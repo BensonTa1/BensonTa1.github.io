@@ -14,9 +14,9 @@ timezone:
 # jekyll-seo-tag settings › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
 # ↓ --------------------------
 
-title: Analog ground11 # the main title
+title: Benson Tai # the main title
 
-tagline: A text-focused Jekyll theme # it will display as the subtitle
+tagline: 新竹NPC # it will display as the subtitle
 
 description: >- # used by seo meta and the atom feed
   A minimal, responsive and feature-rich Jekyll theme for technical writing.
@@ -52,6 +52,8 @@ webmaster_verifications:
   yandex: # fill in your Yandex verification code
   baidu: # fill in your Baidu verification code
   facebook: # fill in your Facebook verification code
+
+
 
 # ↑ --------------------------
 # The end of `jekyll-seo-tag` settings
