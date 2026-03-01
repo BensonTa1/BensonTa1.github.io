@@ -24,5 +24,10 @@ Raceresult 是一家專注於 RFID 計時系統的廠商，提供高頻 RFID 技
 
 這款改機板已經量產並投入商業使用，於實際賽事中成功運行，且兼容各類副廠 RFID 標籤，節省原廠標籤成本的同時，提供比原廠更好的計時軟體。
 
-對產品有興趣可以聯絡我，或是查看我們的官方網站：[Opentimer 官方網站](https://opentmr.com/#/)
+對產品有興趣可以聯絡我，或是查看我們的官方網站：
+
+[Opentimer 官方網站](https://opentmr.com/#/)
+
+[Opentimer facebook](https://www.facebook.com/profile.php?id=61575609073842)
+
 
