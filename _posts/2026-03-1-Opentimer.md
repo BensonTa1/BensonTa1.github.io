@@ -1,6 +1,6 @@
 ---
 title: "Opentimer - Raceresult 5000s改機板"
-date: 2026-03-01 08:00:00 +0800
+date: 2026-03-01 20:00:00 +0800
 categories: Circuit
 tags: [RFID, RaceResult, Timing]
 math: true
