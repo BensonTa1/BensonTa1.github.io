@@ -8,9 +8,9 @@ math: true
 
 本PLL計算軟體由作者開發，能夠再給定規格下計算環路濾波器參數，並且能透過輸出的Phase noise來計算RMS jitter與damping factor等參數。
 
-[Download PLL_Calculator_V1.2](https://github.com/BensonTa1/BensonTa1.github.io/releases/download/tools/PLL_Calculator_V1.2.exe)
+[Download PLL_Calculator_V1.2](https://github.com/BensonTa1/BensonTa1.github.io/releases/download/V1.3/PLL_Calculator_V1.2.exe)
 
-[Github Release Page](https://github.com/BensonTa1/BensonTa1.github.io/releases/tag/tools)
+[Github Release Page](https://github.com/BensonTa1/BensonTa1.github.io/releases)
 
 ## 1.Overview
 
