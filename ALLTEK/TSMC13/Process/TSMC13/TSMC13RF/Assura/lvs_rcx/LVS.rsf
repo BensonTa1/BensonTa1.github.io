@@ -1,0 +1,80 @@
+;
+; sample RSF for running Assura LVS from UNIX
+; Change the parameters for your specific requirement
+
+avParameters(
+; GDS2 Data - use the next line for GDS2 input
+; ?inputLayout ( "GDS2" "<file_name>" )  ; specify full path to gds file
+  ?inputLayout ( "GDS2" "ts_allcelllvs.gds" )
+
+
+; DFII Data - use the next line for DFII input .....(DFII not support now)
+; ?inputLayout ( "df2" "<library>" )
+
+; Top cell name
+; ?cellName  "<cell_name>"
+  ?cellName  "ts_allcelllvs"
+
+; NOTE, viewName needed only for DFII input ....(DFII not support now)
+;  ?viewName  "<view_name>"
+
+  ?rulesFile "./extract.rul"
+  ?runName   "ts_allcelllvs"		;PRINTFILE dev_018s
+  ?workingDirectory "./rundir"
+  ?avrpt t			;run avrpt at end of job
+  ?textPriOnly t	;TEXT-PRI-ONLY YES
+  ?joinPins    top	;nil|top|allLevels :virtual connection is on @top level
+  ?flagNon45   t
+; uncomment the following line to set nrd=0 and nrs=0 when run RCX extraction flow
+; ?set ("ZERO_NRDS")
+
+; uncomment the following line to enable the NW ring to separate the node from BULK
+; ?set ("NW_RING")
+
+; uncomment the following line to apply the extraction of these two diodes, PWDNW and DNWPSUB
+; ?set ("extract_parasitic_diodes")
+; uncomment the following line to apply the comparison of these two diodes, PWDNW and DNWPSUB
+; ?set ("compare_parasitic_diodes")
+
+; ?set ("Skip_Soft_Connect_Checks")  
+
+; uncomment the following line during extracting RCX spice netlist.
+; ?set ("spice_extraction")  
+
+; uncomment the following line to apply accuracy resistor value caculation.
+; ?set ("Accuracy")  
+; uncomment the following line if using 1.5fF/um2 MIMCAP.
+; ?set ("CAP_1P5")
+  
+  ?set ("CDL_input")  
+
+; uncomment the following line to filter MOS with D, G and S tied together (default filter MOS with all pins tied)
+; ?set ("FILTER_DGS_TIED_MOS")
+
+; WELL_TO_PG_CHECK : Default is on. Turn on to highlight if nwell connects to ground or psub connects to power.
+  ?set ("WELL_TO_PG_CHECK")
+
+; GATE_TO_PG_CHECK : Default is off. Turn on to highlight if a mos gate directly connects to power or ground.
+; ?set ("GATE_TO_PG_CHECK")
+
+; DS_TO_PG_CHECK   : Default is on. Turn on to highlight if drain connects to power and source connects to ground.
+  ?set ("DS_TO_PG_CHECK")
+
+
+; FLOATING_WELL_CHECK : Default is on. Turn on to highlight if well does not connect to power or ground.
+;                       The nwell of moscaps and nwell-resistor are excluded.  
+  ?set ("FLOATING_WELL_CHECK")
+  
+; Point to the Assura RCX technology directory
+;  ?technology "tsmc13lo_rcx_tech"
+;  ?techLib    "./assura_tech.lib"
+) ;end of avParameters
+
+
+; To load ASSURA LVS COMPARE FILE
+load( "./compare.rul" )
+
+
+
+avLVS()
+

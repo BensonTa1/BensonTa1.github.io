@@ -1,0 +1,59 @@
+// VerilogA for Fractional_PLL, IDEAL_MMD, veriloga
+
+`include "constants.vams"
+`include "disciplines.vams"
+
+module IDEAL_MMD(FIN,FOUT,DIN0,DIN1,DIN2,DIN3,DIN4,DIN5);
+	electrical FIN,FOUT,DIN0,DIN1,DIN2,DIN3,DIN4,DIN5;
+	input DIN0,DIN1,DIN2,DIN3,DIN4,DIN5,FIN;
+	output FOUT;
+
+	parameter real VOH=1;
+	parameter real VOL=0;
+	parameter real VTH=0.5;
+	parameter real RT_FT = 1p;
+
+	parameter INT=100;
+
+	integer DD0,DD1,DD2,DD3,DD4,DD5;
+	integer DSUM=0;
+	real output_state=VOH,count;
+	real flag=0;
+
+	analog begin
+
+		DD0=(V(DIN0)>VTH)?1:0;DD1=(V(DIN1)>VTH)?1:0;DD2=(V(DIN2)>VTH)?1:0;DD3=(V(DIN3)>VTH)?1:0;DD4=(V(DIN4)>VTH)?1:0;DD5=(V(DIN5)>VTH)?1:0;
+
+		DSUM=INT+DD0*1+DD1*2+DD2*4+DD3*8+DD4*16+DD5*32;
+
+		@(cross(V(FIN)-VTH,0))begin
+
+			count=count+1;
+
+			if(count>=DSUM)begin
+				count=0;
+				if(flag==0)begin
+					flag=1;
+				end else begin	
+					flag=0;
+				end
+			end
+		end
+
+		@(cross(V(FIN)-VTH,1))begin
+			if(flag==1)begin
+				flag=0;
+				if(output_state==VOH)begin
+					output_state=VOL;
+				end else begin	
+					output_state=VOH;
+				end
+			end
+		end
+
+		V(FOUT)<+transition(output_state,0,RT_FT,RT_FT);
+
+	end
+
+
+endmodule

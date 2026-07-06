@@ -1,0 +1,60 @@
+
+simulator lang=spectre insensitive=yes
+//
+parameters alpha_n_18_mm = 0.2
+parameters alpha_p_18_mm = 0.2
+
+parameters ap1_np_18_mm_xx = 0
+parameters ap2_np_18_mm_xx = 0
+parameters ap3_np_18_mm_xx = 0
+parameters ap4_np_18_mm_xx = 0
+parameters ap5_np_18_mm_xx = 0
+statistics {
+process {
+vary ap1_np_18_mm_xx dist=gauss std=sigma/3
+vary ap2_np_18_mm_xx dist=gauss std=sigma/3
+vary ap3_np_18_mm_xx dist=gauss std=sigma/3
+vary ap4_np_18_mm_xx dist=gauss std=sigma/3
+vary ap5_np_18_mm_xx dist=gauss std=sigma/3
+ }
+}
+parameters a1_np_18_mm = ap1_np_18_mm_xx
+parameters a2_np_18_mm = ap2_np_18_mm_xx
+parameters a3_np_18_mm = ap3_np_18_mm_xx
+parameters a4_np_18_mm = ap4_np_18_mm_xx
+parameters a5_np_18_mm = ap5_np_18_mm_xx
+parameters comp1_np_18_mm	= 9.20858580447721
+parameters comp2_np_18_mm	= 5.33400754883847
+parameters comp3_np_18_mm	= 1.59044789954881
+parameters comp4_np_18_mm	= 0.469879164616893
+parameters comp5_np_18_mm	= 1.17014473856718e-14
+parameters 	dtox_n_18_mm_g	  =	alpha_n_18_mm*(1.52903279985744e-11*a1_np_18_mm*comp1_np_18_mm+2.16628866486859e-12*a2_np_18_mm*comp2_np_18_mm+-3.77635732699547e-12*a3_np_18_mm*comp3_np_18_mm+-4.81642886667157e-12*a4_np_18_mm*comp4_np_18_mm+3.16491897118719e-11*a5_np_18_mm*comp5_np_18_mm)
+parameters 	dxl_n_18_mm_g	  =	alpha_n_18_mm*(2.86960113440972e-09*a1_np_18_mm*comp1_np_18_mm+-2.33824928521286e-09*a2_np_18_mm*comp2_np_18_mm+1.44986467747274e-09*a3_np_18_mm*comp3_np_18_mm+2.56708411406478e-09*a4_np_18_mm*comp4_np_18_mm+-8.77768095180626e-10*a5_np_18_mm*comp5_np_18_mm)
+parameters 	dxw_n_18_mm_g	  =	alpha_n_18_mm*(-3.18195953903558e-09*a1_np_18_mm*comp1_np_18_mm+2.20860924641536e-09*a2_np_18_mm*comp2_np_18_mm+9.40677398142189e-10*a3_np_18_mm*comp3_np_18_mm+1.35760679154958e-09*a4_np_18_mm*comp4_np_18_mm+9.56688075034027e-10*a5_np_18_mm*comp5_np_18_mm)
+parameters 	dvth0_n_18_mm_g	  =	alpha_n_18_mm*(2.36462760636765e-03*a1_np_18_mm*comp1_np_18_mm+-3.01472995227983e-03*a2_np_18_mm*comp2_np_18_mm+-8.09168840226689e-04*a3_np_18_mm*comp3_np_18_mm+-2.00221140475792e-03*a4_np_18_mm*comp4_np_18_mm+3.84888697959237e-03*a5_np_18_mm*comp5_np_18_mm)
+parameters 	du0_n_18_mm_g	  =	alpha_n_18_mm*(-1.59850468501303*a1_np_18_mm*comp1_np_18_mm+1.23781758600127*a2_np_18_mm*comp2_np_18_mm+0.436932236823221*a3_np_18_mm*comp3_np_18_mm+-0.457756196989577*a4_np_18_mm*comp4_np_18_mm+-1.59708928357817*a5_np_18_mm*comp5_np_18_mm)
+parameters 	dlvth0_n_18_mm_g	  =	alpha_n_18_mm*(1.7307737700001e-04*a1_np_18_mm*comp1_np_18_mm+-2.15959521169398e-04*a2_np_18_mm*comp2_np_18_mm+1.24600385654585e-04*a3_np_18_mm*comp3_np_18_mm+-8.49882387498405e-05*a4_np_18_mm*comp4_np_18_mm+-2.21064738748618e-05*a5_np_18_mm*comp5_np_18_mm)
+parameters 	dwvth0_n_18_mm_g	  =	alpha_n_18_mm*(1.67306370563655e-03*a1_np_18_mm*comp1_np_18_mm+-1.0017182050065e-03*a2_np_18_mm*comp2_np_18_mm+-2.34303650354865e-04*a3_np_18_mm*comp3_np_18_mm+-2.11084265966198e-04*a4_np_18_mm*comp4_np_18_mm+5.0613051629976e-04*a5_np_18_mm*comp5_np_18_mm)
+parameters 	dwu0_n_18_mm_g	  =	alpha_n_18_mm*(-0.526280422768511*a1_np_18_mm*comp1_np_18_mm+0.423291445199923*a2_np_18_mm*comp2_np_18_mm+-0.537341601252982*a3_np_18_mm*comp3_np_18_mm+-1.07928902843094*a4_np_18_mm*comp4_np_18_mm+0.119769081883086*a5_np_18_mm*comp5_np_18_mm)
+parameters 	dpvth0_n_18_mm_g	  =	alpha_n_18_mm*(-1.32861167425443e-04*a1_np_18_mm*comp1_np_18_mm+1.09491672357709e-04*a2_np_18_mm*comp2_np_18_mm+-5.29755085811788e-05*a3_np_18_mm*comp3_np_18_mm+-1.12501695909273e-05*a4_np_18_mm*comp4_np_18_mm+3.56753401771305e-06*a5_np_18_mm*comp5_np_18_mm)
+parameters 	dpvsat_n_18_mm_g	  =	alpha_n_18_mm*(17.801736379691*a1_np_18_mm*comp1_np_18_mm+-14.9324456473568*a2_np_18_mm*comp2_np_18_mm+12.0398681168047*a3_np_18_mm*comp3_np_18_mm+43.4373192186962*a4_np_18_mm*comp4_np_18_mm+-7.55921758803804*a5_np_18_mm*comp5_np_18_mm)
+parameters 	dcgdo_n_18_mm_g	  =	alpha_n_18_mm*(-3.59322707966499e-12*a1_np_18_mm*comp1_np_18_mm+-5.0907783624412e-13*a2_np_18_mm*comp2_np_18_mm+8.8744397184387e-13*a3_np_18_mm*comp3_np_18_mm+1.13186078366766e-12*a4_np_18_mm*comp4_np_18_mm+1.79512713368643e-12*a5_np_18_mm*comp5_np_18_mm)
+parameters 	dcgso_n_18_mm_g	  =	alpha_n_18_mm*(-3.59322707966499e-12*a1_np_18_mm*comp1_np_18_mm+-5.0907783624412e-13*a2_np_18_mm*comp2_np_18_mm+8.8744397184387e-13*a3_np_18_mm*comp3_np_18_mm+1.13186078366766e-12*a4_np_18_mm*comp4_np_18_mm+1.79512713368643e-12*a5_np_18_mm*comp5_np_18_mm)
+parameters 	dcj_n_18_mm_g	  =	alpha_n_18_mm*(1.70251454135349e-05*a1_np_18_mm*comp1_np_18_mm+-2.49799525628929e-05*a2_np_18_mm*comp2_np_18_mm+-5.79932915405949e-06*a3_np_18_mm*comp3_np_18_mm+-9.02242822028908e-06*a4_np_18_mm*comp4_np_18_mm+-2.29105850446562e-05*a5_np_18_mm*comp5_np_18_mm)
+parameters 	dcjsw_n_18_mm_g	  =	alpha_n_18_mm*(2.21492183049871e-12*a1_np_18_mm*comp1_np_18_mm+-3.24981907128897e-12*a2_np_18_mm*comp2_np_18_mm+-7.54475831693168e-13*a3_np_18_mm*comp3_np_18_mm+-1.17379163254248e-12*a4_np_18_mm*comp4_np_18_mm+-6.47983830979792e-13*a5_np_18_mm*comp5_np_18_mm)
+parameters 	dcjgate_n_18_mm_g	  =	alpha_n_18_mm*(8.26463369589071e-12*a1_np_18_mm*comp1_np_18_mm+-1.21261905645111e-11*a2_np_18_mm*comp2_np_18_mm+-2.81520832721333e-12*a3_np_18_mm*comp3_np_18_mm+-4.37981952441219e-12*a4_np_18_mm*comp4_np_18_mm+-1.42388156416882e-11*a5_np_18_mm*comp5_np_18_mm)
+parameters 	dtox_p_18_mm_g	  =	alpha_p_18_mm*(1.52903279985744e-11*a1_np_18_mm*comp1_np_18_mm+2.16628866486859e-12*a2_np_18_mm*comp2_np_18_mm+-3.77635732699548e-12*a3_np_18_mm*comp3_np_18_mm+-4.81642886667159e-12*a4_np_18_mm*comp4_np_18_mm+3.2895057692414e-11*a5_np_18_mm*comp5_np_18_mm)
+parameters 	du0_p_18_mm_g	  =	alpha_p_18_mm*(-0.42711052874576*a1_np_18_mm*comp1_np_18_mm+-0.659685279487695*a2_np_18_mm*comp2_np_18_mm+9.21574929197675e-02*a3_np_18_mm*comp3_np_18_mm+0.632945172965904*a4_np_18_mm*comp4_np_18_mm+0.855145190742716*a5_np_18_mm*comp5_np_18_mm)
+parameters 	dxl_p_18_mm_g	  =	alpha_p_18_mm*(1.32826824607522e-09*a1_np_18_mm*comp1_np_18_mm+1.31416819717587e-09*a2_np_18_mm*comp2_np_18_mm+2.833280542264e-10*a3_np_18_mm*comp3_np_18_mm+4.80494051359665e-10*a4_np_18_mm*comp4_np_18_mm+2.54586101858951e-10*a5_np_18_mm*comp5_np_18_mm)
+parameters 	dxw_p_18_mm_g	  =	alpha_p_18_mm*(-2.56556035962837e-09*a1_np_18_mm*comp1_np_18_mm+-3.01021485620426e-09*a2_np_18_mm*comp2_np_18_mm+-9.38896079725604e-10*a3_np_18_mm*comp3_np_18_mm+-2.86275606268816e-09*a4_np_18_mm*comp4_np_18_mm+-2.77536616566248e-11*a5_np_18_mm*comp5_np_18_mm)
+parameters 	dvth0_p_18_mm_g	  =	alpha_p_18_mm*(-2.25166676654247e-03*a1_np_18_mm*comp1_np_18_mm+-4.28526175540216e-03*a2_np_18_mm*comp2_np_18_mm+1.28760453315907e-03*a3_np_18_mm*comp3_np_18_mm+-1.7944091249218e-03*a4_np_18_mm*comp4_np_18_mm+3.91492822346432e-03*a5_np_18_mm*comp5_np_18_mm)
+parameters 	dlvth0_p_18_mm_g	  =	alpha_p_18_mm*(7.45203912706842e-05*a1_np_18_mm*comp1_np_18_mm+1.21302029372264e-05*a2_np_18_mm*comp2_np_18_mm+-2.76146267145286e-04*a3_np_18_mm*comp3_np_18_mm+7.42122264366716e-06*a4_np_18_mm*comp4_np_18_mm+-3.68714237573287e-05*a5_np_18_mm*comp5_np_18_mm)
+parameters 	dwvth0_p_18_mm_g	  =	alpha_p_18_mm*(-1.3637991576226e-03*a1_np_18_mm*comp1_np_18_mm+-1.32207879661586e-03*a2_np_18_mm*comp2_np_18_mm+-8.97751341032191e-05*a3_np_18_mm*comp3_np_18_mm+1.01895367409616e-03*a4_np_18_mm*comp4_np_18_mm+-3.78725455769975e-04*a5_np_18_mm*comp5_np_18_mm)
+parameters 	dpvth0_p_18_mm_g	  =	alpha_p_18_mm*(2.24766473931769e-05*a1_np_18_mm*comp1_np_18_mm+8.0705039128644e-06*a2_np_18_mm*comp2_np_18_mm+7.31960728974481e-05*a3_np_18_mm*comp3_np_18_mm+-5.52745954680732e-05*a4_np_18_mm*comp4_np_18_mm+-8.77501559461799e-06*a5_np_18_mm*comp5_np_18_mm)
+parameters 	dpvsat_p_18_mm_g	  =	alpha_p_18_mm*(6.18121869448207*a1_np_18_mm*comp1_np_18_mm+9.31365910678243*a2_np_18_mm*comp2_np_18_mm+7.58662669634607*a3_np_18_mm*comp3_np_18_mm+15.1198650113229*a4_np_18_mm*comp4_np_18_mm+0.782285813044888*a5_np_18_mm*comp5_np_18_mm)
+parameters 	dcgdo_p_18_mm_g	  =	alpha_p_18_mm*(-3.14063337090719e-12*a1_np_18_mm*comp1_np_18_mm+-4.44955691764009e-13*a2_np_18_mm*comp2_np_18_mm+7.75663794964817e-13*a3_np_18_mm*comp3_np_18_mm+9.89294489214212e-13*a4_np_18_mm*comp4_np_18_mm+9.75167293005557e-13*a5_np_18_mm*comp5_np_18_mm)
+parameters 	dcgso_p_18_mm_g	  =	alpha_p_18_mm*(-3.14063337090719e-12*a1_np_18_mm*comp1_np_18_mm+-4.44955691764009e-13*a2_np_18_mm*comp2_np_18_mm+7.75663794964817e-13*a3_np_18_mm*comp3_np_18_mm+9.89294489214212e-13*a4_np_18_mm*comp4_np_18_mm+9.75167293005557e-13*a5_np_18_mm*comp5_np_18_mm)
+parameters 	dcj_p_18_mm_g	  =	alpha_p_18_mm*(1.60185830101189e-05*a1_np_18_mm*comp1_np_18_mm+3.25868526429857e-05*a2_np_18_mm*comp2_np_18_mm+-2.19141971950284e-06*a3_np_18_mm*comp3_np_18_mm+-9.95469300350111e-07*a4_np_18_mm*comp4_np_18_mm+7.8197308343658e-06*a5_np_18_mm*comp5_np_18_mm)
+parameters 	dcjsw_p_18_mm_g	  =	alpha_p_18_mm*(2.44494161733393e-12*a1_np_18_mm*comp1_np_18_mm+4.97378277182413e-12*a2_np_18_mm*comp2_np_18_mm+-3.3447985192411e-13*a3_np_18_mm*comp3_np_18_mm+-1.5194005110607e-13*a4_np_18_mm*comp4_np_18_mm+4.23654586647092e-12*a5_np_18_mm*comp5_np_18_mm)
+parameters 	dcjgate_p_18_mm_g	  =	alpha_p_18_mm*(5.90158321425432e-12*a1_np_18_mm*comp1_np_18_mm+1.20056825526789e-11*a2_np_18_mm*comp2_np_18_mm+-8.07365159816837e-13*a3_np_18_mm*comp3_np_18_mm+-3.66751847497413e-13*a4_np_18_mm*comp4_np_18_mm+-6.96364378345735e-12*a5_np_18_mm*comp5_np_18_mm)
+

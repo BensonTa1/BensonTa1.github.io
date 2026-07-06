@@ -1,0 +1,42 @@
+// VerilogA for ADC, Ideal_SRLatch, veriloga
+
+`include "constants.vams"
+`include "disciplines.vams"
+
+module Ideal_SRLatch(S,R,Q,QB);
+
+
+	input S,R;
+	output Q,QB;
+
+	electrical S,R,Q,QB;
+	
+	real status;	
+
+	analog begin
+		@(initial_step)begin
+			V(Q)<+1.8;
+			V(QB)<+0;
+		end
+
+		if(V(S)>0.9&&V(R)<0.9)begin
+			status=1;
+		end
+		if(V(S)<0.9&&V(R)>0.9)begin
+			status=2;
+		end
+		//======
+		if(status==1)begin
+			V(Q)<+1.8;
+			V(QB)<+0;
+		end
+		if(status==2)begin
+			V(Q)<+0;
+			V(QB)<+1.8;
+		end
+
+
+	end
+
+
+endmodule

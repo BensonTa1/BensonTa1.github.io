@@ -1,0 +1,34 @@
+simulator lang=spectre insensitive=yes
+// Model: l110ae_momcaps_array_vp3_rf
+// UMC RF vp3 array MOM capacitor
+// Model coverage:
+// nf: 10 - 40 (Even integer only)
+// lf: (10 - 40) * 1e-06
+// bm: 1 - 4
+// ns: 3 - 6
+// array: 1 - 4
+// Frequency range: 1 MHz - 0.8 * resonance (maximum 16.0 GHz)
+library mylib
+//
+section tt
+parameters d_cs3=1
+parameters dcj_dionw_l110e_vp3=0
+parameters dcjp_dionw_l110e_vp3=0
+include "./l110ae_momcaps_array_vp3_rf_v022.mdl.scs"
+endsection tt
+//
+section ff
+parameters d_cs3=0.85
+parameters dcj_dionw_l110e_vp3=-8.28e-006
+parameters dcjp_dionw_l110e_vp3=-9.92e-011
+include "./l110ae_momcaps_array_vp3_rf_v022.mdl.scs"
+endsection ff
+//
+section ss
+parameters d_cs3=1.15
+parameters dcj_dionw_l110e_vp3=8.28e-006
+parameters dcjp_dionw_l110e_vp3=9.92e-011
+include "./l110ae_momcaps_array_vp3_rf_v022.mdl.scs"
+endsection ss
+//
+endlibrary mylib

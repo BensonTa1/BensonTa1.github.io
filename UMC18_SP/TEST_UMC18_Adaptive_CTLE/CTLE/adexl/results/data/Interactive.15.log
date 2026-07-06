@@ -1,0 +1,16 @@
+Starting Single Run, Sweeps and Corners...
+
+Current time: Sun Oct 20 17:23:35 2024 
+Best design point: 1
+Design specs: 
+	TEST:CTLE:1	corner	C1 - 
+	TEST:CTLE:1	corner	Nominal - 
+Design parameters: 
+	VC		0
+	VDIF		200m
+
+Interactive.15
+Number of points completed: 1
+Number of simulation errors: 1
+Interactive.15 completed. 
+Current time: Sun Oct 20 17:23:37 2024 

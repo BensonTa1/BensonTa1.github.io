@@ -1,0 +1,19 @@
+// VerilogA for Verilog_A, IDEAL_Voltage_Adder, veriloga
+
+`include "constants.vams"
+`include "disciplines.vams"
+
+module IDEAL_Voltage_Adder(VIN1,VIN2,VOUT);
+	electrical VIN1,VIN2,VOUT;
+	input VIN1,VIN2;
+	output VOUT;
+
+	real VO;
+
+	analog begin
+		VO=V(VIN1)+V(VIN2);
+	
+		VOUT<+VO;
+	end
+
+endmodule

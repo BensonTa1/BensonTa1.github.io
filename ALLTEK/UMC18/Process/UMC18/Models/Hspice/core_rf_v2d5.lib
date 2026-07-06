@@ -1,0 +1,243 @@
+.lib tt
+.param
+*
++ dcd_n_18_rf=0
++ dcgs_n_18_rf=0
++ drgate_n_18_rf=0
++ dtox_n_18_rf=0.0000e+00
++ dxl_n_18_rf=0.0000e+00
++ dxw_n_18_rf=0.0000e+00
++ dvth0_n_18_rf=0.0000e+00
++ du0_n_18_rf=0.0000e+00
++ dlvth0_n_18_rf=0.0000e+00
++ dwvth0_n_18_rf=0.0000e+00
++ dwu0_n_18_rf=0.0000e+00
++ dpvth0_n_18_rf=0.0000e+00
++ dpvsat_n_18_rf=0.0000e+00
++ dcf_n_18_rf=0.0000e+00
++ dcgdo_n_18_rf=0.0000e+00
++ dcgdl_n_18_rf=0.0000e+00
++ dcgso_n_18_rf=0.0000e+00
++ dcgsl_n_18_rf=0.0000e+00
++ dcj_n_18_rf=0.0000e+00
++ dcjsw_n_18_rf=0.0000e+00
++ dcjgate_n_18_rf=0.0000e+00
+*
++ dcd_p_18_rf=0
++ dcgs_p_18_rf=0
++ drgate_p_18_rf=0
++ dcgdl_p_18_rf=0.0000e+00
++ dcgsl_p_18_rf=0.0000e+00
++ dcf_p_18_rf=0.0000e+00
++ dtox_p_18_rf=0.0000e+00
++ du0_p_18_rf=0.0000e+00
++ dxl_p_18_rf=0.0000e+00
++ dxw_p_18_rf=0.0000e+00
++ dvth0_p_18_rf=0.0000e+00
++ dlvth0_p_18_rf=0.0000e+00
++ dwvth0_p_18_rf=0.0000e+00
++ dpvth0_p_18_rf=0.0000e+00
++ dpvsat_p_18_rf=0.0000e+00
++ dcgdo_p_18_rf=0.0000e+00
++ dcgso_p_18_rf=0.0000e+00
++ dcj_p_18_rf=0.0000e+00
++ dcjsw_p_18_rf=0.0000e+00
++ dcjgate_p_18_rf=0.0000e+00
+.include './core_rf_v2d5.mdl'
+* 
+.endl tt
+*
+.lib ss 
+.param 
+*
++ dcd_n_18_rf=0.1
++ dcgs_n_18_rf=0.15
++ drgate_n_18_rf=0.35
++ dtox_n_18_rf=1.0000e-10
++ dxl_n_18_rf=2.2000e-08
++ dxw_n_18_rf=-2.0000e-08
++ dvth0_n_18_rf=1.4500e-02
++ du0_n_18_rf=-1.0000e+01
++ dlvth0_n_18_rf=1.4000e-03
++ dwvth0_n_18_rf=1.1000e-02
++ dwu0_n_18_rf=-4.5000e+00
++ dpvth0_n_18_rf=-1.0000e-03
++ dpvsat_n_18_rf=1.4000e+02
++ dcgdo_n_18_rf=-0.1
++ dcgso_n_18_rf=-0.1
++ dcgdl_n_18_rf=-0.1
++ dcgsl_n_18_rf=-0.1
++ dcf_n_18_rf=0.15
++ dcj_n_18_rf=0.1
++ dcjsw_n_18_rf=0.1
++ dcjgate_n_18_rf=0.1
+*
++ dcd_p_18_rf=0.1
++ dcgs_p_18_rf=0.15
++ drgate_p_18_rf=0.35
++ dcgdl_p_18_rf=-0.1
++ dcgsl_p_18_rf=-0.1
++ dcf_p_18_rf=0.15
++ dtox_p_18_rf=1.0000e-10
++ du0_p_18_rf=-0.0e+00
++ dxl_p_18_rf=1.0000e-08
++ dxw_p_18_rf=-2.0000e-08
++ dvth0_p_18_rf=-1.4000e-02
++ dlvth0_p_18_rf=0.0000e-00
++ dwvth0_p_18_rf=-1.0000e-02
++ dpvth0_p_18_rf=3.0000e-04
++ dpvsat_p_18_rf=4.6000e+01
++ dcgdo_p_18_rf=-0.1
++ dcgso_p_18_rf=-0.1
++ dcj_p_18_rf=0.1
++ dcjsw_p_18_rf=0.1
++ dcjgate_p_18_rf=0.1
+.include './core_rf_v2d5.mdl'
+* 
+.endl ss
+*
+.lib ff 
+.param  
+*
++ dcd_n_18_rf=-0.1
++ dcgs_n_18_rf=-0.15
++ drgate_n_18_rf=-0.35
++ dtox_n_18_rf=-1.0000e-10
++ dxl_n_18_rf=-1.3600e-08
++ dxw_n_18_rf=2.0000e-08
++ dvth0_n_18_rf=-1.4500e-02
++ du0_n_18_rf=1.0000e+01
++ dlvth0_n_18_rf=-7.0000e-04
++ dwvth0_n_18_rf=-1.0100e-02
++ dwu0_n_18_rf=2.0000e+00
++ dpvth0_n_18_rf=6.5000e-04
++ dpvsat_n_18_rf=-8.0000e+01
++ dcgdo_n_18_rf=0.1
++ dcgso_n_18_rf=0.1
++ dcgdl_n_18_rf=0.1
++ dcgsl_n_18_rf=0.1
++ dcf_n_18_rf=-0.15
++ dcj_n_18_rf=-0.1
++ dcjsw_n_18_rf=-0.1
++ dcjgate_n_18_rf=-0.1
+*
++ dcd_p_18_rf=-0.1
++ dcgs_p_18_rf=-0.15
++ drgate_p_18_rf=-0.35
++ dcgdl_p_18_rf=0.1
++ dcgsl_p_18_rf=0.1
++ dcf_p_18_rf=-0.15
++ dtox_p_18_rf=-1.0000e-10
++ du0_p_18_rf=0
++ dxl_p_18_rf=-8.0000e-09
++ dxw_p_18_rf=1.5000e-08
++ dvth0_p_18_rf=1.8000e-02
++ dlvth0_p_18_rf=-1.0000e-03
++ dwvth0_p_18_rf=8.5000e-03
++ dpvth0_p_18_rf=1.0000e-05
++ dpvsat_p_18_rf=-2.1000e+01
++ dcgdo_p_18_rf=0.1
++ dcgso_p_18_rf=0.1
++ dcj_p_18_rf=-0.1
++ dcjsw_p_18_rf=-0.1
++ dcjgate_p_18_rf=-0.1
+.include './core_rf_v2d5.mdl'
+* 
+.endl ff
+*
+.lib snfp 
+.param  
+*
++ dcd_n_18_rf=0.05
++ dcgs_n_18_rf=0.075
++ drgate_n_18_rf=0.175
++ dtox_n_18_rf=0.0000e+00
++ dxl_n_18_rf=1.1000e-08
++ dxw_n_18_rf=-1.0000e-08
++ dvth0_n_18_rf=1.3000e-02
++ du0_n_18_rf=-5.0000e+00
++ dlvth0_n_18_rf=1.1000e-03
++ dwvth0_n_18_rf=4.7000e-03
++ dwu0_n_18_rf=-2.0000e+00
++ dpvth0_n_18_rf=-5.5000e-04
++ dpvsat_n_18_rf=6.0000e+01
++ dcgdo_n_18_rf=0.0000e+00
++ dcgso_n_18_rf=0.0000e+00
++ dcgdl_n_18_rf=0.0000e+00
++ dcgsl_n_18_rf=0.0000e+00
++ dcf_n_18_rf=0.075
++ dcj_n_18_rf=0.05
++ dcjsw_n_18_rf=0.05
++ dcjgate_n_18_rf=0.05
+*
++ dcd_p_18_rf=-0.05
++ dcgs_p_18_rf=-0.075
++ drgate_p_18_rf=-0.175
++ dcgdl_p_18_rf=0
++ dcgsl_p_18_rf=0
++ dcf_p_18_rf=-0.075
++ dtox_p_18_rf=0.0000e+00
++ du0_p_18_rf=0
++ dxl_p_18_rf=-4.0000e-09
++ dxw_p_18_rf=1.0000e-08
++ dvth0_p_18_rf=1.7000e-02
++ dlvth0_p_18_rf=-3.0000e-04
++ dwvth0_p_18_rf=3.5000e-03
++ dpvth0_p_18_rf=9.0000e-05
++ dpvsat_p_18_rf=-3.0000e+01
++ dcgdo_p_18_rf=0.0000e+00
++ dcgso_p_18_rf=0.0000e+00
++ dcj_p_18_rf=-0.05
++ dcjsw_p_18_rf=-0.05
++ dcjgate_p_18_rf=-0.05
+.include './core_rf_v2d5.mdl'
+* 
+.endl snfp
+*
+.lib fnsp 
+.param  
+*
++ dcd_n_18_rf=-0.05
++ dcgs_n_18_rf=-0.075
++ drgate_n_18_rf=-0.175
++ dtox_n_18_rf=0.0000e+00
++ dxl_n_18_rf=-9.5000e-09
++ dxw_n_18_rf=1.0000e-08
++ du0_n_18_rf=6.0000e+00
++ dvth0_n_18_rf=-1.2300e-02
++ dlvth0_n_18_rf=-7.0000e-04
++ dwvth0_n_18_rf=-4.6000e-03
++ dwu0_n_18_rf=1.7000e+00
++ dpvth0_n_18_rf=4.1000e-04
++ dpvsat_n_18_rf=-7.0000e+01
++ dcgdo_n_18_rf=0.0000e+00
++ dcgso_n_18_rf=0.0000e+00
++ dcgdl_n_18_rf=0.0000e+00
++ dcgsl_n_18_rf=0.0000e+00
++ dcf_n_18_rf=-0.075
++ dcj_n_18_rf=-0.05
++ dcjsw_n_18_rf=-0.05
++ dcjgate_n_18_rf=-0.05
+*
++ dcd_p_18_rf=0.05
++ dcgs_p_18_rf=0.075
++ drgate_p_18_rf=0.175
++ dcgdl_p_18_rf=0
++ dcgsl_p_18_rf=0
++ dcf_p_18_rf=0.075
++ dtox_p_18_rf=0.0000e+00
++ dxl_p_18_rf=4.5000e-09
++ dxw_p_18_rf=-1.0000e-08
++ dvth0_p_18_rf=-1.3000e-02
++ du0_p_18_rf=0
++ dlvth0_p_18_rf=-3.0000e-04
++ dwvth0_p_18_rf=-5.0000e-03
++ dpvth0_p_18_rf=1.3000e-04
++ dpvsat_p_18_rf=3.4000e+01
++ dcgdo_p_18_rf=0.0000e+00
++ dcgso_p_18_rf=0.0000e+00
++ dcj_p_18_rf=0.05
++ dcjsw_p_18_rf=0.05
++ dcjgate_p_18_rf=0.05
+.include './core_rf_v2d5.mdl'
+.endl fnsp

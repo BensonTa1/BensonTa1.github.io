@@ -1,0 +1,22 @@
+include "./mm180_bjt_v121.lib.scs" section=tt_bip
+include "./mm180_mimcap_v101.lib.scs" section=mimcaps_typ
+include "./mm180_reg18bpw_v123.lib.scs" section=tt
+include "./mm180_reg33bpw_v123.lib.scs" section=tt
+include "./mm180_res_v141.lib.scs" section=res_typ
+include "./mm180_lvt18_v113.lib.scs" section=tt
+include "./mm180_lvt33_v113.lib.scs" section=tt
+include "./mm180_reg18_v124.lib.scs" section=tt
+include "./mm180_reg33_v114.lib.scs" section=tt
+include "./mm180_zvt18_v121.lib.scs" section=tt
+include "./mm180_zvt33_v113.lib.scs" section=tt
+include "./core_rf_v2d4.lib.scs" section=tt
+include "./io_rf_v2d3.lib.scs" section=tt
+include "./l_slcr20k_rf_v2d3.lib.scs" section=typ
+include "./mimcapm_rf_v2d3.lib.scs" section=typ
+include "./pad_rf_v2d3.lib.scs" section=typ
+include "./rnhr_rf_v2d4.lib.scs" section=typ
+include "./rnnpo_rf_v2d4.lib.scs" section=typ
+include "./rnppo_rf_v2d4.lib.scs" section=typ
+include "./vardiop_rf_v2d3.lib.scs" section=typ
+include "./varmis_18_rf_v2d3.lib.scs" section=typ
+include "./mm180_diode_v113.mdl.scs" 

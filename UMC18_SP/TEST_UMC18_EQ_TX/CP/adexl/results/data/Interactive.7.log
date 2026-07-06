@@ -1,0 +1,20 @@
+Starting Single Run, Sweeps and Corners...
+
+Current time: Sun Nov 24 15:00:29 2024 
+Best design point: 1
+Design specs: 
+	TEST:CP:1	corner	C1_0 - 
+	TEST:CP:1	corner	C1_1 - 
+	TEST:CP:1	corner	C1_2 - 
+	TEST:CP:1	corner	C1_3 - 
+	TEST:CP:1	corner	C1_4 - 
+Design parameters: 
+	VS		0
+	VDD		1.71
+	VV		900m
+
+Interactive.7
+Number of points completed: 6
+Number of simulation errors: 0
+Interactive.7 completed. 
+Current time: Sun Nov 24 15:00:53 2024 

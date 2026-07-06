@@ -1,0 +1,25 @@
+//Revision 35
+//NOTE
+// Default template for spectre
+// Note:
+//      Please remember to replace Top Cell Library, Cell, and View
+//      fields with the actual names used by your design.
+//END_NOTE
+
+config PLL;
+design TEST_UMC18_ALLTEK_PLL.PLL:schematic;
+liblist myLib;
+
+viewlist spectre, cmos_sch, \cmos.sch , schematic, veriloga, ahdl, pspice, dspf;
+stoplist spectre;
+
+
+cell UMC18_ALLTEK_PLL.Ring_OSC binding :calibre;
+cell UMC18_ALLTEK_PLL.PFD binding :schematic;
+cell UMC18_ALLTEK_PLL.DIVIDER_LOOP binding :schematic;
+cell UMC18_ALLTEK_PLL.Constant_GM binding :schematic;
+cell UMC18_ALLTEK_PLL.CP binding :schematic;
+cell UMC18_ALLTEK_PLL.PLL binding :calibre;
+
+
+endconfig

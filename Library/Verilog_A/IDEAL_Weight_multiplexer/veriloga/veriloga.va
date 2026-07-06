@@ -1,0 +1,25 @@
+// VerilogA for Verilog_A, IDEAL_Weight_multiplexer, veriloga
+
+`include "constants.vams"
+`include "disciplines.vams"
+
+module IDEAL_Weight_multiplexer(POL,Weight,VOUT);
+	electrical POL,Weight,VOUT;
+	input POL,Weight;
+	output VOUT;
+
+	real OUT_V;
+	parameter real VTH = 1.5;
+
+	analog begin
+		if(V(POL)>=VTH)begin
+			OUT_V=-1*V(Weight);
+		end else begin
+			OUT_V=1*V(Weight);
+		end
+
+		V(VOUT)<+OUT_V;
+
+	end
+
+endmodule

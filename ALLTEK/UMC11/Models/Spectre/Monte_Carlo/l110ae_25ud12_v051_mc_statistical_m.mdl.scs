@@ -1,0 +1,37 @@
+simulator lang=spectre insensitive=yes
+//.prot
+parameters b1_n_bpw_25ud12_l110ae_xx = 0
+parameters b2_n_bpw_25ud12_l110ae_xx = 0
+parameters b3_n_bpw_25ud12_l110ae_xx = 0
+parameters b4_n_bpw_25ud12_l110ae_xx = 0
+parameters b5_n_bpw_25ud12_l110ae_xx = 0
+parameters b1_n_25ud12_l110ae_xx = 0
+parameters b2_n_25ud12_l110ae_xx = 0
+parameters b3_n_25ud12_l110ae_xx = 0
+parameters b4_n_25ud12_l110ae_xx = 0
+parameters b5_n_25ud12_l110ae_xx = 0
+parameters b1_p_25ud12_l110ae_xx = 0
+parameters b2_p_25ud12_l110ae_xx = 0
+parameters b3_p_25ud12_l110ae_xx = 0
+parameters b4_p_25ud12_l110ae_xx = 0
+parameters b5_p_25ud12_l110ae_xx = 0
+statistics {
+    mismatch {
+        vary b1_n_bpw_25ud12_l110ae_xx dist=gauss std=1/1
+        vary b2_n_bpw_25ud12_l110ae_xx dist=gauss std=1/1
+        vary b3_n_bpw_25ud12_l110ae_xx dist=gauss std=1/1
+        vary b4_n_bpw_25ud12_l110ae_xx dist=gauss std=1/1
+        vary b5_n_bpw_25ud12_l110ae_xx dist=gauss std=1/1
+        vary b1_n_25ud12_l110ae_xx dist=gauss std=1/1
+        vary b2_n_25ud12_l110ae_xx dist=gauss std=1/1
+        vary b3_n_25ud12_l110ae_xx dist=gauss std=1/1
+        vary b4_n_25ud12_l110ae_xx dist=gauss std=1/1
+        vary b5_n_25ud12_l110ae_xx dist=gauss std=1/1
+        vary b1_p_25ud12_l110ae_xx dist=gauss std=1/1
+        vary b2_p_25ud12_l110ae_xx dist=gauss std=1/1
+        vary b3_p_25ud12_l110ae_xx dist=gauss std=1/1
+        vary b4_p_25ud12_l110ae_xx dist=gauss std=1/1
+        vary b5_p_25ud12_l110ae_xx dist=gauss std=1/1
+    }
+}
+//.unprot

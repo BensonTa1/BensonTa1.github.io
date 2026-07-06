@@ -1,0 +1,24 @@
+//Revision 25
+//NOTE
+// Default template for spectre
+// Note:
+//      Please remember to replace Top Cell Library, Cell, and View
+//      fields with the actual names used by your design.
+//END_NOTE
+
+config PLL_5G;
+design TEST.PLL_5G:schematic;
+liblist myLib;
+
+viewlist spectre, cmos_sch, \cmos.sch , schematic, veriloga, ahdl, pspice, dspf;
+stoplist spectre;
+
+
+cell PLL_5G.CP binding :schematic;
+cell PLL_5G.Divider_5G binding :schematic;
+cell PLL_5G.PFD binding :schematic;
+cell PLL_5G.VCO_Output_Buffer binding :schematic;
+cell PLL_5G.PLL_5G binding :schematic;
+
+
+endconfig

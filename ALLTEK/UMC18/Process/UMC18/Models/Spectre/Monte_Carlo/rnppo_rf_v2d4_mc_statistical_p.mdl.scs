@@ -1,0 +1,17 @@
+//
+simulator lang=spectre insensitive=yes
+parameters mc_rsh_polypp=0
+parameters mc_dwpp=0
+parameters mc_coxpp=0
+//   
+parameters ddw_rnppo_rf=(0.1/3)*mc_dwpp
+parameters drsh_rnppo_rf=(0.25/3)*mc_rsh_polypp 
+parameters dcox_rnppo_rf=(0.12/3)*mc_coxpp 
+// 
+statistics { 
+process { 
+vary mc_rsh_polypp dist=gauss std=sigma/3
+vary mc_dwpp dist=gauss std=sigma/3
+vary mc_coxpp dist=gauss std=sigma/3
+ }
+} 

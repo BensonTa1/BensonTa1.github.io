@@ -1,0 +1,5 @@
+TDMCHECKPOINT="1.0"
+umc110ae/pcapacitor type="cell"
+umc110ae/presistor type="cell"
+umc110ae/primRes3 type="cell"
+umc110ae/dummyFiller type="cell"

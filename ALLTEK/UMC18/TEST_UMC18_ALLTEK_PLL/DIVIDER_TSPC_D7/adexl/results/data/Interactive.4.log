@@ -1,0 +1,23 @@
+Starting Single Run, Sweeps and Corners...
+
+Current time: Thu Apr  2 17:15:21 2026 
+Best design point: 1
+Design specs: 
+	TEST_TSMC13_ALLTEK_PLL:DIVIDER_TSPC_D7:1	corner	C0_0 - 
+	(cross(vtime('tran "/CLKOUT") 0.9 4 "rising" nil nil nil) - cross(vtime('tran "/CLKOUT") 0.9 3 "rising" nil nil nil))		2.8n
+	TEST_TSMC13_ALLTEK_PLL:DIVIDER_TSPC_D7:1	corner	C0_1 - 
+	(cross(vtime('tran "/CLKOUT") 0.9 4 "rising" nil nil nil) - cross(vtime('tran "/CLKOUT") 0.9 3 "rising" nil nil nil))		2.8n
+	TEST_TSMC13_ALLTEK_PLL:DIVIDER_TSPC_D7:1	corner	C0_2 - 
+	(cross(vtime('tran "/CLKOUT") 0.9 4 "rising" nil nil nil) - cross(vtime('tran "/CLKOUT") 0.9 3 "rising" nil nil nil))		2.8n
+	TEST_TSMC13_ALLTEK_PLL:DIVIDER_TSPC_D7:1	corner	C0_3 - 
+	(cross(vtime('tran "/CLKOUT") 0.9 4 "rising" nil nil nil) - cross(vtime('tran "/CLKOUT") 0.9 3 "rising" nil nil nil))		2.8n
+	TEST_TSMC13_ALLTEK_PLL:DIVIDER_TSPC_D7:1	corner	C0_4 - 
+	(cross(vtime('tran "/CLKOUT") 0.9 4 "rising" nil nil nil) - cross(vtime('tran "/CLKOUT") 0.9 3 "rising" nil nil nil))		2.8n
+Design parameters: 
+	FS		2.5G
+	VS		1.62
+	temperature		-25
+
+Received stop signal from user. 
+Interactive.4 completed. 
+Current time: Thu Apr  2 17:28:40 2026 

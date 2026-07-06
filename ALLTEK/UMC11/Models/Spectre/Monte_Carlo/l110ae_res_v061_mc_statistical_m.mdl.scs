@@ -1,0 +1,32 @@
+
+simulator lang=spectre insensitive=yes
+parameters mc_res_ma_nnd = 0
+parameters mc_res_ma_nnpo = 0
+parameters mc_res_ma_npd = 0
+parameters mc_res_ma_nppo = 0
+parameters mc_res_ma_snd = 0
+parameters mc_res_ma_snpo = 0
+parameters mc_res_ma_spd = 0
+parameters mc_res_ma_sppo = 0
+parameters mc_res_ma_nhr = 0
+parameters mc_res_ma_snwell = 0
+parameters mc_res_ma_sm1 = 0
+parameters mc_res_ma_s1x = 0
+parameters mc_res_ma_s2x = 0
+statistics {
+    mismatch {
+        vary mc_res_ma_nnd dist=gauss std=1/1
+        vary mc_res_ma_nnpo dist=gauss std=1/1
+        vary mc_res_ma_npd dist=gauss std=1/1
+        vary mc_res_ma_nppo dist=gauss std=1/1
+        vary mc_res_ma_snd dist=gauss std=1/1
+        vary mc_res_ma_snpo dist=gauss std=1/1
+        vary mc_res_ma_spd dist=gauss std=1/1
+        vary mc_res_ma_sppo dist=gauss std=1/1
+        vary mc_res_ma_nhr dist=gauss std=1/1
+        vary mc_res_ma_snwell dist=gauss std=1/1
+        vary mc_res_ma_sm1 dist=gauss std=1/1
+        vary mc_res_ma_s1x dist=gauss std=1/1
+        vary mc_res_ma_s2x dist=gauss std=1/1
+    }
+}

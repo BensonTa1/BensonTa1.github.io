@@ -1,0 +1,21 @@
+Starting Single Run, Sweeps and Corners...
+
+Current time: Sat Nov 16 22:33:45 2024 
+Best design point: 1
+Design specs: 
+	TEST:BGR:1	corner	C1_0 - 
+	v /I0/VOUT; ac dB20(V)		Error	No
+	TEST:BGR:1	corner	C1_1 - 
+	v /I0/VOUT; ac dB20(V)		Error	No
+	TEST:BGR:1	corner	C1_2 - 
+	v /I0/VOUT; ac dB20(V)		Error	No
+	TEST:BGR:1	corner	Nominal - 
+	v /I0/VOUT; ac dB20(V)		Error	No
+Design parameters: 
+	VDD		1.8
+
+Interactive.1
+Number of points completed: 1
+Number of simulation errors: 4
+Interactive.1 completed. 
+Current time: Sat Nov 16 22:33:49 2024 

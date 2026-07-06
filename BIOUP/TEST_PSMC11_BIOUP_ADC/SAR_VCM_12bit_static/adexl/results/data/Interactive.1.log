@@ -1,0 +1,116 @@
+Starting Single Run, Sweeps and Corners...
+
+Current time: Sat Mar 21 07:40:23 2026 
+Best design point: 1
+Design specs: 
+	TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1	corner	C0_0 - 
+	v /CLKIN; tran (V)		Error	No
+	v /I2/VCAPP; tran (V)		Error	No
+	v /I2/VCAPN; tran (V)		Error	No
+	v /I2/VCMPP; tran (V)		Error	No
+	spectrum_enob		11.37
+	TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1	corner	C0_1 - 
+	v /CLKIN; tran (V)		Error	No
+	v /I2/VCAPP; tran (V)		Error	No
+	v /I2/VCAPN; tran (V)		Error	No
+	v /I2/VCMPP; tran (V)		Error	No
+	spectrum_enob		11.44
+	TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1	corner	C0_2 - 
+	v /CLKIN; tran (V)		Error	No
+	v /I2/VCAPP; tran (V)		Error	No
+	v /I2/VCAPN; tran (V)		Error	No
+	v /I2/VCMPP; tran (V)		Error	No
+	spectrum_enob		11.34
+	TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1	corner	C0_3 - 
+	v /CLKIN; tran (V)		Error	No
+	v /I2/VCAPP; tran (V)		Error	No
+	v /I2/VCAPN; tran (V)		Error	No
+	v /I2/VCMPP; tran (V)		Error	No
+	spectrum_enob		11.18
+	TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1	corner	C0_4 - 
+	v /CLKIN; tran (V)		Error	No
+	v /I2/VCAPP; tran (V)		Error	No
+	v /I2/VCAPN; tran (V)		Error	No
+	v /I2/VCMPP; tran (V)		Error	No
+	spectrum_enob		11.42
+	TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1	corner	C0_5 - 
+	v /CLKIN; tran (V)		Error	No
+	v /I2/VCAPP; tran (V)		Error	No
+	v /I2/VCAPN; tran (V)		Error	No
+	v /I2/VCMPP; tran (V)		Error	No
+	spectrum_enob		11.27
+	TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1	corner	C0_6 - 
+	v /CLKIN; tran (V)		Error	No
+	v /I2/VCAPP; tran (V)		Error	No
+	v /I2/VCAPN; tran (V)		Error	No
+	v /I2/VCMPP; tran (V)		Error	No
+	spectrum_enob		11.26
+	TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1	corner	C0_7 - 
+	v /CLKIN; tran (V)		Error	No
+	v /I2/VCAPP; tran (V)		Error	No
+	v /I2/VCAPN; tran (V)		Error	No
+	v /I2/VCMPP; tran (V)		Error	No
+	spectrum_enob		11.48
+	TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1	corner	C0_8 - 
+	v /CLKIN; tran (V)		Error	No
+	v /I2/VCAPP; tran (V)		Error	No
+	v /I2/VCAPN; tran (V)		Error	No
+	v /I2/VCMPP; tran (V)		Error	No
+	spectrum_enob		11.25
+	TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1	corner	C0_9 - 
+	v /CLKIN; tran (V)		Error	No
+	v /I2/VCAPP; tran (V)		Error	No
+	v /I2/VCAPN; tran (V)		Error	No
+	v /I2/VCMPP; tran (V)		Error	No
+	spectrum_enob		11.25
+	TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1	corner	C0_10 - 
+	v /CLKIN; tran (V)		Error	No
+	v /I2/VCAPP; tran (V)		Error	No
+	v /I2/VCAPN; tran (V)		Error	No
+	v /I2/VCMPP; tran (V)		Error	No
+	spectrum_enob		11.07
+	TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1	corner	C0_11 - 
+	v /CLKIN; tran (V)		Error	No
+	v /I2/VCAPP; tran (V)		Error	No
+	v /I2/VCAPN; tran (V)		Error	No
+	v /I2/VCMPP; tran (V)		Error	No
+	spectrum_enob		11.23
+	TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1	corner	C0_12 - 
+	v /CLKIN; tran (V)		Error	No
+	v /I2/VCAPP; tran (V)		Error	No
+	v /I2/VCAPN; tran (V)		Error	No
+	v /I2/VCMPP; tran (V)		Error	No
+	spectrum_enob		11.5
+	TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1	corner	C0_13 - 
+	v /CLKIN; tran (V)		Error	No
+	v /I2/VCAPP; tran (V)		Error	No
+	v /I2/VCAPN; tran (V)		Error	No
+	v /I2/VCMPP; tran (V)		Error	No
+	spectrum_enob		10.93
+	TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1	corner	C0_14 - 
+	v /CLKIN; tran (V)		Error	No
+	v /I2/VCAPP; tran (V)		Error	No
+	v /I2/VCAPN; tran (V)		Error	No
+	v /I2/VCMPP; tran (V)		Error	No
+	spectrum_enob		11.1
+	TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1	corner	Nominal - 
+	v /CLKIN; tran (V)		Error	No
+	v /I2/VCAPP; tran (V)		Error	No
+	v /I2/VCAPN; tran (V)		Error	No
+	v /I2/VCMPP; tran (V)		Error	No
+	spectrum_enob		11.37
+Design parameters: 
+	VA		1
+	M		1
+	N		32
+	FCLK		1M
+	FS		62.5K
+	FIN		1.953K
+	START_TIME		88u
+	STOP_TIME		600u
+
+Interactive.1
+Number of points completed: 1
+Number of simulation errors: 64
+Interactive.1 completed. 
+Current time: Mon Mar 23 19:36:53 2026 

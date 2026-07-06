@@ -1,0 +1,263 @@
+
+
+//********************************************************************************
+//* Property of UMC.
+//* Unauthorized reproduction, modification and/or distribution are strictly
+//* prohibited.
+//* This product is protected under copyright law and trade secret law.
+//* This model card may not be sent in any form outside of UMC without
+//* the written consent of the UMC ATD Modeling Division.
+//********************************************************************************
+//* Process        : 0.11 um Logic and Mixed-Mode 1P8M Metal Metal Capacitor Al Advanced Enhancement Process
+//* Device Type    : N- and P-FET
+//* Description    : 5V MOS Transistor
+//* Model          : BSIM3.3.24 
+//* Simulator      : Spectre
+//* Model Version  : v031
+//* Model Features :
+//*     Global model            : Yes
+//*     Igate model             : NA
+//*     GIDL model              : NA
+//*     Substrate current model : Yes
+//*     Flicker noise           : Yes
+//*     LOD model               : Yes
+//*     RF model                : NA
+//*     Well proximity effect   : Yes
+//********************************************************************************
+//* Revision History:
+//*
+//* Version : 0.2_p1
+//* Date    : 2012/05/17
+//* Author  : Eason Cheng, Yan Zung Wang
+//* Remark  : 1.Original release.
+//*
+//* Version : 0.3_p1
+//* Date    : 2012/06/01
+//* Author  : Eason Cheng
+//* Remark  : 1. Modify SCREF in model card, and table, plot of WPE chapter in the document.
+//*           2. Modify SAREF in model card, and table, plot of LOD chapter in the document.
+//*           3. Update RO tables, plots, dimension ranges and some typo in the document.
+//*           4. Update Device Performance Reference Tables in the document.
+//*
+//* Version : 0.4_p1
+//* Date    : 2016/09/13
+//* Author  : Eason Cheng
+//* Remark  : 1. Set source terminal off current aligned to drain terminal
+//*              by adding jtssws=jtsswd, jtsswgs=jtsswgd, and xtsswgs=xtsswgd.
+//*
+//********************************************************************************
+//* Application Ranges:
+//* Geometry range(After shrinkage):
+//*
+//* For both Vcc=5 V n-ch and p-ch MOSFET:
+//*   0.488 um <= LDES <= 10 um
+//*   0.35 um  <= WDES <= 10 um
+//*
+//*   0.36um <=SA, SB
+//*   0.4um <= SC (for well edge is perpendicular to poly)
+//*   0.75um <= SC (for well edge is parallel to poly)
+//*
+//*
+//* Note: It is recommended to adopt multi-finger structures if WDES > 10 um.
+//*       SAREF=SBREF=3.6um and SCREF=2.0um are the reference dimensions of the STI-stress (LOD) effect
+//*       and Well Proximity Effect (WPE).
+//*
+//* Voltage range:
+//* For n-ch MOSFET:
+//*        0V <= VGS <= Vcc (*1.1)
+//*        0V <= VDS <= Vcc (*1.1)
+//*       -3V <= VBS <= 0V
+//* For p-ch MOSFET:
+//*        0V >= VGS >= -Vcc (*1.1)
+//*        0V >= VDS >= -Vcc (*1.1)
+//*        3V >= VBS >= 0V
+//*
+//* Temperature range: -40c ~ 125c ; nominal temperature=25c.
+//***************************** Start of Model Card ******************************
+
+
+simulator lang=spectre insensitive=yes
+model n_50_lvtl110ae bsim3v3 type=n
+//***** flag parameter ***
++version    = 3.24                                     binunit    = 2
++mobmod     = 1                                        capmod     = 3
++nqsmod     = 0                                        noimod     = 2                                        stimod     = 1
++wpemod     = 1
+//***** geometry range parameter ***
++lmin       = 4.88e-07                                 lmax       = 1.00e-05                                 wmin       = 3.50e-07
++wmax       = 1.00e-05
+//***** process parameter ***
++tox        = 1.18825e-8+dtox_n_50_lvtl110ae         xj         = 1.2e-7                                   nch        = 6.6276e17
+//***** dw and dl parameter ***
++wint       = 6.486375e-8                              wl         = -2.870068e-14                            wln        = 1
++ww         = -1.28e-14                                wwn        = 1                                        wwl        = 5.307295e-21+dwwl_n_50_lvtl110ae
++lint       = 6.88e-8                                  ll         = 0                                        lln        = 1
++lw         = 5.18649e-14                              lwn        = 1                                        lwl        = -1.625987e-20
++llc        = -6.328125e-16                            lwc        = 0                                        lwlc       = 0
++wlc        = 0                                        wwc        = 0                                        wwlc       = -1.056087e-20
++dwg        = -1.880892e-9                             dwb        = 1.028625e-9                              xl         = -7e-10+1.2e-8+dxl_n_50_lvtl110ae
++xw         = -1e-8+dxw_n_50_lvtl110ae
+//***** vth related  parameter ***
++vth0       = 4.9318829e-001+dvth0_n_50_lvtl110ae    pvth0      = -1.4394858e-015+dpvth0_n_50_lvtl110ae  vfb        = -1
++k1         = 0.779821                                 k2         = -1.75776e-2                              pk2        = 7.67648e-15
++k3         = 3.1922067e-001+dk3_n_50_lvtl110ae      wk3        = -2e-7                                    pk3        = -1.913625e-13
++k3b        = 0.18937                                  pk3b       = 7.669485e-14                             w0         = 1e-8
++nlx        = 1.3726271e-007+dnlx_n_50_lvtl110ae     pnlx       = 1.35e-20                                 dvt0       = 10
++dvt1       = 0.590038                                 dvt2       = -6.76965e-2                              dvt0w      = 0
++dvt1w      = 5.3e6                                    dvt2w      = 0                                        ngate      = 1.8243e20
+//***** mobility related parameter ***
++u0         = 3.5568e-002+du0_n_50_lvtl110ae         pu0        = -7.321e-16                               ua         = -5.768361e-10
++lua        = 2.676546e-16                             ub         = 2.2384e-18                               pub        = -2.125e-31
++uc         = 5.0419e-11                               luc        = -8.676957e-18                            puc        = -8.615368e-24
++vsat       = 8.1668967e+004+dvsat_n_50_lvtl110ae    pvsat      = 1.0494559e-009+dpvsat_n_50_lvtl110ae   a0         = 1.266537
++la0        = -6.824904e-7                             pa0        = 6.417665e-14                             ags        = 0.162358
++lags       = 1.276226e-7                              b0         = 2.6005689e-008+db0_n_50_lvtl110ae      b1         = 0
++keta       = -1.75875e-2                              lketa      = 1.38e-8                                  pketa      = -4.02e-15
++a1         = 0                                        a2         = 1                                        rdsw       = 676.45+drdsw_n_50_lvtl110ae
++prwb       = 0                                        prwg       = -0.01                                    wr         = 1.1
+//***** subthreshold related parameter ***
++voff       = -0.07991                                 nfactor    = 0.4688                                   eta0       = 4.02353e-003+deta0_n_50_lvtl110ae
++leta0      = 4.168446e-8                              peta0      = -1.1921202e-014+dpeta0_n_50_lvtl110ae  etab       = -0.055714
++petab      = 3.604836e-15                             dsub       = 0.56                                     cit        = -1.75e-4
++cdsc       = 2.4e-4                                   cdscb      = 0                                        cdscd      = 1.5e-4
+//***** output resistance related parameter ***
++pclm       = 0.05                                     pdiblc1    = 0.19964                                  ppdiblc1   = -8.42516e-15
++pdiblc2    = 8.6e-4                                   pdiblcb    = 0                                        drout      = 0.56
++pscbe1     = 2.332e8                                  pscbe2     = 1e-8                                     pvag       = 0
++delta      = 0.03                                     alpha0     = 2.260326e-6                              palpha0    = 0
++alpha1     = 7.25                                     palpha1    = -1.68625e-13                             beta0      = 31.2
+//***** flicker noise model parameter ***
++noia       = 6.26e20                                  noib       = 3.48e4                                   noic       = 1.32e-12
++em         = 4.1e7                                    ef         = 0.9
+//***** nqs parameter ***
++elm        = 5
+//***** capacitance parameter ***
++xpart      = 1                                        cgso       = 3.15e-11+dcgso_n_50_lvtl110ae          cgdo       = 3.15e-11+dcgdo_n_50_lvtl110ae
++cgbo       = 0                                        ckappa     = 0.6                                      cf         = 5.8167e-11
++dlc        = 9.399473e-8                              dwc        = -1.73707e-8                              noff       = 3.662787
++voffcv     = -3.05928e-2                              lvoffcv    = -4.35e-8                                 acde       = 0.5
++moin       = 10                                       cgsl       = 3.315e-10+dcgsl_n_50_lvtl110ae         cgdl       = 3.315e-10+dcgdl_n_50_lvtl110ae
+//***** souce/drain junction diode model parameter ***
++hdif       = 2.2e-7
++rsh        = 8.3                                      cj         = 7.639e-4+dcj_n_50_lvtl110ae            mj         = 0.28722
++mjsw       = 0.078356                                 cjsw       = 9.64e-11+dcjsw_n_50_lvtl110ae          cjswg      = 1.758e-10+dcjswg_n_50_lvtl110ae
++mjswg      = 0.5148                                   js         = 1.7666e-7                                jsw        = 2.5813e-13
++pbsw       = 0.57106                                  pb         = 0.67177                                  pbswg      = 0.61241
+//***** temperature coeffient ***
++tnom       = 25                                       ute        = -1.05                                    wute       = 6.262471e-8
++pute       = -2.31525e-14                             kt1        = -0.373602                                kt1l       = 1.8524e-8
++kt2        = -4.34309e-2                              lkt2       = 6.05e-9                                  ua1        = 3.15e-9
++lua1       = 2.4e-16                                  pua1       = -8.925e-23                               ub1        = -3.99e-18
++uc1        = -5.6e-11                                 at         = 4.95e3                                   prt        = 600
++nj         = 1.05                                     xti        = 2.9                                      tpb        = 1.7e-3
++tpbsw      = 2.75e-3                                  tpbswg     = 1.25e-3                                  tcj        = 1.12e-3
++tcjsw      = 5.168e-4                                 tcjswg     = 1.44e-3
+//***** stress effect related parameter ***
++saref      = 3.6e-6                                   sbref      = 3.6e-6                                   wlod       = 0
++ku0        = -3.75e-8                                 kvsat      = 0.4                                      kvth0      = 5e-9
++tku0       = 0                                        llodku0    = 1                                        wlodku0    = 1
++llodvth    = 1                                        wlodvth    = 1                                        lku0       = -1e-8
++wku0       = 0                                        pku0       = 0                                        lkvth0     = 5e-7
++wkvth0     = 0                                        pkvth0     = 0                                        stk2       = 2e-9
++lodk2      = 1                                        steta0     = 0                                        lodeta0    = 1
+//***** well proximity effect model parameters ***
++web        = -2.3e3                                   wec        = -5.78e3                                  kvth0we    = -4.14e-3
++scref      = 2.0e-6
+//***** unknown parameters ***
++jtssws     = 0                                        jtsswgs    = 5e-7+djtsswgd_n_50_lvtl110ae           xtsswgs    = 0.2
++jtsswd     = 0                                        jtsswgd    = 5e-7+djtsswgd_n_50_lvtl110ae           xtsswgd    = 0.2
++njtsswg    = 120
+
+
+
+model p_50_lvtl110ae bsim3v3 type=p
+//***** flag parameter ***
++version    = 3.24                                     binunit    = 2
++mobmod     = 1                                        capmod     = 3
++nqsmod     = 0                                        noimod     = 2                                        stimod     = 1
++wpemod     = 1
+//***** geometry range parameter ***
++lmin       = 4.88e-07                                 lmax       = 1.00e-05                                 wmin       = 3.50e-07
++wmax       = 1.00e-05
+//***** process parameter ***
++tox        = 1.24e-8+dtox_p_50_lvtl110ae            xj         = 1.9e-7                                   nch        = 7.759327e17
+//***** dw and dl parameter ***
++wint       = 7.104e-8                                 wl         = 0                                        wln        = 1
++ww         = -1.71e-14                                wwn        = 1                                        wwl        = 1.02e-021+dwwl_p_50_lvtl110ae
++lint       = -4.673e-9                                ll         = 5.66e-15                                 lln        = 1
++lw         = 0                                        lwn        = 1                                        lwl        = 8.612588e-22
++llc        = 1.568653e-14                             lwc        = 0                                        lwlc       = 0
++wlc        = 0                                        wwc        = 0                                        wwlc       = -5.23055e-21
++dwg        = -7.252732e-9                             dwb        = -5.021771e-9                             
++xl         = 2.4e-8+1.2e-8+dxl_p_50_lvtl110ae              xw         = -1e-8+dxw_p_50_lvtl110ae
+//***** vth related  parameter ***
++vth0       = -5.9072208e-001+dvth0_p_50_lvtl110ae   lvth0      = 1.250e-008+dlvth0_p_50_lvtl110ae       pvth0      = 4.9104894e-015+dpvth0_p_50_lvtl110ae
++vfb        = -1                                       k1         = 1.085691                                 k2         = -0.108
++pk2        = -6.715502e-16                            k3         = 4.1685445e-001+dk3_p_50_lvtl110ae      k3b        = 0.4
++w0         = 1e-8                                     nlx        = 0                                        pnlx       = 2.5e-21
++dvt0       = 10.5262                                  dvt1       = 0.771764                                 dvt2       = -0.155
++dvt0w      = 0                                        dvt1w      = 8e5                                      dvt2w      = 0
++ngate      = 1e21
+//***** mobility related parameter ***
++u0         = 1.13090e-002+du0_p_50_lvtl110ae        lu0        = 3.407782e-10                             pu0        = -6.040519e-17
++ua         = 5.268664e-10                             pua        = 2.931312e-23                             ub         = 1.65e-18
++pub        = -1.337402e-31                            uc         = -7.923269e-12                            puc        = -5.372457e-24
++vsat       = 9.652e+004+dvsat_p_50_lvtl110ae        lvsat      = -6.875686e-3                             pvsat      = 1.05e-010+dpvsat_p_50_lvtl110ae
++a0         = 0.964471                                 la0        = -1.564e-7                                pa0        = -8.221376e-14
++ags        = 1.3901806e-001+dags_p_50_lvtl110ae     lags       = 5.33709e-8                               b0         = 2.88e-008+db0_p_50_lvtl110ae
++pb0        = 1.58693e-20                              b1         = 1.3224e-7                                keta       = -1.68679e-2
++lketa      = 1e-9                                     a1         = 0                                        a2         = 1
++rdsw       = 1.9275e+003+drdsw_p_50_lvtl110ae       prwb       = 8.01306e-2                               prwg       = -2.38535e-2
++wr         = 1
+//***** subthreshold related parameter ***
++voff       = -0.0493                                  nfactor    = 0.447                                    lnfactor   = 4e-8
++eta0       = 6.25e-002+deta0_p_50_lvtl110ae         leta0      = 3.59763e-8                               peta0      = 3.05e-015+dpeta0_p_50_lvtl110ae
++etab       = -5.52011e-2                              letab      = -1.610681e-8                             petab      = 1.095e-15
++dsub       = 0.481371                                 cit        = 0                                        cdsc       = 0
++cdscb      = 0                                        cdscd      = 0
+//***** output resistance related parameter ***
++pclm       = 1.853514                                 pdiblc1    = 0.106847                                 pdiblc2    = 4.199809e-4
++pdiblcb    = 0                                        drout      = 0.56                                     pscbe1     = 6.4807e8
++pscbe2     = 8.3017e-6                                pvag       = 0                                        delta      = 0.01
++alpha0     = 2.199375e-6                              alpha1     = 4.711217                                 beta0      = 35.496468
+//***** flicker noise model parameter ***
++noia       = 1.122018e20                              noib       = 4.168694e4                               noic       = 2.122e-11
++em         = 4.188514e7                               ef         = 1.28
+//***** capacitance parameter ***
++xpart      = 1                                        cgso       = 4.9215e-11+dcgso_p_50_lvtl110ae        cgdo       = 4.9215e-11+dcgdo_p_50_lvtl110ae
++cgbo       = 0                                        ckappa     = 0.6                                      cf         = 5.703e-11+dcf_p_50_lvtl110ae
++dlc        = 8.051866e-9                              dwc        = -3.93985e-8                              vfbcv      = -1
++noff       = 1.72601                                  lnoff      = 4.021e-7                                 imelt       = 1.1355e-3
++voffcv     = 0                                        lvoffcv    = -1e-8                                    acde       = 1.193049
++moin       = 5.519018                                 cgsl       = 1.238e-10+dcgsl_p_50_lvtl110ae         cgdl       = 1.238e-10+dcgdl_p_50_lvtl110ae
+//***** souce/drain junction diode model parameter ***
++hdif       = 2.2e-7
++rsh        = 7.2                                      cj         = 9.598e-4+dcj_p_50_lvtl110ae            mj         = 0.2996
++mjsw       = 0.05783                                  cjsw       = 7.346e-11+dcjsw_p_50_lvtl110ae         cjswg      = 1.704e-10+dcjswg_p_50_lvtl110ae
++mjswg      = 0.60877                                  js         = 1.1148e-7                                jsw        = 4.9061e-14
++pbsw       = 0.81097                                  pb         = 0.66925                                  pbswg      = 0.88221
+//***** temperature coeffient ***
++tnom       = 25                                       ute        = -1.060868                                lute       = -3.32516e-9
++wute       = -3.253144e-8                             pute       = -1.626572e-14                            kt1        = -0.349335
++kt1l       = -1.8e-8                                  kt2        = -0.0423                                  ua1        = 1.82232e-9
++lua1       = -5.781076e-17                            pua1       = 0                                        ub1        = -4.635633e-18
++pub1       = 0                                        uc1        = -5.289394e-11                            at         = 0
++prt        = 252.030444                               nj         = 1.0124                                   xti        = 3
++tpb        = 1.55e-3                                  tpbsw      = 1.0296e-3                                tpbswg     = 1.9e-3
++tcj        = 1.05e-3                                  tcjsw      = 1.098e-4                                 tcjswg     = 1.1835e-3
+//***** stress effect related parameter ***
++saref      = 3.6e-6                                   sbref      = 3.6e-6                                   wlod       = 0
++ku0        = 1e-7                                     kvsat      = -0.9                                     kvth0      = 5e-10
++tku0       = 0                                        llodku0    = 1.22                                     wlodku0    = 1
++llodvth    = 1                                        wlodvth    = 1                                        lku0       = 4.5e-8
++wku0       = 0                                        pku0       = 0                                        lkvth0     = 0
++wkvth0     = 0                                        pkvth0     = 0                                        stk2       = 1.129e-9
++lodk2      = 1                                        steta0     = 7e-9                                     lodeta0    = 1
+//***** well proximity effect model parameters ***
++web        = -1.89e3                                  wec        = 1.72e3                                   kvth0we    = 6.07e-3
++scref      = 2.0e-6
+//***** unknown parameters ***
++jtssws     = 0                                        jtsswgs    = 2.3e-7+djtsswgd_p_50_lvtl110ae         xtsswgs    = 0.2
++jtsswd     = 0                                        jtsswgd    = 2.3e-7+djtsswgd_p_50_lvtl110ae         xtsswgd    = 0.2
++njtsswg    = 80
+

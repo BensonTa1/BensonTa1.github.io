@@ -1,0 +1,95 @@
+simulator lang=spectre insensitive=yes
+//.prot
+parameters mc_dion_l110e = 0
+statistics {
+    process {
+        vary mc_dion_l110e dist=gauss std=sigma/3
+    }
+}
+parameters mc_sta_dion_l110e = mc_dion_l110e 
+parameters mc_diop_l110e = 0
+statistics {
+    process {
+        vary mc_diop_l110e dist=gauss std=sigma/3
+    }
+}
+parameters mc_sta_diop_l110e = mc_diop_l110e 
+parameters mc_dion_33_l110e = 0
+statistics {
+    process {
+        vary mc_dion_33_l110e dist=gauss std=sigma/3
+    }
+}
+parameters mc_sta_dion_33_l110e = mc_dion_33_l110e 
+parameters mc_diop_33_l110e = 0
+statistics {
+    process {
+        vary mc_diop_33_l110e dist=gauss std=sigma/3
+    }
+}
+parameters mc_sta_diop_33_l110e = mc_diop_33_l110e 
+parameters mc_dionw_l110e = 0
+statistics {
+    process {
+        vary mc_dionw_l110e dist=gauss std=sigma/3
+    }
+}
+parameters mc_sta_dionw_l110e = mc_dionw_l110e 
+parameters mc_diodnw_l110e = 0
+statistics {
+    process {
+        vary mc_diodnw_l110e dist=gauss std=sigma/3
+    }
+}
+parameters mc_sta_diodnw_l110e = mc_diodnw_l110e 
+parameters mc_diopw_l110e = 0
+statistics {
+    process {
+        vary mc_diopw_l110e dist=gauss std=sigma/3
+    }
+}
+parameters mc_sta_diopw_l110e = mc_diopw_l110e 
+
+parameters djs_dion_l110e = (5.00000e-01 / 3) * mc_sta_dion_l110e  
+parameters djsw_dion_l110e = (6.70000e-01 / 3) * mc_sta_dion_l110e  
+parameters dn_dion_l110e = (3.00000e-03 / 3) * mc_sta_dion_l110e  
+parameters dcj_dion_l110e = (-1.00000e-01 / 3) * mc_sta_dion_l110e  
+parameters dcjp_dion_l110e = (-1.00000e-01 / 3) * mc_sta_dion_l110e  
+parameters drs_dion_l110e = (-2.50000e-01 / 3) * mc_sta_dion_l110e  
+parameters djs_diop_l110e = (5.00000e-01 / 3) * mc_sta_diop_l110e  
+parameters djsw_diop_l110e = (6.70000e-01 / 3) * mc_sta_diop_l110e  
+parameters dn_diop_l110e = (3.00000e-03 / 3) * mc_sta_diop_l110e  
+parameters dcj_diop_l110e = (-1.00000e-01 / 3) * mc_sta_diop_l110e  
+parameters dcjp_diop_l110e = (-1.00000e-01 / 3) * mc_sta_diop_l110e  
+parameters drs_diop_l110e = (-2.50000e-01 / 3) * mc_sta_diop_l110e  
+parameters djs_dion_33_l110e = (5.00000e-01 / 3) * mc_sta_dion_33_l110e  
+parameters djsw_dion_33_l110e = (6.70000e-01 / 3) * mc_sta_dion_33_l110e  
+parameters dn_dion_33_l110e = (3.00000e-03 / 3) * mc_sta_dion_33_l110e  
+parameters dcj_dion_33_l110e = (-1.00000e-01 / 3) * mc_sta_dion_33_l110e  
+parameters dcjp_dion_33_l110e = (-1.00000e-01 / 3) * mc_sta_dion_33_l110e  
+parameters drs_dion_33_l110e = (-2.50000e-01 / 3) * mc_sta_dion_33_l110e  
+parameters djs_diop_33_l110e = (5.00000e-01 / 3) * mc_sta_diop_33_l110e  
+parameters djsw_diop_33_l110e = (6.70000e-01 / 3) * mc_sta_diop_33_l110e  
+parameters dn_diop_33_l110e = (3.00000e-03 / 3) * mc_sta_diop_33_l110e  
+parameters dcj_diop_33_l110e = (-1.00000e-01 / 3) * mc_sta_diop_33_l110e  
+parameters dcjp_diop_33_l110e = (-1.00000e-01 / 3) * mc_sta_diop_33_l110e  
+parameters drs_diop_33_l110e = (-2.50000e-01 / 3) * mc_sta_diop_33_l110e  
+parameters djs_dionw_l110e = (5.00000e-01 / 3) * mc_sta_dionw_l110e  
+parameters djsw_dionw_l110e = (6.70000e-01 / 3) * mc_sta_dionw_l110e  
+parameters dn_dionw_l110e = (3.00000e-03 / 3) * mc_sta_dionw_l110e  
+parameters dcj_dionw_l110e = (-1.00000e-01 / 3) * mc_sta_dionw_l110e  
+parameters dcjp_dionw_l110e = (-1.00000e-01 / 3) * mc_sta_dionw_l110e  
+parameters drs_dionw_l110e = (-2.50000e-01 / 3) * mc_sta_dionw_l110e  
+parameters djs_diodnw_l110e = (5.00000e-01 / 3) * mc_sta_diodnw_l110e  
+parameters djsw_diodnw_l110e = (6.70000e-01 / 3) * mc_sta_diodnw_l110e  
+parameters dn_diodnw_l110e = (3.00000e-03 / 3) * mc_sta_diodnw_l110e  
+parameters dcj_diodnw_l110e = (-1.00000e-01 / 3) * mc_sta_diodnw_l110e  
+parameters dcjp_diodnw_l110e = (-1.00000e-01 / 3) * mc_sta_diodnw_l110e  
+parameters drs_diodnw_l110e = (-2.50000e-01 / 3) * mc_sta_diodnw_l110e  
+parameters djs_diopw_l110e = (5.00000e-01 / 3) * mc_sta_diopw_l110e  
+parameters djsw_diopw_l110e = (6.70000e-01 / 3) * mc_sta_diopw_l110e  
+parameters dn_diopw_l110e = (3.00000e-03 / 3) * mc_sta_diopw_l110e  
+parameters dcj_diopw_l110e = (-1.00000e-01 / 3) * mc_sta_diopw_l110e  
+parameters dcjp_diopw_l110e = (-1.00000e-01 / 3) * mc_sta_diopw_l110e  
+parameters drs_diopw_l110e = (-2.50000e-01 / 3) * mc_sta_diopw_l110e  
+//.unprot

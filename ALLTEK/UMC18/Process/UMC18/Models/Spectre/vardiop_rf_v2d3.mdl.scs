@@ -1,0 +1,35 @@
+simulator lang=spectre insensitive=yes
+//      #############################################
+//      #                                           #
+//      #  018RFCMOS PN VARACTOR SPECTRE MODEL      # 
+//      #                                           #  
+//      #############################################
+//
+subckt vardiop_rf ( 1 2 ) 
+parameters nf=60 
++ p_nf_30=nf / 30 
++ p_l1=(15.2 * p_nf_30) * 1e-12 
++ p_l2=1.31e-11 
++ p_c2=(86.62 * p_nf_30) * 1e-15 
++ p_csub=(12.19 * 2 * p_nf_30) * 1e-15 
++ p_rsub=143.3 / p_nf_30 
++ p_diode_area=nf*(2*5)*1e-12
++ p_diode_pj=nf*(2*(2+5))*1e-6
++ p_sub_area=((39.94*int(nf/15)+(nf-(int(nf/15)*15)*1.5)*1.5+1.94)*8.88)*1e-12
++ p_sub_pj=2*((39.94*int(nf/15)+(nf-(int(nf/15)*15)*1.5)*1.5+1.94)+8.88)*1e-6
+l1 ( 1 11 ) inductor l=p_l1
+l2 ( 2 22 ) inductor l=p_l2
+c2 ( 22 223 ) capacitor c=p_c2
+csub ( 223 0 ) capacitor c=p_csub
+rsub ( 223 0 ) resistor r=p_rsub
+d1 ( 11 22 ) diode_m1
+model diode_m1 diode level=1 tlevc=1 area=p_diode_area perim=p_diode_pj is=1.12e-7 xti=3  
++ isw=3.5e-14 bv=11.75 ibv=125 rs=9.355e-10 cjo=1.136e-3*(1+dcj_vardiop_rf) vj=0.6599 mj=0.3307 cjsw=1.56e-10 *(1+dcjsw_vardiop_rf)
++ vjsw=0.665 mjsw=0.324 fc=0.5 eg=1.165 cta=1.03e-3 pta=1.86e-3 n=1.00 ik=3.3833e+7 imax=1e14
+d2 ( 0 22 ) d_sub
+model d_sub diode level=1 area=p_sub_area perim=p_sub_pj is=4.204e-06 isw=3.231e-12 
++ n=1.02 rs=9.223e-06 ik=400 ikp=3.4e+04 bv=14.38 ibv=1e-3 tlev=1 eg=1.17 
++ xti=3 trs=0.00249 cj=0.000107*(1+dcj_vardiop_rf) mj=0.458 vj=0.75 cjsw=2.4e-11*(1+dcjsw_vardiop_rf) mjsw=0.384 vjsw=0.75 
++ tlevc=1 imax =1e14
+ends vardiop_rf
+//

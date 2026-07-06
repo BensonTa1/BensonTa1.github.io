@@ -1,0 +1,35 @@
+
+**
+.lib typ
+.param d_cj_varmis_33_rf  =   0.0000e+00         
++ d_cjsw_varmis_33_rf      =   0.0000e+00         
++ d_r_gate_varmis_33_rf    =   0.0000e+00         
++  dtoxe_varmis_33_rf        =   0.0000e+00         
++  dxw_varmis_33_rf          =   0.0000e+00         
++  dxl_varmis_33_rf            =   0.0000e+00         
++  dcmina_varmis_33_rf     =   0.0000e+00         
+.include 'l110ae_varmis33_v021_rf.mdl'
+.endl typ
+**
+.lib min
+.param d_cj_varmis_33_rf  =  0.1
++ d_cjsw_varmis_33_rf      =  0.1
++ d_r_gate_varmis_33_rf    =  0.15
++  dtoxe_varmis_33_rf       =  1.5000e-10        
++  dxw_varmis_33_rf         =  -2.9050e-07        
++  dxl_varmis_33_rf           =  -3.0700e-08        
++  dcmina_varmis_33_rf    =   8.0000e-02         
+.include 'l110ae_varmis33_v021_rf.mdl'
+.endl min
+**
+.lib max
+.param d_cj_varmis_33_rf  =  -0.1
++ d_cjsw_varmis_33_rf      =  -0.1
++ d_r_gate_varmis_33_rf   =  -0.15
++  dtoxe_varmis_33_rf       =  -1.5000e-10         
++  dxw_varmis_33_rf         =   2.8650e-07         
++  dxl_varmis_33_rf           =   2.7050e-08        
++  dcmina_varmis_33_rf    =  -6.7200e-02         
+.include 'l110ae_varmis33_v021_rf.mdl'
+.endl max
+**

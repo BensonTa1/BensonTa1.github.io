@@ -1,0 +1,28 @@
+Starting Single Run, Sweeps and Corners...
+
+Current time: Wed Nov 20 09:20:09 2024 
+Best design point: 1
+Design specs: 
+	TEST:PLL_5G:1	corner	C1_0 - 
+	v /Q; tran (V)		Error	No
+	v /I14/UPB; tran (V)		Error	No
+	TEST:PLL_5G:1	corner	C1_1 - 
+	v /Q; tran (V)		Error	No
+	v /I14/UPB; tran (V)		Error	No
+	TEST:PLL_5G:1	corner	C1_2 - 
+	v /Q; tran (V)		Error	No
+	v /I14/UPB; tran (V)		Error	No
+	TEST:PLL_5G:1	corner	C1_3 - 
+	v /Q; tran (V)		Error	No
+	v /I14/UPB; tran (V)		Error	No
+	TEST:PLL_5G:1	corner	C1_4 - 
+	v /Q; tran (V)		Error	No
+	v /I14/UPB; tran (V)		Error	No
+Design parameters: 
+	VC		1.8
+	VDD		1.71
+	temperature		-50
+
+Received stop signal from user. 
+Interactive.2 completed. 
+Current time: Wed Nov 20 21:35:23 2024 

@@ -1,0 +1,154 @@
+// VerilogA for Verilog_A, IDEAL_16bit_ADC, veriloga
+
+`include "constants.vams"
+`include "disciplines.vams"
+
+module IDEAL_16bit_ADC(CLKIN,VIN,D0,D1,D2,D3,D4,D5,D6,D7,D8,D9,D10,D11,D12,D13,D14,D15);
+	electrical CLKIN,VIN,D0,D1,D2,D3,D4,D5,D6,D7,D8,D9,D10,D11,D12,D13,D14,D15;
+	input CLKIN,VIN;
+	output D0,D1,D2,D3,D4,D5,D6,D7,D8,D9,D10,D11,D12,D13,D14,D15;
+
+	parameter real VTH=0.5;
+	parameter real VREF=2;
+	parameter real VOH=3.3;
+	parameter real VOL=0;
+	real VDAC=0;
+	
+	real DD0,DD1,DD2,DD3,DD4,DD5,DD6,DD7,DD8,DD9,DD10,DD11,DD12,DD13,DD14,DD15;	//16bit
+
+
+	analog begin
+
+
+		@(cross(V(CLKIN)-VTH,1))begin		//rising edge sample
+		
+			DD0=0;
+			DD1=0;
+			DD2=0;
+			DD3=0;
+			DD4=0;
+			DD5=0;
+			DD6=0;
+			DD7=0;
+			DD8=0;
+			DD9=0;
+			DD10=0;
+			DD11=0;
+			DD12=0;
+			DD13=0;
+			DD14=0;
+			DD15=0;
+			VDAC=0;
+			
+			//D0
+			if((V(VIN)-VDAC)>=VREF/2)begin
+				DD0=1;
+				VDAC=VDAC+VREF/2;
+			end
+
+			//D1
+			if((V(VIN)-VDAC)>=VREF/2**2)begin
+				DD1=1;
+				VDAC=VDAC+VREF/2**2;
+			end
+
+			//D2
+			if((V(VIN)-VDAC)>=VREF/2**3)begin
+				DD2=1;
+				VDAC=VDAC+VREF/2**3;
+			end
+
+			//D3
+			if((V(VIN)-VDAC)>=VREF/2**4)begin
+				DD3=1;
+				VDAC=VDAC+VREF/2**4;
+			end
+//==
+
+			//D4
+			if((V(VIN)-VDAC)>=VREF/2**5)begin
+				DD4=1;
+				VDAC=VDAC+VREF/2**5;
+			end
+			//D5
+			if((V(VIN)-VDAC)>=VREF/2**6)begin
+				DD5=1;
+				VDAC=VDAC+VREF/2**6;
+			end
+			//D6
+			if((V(VIN)-VDAC)>=VREF/2**7)begin
+				DD6=1;
+				VDAC=VDAC+VREF/2**7;
+			end
+			//D7
+			if((V(VIN)-VDAC)>=VREF/2**8)begin
+				DD7=1;
+				VDAC=VDAC+VREF/2**8;
+			end
+			//D8
+			if((V(VIN)-VDAC)>=VREF/2**9)begin
+				DD8=1;
+				VDAC=VDAC+VREF/2**9;
+			end
+			//D9
+			if((V(VIN)-VDAC)>=VREF/2**10)begin
+				DD9=1;
+				VDAC=VDAC+VREF/2**10;
+			end
+			//D10
+			if((V(VIN)-VDAC)>=VREF/2**11)begin
+				DD10=1;
+				VDAC=VDAC+VREF/2**11;
+			end
+			//D11
+			if((V(VIN)-VDAC)>=VREF/2**12)begin
+				DD11=1;
+				VDAC=VDAC+VREF/2**12;
+			end
+			//D12
+			if((V(VIN)-VDAC)>=VREF/2**13)begin
+				DD12=1;
+				VDAC=VDAC+VREF/2**13;
+			end
+			//D13
+			if((V(VIN)-VDAC)>=VREF/2**14)begin
+				DD13=1;
+				VDAC=VDAC+VREF/2**14;
+			end
+			//D14
+			if((V(VIN)-VDAC)>=VREF/2**15)begin
+				DD14=1;
+				VDAC=VDAC+VREF/2**15;
+			end
+			//D15
+			if((V(VIN)-VDAC)>=VREF/2**16)begin
+				DD15=1;
+				VDAC=VDAC+VREF/2**16;
+			end
+
+			
+			
+
+		end
+		
+		V(D0)<+(DD0>0.5) ? VOH : VOL;
+		V(D1)<+(DD1>0.5) ? VOH : VOL;
+		V(D2)<+(DD2>0.5) ? VOH : VOL;
+		V(D3)<+(DD3>0.5) ? VOH : VOL;
+		V(D4)<+(DD4>0.5) ? VOH : VOL;
+		V(D5)<+(DD5>0.5) ? VOH : VOL;
+		V(D6)<+(DD6>0.5) ? VOH : VOL;
+		V(D7)<+(DD7>0.5) ? VOH : VOL;
+		V(D8)<+(DD8>0.5) ? VOH : VOL;
+		V(D9)<+(DD9>0.5) ? VOH : VOL;
+		V(D10)<+(DD10>0.5) ? VOH : VOL;
+		V(D11)<+(DD11>0.5) ? VOH : VOL;
+		V(D12)<+(DD12>0.5) ? VOH : VOL;
+		V(D13)<+(DD13>0.5) ? VOH : VOL;
+		V(D14)<+(DD14>0.5) ? VOH : VOL;
+		V(D15)<+(DD15>0.5) ? VOH : VOL;
+
+	end
+
+
+endmodule

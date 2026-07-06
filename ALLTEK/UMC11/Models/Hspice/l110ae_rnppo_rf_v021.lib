@@ -1,0 +1,27 @@
+*
+.lib tt
+.param drend_rnppo_rf=0
+.param drs_rnppo_rf=0
+.param ddw_rnppo_rf=0
+.param p_cox_rnppo_rf=0
+
+.include 'l110ae_rnppo_rf_v021.mdl'
+.endl tt
+
+.lib ss
+.param drend_rnppo_rf=1.5470e-005
+.param drs_rnppo_rf=6.0000e+001
+.param ddw_rnppo_rf=-1.5000e-008
+.param p_cox_rnppo_rf=0.1
+
+.include 'l110ae_rnppo_rf_v021.mdl'
+.endl ss
+
+.lib ff
+.param drend_rnppo_rf=-1.6030e-005
+.param drs_rnppo_rf=-6.0000e+001
+.param ddw_rnppo_rf=1.6000e-008
+.param p_cox_rnppo_rf=-0.1
+
+.include 'l110ae_rnppo_rf_v021.mdl'
+.endl ff

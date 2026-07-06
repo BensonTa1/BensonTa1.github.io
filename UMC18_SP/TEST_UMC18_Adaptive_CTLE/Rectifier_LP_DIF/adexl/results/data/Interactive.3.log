@@ -1,0 +1,27 @@
+Starting Single Run, Sweeps and Corners...
+
+Current time: Thu Apr 24 18:50:20 2025 
+Best design point: 1
+Design specs: 
+	TEST_Adaptive_CTLE:Current_Mirror_OTA:1	corner	Corner_0 - 
+	(VDC("/VINP") - VDC("/VOUT"))		6.452m
+	TEST_Adaptive_CTLE:Current_Mirror_OTA:1	corner	Corner_1 - 
+	(VDC("/VINP") - VDC("/VOUT"))		7.201m
+	TEST_Adaptive_CTLE:Current_Mirror_OTA:1	corner	Corner_2 - 
+	(VDC("/VINP") - VDC("/VOUT"))		5.699m
+	TEST_Adaptive_CTLE:Current_Mirror_OTA:1	corner	Corner_3 - 
+	(VDC("/VINP") - VDC("/VOUT"))		6.759m
+	TEST_Adaptive_CTLE:Current_Mirror_OTA:1	corner	Corner_4 - 
+	(VDC("/VINP") - VDC("/VOUT"))		6.115m
+	TEST_Adaptive_CTLE:Current_Mirror_OTA:1	corner	Nominal - 
+	(VDC("/VINP") - VDC("/VOUT"))		6.452m
+Design parameters: 
+	sigma		3
+	VDM		0
+	VCM		900m
+
+Interactive.3
+Number of points completed: 1
+Number of simulation errors: 0
+Interactive.3 completed. 
+Current time: Thu Apr 24 18:50:26 2025 

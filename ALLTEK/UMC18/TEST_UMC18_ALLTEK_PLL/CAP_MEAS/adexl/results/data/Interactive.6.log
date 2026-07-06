@@ -1,0 +1,37 @@
+Starting Single Run, Sweeps and Corners...
+
+Current time: Tue Mar 24 17:26:18 2026 
+Best design point: 1
+Design specs: 
+	TEST_TSMC13_ALLTEK_PLL:PLL_LOOP_FR:1	corner	C0_0 - 
+	C		12.01p
+	ymax(C)		Error	No
+	ymin(C)		Error	No
+	TEST_TSMC13_ALLTEK_PLL:PLL_LOOP_FR:1	corner	C0_1 - 
+	C		12.34p
+	ymax(C)		Error	No
+	ymin(C)		Error	No
+	TEST_TSMC13_ALLTEK_PLL:PLL_LOOP_FR:1	corner	C0_2 - 
+	C		11.8p
+	ymax(C)		Error	No
+	ymin(C)		Error	No
+	TEST_TSMC13_ALLTEK_PLL:PLL_LOOP_FR:1	corner	C0_3 - 
+	C		12.24p
+	ymax(C)		Error	No
+	ymin(C)		Error	No
+	TEST_TSMC13_ALLTEK_PLL:PLL_LOOP_FR:1	corner	C0_4 - 
+	C		11.91p
+	ymax(C)		Error	No
+	ymin(C)		Error	No
+	TEST_TSMC13_ALLTEK_PLL:PLL_LOOP_FR:1	corner	Nominal - 
+	C		12.01p
+	ymax(C)		Error	No
+	ymin(C)		Error	No
+Design parameters: 
+	VDC		1
+
+Interactive.6
+Number of points completed: 14
+Number of simulation errors: 168
+Interactive.6 completed. 
+Current time: Tue Mar 24 17:28:10 2026 

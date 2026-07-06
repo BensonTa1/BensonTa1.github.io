@@ -1,0 +1,290 @@
+**
+.lib tt
+.param
++dtox_n_12_hsl110e   =  0.0000000e+000   dxl_n_12_hsl110e     =  0.0000000e+000   du0_n_12_hsl110e     =  0.0000000e+000   
++dvth0_n_12_hsl110e  =  0.0000000e+000   drdsw_n_12_hsl110e   =  0.0000000e+000   dxw_n_12_hsl110e     =  0.0000000e+000   
++dnlx_n_12_hsl110e   =  0.0000000e+000   dk3_n_12_hsl110e     =  0.0000000e+000   dpvth0_n_12_hsl110e  =  0.0000000e+000   
++dwwl_n_12_hsl110e   =  0.0000000e+000   dags_n_12_hsl110e    =  0.0000000e+000   dcgdo_n_12_hsl110e   =  0.0000000e+000   
++dcgso_n_12_hsl110e  =  0.0000000e+000   dcj_n_12_hsl110e     =  0.0000000e+000   dcjsw_n_12_hsl110e   =  0.0000000e+000   
++dcjswg_n_12_hsl110e =  0.0000000e+000   dvsat_n_12_hsl110e   =  0.0000000e+000   dwags_n_12_hsl110e   =  0.0000000e+000   
++dpvsat_n_12_hsl110e =  0.0000000e+000
+*
++dtox_p_12_hsl110e   =  0.0000000e+000   dxl_p_12_hsl110e     =  0.0000000e+000   du0_p_12_hsl110e     =  0.0000000e+000   
++dvth0_p_12_hsl110e  =  0.0000000e+000   drdsw_p_12_hsl110e   =  0.0000000e+000   dxw_p_12_hsl110e     =  0.0000000e+000   
++dnlx_p_12_hsl110e   =  0.0000000e+000   dk3_p_12_hsl110e     =  0.0000000e+000   dpvth0_p_12_hsl110e  =  0.0000000e+000   
++dwwl_p_12_hsl110e   =  0.0000000e+000   dags_p_12_hsl110e    =  0.0000000e+000   dcgdo_p_12_hsl110e   =  0.0000000e+000   
++dcgso_p_12_hsl110e  =  0.0000000e+000   dcj_p_12_hsl110e     =  0.0000000e+000   dcjsw_p_12_hsl110e   =  0.0000000e+000   
++dcjswg_p_12_hsl110e =  0.0000000e+000   dvsat_p_12_hsl110e   =  0.0000000e+000   dwags_p_12_hsl110e   =  0.0000000e+000   
++dpvsat_p_12_hsl110e =  0.0000000e+000   dpags_p_12_hsl110e   =  0.0000000e+000
+*
+.include  'l110ae_hs12_v104.mdl'
+.lib 'l110ae_hs12_v104.lib' igate
+.endl tt
+*
+.lib ff
+.param
++dtox_n_12_hsl110e   = -5.2800000e-011   dxl_n_12_hsl110e     = -0.5600000e-009   du0_n_12_hsl110e     =  1.2000000e-003   
++dvth0_n_12_hsl110e  = -3.1600000e-002   drdsw_n_12_hsl110e   = -8.8000000e+000   dxw_n_12_hsl110e     =  1.2180000e-008   
++dnlx_n_12_hsl110e   = -2.4200000e-008   dk3_n_12_hsl110e     = -2.8300000e+000   dpvth0_n_12_hsl110e  = -7.4500000e-016   
++dwwl_n_12_hsl110e   =  5.4800000e-023   dags_n_12_hsl110e    = -1.0550000e-001   dcgdo_n_12_hsl110e   =  1.9000000e-011   
++dcgso_n_12_hsl110e  =  1.9000000e-011   dcj_n_12_hsl110e     = -7.2000000e-005   dcjsw_n_12_hsl110e   = -9.9400000e-012   
++dcjswg_n_12_hsl110e = -3.0300000e-011   dvsat_n_12_hsl110e   = -0.1520000e+003   dwags_n_12_hsl110e   = -6.8800000e-009   
++dpvsat_n_12_hsl110e =  1.7000000e-011
+*
++dtox_p_12_hsl110e   = -5.2800000e-011   dxl_p_12_hsl110e     = -0.7430000e-009   du0_p_12_hsl110e     =  6.3300000e-004   
++dvth0_p_12_hsl110e  =  3.0150000e-002   drdsw_p_12_hsl110e   = -4.2800000e+001   dxw_p_12_hsl110e     =  5.1000000e-009   
++dnlx_p_12_hsl110e   = -1.2640000e-008   dk3_p_12_hsl110e     = -2.1400000e+001   dpvth0_p_12_hsl110e  =  4.6800000e-016   
++dwwl_p_12_hsl110e   = -2.1600000e-023   dags_p_12_hsl110e    = -1.4100000e-001   dcgdo_p_12_hsl110e   =  2.0000000e-011   
++dcgso_p_12_hsl110e  =  2.0000000e-011   dcj_p_12_hsl110e     = -9.6900000e-005   dcjsw_p_12_hsl110e   = -1.1800000e-011   
++dcjswg_p_12_hsl110e = -4.8200000e-011   dvsat_p_12_hsl110e   = -7.8400000e+003   dwags_p_12_hsl110e   = -1.0790000e-008   
++dpvsat_p_12_hsl110e = -4.2750000e-010   dpags_p_12_hsl110e   =  0.0000000e+000
+.include  'l110ae_hs12_v104.mdl'
+.lib 'l110ae_hs12_v104.lib' igate
+.endl ff
+*
+.lib ss
+.param
++dtox_n_12_hsl110e   =  5.2800000e-011   dxl_n_12_hsl110e     =  2.3200000e-009   du0_n_12_hsl110e     = -1.4880000e-003   
++dvth0_n_12_hsl110e  =  3.1150000e-002   drdsw_n_12_hsl110e   =  9.4700000e+000   dxw_n_12_hsl110e     = -1.8400000e-008   
++dnlx_n_12_hsl110e   =  2.5000000e-008   dk3_n_12_hsl110e     =  2.3500000e+000   dpvth0_n_12_hsl110e  =  8.5400000e-016   
++dwwl_n_12_hsl110e   = -2.4100000e-023   dags_n_12_hsl110e    =  1.0920000e-001   dcgdo_n_12_hsl110e   = -1.9000000e-011   
++dcgso_n_12_hsl110e  = -1.9000000e-011   dcj_n_12_hsl110e     =  7.2000000e-005   dcjsw_n_12_hsl110e   =  9.9400000e-012   
++dcjswg_n_12_hsl110e =  3.0300000e-011   dvsat_n_12_hsl110e   =  0.6500000e+003   dwags_n_12_hsl110e   =  6.3200000e-009   
++dpvsat_n_12_hsl110e =  4.8400000e-011
+*
++dtox_p_12_hsl110e   =  5.2800000e-011   dxl_p_12_hsl110e     =  3.6800000e-009   du0_p_12_hsl110e     = -7.6400000e-004   
++dvth0_p_12_hsl110e  = -2.9300000e-002   drdsw_p_12_hsl110e   =  4.2800000e+001   dxw_p_12_hsl110e     = -2.2000000e-008   
++dnlx_p_12_hsl110e   =  1.2960000e-008   dk3_p_12_hsl110e     =  2.0200000e+001   dpvth0_p_12_hsl110e  = -5.3900000e-016   
++dwwl_p_12_hsl110e   =  3.3400000e-023   dags_p_12_hsl110e    =  1.4680000e-001   dcgdo_p_12_hsl110e   = -2.0000000e-011   
++dcgso_p_12_hsl110e  = -2.0000000e-011   dcj_p_12_hsl110e     =  9.6900000e-005   dcjsw_p_12_hsl110e   =  1.1800000e-011   
++dcjswg_p_12_hsl110e =  4.8200000e-011   dvsat_p_12_hsl110e   =  2.9100000e+004   dwags_p_12_hsl110e   =  0.3750000e-008   
++dpvsat_p_12_hsl110e =  0.0000000e+000   dpags_p_12_hsl110e   =  5.4100000e-014
+.include  'l110ae_hs12_v104.mdl'
+.lib 'l110ae_hs12_v104.lib' igate
+.endl ss
+*
+.lib fnsp
+.param
++dtox_n_12_hsl110e   =  0.0000000e+000   dxl_n_12_hsl110e     = -1.1500000e-009   du0_n_12_hsl110e     =  0.7980000e-003   
++dvth0_n_12_hsl110e  = -1.8800000e-002   drdsw_n_12_hsl110e   = -2.6000000e+000   dxw_n_12_hsl110e     =  0.6680000e-008   
++dnlx_n_12_hsl110e   = -1.5050000e-008   dk3_n_12_hsl110e     = -1.3320000e+000   dpvth0_n_12_hsl110e  = -3.6800000e-016   
++dwwl_n_12_hsl110e   =  1.6700000e-023   dags_n_12_hsl110e    = -0.5070000e-001   dcgdo_n_12_hsl110e   =  0.0000000e+000   
++dcgso_n_12_hsl110e  =  0.0000000e+000   dcj_n_12_hsl110e     = -7.2000000e-005   dcjsw_n_12_hsl110e   = -9.9400000e-012   
++dcjswg_n_12_hsl110e = -3.0300000e-011   dvsat_n_12_hsl110e   =  0.4200000e+003   dwags_n_12_hsl110e   = -3.5200000e-009   
++dpvsat_n_12_hsl110e = -0.3200000e-011
+*
++dtox_p_12_hsl110e   =  0.0000000e+000   dxl_p_12_hsl110e     =  1.3300000e-009   du0_p_12_hsl110e     = -4.2000000e-004   
++dvth0_p_12_hsl110e  = -1.8450000e-002   drdsw_p_12_hsl110e   =  2.1400000e+001   dxw_p_12_hsl110e     = -0.7200000e-008   
++dnlx_p_12_hsl110e   =  0.6750000e-008   dk3_p_12_hsl110e     =  1.0400000e+001   dpvth0_p_12_hsl110e  = -2.5600000e-016   
++dwwl_p_12_hsl110e   =  0.9900000e-023   dags_p_12_hsl110e    =  0.6960000e-001   dcgdo_p_12_hsl110e   =  0.0000000e+000   
++dcgso_p_12_hsl110e  =  0.0000000e+000   dcj_p_12_hsl110e     =  9.6900000e-005   dcjsw_p_12_hsl110e   =  1.1800000e-011   
++dcjswg_p_12_hsl110e =  4.8200000e-011   dvsat_p_12_hsl110e   =  0.8600000e+004   dwags_p_12_hsl110e   =  0.3380000e-008   
++dpvsat_p_12_hsl110e =  0.0000000e+000   dpags_p_12_hsl110e   =  2.4500000e-014
+.include  'l110ae_hs12_v104.mdl'
+.lib 'l110ae_hs12_v104.lib' igate
+.endl fnsp
+*
+.lib snfp
+.param
++dtox_n_12_hsl110e   =  0.0000000e+000   dxl_n_12_hsl110e     =  1.1500000e-009   du0_n_12_hsl110e     = -0.8820000e-003   
++dvth0_n_12_hsl110e  =  1.8200000e-002   drdsw_n_12_hsl110e   =  3.5400000e+000   dxw_n_12_hsl110e     = -0.8050000e-008   
++dnlx_n_12_hsl110e   =  1.5800000e-008   dk3_n_12_hsl110e     =  1.2900000e+000   dpvth0_n_12_hsl110e  =  3.9700000e-016   
++dwwl_n_12_hsl110e   = -1.3400000e-023   dags_n_12_hsl110e    =  0.5110000e-001   dcgdo_n_12_hsl110e   =  0.0000000e+000   
++dcgso_n_12_hsl110e  =  0.0000000e+000   dcj_n_12_hsl110e     =  7.2000000e-005   dcjsw_n_12_hsl110e   =  9.9400000e-012   
++dcjswg_n_12_hsl110e =  3.0300000e-011   dvsat_n_12_hsl110e   = -0.7500000e+003   dwags_n_12_hsl110e   =  3.6200000e-009   
++dpvsat_n_12_hsl110e =  1.8500000e-011
+*
++dtox_p_12_hsl110e   =  0.0000000e+000   dxl_p_12_hsl110e     = -0.6350000e-009   du0_p_12_hsl110e     =  3.8850000e-004   
++dvth0_p_12_hsl110e  =  1.8900000e-002   drdsw_p_12_hsl110e   = -2.1400000e+001   dxw_p_12_hsl110e     =  3.3400000e-009   
++dnlx_p_12_hsl110e   = -0.6480000e-008   dk3_p_12_hsl110e     = -1.0350000e+001   dpvth0_p_12_hsl110e  =  2.4000000e-016   
++dwwl_p_12_hsl110e   = -1.1800000e-023   dags_p_12_hsl110e    = -0.6790000e-001   dcgdo_p_12_hsl110e   =  0.0000000e+000   
++dcgso_p_12_hsl110e  =  0.0000000e+000   dcj_p_12_hsl110e     = -9.6900000e-005   dcjsw_p_12_hsl110e   = -1.1800000e-011   
++dcjswg_p_12_hsl110e = -4.8200000e-011   dvsat_p_12_hsl110e   = -4.1600000e+003   dwags_p_12_hsl110e   = -0.5210000e-008   
++dpvsat_p_12_hsl110e = -3.2000000e-010   dpags_p_12_hsl110e   =  0.0000000e+000
+.include  'l110ae_hs12_v104.mdl'
+.lib 'l110ae_hs12_v104.lib' igate
+.endl snfp
+.lib igate
+.subckt n_12_hsl110e_ig n11 n2 n33 n4 w=1u l=1u nrd='hdif/w' nrs='hdif/w'
++  ad='2*hdif*w' as='2*hdif*w' pd='2*(2*hdif+w)' ps='2*(2*hdif+w)' dtemp=0 sa=2u sb=2u
+*
+mnig n1 n2 n3 n4 n_12_hsl110e w=w l=l m=1 nrd=nrd nrs=nrs ad=ad as=as pd=pd ps=ps dtemp=dtemp sa=sa sb=sb
+.param rsh='8.5'
+.param hdif='1.25e-07'
+.param tcig='1+1.55e-3*(temper+dtemp-25)'
+.param area='w*0.9*(l*0.9+8e-9)*1e4*tcig'
+.param toxg='(2.64e-09+dtox_n_12_hsl110e)*1e2'
+.param vdf0='3.11' vdfl='-0.3e-08' vdfw='3.5e-09'
+.param vaf0='0.7' vafl='-0.8e-10' vafw='1.0e-10'
+.param vdr0='5.78' vdrl='0e-07' vdrw='5.0e-09'
+.param var0='0.60' varl='0e-07' varw='1.0e-10' 
+.param vdf= '(vdf0+vdfl/(l*0.9+8e-9)+vdfw/(w*0.9))*2.6e7*toxg'
+.param vaf= '(vaf0+vafl/(l*0.9+8e-9)+vafw/(w*0.9))*2.6e7*toxg'
+.param vdr= '(vdr0+vdrl/(l*0.9+8e-9)+vdrw/(w*0.9))*2.6e7*toxg'
+.param var= '(var0+varl/(l*0.9+8e-9)+varw/(w*0.9))*2.6e7*toxg'
+.param igf= '2.1e-7*area*exp(-vdf)*pwr(1/toxg,2.0)'
+.param igr= '2.1e-7*area/(l*0.9+8e-9)*exp(-vdr)*pwr(1/toxg,2.0)'
+gigcd n2 n1 cur='igf*pwr((abs(v(n2,n1))+v(n2,n1))/2,vaf)-igr*pwr((abs(v(n2,n1))-v(n2,n1))/2,var)'
+gigcs n2 n3 cur='igf*pwr((abs(v(n2,n3))+v(n2,n3))/2,vaf)-igr*pwr((abs(v(n2,n3))-v(n2,n3))/2,var)'
+rdn n1 n11  'rsh*nrd'
+rsn n3 n33  'rsh*nrs'
+.ends
+*
+.subckt p_12_hsl110e_ig p11 p2 p33 p4 w=1u l=1u nrd='hdif/w' nrs='hdif/w'
++  ad='2*hdif*w' as='2*hdif*w' pd='2*(2*hdif+w)' ps='2*(2*hdif+w)' dtemp=0 sa=2u sb=2u
+*
+mpig p1 p2 p3 p4 p_12_hsl110e w=w l=l m=1 nrd=nrd nrs=nrs ad=ad as=as pd=pd ps=ps dtemp=dtemp sa=sa sb=sb
+.param rsh='7.6'
+.param hdif='1.25e-07'
+.param tcig='1+2.25e-3*(temper+dtemp-25)'
+.param area='w*0.9*(l*0.9+8e-9)*1e4*tcig'
+.param toxg='(2.83e-09+dtox_p_12_hsl110e)*1e2'
+.param vdf0='3.22' vdfl='-7.00e-09' vdfw='-6.0e-8'
+.param vaf0='0.6' vafl='-1.5e-08' vafw='-3.0e-8'
+.param vdr0='5.50' vdrl='+1.50e-08' vdrw='-1.0e-07'
+.param var0='0.35' varl='+1.50e-08' varw='4.0e-8' 
+.param vdf= '(vdf0+vdfl/(l*0.9+8e-9)+vdfw/(w*0.9))*2.6e7*toxg'
+.param vaf= '(vaf0+vafl/(l*0.9+8e-9)+vafw/(w*0.9))*2.6e7*toxg'
+.param vdr= '(vdr0+vdrl/(l*0.9+8e-9)+vdrw/(w*0.9))*2.6e7*toxg'
+.param var= '(var0+varl/(l*0.9+8e-9)+varw/(w*0.9))*2.6e7*toxg'
+.param igf= '2.1e-7*area*exp(-vdf)*pwr(1/toxg,2.0)'
+.param igr= '2.1e-7*area/(l*0.9+8e-9)*exp(-vdr)*pwr(1/toxg,2.0)'
+gigcd p2 p1 cur='-igf*pwr((abs(v(p2,p1))-v(p2,p1))/2,vaf)+igr*pwr((abs(v(p2,p1))+v(p2,p1))/2,var)'
+gigcs p2 p3 cur='-igf*pwr((abs(v(p2,p3))-v(p2,p3))/2,vaf)+igr*pwr((abs(v(p2,p3))+v(p2,p3))/2,var)'
+rdp p1 p11  'rsh*nrd'
+rsp p3 p33  'rsh*nrs'
+
+.ends
+*
+.subckt n_12bpw_hsl110e_ig n11 n2 n33 n4 w=1u l=1u nrd='hdif/w' nrs='hdif/w'
++  ad='2*hdif*w' as='2*hdif*w' pd='2*(2*hdif+w)' ps='2*(2*hdif+w)' dtemp=0 sa=2u sb=2u
+*
+mnig n1 n2 n3 n4 n_12bpw_hsl110e w=w l=l m=1 nrd=nrd nrs=nrs ad=ad as=as pd=pd ps=ps dtemp=dtemp sa=sa sb=sb
+.param rsh='8.5'
+.param hdif='1.25e-07'
+.param tcig='1+1.55e-3*(temper+dtemp-25)'
+.param area='w*0.9*(l*0.9+8e-9)*1e4*tcig'
+.param toxg='(2.64e-09+dtox_n_12_hsl110e)*1e2'
+.param vdf0='3.11' vdfl='-0.3e-08' vdfw='3.5e-09'
+.param vaf0='0.7' vafl='-0.8e-10' vafw='1.0e-10'
+.param vdr0='5.78' vdrl='0e-07' vdrw='5.0e-09'
+.param var0='0.60' varl='0e-07' varw='1.0e-10' 
+.param vdf= '(vdf0+vdfl/(l*0.9+8e-9)+vdfw/(w*0.9))*2.6e7*toxg'
+.param vaf= '(vaf0+vafl/(l*0.9+8e-9)+vafw/(w*0.9))*2.6e7*toxg'
+.param vdr= '(vdr0+vdrl/(l*0.9+8e-9)+vdrw/(w*0.9))*2.6e7*toxg'
+.param var= '(var0+varl/(l*0.9+8e-9)+varw/(w*0.9))*2.6e7*toxg'
+.param igf= '2.1e-7*area*exp(-vdf)*pwr(1/toxg,2.0)'
+.param igr= '2.1e-7*area/(l*0.9+8e-9)*exp(-vdr)*pwr(1/toxg,2.0)'
+gigcd n2 n1 cur='igf*pwr((abs(v(n2,n1))+v(n2,n1))/2,vaf)-igr*pwr((abs(v(n2,n1))-v(n2,n1))/2,var)'
+gigcs n2 n3 cur='igf*pwr((abs(v(n2,n3))+v(n2,n3))/2,vaf)-igr*pwr((abs(v(n2,n3))-v(n2,n3))/2,var)'
+rdn n1 n11  'rsh*nrd'
+rsn n3 n33  'rsh*nrs'
+.ends
+*
+.endl igate
+*
+.lib tt_tn
+.param
++dtox_n_12_hsl110e   =  0.0000000e+000   dxl_n_12_hsl110e     =  0.0000000e+000   du0_n_12_hsl110e     =  0.0000000e+000   
++dvth0_n_12_hsl110e  =  0.0000000e+000   drdsw_n_12_hsl110e   =  0.0000000e+000   dxw_n_12_hsl110e     =  0.0000000e+000   
++dnlx_n_12_hsl110e   =  0.0000000e+000   dk3_n_12_hsl110e     =  0.0000000e+000   dpvth0_n_12_hsl110e  =  0.0000000e+000   
++dwwl_n_12_hsl110e   =  0.0000000e+000   dags_n_12_hsl110e    =  0.0000000e+000   dcgdo_n_12_hsl110e   =  0.0000000e+000   
++dcgso_n_12_hsl110e  =  0.0000000e+000   dcj_n_12_hsl110e     =  0.0000000e+000   dcjsw_n_12_hsl110e   =  0.0000000e+000   
++dcjswg_n_12_hsl110e =  0.0000000e+000   dvsat_n_12_hsl110e   =  0.0000000e+000   dwags_n_12_hsl110e   =  0.0000000e+000   
++dpvsat_n_12_hsl110e =  0.0000000e+000
+*
++dtox_p_12_hsl110e   =  0.0000000e+000   dxl_p_12_hsl110e     =  0.0000000e+000   du0_p_12_hsl110e     =  0.0000000e+000   
++dvth0_p_12_hsl110e  =  0.0000000e+000   drdsw_p_12_hsl110e   =  0.0000000e+000   dxw_p_12_hsl110e     =  0.0000000e+000   
++dnlx_p_12_hsl110e   =  0.0000000e+000   dk3_p_12_hsl110e     =  0.0000000e+000   dpvth0_p_12_hsl110e  =  0.0000000e+000   
++dwwl_p_12_hsl110e   =  0.0000000e+000   dags_p_12_hsl110e    =  0.0000000e+000   dcgdo_p_12_hsl110e   =  0.0000000e+000   
++dcgso_p_12_hsl110e  =  0.0000000e+000   dcj_p_12_hsl110e     =  0.0000000e+000   dcjsw_p_12_hsl110e   =  0.0000000e+000   
++dcjswg_p_12_hsl110e =  0.0000000e+000   dvsat_p_12_hsl110e   =  0.0000000e+000   dwags_p_12_hsl110e   =  0.0000000e+000   
++dpvsat_p_12_hsl110e =  0.0000000e+000   dpags_p_12_hsl110e   =  0.0000000e+000
+*
+.include  'l110ae_hs12_v104_tn.mdl'
+.endl tt_tn
+*
+.lib ff_tn
+.param
++dtox_n_12_hsl110e   = -5.2800000e-011   dxl_n_12_hsl110e     = -0.5600000e-009   du0_n_12_hsl110e     =  1.2000000e-003   
++dvth0_n_12_hsl110e  = -3.1600000e-002   drdsw_n_12_hsl110e   = -8.8000000e+000   dxw_n_12_hsl110e     =  1.2180000e-008   
++dnlx_n_12_hsl110e   = -2.4200000e-008   dk3_n_12_hsl110e     = -2.8300000e+000   dpvth0_n_12_hsl110e  = -7.4500000e-016   
++dwwl_n_12_hsl110e   =  5.4800000e-023   dags_n_12_hsl110e    = -1.0550000e-001   dcgdo_n_12_hsl110e   =  1.9000000e-011   
++dcgso_n_12_hsl110e  =  1.9000000e-011   dcj_n_12_hsl110e     = -7.2000000e-005   dcjsw_n_12_hsl110e   = -9.9400000e-012   
++dcjswg_n_12_hsl110e = -3.0300000e-011   dvsat_n_12_hsl110e   = -0.1520000e+003   dwags_n_12_hsl110e   = -6.8800000e-009   
++dpvsat_n_12_hsl110e =  1.7000000e-011
+*
++dtox_p_12_hsl110e   = -5.2800000e-011   dxl_p_12_hsl110e     = -0.7430000e-009   du0_p_12_hsl110e     =  6.3300000e-004   
++dvth0_p_12_hsl110e  =  3.0150000e-002   drdsw_p_12_hsl110e   = -4.2800000e+001   dxw_p_12_hsl110e     =  5.1000000e-009   
++dnlx_p_12_hsl110e   = -1.2640000e-008   dk3_p_12_hsl110e     = -2.1400000e+001   dpvth0_p_12_hsl110e  =  4.6800000e-016   
++dwwl_p_12_hsl110e   = -2.1600000e-023   dags_p_12_hsl110e    = -1.4100000e-001   dcgdo_p_12_hsl110e   =  2.0000000e-011   
++dcgso_p_12_hsl110e  =  2.0000000e-011   dcj_p_12_hsl110e     = -9.6900000e-005   dcjsw_p_12_hsl110e   = -1.1800000e-011   
++dcjswg_p_12_hsl110e = -4.8200000e-011   dvsat_p_12_hsl110e   = -7.8400000e+003   dwags_p_12_hsl110e   = -1.0790000e-008   
++dpvsat_p_12_hsl110e = -4.2750000e-010   dpags_p_12_hsl110e   =  0.0000000e+000
+.include  'l110ae_hs12_v104_tn.mdl'
+.endl ff_tn
+*
+.lib ss_tn
+.param
++dtox_n_12_hsl110e   =  5.2800000e-011   dxl_n_12_hsl110e     =  2.3200000e-009   du0_n_12_hsl110e     = -1.4880000e-003   
++dvth0_n_12_hsl110e  =  3.1150000e-002   drdsw_n_12_hsl110e   =  9.4700000e+000   dxw_n_12_hsl110e     = -1.8400000e-008   
++dnlx_n_12_hsl110e   =  2.5000000e-008   dk3_n_12_hsl110e     =  2.3500000e+000   dpvth0_n_12_hsl110e  =  8.5400000e-016   
++dwwl_n_12_hsl110e   = -2.4100000e-023   dags_n_12_hsl110e    =  1.0920000e-001   dcgdo_n_12_hsl110e   = -1.9000000e-011   
++dcgso_n_12_hsl110e  = -1.9000000e-011   dcj_n_12_hsl110e     =  7.2000000e-005   dcjsw_n_12_hsl110e   =  9.9400000e-012   
++dcjswg_n_12_hsl110e =  3.0300000e-011   dvsat_n_12_hsl110e   =  0.6500000e+003   dwags_n_12_hsl110e   =  6.3200000e-009   
++dpvsat_n_12_hsl110e =  4.8400000e-011
+*
++dtox_p_12_hsl110e   =  5.2800000e-011   dxl_p_12_hsl110e     =  3.6800000e-009   du0_p_12_hsl110e     = -7.6400000e-004   
++dvth0_p_12_hsl110e  = -2.9300000e-002   drdsw_p_12_hsl110e   =  4.2800000e+001   dxw_p_12_hsl110e     = -2.2000000e-008   
++dnlx_p_12_hsl110e   =  1.2960000e-008   dk3_p_12_hsl110e     =  2.0200000e+001   dpvth0_p_12_hsl110e  = -5.3900000e-016   
++dwwl_p_12_hsl110e   =  3.3400000e-023   dags_p_12_hsl110e    =  1.4680000e-001   dcgdo_p_12_hsl110e   = -2.0000000e-011   
++dcgso_p_12_hsl110e  = -2.0000000e-011   dcj_p_12_hsl110e     =  9.6900000e-005   dcjsw_p_12_hsl110e   =  1.1800000e-011   
++dcjswg_p_12_hsl110e =  4.8200000e-011   dvsat_p_12_hsl110e   =  2.9100000e+004   dwags_p_12_hsl110e   =  0.3750000e-008   
++dpvsat_p_12_hsl110e =  0.0000000e+000   dpags_p_12_hsl110e   =  5.4100000e-014
+.include  'l110ae_hs12_v104_tn.mdl'
+.endl ss_tn
+*
+.lib fnsp_tn
+.param
++dtox_n_12_hsl110e   =  0.0000000e+000   dxl_n_12_hsl110e     = -1.1500000e-009   du0_n_12_hsl110e     =  0.7980000e-003   
++dvth0_n_12_hsl110e  = -1.8800000e-002   drdsw_n_12_hsl110e   = -2.6000000e+000   dxw_n_12_hsl110e     =  0.6680000e-008   
++dnlx_n_12_hsl110e   = -1.5050000e-008   dk3_n_12_hsl110e     = -1.3320000e+000   dpvth0_n_12_hsl110e  = -3.6800000e-016   
++dwwl_n_12_hsl110e   =  1.6700000e-023   dags_n_12_hsl110e    = -0.5070000e-001   dcgdo_n_12_hsl110e   =  0.0000000e+000   
++dcgso_n_12_hsl110e  =  0.0000000e+000   dcj_n_12_hsl110e     = -7.2000000e-005   dcjsw_n_12_hsl110e   = -9.9400000e-012   
++dcjswg_n_12_hsl110e = -3.0300000e-011   dvsat_n_12_hsl110e   =  0.4200000e+003   dwags_n_12_hsl110e   = -3.5200000e-009   
++dpvsat_n_12_hsl110e = -0.3200000e-011
+*
++dtox_p_12_hsl110e   =  0.0000000e+000   dxl_p_12_hsl110e     =  1.3300000e-009   du0_p_12_hsl110e     = -4.2000000e-004   
++dvth0_p_12_hsl110e  = -1.8450000e-002   drdsw_p_12_hsl110e   =  2.1400000e+001   dxw_p_12_hsl110e     = -0.7200000e-008   
++dnlx_p_12_hsl110e   =  0.6750000e-008   dk3_p_12_hsl110e     =  1.0400000e+001   dpvth0_p_12_hsl110e  = -2.5600000e-016   
++dwwl_p_12_hsl110e   =  0.9900000e-023   dags_p_12_hsl110e    =  0.6960000e-001   dcgdo_p_12_hsl110e   =  0.0000000e+000   
++dcgso_p_12_hsl110e  =  0.0000000e+000   dcj_p_12_hsl110e     =  9.6900000e-005   dcjsw_p_12_hsl110e   =  1.1800000e-011   
++dcjswg_p_12_hsl110e =  4.8200000e-011   dvsat_p_12_hsl110e   =  0.8600000e+004   dwags_p_12_hsl110e   =  0.3380000e-008   
++dpvsat_p_12_hsl110e =  0.0000000e+000   dpags_p_12_hsl110e   =  2.4500000e-014
+.include  'l110ae_hs12_v104_tn.mdl'
+.endl fnsp_tn
+*
+.lib snfp_tn
+.param
++dtox_n_12_hsl110e   =  0.0000000e+000   dxl_n_12_hsl110e     =  1.1500000e-009   du0_n_12_hsl110e     = -0.8820000e-003   
++dvth0_n_12_hsl110e  =  1.8200000e-002   drdsw_n_12_hsl110e   =  3.5400000e+000   dxw_n_12_hsl110e     = -0.8050000e-008   
++dnlx_n_12_hsl110e   =  1.5800000e-008   dk3_n_12_hsl110e     =  1.2900000e+000   dpvth0_n_12_hsl110e  =  3.9700000e-016   
++dwwl_n_12_hsl110e   = -1.3400000e-023   dags_n_12_hsl110e    =  0.5110000e-001   dcgdo_n_12_hsl110e   =  0.0000000e+000   
++dcgso_n_12_hsl110e  =  0.0000000e+000   dcj_n_12_hsl110e     =  7.2000000e-005   dcjsw_n_12_hsl110e   =  9.9400000e-012   
++dcjswg_n_12_hsl110e =  3.0300000e-011   dvsat_n_12_hsl110e   = -0.7500000e+003   dwags_n_12_hsl110e   =  3.6200000e-009   
++dpvsat_n_12_hsl110e =  1.8500000e-011
+*
++dtox_p_12_hsl110e   =  0.0000000e+000   dxl_p_12_hsl110e     = -0.6350000e-009   du0_p_12_hsl110e     =  3.8850000e-004   
++dvth0_p_12_hsl110e  =  1.8900000e-002   drdsw_p_12_hsl110e   = -2.1400000e+001   dxw_p_12_hsl110e     =  3.3400000e-009   
++dnlx_p_12_hsl110e   = -0.6480000e-008   dk3_p_12_hsl110e     = -1.0350000e+001   dpvth0_p_12_hsl110e  =  2.4000000e-016   
++dwwl_p_12_hsl110e   = -1.1800000e-023   dags_p_12_hsl110e    = -0.6790000e-001   dcgdo_p_12_hsl110e   =  0.0000000e+000   
++dcgso_p_12_hsl110e  =  0.0000000e+000   dcj_p_12_hsl110e     = -9.6900000e-005   dcjsw_p_12_hsl110e   = -1.1800000e-011   
++dcjswg_p_12_hsl110e = -4.8200000e-011   dvsat_p_12_hsl110e   = -4.1600000e+003   dwags_p_12_hsl110e   = -0.5210000e-008   
++dpvsat_p_12_hsl110e = -3.2000000e-010   dpags_p_12_hsl110e   =  0.0000000e+000
+.include  'l110ae_hs12_v104_tn.mdl'
+.endl snfp_tn
+
+
+
+
+

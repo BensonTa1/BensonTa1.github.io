@@ -1,0 +1,9 @@
+simulator lang=spice
+
+.lib "/home/IC/Desktop/UMC/LIB/logic11_3p3v.lib" TT
+.lib "/home/IC/Desktop/UMC/LIB/logic11.lib" RES_TT
+.lib "/home/IC/Desktop/UMC/LIB/110MIM.lib" MIM_TT
+
+.lib "/home/IC/Desktop/UMC/LIB/logic11_3p3v.lib" bjt
+
+simulator lang=spectre

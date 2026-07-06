@@ -1,0 +1,54 @@
+// VerilogA for Bio_up_DAC, MOS_VA, veriloga
+
+`include "constants.vams"
+`include "disciplines.vams"
+
+module MOS_VA(out, in);
+  input in;
+  output out;
+  electrical in, out;
+
+
+  parameter real x0 = 1.0,  y0 = 0.00;
+  parameter real x1 = 1.4,  y1 = 0.01;
+  parameter real x2 = 1.7,  y2 = 0.02;
+  parameter real x3 = 2.0,  y3 = 0.04;
+  parameter real x4 = 2.5,  y4 = 0.27;
+  parameter real x5 = 2.6,  y5 = 0.40;
+  parameter real x6 = 2.7,  y6 = 0.60;
+
+  real term0, term1, term2, term3, term4, term5, term6,x,L;
+
+  analog begin
+	x=V(in);
+
+      term0 = y0 * (x-x1)*(x-x2)*(x-x3)*(x-x4)*(x-x5)*(x-x6) /
+                   ((x0-x1)*(x0-x2)*(x0-x3)*(x0-x4)*(x0-x5)*(x0-x6));
+
+      term1 = y1 * (x-x0)*(x-x2)*(x-x3)*(x-x4)*(x-x5)*(x-x6) /
+                   ((x1-x0)*(x1-x2)*(x1-x3)*(x1-x4)*(x1-x5)*(x1-x6));
+
+      term2 = y2 * (x-x0)*(x-x1)*(x-x3)*(x-x4)*(x-x5)*(x-x6) /
+                   ((x2-x0)*(x2-x1)*(x2-x3)*(x2-x4)*(x2-x5)*(x2-x6));
+
+      term3 = y3 * (x-x0)*(x-x1)*(x-x2)*(x-x4)*(x-x5)*(x-x6) /
+                   ((x3-x0)*(x3-x1)*(x3-x2)*(x3-x4)*(x3-x5)*(x3-x6));
+
+      term4 = y4 * (x-x0)*(x-x1)*(x-x2)*(x-x3)*(x-x5)*(x-x6) /
+                   ((x4-x0)*(x4-x1)*(x4-x2)*(x4-x3)*(x4-x5)*(x4-x6));
+
+      term5 = y5 * (x-x0)*(x-x1)*(x-x2)*(x-x3)*(x-x4)*(x-x6) /
+                   ((x5-x0)*(x5-x1)*(x5-x2)*(x5-x3)*(x5-x4)*(x5-x6));
+
+      term6 = y6 * (x-x0)*(x-x1)*(x-x2)*(x-x3)*(x-x4)*(x-x5) /
+                   ((x6-x0)*(x6-x1)*(x6-x2)*(x6-x3)*(x6-x4)*(x6-x5));
+
+      L = term0 + term1 + term2 + term3 + term4 + term5 + term6;
+	
+	if(L<=0) L=0;	
+
+	I(out) <+ L;
+	
+  end
+endmodule
+

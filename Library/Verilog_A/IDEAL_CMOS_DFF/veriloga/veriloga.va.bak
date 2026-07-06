@@ -1,0 +1,42 @@
+// VerilogA for Verilog_A, IDEAL_CMOS_DFF, veriloga
+
+`include "constants.vams"
+`include "disciplines.vams"
+
+module IDEAL_CMOS_DFF(D,Q,CLK,RST);
+	electrical D,Q,CLK,RST;
+	input D,CLK,RST;
+	output Q;
+
+	real DATA=1.8;
+
+	parameter real VOH=1.8;
+	parameter real VOL=0;
+	parameter real VTH=0.9;
+	parameter real RT_FT=0.1p;
+
+	parameter real POS_TRIG = 1;
+	real TRIG;
+
+	analog begin
+
+		if(POS_TRIG==1)
+			TRIG=1;
+		else
+			TRIG=0;
+	
+		@(cross(V(CLK)-VTH,TRIG))begin
+			if(V(D)>VTH)
+				DATA=VOH;
+			if(V(D)<=VTH)
+				DATA=VOL;
+		end
+
+		@(cross(V(RST)-VTH,1))begin
+			DATA=VOL;
+		end
+
+		V(Q)<+transition(DATA,0,RT_FT,RT_FT);
+
+
+endmodule

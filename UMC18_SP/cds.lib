@@ -1,0 +1,44 @@
+# File Created by IC at Wed Feb  4 14:00:28 2026
+# assisted by CdsLibEditor
+#===============================================================================================Artist
+DEFINE analogLib $CDS_INST_DIR/tools/dfII/etc/cdslib/artist/analogLib
+DEFINE basic $CDS_INST_DIR/tools/dfII/etc/cdslib/basic
+DEFINE ahdlLib /opt/eda/cadence/IC618/tools.lnx86/dfII/samples/artist/ahdlLib
+DEFINE pllLib /opt/eda/cadence/IC618/tools.lnx86/dfII/samples/artist/pllLib
+DEFINE bmslib /opt/eda/cadence/IC618/tools.lnx86/dfII/samples/artist/bmslib
+DEFINE pllMMLib /opt/eda/cadence/IC618/tools.lnx86/dfII/samples/artist/pllMMLib
+DEFINE rfLib /opt/eda/cadence/IC618/tools.lnx86/dfII/samples/artist/rfLib
+DEFINE rfTlineLib /opt/eda/cadence/IC618/tools.lnx86/dfII/samples/artist/rfTlineLib
+DEFINE passiveLib /opt/eda/cadence/IC618/tools.lnx86/dfII/samples/artist/passiveLib
+
+#===============================================================================================Process
+DEFINE UMC_18_CMOS ./Process/UMC18/UMC_18_CMOS
+
+
+DEFINE Verilog_A ../Library/Verilog_A
+DEFINE Fractional_PLL ./Fractional_PLL
+
+DEFINE TEST_Verilog_A /home/IC/Desktop/virtuoso/TEST_Verilog_A
+
+#===============================================================================================UMC18
+DEFINE UMC18_Standard_Cell ./UMC18_Standard_Cell
+
+DEFINE UMC18_CDR ./UMC18_CDR
+DEFINE UMC18_EQ_TX ./UMC18_EQ_TX
+DEFINE UMC18_Adaptive_CTLE ./UMC18_Adaptive_CTLE
+DEFINE UMC18_RRIO_OPA ./UMC18_RRIO_OPA
+DEFINE UMC18_Radar_4G_5G ./UMC18_Radar_4G_5G
+DEFINE PLL_5G ./PLL_5G
+DEFINE UMC18_ALLTEK_PLL ./UMC18_ALLTEK_PLL
+DEFINE UMC18_PLL_2p5G ./UMC18_PLL_2p5G
+
+DEFINE TEST_UMC18_RRIO_OPA ./TEST_UMC18_RRIO_OPA
+DEFINE TEST_UMC18_CDR ./TEST_UMC18_CDR
+DEFINE TEST_UMC18_Adaptive_CTLE ./TEST_UMC18_Adaptive_CTLE
+DEFINE TEST_UMC18_EQ_TX ./TEST_UMC18_EQ_TX
+DEFINE TEST_UMC18_ALLTEK_PLL ./TEST_UMC18_ALLTEK_PLL
+
+DEFINE ADC ./ADC
+DEFINE TEST_ADC ./TEST_ADC
+
+

@@ -1,0 +1,421 @@
+// *******************************************************************************
+//  Property of UMC                                                                  
+//  Unauthorized reproduction, modification and/or distribution are strictly         
+//  prohibited.                                                                      
+//  This product is protected under copyright law and trade secret law.              
+//  This model card may not be sent in any form outside of UMC without               
+//  the written consent of the UMC ATD Modeling Division.                            
+// *******************************************************************************
+//  Process:      0.11 um Logic and Mixed-Mode Metal Metal Capacitor Al Enhancement Process 
+//  Device Type:  n-ch and p-ch MOSFET  
+//  Description:  1.2V
+//  Model:        BSIM3 3.24 (Spectre)
+//  Simulator:    Spectre
+//  Model Version:0.5 P1
+//  Model features:
+//      Global model:  Yes
+//      Igate model:  Yes
+//      Flicker Noise: Yes
+//      LOD model: Yes
+//      RF model: No
+//      Well proximity effect: No
+// *******************************************************************************                
+//  Revision history:                                 
+//  <Revision 1>                                  
+//  Version : 0.1 p1                                  
+//  Date    : 2010 / 01 / 08                                  
+//  Author  : Jian Zhi Huang                                  
+//  Remark  : 1. Copy model form l110e_hs12_v021_target.lib in the G-05-LOGIC/MIXED_MODE11-MMC/L110E-SPICE.                                   
+//            2. New DSM version definition from 2009/11/30.                                  
+//            3. Align L110AE shrink methodology. Change Xl from 12nm to 8nm.                                 
+//   
+//  <Revision 2>                  
+//  Version : 0.1 p2                  
+//  Date    : 2010 / 04 / 13                  
+//  Author  : Ho Cheng Hu
+//  Remark  : 1. Update Idlin corenr aligned to Idsat.
+//  
+//  <Revision 3>                  
+//  Version : 0.2 p1                  
+//  Date    : 2010 /05 / 11                  
+//  Author  : Kelly Pao
+//  Remark  : 1. The model had been passed the verification of new silicon data .
+//
+// <Revision 4>                  
+// Version : 0.2 p2                  
+// Date    : 2010 / 08 / 11                  
+// Author  : Shih-Hsin Yeh
+// Remark  : 1. Remove the typo in the model card.
+//       2. Copy Igate model from L110E model.
+//
+// 
+// <Revision 5>                  
+// Version : 0.3 P1              
+// Date    : 2010 / 10 / 22                 
+// Author  : Kelly Pao
+// Remark  : 1. Removed the m in igate area formula.(area='w*0.9*l*0.9*m*1e4*tcig' --> area='w*0.9*l*0.9*1e4*tcig')
+//           2. Updated the wmax,lmax
+// 
+// <Revision 6>                  
+// Version : 0.4 P1                 
+// Date    : 2010 / 10 / 28                 
+// Author  : Yealing Lin
+// Remark  : 1. Add Twell NMOS model (copy from Twin well NMOS).
+//           2. Modify Igate model:
+//              (a) m=m_s1 to m=1
+//              (b) area=w * 0.9 * l * 0.9 * 1e4 * tcig'to area=w * 0.9 * (l * 0.9+8e-9) * 1e4 * tcig
+//              <c) r=rsh * nrd/m_s1 to r=rsh * nrd
+//              <d) r=rsh * nrd/m_s1 to r=rsh * nrd 
+//
+// <Revision 7>  
+// Version : 0.5 P1
+// Date    : 20010/12/24
+// Author  : YZ wang
+// Remark  : 1. Revised the target values (10um/0.116um) based on EDR revision.
+//           2. Add the enhancement of thermal noise model
+//           3. Triple well NMOS model was copied from twin well NMOS model.
+// *************************** Start of Model Card ******************************                                 
+// *                                                    
+simulator lang=spectre insensitive=yes
+ahdl_include "l110ae_hs12_v051_s.va"
+inline subckt n_12_hsl110e_ig ( 10 20 30 40 )
+parameters lf=0.12u wf=9.6u nf=1 dtemp=0
++ wg=wf*0.9 lg=lf*0.9+8e-9  
++ nf_odd=nf-2*int(nf/2) nf_even=1-nf_odd
++ sa=2.2u sb=2.2u sd=0
++ a_unit=sd*wf   p_unit=2*(sd+wf)  a_sa_edge=sa*wf   p_sa_edge=2*(sa+wf)
++ a_sb_edge=sb*wf   p_sb_edge=2*(sb+wf)
++ ad=(nf_odd*(a_unit*((nf+1)/2-1)+a_sb_edge) + nf_even*(a_unit*nf/2))/nf
++ as=(nf_odd*(a_unit*((nf+1)/2-1)+a_sa_edge) + nf_even*(a_unit*(nf/2-1)+a_sa_edge+a_sb_edge))/nf
++ pd=(nf_odd*(p_unit*((nf+1)/2-1)+p_sb_edge) + nf_even*(p_unit*nf/2))/nf
++ ps=(nf_odd*(p_unit*((nf+1)/2-1)+p_sa_edge) + nf_even*(p_unit*(nf/2-1)+p_sa_edge+p_sb_edge))/nf
++ rsh=8.5
++ hdif=1.25e-7
++ tcig=1 + 1.55e-3 * (temp + dtemp - 25) 
++ area=wg * (lg) * 1e4 * tcig * nf
++ toxg=(2.64e-09 + dtox_n_12_hsl110e) * 1e2 
++ vdf0=3.11 vdfl= - 0.3e-08 vdfw=3.5e-09 
++ vaf0=0.7 vafl= - 0.8e-10 vafw=1.0e-10 
++ vdr0=5.78 vdrl=0e-07 vdrw=5.0e-09 
++ var0=0.60 varl=0e-07 varw=1.0e-10 
++ vdf=(vdf0 + vdfl / (lg) + vdfw / (wg)) * 2.6e7 * toxg 
++ vaf=(vaf0 + vafl / (lg) + vafw / (wg)) * 2.6e7 * toxg 
++ vdr=(vdr0 + vdrl / (lg) + vdrw / (wg)) * 2.6e7 * toxg 
++ var=(var0 + varl / (lg) + varw / (wg)) * 2.6e7 * toxg 
++ igf=2.1e-7 * area * exp( - vdf) * pow(1 / toxg,2.0) 
++ igr=2.1e-7 * area / (lg) * exp( - vdr) * pow(1 / toxg,2.0)
++ nrd=hdif/wf
++ nrs=hdif/wf 
+// 
+***Igate model***
+rdn ( 10 11 ) resistor r=rsh * nrd / nf
+rsn ( 30 33 ) resistor r=rsh * nrs / nf
+gigcd ( 20 11 ) bsource i =igf * pow((abs(v(20,11)) + v(20,11)) / 2,vaf) - igr * pow((abs(v(20,11)) - v(20,11)) / 2,var)
+gigcs ( 20 33 ) bsource i =igf * pow((abs(v(20,33)) + v(20,33)) / 2,vaf) - igr * pow((abs(v(20,33)) - v(20,33)) / 2,var)
+**
+n_12_hsl110e_ig ( 11 20 33 40 ) n_12_hsl110e trise=dtemp m=nf l=lf w=wf nrd=nrd nrs=nrs sa=sa sb=sb ad=ad as=as pd=pd ps=ps
+//
+model n_12_hsl110e bsim3v3 type=n 
++ lmin=1.08e-7              lmax=4.5e-5               wmin=1.44e-7
++ wmax=0.00009               tnom=25.0                 version=3.24
++ tox=2.64e-09 + dtox_n_12_hsl110e                    toxm=2.64e-09
++ xj=1.0700000e-07          nch=3.0300001e+17         lln=1.0000000
++ lwn=1.0000000             wln=1.0000000             wwn=1.0000000
++ lint=8.250001e-09         ll=0.00                   lw=0.00
++ lwl=-3.7000000e-22        wint=1.5500000e-08        wl=0.00
++ ww=-2.5000000e-15         wwl= - 3.1595e-22 + dwwl_n_12_hsl110e
++ mobmod=1                  binunit=2                 
++ xl= - 2.3e-8 + dxl_n_12_hsl110e + 8e-9 - 3e-09      
++ xw=1e-9 + dxw_n_12_hsl110e                          dwg=0.00
++ dwb=0.00                  llc=0                     lwc=0
++ lwlc=3.51e-022            wlc=0                     wwc=0
++ wwlc= - 0.6e-21           dlc=1.5e-008 - 4.75e-09   dwc= - 8.5e-08
++ ldif=9.00e-08             hdif=1.25e-07             rsh=8.49
++ rd=0                      rs=0                      rsc=0
++ rdc=0                     vth0=0.1925450 + dvth0_n_12_hsl110e
++ pvth0=1.0000000e-15 + dpvth0_n_12_hsl110e           k1=0.3120560
++ k2=-2.0300001e-02         k3= - 2.9523165 + dk3_n_12_hsl110e
++ dvt0=0.9900000            dvt1=0.4444000            dvt2=-4.3300000e-02
++ dvt0w=0.2177000           dvt1w=9.4200000e+05       dvt2w=-6.0000000e-02
++ nlx=2.7495999e-07 + dnlx_n_12_hsl110e               w0=1.2646157e-07
++ k3b=3.4389060             ngate=3.2531000e+21       vfb=-0.9255526
++ vsat=1.0303000e+05 + dvsat_n_12_hsl110e             lvsat=2.7178398e-03
++ pvsat=3.3600000e-10 + dpvsat_n_12_hsl110e           ua=6.5000000e-13
++ pua=-1.8396019e-23        ub=1.3780000e-18          uc=8.1000000e-11
++ puc=-2.0000000e-24        rdsw=44.0000000 + drdsw_n_12_hsl110e
++ lrdsw=3.0000001e-06       prdsw=-3.8600000e-13      prwb=0.00
++ prwg=0.00                 wr=1.0000000              
++ u0=3.7188900e-02 + du0_n_12_hsl110e                 lu0=2.5000000e-11
++ a0=3.5000000              keta=0.00                 a1=0.00
++ a2=0.7390000              ags=0.7261000 + dags_n_12_hsl110e
++ lags=4.5890070e-07        wags=5.0632000e-09 + dwags_n_12_hsl110e
++ b0=5.5879350e-09          b1=0.2250000              voff=-9.0000000e-02
++ lvoff=-6.2500000e-09      wvoff=-3.7300000e-09      nfactor=1.0000000
++ pnfactor=-1.2100000e-14   cit=2.9104000e-11         cdsc=6.0000000e-04
++ cdscb=-1.0000000e-03      cdscd=9.0000000e-04       eta0=0.1134000
++ etab=-0.1228000           petab=7.170002e-15        dsub=0.8632400
++ pdsub=-9.0000000e-15      pclm=0.1000000            pdiblc1=9.4857380e-03
++ pdiblc2=3.4571030e-02     pdiblcb=0.1000000         drout=0.2800000
++ pscbe1=7.1300000e+09      pscbe2=2.4999999e-03      pvag=0.00
++ delta=2.9999999e-02       kt1=-0.24718              wkt1=7e-009
++ kt1l=1.1367396e-009       wkt1l=-7e-016             kt2=-0.011256
++ wkt2=4e-009               ute=-1.4736               wute=5e-008
++ ua1=3.0012e-009           ub1=-3.8235e-018          uc1=-1.7918e-010
++ wuc1=4e-017               prt=-114.56               at=72363
++ wat=-0.001                cj=0.00072 + dcj_n_12_hsl110e
++ mj=0.258                  pb=0.56                   
++ cjsw=9.94e-011 + dcjsw_n_12_hsl110e                 mjsw=0.13
++ pbsw=0.54                 cjswg=3.03e-10 + dcjswg_n_12_hsl110e
++ mjswg=0.78                pbswg=0.6                 tpb=0.001632
++ tpbsw=0.00031             tpbswg=0.00205            tcj=0.0009555
++ tcjsw=0.00073248          tcjswg=0.0033             js=8.81e-08
++ jsw=9.61e-14              nj=1.008                  xti=3.0
++ cgdo=1.40e-10 + dcgdo_n_12_hsl110e + 0.5e-10        
++ cgso=1.40e-10 + dcgso_n_12_hsl110e + 0.5e-10        cgbo=0.0e+00
++ capmod=3                  nqsmod=0                  elm=5
++ xpart=1                   cgsl=0.00                 cgdl=0.00
++ ckappa=0.6000000          clc=1.0000000e-07         cle=0.6000000
++ alpha0=6.66e-6            alpha1=114.8              beta0=19.4
++ saref=2.2e-006            sbref=2.2e-006            wlod=0
++ kvth0=3.25e-09            lkvth0=-2.71e-11          wkvth0=0
++ pkvth0=0                  llodvth=1                 wlodvth=1
++ stk2=0                    lodk2=1                   lodeta0=1
++ ku0=-5.32e-08             lku0=9.257e-08            wku0=0
++ pku0=0                    llodku0=1.12              wlodku0=1
++ kvsat=1                   steta0=0                  tku0=0
++ noimod=2                  noia=8.7587127e+20
++ noib=1.4666402e+05        noic=-5.8999554e-13       ef=0.905309
++ em=3.4329842e+06          
+ends n_12_hsl110e_ig       
+//
+inline subckt p_12_hsl110e_ig ( 10 20 30 40 )
+parameters lf=0.12u wf=9.6u nf=1 dtemp=0 hfn_flag=hfnoise rde=10e6
++ wg=wf*0.9 lg=lf*0.9+8e-9  
++ nf_odd=nf-2*int(nf/2) nf_even=1-nf_odd
++ sa=2.2u sb=2.2u sd=0
++ a_unit=sd*wf   p_unit=2*(sd+wf)  a_sa_edge=sa*wf   p_sa_edge=2*(sa+wf)
++ a_sb_edge=sb*wf   p_sb_edge=2*(sb+wf)
++ ad=(nf_odd*(a_unit*((nf+1)/2-1)+a_sb_edge) + nf_even*(a_unit*nf/2))/nf
++ as=(nf_odd*(a_unit*((nf+1)/2-1)+a_sa_edge) + nf_even*(a_unit*(nf/2-1)+a_sa_edge+a_sb_edge))/nf
++ pd=(nf_odd*(p_unit*((nf+1)/2-1)+p_sb_edge) + nf_even*(p_unit*nf/2))/nf
++ ps=(nf_odd*(p_unit*((nf+1)/2-1)+p_sa_edge) + nf_even*(p_unit*(nf/2-1)+p_sa_edge+p_sb_edge))/nf
++ rsh=7.6
++ hdif=1.25e-7
++ tcig=1 + 2.25e-3 * (temp + dtemp - 25) 
++ area=wg * (lg)  * 1e4 * tcig * nf
++ toxg=(2.83e-09 + dtox_p_12_hsl110e) * 1e2 
++ vdf0=3.22 vdfl= - 7.00e-09 vdfw= - 6.0e-8 
++ vaf0=0.6 vafl= - 1.5e-08 vafw= - 3.0e-8 
++ vdr0=5.50 vdrl= + 1.50e-08 vdrw= - 1.0e-07 
++ var0=0.35 varl= + 1.50e-08 varw=4.0e-8 
++ vdf=(vdf0 + vdfl / (lg) + vdfw / (wg)) * 2.6e7 * toxg 
++ vaf=(vaf0 + vafl / (lg) + vafw / (wg)) * 2.6e7 * toxg 
++ vdr=(vdr0 + vdrl / (lg) + vdrw / (wg)) * 2.6e7 * toxg 
++ var=(var0 + varl / (lg) + varw / (wg)) * 2.6e7 * toxg 
++ igf=2.1e-7 * area * exp( - vdf) * pow(1 / toxg,2.0) 
++ igr=2.1e-7 * area / (lg) * exp( - vdr) *  pow(1 / toxg,2.0)
++ nrd=hdif/wf
++ nrs=hdif/wf
+***Igate model***
+gigcd ( 20 11 ) bsource i = - igf * pow((abs(v(20,11)) - v(20,11)) / 2,vaf) + igr * pow((abs(v(20,11)) + v(20,11)) / 2,var)
+gigcs ( 20 33 ) bsource i = - igf * pow((abs(v(20,33)) - v(20,33)) / 2,vaf) + igr * pow((abs(v(20,33)) + v(20,33)) / 2,var)
+rdn ( 10 11 ) resistor r=rsh * nrd / nf
+rsn ( 30 33 ) resistor r=rsh * nrs / nf
+**
+//   ----- Enhanced Channel Noise ----- 
+if (hfn_flag==1) {
+ide  ( 30  10 ) cccs probe=vde gain=1
+recn ( ecn 40 10 20 30 40 ) rde_p_12_hsl110ae  lf=lg wf=wg nf=nf r=rde
+vde  ( ecn 40 ) vsource  dc=0
+ }
+p_12_hsl110e_ig ( 11 20 33 40 ) p_12_hsl110e trise=dtemp m=nf l=lf w=wf nrd=nrd nrs=nrs sa=sa sb=sb ad=ad as=as pd=pd ps=ps
+//                 
+model p_12_hsl110e bsim3v3 type=p 
++ lmin=1.08e-7              lmax=4.5e-5               wmin=1.44e-7
++ wmax=0.00009               tnom=25.0                 version=3.24
++ tox=2.83e-09 + dtox_p_12_hsl110e                    toxm=2.83e-09
++ xj=1.1700000e-07          nch=6.9500000e+17         lln=1.0000000
++ lwn=1.0000000             wln=1.0000000             wwn=1.0157551
++ lint=-2.0880000e-08       ll=2.6774999e-15          lw=-3.9825540e-16
++ lwl=-1.0072878e-22        wint=2.7079999e-08        wl=-4.5519940e-16
++ ww=-6.0500000e-15         wwl= - 6.2010000e-23 + dwwl_p_12_hsl110e
++ mobmod=1                  binunit=2                 
++ xl= - 1.40e-08 + dxl_p_12_hsl110e + 8e-9 - 3e-09    
++ xw=4.00e-09 + dxw_p_12_hsl110e                      dwg=-1.8869736e-08
++ dwb=-5.0740930e-09        llc=0                     lwc=0
++ lwlc=2e-22                wlc=0                     wwc=0
++ wwlc=-0.6e-021            dlc=2e-008 - 5.7e-09      dwc= - 4.5e-008
++ ldif=9.00e-08             hdif=1.25e-07             rsh=7.6
++ rd=0                      rs=0                      rsc=0
++ rdc=0                     vth0= - 0.2506557 + dvth0_p_12_hsl110e
++ wvth0=3.0000002e-09       pvth0= - 6.4392000e-16 + dpvth0_p_12_hsl110e
++ k1=0.4218000              k2=-2.1400001e-02         lk2=-2.3889996e-10
++ pk2=2.0000002e-16         k3= - 1.2176359 + dk3_p_12_hsl110e
++ lk3=1.5400000e-06         wk3=-1.0632040e-07        dvt0=9.2711500
++ dvt1=2.0040016            dvt2=-5.5879620e-03       dvt0w=0.9004000
++ dvt1w=3.4200240e+07       dvt2w=-7.0900000e-03      
++ nlx=3.8702100e-08 + dnlx_p_12_hsl110e               lnlx=-1.5850000e-16
++ w0=2.3370733e-06          k3b=6.6904590             wk3b=2.8400002e-06
++ ngate=1.0000000e+21       vfb=-1.0575110            
++ vsat=1.2200000e+05 + dvsat_p_12_hsl110e             lvsat=-6.7580000e-04
++ pvsat= - 5.4200000e-10 + dpvsat_p_12_hsl110e        ua=1.4576327e-09
++ ub=2.1931962e-19          wub=5.0000000e-26         pub=1.0000000e-32
++ uc=-7.0245750e-11         luc=1.0000000e-17         
++ rdsw=2.1426822e+02 + drdsw_p_12_hsl110e             prdsw=-4.54e-12
++ prwb=-1.3963644e-03       prwg=-0.4150886           pprwg=-1.2985000e-14
++ wr=0.6858034              u0=1.1559438e-02 + du0_p_12_hsl110e
++ lu0=-1.9999998e-11        pu0=-9.4000000e-18        a0=2.3345001
++ pa0=7.5249870e-15         keta=0.00                 pketa=-6.0500000e-16
++ a1=6.5600000e-02          a2=0.7920000              
++ ags=0.6822000 + dags_p_12_hsl110e                   lags=2.1879999e-07
++ wags= - 2.5259999e-08 + dwags_p_12_hsl110e          
++ pags= - 3.3300000e-14 + dpags_p_12_hsl110e          b0=3.7700000e-07
++ b1=2.8100001e-06          voff=-0.1131486           lvoff=-1.1675000e-09
++ nfactor=0.5357475         lnfactor=1.3585000e-07    pnfactor=-1.3872500e-14
++ cit=6.2500000e-06         cdsc=1.1800000e-04        cdscb=-2.6879999e-05
++ cdscd=3.3213180e-04       eta0=7.2600000e-02        peta0=-2.3011950e-16
++ etab=-2.1058559e-02       petab=2.2406327e-16       dsub=0.3279379
++ pclm=0.9720000            ppclm=4.5450010e-14       pdiblc1=1.1500000e-07
++ pdiblc2=1.2500000e-02     pdiblcb=0.00              drout=0.5600000
++ pscbe1=4.2400000e+08      pscbe2=1.0000000e-05      pvag=1.1000000
++ delta=9.9886390e-03       kt1=-0.21588              kt1l=1e-010
++ kt2=-0.007                ute=-1.3753               ua1=3.3505e-010
++ ub1=-2.1725e-018          uc1=-4.2565e-010          prt=-314.26
++ at=13500                  pat=1.4067e-009           
++ cj=9.69e-004 + dcj_p_12_hsl110e                     mj=0.308
++ pb=0.687                  cjsw=1.18e-010 + dcjsw_p_12_hsl110e
++ mjsw=0.1                  pbsw=0.45                 
++ cjswg=4.82e-10 + dcjswg_p_12_hsl110e                mjswg=0.391
++ pbswg=0.5                 tpb=0.0017088             tpbsw=0.0025864
++ tpbswg=0.00203            tcj=0.0010049             tcjsw=0.0005243
++ tcjswg=0.00204            js=1.21e-07               jsw=1.08e-13
++ nj=1.017                  xti=3.0                   
++ cgdo=1.50e-10 + dcgdo_p_12_hsl110e + 0.5e-10        
++ cgso=1.50e-10 + dcgso_p_12_hsl110e + 0.5e-10        cgbo=0.0e+00
++ capmod=3                  nqsmod=0                  elm=5
++ xpart=1                   cgsl=0.00                 cgdl=0.00
++ ckappa=0.6000000          clc=1.0000000e-07         cle=0.6000000
++ alpha0=5.94e-6            alpha1=68.6               beta0=23.4
++ saref=2.2e-006            sbref=2.2e-006
++ wlod=0                    kvth0=0                   lkvth0=0
++ wkvth0=0                  pkvth0=0                  llodvth=1
++ wlodvth=1                 stk2=0                    lodk2=1
++ lodeta0=1                 ku0=7.42e-08              lku0=1.957e-08
++ wku0=0                    pku0=0                    llodku0=1.15
++ wlodku0=1                 kvsat=1                   steta0=0
++ tku0=0                    noimod=2                  noia=3.4470439e+20
++ noib=5.7345612e+04        noic=2.1467835e-11        ef=1.0980679
++ em=2.0741378e+07          
+//
+ends p_12_hsl110e_ig
+//
+inline subckt n_12bpw_hsl110e_ig ( 10 20 30 40 )
+parameters lf=0.12u wf=9.6u nf=1 dtemp=0
++ wg=wf*0.9 lg=lf*0.9+8e-9  
++ nf_odd=nf-2*int(nf/2) nf_even=1-nf_odd
++ sa=2.2u sb=2.2u sd=0
++ a_unit=sd*wf   p_unit=2*(sd+wf)  a_sa_edge=sa*wf   p_sa_edge=2*(sa+wf)
++ a_sb_edge=sb*wf   p_sb_edge=2*(sb+wf)
++ ad=(nf_odd*(a_unit*((nf+1)/2-1)+a_sb_edge) + nf_even*(a_unit*nf/2))/nf
++ as=(nf_odd*(a_unit*((nf+1)/2-1)+a_sa_edge) + nf_even*(a_unit*(nf/2-1)+a_sa_edge+a_sb_edge))/nf
++ pd=(nf_odd*(p_unit*((nf+1)/2-1)+p_sb_edge) + nf_even*(p_unit*nf/2))/nf
++ ps=(nf_odd*(p_unit*((nf+1)/2-1)+p_sa_edge) + nf_even*(p_unit*(nf/2-1)+p_sa_edge+p_sb_edge))/nf
++ rsh=8.5
++ hdif=1.25e-7
++ tcig=1 + 1.55e-3 * (temp + dtemp - 25) 
++ area=wg * (lg) * 1e4 * tcig * nf
++ toxg=(2.64e-09 + dtox_n_12_hsl110e) * 1e2 
++ vdf0=3.11 vdfl= - 0.3e-08 vdfw=3.5e-09 
++ vaf0=0.7 vafl= - 0.8e-10 vafw=1.0e-10 
++ vdr0=5.78 vdrl=0e-07 vdrw=5.0e-09 
++ var0=0.60 varl=0e-07 varw=1.0e-10 
++ vdf=(vdf0 + vdfl / (lg) + vdfw / (wg)) * 2.6e7 * toxg 
++ vaf=(vaf0 + vafl / (lg) + vafw / (wg)) * 2.6e7 * toxg 
++ vdr=(vdr0 + vdrl / (lg) + vdrw / (wg)) * 2.6e7 * toxg 
++ var=(var0 + varl / (lg) + varw / (wg)) * 2.6e7 * toxg 
++ igf=2.1e-7 * area * exp( - vdf) * pow(1 / toxg,2.0) 
++ igr=2.1e-7 * area / (lg) * exp( - vdr) * pow(1 / toxg,2.0)
++ nrd=hdif/wf
++ nrs=hdif/wf 
+// 
+gigcd ( 20 11 ) bsource i =igf * pow((abs(v(20,11)) + v(20,11)) / 2,vaf) - igr * pow((abs(v(20,11)) - v(20,11)) / 2,var)
+gigcs ( 20 33 ) bsource i =igf * pow((abs(v(20,33)) + v(20,33)) / 2,vaf) - igr * pow((abs(v(20,33)) - v(20,33)) / 2,var)
+***Igate model***
+rdn ( 10 11 ) resistor r=rsh * nrd / nf
+rsn ( 30 33 ) resistor r=rsh * nrs / nf
+**
+n_12bpw_hsl110e_ig ( 11 20 33 40 ) n_12bpw_hsl110e trise=dtemp m=nf l=lf w=wf nrd=nrd nrs=nrs sa=sa sb=sb ad=ad as=as pd=pd ps=ps
+//
+model n_12bpw_hsl110e bsim3v3 type=n 
++ lmin=1.08e-7              lmax=4.5e-5               wmin=1.44e-7
++ wmax=0.00009               tnom=25.0                 version=3.24
++ tox=2.64e-09 + dtox_n_12_hsl110e                    toxm=2.64e-09
++ xj=1.0700000e-07          nch=3.0300001e+17         lln=1.0000000
++ lwn=1.0000000             wln=1.0000000             wwn=1.0000000
++ lint=8.250001e-09         ll=0.00                   lw=0.00
++ lwl=-3.7000000e-22        wint=1.5500000e-08        wl=0.00
++ ww=-2.5000000e-15         wwl= - 3.1595e-22 + dwwl_n_12_hsl110e
++ mobmod=1                  binunit=2                 
++ xl= - 2.3e-8 + dxl_n_12_hsl110e + 8e-9 - 3e-09      
++ xw=1e-9 + dxw_n_12_hsl110e                          dwg=0.00
++ dwb=0.00                  llc=0                     lwc=0
++ lwlc=3.51e-022            wlc=0                     wwc=0
++ wwlc= - 0.6e-21           dlc=1.5e-008 - 4.75e-09   dwc= - 8.5e-08
++ ldif=9.00e-08             hdif=1.25e-07             rsh=8.49
++ rd=0                      rs=0                      rsc=0
++ rdc=0                     vth0=0.1925450 + dvth0_n_12_hsl110e
++ pvth0=1.0000000e-15 + dpvth0_n_12_hsl110e           k1=0.3120560
++ k2=-2.0300001e-02         k3= - 2.9523165 + dk3_n_12_hsl110e
++ dvt0=0.9900000            dvt1=0.4444000            dvt2=-4.3300000e-02
++ dvt0w=0.2177000           dvt1w=9.4200000e+05       dvt2w=-6.0000000e-02
++ nlx=2.7495999e-07 + dnlx_n_12_hsl110e               w0=1.2646157e-07
++ k3b=3.4389060             ngate=3.2531000e+21       vfb=-0.9255526
++ vsat=1.0303000e+05 + dvsat_n_12_hsl110e             lvsat=2.7178398e-03
++ pvsat=3.3600000e-10 + dpvsat_n_12_hsl110e           ua=6.5000000e-13
++ pua=-1.8396019e-23        ub=1.3780000e-18          uc=8.1000000e-11
++ puc=-2.0000000e-24        rdsw=44.0000000 + drdsw_n_12_hsl110e
++ lrdsw=3.0000001e-06       prdsw=-3.8600000e-13      prwb=0.00
++ prwg=0.00                 wr=1.0000000              
++ u0=3.7188900e-02 + du0_n_12_hsl110e                 lu0=2.5000000e-11
++ a0=3.5000000              keta=0.00                 a1=0.00
++ a2=0.7390000              ags=0.7261000 + dags_n_12_hsl110e
++ lags=4.5890070e-07        wags=5.0632000e-09 + dwags_n_12_hsl110e
++ b0=5.5879350e-09          b1=0.2250000              voff=-9.0000000e-02
++ lvoff=-6.2500000e-09      wvoff=-3.7300000e-09      nfactor=1.0000000
++ pnfactor=-1.2100000e-14   cit=2.9104000e-11         cdsc=6.0000000e-04
++ cdscb=-1.0000000e-03      cdscd=9.0000000e-04       eta0=0.1134000
++ etab=-0.1228000           petab=7.170002e-15        dsub=0.8632400
++ pdsub=-9.0000000e-15      pclm=0.1000000            pdiblc1=9.4857380e-03
++ pdiblc2=3.4571030e-02     pdiblcb=0.1000000         drout=0.2800000
++ pscbe1=7.1300000e+09      pscbe2=2.4999999e-03      pvag=0.00
++ delta=2.9999999e-02       kt1=-0.24718              wkt1=7e-009
++ kt1l=1.1367396e-009       wkt1l=-7e-016             kt2=-0.011256
++ wkt2=4e-009               ute=-1.4736               wute=5e-008
++ ua1=3.0012e-009           ub1=-3.8235e-018          uc1=-1.7918e-010
++ wuc1=4e-017               prt=-114.56               at=72363
++ wat=-0.001                cj=0.00072 + dcj_n_12_hsl110e
++ mj=0.258                  pb=0.56                   
++ cjsw=9.94e-011 + dcjsw_n_12_hsl110e                 mjsw=0.13
++ pbsw=0.54                 cjswg=3.03e-10 + dcjswg_n_12_hsl110e
++ mjswg=0.78                pbswg=0.6                 tpb=0.001632
++ tpbsw=0.00031             tpbswg=0.00205            tcj=0.0009555
++ tcjsw=0.00073248          tcjswg=0.0033             js=8.81e-08
++ jsw=9.61e-14              nj=1.008                  xti=3.0
++ cgdo=1.40e-10 + dcgdo_n_12_hsl110e + 0.5e-10        
++ cgso=1.40e-10 + dcgso_n_12_hsl110e + 0.5e-10        cgbo=0.0e+00
++ capmod=3                  nqsmod=0                  elm=5
++ xpart=1                   cgsl=0.00                 cgdl=0.00
++ ckappa=0.6000000          clc=1.0000000e-07         cle=0.6000000
++ alpha0=6.66e-6            alpha1=114.8              beta0=19.4
++ saref=2.2e-006            sbref=2.2e-006            wlod=0
++ kvth0=3.25e-09            lkvth0=-2.71e-11          wkvth0=0
++ pkvth0=0                  llodvth=1                 wlodvth=1
++ stk2=0                    lodk2=1                   lodeta0=1
++ ku0=-5.32e-08             lku0=9.257e-08            wku0=0
++ pku0=0                    llodku0=1.12              wlodku0=1
++ kvsat=1                   steta0=0                  tku0=0
++ noimod=2                  noia=8.7587127e+20
++ noib=1.4666402e+05        noic=-5.8999554e-13       ef=0.905309
++ em=3.4329842e+06          
+//
+ends n_12bpw_hsl110e_ig

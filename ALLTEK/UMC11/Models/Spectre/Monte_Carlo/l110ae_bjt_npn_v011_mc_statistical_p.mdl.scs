@@ -1,0 +1,78 @@
+simulator lang=spectre insensitive=yes
+parameters mc_is_npn_sv4p5x4p5_l110ae = 0
+parameters mc_bf_npn_sv4p5x4p5_l110ae = 0
+parameters mc_nf_npn_sv4p5x4p5_l110ae = 0
+parameters mc_re_npn_sv4p5x4p5_l110ae = 0
+parameters mc_rc_npn_sv4p5x4p5_l110ae = 0
+parameters mc_ise_npn_sv4p5x4p5_l110ae = 0
+parameters mc_cje_npn_sv4p5x4p5_l110ae = 0
+parameters mc_cjc_npn_sv4p5x4p5_l110ae = 0
+parameters mc_is_npn_sv9x9_l110ae = 0
+parameters mc_bf_npn_sv9x9_l110ae = 0
+parameters mc_nf_npn_sv9x9_l110ae = 0
+parameters mc_re_npn_sv9x9_l110ae = 0
+parameters mc_rc_npn_sv9x9_l110ae = 0
+parameters mc_ise_npn_sv9x9_l110ae = 0
+parameters mc_cje_npn_sv9x9_l110ae = 0
+parameters mc_cjc_npn_sv9x9_l110ae = 0
+parameters mc_is_npn_sv13p5x13p5_l110ae = 0
+parameters mc_bf_npn_sv13p5x13p5_l110ae = 0
+parameters mc_nf_npn_sv13p5x13p5_l110ae = 0
+parameters mc_re_npn_sv13p5x13p5_l110ae = 0
+parameters mc_rc_npn_sv13p5x13p5_l110ae = 0
+parameters mc_ise_npn_sv13p5x13p5_l110ae = 0
+parameters mc_cje_npn_sv13p5x13p5_l110ae = 0
+parameters mc_cjc_npn_sv13p5x13p5_l110ae = 0
+statistics {
+process {
+        vary mc_is_npn_sv4p5x4p5_l110ae dist=gauss std=sigma/3
+        vary mc_bf_npn_sv4p5x4p5_l110ae dist=gauss std=sigma/3
+        vary mc_nf_npn_sv4p5x4p5_l110ae dist=gauss std=sigma/3
+        vary mc_re_npn_sv4p5x4p5_l110ae dist=gauss std=sigma/3
+        vary mc_rc_npn_sv4p5x4p5_l110ae dist=gauss std=sigma/3
+        vary mc_ise_npn_sv4p5x4p5_l110ae dist=gauss std=sigma/3
+        vary mc_cje_npn_sv4p5x4p5_l110ae dist=gauss std=sigma/3
+        vary mc_cjc_npn_sv4p5x4p5_l110ae dist=gauss std=sigma/3
+        vary mc_is_npn_sv9x9_l110ae dist=gauss std=sigma/3
+        vary mc_bf_npn_sv9x9_l110ae dist=gauss std=sigma/3
+        vary mc_nf_npn_sv9x9_l110ae dist=gauss std=sigma/3
+        vary mc_re_npn_sv9x9_l110ae dist=gauss std=sigma/3
+        vary mc_rc_npn_sv9x9_l110ae dist=gauss std=sigma/3
+        vary mc_ise_npn_sv9x9_l110ae dist=gauss std=sigma/3
+        vary mc_cje_npn_sv9x9_l110ae dist=gauss std=sigma/3
+        vary mc_cjc_npn_sv9x9_l110ae dist=gauss std=sigma/3
+        vary mc_is_npn_sv13p5x13p5_l110ae dist=gauss std=sigma/3
+        vary mc_bf_npn_sv13p5x13p5_l110ae dist=gauss std=sigma/3
+        vary mc_nf_npn_sv13p5x13p5_l110ae dist=gauss std=sigma/3
+        vary mc_re_npn_sv13p5x13p5_l110ae dist=gauss std=sigma/3
+        vary mc_rc_npn_sv13p5x13p5_l110ae dist=gauss std=sigma/3
+        vary mc_ise_npn_sv13p5x13p5_l110ae dist=gauss std=sigma/3
+        vary mc_cje_npn_sv13p5x13p5_l110ae dist=gauss std=sigma/3
+        vary mc_cjc_npn_sv13p5x13p5_l110ae dist=gauss std=sigma/3
+    }
+}
+
+parameters dis_npn_sv4p5x4p5_l110ae = (2.00000e-01 / 3) * mc_is_npn_sv4p5x4p5_l110ae 
+parameters dbf_npn_sv4p5x4p5_l110ae = (2.00000e-01 / 3) * mc_bf_npn_sv4p5x4p5_l110ae
+parameters dnf_npn_sv4p5x4p5_l110ae = (5.00000e-03 / 3) * mc_nf_npn_sv4p5x4p5_l110ae
+parameters dre_npn_sv4p5x4p5_l110ae = (2.00000e-01 / 3) * mc_re_npn_sv4p5x4p5_l110ae
+parameters drc_npn_sv4p5x4p5_l110ae = (2.00000e-01 / 3) * mc_rc_npn_sv4p5x4p5_l110ae
+parameters dise_npn_sv4p5x4p5_l110ae = (2.50000e-01 / 3) * mc_ise_npn_sv4p5x4p5_l110ae
+parameters dcje_npn_sv4p5x4p5_l110ae = (1.00000e-01 / 3) * mc_cje_npn_sv4p5x4p5_l110ae
+parameters dcjc_npn_sv4p5x4p5_l110ae = (1.00000e-01 / 3) * mc_cjc_npn_sv4p5x4p5_l110ae
+parameters dis_npn_sv9x9_l110ae = (3.00000e-01 / 3) * mc_is_npn_sv9x9_l110ae
+parameters dbf_npn_sv9x9_l110ae = (2.00000e-01 / 3) * mc_bf_npn_sv9x9_l110ae
+parameters dnf_npn_sv9x9_l110ae = (5.00000e-03 / 3) * mc_nf_npn_sv9x9_l110ae
+parameters dre_npn_sv9x9_l110ae = (2.00000e-01 / 3) * mc_re_npn_sv9x9_l110ae
+parameters drc_npn_sv9x9_l110ae = (2.00000e-01 / 3) * mc_rc_npn_sv9x9_l110ae
+parameters dise_npn_sv9x9_l110ae = (2.50000e-01 / 3) * mc_ise_npn_sv9x9_l110ae
+parameters dcje_npn_sv9x9_l110ae = (1.00000e-01 / 3) * mc_cje_npn_sv9x9_l110ae
+parameters dcjc_npn_sv9x9_l110ae = (1.00000e-01 / 3) * mc_cjc_npn_sv9x9_l110ae
+parameters dis_npn_sv13p5x13p5_l110ae = (3.00000e-01 / 3) * mc_is_npn_sv13p5x13p5_l110ae
+parameters dbf_npn_sv13p5x13p5_l110ae = (2.00000e-01 / 3) * mc_bf_npn_sv13p5x13p5_l110ae
+parameters dnf_npn_sv13p5x13p5_l110ae = (5.00000e-03 / 3) * mc_nf_npn_sv13p5x13p5_l110ae
+parameters dre_npn_sv13p5x13p5_l110ae = (2.00000e-01 / 3) * mc_re_npn_sv13p5x13p5_l110ae
+parameters drc_npn_sv13p5x13p5_l110ae = (2.00000e-01 / 3) * mc_rc_npn_sv13p5x13p5_l110ae
+parameters dise_npn_sv13p5x13p5_l110ae = (2.50000e-01 / 3) * mc_ise_npn_sv13p5x13p5_l110ae
+parameters dcje_npn_sv13p5x13p5_l110ae = (1.00000e-01 / 3) * mc_cje_npn_sv13p5x13p5_l110ae
+parameters dcjc_npn_sv13p5x13p5_l110ae = (1.00000e-01 / 3) * mc_cjc_npn_sv13p5x13p5_l110ae

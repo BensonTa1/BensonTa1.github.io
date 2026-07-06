@@ -1,0 +1,42 @@
+// VerilogA for Verilog_A, IDEAL_CP_Single, veriloga
+
+`include "constants.vams"
+`include "disciplines.vams"
+
+module IDEAL_CP_Single(IN,EN,IOUT);
+	
+	electrical IN,DN,IOUT;
+	input IN,EN;
+	output IOUT;
+
+	real IO;
+
+	parameter real output_current = 100u;
+	parameter VTH = 1.5;
+	parameter RT_FT = 1p;
+	parameter VDD = 1.8;
+
+	analog begin
+
+		if(V(IOUT)>=0&&V(IOUT)<=VDD)begin
+			if(V(IN)>VTH&&V(EN)>VTH)//UP
+				IO = -output_current;
+
+			if(V(IN)<VTH&&V(EN)>VTH)//DN
+				IO = +output_current;
+			
+		end
+
+		else begin
+			V(IOUT)<+0;
+		end
+
+		if(V(EN)<VTH)//Disable
+				IO = 0;
+		
+		I(IOUT)<+transition(IO,0,RT_FT,RT_FT);
+
+	end
+
+	
+endmodule

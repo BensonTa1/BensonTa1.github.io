@@ -1,0 +1,52 @@
+*     ##########################################
+*     #                                        #
+*     #  0.18um RFCMOS rnhr_sh HSPICE MODEL    #
+*     #                                        #  
+*     ##########################################
+*
+.subckt rnhr_rf 1 2 999  l=20e-6 w=20e-6 
+*
+.param dw='-0.043e-6*(1+ddw_rnhr_rf)'              
+.param wi='w+dw'                                             
+.param dt='temper-25'
+.param tc1='-8.34e-4'
+.param tc2='1.3e-6'
+.param rs='(2*120e-6/wi+1039*(1+drsh_rnhr_rf)*(l-0.4e-6)/wi)*(1+tc1*dt+tc2*dt*dt)'
+.param x='4e-7/wi'
+.param ep='2.5+1.5/(sqrt(1+10*x))'
+.param f='2/(1/x+2.42-0.44*x+pow(1-x,6))'    
+.param z0='120*3.14159*f/sqrt(ep)' 
+.param fc='1.9895e12*z0*(sqrt(1/ep))'                   
+.param eeff='4-(4-ep)/(1+3e9/(fc*fc))'
+.param cox='(8.854e-12*eeff*l/f)+(-4e-17+1.8e-9*wi-1.4e-4*wi*wi)'
+.param cox1='cox/2'
+.param cox2='cox1'                                 
+.param dgg='1e-5+2*wi'                 
+.param dsg='5e-6+wi'                   
+.param rgg='l/dgg'                          
+.param rsg='l/dsg'                              
+.param ps='2*(wi+2e-7)'
+.param pg='2*(wi+1.48e-6)'
+.param ls='2e-7*l*(log(4*l/ps)+0.5) '        
+.param lg='2e-7*l*(log(4*l/pg)+0.5)'          
+.param mgg='2e-7*l*(log(rgg+sqrt(1+rgg*rgg))-sqrt(1+1*pow(rgg,-2)+1*pow(rgg,-1)))'
+.param msg='2e-7*l*(log(rsg+sqrt(1+rsg*rsg))-sqrt(1+1*pow(rsg,-2)+1*pow(rsg,-1)))'
+.param lsg='(lg+mgg)/2+ls-2*msg'
+.param f1='6.283e-7/lsg'
+.param rsub='1/(5*(5e-6+wi/2)*1.66e-3*f1)'
+.param rsub1='rsub*2'
+.param rsub2='rsub1'
+.param csub='2.944e-12/rsub'
+.param csub1='csub/2'
+.param csub2='csub1'
+* --------- Equivalent network -------------------
+*
+rs 1 2 'rs*(1.0-0.035e-6*abs(v(1,2)/(l-0.4e-6))-0.15e-12*abs(v(1,2)/(l-0.4e-6))*abs(v(1,2)/(l-0.4e-6)))'
+cox1 1 11 'cox1*(1+dcox_rnhr_rf)'
+cox2 2 22 'cox2*(1+dcox_rnhr_rf)'
+rsub1 11 999 rsub1
+csub1 11 999 csub1
+rsub2 22 999 rsub2
+csub2 22 999 csub2
+*
+.ends

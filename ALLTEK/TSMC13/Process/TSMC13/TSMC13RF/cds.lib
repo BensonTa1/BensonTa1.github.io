@@ -1,0 +1,5 @@
+DEFINE basic $CDSHOME/tools/dfII/etc/cdslib/basic
+DEFINE analogLib $CDSHOME/tools/dfII/etc/cdslib/artist/analogLib
+DEFINE US_8ths $CDSHOME/tools/dfII/etc/cdslib/sheets/US_8ths
+DEFINE tsmc13rf ./tsmc13rf
+DEFINE TSMC13 /home/IC/Desktop/virtuoso/Process/TSMC13/TSMC13/TSMC13

@@ -1,0 +1,45 @@
+// VerilogA for Verilog_A, IDEAL_Jitter_Detector, veriloga
+
+`include "constants.vams"
+`include "disciplines.vams"
+
+module IDEAL_Jitter_Detector(CLKIN_Ideal,CLKIN_Sample,Jitter_Out);
+	electrical CLKIN_Ideal,CLKIN_Sample,Jitter_Out;
+	input CLKIN_Ideal,CLKIN_Sample;
+	output Jitter_Out;
+
+	real flag=0;
+	real start_times=0;
+	real jitter=0;
+
+	parameter real VTH=1.5;
+
+	analog begin
+		@(cross(V(CLKIN_Sample)-VTH,1))begin
+			if(flag==0)begin
+				flag=1;
+				start_times=$realtime;
+			end else begin
+				flag=0;
+				jitter=0+start_times-$realtime;
+			end
+		end
+	
+		@(cross(V(CLKIN_Ideal)-VTH,-1))begin
+			if(flag==0)begin
+				flag=1;
+				start_times=$realtime;
+			end else begin
+				flag=0;
+				jitter=0+$realtime-start_times;
+			end
+		end
+
+		@(cross(V(CLKIN_Ideal)-VTH,1))begin
+			flag=0;
+		end
+
+		V(Jitter_Out)<+jitter;
+
+	end
+endmodule

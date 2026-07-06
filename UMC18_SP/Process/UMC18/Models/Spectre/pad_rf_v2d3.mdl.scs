@@ -1,0 +1,24 @@
+simulator lang=spectre insensitive=yes
+//      #########################################
+//      #                                       #
+//      #  0.18um RFCMOS pad_sh SPECTRE MODEL   #
+//      #                                       #  
+//      #########################################
+// 
+subckt pad_rf ( 1 999 ) 
+parameters index=1 
++ indexa=6-index
++ p_c1=(411.65 - 380.75 * indexa + 153.76 * indexa * indexa - 28.306* indexa * indexa * indexa + 1.9421 * indexa * indexa * indexa * indexa) * 1e-15 
++ p_r1=65e-6 * 0.372 * 6.6711e-9 / p_c1 
+//  *  index set from 1,2 3,4,5  ***
+//  *****   Parameter cal   ********
+ 
+// index set from 1,2 3,4,5
+ 
+//  --------- Equivalent network -------------------
+// 
+c ( 1 11 ) capacitor c=p_c1* (1+dc_pad_rf)
+r ( 11 999 ) resistor r=p_r1
+// 
+ends pad_rf
+// 

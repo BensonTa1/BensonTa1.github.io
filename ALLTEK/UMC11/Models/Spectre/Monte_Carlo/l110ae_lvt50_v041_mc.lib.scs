@@ -1,0 +1,263 @@
+//********************************************************************************
+//* TT:   TYPICAL N-CH MOSFET AND TYPICAL P-CH MOSFET
+//* FF:   FAST N-CH MOSFET AND FAST P-CH MOSFET
+//* SS:   SLOW N-CH MOSFET AND SLOW P-CH MOSFET
+//* FNSP: FAST N-CH MOSFET AND SLOW P-CH MOSFET
+//* SNFP: SLOW N-CH MOSFET AND FAST P-CH MOSFET
+//********************************************************************************
+//*
+simulator lang=spectre insensitive=yes
+library mylib
+
+section tt
+parameters
+//*
++dtox_n_50_lvtl110ae_t       = 0.0000000e+000   dxl_n_50_lvtl110ae_t        = 0.0000000e+000   dxw_n_50_lvtl110ae_t        = 0.0000000e+000
++dvth0_n_50_lvtl110ae_t      = 0.0000000e+000   dnlx_n_50_lvtl110ae_t       = 0.0000000e+000   dk3_n_50_lvtl110ae_t        = 0.0000000e+000
++dpvth0_n_50_lvtl110ae_t     = 0.0000000e+000   du0_n_50_lvtl110ae_t        = 0.0000000e+000   drdsw_n_50_lvtl110ae_t      = 0.0000000e+000
++dwwl_n_50_lvtl110ae_t       = 0.0000000e+000   dvsat_n_50_lvtl110ae_t      = 0.0000000e+000   db0_n_50_lvtl110ae_t        = 0.0000000e+000
++dpvsat_n_50_lvtl110ae_t     = 0.0000000e+000   dcj_n_50_lvtl110ae_t        = 0.0000000e+000   dcjsw_n_50_lvtl110ae_t      = 0.0000000e+000
++dcjswg_n_50_lvtl110ae_t     = 0.0000000e+000   dcgdo_n_50_lvtl110ae_t      = 0.0000000e+000   dcgso_n_50_lvtl110ae_t      = 0.0000000e+000
++dcgdl_n_50_lvtl110ae_t      = 0.0000000e+000   dcgsl_n_50_lvtl110ae_t      = 0.0000000e+000   deta0_n_50_lvtl110ae_t      = 0.0000000e+000
++dpeta0_n_50_lvtl110ae_t     = 0.0000000e+000   djtsswgd_n_50_lvtl110ae_t   = 0.0000000e+000
+//*
++dtox_p_50_lvtl110ae_t       = 0.0000000e+000   dxl_p_50_lvtl110ae_t        = 0.0000000e+000   dxw_p_50_lvtl110ae_t        = 0.0000000e+000
++dvth0_p_50_lvtl110ae_t      = 0.0000000e+000   dlvth0_p_50_lvtl110ae_t     = 0.0000000e+000   dk3_p_50_lvtl110ae_t        = 0.0000000e+000
++dpvth0_p_50_lvtl110ae_t     = 0.0000000e+000   du0_p_50_lvtl110ae_t        = 0.0000000e+000   drdsw_p_50_lvtl110ae_t      = 0.0000000e+000
++dwwl_p_50_lvtl110ae_t       = 0.0000000e+000   dags_p_50_lvtl110ae_t       = 0.0000000e+000   dvsat_p_50_lvtl110ae_t      = 0.0000000e+000
++db0_p_50_lvtl110ae_t        = 0.0000000e+000   dpvsat_p_50_lvtl110ae_t     = 0.0000000e+000   dcj_p_50_lvtl110ae_t        = 0.0000000e+000
++dcjsw_p_50_lvtl110ae_t      = 0.0000000e+000   dcjswg_p_50_lvtl110ae_t     = 0.0000000e+000   dcgdo_p_50_lvtl110ae_t      = 0.0000000e+000
++dcgso_p_50_lvtl110ae_t      = 0.0000000e+000   dcgdl_p_50_lvtl110ae_t      = 0.0000000e+000   dcgsl_p_50_lvtl110ae_t      = 0.0000000e+000
++dcf_p_50_lvtl110ae_t        = 0.0000000e+000   deta0_p_50_lvtl110ae_t      = 0.0000000e+000   dpeta0_p_50_lvtl110ae_t     = 0.0000000e+000
++djtsswgd_p_50_lvtl110ae_t   = 0.0000000e+000
+//*
+//*
+endsection tt
+//*
+section ff
+parameters
+//*
++dtox_n_50_lvtl110ae_t       = -3.5647500e-010  dxl_n_50_lvtl110ae_t        = -1.4291428e-008  dxw_n_50_lvtl110ae_t        = 1.3359801e-008
++dvth0_n_50_lvtl110ae_t      = -3.0795457e-002  dnlx_n_50_lvtl110ae_t       = -6.1703652e-008  dk3_n_50_lvtl110ae_t        = -1.2070455e+000
++dpvth0_n_50_lvtl110ae_t     = 7.0963778e-016   du0_n_50_lvtl110ae_t        = 2.0888310e-003   drdsw_n_50_lvtl110ae_t      = -8.0000000e+001
++dwwl_n_50_lvtl110ae_t       = -2.0282861e-022  dvsat_n_50_lvtl110ae_t      = 7.2485116e+003   db0_n_50_lvtl110ae_t        = 1.1928932e-008
++dpvsat_n_50_lvtl110ae_t     = 3.1452331e-010   dcj_n_50_lvtl110ae_t        = -7.6390000e-005  dcjsw_n_50_lvtl110ae_t      = -9.6400000e-012
++dcjswg_n_50_lvtl110ae_t     = -1.7580000e-011  dcgdo_n_50_lvtl110ae_t      = 3.1500000e-012   dcgso_n_50_lvtl110ae_t      = 3.1500000e-012
++dcgdl_n_50_lvtl110ae_t      = 3.3150000e-011   dcgsl_n_50_lvtl110ae_t      = 3.3150000e-011   deta0_n_50_lvtl110ae_t      = -1.2696517e-002
++dpeta0_n_50_lvtl110ae_t     = 5.5208967e-016   djtsswgd_n_50_lvtl110ae_t   = 5.0000000e-007
+//*
++dtox_p_50_lvtl110ae_t       = -3.7200000e-010  dxl_p_50_lvtl110ae_t        = -2.4000000e-009  dxw_p_50_lvtl110ae_t        = 2.4555304e-008
++dvth0_p_50_lvtl110ae_t      = 4.3010876e-002   dlvth0_p_50_lvtl110ae_t     = 1.5788935e-008   dk3_p_50_lvtl110ae_t        = -1.2873167e-001
++dpvth0_p_50_lvtl110ae_t     = 2.8802039e-015   du0_p_50_lvtl110ae_t        = 7.3516972e-004   drdsw_p_50_lvtl110ae_t      = -4.3194620e+002
++dwwl_p_50_lvtl110ae_t       = -1.9561897e-021  dags_p_50_lvtl110ae_t       = -6.1194052e-003  dvsat_p_50_lvtl110ae_t      = 8.1991592e+003
++db0_p_50_lvtl110ae_t        = 3.6456413e-009   dpvsat_p_50_lvtl110ae_t     = -5.4831681e-010  dcj_p_50_lvtl110ae_t        = -9.5980000e-005
++dcjsw_p_50_lvtl110ae_t      = -7.3460000e-012  dcjswg_p_50_lvtl110ae_t     = -1.7040000e-011  dcgdo_p_50_lvtl110ae_t      = 4.9215000e-012
++dcgso_p_50_lvtl110ae_t      = 4.9215000e-012   dcgdl_p_50_lvtl110ae_t      = 1.2380000e-011   dcgsl_p_50_lvtl110ae_t      = 1.2380000e-011
++dcf_p_50_lvtl110ae_t        = 0.0000000e+000   deta0_p_50_lvtl110ae_t      = 9.7561533e-003   dpeta0_p_50_lvtl110ae_t     = 1.1122263e-015
++djtsswgd_p_50_lvtl110ae_t   = 6.7000000e-006
+//*
+//*
+endsection ff
+//*
+section ss
+parameters
+//*
++dtox_n_50_lvtl110ae_t       = 3.5647500e-010   dxl_n_50_lvtl110ae_t        = 2.7357615e-008   dxw_n_50_lvtl110ae_t        = -1.7560904e-008
++dvth0_n_50_lvtl110ae_t      = 3.0028895e-002   dnlx_n_50_lvtl110ae_t       = 6.1136919e-008   dk3_n_50_lvtl110ae_t        = 1.0347819e+000
++dpvth0_n_50_lvtl110ae_t     = -9.7264206e-016  du0_n_50_lvtl110ae_t        = -2.2260535e-003  drdsw_n_50_lvtl110ae_t      = 8.0000000e+001
++dwwl_n_50_lvtl110ae_t       = 6.1284191e-022   dvsat_n_50_lvtl110ae_t      = -8.4358285e+003  db0_n_50_lvtl110ae_t        = -9.6612996e-009
++dpvsat_n_50_lvtl110ae_t     = -2.8170504e-010  dcj_n_50_lvtl110ae_t        = 7.6390000e-005   dcjsw_n_50_lvtl110ae_t      = 9.6400000e-012
++dcjswg_n_50_lvtl110ae_t     = 1.7580000e-011   dcgdo_n_50_lvtl110ae_t      = -3.1500000e-012  dcgso_n_50_lvtl110ae_t      = -3.1500000e-012
++dcgdl_n_50_lvtl110ae_t      = -3.3150000e-011  dcgsl_n_50_lvtl110ae_t      = -3.3150000e-011  deta0_n_50_lvtl110ae_t      = 3.4777289e-002
++dpeta0_n_50_lvtl110ae_t     = -1.6815874e-015  djtsswgd_n_50_lvtl110ae_t   = -5.000000e-007
+//*
++dtox_p_50_lvtl110ae_t       = 3.7200000e-010   dxl_p_50_lvtl110ae_t        = 2.4000000e-009   dxw_p_50_lvtl110ae_t        = -3.2573578e-008
++dvth0_p_50_lvtl110ae_t      = -4.2356840e-002  dlvth0_p_50_lvtl110ae_t     = -1.6102610e-008  dk3_p_50_lvtl110ae_t        = 6.3160147e-002
++dpvth0_p_50_lvtl110ae_t     = -1.2857465e-015  du0_p_50_lvtl110ae_t        = -7.7955332e-004  drdsw_p_50_lvtl110ae_t      = 6.6893161e+002
++dwwl_p_50_lvtl110ae_t       = 2.5868743e-021   dags_p_50_lvtl110ae_t       = 5.9956095e-003   dvsat_p_50_lvtl110ae_t      = -1.0333049e+004
++db0_p_50_lvtl110ae_t        = -3.2502353e-009  dpvsat_p_50_lvtl110ae_t     = 6.7261942e-010   dcj_p_50_lvtl110ae_t        = 9.5980000e-005
++dcjsw_p_50_lvtl110ae_t      = 7.3460000e-012   dcjswg_p_50_lvtl110ae_t     = 1.7040000e-011   dcgdo_p_50_lvtl110ae_t      = -4.9215000e-012
++dcgso_p_50_lvtl110ae_t      = -4.9215000e-012  dcgdl_p_50_lvtl110ae_t      = -1.2380000e-011  dcgsl_p_50_lvtl110ae_t      = -1.2380000e-011
++dcf_p_50_lvtl110ae_t        = 0.0000000e+000   deta0_p_50_lvtl110ae_t      = -1.0392247e-002  dpeta0_p_50_lvtl110ae_t     = -1.6869733e-015
++djtsswgd_p_50_lvtl110ae_t   = -2.2500000e-007
+//*
+//*
+endsection ss
+//*
+section fnsp
+parameters
+//*
++dtox_n_50_lvtl110ae_t       = 0.0000000e+000   dxl_n_50_lvtl110ae_t        = -8.1848873e-009  dxw_n_50_lvtl110ae_t        = 7.3669401e-009
++dvth0_n_50_lvtl110ae_t      = -1.5861239e-002  dnlx_n_50_lvtl110ae_t       = -2.8826843e-008  dk3_n_50_lvtl110ae_t        = -5.7241504e-001
++dpvth0_n_50_lvtl110ae_t     = 6.5469472e-016   du0_n_50_lvtl110ae_t        = 1.2745685e-003   drdsw_n_50_lvtl110ae_t      = -4.0000000e+001
++dwwl_n_50_lvtl110ae_t       = -2.4128239e-022  dvsat_n_50_lvtl110ae_t      = 5.0064079e+003   db0_n_50_lvtl110ae_t        = 6.1759160e-009
++dpvsat_n_50_lvtl110ae_t     = 1.4685215e-010   dcj_n_50_lvtl110ae_t        = -7.6390000e-005  dcjsw_n_50_lvtl110ae_t      = -9.6400000e-012
++dcjswg_n_50_lvtl110ae_t     = -1.7580000e-011  dcgdo_n_50_lvtl110ae_t      = 0.0000000e+000   dcgso_n_50_lvtl110ae_t      = 0.0000000e+000
++dcgdl_n_50_lvtl110ae_t      = 0.0000000e+000   dcgsl_n_50_lvtl110ae_t      = 0.0000000e+000   deta0_n_50_lvtl110ae_t      = -1.1441535e-002
++dpeta0_n_50_lvtl110ae_t     = 5.3357238e-016   djtsswgd_n_50_lvtl110ae_t   = 4.5000000e-007
+//*
++dtox_p_50_lvtl110ae_t       = 0.0000000e+000   dxl_p_50_lvtl110ae_t        = 1.2000000e-009   dxw_p_50_lvtl110ae_t        = -1.5004764e-008
++dvth0_p_50_lvtl110ae_t      = -2.1567800e-002  dlvth0_p_50_lvtl110ae_t     = -7.8067634e-009  dk3_p_50_lvtl110ae_t        = 4.6960381e-002
++dpvth0_p_50_lvtl110ae_t     = -8.9490771e-016  du0_p_50_lvtl110ae_t        = -4.5207812e-004  drdsw_p_50_lvtl110ae_t      = 2.9905830e+002
++dwwl_p_50_lvtl110ae_t       = 1.2501950e-021   dags_p_50_lvtl110ae_t       = 3.0791868e-003   dvsat_p_50_lvtl110ae_t      = -6.0424748e+003
++db0_p_50_lvtl110ae_t        = -1.6777971e-009  dpvsat_p_50_lvtl110ae_t     = 3.2811065e-010   dcj_p_50_lvtl110ae_t        = 9.5980000e-005
++dcjsw_p_50_lvtl110ae_t      = 7.3460000e-012   dcjswg_p_50_lvtl110ae_t     = 1.7040000e-011   dcgdo_p_50_lvtl110ae_t      = 0.0000000e+000
++dcgso_p_50_lvtl110ae_t      = 0.0000000e+000   dcgdl_p_50_lvtl110ae_t      = 0.0000000e+000   dcgsl_p_50_lvtl110ae_t      = 0.0000000e+000
++dcf_p_50_lvtl110ae_t        = 0.0000000e+000   deta0_p_50_lvtl110ae_t      = -7.5321139e-004  dpeta0_p_50_lvtl110ae_t     = -7.4800304e-016
++djtsswgd_p_50_lvtl110ae_t   = -2.0000000e-007
+//*
+//*
+endsection fnsp
+//*
+section snfp
+parameters
+//*
++dtox_n_50_lvtl110ae_t       = 0.0000000e+000   dxl_n_50_lvtl110ae_t        = 1.1348235e-008   dxw_n_50_lvtl110ae_t        = -8.3280754e-009
++dvth0_n_50_lvtl110ae_t      = 1.5673695e-002   dnlx_n_50_lvtl110ae_t       = 2.7127297e-008   dk3_n_50_lvtl110ae_t        = 5.4565369e-001
++dpvth0_n_50_lvtl110ae_t     = -7.1255042e-016  du0_n_50_lvtl110ae_t        = -1.2980562e-003  drdsw_n_50_lvtl110ae_t      = 4.0000000e+001
++dwwl_n_50_lvtl110ae_t       = 3.4372611e-022   dvsat_n_50_lvtl110ae_t      = -5.1592988e+003  db0_n_50_lvtl110ae_t        = -5.5411347e-009
++dpvsat_n_50_lvtl110ae_t     = -1.3653161e-010  dcj_n_50_lvtl110ae_t        = 7.6390000e-005   dcjsw_n_50_lvtl110ae_t      = 9.6400000e-012
++dcjswg_n_50_lvtl110ae_t     = 1.7580000e-011   dcgdo_n_50_lvtl110ae_t      = 0.0000000e+000   dcgso_n_50_lvtl110ae_t      = 0.0000000e+000
++dcgdl_n_50_lvtl110ae_t      = 0.0000000e+000   dcgsl_n_50_lvtl110ae_t      = 0.0000000e+000   deta0_n_50_lvtl110ae_t      = 1.7319798e-002
++dpeta0_n_50_lvtl110ae_t     = -8.2297245e-016  djtsswgd_n_50_lvtl110ae_t   = -5.0000000e-007
+//*
++dtox_p_50_lvtl110ae_t       = 0.0000000e+000   dxl_p_50_lvtl110ae_t        = -1.2000000e-009  dxw_p_50_lvtl110ae_t        = 1.3034976e-008
++dvth0_p_50_lvtl110ae_t      = 2.1587129e-002   dlvth0_p_50_lvtl110ae_t     = 7.8009923e-009   dk3_p_50_lvtl110ae_t        = -6.5154113e-002
++dpvth0_p_50_lvtl110ae_t     = 1.2483706e-015   du0_p_50_lvtl110ae_t        = 4.4701593e-004   drdsw_p_50_lvtl110ae_t      = -2.4097694e+002
++dwwl_p_50_lvtl110ae_t       = -1.0980941e-021  dags_p_50_lvtl110ae_t       = -3.0825659e-003  dvsat_p_50_lvtl110ae_t      = 5.6750868e+003
++db0_p_50_lvtl110ae_t        = 1.8298342e-009   dpvsat_p_50_lvtl110ae_t     = -3.0309280e-010  dcj_p_50_lvtl110ae_t        = -9.5980000e-005
++dcjsw_p_50_lvtl110ae_t      = -7.3460000e-012  dcjswg_p_50_lvtl110ae_t     = -1.7040000e-011  dcgdo_p_50_lvtl110ae_t      = 0.0000000e+000
++dcgso_p_50_lvtl110ae_t      = 0.0000000e+000   dcgdl_p_50_lvtl110ae_t      = 0.0000000e+000   dcgsl_p_50_lvtl110ae_t      = 0.0000000e+000
++dcf_p_50_lvtl110ae_t        = 0.0000000e+000   deta0_p_50_lvtl110ae_t      = 4.1238354e-004   dpeta0_p_50_lvtl110ae_t     = 4.7656580e-016
++djtsswgd_p_50_lvtl110ae_t   = 1.0000000e-006
+//*
+//*
+endsection snfp
+//*
+section tt_g
+parameters
+//*
++dtox_n_50_lvtl110ae_g       = 0.0000000e+000   dxl_n_50_lvtl110ae_g        = 0.0000000e+000   dxw_n_50_lvtl110ae_g        = 0.0000000e+000
++dvth0_n_50_lvtl110ae_g      = 0.0000000e+000   dnlx_n_50_lvtl110ae_g       = 0.0000000e+000   dk3_n_50_lvtl110ae_g        = 0.0000000e+000
++dpvth0_n_50_lvtl110ae_g     = 0.0000000e+000   du0_n_50_lvtl110ae_g        = 0.0000000e+000   drdsw_n_50_lvtl110ae_g      = 0.0000000e+000
++dwwl_n_50_lvtl110ae_g       = 0.0000000e+000   dvsat_n_50_lvtl110ae_g      = 0.0000000e+000   db0_n_50_lvtl110ae_g        = 0.0000000e+000
++dpvsat_n_50_lvtl110ae_g     = 0.0000000e+000   dcj_n_50_lvtl110ae_g        = 0.0000000e+000   dcjsw_n_50_lvtl110ae_g      = 0.0000000e+000
++dcjswg_n_50_lvtl110ae_g     = 0.0000000e+000   dcgdo_n_50_lvtl110ae_g      = 0.0000000e+000   dcgso_n_50_lvtl110ae_g      = 0.0000000e+000
++dcgdl_n_50_lvtl110ae_g      = 0.0000000e+000   dcgsl_n_50_lvtl110ae_g      = 0.0000000e+000   deta0_n_50_lvtl110ae_g      = 0.0000000e+000
++dpeta0_n_50_lvtl110ae_g     = 0.0000000e+000   djtsswgd_n_50_lvtl110ae_g   = 0.0000000e+000
+//*
++dtox_p_50_lvtl110ae_g       = 0.0000000e+000   dxl_p_50_lvtl110ae_g        = 0.0000000e+000   dxw_p_50_lvtl110ae_g        = 0.0000000e+000
++dvth0_p_50_lvtl110ae_g      = 0.0000000e+000   dlvth0_p_50_lvtl110ae_g     = 0.0000000e+000   dk3_p_50_lvtl110ae_g        = 0.0000000e+000
++dpvth0_p_50_lvtl110ae_g     = 0.0000000e+000   du0_p_50_lvtl110ae_g        = 0.0000000e+000   drdsw_p_50_lvtl110ae_g      = 0.0000000e+000
++dwwl_p_50_lvtl110ae_g       = 0.0000000e+000   dags_p_50_lvtl110ae_g       = 0.0000000e+000   dvsat_p_50_lvtl110ae_g      = 0.0000000e+000
++db0_p_50_lvtl110ae_g        = 0.0000000e+000   dpvsat_p_50_lvtl110ae_g     = 0.0000000e+000   dcj_p_50_lvtl110ae_g        = 0.0000000e+000
++dcjsw_p_50_lvtl110ae_g      = 0.0000000e+000   dcjswg_p_50_lvtl110ae_g     = 0.0000000e+000   dcgdo_p_50_lvtl110ae_g      = 0.0000000e+000
++dcgso_p_50_lvtl110ae_g      = 0.0000000e+000   dcgdl_p_50_lvtl110ae_g      = 0.0000000e+000   dcgsl_p_50_lvtl110ae_g      = 0.0000000e+000
++dcf_p_50_lvtl110ae_g        = 0.0000000e+000   deta0_p_50_lvtl110ae_g      = 0.0000000e+000   dpeta0_p_50_lvtl110ae_g     = 0.0000000e+000
++djtsswgd_p_50_lvtl110ae_g   = 0.0000000e+000
+//*
+//*
+endsection tt_g
+//*
+section ff_g
+parameters
+//*
++dtox_n_50_lvtl110ae_g       = -3.5647500e-010  dxl_n_50_lvtl110ae_g        = -1.4291428e-008  dxw_n_50_lvtl110ae_g        = 1.3359801e-008
++dvth0_n_50_lvtl110ae_g      = -3.0755457e-002  dnlx_n_50_lvtl110ae_g       = -6.1400000e-008  dk3_n_50_lvtl110ae_g        = -1.1870455e+000
++dpvth0_n_50_lvtl110ae_g     = 2.07500000e-015  du0_n_50_lvtl110ae_g        = 2.0888310e-003   drdsw_n_50_lvtl110ae_g      = -8.0000000e+001
++dwwl_n_50_lvtl110ae_g       = -2.0282861e-022  dvsat_n_50_lvtl110ae_g      = 7.2485116e+003   db0_n_50_lvtl110ae_g        = 1.1928932e-008
++dpvsat_n_50_lvtl110ae_g     = 3.67000000e-010  dcj_n_50_lvtl110ae_g        = -7.6390000e-005  dcjsw_n_50_lvtl110ae_g      = -9.6400000e-012
++dcjswg_n_50_lvtl110ae_g     = -1.7580000e-011  dcgdo_n_50_lvtl110ae_g      = 3.1500000e-012   dcgso_n_50_lvtl110ae_g      = 3.1500000e-012
++dcgdl_n_50_lvtl110ae_g      = 3.3150000e-011   dcgsl_n_50_lvtl110ae_g      = 3.3150000e-011   deta0_n_50_lvtl110ae_g      = -1.2696517e-002
++dpeta0_n_50_lvtl110ae_g     = 5.5208967e-016   djtsswgd_n_50_lvtl110ae_g   = 5.0000000e-007
+//*
++dtox_p_50_lvtl110ae_g       = -3.7200000e-010  dxl_p_50_lvtl110ae_g        = -2.4000000e-009  dxw_p_50_lvtl110ae_g        = 2.4555304e-008
++dvth0_p_50_lvtl110ae_g      = 4.3010876e-002   dlvth0_p_50_lvtl110ae_g     = 1.5730000e-008   dk3_p_50_lvtl110ae_g        = -1.220000e-001
++dpvth0_p_50_lvtl110ae_g     = 1.8802039e-015   du0_p_50_lvtl110ae_g        = 7.3516972e-004   drdsw_p_50_lvtl110ae_g      = -4.3194620e+002
++dwwl_p_50_lvtl110ae_g       = -1.9561897e-021  dags_p_50_lvtl110ae_g       = -6.1194052e-003  dvsat_p_50_lvtl110ae_g      = 8.17000000e+003
++db0_p_50_lvtl110ae_g        = 3.6456413e-009   dpvsat_p_50_lvtl110ae_g     = -4.2500000e-010  dcj_p_50_lvtl110ae_g        = -9.5980000e-005
++dcjsw_p_50_lvtl110ae_g      = -7.3460000e-012  dcjswg_p_50_lvtl110ae_g     = -1.7040000e-011  dcgdo_p_50_lvtl110ae_g      = 4.9215000e-012
++dcgso_p_50_lvtl110ae_g      = 4.9215000e-012   dcgdl_p_50_lvtl110ae_g      = 1.2380000e-011   dcgsl_p_50_lvtl110ae_g      = 1.2380000e-011
++dcf_p_50_lvtl110ae_g        = 0.0000000e+000   deta0_p_50_lvtl110ae_g      = 9.7561533e-003   dpeta0_p_50_lvtl110ae_g     = 1.1122263e-015
++djtsswgd_p_50_lvtl110ae_g   = 6.7000000e-006
+//*
+//*
+endsection ff_g
+//*
+section ss_g
+parameters
+//*
++dtox_n_50_lvtl110ae_g       = 3.5647500e-010   dxl_n_50_lvtl110ae_g        = 2.7357615e-008   dxw_n_50_lvtl110ae_g        = -1.7560904e-008
++dvth0_n_50_lvtl110ae_g      = 3.0028895e-002   dnlx_n_50_lvtl110ae_g       = 6.0600000e-008   dk3_n_50_lvtl110ae_g        = 1.01500000e+000
++dpvth0_n_50_lvtl110ae_g     = -2.26264206e-015 du0_n_50_lvtl110ae_g        = -2.2260535e-003  drdsw_n_50_lvtl110ae_g      = 8.0000000e+001
++dwwl_n_50_lvtl110ae_g       = 6.1284191e-022   dvsat_n_50_lvtl110ae_g      = -8.4358285e+003  db0_n_50_lvtl110ae_g        = -9.6612996e-009
++dpvsat_n_50_lvtl110ae_g     = -3.1700000e-010  dcj_n_50_lvtl110ae_g        = 7.6390000e-005   dcjsw_n_50_lvtl110ae_g      = 9.6400000e-012
++dcjswg_n_50_lvtl110ae_g     = 1.7580000e-011   dcgdo_n_50_lvtl110ae_g      = -3.1500000e-012  dcgso_n_50_lvtl110ae_g      = -3.1500000e-012
++dcgdl_n_50_lvtl110ae_g      = -3.3150000e-011  dcgsl_n_50_lvtl110ae_g      = -3.3150000e-011  deta0_n_50_lvtl110ae_g      = 3.4777289e-002
++dpeta0_n_50_lvtl110ae_g     = -1.6815874e-015  djtsswgd_n_50_lvtl110ae_g   = -5.000000e-007
+//*
++dtox_p_50_lvtl110ae_g       = 3.7200000e-010   dxl_p_50_lvtl110ae_g        = 2.4000000e-009   dxw_p_50_lvtl110ae_g        = -3.2573578e-008
++dvth0_p_50_lvtl110ae_g      = -4.2356840e-002  dlvth0_p_50_lvtl110ae_g     = -1.603000e-008   dk3_p_50_lvtl110ae_g        = 5.55000000e-002
++dpvth0_p_50_lvtl110ae_g     = -6.0500000e-016  du0_p_50_lvtl110ae_g        = -7.7955332e-004  drdsw_p_50_lvtl110ae_g      = 6.6893161e+002
++dwwl_p_50_lvtl110ae_g       = 2.5868743e-021   dags_p_50_lvtl110ae_g       = 5.9956095e-003   dvsat_p_50_lvtl110ae_g      = -1.025000e+004
++db0_p_50_lvtl110ae_g        = -3.2502353e-009  dpvsat_p_50_lvtl110ae_g     = 6.2000000e-010   dcj_p_50_lvtl110ae_g        = 9.5980000e-005
++dcjsw_p_50_lvtl110ae_g      = 7.3460000e-012   dcjswg_p_50_lvtl110ae_g     = 1.7040000e-011   dcgdo_p_50_lvtl110ae_g      = -4.9215000e-012
++dcgso_p_50_lvtl110ae_g      = -4.9215000e-012  dcgdl_p_50_lvtl110ae_g      = -1.2380000e-011  dcgsl_p_50_lvtl110ae_g      = -1.2380000e-011
++dcf_p_50_lvtl110ae_g        = 0.0000000e+000   deta0_p_50_lvtl110ae_g      = -1.0392247e-002  dpeta0_p_50_lvtl110ae_g     = -1.6869733e-015
++djtsswgd_p_50_lvtl110ae_g   = -2.2500000e-007
+//*
+//*
+endsection ss_g
+//*
+section fnsp_g
+parameters
+//*
++dtox_n_50_lvtl110ae_g       = 0.0000000e+000   dxl_n_50_lvtl110ae_g        = -8.1848873e-009  dxw_n_50_lvtl110ae_g        = 7.3669401e-009
++dvth0_n_50_lvtl110ae_g      = -1.5861239e-002  dnlx_n_50_lvtl110ae_g       = -2.8200000e-008  dk3_n_50_lvtl110ae_g        = -5.650000e-001
++dpvth0_n_50_lvtl110ae_g     = 1.3469472e-015   du0_n_50_lvtl110ae_g        = 1.2745685e-003   drdsw_n_50_lvtl110ae_g      = -4.0000000e+001
++dwwl_n_50_lvtl110ae_g       = -2.4128239e-022  dvsat_n_50_lvtl110ae_g      = 5.0064079e+003   db0_n_50_lvtl110ae_g        = 6.1759160e-009
++dpvsat_n_50_lvtl110ae_g     = 1.7200000e-010   dcj_n_50_lvtl110ae_g        = -7.6390000e-005  dcjsw_n_50_lvtl110ae_g      = -9.6400000e-012
++dcjswg_n_50_lvtl110ae_g     = -1.7580000e-011  dcgdo_n_50_lvtl110ae_g      = 0.0000000e+000   dcgso_n_50_lvtl110ae_g      = 0.0000000e+000
++dcgdl_n_50_lvtl110ae_g      = 0.0000000e+000   dcgsl_n_50_lvtl110ae_g      = 0.0000000e+000   deta0_n_50_lvtl110ae_g      = -1.1441535e-002
++dpeta0_n_50_lvtl110ae_g     = 5.3357238e-016   djtsswgd_n_50_lvtl110ae_g   = 4.5000000e-007
+//*
++dtox_p_50_lvtl110ae_g       = 0.0000000e+000   dxl_p_50_lvtl110ae_g        = 1.2000000e-009   dxw_p_50_lvtl110ae_g        = -1.5004764e-008
++dvth0_p_50_lvtl110ae_g      = -2.1567800e-002  dlvth0_p_50_lvtl110ae_g     = -7.780000e-009   dk3_p_50_lvtl110ae_g        = 4.35000000e-002
++dpvth0_p_50_lvtl110ae_g     = -4.8700000e-016  du0_p_50_lvtl110ae_g        = -4.5207812e-004  drdsw_p_50_lvtl110ae_g      = 2.9905830e+002
++dwwl_p_50_lvtl110ae_g       = 1.2501950e-021   dags_p_50_lvtl110ae_g       = 3.0791868e-003   dvsat_p_50_lvtl110ae_g      = -6.0424748e+003
++db0_p_50_lvtl110ae_g        = -1.6777971e-009  dpvsat_p_50_lvtl110ae_g     = 2.9500000e-010   dcj_p_50_lvtl110ae_g        = 9.5980000e-005
++dcjsw_p_50_lvtl110ae_g      = 7.3460000e-012   dcjswg_p_50_lvtl110ae_g     = 1.7040000e-011   dcgdo_p_50_lvtl110ae_g      = 0.0000000e+000
++dcgso_p_50_lvtl110ae_g      = 0.0000000e+000   dcgdl_p_50_lvtl110ae_g      = 0.0000000e+000   dcgsl_p_50_lvtl110ae_g      = 0.0000000e+000
++dcf_p_50_lvtl110ae_g        = 0.0000000e+000   deta0_p_50_lvtl110ae_g      = -7.5321139e-004  dpeta0_p_50_lvtl110ae_g     = -7.4800304e-016
++djtsswgd_p_50_lvtl110ae_g   = -2.0000000e-007
+//*
+//*
+endsection fnsp_g
+//*
+section snfp_g
+parameters
+//*
++dtox_n_50_lvtl110ae_g       = 0.0000000e+000   dxl_n_50_lvtl110ae_g        = 1.1348235e-008   dxw_n_50_lvtl110ae_g        = -8.3280754e-009
++dvth0_n_50_lvtl110ae_g      = 1.5673695e-002   dnlx_n_50_lvtl110ae_g       = 2.7400000e-008   dk3_n_50_lvtl110ae_g        = 5.35000000e-001
++dpvth0_n_50_lvtl110ae_g     = -1.370000e-015   du0_n_50_lvtl110ae_g        = -1.2980562e-003  drdsw_n_50_lvtl110ae_g      = 4.0000000e+001
++dwwl_n_50_lvtl110ae_g       = 3.4372611e-022   dvsat_n_50_lvtl110ae_g      = -5.1592988e+003  db0_n_50_lvtl110ae_g        = -5.5411347e-009
++dpvsat_n_50_lvtl110ae_g     = -1.570000e-010   dcj_n_50_lvtl110ae_g        = 7.6390000e-005   dcjsw_n_50_lvtl110ae_g      = 9.6400000e-012
++dcjswg_n_50_lvtl110ae_g     = 1.7580000e-011   dcgdo_n_50_lvtl110ae_g      = 0.0000000e+000   dcgso_n_50_lvtl110ae_g      = 0.0000000e+000
++dcgdl_n_50_lvtl110ae_g      = 0.0000000e+000   dcgsl_n_50_lvtl110ae_g      = 0.0000000e+000   deta0_n_50_lvtl110ae_g      = 1.7319798e-002
++dpeta0_n_50_lvtl110ae_g     = -8.2297245e-016  djtsswgd_n_50_lvtl110ae_g   = -5.0000000e-007
+//*
++dtox_p_50_lvtl110ae_g       = 0.0000000e+000   dxl_p_50_lvtl110ae_g        = -1.2000000e-009  dxw_p_50_lvtl110ae_g        = 1.3034976e-008
++dvth0_p_50_lvtl110ae_g      = 2.1587129e-002   dlvth0_p_50_lvtl110ae_g     = 7.77000000e-009  dk3_p_50_lvtl110ae_g        = -6.200000e-002
++dpvth0_p_50_lvtl110ae_g     = 7.8000000e-016   du0_p_50_lvtl110ae_g        = 4.4701593e-004   drdsw_p_50_lvtl110ae_g      = -2.4097694e+002
++dwwl_p_50_lvtl110ae_g       = -1.0980941e-021  dags_p_50_lvtl110ae_g       = -3.0825659e-003  dvsat_p_50_lvtl110ae_g      = 5.6750868e+003
++db0_p_50_lvtl110ae_g        = 1.8298342e-009   dpvsat_p_50_lvtl110ae_g     = -2.5000000e-010  dcj_p_50_lvtl110ae_g        = -9.5980000e-005
++dcjsw_p_50_lvtl110ae_g      = -7.3460000e-012  dcjswg_p_50_lvtl110ae_g     = -1.7040000e-011  dcgdo_p_50_lvtl110ae_g      = 0.0000000e+000
++dcgso_p_50_lvtl110ae_g      = 0.0000000e+000   dcgdl_p_50_lvtl110ae_g      = 0.0000000e+000   dcgsl_p_50_lvtl110ae_g      = 0.0000000e+000
++dcf_p_50_lvtl110ae_g        = 0.0000000e+000   deta0_p_50_lvtl110ae_g      = 4.1238354e-004   dpeta0_p_50_lvtl110ae_g     = 4.7656580e-016
++djtsswgd_p_50_lvtl110ae_g   = 1.0000000e-006
+//*
+//*
+endsection snfp_g
+//*
+endlibrary mylib
+

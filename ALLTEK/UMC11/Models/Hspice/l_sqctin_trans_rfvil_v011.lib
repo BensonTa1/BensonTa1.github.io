@@ -1,0 +1,21 @@
+* Model: l_sqctin_trans_rfvil_v011
+* UMC 0.11um 1P8M top metal 41K transformer, primary tapped
+* Date: 2009-12-25
+* Model coverage:
+* od: (75 - 300) * 1e-06 (Before shrinkage)
+* w: (5.2 - 11.9) * 1e-06 (Before shrinkage)
+* nt_in: 1 - 9 (Integer)
+* nt_out: 1 - 9 (Integer)
+* Frequency range: 1 MHz - 0.8 * resonance (maximum 30.0 GHz)
+*
+.lib typ
+.include './l_sqctin_trans_rfvil_v011.typ.mdl'
+.endl typ
+*
+.lib min
+.include './l_sqctin_trans_rfvil_v011.min.mdl'
+.endl min
+*
+.lib max
+.include './l_sqctin_trans_rfvil_v011.max.mdl'
+.endl max

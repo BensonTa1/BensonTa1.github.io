@@ -1,0 +1,21 @@
+#*****************************************************************************
+# TSMC  Layout Editor Font File - font.map, 09/09/2009
+# 1P8M PROCESS
+# Technology File Document: T-013-LO-LE-002 Ver 2.2C
+#*****************************************************************************
+#################################
+#                               #
+#          OPUS-STREAM          #
+#     TEXT FONT MAP TABLE       #
+#                               #
+#################################
+#
+#OPUS    STREAM     Font
+#Font     Font     Height
+#------------------------------
+ stick     0        0.5
+ roman     1        0.5
+ gothic    2        0.5
+ script    3        0.5
+ modern    4        0.5
+#

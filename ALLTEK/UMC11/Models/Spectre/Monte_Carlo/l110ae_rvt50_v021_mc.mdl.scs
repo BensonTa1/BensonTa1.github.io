@@ -1,0 +1,414 @@
+simulator lang=spectre insensitive=yes
+inline subckt n_50_rvtl110ae ( d g s b )
+parameters w=0u l=0u
++ dtemp=0 nf=1 mf=1 mis_flag=1
++ nf_odd=nf-2*int(nf/2) nf_even=1-nf_odd
++ sa=3.6e-6 sb=3.6e-6 sd=0
++ a_unit=sd*w   p_unit=2*(sd+w)  a_sa_edge=sa*w   p_sa_edge=2*(sa+w)
++ a_sb_edge=sb*w   p_sb_edge=2*(sb+w)
++ ad=(nf_odd*(a_unit*((nf+1)/2-1)+a_sb_edge) + nf_even*(a_unit*nf/2))/nf
++ as=(nf_odd*(a_unit*((nf+1)/2-1)+a_sa_edge) + nf_even*(a_unit*(nf/2-1)+a_sa_edge+a_sb_edge))/nf
++ pd=(nf_odd*(p_unit*((nf+1)/2-1)+p_sb_edge) + nf_even*(p_unit*nf/2))/nf
++ ps=(nf_odd*(p_unit*((nf+1)/2-1)+p_sa_edge) + nf_even*(p_unit*(nf/2-1)+p_sa_edge+p_sb_edge))/nf
+//
+//
+parameters beta  = a+b/((l*0.9+1.2e-8)*1e6)+c/(((l*0.9+1.2e-8)*1e6)*((l*0.9+1.2e-8)*1e6))+d/(((l*0.9+1.2e-8)*1e6)*((l*0.9+1.2e-8)*1e6)*((l*0.9+1.2e-8)*1e6))+e/(((l*0.9+1.2e-8)*1e6)*((l*0.9+1.2e-8)*1e6)*((l*0.9+1.2e-8)*1e6)*((l*0.9+1.2e-8)*1e6))
+parameters  beta_ion  = a_ion*log((l*0.9+1.2e-8)*1e6)+b_ion
+//
+parameters  a = 0.7482 
+parameters  b = 2.4894 
+parameters  c = -5.6373
+parameters  d = 4.3786
+parameters  e = -1.0358
+//
+parameters  a_ion = 1.1892  
+parameters  b_ion = 0.9633 
+//
+parameters compl1	= 4.36432866870764
+parameters compl2	= 2.22422618549829
+parameters compl3	= 6.96213834126233e-02
+parameters compl4	= 2.46172723077399e-02
+parameters compl5	= 1.65474023921662e-13
+parameters l_factor_n=1/sqrt(2*w*0.9*(l*0.9+1.2e-8)*mf*1e+12)
+parameters  b1_np_50_rvtl110ae = b1_np_50_rvtl110ae_xx
+parameters  b2_np_50_rvtl110ae = b2_np_50_rvtl110ae_xx
+parameters  b3_np_50_rvtl110ae = b3_np_50_rvtl110ae_xx
+parameters  b4_np_50_rvtl110ae = b4_np_50_rvtl110ae_xx
+parameters  b5_np_50_rvtl110ae = b5_np_50_rvtl110ae_xx
+parameters  dtox_n_50_rvtl110ae_l = beta*(0*b1_np_50_rvtl110ae*compl1+0*b2_np_50_rvtl110ae*compl2+0*b3_np_50_rvtl110ae*compl3+0*b4_np_50_rvtl110ae*compl4+0*b5_np_50_rvtl110ae*compl5)* mis_flag*l_factor_n
+parameters  dxl_n_50_rvtl110ae_l = beta*(0*b1_np_50_rvtl110ae*compl1+0*b2_np_50_rvtl110ae*compl2+0*b3_np_50_rvtl110ae*compl3+0*b4_np_50_rvtl110ae*compl4+0*b5_np_50_rvtl110ae*compl5)* mis_flag*l_factor_n
+parameters  dxw_n_50_rvtl110ae_l = beta*(0*b1_np_50_rvtl110ae*compl1+0*b2_np_50_rvtl110ae*compl2+0*b3_np_50_rvtl110ae*compl3+0*b4_np_50_rvtl110ae*compl4+0*b5_np_50_rvtl110ae*compl5)* mis_flag*l_factor_n
+parameters  dvth0_n_50_rvtl110ae_l = beta*(2.30911252734219e-03*b1_np_50_rvtl110ae*compl1+-2.17450301266721e-03*b2_np_50_rvtl110ae*compl2+-1.81790408236237e-03*b3_np_50_rvtl110ae*compl3+3.49560995219151e-04*b4_np_50_rvtl110ae*compl4+-1.52084156627764e-03*b5_np_50_rvtl110ae*compl5)* mis_flag*l_factor_n
+parameters  dnlx_n_50_rvtl110ae_l = beta*(0*b1_np_50_rvtl110ae*compl1+0*b2_np_50_rvtl110ae*compl2+0*b3_np_50_rvtl110ae*compl3+0*b4_np_50_rvtl110ae*compl4+0*b5_np_50_rvtl110ae*compl5)* mis_flag*l_factor_n
+parameters  dk3_n_50_rvtl110ae_l = beta*(0*b1_np_50_rvtl110ae*compl1+0*b2_np_50_rvtl110ae*compl2+0*b3_np_50_rvtl110ae*compl3+0*b4_np_50_rvtl110ae*compl4+0*b5_np_50_rvtl110ae*compl5)* mis_flag*l_factor_n
+parameters  dpvth0_n_50_rvtl110ae_l = beta*(0*b1_np_50_rvtl110ae*compl1+0*b2_np_50_rvtl110ae*compl2+0*b3_np_50_rvtl110ae*compl3+0*b4_np_50_rvtl110ae*compl4+0*b5_np_50_rvtl110ae*compl5)* mis_flag*l_factor_n
+parameters  du0_n_50_rvtl110ae_l = beta_ion*(-4.60793033217991e-06*b1_np_50_rvtl110ae*compl1+5.06941849620815e-06*b2_np_50_rvtl110ae*compl2+-7.15560638407922e-06*b3_np_50_rvtl110ae*compl3+2.20615041554253e-06*b4_np_50_rvtl110ae*compl4+-5.47185378503176e-06*b5_np_50_rvtl110ae*compl5)* mis_flag*l_factor_n
+parameters  dlrdsw_n_50_rvtl110ae_l = beta*(0*b1_np_50_rvtl110ae*compl1+0*b2_np_50_rvtl110ae*compl2+0*b3_np_50_rvtl110ae*compl3+0*b4_np_50_rvtl110ae*compl4+0*b5_np_50_rvtl110ae*compl5)* mis_flag*l_factor_n
+parameters  dwwl_n_50_rvtl110ae_l = beta*(0*b1_np_50_rvtl110ae*compl1+0*b2_np_50_rvtl110ae*compl2+0*b3_np_50_rvtl110ae*compl3+0*b4_np_50_rvtl110ae*compl4+0*b5_np_50_rvtl110ae*compl5)* mis_flag*l_factor_n
+parameters  dprdsw_n_50_rvtl110ae_l = beta*(0*b1_np_50_rvtl110ae*compl1+0*b2_np_50_rvtl110ae*compl2+0*b3_np_50_rvtl110ae*compl3+0*b4_np_50_rvtl110ae*compl4+0*b5_np_50_rvtl110ae*compl5)* mis_flag*l_factor_n
+parameters  dags_n_50_rvtl110ae_l = beta*(0*b1_np_50_rvtl110ae*compl1+0*b2_np_50_rvtl110ae*compl2+0*b3_np_50_rvtl110ae*compl3+0*b4_np_50_rvtl110ae*compl4+0*b5_np_50_rvtl110ae*compl5)* mis_flag*l_factor_n
+parameters  dlvsat_n_50_rvtl110ae_l = beta_ion*(-3.22077151810217e-05*b1_np_50_rvtl110ae*compl1+3.10126944718267e-05*b2_np_50_rvtl110ae*compl2+2.46658215232071e-05*b3_np_50_rvtl110ae*compl3+-1.17364967233754e-05*b4_np_50_rvtl110ae*compl4+1.77392187470047e-05*b5_np_50_rvtl110ae*compl5)* mis_flag*l_factor_n
+parameters  dwb0_n_50_rvtl110ae_l = beta*(0*b1_np_50_rvtl110ae*compl1+0*b2_np_50_rvtl110ae*compl2+0*b3_np_50_rvtl110ae*compl3+0*b4_np_50_rvtl110ae*compl4+0*b5_np_50_rvtl110ae*compl5)* mis_flag*l_factor_n
+parameters  dpvsat_n_50_rvtl110ae_l = beta*(0*b1_np_50_rvtl110ae*compl1+0*b2_np_50_rvtl110ae*compl2+0*b3_np_50_rvtl110ae*compl3+0*b4_np_50_rvtl110ae*compl4+0*b5_np_50_rvtl110ae*compl5)* mis_flag*l_factor_n
+parameters  dleta0_n_50_rvtl110ae_l = beta*(0*b1_np_50_rvtl110ae*compl1+0*b2_np_50_rvtl110ae*compl2+0*b3_np_50_rvtl110ae*compl3+0*b4_np_50_rvtl110ae*compl4+0*b5_np_50_rvtl110ae*compl5)* mis_flag*l_factor_n
+parameters  dpeta0_n_50_rvtl110ae_l = beta*(0*b1_np_50_rvtl110ae*compl1+0*b2_np_50_rvtl110ae*compl2+0*b3_np_50_rvtl110ae*compl3+0*b4_np_50_rvtl110ae*compl4+0*b5_np_50_rvtl110ae*compl5)* mis_flag*l_factor_n
+parameters  dcj_n_50_rvtl110ae_l = beta*(0*b1_np_50_rvtl110ae*compl1+0*b2_np_50_rvtl110ae*compl2+0*b3_np_50_rvtl110ae*compl3+0*b4_np_50_rvtl110ae*compl4+0*b5_np_50_rvtl110ae*compl5)* mis_flag*l_factor_n
+parameters  dcjsw_n_50_rvtl110ae_l = beta*(0*b1_np_50_rvtl110ae*compl1+0*b2_np_50_rvtl110ae*compl2+0*b3_np_50_rvtl110ae*compl3+0*b4_np_50_rvtl110ae*compl4+0*b5_np_50_rvtl110ae*compl5)* mis_flag*l_factor_n
+parameters  dcjswg_n_50_rvtl110ae_l = beta*(0*b1_np_50_rvtl110ae*compl1+0*b2_np_50_rvtl110ae*compl2+0*b3_np_50_rvtl110ae*compl3+0*b4_np_50_rvtl110ae*compl4+0*b5_np_50_rvtl110ae*compl5)* mis_flag*l_factor_n
+parameters  dcgdo_n_50_rvtl110ae_l = beta*(0*b1_np_50_rvtl110ae*compl1+0*b2_np_50_rvtl110ae*compl2+0*b3_np_50_rvtl110ae*compl3+0*b4_np_50_rvtl110ae*compl4+0*b5_np_50_rvtl110ae*compl5)* mis_flag*l_factor_n
+parameters  dcgso_n_50_rvtl110ae_l = beta*(0*b1_np_50_rvtl110ae*compl1+0*b2_np_50_rvtl110ae*compl2+0*b3_np_50_rvtl110ae*compl3+0*b4_np_50_rvtl110ae*compl4+0*b5_np_50_rvtl110ae*compl5)* mis_flag*l_factor_n
+parameters  dcgdl_n_50_rvtl110ae_l = beta*(0*b1_np_50_rvtl110ae*compl1+0*b2_np_50_rvtl110ae*compl2+0*b3_np_50_rvtl110ae*compl3+0*b4_np_50_rvtl110ae*compl4+0*b5_np_50_rvtl110ae*compl5)* mis_flag*l_factor_n
+parameters  dcgsl_n_50_rvtl110ae_l = beta*(0*b1_np_50_rvtl110ae*compl1+0*b2_np_50_rvtl110ae*compl2+0*b3_np_50_rvtl110ae*compl3+0*b4_np_50_rvtl110ae*compl4+0*b5_np_50_rvtl110ae*compl5)* mis_flag*l_factor_n
+parameters  djtsswgd_n_50_rvtl110ae_l = beta*(0*b1_np_50_rvtl110ae*compl1+0*b2_np_50_rvtl110ae*compl2+0*b3_np_50_rvtl110ae*compl3+0*b4_np_50_rvtl110ae*compl4+0*b5_np_50_rvtl110ae*compl5)* mis_flag*l_factor_n
+parameters  djtsswgs_n_50_rvtl110ae_l = beta*(0*b1_np_50_rvtl110ae*compl1+0*b2_np_50_rvtl110ae*compl2+0*b3_np_50_rvtl110ae*compl3+0*b4_np_50_rvtl110ae*compl4+0*b5_np_50_rvtl110ae*compl5)* mis_flag*l_factor_n
+parameters  dtox_n_50_rvtl110ae = (global_flag_n_50_rvtl110ae*dtox_n_50_rvtl110ae_g  + local_flag_n_50_rvtl110ae*dtox_n_50_rvtl110ae_l)*(1-total_flag_n_50_rvtl110ae)+ total_flag_n_50_rvtl110ae*dtox_n_50_rvtl110ae_t
+parameters  dxl_n_50_rvtl110ae = (global_flag_n_50_rvtl110ae*dxl_n_50_rvtl110ae_g  + local_flag_n_50_rvtl110ae*dxl_n_50_rvtl110ae_l)*(1-total_flag_n_50_rvtl110ae)+ total_flag_n_50_rvtl110ae*dxl_n_50_rvtl110ae_t
+parameters  dxw_n_50_rvtl110ae = (global_flag_n_50_rvtl110ae*dxw_n_50_rvtl110ae_g  + local_flag_n_50_rvtl110ae*dxw_n_50_rvtl110ae_l)*(1-total_flag_n_50_rvtl110ae)+ total_flag_n_50_rvtl110ae*dxw_n_50_rvtl110ae_t
+parameters  dvth0_n_50_rvtl110ae = (global_flag_n_50_rvtl110ae*dvth0_n_50_rvtl110ae_g  + local_flag_n_50_rvtl110ae*dvth0_n_50_rvtl110ae_l)*(1-total_flag_n_50_rvtl110ae)+ total_flag_n_50_rvtl110ae*dvth0_n_50_rvtl110ae_t
+parameters  dnlx_n_50_rvtl110ae = (global_flag_n_50_rvtl110ae*dnlx_n_50_rvtl110ae_g  + local_flag_n_50_rvtl110ae*dnlx_n_50_rvtl110ae_l)*(1-total_flag_n_50_rvtl110ae)+ total_flag_n_50_rvtl110ae*dnlx_n_50_rvtl110ae_t
+parameters  dk3_n_50_rvtl110ae = (global_flag_n_50_rvtl110ae*dk3_n_50_rvtl110ae_g  + local_flag_n_50_rvtl110ae*dk3_n_50_rvtl110ae_l)*(1-total_flag_n_50_rvtl110ae)+ total_flag_n_50_rvtl110ae*dk3_n_50_rvtl110ae_t
+parameters  dpvth0_n_50_rvtl110ae = (global_flag_n_50_rvtl110ae*dpvth0_n_50_rvtl110ae_g  + local_flag_n_50_rvtl110ae*dpvth0_n_50_rvtl110ae_l)*(1-total_flag_n_50_rvtl110ae)+ total_flag_n_50_rvtl110ae*dpvth0_n_50_rvtl110ae_t
+parameters  du0_n_50_rvtl110ae = (global_flag_n_50_rvtl110ae*du0_n_50_rvtl110ae_g  + local_flag_n_50_rvtl110ae*du0_n_50_rvtl110ae_l)*(1-total_flag_n_50_rvtl110ae)+ total_flag_n_50_rvtl110ae*du0_n_50_rvtl110ae_t
+parameters  dlrdsw_n_50_rvtl110ae = (global_flag_n_50_rvtl110ae*dlrdsw_n_50_rvtl110ae_g  + local_flag_n_50_rvtl110ae*dlrdsw_n_50_rvtl110ae_l)*(1-total_flag_n_50_rvtl110ae)+ total_flag_n_50_rvtl110ae*dlrdsw_n_50_rvtl110ae_t
+parameters  dwwl_n_50_rvtl110ae = (global_flag_n_50_rvtl110ae*dwwl_n_50_rvtl110ae_g  + local_flag_n_50_rvtl110ae*dwwl_n_50_rvtl110ae_l)*(1-total_flag_n_50_rvtl110ae)+ total_flag_n_50_rvtl110ae*dwwl_n_50_rvtl110ae_t
+parameters  dprdsw_n_50_rvtl110ae = (global_flag_n_50_rvtl110ae*dprdsw_n_50_rvtl110ae_g  + local_flag_n_50_rvtl110ae*dprdsw_n_50_rvtl110ae_l)*(1-total_flag_n_50_rvtl110ae)+ total_flag_n_50_rvtl110ae*dprdsw_n_50_rvtl110ae_t
+parameters  dags_n_50_rvtl110ae = (global_flag_n_50_rvtl110ae*dags_n_50_rvtl110ae_g  + local_flag_n_50_rvtl110ae*dags_n_50_rvtl110ae_l)*(1-total_flag_n_50_rvtl110ae)+ total_flag_n_50_rvtl110ae*dags_n_50_rvtl110ae_t
+parameters  dlvsat_n_50_rvtl110ae = (global_flag_n_50_rvtl110ae*dlvsat_n_50_rvtl110ae_g  + local_flag_n_50_rvtl110ae*dlvsat_n_50_rvtl110ae_l)*(1-total_flag_n_50_rvtl110ae)+ total_flag_n_50_rvtl110ae*dlvsat_n_50_rvtl110ae_t
+parameters  dwb0_n_50_rvtl110ae = (global_flag_n_50_rvtl110ae*dwb0_n_50_rvtl110ae_g  + local_flag_n_50_rvtl110ae*dwb0_n_50_rvtl110ae_l)*(1-total_flag_n_50_rvtl110ae)+ total_flag_n_50_rvtl110ae*dwb0_n_50_rvtl110ae_t
+parameters  dpvsat_n_50_rvtl110ae = (global_flag_n_50_rvtl110ae*dpvsat_n_50_rvtl110ae_g  + local_flag_n_50_rvtl110ae*dpvsat_n_50_rvtl110ae_l)*(1-total_flag_n_50_rvtl110ae)+ total_flag_n_50_rvtl110ae*dpvsat_n_50_rvtl110ae_t
+parameters  dleta0_n_50_rvtl110ae = (global_flag_n_50_rvtl110ae*dleta0_n_50_rvtl110ae_g  + local_flag_n_50_rvtl110ae*dleta0_n_50_rvtl110ae_l)*(1-total_flag_n_50_rvtl110ae)+ total_flag_n_50_rvtl110ae*dleta0_n_50_rvtl110ae_t
+parameters  dpeta0_n_50_rvtl110ae = (global_flag_n_50_rvtl110ae*dpeta0_n_50_rvtl110ae_g  + local_flag_n_50_rvtl110ae*dpeta0_n_50_rvtl110ae_l)*(1-total_flag_n_50_rvtl110ae)+ total_flag_n_50_rvtl110ae*dpeta0_n_50_rvtl110ae_t
+parameters  dcj_n_50_rvtl110ae = (global_flag_n_50_rvtl110ae*dcj_n_50_rvtl110ae_g  + local_flag_n_50_rvtl110ae*dcj_n_50_rvtl110ae_l)*(1-total_flag_n_50_rvtl110ae)+ total_flag_n_50_rvtl110ae*dcj_n_50_rvtl110ae_t
+parameters  dcjsw_n_50_rvtl110ae = (global_flag_n_50_rvtl110ae*dcjsw_n_50_rvtl110ae_g  + local_flag_n_50_rvtl110ae*dcjsw_n_50_rvtl110ae_l)*(1-total_flag_n_50_rvtl110ae)+ total_flag_n_50_rvtl110ae*dcjsw_n_50_rvtl110ae_t
+parameters  dcjswg_n_50_rvtl110ae = (global_flag_n_50_rvtl110ae*dcjswg_n_50_rvtl110ae_g  + local_flag_n_50_rvtl110ae*dcjswg_n_50_rvtl110ae_l)*(1-total_flag_n_50_rvtl110ae)+ total_flag_n_50_rvtl110ae*dcjswg_n_50_rvtl110ae_t
+parameters  dcgdo_n_50_rvtl110ae = (global_flag_n_50_rvtl110ae*dcgdo_n_50_rvtl110ae_g  + local_flag_n_50_rvtl110ae*dcgdo_n_50_rvtl110ae_l)*(1-total_flag_n_50_rvtl110ae)+ total_flag_n_50_rvtl110ae*dcgdo_n_50_rvtl110ae_t
+parameters  dcgso_n_50_rvtl110ae = (global_flag_n_50_rvtl110ae*dcgso_n_50_rvtl110ae_g  + local_flag_n_50_rvtl110ae*dcgso_n_50_rvtl110ae_l)*(1-total_flag_n_50_rvtl110ae)+ total_flag_n_50_rvtl110ae*dcgso_n_50_rvtl110ae_t
+parameters  dcgdl_n_50_rvtl110ae = (global_flag_n_50_rvtl110ae*dcgdl_n_50_rvtl110ae_g  + local_flag_n_50_rvtl110ae*dcgdl_n_50_rvtl110ae_l)*(1-total_flag_n_50_rvtl110ae)+ total_flag_n_50_rvtl110ae*dcgdl_n_50_rvtl110ae_t
+parameters  dcgsl_n_50_rvtl110ae = (global_flag_n_50_rvtl110ae*dcgsl_n_50_rvtl110ae_g  + local_flag_n_50_rvtl110ae*dcgsl_n_50_rvtl110ae_l)*(1-total_flag_n_50_rvtl110ae)+ total_flag_n_50_rvtl110ae*dcgsl_n_50_rvtl110ae_t
+parameters  djtsswgd_n_50_rvtl110ae = (global_flag_n_50_rvtl110ae*djtsswgd_n_50_rvtl110ae_g  + local_flag_n_50_rvtl110ae*djtsswgd_n_50_rvtl110ae_l)*(1-total_flag_n_50_rvtl110ae)+ total_flag_n_50_rvtl110ae*djtsswgd_n_50_rvtl110ae_t
+parameters  djtsswgs_n_50_rvtl110ae = (global_flag_n_50_rvtl110ae*djtsswgs_n_50_rvtl110ae_g  + local_flag_n_50_rvtl110ae*djtsswgs_n_50_rvtl110ae_l)*(1-total_flag_n_50_rvtl110ae)+ total_flag_n_50_rvtl110ae*djtsswgs_n_50_rvtl110ae_t
+//
+n_50_rvtl110ae ( d g s b ) n_50_rvtl110ae_main trise=dtemp w=w l=l as=as ad=ad ps=ps pd=pd
++ m=1 dtemp=dtemp
++ sa=sa sb=sb
+model n_50_rvtl110ae_main bsim3v3 type=n
++ version    = 3.24                                                        lmin       = 4.88e-007                                                   
++ lmax       = 1e-005                                                      wmin       = 3.50e-007                                                   
++ wmax       = 1e-005                                                      binunit    = 2                                                           
++ mobmod     = 1                                                           capmod     = 3                                                           
++ nqsmod     = 0                                                           stimod     = 1                                                           
++ wpemod     = 1                                                           
++ tnom       = 25                                                          tox        = 1.18825e-8+dtox_n_50_rvtl110ae                              
++ wint       = 6.9446e-008                                                 lint       = 8.18e-008                                                   
++ dlc        = 5.629455e-008                                               dwc        = 5.084353e-009                                               
++ hdif       = 2.2e-007                                                    xl         = -7e-010+1.2e-8+dxl_n_50_rvtl110ae                                  
++ xw         = -1e-008+dxw_n_50_rvtl110ae                                  xj         = 1.2e-007                                                    
++ ngate      = 1.8243e+020                                                 ll         = 0                                                           
++ wl         = -3.070068e-014                                              lln        = 1                                                           
++ wln        = 1                                                           lw         = 5.18649e-014                                                
++ ww         = -1.42e-014                                                  lwn        = 1                                                           
++ wwn        = 1                                                           lwl        = -1.625987e-020                                              
++ wwl        = 6.067295e-021+dwwl_n_50_rvtl110ae                           llc        = -2.297936e-014                                              
++ wlc        = -1.559915e-014                                              lwc        = -2.427163e-014                                              
++ wwc        = -6.390019e-015                                              lwlc       = 1.960731e-022                                               
++ wwlc       = 1.295753e-022                                               xpart      = 1                                                           
++ vth0       = 7.4630760e-001+dvth0_n_50_rvtl110ae                         pvth0      = -2.547019e-015+dpvth0_n_50_rvtl110ae                        
++ vfb        = -1                                                          k1         = 0.934592                                                    
++ k2         = -0.028131                                                   pk2        = 8.137069e-15                                                
++ k3         = 0.724281+dk3_n_50_rvtl110ae                                 lk3        = -5.38254e-007                                               
++ wk3        = -2.5343562e-007                                             pk3        = -2.6392394e-013                                             
++ k3b        = -0.355                                                      wk3b       = 1.357545e-7                                                 
++ pk3b       = 5.786362e-14                                                nlx        = 1.4316986e-007+dnlx_n_50_rvtl110ae                          
++ wnlx       = -1e-014                                                     pnlx       = 1.666e-020                                                  
++ w0         = 1e-008                                                      dvt0       = 10                                                          
++ dvt1       = 0.75461951                                                  ldvt1      = -1.757324e-008                                              
++ dvt2       = -0.217692                                                   dvt0w      = 0                                                           
++ dvt1w      = 5300000                                                     dvt2w      = 0                                                           
++ nch        = 6.6276e+017                                                 voff       = -0.109865                                                   
++ nfactor    = 0.641952                                                    cdsc       = 0.00024                                                     
++ cdscb      = 0                                                           cdscd      = 0.00015                                                     
++ cit        = 0                                                           alpha0     = 2.260326e-006                                               
++ alpha1     = 7.25                                                        palpha1    = 2.9757e-013                                                 
++ beta0      = 31.2                                                        eta0       = 4.9360966e-002                                              
++ leta0      = -7.4452461e-009+dleta0_n_50_rvtl110ae                       peta0      = -5.2261473e-016+dpeta0_n_50_rvtl110ae                       
++ etab       = -6.80215e-2                                                 wetab      = 1.129728e-8                                                 
++ dsub       = 0.56                                                        pdsub      = 2e-014                                                      
++ u0         = 0.034568+du0_n_50_rvtl110ae                                 lu0        = -1e-009                                                     
++ wu0        = 0                                                           pu0        = -8.15409e-016                                               
++ ua         = -5.768361e-010                                              lua        = 3.376546e-16                                                
++ pua        = -1.335359e-22                                               ub         = 2.1255257e-018                                              
++ pub        = -1.4733776e-031                                             uc         = 6.352794e-011                                               
++ luc        = -5.1194e-18                                                 puc        = -7.844304e-24                                               
++ prwg       = -0.01                                                       prwb       = -0.7173                                                     
++ lprwb      = 2.255e-007                                                  wprwb      = 2.655504e-7                                                 
++ pprwb      = -8.28286e-14                                                wr         = 1.1                                                         
++ rdsw       = 415.87                                                      lrdsw      = 5.7206110e-005+dlrdsw_n_50_rvtl110ae                        
++ wrdsw      = 0.0001287595                                                prdsw      = -8.477168e-012+dprdsw_n_50_rvtl110ae                        
++ a0         = 1.558831                                                    la0        = -7.0672e-007                                                
++ wa0        = -7.902714e-008                                              pa0        = 2.869381e-13                                                
++ ags        = 1.7288663e-001+dags_n_50_rvtl110ae                          lags       = 5.104904e-008                                               
++ pags       = 2.644986e-015                                               a1         = 0                                                           
++ a2         = 1                                                           b0         = 8.6e-009                                                    
++ lb0        = -3.768814e-14                                               wb0        = 9.5745297e-015+dwb0_n_50_rvtl110ae                          
++ pb0        = -1.16763e-20                                                b1         = 0                                                           
++ vsat       = 8.749193e4                                                  lvsat      = -3.5943318e-003+dlvsat_n_50_rvtl110ae                       
++ wvsat      = 1.493442e-3                                                 pvsat      = 1.4060369e-009+dpvsat_n_50_rvtl110ae                        
++ keta       = -1.99231e-2                                                 lketa      = -7.7555e-9                                                  
++ wketa      = -2.946038e-9                                                pketa      = -5.197249e-15                                               
++ delta      = 0.03                                                        dwg        = -4.062727e-009                                              
++ ldwg       = 1.000992e-15                                                wdwg       = 6.304698e-16                                                
++ pdwg       = 3.267791e-22                                                dwb        = 4.649385e-9                                                 
++ pclm       = 0.05                                                        pdiblc1    = 0.19964                                                     
++ ppdiblc1   = -8.42516e-015                                               pdiblc2    = 0.00086                                                     
++ pdiblcb    = 0                                                           drout      = 0.56                                                        
++ pvag       = 0                                                           pscbe1     = 2.332e+008                                                  
++ pscbe2     = 1e-008                                                      elm        = 5                                                           
++ lk3b       = 3.077102e-7                                                 ldvt2      = 3.91481e-8                                                  
++ cf         = 5.8167e-011                                                 ckappa     = 0.259                                                       
++ acde       = 0.4                                                         moin       = 10                                                          
++ noff       = 1.998349                                                    lnoff      = 1.9e-007                                                    
++ voffcv     = -0.0275335                                                  lvoffcv    = -6.39e-008                                                  
++ cgbo       = 0                                                           cgso       = 4.3e-011+dcgso_n_50_rvtl110ae                               
++ cgdo       = 4.3e-011+dcgdo_n_50_rvtl110ae                               cgdl       = 1e-010+dcgdl_n_50_rvtl110ae                                 
++ cgsl       = 1e-010+dcgsl_n_50_rvtl110ae                                 
++ kt1        = -0.403602                                                   kt1l       = 1.8524e-008                                                 
++ kt2        = -0.05                                                       ute        = -1.25                                                       
++ wute       = -3.75e-008                                                  pute       = -1e-014                                                     
++ ua1        = 2.163417e-009                                               wua1       = -2.655e-016                                                 
++ pua1       = 4.900018e-023                                               ub1        = -2.561621e-018                                              
++ lub1       = -2.986809e-025                                              pub1       = 2.670188e-031                                               
++ uc1        = -5.6e-011                                                   wuc1       = -1.344e-017                                                 
++ puc1       = 1.49688e-023                                                prt        = 600                                                         
++ pprt       = -9.233e-011                                                 at         = 4950                                                        
++ pat        = 9e-010                                                      lkt2       = 1.06e-8                                                     
++ noia       = 4.0128993e+20                                               noib       = 7.7178817e+04                                               
++ noic       = 1.0000000e-12                                               em         = 3.2787029e+07                                               
++ ef         = 0.9                                                         noimod     = 2                                                           
++ rsh        = 8.3                                                         js         = 1.7666e-007                                                 
++ jsw        = 2.5813e-013                                                 cj         = 0.0007639+dcj_n_50_rvtl110ae                                
++ mj         = 0.28722                                                     cjsw       = 9.64e-011+dcjsw_n_50_rvtl110ae                              
++ mjsw       = 0.078356                                                    cjswg      = 1.758e-010+dcjswg_n_50_rvtl110ae                            
++ mjswg      = 0.5148                                                      pb         = 0.67177                                                     
++ pbsw       = 0.57106                                                     pbswg      = 0.61241                                                     
++ rs         = 0                                                           xti        = 3                                                           
++ tpb        = 0.0017                                                      tpbsw      = 0.00275                                                     
++ tpbswg     = 0.00125                                                     tcj        = 0.00112                                                     
++ tcjsw      = 0.0005168                                                   tcjswg     = 0.00144                                                     
++ nj         = 1.0161                                                      imelt      = 1                                                           
++ jtssws     = 0                                                           jtsswgs    = 2.3500000e-009+djtsswgs_n_50_rvtl110ae                      
++ njtssw     = 60                                                          njtsswg    = 60                                                          
++ xtsswd     = 0.02                                                        xtsswgd    = 0.02                                                        
++ jtsswd     = 0                                                           jtsswgd    = 2.35e-9+djtsswgd_n_50_rvtl110ae                             
++ xtssws     = 0.02                                                        
++ saref      = 3.6e-6                                                      sbref      = 3.6e-6                                                      
++ wlod       = 0                                                           ku0        = -3.75e-8                                                    
++ kvsat      = 0.4                                                         kvth0      = 5.00e-9                                                     
++ tku0       = 0                                                           llodku0    = 1                                                           
++ wlodku0    = 1                                                           llodvth    = 1                                                           
++ wlodvth    = 1                                                           lku0       = -1.00e-8                                                    
++ wku0       = 0                                                           pku0       = 0                                                           
++ lkvth0     = 5.00e-7                                                     wkvth0     = 0                                                           
++ pkvth0     = 0                                                           stk2       = 2e-9                                                        
++ lodk2      = 1                                                           steta0     = 0                                                           
++ lodeta0    = 1                                                           
++ kvth0we    = -0.0041485                                                  web        = -2870.662726                                                
++ wec        = -389.8740804                                                scref      = 2e-6                                                        
+ends n_50_rvtl110ae
+//
+//
+//
+inline subckt p_50_rvtl110ae ( d g s b )
+parameters w=0u l=0u
++ dtemp=0 nf=1 mf=1 mis_flag=1
++ nf_odd=nf-2*int(nf/2) nf_even=1-nf_odd
++ sa=3.6e-6 sb=3.6e-6 sd=0
++ a_unit=sd*w   p_unit=2*(sd+w)  a_sa_edge=sa*w   p_sa_edge=2*(sa+w)
++ a_sb_edge=sb*w   p_sb_edge=2*(sb+w)
++ ad=(nf_odd*(a_unit*((nf+1)/2-1)+a_sb_edge) + nf_even*(a_unit*nf/2))/nf
++ as=(nf_odd*(a_unit*((nf+1)/2-1)+a_sa_edge) + nf_even*(a_unit*(nf/2-1)+a_sa_edge+a_sb_edge))/nf
++ pd=(nf_odd*(p_unit*((nf+1)/2-1)+p_sb_edge) + nf_even*(p_unit*nf/2))/nf
++ ps=(nf_odd*(p_unit*((nf+1)/2-1)+p_sa_edge) + nf_even*(p_unit*(nf/2-1)+p_sa_edge+p_sb_edge))/nf
+//
+//
+parameters beta  = a*(((l*0.9+1.2e-8)*1e6)*((l*0.9+1.2e-8)*1e6))+b*((l*0.9+1.2e-8)*1e6)+c
+parameters  beta_ion  = a_ion*log((l*0.9+1.2e-8)*1e6)+b_ion
+//
+parameters  a = 0.0022 
+parameters  b = -0.0212 
+parameters  c = 1.2484
+//
+parameters  a_ion = 0.2123
+parameters  b_ion = 0.6838  
+//
+parameters compl1	= 4.36432866870764
+parameters compl2	= 2.22422618549829
+parameters compl3	= 6.96213834126233e-02
+parameters compl4	= 2.46172723077399e-02
+parameters compl5	= 1.65474023921662e-13
+parameters l_factor_p=1/sqrt(2*w*0.9*(l*0.9+1.2e-8)*mf*1e+12)
+parameters b1_np_50_rvtl110ae = b1_np_50_rvtl110ae_xx
+parameters b2_np_50_rvtl110ae = b2_np_50_rvtl110ae_xx
+parameters b3_np_50_rvtl110ae = b3_np_50_rvtl110ae_xx
+parameters b4_np_50_rvtl110ae = b4_np_50_rvtl110ae_xx
+parameters b5_np_50_rvtl110ae = b5_np_50_rvtl110ae_xx
+parameters  dtox_p_50_rvtl110ae_l = beta*(0*b1_np_50_rvtl110ae*compl1+0*b2_np_50_rvtl110ae*compl2+0*b3_np_50_rvtl110ae*compl3+0*b4_np_50_rvtl110ae*compl4+0*b5_np_50_rvtl110ae*compl5)* mis_flag*l_factor_p
+parameters  dxl_p_50_rvtl110ae_l = beta*(0*b1_np_50_rvtl110ae*compl1+0*b2_np_50_rvtl110ae*compl2+0*b3_np_50_rvtl110ae*compl3+0*b4_np_50_rvtl110ae*compl4+0*b5_np_50_rvtl110ae*compl5)* mis_flag*l_factor_p
+parameters  dxw_p_50_rvtl110ae_l = beta*(0*b1_np_50_rvtl110ae*compl1+0*b2_np_50_rvtl110ae*compl2+0*b3_np_50_rvtl110ae*compl3+0*b4_np_50_rvtl110ae*compl4+0*b5_np_50_rvtl110ae*compl5)* mis_flag*l_factor_p
+parameters  dvth0_p_50_rvtl110ae_l = beta*(-1.23725098848045e-03*b1_np_50_rvtl110ae*compl1+-1.24790778131702e-03*b2_np_50_rvtl110ae*compl2+4.87412930398308e-04*b3_np_50_rvtl110ae*compl3+-0.001892605463327*b4_np_50_rvtl110ae*compl4+-1.51152952951203e-03*b5_np_50_rvtl110ae*compl5)* mis_flag*l_factor_p
+parameters  dlvth0_p_50_rvtl110ae_l = beta*(0*b1_np_50_rvtl110ae*compl1+0*b2_np_50_rvtl110ae*compl2+0*b3_np_50_rvtl110ae*compl3+0*b4_np_50_rvtl110ae*compl4+0*b5_np_50_rvtl110ae*compl5)* mis_flag*l_factor_p
+parameters  dk3_p_50_rvtl110ae_l = beta*(0*b1_np_50_rvtl110ae*compl1+0*b2_np_50_rvtl110ae*compl2+0*b3_np_50_rvtl110ae*compl3+0*b4_np_50_rvtl110ae*compl4+0*b5_np_50_rvtl110ae*compl5)* mis_flag*l_factor_p
+parameters  dpvth0_p_50_rvtl110ae_l = beta*(0*b1_np_50_rvtl110ae*compl1+0*b2_np_50_rvtl110ae*compl2+0*b3_np_50_rvtl110ae*compl3+0*b4_np_50_rvtl110ae*compl4+0*b5_np_50_rvtl110ae*compl5)* mis_flag*l_factor_p
+parameters  du0_p_50_rvtl110ae_l = beta_ion*(-6.93692333464544e-06*b1_np_50_rvtl110ae*compl1+-7.02009450926487e-06*b2_np_50_rvtl110ae*compl2+-8.98791694183273e-06*b3_np_50_rvtl110ae*compl3+-1.53087772868147e-06*b4_np_50_rvtl110ae*compl4+1.0469739774924e-05*b5_np_50_rvtl110ae*compl5)* mis_flag*l_factor_p
+parameters  drdsw_p_50_rvtl110ae_l = beta*(0*b1_np_50_rvtl110ae*compl1+0*b2_np_50_rvtl110ae*compl2+0*b3_np_50_rvtl110ae*compl3+0*b4_np_50_rvtl110ae*compl4+0*b5_np_50_rvtl110ae*compl5)* mis_flag*l_factor_p
+parameters  dpu0_p_50_rvtl110ae_l = beta*(0*b1_np_50_rvtl110ae*compl1+0*b2_np_50_rvtl110ae*compl2+0*b3_np_50_rvtl110ae*compl3+0*b4_np_50_rvtl110ae*compl4+0*b5_np_50_rvtl110ae*compl5)* mis_flag*l_factor_p
+parameters  dags_p_50_rvtl110ae_l = beta*(0*b1_np_50_rvtl110ae*compl1+0*b2_np_50_rvtl110ae*compl2+0*b3_np_50_rvtl110ae*compl3+0*b4_np_50_rvtl110ae*compl4+0*b5_np_50_rvtl110ae*compl5)* mis_flag*l_factor_p
+parameters  dvsat_p_50_rvtl110ae_l = beta_ion*(-103.873968608274*b1_np_50_rvtl110ae*compl1+-101.118275034178*b2_np_50_rvtl110ae*compl2+82.2756899609688*b3_np_50_rvtl110ae*compl3+186.007525652315*b4_np_50_rvtl110ae*compl4+-39.0393370849484*b5_np_50_rvtl110ae*compl5)* mis_flag*l_factor_p
+parameters  dwags_p_50_rvtl110ae_l = beta*(0*b1_np_50_rvtl110ae*compl1+0*b2_np_50_rvtl110ae*compl2+0*b3_np_50_rvtl110ae*compl3+0*b4_np_50_rvtl110ae*compl4+0*b5_np_50_rvtl110ae*compl5)* mis_flag*l_factor_p
+parameters  dpvsat_p_50_rvtl110ae_l = beta*(0*b1_np_50_rvtl110ae*compl1+0*b2_np_50_rvtl110ae*compl2+0*b3_np_50_rvtl110ae*compl3+0*b4_np_50_rvtl110ae*compl4+0*b5_np_50_rvtl110ae*compl5)* mis_flag*l_factor_p
+parameters  djtsswgd_p_50_rvtl110ae_l = beta*(0*b1_np_50_rvtl110ae*compl1+0*b2_np_50_rvtl110ae*compl2+0*b3_np_50_rvtl110ae*compl3+0*b4_np_50_rvtl110ae*compl4+0*b5_np_50_rvtl110ae*compl5)* mis_flag*l_factor_p
+parameters  djtsswgs_p_50_rvtl110ae_l = beta*(0*b1_np_50_rvtl110ae*compl1+0*b2_np_50_rvtl110ae*compl2+0*b3_np_50_rvtl110ae*compl3+0*b4_np_50_rvtl110ae*compl4+0*b5_np_50_rvtl110ae*compl5)* mis_flag*l_factor_p
+parameters  dwu0_p_50_rvtl110ae_l = beta*(0*b1_np_50_rvtl110ae*compl1+0*b2_np_50_rvtl110ae*compl2+0*b3_np_50_rvtl110ae*compl3+0*b4_np_50_rvtl110ae*compl4+0*b5_np_50_rvtl110ae*compl5)* mis_flag*l_factor_p
+parameters  deta0_p_50_rvtl110ae_l = beta*(0*b1_np_50_rvtl110ae*compl1+0*b2_np_50_rvtl110ae*compl2+0*b3_np_50_rvtl110ae*compl3+0*b4_np_50_rvtl110ae*compl4+0*b5_np_50_rvtl110ae*compl5)* mis_flag*l_factor_p
+parameters  dcj_p_50_rvtl110ae_l = beta*(0*b1_np_50_rvtl110ae*compl1+0*b2_np_50_rvtl110ae*compl2+0*b3_np_50_rvtl110ae*compl3+0*b4_np_50_rvtl110ae*compl4+0*b5_np_50_rvtl110ae*compl5)* mis_flag*l_factor_p
+parameters  dcjsw_p_50_rvtl110ae_l = beta*(0*b1_np_50_rvtl110ae*compl1+0*b2_np_50_rvtl110ae*compl2+0*b3_np_50_rvtl110ae*compl3+0*b4_np_50_rvtl110ae*compl4+0*b5_np_50_rvtl110ae*compl5)* mis_flag*l_factor_p
+parameters  dcjswg_p_50_rvtl110ae_l = beta*(0*b1_np_50_rvtl110ae*compl1+0*b2_np_50_rvtl110ae*compl2+0*b3_np_50_rvtl110ae*compl3+0*b4_np_50_rvtl110ae*compl4+0*b5_np_50_rvtl110ae*compl5)* mis_flag*l_factor_p
+parameters  dcgdo_p_50_rvtl110ae_l = beta*(0*b1_np_50_rvtl110ae*compl1+0*b2_np_50_rvtl110ae*compl2+0*b3_np_50_rvtl110ae*compl3+0*b4_np_50_rvtl110ae*compl4+0*b5_np_50_rvtl110ae*compl5)* mis_flag*l_factor_p
+parameters  dcgso_p_50_rvtl110ae_l = beta*(0*b1_np_50_rvtl110ae*compl1+0*b2_np_50_rvtl110ae*compl2+0*b3_np_50_rvtl110ae*compl3+0*b4_np_50_rvtl110ae*compl4+0*b5_np_50_rvtl110ae*compl5)* mis_flag*l_factor_p
+parameters  dcgdl_p_50_rvtl110ae_l = beta*(0*b1_np_50_rvtl110ae*compl1+0*b2_np_50_rvtl110ae*compl2+0*b3_np_50_rvtl110ae*compl3+0*b4_np_50_rvtl110ae*compl4+0*b5_np_50_rvtl110ae*compl5)* mis_flag*l_factor_p
+parameters  dcgsl_p_50_rvtl110ae_l = beta*(0*b1_np_50_rvtl110ae*compl1+0*b2_np_50_rvtl110ae*compl2+0*b3_np_50_rvtl110ae*compl3+0*b4_np_50_rvtl110ae*compl4+0*b5_np_50_rvtl110ae*compl5)* mis_flag*l_factor_p
+parameters  dtox_p_50_rvtl110ae = (global_flag_p_50_rvtl110ae*dtox_p_50_rvtl110ae_g  + local_flag_p_50_rvtl110ae*dtox_p_50_rvtl110ae_l)*(1-total_flag_p_50_rvtl110ae)+ total_flag_p_50_rvtl110ae*dtox_p_50_rvtl110ae_t
+parameters  dxl_p_50_rvtl110ae = (global_flag_p_50_rvtl110ae*dxl_p_50_rvtl110ae_g  + local_flag_p_50_rvtl110ae*dxl_p_50_rvtl110ae_l)*(1-total_flag_p_50_rvtl110ae)+ total_flag_p_50_rvtl110ae*dxl_p_50_rvtl110ae_t
+parameters  dxw_p_50_rvtl110ae = (global_flag_p_50_rvtl110ae*dxw_p_50_rvtl110ae_g  + local_flag_p_50_rvtl110ae*dxw_p_50_rvtl110ae_l)*(1-total_flag_p_50_rvtl110ae)+ total_flag_p_50_rvtl110ae*dxw_p_50_rvtl110ae_t
+parameters  dvth0_p_50_rvtl110ae = (global_flag_p_50_rvtl110ae*dvth0_p_50_rvtl110ae_g  + local_flag_p_50_rvtl110ae*dvth0_p_50_rvtl110ae_l)*(1-total_flag_p_50_rvtl110ae)+ total_flag_p_50_rvtl110ae*dvth0_p_50_rvtl110ae_t
+parameters  dlvth0_p_50_rvtl110ae = (global_flag_p_50_rvtl110ae*dlvth0_p_50_rvtl110ae_g  + local_flag_p_50_rvtl110ae*dlvth0_p_50_rvtl110ae_l)*(1-total_flag_p_50_rvtl110ae)+ total_flag_p_50_rvtl110ae*dlvth0_p_50_rvtl110ae_t
+parameters  dk3_p_50_rvtl110ae = (global_flag_p_50_rvtl110ae*dk3_p_50_rvtl110ae_g  + local_flag_p_50_rvtl110ae*dk3_p_50_rvtl110ae_l)*(1-total_flag_p_50_rvtl110ae)+ total_flag_p_50_rvtl110ae*dk3_p_50_rvtl110ae_t
+parameters  dpvth0_p_50_rvtl110ae = (global_flag_p_50_rvtl110ae*dpvth0_p_50_rvtl110ae_g  + local_flag_p_50_rvtl110ae*dpvth0_p_50_rvtl110ae_l)*(1-total_flag_p_50_rvtl110ae)+ total_flag_p_50_rvtl110ae*dpvth0_p_50_rvtl110ae_t
+parameters  du0_p_50_rvtl110ae = (global_flag_p_50_rvtl110ae*du0_p_50_rvtl110ae_g  + local_flag_p_50_rvtl110ae*du0_p_50_rvtl110ae_l)*(1-total_flag_p_50_rvtl110ae)+ total_flag_p_50_rvtl110ae*du0_p_50_rvtl110ae_t
+parameters  drdsw_p_50_rvtl110ae = (global_flag_p_50_rvtl110ae*drdsw_p_50_rvtl110ae_g  + local_flag_p_50_rvtl110ae*drdsw_p_50_rvtl110ae_l)*(1-total_flag_p_50_rvtl110ae)+ total_flag_p_50_rvtl110ae*drdsw_p_50_rvtl110ae_t
+parameters  dpu0_p_50_rvtl110ae = (global_flag_p_50_rvtl110ae*dpu0_p_50_rvtl110ae_g  + local_flag_p_50_rvtl110ae*dpu0_p_50_rvtl110ae_l)*(1-total_flag_p_50_rvtl110ae)+ total_flag_p_50_rvtl110ae*dpu0_p_50_rvtl110ae_t
+parameters  dags_p_50_rvtl110ae = (global_flag_p_50_rvtl110ae*dags_p_50_rvtl110ae_g  + local_flag_p_50_rvtl110ae*dags_p_50_rvtl110ae_l)*(1-total_flag_p_50_rvtl110ae)+ total_flag_p_50_rvtl110ae*dags_p_50_rvtl110ae_t
+parameters  dvsat_p_50_rvtl110ae = (global_flag_p_50_rvtl110ae*dvsat_p_50_rvtl110ae_g  + local_flag_p_50_rvtl110ae*dvsat_p_50_rvtl110ae_l)*(1-total_flag_p_50_rvtl110ae)+ total_flag_p_50_rvtl110ae*dvsat_p_50_rvtl110ae_t
+parameters  dwags_p_50_rvtl110ae = (global_flag_p_50_rvtl110ae*dwags_p_50_rvtl110ae_g  + local_flag_p_50_rvtl110ae*dwags_p_50_rvtl110ae_l)*(1-total_flag_p_50_rvtl110ae)+ total_flag_p_50_rvtl110ae*dwags_p_50_rvtl110ae_t
+parameters  dpvsat_p_50_rvtl110ae = (global_flag_p_50_rvtl110ae*dpvsat_p_50_rvtl110ae_g  + local_flag_p_50_rvtl110ae*dpvsat_p_50_rvtl110ae_l)*(1-total_flag_p_50_rvtl110ae)+ total_flag_p_50_rvtl110ae*dpvsat_p_50_rvtl110ae_t
+parameters  djtsswgd_p_50_rvtl110ae = (global_flag_p_50_rvtl110ae*djtsswgd_p_50_rvtl110ae_g  + local_flag_p_50_rvtl110ae*djtsswgd_p_50_rvtl110ae_l)*(1-total_flag_p_50_rvtl110ae)+ total_flag_p_50_rvtl110ae*djtsswgd_p_50_rvtl110ae_t
+parameters  djtsswgs_p_50_rvtl110ae = (global_flag_p_50_rvtl110ae*djtsswgs_p_50_rvtl110ae_g  + local_flag_p_50_rvtl110ae*djtsswgs_p_50_rvtl110ae_l)*(1-total_flag_p_50_rvtl110ae)+ total_flag_p_50_rvtl110ae*djtsswgs_p_50_rvtl110ae_t
+parameters  dwu0_p_50_rvtl110ae = (global_flag_p_50_rvtl110ae*dwu0_p_50_rvtl110ae_g  + local_flag_p_50_rvtl110ae*dwu0_p_50_rvtl110ae_l)*(1-total_flag_p_50_rvtl110ae)+ total_flag_p_50_rvtl110ae*dwu0_p_50_rvtl110ae_t
+parameters  deta0_p_50_rvtl110ae = (global_flag_p_50_rvtl110ae*deta0_p_50_rvtl110ae_g  + local_flag_p_50_rvtl110ae*deta0_p_50_rvtl110ae_l)*(1-total_flag_p_50_rvtl110ae)+ total_flag_p_50_rvtl110ae*deta0_p_50_rvtl110ae_t
+parameters  dcj_p_50_rvtl110ae = (global_flag_p_50_rvtl110ae*dcj_p_50_rvtl110ae_g  + local_flag_p_50_rvtl110ae*dcj_p_50_rvtl110ae_l)*(1-total_flag_p_50_rvtl110ae)+ total_flag_p_50_rvtl110ae*dcj_p_50_rvtl110ae_t
+parameters  dcjsw_p_50_rvtl110ae = (global_flag_p_50_rvtl110ae*dcjsw_p_50_rvtl110ae_g  + local_flag_p_50_rvtl110ae*dcjsw_p_50_rvtl110ae_l)*(1-total_flag_p_50_rvtl110ae)+ total_flag_p_50_rvtl110ae*dcjsw_p_50_rvtl110ae_t
+parameters  dcjswg_p_50_rvtl110ae = (global_flag_p_50_rvtl110ae*dcjswg_p_50_rvtl110ae_g  + local_flag_p_50_rvtl110ae*dcjswg_p_50_rvtl110ae_l)*(1-total_flag_p_50_rvtl110ae)+ total_flag_p_50_rvtl110ae*dcjswg_p_50_rvtl110ae_t
+parameters  dcgdo_p_50_rvtl110ae = (global_flag_p_50_rvtl110ae*dcgdo_p_50_rvtl110ae_g  + local_flag_p_50_rvtl110ae*dcgdo_p_50_rvtl110ae_l)*(1-total_flag_p_50_rvtl110ae)+ total_flag_p_50_rvtl110ae*dcgdo_p_50_rvtl110ae_t
+parameters  dcgso_p_50_rvtl110ae = (global_flag_p_50_rvtl110ae*dcgso_p_50_rvtl110ae_g  + local_flag_p_50_rvtl110ae*dcgso_p_50_rvtl110ae_l)*(1-total_flag_p_50_rvtl110ae)+ total_flag_p_50_rvtl110ae*dcgso_p_50_rvtl110ae_t
+parameters  dcgdl_p_50_rvtl110ae = (global_flag_p_50_rvtl110ae*dcgdl_p_50_rvtl110ae_g  + local_flag_p_50_rvtl110ae*dcgdl_p_50_rvtl110ae_l)*(1-total_flag_p_50_rvtl110ae)+ total_flag_p_50_rvtl110ae*dcgdl_p_50_rvtl110ae_t
+parameters  dcgsl_p_50_rvtl110ae = (global_flag_p_50_rvtl110ae*dcgsl_p_50_rvtl110ae_g  + local_flag_p_50_rvtl110ae*dcgsl_p_50_rvtl110ae_l)*(1-total_flag_p_50_rvtl110ae)+ total_flag_p_50_rvtl110ae*dcgsl_p_50_rvtl110ae_t
+//
+p_50_rvtl110ae ( d g s b ) p_50_rvtl110ae_main trise=dtemp w=w l=l as=as ad=ad ps=ps pd=pd
++ m=1 dtemp=dtemp
++ sa=sa sb=sb
+model p_50_rvtl110ae_main bsim3v3 type=p
++ version    = 3.24                                                        binunit    = 2                                                           
++ mobmod     = 1                                                           capmod     = 3                                                           
++ nqsmod     = 0                                                           noimod     = 2                                                           
++ stimod     = 1                                                           wpemod     = 1                                                           
++ lmin       = 4.88e-7                                                     lmax       = 1e-5                                                        
++ wmin       = 3.50e-7                                                     wmax       = 1e-5                                                        
++ tox        = 1.24e-8+dtox_p_50_rvtl110ae                                 xj         = 1.9e-7                                                      
++ nch        = 1.617944e17                                                 
++ wint       = 8.207075e-8                                                 wl         = -2.3814e-14                                                 
++ wln        = 1                                                           ww         = -2.04434e-14                                                
++ wwn        = 1                                                           wwl        = 4.348302e-21                                                
++ lint       = -1.603715e-8                                                ll         = 1.339569e-14                                                
++ lln        = 1                                                           lw         = 8.4e-15                                                     
++ lwn        = 1                                                           lwl        = -3.290479e-21                                               
++ llc        = -9.821105e-15                                               lwc        = 0                                                           
++ lwlc       = -5.69e-21                                                   wlc        = -1.3e-14                                                    
++ wwc        = -8.39625e-15                                                wwlc       = 6.05299e-22                                                 
++ dwg        = -6.941835e-9                                                dwb        = -6.930044e-9                                                
++ xl         = 2.4e-8+1.2e-8+dxl_p_50_rvtl110ae                                   xw         = -1e-8+dxw_p_50_rvtl110ae                                    
++ vth0       = -8.1892596e-001+dvth0_p_50_rvtl110ae                        lvth0      = 7.2764937e-009+dlvth0_p_50_rvtl110ae                        
++ wvth0      = 3.645e-9                                                    pvth0      = 1.8260844e-015+dpvth0_p_50_rvtl110ae                        
++ vfb        = -1                                                          k1         = 1.32067                                                     
++ k2         = -7.95018e-2                                                 pk2        = -2.8e-15                                                    
++ k3         = 1.0521658e+000+dk3_p_50_rvtl110ae                           wk3        = 1.315e-7                                                    
++ k3b        = 2.701412                                                    w0         = 2.2e-6                                                      
++ ww0        = -5.11e-13                                                   nlx        = 0                                                           
++ dvt0       = 7.488728                                                    dvt1       = 1.228261                                                    
++ dvt2       = -0.190979                                                   dvt0w      = 0                                                           
++ dvt1w      = 8e5                                                         dvt2w      = 0                                                           
++ ngate      = 1e21                                                        
++ u0         = 1.17436e-2+du0_p_50_rvtl110ae                               pu0        = -4.536e-16+dpu0_p_50_rvtl110ae                              
++ ua         = 9.387995e-10                                                wu0        = 0+dwu0_p_50_rvtl110ae                                       
++ pua        = -9.68e-23                                                   ub         = 1.0785013e-018                                              
++ pub        = 2.634938e-32                                                uc         = -1.814679e-11                                               
++ puc        = -3.6e-24                                                    vsat       = 6.49421e4+dvsat_p_50_rvtl110ae                              
++ wvsat      = 4.939242e-3                                                 pvsat      = -4.2137e-9+dpvsat_p_50_rvtl110ae                            
++ a0         = 0.965222                                                    la0        = -2.4e-7                                                     
++ pa0        = -1.45e-15                                                   ags        = 1.0038957e-001+dags_p_50_rvtl110ae                          
++ lags       = 9.9592183e-008                                              wags       = 4.3451901e-009+dwags_p_50_rvtl110ae                         
++ pags       = -2.6110108e-014                                             b0         = 1e-7                                                        
++ b1         = 1.450507e-6                                                 keta       = -0.021109                                                   
++ lketa      = -2.905695e-8                                                wketa      = 1.779881e-9                                                 
++ pketa      = 5.291e-15                                                   a1         = 0                                                           
++ a2         = 1                                                           rdsw       = 2.491116e3+drdsw_p_50_rvtl110ae                             
++ prwb       = -7.93075e-2                                                 prwg       = -4.3104560e-002                                             
++ wr         = 1.05                                                        
++ voff       = -0.129363                                                   nfactor    = 1.458337                                                    
++ eta0       = 3.8551224e-011+deta0_p_50_rvtl110ae                         peta0      = 5e-16                                                       
++ lvoff      = 7e-9                                                        etab       = -1.88122e-2                                                 
++ dsub       = 3.81794e-1                                                  cit        = 0                                                           
++ cdsc       = 0                                                           cdscb      = 9.41625e-4                                                  
++ cdscd      = 0                                                           
++ pclm       = 1.16474                                                     ppclm      = 1e-13                                                       
++ pdiblc1    = 4.80427e-2                                                  pdiblc2    = 1.385937e-4                                                 
++ pdiblcb    = 0                                                           drout      = 0.4                                                         
++ pscbe1     = 6.804735e8                                                  pscbe2     = 8.3017e-6                                                   
++ pvag       = 0                                                           delta      = 6.5e-3                                                      
++ alpha0     = 7.374375e-6                                                 alpha1     = 62.27875                                                    
++ beta0      = 42.694952                                                   
++ noia       = 2.361113e20                                                 noib       = 5.530384e3                                                  
++ noic       = 3.610864e-11                                                em         = 2.198161e7                                                  
++ ef         = 1.2                                                         
++ xpart      = 1                                                           cgso       = 2.8371e-11+dcgso_p_50_rvtl110ae                             
++ cgdo       = 2.8371e-11+dcgdo_p_50_rvtl110ae                             cgbo       = 0                                                           
++ ckappa     = 0.728197                                                    cf         = 5.816725e-11                                                
++ dlc        = 6.260362e-8                                                 dwc        = -1.2e-9                                                     
++ vfbcv      = -1                                                          noff       = 1.74758                                                     
++ voffcv     = 0.02                                                        imelt      = 1                                                           
++ lvoffcv    = -1e-8                                                       acde       = 0.763552                                                    
++ moin       = 7.5                                                         cgsl       = 1.1761e-10+dcgsl_p_50_rvtl110ae                             
++ cgdl       = 1.1761e-10+dcgdl_p_50_rvtl110ae                             
++ hdif       = 2.2e-7                                                      rsh        = 7.2                                                         
++ rs         = 6.3216e-7                                                   cj         = 9.598e-4+dcj_p_50_rvtl110ae                                 
++ mj         = 0.2996                                                      mjsw       = 0.05783                                                     
++ cjsw       = 7.346e-11+dcjsw_p_50_rvtl110ae                              cjswg      = 1.96e-10+dcjswg_p_50_rvtl110ae                              
++ mjswg      = 0.56739                                                     js         = 1.1148e-7                                                   
++ jsw        = 4.9061e-14                                                  pbsw       = 0.81097                                                     
++ pb         = 0.66925                                                     pbswg      = 0.9135                                                      
++ tnom       = 25                                                          ute        = -1.801725                                                   
++ pute       = -2.45e-14                                                   kt1        = -0.471602                                                   
++ kt1l       = -2e-8                                                       kt2        = -7.71235e-2                                                 
++ ua1        = -2.394773e-9                                                ub1        = 9.636696e-19                                                
++ uc1        = 1.5e-11                                                     at         = 1e3                                                         
++ prt        = 30                                                          nj         = 0.97669                                                     
++ xti        = 3                                                           tpb        = 1.55e-3                                                     
++ tpbsw      = 1.0296e-3                                                   tpbswg     = 0.0017396                                                   
++ tcj        = 1.05e-3                                                     tcjsw      = 1.098e-4                                                    
++ tcjswg     = 1.5381e-3                                                   
++ saref      = 3.6e-6                                                      sbref      = 3.6e-6                                                      
++ wlod       = 0                                                           ku0        = 1.02e-7                                                     
++ kvsat      = 0                                                           kvth0      = -1.44e-9                                                    
++ tku0       = 0                                                           llodku0    = 1.22                                                        
++ wlodku0    = 1                                                           llodvth    = 1                                                           
++ wlodvth    = 1                                                           lku0       = 3.1e-8                                                      
++ wku0       = 0                                                           pku0       = 0                                                           
++ lkvth0     = 0                                                           wkvth0     = 0                                                           
++ pkvth0     = 0                                                           stk2       = 1.129e-9                                                    
++ lodk2      = 1                                                           steta0     = 0                                                           
++ lodeta0    = 1                                                           
++ kvth0we    = 0.006167886                                                 web        = -1724.538979                                                
++ wec        = 939.639048                                                  scref      = 2e-6                                                        
++ jtssws     = 0                                                           jtsswd     = 0                                                           
++ jtsswgs    = 5.24e-7+djtsswgs_p_50_rvtl110ae                             njtssw     = 50                                                          
++ njtsswg    = 90                                                          jtsswgd    = 5.24e-7+djtsswgd_p_50_rvtl110ae                             
++ xtsswgd    = 0.27                                                        xtsswd     = 0.02                                                        
+ends p_50_rvtl110ae

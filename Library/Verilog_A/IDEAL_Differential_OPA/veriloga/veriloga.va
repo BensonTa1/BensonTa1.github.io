@@ -1,0 +1,43 @@
+// VerilogA for Verilog_A, IDEAL_Differential_OPA, veriloga
+
+`include "constants.vams"
+`include "disciplines.vams"
+
+module IDEAL_Differential_OPA(VINP,VINN,VOUTP,VOUTN);
+	electrical VINP,VINN,VOUTP,VOUTN;
+	
+	electrical VCM,VP1,VP2,VN1,VN2;
+
+	input  VINP,VINN;
+	output VOUTP,VOUTN;
+
+	parameter real AV=1000;
+	parameter real VCM_OUT=0.9;
+
+	real VDIFF=0,VDIFF_2;
+	
+	
+	parameter real fp1=1e6;
+	real C=1;		//normalized to 1
+
+	analog begin
+		
+		V(VCM)<+VCM_OUT;
+		
+		V(VP1,VCM)<+(V(VINP)-V(VINN))/2;		//differential P
+		V(VN1,VCM)<+(V(VINP)-V(VINN))/2;		//differential N
+
+		V(VP1,VP2)<+I(VP1,VP2)*1/(fp1*`M_TWO_PI);	//Res P R=1/(fp1*2*pi)
+		V(VN1,VN2)<+I(VN1,VN2)*1/(fp1*`M_TWO_PI);	//Res N R=1/(fp1*2*pi)
+
+								//pole= 1/RC
+
+		I(VP2,VCM)<+C*ddt(V(VP2,VCM));			//Cap P
+		I(VN2,VCM)<+C*ddt(V(VN2,VCM));			//Cap N
+
+		V(VOUTP,VCM)<+V(VP2,VCM)*AV;			//output P
+		V(VOUTN,VCM)<+V(VN2,VCM)*AV*(-1);		//output N
+		
+	end
+
+endmodule

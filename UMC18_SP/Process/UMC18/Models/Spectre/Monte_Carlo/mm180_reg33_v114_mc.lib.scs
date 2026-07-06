@@ -1,0 +1,287 @@
+simulator lang=spectre insensitive=yes
+library mylib
+
+section tt
+parameters dtox_n_33_mm_t=0
+parameters dlint_n_33_mm_t=0
+parameters dwint_n_33_mm_t=0
+parameters dvth0_n_33_mm_t=0
+parameters dcgdo_n_33_mm_t=0
+parameters dcgso_n_33_mm_t=0
+parameters du0_n_33_mm_t=0
+parameters drdsw_n_33_mm_t=0
+parameters dpvth0_n_33_mm_t=0
+parameters dwwl_n_33_mm_t=0
+parameters dtox_p_33_mm_t=0
+parameters dlint_p_33_mm_t=0
+parameters dwint_p_33_mm_t=0
+parameters dvth0_p_33_mm_t=0
+parameters dcgdo_p_33_mm_t=0
+parameters dcgso_p_33_mm_t=0
+parameters du0_p_33_mm_t=0
+parameters drdsw_p_33_mm_t=0
+parameters dpvth0_p_33_mm_t=0
+parameters dwwl_p_33_mm_t=0
+
+
+endsection tt
+
+
+
+section ss
+parameters dtox_n_33_mm_t=5e-10
+parameters dlint_n_33_mm_t=-1.23e-8
+parameters dwint_n_33_mm_t=8e-9
+parameters dvth0_n_33_mm_t=0.05
+parameters dcgdo_n_33_mm_t=-2.7e-11
+parameters dcgso_n_33_mm_t=-2.7e-11
+parameters du0_n_33_mm_t=0
+parameters drdsw_n_33_mm_t=0
+parameters dpvth0_n_33_mm_t=0
+parameters dwwl_n_33_mm_t=0
+parameters dtox_p_33_mm_t=5e-10
+parameters dlint_p_33_mm_t=-1.3396e-8
+parameters dwint_p_33_mm_t=2e-8
+parameters dvth0_p_33_mm_t=-0.05
+parameters dcgdo_p_33_mm_t=-2.6e-11
+parameters dcgso_p_33_mm_t=-2.6e-11
+parameters du0_p_33_mm_t=0
+parameters drdsw_p_33_mm_t=0
+parameters dpvth0_p_33_mm_t=0
+parameters dwwl_p_33_mm_t=0
+
+
+endsection ss
+
+
+
+
+section ff
+parameters dtox_n_33_mm_t=-5e-10
+parameters dlint_n_33_mm_t=9.4e-9
+parameters dwint_n_33_mm_t=-3e-9
+parameters dvth0_n_33_mm_t=-0.05
+parameters dcgdo_n_33_mm_t=2.7e-11
+parameters dcgso_n_33_mm_t=2.7e-11
+parameters du0_n_33_mm_t=0
+parameters drdsw_n_33_mm_t=0
+parameters dpvth0_n_33_mm_t=0
+parameters dwwl_n_33_mm_t=0
+parameters dtox_p_33_mm_t=-5e-10
+parameters dlint_p_33_mm_t=1.01e-8
+parameters dwint_p_33_mm_t=-1e-8
+parameters dvth0_p_33_mm_t=0.05
+parameters dcgdo_p_33_mm_t=2.6e-11
+parameters dcgso_p_33_mm_t=2.6e-11
+parameters du0_p_33_mm_t=0
+parameters drdsw_p_33_mm_t=0
+parameters dpvth0_p_33_mm_t=0
+parameters dwwl_p_33_mm_t=0
+
+
+endsection ff
+
+
+
+
+section snfp
+parameters dtox_n_33_mm_t=0
+parameters dlint_n_33_mm_t=-7.8e-9
+parameters dwint_n_33_mm_t=7e-9
+parameters dvth0_n_33_mm_t=0.040663
+parameters dcgdo_n_33_mm_t=0
+parameters dcgso_n_33_mm_t=0
+parameters du0_n_33_mm_t=0
+parameters drdsw_n_33_mm_t=0
+parameters dpvth0_n_33_mm_t=0
+parameters dwwl_n_33_mm_t=0
+parameters dtox_p_33_mm_t=0
+parameters dlint_p_33_mm_t=7.43e-9
+parameters dwint_p_33_mm_t=-5e-9
+parameters dvth0_p_33_mm_t=0.02
+parameters dcgdo_p_33_mm_t=0
+parameters dcgso_p_33_mm_t=0
+parameters du0_p_33_mm_t=0
+parameters drdsw_p_33_mm_t=0
+parameters dpvth0_p_33_mm_t=0
+parameters dwwl_p_33_mm_t=0
+
+
+endsection snfp
+
+
+
+
+
+section fnsp
+parameters dtox_n_33_mm_t=0
+parameters dlint_n_33_mm_t=9.2e-9
+parameters dwint_n_33_mm_t=-2e-9
+parameters dvth0_n_33_mm_t=-0.03
+parameters dcgdo_n_33_mm_t=0
+parameters dcgso_n_33_mm_t=0
+parameters du0_n_33_mm_t=0
+parameters drdsw_n_33_mm_t=0
+parameters dpvth0_n_33_mm_t=0
+parameters dwwl_n_33_mm_t=0
+parameters dtox_p_33_mm_t=0
+parameters dlint_p_33_mm_t=-8.44e-9
+parameters dwint_p_33_mm_t=1e-8
+parameters dvth0_p_33_mm_t=-0.02
+parameters dcgdo_p_33_mm_t=0
+parameters dcgso_p_33_mm_t=0
+parameters du0_p_33_mm_t=0
+parameters drdsw_p_33_mm_t=0
+parameters dpvth0_p_33_mm_t=0
+parameters dwwl_p_33_mm_t=0
+
+
+endsection fnsp
+
+
+section tt_g
+parameters dtox_n_33_mm_g=0
+parameters dlint_n_33_mm_g=0
+parameters dwint_n_33_mm_g=0
+parameters dvth0_n_33_mm_g=0
+parameters dcgdo_n_33_mm_g=0
+parameters dcgso_n_33_mm_g=0
+parameters du0_n_33_mm_g=0
+parameters drdsw_n_33_mm_g=0
+parameters dpvth0_n_33_mm_g=0
+parameters dwwl_n_33_mm_g=0
+parameters dtox_p_33_mm_g=0
+parameters dlint_p_33_mm_g=0
+parameters dwint_p_33_mm_g=0
+parameters dvth0_p_33_mm_g=0
+parameters dcgdo_p_33_mm_g=0
+parameters dcgso_p_33_mm_g=0
+parameters du0_p_33_mm_g=0
+parameters drdsw_p_33_mm_g=0
+parameters dpvth0_p_33_mm_g=0
+parameters dwwl_p_33_mm_g=0
+
+
+endsection tt_g
+
+
+
+section ss_g
+parameters dtox_n_33_mm_g=5e-10
+parameters dlint_n_33_mm_g=-1.23e-8
+parameters dwint_n_33_mm_g=8e-9
+parameters dvth0_n_33_mm_g=0.05
+parameters dcgdo_n_33_mm_g=-2.7e-11
+parameters dcgso_n_33_mm_g=-2.7e-11
+parameters du0_n_33_mm_g=0
+parameters drdsw_n_33_mm_g=0
+parameters dpvth0_n_33_mm_g=-1.33e-15
+parameters dwwl_n_33_mm_g=5.5e-23
+parameters dtox_p_33_mm_g=5e-10
+parameters dlint_p_33_mm_g=-1.3396e-8
+parameters dwint_p_33_mm_g=2e-8
+parameters dvth0_p_33_mm_g=-0.05
+parameters dcgdo_p_33_mm_g=-2.6e-11
+parameters dcgso_p_33_mm_g=-2.6e-11
+parameters du0_p_33_mm_g=0
+parameters drdsw_p_33_mm_g=0
+parameters dpvth0_p_33_mm_g=2.5e-4
+parameters dwwl_p_33_mm_g=9.5e-28
+
+
+endsection ss_g
+
+
+
+
+section ff_g
+parameters dtox_n_33_mm_g=-5e-10
+parameters dlint_n_33_mm_g=9.4e-9
+parameters dwint_n_33_mm_g=-3e-9
+parameters dvth0_n_33_mm_g=-0.05
+parameters dcgdo_n_33_mm_g=2.7e-11
+parameters dcgso_n_33_mm_g=2.7e-11
+parameters du0_n_33_mm_g=0
+parameters drdsw_n_33_mm_g=0
+parameters dpvth0_n_33_mm_g=1.42e-15
+parameters dwwl_n_33_mm_g=-7.0e-23
+parameters dtox_p_33_mm_g=-5e-10
+parameters dlint_p_33_mm_g=1.01e-8
+parameters dwint_p_33_mm_g=-1e-8
+parameters dvth0_p_33_mm_g=0.05
+parameters dcgdo_p_33_mm_g=2.6e-11
+parameters dcgso_p_33_mm_g=2.6e-11
+parameters du0_p_33_mm_g=0
+parameters drdsw_p_33_mm_g=0
+parameters dpvth0_p_33_mm_g=-3.02e-4
+parameters dwwl_p_33_mm_g=-1.7e-27
+
+
+endsection ff_g
+
+
+
+
+section snfp_g
+parameters dtox_n_33_mm_g=0
+parameters dlint_n_33_mm_g=-7.8e-9
+parameters dwint_n_33_mm_g=7e-9
+parameters dvth0_n_33_mm_g=0.040663
+parameters dcgdo_n_33_mm_g=0
+parameters dcgso_n_33_mm_g=0
+parameters du0_n_33_mm_g=0
+parameters drdsw_n_33_mm_g=0
+parameters dpvth0_n_33_mm_g=-1.89e-15
+parameters dwwl_n_33_mm_g=7.7e-23
+parameters dtox_p_33_mm_g=0
+parameters dlint_p_33_mm_g=7.43e-9
+parameters dwint_p_33_mm_g=-5e-9
+parameters dvth0_p_33_mm_g=0.02
+parameters dcgdo_p_33_mm_g=0
+parameters dcgso_p_33_mm_g=0
+parameters du0_p_33_mm_g=0
+parameters drdsw_p_33_mm_g=0
+parameters dpvth0_p_33_mm_g=-8.02e-4
+parameters dwwl_p_33_mm_g=-5.00e-27
+
+
+endsection snfp_g
+
+
+
+
+
+section fnsp_g
+parameters dtox_n_33_mm_g=0
+parameters dlint_n_33_mm_g=9.2e-9
+parameters dwint_n_33_mm_g=-2e-9
+parameters dvth0_n_33_mm_g=-0.03
+parameters dcgdo_n_33_mm_g=0
+parameters dcgso_n_33_mm_g=0
+parameters du0_n_33_mm_g=0
+parameters drdsw_n_33_mm_g=0
+parameters dpvth0_n_33_mm_g=2.66e-15
+parameters dwwl_n_33_mm_g=-1.21e-22
+parameters dtox_p_33_mm_g=0
+parameters dlint_p_33_mm_g=-8.44e-9
+parameters dwint_p_33_mm_g=1e-8
+parameters dvth0_p_33_mm_g=-0.02
+parameters dcgdo_p_33_mm_g=0
+parameters dcgso_p_33_mm_g=0
+parameters du0_p_33_mm_g=0
+parameters drdsw_p_33_mm_g=0
+parameters dpvth0_p_33_mm_g=7.02e-4
+parameters dwwl_p_33_mm_g=4.21e-27
+
+
+endsection fnsp_g
+
+
+
+
+
+
+
+
+
+endlibrary mylib

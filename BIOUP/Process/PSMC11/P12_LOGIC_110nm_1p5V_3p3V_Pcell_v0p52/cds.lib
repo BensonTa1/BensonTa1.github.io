@@ -1,0 +1,5 @@
+DEFINE basic $CDSHOME/tools/dfII/etc/cdslib/basic
+DEFINE analogLib $CDSHOME/tools/dfII/etc/cdslib/artist/analogLib
+DEFINE LG1533 LG1533
+DEFINE avTech $ASSURAHOME/tools/assura/etc/avtech/avTech
+

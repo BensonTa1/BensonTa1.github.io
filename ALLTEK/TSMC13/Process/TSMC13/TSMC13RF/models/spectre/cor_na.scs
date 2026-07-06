@@ -1,0 +1,16 @@
+library na_cor 
+
+section ff_na 
+include "cr013g_2d5_v1d4.scs" section = ff_na 
+endsection ff_na 
+
+section ss_na 
+include "cr013g_2d5_v1d4.scs" section = ss_na 
+endsection ss_na 
+
+section tt_na 
+include "cr013g_2d5_v1d4.scs" section = tt_na 
+endsection tt_na 
+
+
+endlibrary na_cor 

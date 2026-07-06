@@ -1,0 +1,38 @@
+// VerilogA for Verilog_A, IDEAL_Divider, veriloga
+
+`include "constants.vams"
+`include "disciplines.vams"
+
+module IDEAL_Divider(CLKIN,CLKOUT);
+	electrical CLKIN,CLKOUT;
+	input CLKIN;
+	output CLKOUT;
+
+	parameter real VOH = 1.8;
+	parameter real VOL = 1.2;
+	parameter real VTH = 1.5;
+	parameter real RT_FT = 1p;
+
+	parameter real M=4;
+
+	real output_state=VOL;
+	real count=0;
+	
+	analog begin
+		@(cross(V(CLKIN)-VTH,0))begin
+
+			count=count+1;
+
+			if(count==M)begin
+				count=0;
+				if(output_state==VOH)begin
+					output_state=VOL;
+				end else begin	
+					output_state=VOH;
+				end
+			end
+		end
+
+		V(CLKOUT)<+transition(output_state,0,RT_FT,RT_FT);
+	end
+endmodule

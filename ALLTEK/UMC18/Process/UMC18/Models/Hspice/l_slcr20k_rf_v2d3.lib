@@ -1,0 +1,41 @@
+.lib typ
+.param
+*
++ dw_l_rf=0
++ dt_l_rf=0
++ drs_l_rf=0
++ dcp_l_rf=0
++ dcox_l_rf=0
++ dls_l_rf=0
+*
+.include './l_slcr20k_rf_v2d3.mdl'
+* 
+.endl typ
+*
+.lib min
+.param
+*
++ dw_l_rf=-0.2
++ dt_l_rf=-0.1
++ drs_l_rf=0.1
++ dcp_l_rf=-0.1
++ dcox_l_rf=0.15
++ dls_l_rf=-0.03
+*
+.include './l_slcr20k_rf_v2d3.mdl'
+* 
+.endl min
+*
+.lib max
+.param
+*
++ dw_l_rf=0.2
++ dt_l_rf=0.1
++ drs_l_rf=-0.1
++ dcp_l_rf=0.1
++ dcox_l_rf=-0.15
++ dls_l_rf=0.03
+*
+.include './l_slcr20k_rf_v2d3.mdl'
+* 
+.endl max

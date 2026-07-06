@@ -1,0 +1,152 @@
+
+simulator lang=spectre insensitive=yes
+
+//
+parameters mc_is_pnp_sv45x45_l110e = 0
+parameters mc_bf_pnp_sv45x45_l110e = 0
+parameters mc_nf_pnp_sv45x45_l110e = 0
+parameters mc_re_pnp_sv45x45_l110e = 0
+parameters mc_rc_pnp_sv45x45_l110e = 0
+parameters mc_cje_pnp_sv45x45_l110e = 0
+parameters mc_cjc_pnp_sv45x45_l110e = 0
+//
+parameters mc_is_pnp_sv90x90_l110e = 0
+parameters mc_bf_pnp_sv90x90_l110e = 0
+parameters mc_nf_pnp_sv90x90_l110e = 0
+parameters mc_re_pnp_sv90x90_l110e = 0
+parameters mc_rc_pnp_sv90x90_l110e = 0
+parameters mc_cje_pnp_sv90x90_l110e = 0
+parameters mc_cjc_pnp_sv90x90_l110e = 0
+//
+parameters mc_is_pnp_sv135x135_l110e = 0
+parameters mc_bf_pnp_sv135x135_l110e = 0
+parameters mc_nf_pnp_sv135x135_l110e = 0
+parameters mc_re_pnp_sv135x135_l110e = 0
+parameters mc_rc_pnp_sv135x135_l110e = 0
+parameters mc_cje_pnp_sv135x135_l110e = 0
+parameters mc_cjc_pnp_sv135x135_l110e = 0
+//
+parameters mc_is_pnp_v45x45_l110e = 0
+parameters mc_bf_pnp_v45x45_l110e = 0
+parameters mc_nf_pnp_v45x45_l110e = 0
+parameters mc_re_pnp_v45x45_l110e = 0
+parameters mc_rc_pnp_v45x45_l110e = 0
+parameters mc_cje_pnp_v45x45_l110e = 0
+parameters mc_cjc_pnp_v45x45_l110e = 0
+//
+parameters mc_is_pnp_v90x90_l110e = 0
+parameters mc_bf_pnp_v90x90_l110e = 0
+parameters mc_nf_pnp_v90x90_l110e = 0
+parameters mc_re_pnp_v90x90_l110e = 0
+parameters mc_rc_pnp_v90x90_l110e = 0
+parameters mc_cje_pnp_v90x90_l110e = 0
+parameters mc_cjc_pnp_v90x90_l110e = 0
+//
+parameters mc_is_pnp_v135x135_l110e = 0
+parameters mc_bf_pnp_v135x135_l110e = 0
+parameters mc_nf_pnp_v135x135_l110e = 0
+parameters mc_re_pnp_v135x135_l110e = 0
+parameters mc_rc_pnp_v135x135_l110e = 0
+parameters mc_cje_pnp_v135x135_l110e = 0
+parameters mc_cjc_pnp_v135x135_l110e = 0
+
+parameters dis_pnp_sv45x45_l110e  = (1.00000e-01 / 3) * mc_is_pnp_sv45x45_l110e
+parameters dbf_pnp_sv45x45_l110e  = (1.50000e-01 / 3) * mc_bf_pnp_sv45x45_l110e
+parameters dnf_pnp_sv45x45_l110e  = (5.00000e-03 / 3) * mc_nf_pnp_sv45x45_l110e
+parameters dre_pnp_sv45x45_l110e  = (2.00000e-01 / 3) * mc_re_pnp_sv45x45_l110e
+parameters drc_pnp_sv45x45_l110e  = (2.00000e-01 / 3) * mc_rc_pnp_sv45x45_l110e
+parameters dcje_pnp_sv45x45_l110e = (2.00000e-01 / 3) * mc_cje_pnp_sv45x45_l110e
+parameters dcjc_pnp_sv45x45_l110e = (2.00000e-01 / 3) * mc_cjc_pnp_sv45x45_l110e
+//
+parameters dis_pnp_sv90x90_l110e  = (1.00000e-01 / 3) * mc_is_pnp_sv90x90_l110e
+parameters dbf_pnp_sv90x90_l110e  = (1.50000e-01 / 3) * mc_bf_pnp_sv90x90_l110e
+parameters dnf_pnp_sv90x90_l110e  = (5.00000e-03 / 3) * mc_nf_pnp_sv90x90_l110e
+parameters dre_pnp_sv90x90_l110e  = (2.00000e-01 / 3) * mc_re_pnp_sv90x90_l110e
+parameters drc_pnp_sv90x90_l110e  = (2.00000e-01 / 3) * mc_rc_pnp_sv90x90_l110e
+parameters dcje_pnp_sv90x90_l110e = (2.00000e-01 / 3) * mc_cje_pnp_sv90x90_l110e
+parameters dcjc_pnp_sv90x90_l110e = (2.00000e-01 / 3) * mc_cjc_pnp_sv90x90_l110e
+//
+parameters dis_pnp_sv135x135_l110e  = (1.00000e-01 / 3) * mc_is_pnp_sv135x135_l110e
+parameters dbf_pnp_sv135x135_l110e  = (1.50000e-01 / 3) * mc_bf_pnp_sv135x135_l110e
+parameters dnf_pnp_sv135x135_l110e  = (5.00000e-03 / 3) * mc_nf_pnp_sv135x135_l110e
+parameters dre_pnp_sv135x135_l110e  = (2.00000e-01 / 3) * mc_re_pnp_sv135x135_l110e
+parameters drc_pnp_sv135x135_l110e  = (2.00000e-01 / 3) * mc_rc_pnp_sv135x135_l110e
+parameters dcje_pnp_sv135x135_l110e = (2.00000e-01 / 3) * mc_cje_pnp_sv135x135_l110e
+parameters dcjc_pnp_sv135x135_l110e = (2.00000e-01 / 3) * mc_cjc_pnp_sv135x135_l110e
+//
+parameters dis_pnp_v45x45_l110e  = (1.00000e-01 / 3) * mc_is_pnp_v45x45_l110e
+parameters dbf_pnp_v45x45_l110e  = (1.50000e-01 / 3) * mc_bf_pnp_v45x45_l110e
+parameters dnf_pnp_v45x45_l110e  = (5.00000e-03 / 3) * mc_nf_pnp_v45x45_l110e
+parameters dre_pnp_v45x45_l110e  = (2.00000e-01 / 3) * mc_re_pnp_v45x45_l110e
+parameters drc_pnp_v45x45_l110e  = (2.00000e-01 / 3) * mc_rc_pnp_v45x45_l110e
+parameters dcje_pnp_v45x45_l110e = (2.00000e-01 / 3) * mc_cje_pnp_v45x45_l110e
+parameters dcjc_pnp_v45x45_l110e = (2.00000e-01 / 3) * mc_cjc_pnp_v45x45_l110e
+//
+parameters dis_pnp_v90x90_l110e  = (1.00000e-01 / 3) * mc_is_pnp_v90x90_l110e
+parameters dbf_pnp_v90x90_l110e  = (1.50000e-01 / 3) * mc_bf_pnp_v90x90_l110e
+parameters dnf_pnp_v90x90_l110e  = (5.00000e-03 / 3) * mc_nf_pnp_v90x90_l110e
+parameters dre_pnp_v90x90_l110e  = (2.00000e-01 / 3) * mc_re_pnp_v90x90_l110e
+parameters drc_pnp_v90x90_l110e  = (2.00000e-01 / 3) * mc_rc_pnp_v90x90_l110e
+parameters dcje_pnp_v90x90_l110e = (2.00000e-01 / 3) * mc_cje_pnp_v90x90_l110e
+parameters dcjc_pnp_v90x90_l110e = (2.00000e-01 / 3) * mc_cjc_pnp_v90x90_l110e
+//
+parameters dis_pnp_v135x135_l110e  = (1.00000e-01 / 3) * mc_is_pnp_v135x135_l110e
+parameters dbf_pnp_v135x135_l110e  = (1.50000e-01 / 3) * mc_bf_pnp_v135x135_l110e
+parameters dnf_pnp_v135x135_l110e  = (5.00000e-03 / 3) * mc_nf_pnp_v135x135_l110e
+parameters dre_pnp_v135x135_l110e  = (2.00000e-01 / 3) * mc_re_pnp_v135x135_l110e
+parameters drc_pnp_v135x135_l110e  = (2.00000e-01 / 3) * mc_rc_pnp_v135x135_l110e
+parameters dcje_pnp_v135x135_l110e = (2.00000e-01 / 3) * mc_cje_pnp_v135x135_l110e
+parameters dcjc_pnp_v135x135_l110e = (2.00000e-01 / 3) * mc_cjc_pnp_v135x135_l110e
+
+statistics {
+process {
+vary mc_is_pnp_sv45x45_l110e dist=gauss std=sigma/3
+vary mc_bf_pnp_sv45x45_l110e dist=gauss std=sigma/3
+vary mc_nf_pnp_sv45x45_l110e dist=gauss std=sigma/3
+vary mc_re_pnp_sv45x45_l110e dist=gauss std=sigma/3
+vary mc_rc_pnp_sv45x45_l110e dist=gauss std=sigma/3
+vary mc_cje_pnp_sv45x45_l110e dist=gauss std=sigma/3
+vary mc_cjc_pnp_sv45x45_l110e dist=gauss std=sigma/3
+//
+vary mc_is_pnp_sv90x90_l110e dist=gauss std=sigma/3
+vary mc_bf_pnp_sv90x90_l110e dist=gauss std=sigma/3
+vary mc_nf_pnp_sv90x90_l110e dist=gauss std=sigma/3
+vary mc_re_pnp_sv90x90_l110e dist=gauss std=sigma/3
+vary mc_rc_pnp_sv90x90_l110e dist=gauss std=sigma/3
+vary mc_cje_pnp_sv90x90_l110e dist=gauss std=sigma/3
+vary mc_cjc_pnp_sv90x90_l110e dist=gauss std=sigma/3
+//
+vary mc_is_pnp_sv135x135_l110e dist=gauss std=sigma/3
+vary mc_bf_pnp_sv135x135_l110e dist=gauss std=sigma/3
+vary mc_nf_pnp_sv135x135_l110e dist=gauss std=sigma/3
+vary mc_re_pnp_sv135x135_l110e dist=gauss std=sigma/3
+vary mc_rc_pnp_sv135x135_l110e dist=gauss std=sigma/3
+vary mc_cje_pnp_sv135x135_l110e dist=gauss std=sigma/3
+vary mc_cjc_pnp_sv135x135_l110e dist=gauss std=sigma/3
+//
+vary mc_is_pnp_v45x45_l110e dist=gauss std=sigma/3
+vary mc_bf_pnp_v45x45_l110e dist=gauss std=sigma/3
+vary mc_nf_pnp_v45x45_l110e dist=gauss std=sigma/3
+vary mc_re_pnp_v45x45_l110e dist=gauss std=sigma/3
+vary mc_rc_pnp_v45x45_l110e dist=gauss std=sigma/3
+vary mc_cje_pnp_v45x45_l110e dist=gauss std=sigma/3
+vary mc_cjc_pnp_v45x45_l110e dist=gauss std=sigma/3
+//
+vary mc_is_pnp_v90x90_l110e dist=gauss std=sigma/3
+vary mc_bf_pnp_v90x90_l110e dist=gauss std=sigma/3
+vary mc_nf_pnp_v90x90_l110e dist=gauss std=sigma/3
+vary mc_re_pnp_v90x90_l110e dist=gauss std=sigma/3
+vary mc_rc_pnp_v90x90_l110e dist=gauss std=sigma/3
+vary mc_cje_pnp_v90x90_l110e dist=gauss std=sigma/3
+vary mc_cjc_pnp_v90x90_l110e dist=gauss std=sigma/3
+//
+vary mc_is_pnp_v135x135_l110e dist=gauss std=sigma/3
+vary mc_bf_pnp_v135x135_l110e dist=gauss std=sigma/3
+vary mc_nf_pnp_v135x135_l110e dist=gauss std=sigma/3
+vary mc_re_pnp_v135x135_l110e dist=gauss std=sigma/3
+vary mc_rc_pnp_v135x135_l110e dist=gauss std=sigma/3
+vary mc_cje_pnp_v135x135_l110e dist=gauss std=sigma/3
+vary mc_cjc_pnp_v135x135_l110e dist=gauss std=sigma/3
+ }
+}
+

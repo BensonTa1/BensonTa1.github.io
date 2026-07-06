@@ -1,0 +1,195 @@
+simulator lang=spectre insensitive=yes
+library io_rf
+
+section tt
+parameters dcgs_n_33_rf=0
+parameters drgate_n_33_rf=0
+parameters dcd_n_33_rf=0
+parameters dcj_n_33_rf=0.0000e+00
+parameters dcjsw_n_33_rf=0.0000e+00
+parameters dcjgate_n_33_rf=0.0000e+00
+parameters dcf_n_33_rf=0.0000e+00
+
+
+parameters dtox_n_33_rf=0
+parameters dlint_n_33_rf=0
+parameters dwint_n_33_rf=0
+parameters dvth0_n_33_rf=0
+parameters dcgdo_n_33_rf=0
+parameters dcgso_n_33_rf=0
+
+parameters dcgs_p_33_rf=0
+parameters drgate_p_33_rf=0
+parameters dcd_p_33_rf=0
+parameters dcj_p_33_rf=0.0000e+00
+parameters dcjsw_p_33_rf=0.0000e+00
+parameters dcjgate_p_33_rf=0.0000e+00
+parameters dcf_p_33_rf=0.0000e+00
+
+parameters dtox_p_33_rf=0
+parameters dlint_p_33_rf=0
+parameters dwint_p_33_rf=0
+parameters dvth0_p_33_rf=0
+parameters dcgdo_p_33_rf=0
+parameters dcgso_p_33_rf=0
+
+
+include "./io_rf_v2d3.mdl.scs"
+ 
+endsection tt
+
+
+
+section ss
+parameters dcgs_n_33_rf=0.15
+parameters drgate_n_33_rf=0.35
+parameters dcd_n_33_rf=0.1
+parameters dcj_n_33_rf=0.1
+parameters dcjsw_n_33_rf=0.1
+parameters dcjgate_n_33_rf=0.1
+parameters dcf_n_33_rf=0.15
+
+parameters dtox_n_33_rf=5e-10
+parameters dlint_n_33_rf=-1.23e-8
+parameters dwint_n_33_rf=8e-9
+parameters dvth0_n_33_rf=0.05
+parameters dcgdo_n_33_rf=-0.1
+parameters dcgso_n_33_rf=-0.1
+
+parameters dcgs_p_33_rf=0.15
+parameters drgate_p_33_rf=0.35
+parameters dcd_p_33_rf=0.1
+parameters dcj_p_33_rf=0.1
+parameters dcjsw_p_33_rf=0.1
+parameters dcjgate_p_33_rf=0.1
+parameters dcf_p_33_rf=0.15
+
+parameters dtox_p_33_rf=5e-10
+parameters dlint_p_33_rf=-1.3396e-8
+parameters dwint_p_33_rf=2e-8
+parameters dvth0_p_33_rf=-0.05
+parameters dcgdo_p_33_rf=-0.1
+parameters dcgso_p_33_rf=-0.1
+
+include "./io_rf_v2d3.mdl.scs"
+ 
+endsection ss
+
+
+
+
+section ff
+parameters dcgs_n_33_rf=-0.15
+parameters drgate_n_33_rf=-0.35
+parameters dcd_n_33_rf=-0.1
+parameters dcj_n_33_rf=-0.1
+parameters dcjsw_n_33_rf=-0.1
+parameters dcjgate_n_33_rf=-0.1
+parameters dcf_n_33_rf=-0.15
+
+parameters dtox_n_33_rf=-5e-10
+parameters dlint_n_33_rf=9.4e-9
+parameters dwint_n_33_rf=-3e-9
+parameters dvth0_n_33_rf=-0.05
+parameters dcgdo_n_33_rf=0.1
+parameters dcgso_n_33_rf=0.1
+
+parameters dcgs_p_33_rf=-0.15
+parameters drgate_p_33_rf=-0.35
+parameters dcd_p_33_rf=-0.1
+parameters dcj_p_33_rf=-0.1
+parameters dcjsw_p_33_rf=-0.1
+parameters dcjgate_p_33_rf=-0.1
+parameters dcf_p_33_rf=-0.15
+
+parameters dtox_p_33_rf=-5e-10
+parameters dlint_p_33_rf=1.01e-8
+parameters dwint_p_33_rf=-1e-8
+parameters dvth0_p_33_rf=0.05
+parameters dcgdo_p_33_rf=0.1
+parameters dcgso_p_33_rf=0.1
+
+include "./io_rf_v2d3.mdl.scs"
+ 
+endsection ff
+
+
+
+
+section snfp
+parameters dcgs_n_33_rf=0.075
+parameters drgate_n_33_rf=0.175
+parameters dcd_n_33_rf=0.05
+parameters dcj_n_33_rf=0.05
+parameters dcjsw_n_33_rf=0.05
+parameters dcjgate_n_33_rf=0.05
+parameters dcf_n_33_rf=0.075
+
+parameters dtox_n_33_rf=0
+parameters dlint_n_33_rf=-7.8e-9
+parameters dwint_n_33_rf=7e-9
+parameters dvth0_n_33_rf=0.040663
+parameters dcgdo_n_33_rf=0
+parameters dcgso_n_33_rf=0
+
+parameters dcgs_p_33_rf=-0.075
+parameters drgate_p_33_rf=-0.175
+parameters dcd_p_33_rf=-0.05
+parameters dcj_p_33_rf=-0.05
+parameters dcjsw_p_33_rf=-0.05
+parameters dcjgate_p_33_rf=-0.05
+parameters dcf_p_33_rf=-0.075
+
+parameters dtox_p_33_rf=0
+parameters dlint_p_33_rf=7.43e-9
+parameters dwint_p_33_rf=-5e-9
+parameters dvth0_p_33_rf=0.02
+parameters dcgdo_p_33_rf=0
+parameters dcgso_p_33_rf=0
+
+include "./io_rf_v2d3.mdl.scs"
+ 
+endsection snfp
+
+
+
+
+
+section fnsp
+parameters dcgs_n_33_rf=-0.075
+parameters drgate_n_33_rf=-0.175
+parameters dcd_n_33_rf=-0.05
+parameters dcj_n_33_rf=-0.05
+parameters dcjsw_n_33_rf=-0.05
+parameters dcjgate_n_33_rf=-0.05
+parameters dcf_n_33_rf=-0.075
+
+parameters dtox_n_33_rf=0
+parameters dlint_n_33_rf=9.2e-9
+parameters dwint_n_33_rf=-2e-9
+parameters dvth0_n_33_rf=-0.03
+parameters dcgdo_n_33_rf=0
+parameters dcgso_n_33_rf=0
+
+parameters dcgs_p_33_rf=0.075
+parameters drgate_p_33_rf=0.175
+parameters dcd_p_33_rf=0.05
+parameters dcj_p_33_rf=0.05
+parameters dcjsw_p_33_rf=0.05
+parameters dcjgate_p_33_rf=0.05
+parameters dcf_p_33_rf=0.075
+
+parameters dtox_p_33_rf=0
+parameters dlint_p_33_rf=-8.44e-9
+parameters dwint_p_33_rf=1e-8
+parameters dvth0_p_33_rf=-0.02
+parameters dcgdo_p_33_rf=0
+parameters dcgso_p_33_rf=0
+
+
+include "./io_rf_v2d3.mdl.scs"
+ 
+endsection fnsp
+
+endlibrary io_rf
+

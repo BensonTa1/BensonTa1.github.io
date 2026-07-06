@@ -1,0 +1,170 @@
+simulator lang=spectre insensitive=yes
+//.prot
+parameters
++ alpha_n_bpw_25ud12_l110ae = 0.2
++ alpha_n_25ud12_l110ae = 0.2
++ alpha_p_25ud12_l110ae = 0.2
+parameters ap1_n_bpw_25ud12_l110ae = 0
+parameters ap2_n_bpw_25ud12_l110ae = 0
+parameters ap3_n_bpw_25ud12_l110ae = 0
+parameters ap4_n_bpw_25ud12_l110ae = 0
+parameters ap5_n_bpw_25ud12_l110ae = 0
+statistics {
+    process {
+        vary ap1_n_bpw_25ud12_l110ae dist=gauss std=sigma/3
+        vary ap2_n_bpw_25ud12_l110ae dist=gauss std=sigma/3
+        vary ap3_n_bpw_25ud12_l110ae dist=gauss std=sigma/3
+        vary ap4_n_bpw_25ud12_l110ae dist=gauss std=sigma/3
+        vary ap5_n_bpw_25ud12_l110ae dist=gauss std=sigma/3
+    }
+}
+parameters
++ a1_n_bpw_25ud12_l110ae = ap1_n_bpw_25ud12_l110ae
+parameters
++ a2_n_bpw_25ud12_l110ae = ap2_n_bpw_25ud12_l110ae
++ a3_n_bpw_25ud12_l110ae = ap3_n_bpw_25ud12_l110ae
++ a4_n_bpw_25ud12_l110ae = ap4_n_bpw_25ud12_l110ae
++ a5_n_bpw_25ud12_l110ae = ap5_n_bpw_25ud12_l110ae
++ comp1_n_bpw_25ud12_l110ae	= 14.7021979349394
++ comp2_n_bpw_25ud12_l110ae	= 7.21340013324537
++ comp3_n_bpw_25ud12_l110ae	= 3.76153102288034
++ comp4_n_bpw_25ud12_l110ae	= 1.28961961968221
++ comp5_n_bpw_25ud12_l110ae	= 1.44541577964641e-14
++ 	dtox_n_bpw_25ud12_l110ae_g	  =	alpha_n_bpw_25ud12_l110ae*(-1.51187766573104e-11*a1_n_bpw_25ud12_l110ae*comp1_n_bpw_25ud12_l110ae+-7.50132685951075e-12*a2_n_bpw_25ud12_l110ae*comp2_n_bpw_25ud12_l110ae+-3.11745303477541e-12*a3_n_bpw_25ud12_l110ae*comp3_n_bpw_25ud12_l110ae+-2.95557990786441e-12*a4_n_bpw_25ud12_l110ae*comp4_n_bpw_25ud12_l110ae+2.47983902261911e-11*a5_n_bpw_25ud12_l110ae*comp5_n_bpw_25ud12_l110ae)
++ 	dxl_n_bpw_25ud12_l110ae_g	  =	alpha_n_bpw_25ud12_l110ae*(-1.0493115284933e-9*a1_n_bpw_25ud12_l110ae*comp1_n_bpw_25ud12_l110ae+4.77660243041929e-10*a2_n_bpw_25ud12_l110ae*comp2_n_bpw_25ud12_l110ae+7.89781767883721e-11*a3_n_bpw_25ud12_l110ae*comp3_n_bpw_25ud12_l110ae+-1.58606194468627e-10*a4_n_bpw_25ud12_l110ae*comp4_n_bpw_25ud12_l110ae+2.00691320200261e-10*a5_n_bpw_25ud12_l110ae*comp5_n_bpw_25ud12_l110ae)
++ 	dxw_n_bpw_25ud12_l110ae_g	  =	alpha_n_bpw_25ud12_l110ae*(1.0493115284933e-9*a1_n_bpw_25ud12_l110ae*comp1_n_bpw_25ud12_l110ae+-4.7766024304193e-10*a2_n_bpw_25ud12_l110ae*comp2_n_bpw_25ud12_l110ae+-7.89781767883733e-11*a3_n_bpw_25ud12_l110ae*comp3_n_bpw_25ud12_l110ae+1.58606194468626e-10*a4_n_bpw_25ud12_l110ae*comp4_n_bpw_25ud12_l110ae+-1.35054511749995e-11*a5_n_bpw_25ud12_l110ae*comp5_n_bpw_25ud12_l110ae)
++ 	dvth0_n_bpw_25ud12_l110ae_g	  =	alpha_n_bpw_25ud12_l110ae*(-0.00518933569686991*a1_n_bpw_25ud12_l110ae*comp1_n_bpw_25ud12_l110ae+0.00233194775707835*a2_n_bpw_25ud12_l110ae*comp2_n_bpw_25ud12_l110ae+-8.21465086333837e-5*a3_n_bpw_25ud12_l110ae*comp3_n_bpw_25ud12_l110ae+-0.000813277495974013*a4_n_bpw_25ud12_l110ae*comp4_n_bpw_25ud12_l110ae+-0.00317430711349752*a5_n_bpw_25ud12_l110ae*comp5_n_bpw_25ud12_l110ae)
++ 	dnlx_n_bpw_25ud12_l110ae_g	  =	alpha_n_bpw_25ud12_l110ae*(-4.58214402556103e-9*a1_n_bpw_25ud12_l110ae*comp1_n_bpw_25ud12_l110ae+1.75878177595421e-9*a2_n_bpw_25ud12_l110ae*comp2_n_bpw_25ud12_l110ae+6.8720790062128e-10*a3_n_bpw_25ud12_l110ae*comp3_n_bpw_25ud12_l110ae+-7.77323591481256e-10*a4_n_bpw_25ud12_l110ae*comp4_n_bpw_25ud12_l110ae+9.17584226953446e-10*a5_n_bpw_25ud12_l110ae*comp5_n_bpw_25ud12_l110ae)
++ 	dk3_n_bpw_25ud12_l110ae_g	  =	alpha_n_bpw_25ud12_l110ae*(-0.0348831965488181*a1_n_bpw_25ud12_l110ae*comp1_n_bpw_25ud12_l110ae+0.0224276120984334*a2_n_bpw_25ud12_l110ae*comp2_n_bpw_25ud12_l110ae+-0.0249135726991319*a3_n_bpw_25ud12_l110ae*comp3_n_bpw_25ud12_l110ae+-0.0156912976281481*a4_n_bpw_25ud12_l110ae*comp4_n_bpw_25ud12_l110ae+-0.00301413567488887*a5_n_bpw_25ud12_l110ae*comp5_n_bpw_25ud12_l110ae)
++ 	dpvth0_n_bpw_25ud12_l110ae_g	  =	alpha_n_bpw_25ud12_l110ae*(-5.33525911261059e-16*a1_n_bpw_25ud12_l110ae*comp1_n_bpw_25ud12_l110ae+2.43373652642209e-16*a2_n_bpw_25ud12_l110ae*comp2_n_bpw_25ud12_l110ae+-5.005854010139e-17*a3_n_bpw_25ud12_l110ae*comp3_n_bpw_25ud12_l110ae+-8.97637118425158e-17*a4_n_bpw_25ud12_l110ae*comp4_n_bpw_25ud12_l110ae+4.7596507819027e-16*a5_n_bpw_25ud12_l110ae*comp5_n_bpw_25ud12_l110ae)
++ 	du0_n_bpw_25ud12_l110ae_g	  =	alpha_n_bpw_25ud12_l110ae*(0.000285889848460293*a1_n_bpw_25ud12_l110ae*comp1_n_bpw_25ud12_l110ae+-0.000175727035520804*a2_n_bpw_25ud12_l110ae*comp2_n_bpw_25ud12_l110ae+-0.000132228638213626*a3_n_bpw_25ud12_l110ae*comp3_n_bpw_25ud12_l110ae+1.56326626878585e-5*a4_n_bpw_25ud12_l110ae*comp4_n_bpw_25ud12_l110ae+-4.58652044449543e-5*a5_n_bpw_25ud12_l110ae*comp5_n_bpw_25ud12_l110ae)
++ 	dlu0_n_bpw_25ud12_l110ae_g	  =	1.5*alpha_n_bpw_25ud12_l110ae*(5.55498541475833e-11*a1_n_bpw_25ud12_l110ae*comp1_n_bpw_25ud12_l110ae+-2.17028045626508e-11*a2_n_bpw_25ud12_l110ae*comp2_n_bpw_25ud12_l110ae+-1.30939027257195e-11*a3_n_bpw_25ud12_l110ae*comp3_n_bpw_25ud12_l110ae+6.14576238022676e-12*a4_n_bpw_25ud12_l110ae*comp4_n_bpw_25ud12_l110ae+-4.93236535212121e-12*a5_n_bpw_25ud12_l110ae*comp5_n_bpw_25ud12_l110ae)
++ 	dwu0_n_bpw_25ud12_l110ae_g	  =	alpha_n_bpw_25ud12_l110ae*(2.07622288306011e-11*a1_n_bpw_25ud12_l110ae*comp1_n_bpw_25ud12_l110ae+-5.29176450754331e-12*a2_n_bpw_25ud12_l110ae*comp2_n_bpw_25ud12_l110ae+-2.1869766646578e-11*a3_n_bpw_25ud12_l110ae*comp3_n_bpw_25ud12_l110ae+1.65811997906227e-12*a4_n_bpw_25ud12_l110ae*comp4_n_bpw_25ud12_l110ae+-9.23674372008649e-13*a5_n_bpw_25ud12_l110ae*comp5_n_bpw_25ud12_l110ae)
++ 	dpu0_n_bpw_25ud12_l110ae_g	  =	alpha_n_bpw_25ud12_l110ae*(1.60763023473866e-17*a1_n_bpw_25ud12_l110ae*comp1_n_bpw_25ud12_l110ae+-8.48451247628362e-18*a2_n_bpw_25ud12_l110ae*comp2_n_bpw_25ud12_l110ae+-4.07168363088734e-18*a3_n_bpw_25ud12_l110ae*comp3_n_bpw_25ud12_l110ae+1.67275992913639e-19*a4_n_bpw_25ud12_l110ae*comp4_n_bpw_25ud12_l110ae+-4.69999634905044e-18*a5_n_bpw_25ud12_l110ae*comp5_n_bpw_25ud12_l110ae)
++ 	drdsw_n_bpw_25ud12_l110ae_g	  =	alpha_n_bpw_25ud12_l110ae*(-6.19093801811046*a1_n_bpw_25ud12_l110ae*comp1_n_bpw_25ud12_l110ae+2.81819543394738*a2_n_bpw_25ud12_l110ae*comp2_n_bpw_25ud12_l110ae+0.465971243051395*a3_n_bpw_25ud12_l110ae*comp3_n_bpw_25ud12_l110ae+-0.935776547364898*a4_n_bpw_25ud12_l110ae*comp4_n_bpw_25ud12_l110ae+1.18407878918154*a5_n_bpw_25ud12_l110ae*comp5_n_bpw_25ud12_l110ae)
++ 	dags_n_bpw_25ud12_l110ae_g	  =	alpha_n_bpw_25ud12_l110ae*(-0.0253721680663996*a1_n_bpw_25ud12_l110ae*comp1_n_bpw_25ud12_l110ae+0.0115085136530229*a2_n_bpw_25ud12_l110ae*comp2_n_bpw_25ud12_l110ae+0.00403202610821101*a3_n_bpw_25ud12_l110ae*comp3_n_bpw_25ud12_l110ae+-0.00382749477094683*a4_n_bpw_25ud12_l110ae*comp4_n_bpw_25ud12_l110ae+-0.00262761655779376*a5_n_bpw_25ud12_l110ae*comp5_n_bpw_25ud12_l110ae)
++ 	dvsat_n_bpw_25ud12_l110ae_g	  =	alpha_n_bpw_25ud12_l110ae*(-687.375162006606*a1_n_bpw_25ud12_l110ae*comp1_n_bpw_25ud12_l110ae+-46.0108706406811*a2_n_bpw_25ud12_l110ae*comp2_n_bpw_25ud12_l110ae+691.536130543154*a3_n_bpw_25ud12_l110ae*comp3_n_bpw_25ud12_l110ae+-19.6421671341493*a4_n_bpw_25ud12_l110ae*comp4_n_bpw_25ud12_l110ae+-824.682403340168*a5_n_bpw_25ud12_l110ae*comp5_n_bpw_25ud12_l110ae)
++ 	dwags_n_bpw_25ud12_l110ae_g	  =	alpha_n_bpw_25ud12_l110ae*(-4.0142114603824e-10*a1_n_bpw_25ud12_l110ae*comp1_n_bpw_25ud12_l110ae+2.79123308533611e-10*a2_n_bpw_25ud12_l110ae*comp2_n_bpw_25ud12_l110ae+-3.52018483513454e-10*a3_n_bpw_25ud12_l110ae*comp3_n_bpw_25ud12_l110ae+-3.82852117842454e-10*a4_n_bpw_25ud12_l110ae*comp4_n_bpw_25ud12_l110ae+5.20784818702234e-10*a5_n_bpw_25ud12_l110ae*comp5_n_bpw_25ud12_l110ae)
++ 	dpvsat_n_bpw_25ud12_l110ae_g	  =	alpha_n_bpw_25ud12_l110ae*(1.11310930516251e-11*a1_n_bpw_25ud12_l110ae*comp1_n_bpw_25ud12_l110ae+-1.45723844372329e-11*a2_n_bpw_25ud12_l110ae*comp2_n_bpw_25ud12_l110ae+2.62131975996339e-11*a3_n_bpw_25ud12_l110ae*comp3_n_bpw_25ud12_l110ae+2.13735195009957e-11*a4_n_bpw_25ud12_l110ae*comp4_n_bpw_25ud12_l110ae+-2.71103865124189e-11*a5_n_bpw_25ud12_l110ae*comp5_n_bpw_25ud12_l110ae)
++ 	dcj_n_bpw_25ud12_l110ae_g	  =	alpha_n_bpw_25ud12_l110ae*(-9.10406631725732e-6*a1_n_bpw_25ud12_l110ae*comp1_n_bpw_25ud12_l110ae+1.10805538181664e-5*a2_n_bpw_25ud12_l110ae*comp2_n_bpw_25ud12_l110ae+2.73733024258951e-6*a3_n_bpw_25ud12_l110ae*comp3_n_bpw_25ud12_l110ae+-1.05284382508908e-6*a4_n_bpw_25ud12_l110ae*comp4_n_bpw_25ud12_l110ae+1.14942597231263e-6*a5_n_bpw_25ud12_l110ae*comp5_n_bpw_25ud12_l110ae)
++ 	dcjsw_n_bpw_25ud12_l110ae_g	  =	alpha_n_bpw_25ud12_l110ae*(-1.31068628389177e-12*a1_n_bpw_25ud12_l110ae*comp1_n_bpw_25ud12_l110ae+1.59523551359307e-12*a2_n_bpw_25ud12_l110ae*comp2_n_bpw_25ud12_l110ae+3.94085574337627e-13*a3_n_bpw_25ud12_l110ae*comp3_n_bpw_25ud12_l110ae+-1.5157490208618e-13*a4_n_bpw_25ud12_l110ae*comp4_n_bpw_25ud12_l110ae+-9.38373286033116e-13*a5_n_bpw_25ud12_l110ae*comp5_n_bpw_25ud12_l110ae)
++ 	dcjswg_n_bpw_25ud12_l110ae_g	  =	alpha_n_bpw_25ud12_l110ae*(-2.51136208925649e-12*a1_n_bpw_25ud12_l110ae*comp1_n_bpw_25ud12_l110ae+3.0565773377728e-12*a2_n_bpw_25ud12_l110ae*comp2_n_bpw_25ud12_l110ae+7.55094169732009e-13*a3_n_bpw_25ud12_l110ae*comp3_n_bpw_25ud12_l110ae+-2.90427593132155e-13*a4_n_bpw_25ud12_l110ae*comp4_n_bpw_25ud12_l110ae+-1.02438557264787e-12*a5_n_bpw_25ud12_l110ae*comp5_n_bpw_25ud12_l110ae)
++ 	dcgdo_n_bpw_25ud12_l110ae_g	  =	alpha_n_bpw_25ud12_l110ae*(1.16657227294062e-13*a1_n_bpw_25ud12_l110ae*comp1_n_bpw_25ud12_l110ae+5.78806084838794e-14*a2_n_bpw_25ud12_l110ae*comp2_n_bpw_25ud12_l110ae+2.40544215646241e-14*a3_n_bpw_25ud12_l110ae*comp3_n_bpw_25ud12_l110ae+2.28054005236444e-14*a4_n_bpw_25ud12_l110ae*comp4_n_bpw_25ud12_l110ae+3.27867008424086e-14*a5_n_bpw_25ud12_l110ae*comp5_n_bpw_25ud12_l110ae)
++ 	dcgso_n_bpw_25ud12_l110ae_g	  =	alpha_n_bpw_25ud12_l110ae*(1.16657227294062e-13*a1_n_bpw_25ud12_l110ae*comp1_n_bpw_25ud12_l110ae+5.78806084838794e-14*a2_n_bpw_25ud12_l110ae*comp2_n_bpw_25ud12_l110ae+2.40544215646241e-14*a3_n_bpw_25ud12_l110ae*comp3_n_bpw_25ud12_l110ae+2.28054005236444e-14*a4_n_bpw_25ud12_l110ae*comp4_n_bpw_25ud12_l110ae+3.27867008424086e-14*a5_n_bpw_25ud12_l110ae*comp5_n_bpw_25ud12_l110ae)
++ 	dcgdl_n_bpw_25ud12_l110ae_g	  =	alpha_n_bpw_25ud12_l110ae*(2.51979610955174e-12*a1_n_bpw_25ud12_l110ae*comp1_n_bpw_25ud12_l110ae+1.2502211432518e-12*a2_n_bpw_25ud12_l110ae*comp2_n_bpw_25ud12_l110ae+5.19575505795886e-13*a3_n_bpw_25ud12_l110ae*comp3_n_bpw_25ud12_l110ae+4.92596651310725e-13*a4_n_bpw_25ud12_l110ae*comp4_n_bpw_25ud12_l110ae+-2.25061772819791e-13*a5_n_bpw_25ud12_l110ae*comp5_n_bpw_25ud12_l110ae)
++ 	dcgsl_n_bpw_25ud12_l110ae_g	  =	alpha_n_bpw_25ud12_l110ae*(2.51979610955174e-12*a1_n_bpw_25ud12_l110ae*comp1_n_bpw_25ud12_l110ae+1.2502211432518e-12*a2_n_bpw_25ud12_l110ae*comp2_n_bpw_25ud12_l110ae+5.19575505795886e-13*a3_n_bpw_25ud12_l110ae*comp3_n_bpw_25ud12_l110ae+4.92596651310725e-13*a4_n_bpw_25ud12_l110ae*comp4_n_bpw_25ud12_l110ae+-2.25061772819791e-13*a5_n_bpw_25ud12_l110ae*comp5_n_bpw_25ud12_l110ae)
++ 	djtsswd_n_bpw_25ud12_l110ae_g	  =	alpha_n_bpw_25ud12_l110ae*0.05*(2.92381019249323e-8*a1_n_bpw_25ud12_l110ae*comp1_n_bpw_25ud12_l110ae+-3.81458809319555e-8*a2_n_bpw_25ud12_l110ae*comp2_n_bpw_25ud12_l110ae+2.64228978775699e-8*a3_n_bpw_25ud12_l110ae*comp3_n_bpw_25ud12_l110ae+-1.35167019294821e-7*a4_n_bpw_25ud12_l110ae*comp4_n_bpw_25ud12_l110ae+-1.97080231464529e-10*a5_n_bpw_25ud12_l110ae*comp5_n_bpw_25ud12_l110ae)
++ 	djtsswgd_n_bpw_25ud12_l110ae_g_temp	  =	alpha_n_bpw_25ud12_l110ae*(3.39801708310148e-7*a1_n_bpw_25ud12_l110ae*comp1_n_bpw_25ud12_l110ae+-3.48369137224116e-7*a2_n_bpw_25ud12_l110ae*comp2_n_bpw_25ud12_l110ae+4.34923459667031e-7*a3_n_bpw_25ud12_l110ae*comp3_n_bpw_25ud12_l110ae+-1.11470087761041e-6*a4_n_bpw_25ud12_l110ae*comp4_n_bpw_25ud12_l110ae+1.38979873925108e-9*a5_n_bpw_25ud12_l110ae*comp5_n_bpw_25ud12_l110ae)
++ 	deta0_n_bpw_25ud12_l110ae_g	  =	alpha_n_bpw_25ud12_l110ae*(-0.000815153547782737*a1_n_bpw_25ud12_l110ae*comp1_n_bpw_25ud12_l110ae+0.0010688365619167*a2_n_bpw_25ud12_l110ae*comp2_n_bpw_25ud12_l110ae+-3.27372864625725e-5*a3_n_bpw_25ud12_l110ae*comp3_n_bpw_25ud12_l110ae+-0.000185223094901483*a4_n_bpw_25ud12_l110ae*comp4_n_bpw_25ud12_l110ae+0.00098070171267358*a5_n_bpw_25ud12_l110ae*comp5_n_bpw_25ud12_l110ae)
++ 	dpeta0_n_bpw_25ud12_l110ae_g	  =	alpha_n_bpw_25ud12_l110ae*(-3.09632799644105e-17*a1_n_bpw_25ud12_l110ae*comp1_n_bpw_25ud12_l110ae+3.3185348529889e-17*a2_n_bpw_25ud12_l110ae*comp2_n_bpw_25ud12_l110ae+-3.9246512973093e-18*a3_n_bpw_25ud12_l110ae*comp3_n_bpw_25ud12_l110ae+-2.20816376194823e-17*a4_n_bpw_25ud12_l110ae*comp4_n_bpw_25ud12_l110ae+1.82225509910275e-17*a5_n_bpw_25ud12_l110ae*comp5_n_bpw_25ud12_l110ae)
+//*
+parameters djtsswgd_n_bpw_25ud12_l110ae_g   = (djtsswgd_n_bpw_25ud12_l110ae_g_temp > 0) ? djtsswgd_n_bpw_25ud12_l110ae_g_temp : -1e-8/5*a1_n_bpw_25ud12_l110ae
+//*
+parameters ap1_n_25ud12_l110ae = 0
+parameters ap2_n_25ud12_l110ae = 0
+parameters ap3_n_25ud12_l110ae = 0
+parameters ap4_n_25ud12_l110ae = 0
+parameters ap5_n_25ud12_l110ae = 0
+statistics {
+    process {
+        vary ap1_n_25ud12_l110ae dist=gauss std=sigma/3
+        vary ap2_n_25ud12_l110ae dist=gauss std=sigma/3
+        vary ap3_n_25ud12_l110ae dist=gauss std=sigma/3
+        vary ap4_n_25ud12_l110ae dist=gauss std=sigma/3
+        vary ap5_n_25ud12_l110ae dist=gauss std=sigma/3
+    }
+}
+parameters
++ a1_n_25ud12_l110ae = ap1_n_25ud12_l110ae
+parameters
++ a2_n_25ud12_l110ae = ap2_n_25ud12_l110ae
++ a3_n_25ud12_l110ae = ap3_n_25ud12_l110ae
++ a4_n_25ud12_l110ae = ap4_n_25ud12_l110ae
++ a5_n_25ud12_l110ae = ap5_n_25ud12_l110ae
++ comp1_n_25ud12_l110ae	= 14.7021979349394
++ comp2_n_25ud12_l110ae	= 7.21340013324537
++ comp3_n_25ud12_l110ae	= 3.76153102288034
++ comp4_n_25ud12_l110ae	= 1.28961961968221
++ comp5_n_25ud12_l110ae	= 1.44541577964641e-14
++ 	dtox_n_25ud12_l110ae_g	  =	alpha_n_25ud12_l110ae*(-1.51187766573104e-11*a1_n_25ud12_l110ae*comp1_n_25ud12_l110ae+-7.50132685951075e-12*a2_n_25ud12_l110ae*comp2_n_25ud12_l110ae+-3.11745303477542e-12*a3_n_25ud12_l110ae*comp3_n_25ud12_l110ae+-2.95557990786441e-12*a4_n_25ud12_l110ae*comp4_n_25ud12_l110ae+2.53668000442002e-11*a5_n_25ud12_l110ae*comp5_n_25ud12_l110ae)
++ 	dxl_n_25ud12_l110ae_g	  =	alpha_n_25ud12_l110ae*(-1.74804785795115e-9*a1_n_25ud12_l110ae*comp1_n_25ud12_l110ae+2.12754803093235e-9*a2_n_25ud12_l110ae*comp2_n_25ud12_l110ae+5.25587589140616e-10*a3_n_25ud12_l110ae*comp3_n_25ud12_l110ae+-2.02153777122138e-10*a4_n_25ud12_l110ae*comp4_n_25ud12_l110ae+-4.07263653319932e-10*a5_n_25ud12_l110ae*comp5_n_25ud12_l110ae)
++ 	du0_n_25ud12_l110ae_g	  =	alpha_n_25ud12_l110ae*(0.000225867547518563*a1_n_25ud12_l110ae*comp1_n_25ud12_l110ae+-0.000160750415944279*a2_n_25ud12_l110ae*comp2_n_25ud12_l110ae+-0.00017522239477349*a3_n_25ud12_l110ae*comp3_n_25ud12_l110ae+4.48142625010094e-5*a4_n_25ud12_l110ae*comp4_n_25ud12_l110ae+0.000901629065387271*a5_n_25ud12_l110ae*comp5_n_25ud12_l110ae)
++ 	dvth0_n_25ud12_l110ae_g	  =	alpha_n_25ud12_l110ae*(-0.00561168504298508*a1_n_25ud12_l110ae*comp1_n_25ud12_l110ae+0.00263487884864038*a2_n_25ud12_l110ae*comp2_n_25ud12_l110ae+0.000143840809880464*a3_n_25ud12_l110ae*comp3_n_25ud12_l110ae+-0.000824696131039935*a4_n_25ud12_l110ae*comp4_n_25ud12_l110ae+-0.0105985021890463*a5_n_25ud12_l110ae*comp5_n_25ud12_l110ae)
++ 	drdsw_n_25ud12_l110ae_g	  =	alpha_n_25ud12_l110ae*(-18.8883062536845*a1_n_25ud12_l110ae*comp1_n_25ud12_l110ae+-6.46624487597327*a2_n_25ud12_l110ae*comp2_n_25ud12_l110ae+33.0867883056041*a3_n_25ud12_l110ae*comp3_n_25ud12_l110ae+20.2871808007497*a4_n_25ud12_l110ae*comp4_n_25ud12_l110ae+8.28352448138709*a5_n_25ud12_l110ae*comp5_n_25ud12_l110ae)
++ 	dxw_n_25ud12_l110ae_g	  =	alpha_n_25ud12_l110ae*(2.93143427245734e-9*a1_n_25ud12_l110ae*comp1_n_25ud12_l110ae+-9.01148181891553e-10*a2_n_25ud12_l110ae*comp2_n_25ud12_l110ae+-2.28675810985194e-9*a3_n_25ud12_l110ae*comp3_n_25ud12_l110ae+1.52182167288644e-10*a4_n_25ud12_l110ae*comp4_n_25ud12_l110ae+-3.37091916270173e-10*a5_n_25ud12_l110ae*comp5_n_25ud12_l110ae)
++ 	dnlx_n_25ud12_l110ae_g	  =	alpha_n_25ud12_l110ae*(-5.5042772145245e-9*a1_n_25ud12_l110ae*comp1_n_25ud12_l110ae+4.42818442094568e-10*a2_n_25ud12_l110ae*comp2_n_25ud12_l110ae+9.5736344459576e-10*a3_n_25ud12_l110ae*comp3_n_25ud12_l110ae+-1.50119730780461e-9*a4_n_25ud12_l110ae*comp4_n_25ud12_l110ae+1.28905035816831e-9*a5_n_25ud12_l110ae*comp5_n_25ud12_l110ae)
++ 	dk3_n_25ud12_l110ae_g	  =	alpha_n_25ud12_l110ae*(-0.0374136193801788*a1_n_25ud12_l110ae*comp1_n_25ud12_l110ae+0.019368074940152*a2_n_25ud12_l110ae*comp2_n_25ud12_l110ae+-0.0222058272034126*a3_n_25ud12_l110ae*comp3_n_25ud12_l110ae+-0.00666335042000567*a4_n_25ud12_l110ae*comp4_n_25ud12_l110ae+0.0081136732027266*a5_n_25ud12_l110ae*comp5_n_25ud12_l110ae)
++ 	dpvth0_n_25ud12_l110ae_g	  =	alpha_n_25ud12_l110ae*(-7.18628114155794e-16*a1_n_25ud12_l110ae*comp1_n_25ud12_l110ae+2.68188912654662e-16*a2_n_25ud12_l110ae*comp2_n_25ud12_l110ae+-8.29283710522657e-17*a3_n_25ud12_l110ae*comp3_n_25ud12_l110ae+-1.77394598253511e-16*a4_n_25ud12_l110ae*comp4_n_25ud12_l110ae+1.73843407260019e-16*a5_n_25ud12_l110ae*comp5_n_25ud12_l110ae)
++ 	dwwl_n_25ud12_l110ae_g	  =	alpha_n_25ud12_l110ae*(-2.03328868550635e-22*a1_n_25ud12_l110ae*comp1_n_25ud12_l110ae+-2.42143795024272e-23*a2_n_25ud12_l110ae*comp2_n_25ud12_l110ae+6.20148441766309e-23*a3_n_25ud12_l110ae*comp3_n_25ud12_l110ae+-1.01031225616402e-22*a4_n_25ud12_l110ae*comp4_n_25ud12_l110ae+-6.9168437148137e-23*a5_n_25ud12_l110ae*comp5_n_25ud12_l110ae)
++ 	dvsat_n_25ud12_l110ae_g	  =	alpha_n_25ud12_l110ae*(230.637346597575*a1_n_25ud12_l110ae*comp1_n_25ud12_l110ae+-49.9801257816633*a2_n_25ud12_l110ae*comp2_n_25ud12_l110ae+-490.249515981939*a3_n_25ud12_l110ae*comp3_n_25ud12_l110ae+372.556118122991*a4_n_25ud12_l110ae*comp4_n_25ud12_l110ae+-39.9246925451117*a5_n_25ud12_l110ae*comp5_n_25ud12_l110ae)
++ 	dpvsat_n_25ud12_l110ae_g	  =	alpha_n_25ud12_l110ae*(-3.83228852770399e-11*a1_n_25ud12_l110ae*comp1_n_25ud12_l110ae+2.23253687067843e-11*a2_n_25ud12_l110ae*comp2_n_25ud12_l110ae+-9.01367109500188e-11*a3_n_25ud12_l110ae*comp3_n_25ud12_l110ae+-1.21221962219726e-11*a4_n_25ud12_l110ae*comp4_n_25ud12_l110ae+9.80020690808766e-12*a5_n_25ud12_l110ae*comp5_n_25ud12_l110ae)
++ 	dcj_n_25ud12_l110ae_g	  =	alpha_n_25ud12_l110ae*(-9.10406631725732e-6*a1_n_25ud12_l110ae*comp1_n_25ud12_l110ae+1.10805538181664e-5*a2_n_25ud12_l110ae*comp2_n_25ud12_l110ae+2.73733024258951e-6*a3_n_25ud12_l110ae*comp3_n_25ud12_l110ae+-1.05284382508908e-6*a4_n_25ud12_l110ae*comp4_n_25ud12_l110ae+1.14942597231263e-6*a5_n_25ud12_l110ae*comp5_n_25ud12_l110ae)
++ 	dcjsw_n_25ud12_l110ae_g	  =	alpha_n_25ud12_l110ae*(-1.31068628389177e-12*a1_n_25ud12_l110ae*comp1_n_25ud12_l110ae+1.59523551359307e-12*a2_n_25ud12_l110ae*comp2_n_25ud12_l110ae+3.94085574337627e-13*a3_n_25ud12_l110ae*comp3_n_25ud12_l110ae+-1.5157490208618e-13*a4_n_25ud12_l110ae*comp4_n_25ud12_l110ae+-9.38373286033116e-13*a5_n_25ud12_l110ae*comp5_n_25ud12_l110ae)
++ 	dcjswg_n_25ud12_l110ae_g	  =	alpha_n_25ud12_l110ae*(-2.51136208925649e-12*a1_n_25ud12_l110ae*comp1_n_25ud12_l110ae+3.0565773377728e-12*a2_n_25ud12_l110ae*comp2_n_25ud12_l110ae+7.55094169732009e-13*a3_n_25ud12_l110ae*comp3_n_25ud12_l110ae+-2.90427593132155e-13*a4_n_25ud12_l110ae*comp4_n_25ud12_l110ae+-1.02438557264787e-12*a5_n_25ud12_l110ae*comp5_n_25ud12_l110ae)
++ 	dcgdo_n_25ud12_l110ae_g	  =	alpha_n_25ud12_l110ae*(1.16657227294062e-13*a1_n_25ud12_l110ae*comp1_n_25ud12_l110ae+5.78806084838794e-14*a2_n_25ud12_l110ae*comp2_n_25ud12_l110ae+2.40544215646241e-14*a3_n_25ud12_l110ae*comp3_n_25ud12_l110ae+2.28054005236444e-14*a4_n_25ud12_l110ae*comp4_n_25ud12_l110ae+3.27867008424086e-14*a5_n_25ud12_l110ae*comp5_n_25ud12_l110ae)
++ 	dcgso_n_25ud12_l110ae_g	  =	alpha_n_25ud12_l110ae*(1.16657227294062e-13*a1_n_25ud12_l110ae*comp1_n_25ud12_l110ae+5.78806084838794e-14*a2_n_25ud12_l110ae*comp2_n_25ud12_l110ae+2.40544215646241e-14*a3_n_25ud12_l110ae*comp3_n_25ud12_l110ae+2.28054005236444e-14*a4_n_25ud12_l110ae*comp4_n_25ud12_l110ae+3.27867008424086e-14*a5_n_25ud12_l110ae*comp5_n_25ud12_l110ae)
++ 	dags_n_25ud12_l110ae_g	  =	alpha_n_25ud12_l110ae*(-0.00367710213026597*a1_n_25ud12_l110ae*comp1_n_25ud12_l110ae+0.00220401241101148*a2_n_25ud12_l110ae*comp2_n_25ud12_l110ae+-0.00623589664862097*a3_n_25ud12_l110ae*comp3_n_25ud12_l110ae+-0.0044468893084379*a4_n_25ud12_l110ae*comp4_n_25ud12_l110ae+-0.00121812378364108*a5_n_25ud12_l110ae*comp5_n_25ud12_l110ae)
++ 	deta0_n_25ud12_l110ae_g	  =	alpha_n_25ud12_l110ae*(-0.000317771112424299*a1_n_25ud12_l110ae*comp1_n_25ud12_l110ae+0.000612220236482899*a2_n_25ud12_l110ae*comp2_n_25ud12_l110ae+0.000147968284388776*a3_n_25ud12_l110ae*comp3_n_25ud12_l110ae+-0.000165430901634867*a4_n_25ud12_l110ae*comp4_n_25ud12_l110ae+0.000688022141814994*a5_n_25ud12_l110ae*comp5_n_25ud12_l110ae)
++ 	dcgdl_n_25ud12_l110ae_g	  =	alpha_n_25ud12_l110ae*(0*a1_n_25ud12_l110ae*comp1_n_25ud12_l110ae+0*a2_n_25ud12_l110ae*comp2_n_25ud12_l110ae+0*a3_n_25ud12_l110ae*comp3_n_25ud12_l110ae+0*a4_n_25ud12_l110ae*comp4_n_25ud12_l110ae+0*a5_n_25ud12_l110ae*comp5_n_25ud12_l110ae)
++ 	dcgsl_n_25ud12_l110ae_g	  =	alpha_n_25ud12_l110ae*(0*a1_n_25ud12_l110ae*comp1_n_25ud12_l110ae+0*a2_n_25ud12_l110ae*comp2_n_25ud12_l110ae+0*a3_n_25ud12_l110ae*comp3_n_25ud12_l110ae+0*a4_n_25ud12_l110ae*comp4_n_25ud12_l110ae+0*a5_n_25ud12_l110ae*comp5_n_25ud12_l110ae)
++ 	dwags_n_25ud12_l110ae_g	  =	alpha_n_25ud12_l110ae*(0*a1_n_25ud12_l110ae*comp1_n_25ud12_l110ae+0*a2_n_25ud12_l110ae*comp2_n_25ud12_l110ae+0*a3_n_25ud12_l110ae*comp3_n_25ud12_l110ae+0*a4_n_25ud12_l110ae*comp4_n_25ud12_l110ae+0*a5_n_25ud12_l110ae*comp5_n_25ud12_l110ae)
++ 	dwb0_n_25ud12_l110ae_g	  =	alpha_n_25ud12_l110ae*(8.89721799176767e-16*a1_n_25ud12_l110ae*comp1_n_25ud12_l110ae+-2.28478020588455e-16*a2_n_25ud12_l110ae*comp2_n_25ud12_l110ae+2.21428697411375e-15*a3_n_25ud12_l110ae*comp3_n_25ud12_l110ae+-1.96288547618375e-17*a4_n_25ud12_l110ae*comp4_n_25ud12_l110ae+-9.48367287805116e-17*a5_n_25ud12_l110ae*comp5_n_25ud12_l110ae)
++ 	dwvsat_n_25ud12_l110ae_g	  =	alpha_n_25ud12_l110ae*(0*a1_n_25ud12_l110ae*comp1_n_25ud12_l110ae+0*a2_n_25ud12_l110ae*comp2_n_25ud12_l110ae+0*a3_n_25ud12_l110ae*comp3_n_25ud12_l110ae+0*a4_n_25ud12_l110ae*comp4_n_25ud12_l110ae+0*a5_n_25ud12_l110ae*comp5_n_25ud12_l110ae)
++ 	db0_n_25ud12_l110ae_g	  =	alpha_n_25ud12_l110ae*(3.75950252552648e-9*a1_n_25ud12_l110ae*comp1_n_25ud12_l110ae+5.75184599666949e-10*a2_n_25ud12_l110ae*comp2_n_25ud12_l110ae+2.91094514358859e-9*a3_n_25ud12_l110ae*comp3_n_25ud12_l110ae+-5.96870912692265e-10*a4_n_25ud12_l110ae*comp4_n_25ud12_l110ae+5.98954507405127e-9*a5_n_25ud12_l110ae*comp5_n_25ud12_l110ae)
++ 	djtsswd_n_25ud12_l110ae_g	  =	alpha_n_25ud12_l110ae*0.05*(0*a1_n_25ud12_l110ae*comp1_n_25ud12_l110ae+0*a2_n_25ud12_l110ae*comp2_n_25ud12_l110ae+0*a3_n_25ud12_l110ae*comp3_n_25ud12_l110ae+0*a4_n_25ud12_l110ae*comp4_n_25ud12_l110ae+0*a5_n_25ud12_l110ae*comp5_n_25ud12_l110ae)
++ 	djtsswgd_n_25ud12_l110ae_g_temp	  =	alpha_n_25ud12_l110ae*(3.49696761788842e-7*a1_n_25ud12_l110ae*comp1_n_25ud12_l110ae+-4.18693501754306e-7*a2_n_25ud12_l110ae*comp2_n_25ud12_l110ae+3.57401077462953e-7*a3_n_25ud12_l110ae*comp3_n_25ud12_l110ae+-1.41348804499256e-6*a4_n_25ud12_l110ae*comp4_n_25ud12_l110ae+-3.90637170872775e-8*a5_n_25ud12_l110ae*comp5_n_25ud12_l110ae)
+//*
+parameters djtsswgd_n_25ud12_l110ae_g   = (djtsswgd_n_25ud12_l110ae_g_temp > 0) ? djtsswgd_n_25ud12_l110ae_g_temp : -1e-7/5*a1_n_25ud12_l110ae
+//*
+parameters ap1_p_25ud12_l110ae = 0
+parameters ap2_p_25ud12_l110ae = 0
+parameters ap3_p_25ud12_l110ae = 0
+parameters ap4_p_25ud12_l110ae = 0
+parameters ap5_p_25ud12_l110ae = 0
+statistics {
+    process {
+        vary ap1_p_25ud12_l110ae dist=gauss std=sigma/3
+        vary ap2_p_25ud12_l110ae dist=gauss std=sigma/3
+        vary ap3_p_25ud12_l110ae dist=gauss std=sigma/3
+        vary ap4_p_25ud12_l110ae dist=gauss std=sigma/3
+        vary ap5_p_25ud12_l110ae dist=gauss std=sigma/3
+    }
+}
+parameters
++ a1_p_25ud12_l110ae = ap1_p_25ud12_l110ae
+parameters
++ a2_p_25ud12_l110ae = ap2_p_25ud12_l110ae
++ a3_p_25ud12_l110ae = ap3_p_25ud12_l110ae
++ a4_p_25ud12_l110ae = ap4_p_25ud12_l110ae
++ a5_p_25ud12_l110ae = ap5_p_25ud12_l110ae
++ comp1_p_25ud12_l110ae	= 14.7021979349394
++ comp2_p_25ud12_l110ae	= 7.21340013324537
++ comp3_p_25ud12_l110ae	= 3.76153102288034
++ comp4_p_25ud12_l110ae	= 1.28961961968221
++ comp5_p_25ud12_l110ae	= 1.44541577964641e-14
++ 	dtox_p_25ud12_l110ae_g	  =	alpha_p_25ud12_l110ae*(-1.02658360018775e-11*a1_p_25ud12_l110ae*comp1_p_25ud12_l110ae+-5.09349354658141e-12*a2_p_25ud12_l110ae*comp2_p_25ud12_l110ae+-2.11678909768683e-12*a3_p_25ud12_l110ae*comp3_p_25ud12_l110ae+-2.00687524608066e-12*a4_p_25ud12_l110ae*comp4_p_25ud12_l110ae+-2.39158608425093e-11*a5_p_25ud12_l110ae*comp5_p_25ud12_l110ae)
++ 	dxl_p_25ud12_l110ae_g	  =	alpha_p_25ud12_l110ae*(-3.50575199035446e-10*a1_p_25ud12_l110ae*comp1_p_25ud12_l110ae+-1.17222754484848e-9*a2_p_25ud12_l110ae*comp2_p_25ud12_l110ae+-3.67631235563864e-10*a3_p_25ud12_l110ae*comp3_p_25ud12_l110ae+-1.15058611815108e-10*a4_p_25ud12_l110ae*comp4_p_25ud12_l110ae+-3.50252311022059e-11*a5_p_25ud12_l110ae*comp5_p_25ud12_l110ae)
++ 	du0_p_25ud12_l110ae_g	  =	alpha_p_25ud12_l110ae*(0.000117522441814599*a1_p_25ud12_l110ae*comp1_p_25ud12_l110ae+0.000219871058619812*a2_p_25ud12_l110ae*comp2_p_25ud12_l110ae+2.79668429784752e-5*a3_p_25ud12_l110ae*comp3_p_25ud12_l110ae+2.55618720601882e-5*a4_p_25ud12_l110ae*comp4_p_25ud12_l110ae+-0.00017422083957657*a5_p_25ud12_l110ae*comp5_p_25ud12_l110ae)
++ 	dvth0_p_25ud12_l110ae_g	  =	alpha_p_25ud12_l110ae*(0.00399807407035379*a1_p_25ud12_l110ae*comp1_p_25ud12_l110ae+0.00684365663782967*a2_p_25ud12_l110ae*comp2_p_25ud12_l110ae+0.00265396612011841*a3_p_25ud12_l110ae*comp3_p_25ud12_l110ae+0.00101534849872269*a4_p_25ud12_l110ae*comp4_p_25ud12_l110ae+-8.90685703496871e-5*a5_p_25ud12_l110ae*comp5_p_25ud12_l110ae)
++ 	drdsw_p_25ud12_l110ae_g	  =	alpha_p_25ud12_l110ae*(-37.4309095048686*a1_p_25ud12_l110ae*comp1_p_25ud12_l110ae+-40.6314093740737*a2_p_25ud12_l110ae*comp2_p_25ud12_l110ae+77.5277002738207*a3_p_25ud12_l110ae*comp3_p_25ud12_l110ae+9.54874261562664*a4_p_25ud12_l110ae*comp4_p_25ud12_l110ae+16.8416549318128*a5_p_25ud12_l110ae*comp5_p_25ud12_l110ae)
++ 	dwu0_p_25ud12_l110ae_g	  =	alpha_p_25ud12_l110ae*(4.81898566420575e-12*a1_p_25ud12_l110ae*comp1_p_25ud12_l110ae+7.84221122958187e-12*a2_p_25ud12_l110ae*comp2_p_25ud12_l110ae+-3.62624023734937e-12*a3_p_25ud12_l110ae*comp3_p_25ud12_l110ae+1.22948092371784e-12*a4_p_25ud12_l110ae*comp4_p_25ud12_l110ae+-2.23525248904336e-12*a5_p_25ud12_l110ae*comp5_p_25ud12_l110ae)
++ 	dlvth0_p_25ud12_l110ae_g	  =	alpha_p_25ud12_l110ae*(1.06822937099342e-9*a1_p_25ud12_l110ae*comp1_p_25ud12_l110ae+1.7041534427704e-9*a2_p_25ud12_l110ae*comp2_p_25ud12_l110ae+5.21309177576889e-10*a3_p_25ud12_l110ae*comp3_p_25ud12_l110ae+3.25455298416418e-10*a4_p_25ud12_l110ae*comp4_p_25ud12_l110ae+7.40205227795351e-10*a5_p_25ud12_l110ae*comp5_p_25ud12_l110ae)
++ 	dwvth0_p_25ud12_l110ae_g	  =	alpha_p_25ud12_l110ae*(1.68754869569913e-10*a1_p_25ud12_l110ae*comp1_p_25ud12_l110ae+2.86255586986534e-10*a2_p_25ud12_l110ae*comp2_p_25ud12_l110ae+1.77885712567274e-10*a3_p_25ud12_l110ae*comp3_p_25ud12_l110ae+4.636769565301e-11*a4_p_25ud12_l110ae*comp4_p_25ud12_l110ae+-1.82777098623352e-11*a5_p_25ud12_l110ae*comp5_p_25ud12_l110ae)
++ 	dpvth0_p_25ud12_l110ae_g	  =	alpha_p_25ud12_l110ae*(2.13469300051634e-16*a1_p_25ud12_l110ae*comp1_p_25ud12_l110ae+3.72593427503736e-16*a2_p_25ud12_l110ae*comp2_p_25ud12_l110ae+1.19278407292179e-16*a3_p_25ud12_l110ae*comp3_p_25ud12_l110ae+6.28194300829137e-17*a4_p_25ud12_l110ae*comp4_p_25ud12_l110ae+-2.96677506069042e-17*a5_p_25ud12_l110ae*comp5_p_25ud12_l110ae)
++ 	dprdsw_p_25ud12_l110ae_g	  =	alpha_p_25ud12_l110ae*(-2.01921037320981e-12*a1_p_25ud12_l110ae*comp1_p_25ud12_l110ae+-1.98732624953227e-12*a2_p_25ud12_l110ae*comp2_p_25ud12_l110ae+5.46896244225915e-12*a3_p_25ud12_l110ae*comp3_p_25ud12_l110ae+1.66122809745361e-12*a4_p_25ud12_l110ae*comp4_p_25ud12_l110ae+-1.0810527094994e-13*a5_p_25ud12_l110ae*comp5_p_25ud12_l110ae)
++ 	dags_p_25ud12_l110ae_g	  =	alpha_p_25ud12_l110ae*(-0.0211316097710535*a1_p_25ud12_l110ae*comp1_p_25ud12_l110ae+-0.0361797505176227*a2_p_25ud12_l110ae*comp2_p_25ud12_l110ae+-0.00874885414977754*a3_p_25ud12_l110ae*comp3_p_25ud12_l110ae+-0.00538709648431408*a4_p_25ud12_l110ae*comp4_p_25ud12_l110ae+0.00286992163258654*a5_p_25ud12_l110ae*comp5_p_25ud12_l110ae)
++ 	dlags_p_25ud12_l110ae_g	  =	alpha_p_25ud12_l110ae*(-2.55583869035243e-8*a1_p_25ud12_l110ae*comp1_p_25ud12_l110ae+-5.26989622687751e-8*a2_p_25ud12_l110ae*comp2_p_25ud12_l110ae+-2.78961488150508e-8*a3_p_25ud12_l110ae*comp3_p_25ud12_l110ae+-7.97844011155765e-9*a4_p_25ud12_l110ae*comp4_p_25ud12_l110ae+4.08785890868598e-9*a5_p_25ud12_l110ae*comp5_p_25ud12_l110ae)
++ 	dwags_p_25ud12_l110ae_g	  =	alpha_p_25ud12_l110ae*(-1.36669711311071e-9*a1_p_25ud12_l110ae*comp1_p_25ud12_l110ae+-1.8937924640718e-9*a2_p_25ud12_l110ae*comp2_p_25ud12_l110ae+1.84449240626277e-9*a3_p_25ud12_l110ae*comp3_p_25ud12_l110ae+4.89625321682543e-10*a4_p_25ud12_l110ae*comp4_p_25ud12_l110ae+3.73283767865338e-10*a5_p_25ud12_l110ae*comp5_p_25ud12_l110ae)
++ 	dpags_p_25ud12_l110ae_g	  =	alpha_p_25ud12_l110ae*(5.57602802798345e-15*a1_p_25ud12_l110ae*comp1_p_25ud12_l110ae+4.30008888264542e-15*a2_p_25ud12_l110ae*comp2_p_25ud12_l110ae+-2.35356940108776e-14*a3_p_25ud12_l110ae*comp3_p_25ud12_l110ae+-7.65173030129751e-15*a4_p_25ud12_l110ae*comp4_p_25ud12_l110ae+-3.36319673524792e-16*a5_p_25ud12_l110ae*comp5_p_25ud12_l110ae)
++ 	dcgdo_p_25ud12_l110ae_g	  =	alpha_p_25ud12_l110ae*(4.40192951684774e-13*a1_p_25ud12_l110ae*comp1_p_25ud12_l110ae+3.21589610628693e-13*a2_p_25ud12_l110ae*comp2_p_25ud12_l110ae+-1.21541606605197e-12*a3_p_25ud12_l110ae*comp3_p_25ud12_l110ae+-7.85019806482013e-13*a4_p_25ud12_l110ae*comp4_p_25ud12_l110ae+-1.25878462484786e-12*a5_p_25ud12_l110ae*comp5_p_25ud12_l110ae)
++ 	dcgso_p_25ud12_l110ae_g	  =	alpha_p_25ud12_l110ae*(8.67929771067821e-13*a1_p_25ud12_l110ae*comp1_p_25ud12_l110ae+4.30631727120063e-13*a2_p_25ud12_l110ae*comp2_p_25ud12_l110ae+1.78964896440805e-13*a3_p_25ud12_l110ae*comp3_p_25ud12_l110ae+1.69672179895916e-13*a4_p_25ud12_l110ae*comp4_p_25ud12_l110ae+-7.75212773045948e-14*a5_p_25ud12_l110ae*comp5_p_25ud12_l110ae)
++ 	dcgdl_p_25ud12_l110ae_g	  =	alpha_p_25ud12_l110ae*(2.02610272364327e-12*a1_p_25ud12_l110ae*comp1_p_25ud12_l110ae+1.00527040814802e-12*a2_p_25ud12_l110ae*comp2_p_25ud12_l110ae+4.17777193734392e-13*a3_p_25ud12_l110ae*comp3_p_25ud12_l110ae+3.96084196294657e-13*a4_p_25ud12_l110ae*comp4_p_25ud12_l110ae+4.9908888052903e-13*a5_p_25ud12_l110ae*comp5_p_25ud12_l110ae)
++ 	dcgsl_p_25ud12_l110ae_g	  =	alpha_p_25ud12_l110ae*(2.02610272364327e-12*a1_p_25ud12_l110ae*comp1_p_25ud12_l110ae+1.00527040814802e-12*a2_p_25ud12_l110ae*comp2_p_25ud12_l110ae+4.17777193734392e-13*a3_p_25ud12_l110ae*comp3_p_25ud12_l110ae+3.96084196294657e-13*a4_p_25ud12_l110ae*comp4_p_25ud12_l110ae+4.9908888052903e-13*a5_p_25ud12_l110ae*comp5_p_25ud12_l110ae)
++ 	dcj_p_25ud12_l110ae_g	  =	alpha_p_25ud12_l110ae*(-6.75355074925864e-6*a1_p_25ud12_l110ae*comp1_p_25ud12_l110ae+-2.25820258694701e-5*a2_p_25ud12_l110ae*comp2_p_25ud12_l110ae+-7.08212164814939e-6*a3_p_25ud12_l110ae*comp3_p_25ud12_l110ae+-2.21651210972862e-6*a4_p_25ud12_l110ae*comp4_p_25ud12_l110ae+1.75702733875492e-5*a5_p_25ud12_l110ae*comp5_p_25ud12_l110ae)
++ 	dcjsw_p_25ud12_l110ae_g	  =	alpha_p_25ud12_l110ae*(-7.37960793969613e-13*a1_p_25ud12_l110ae*comp1_p_25ud12_l110ae+-2.46753898190606e-12*a2_p_25ud12_l110ae*comp2_p_25ud12_l110ae+-7.73863750861933e-13*a3_p_25ud12_l110ae*comp3_p_25ud12_l110ae+-2.42198377870802e-13*a4_p_25ud12_l110ae*comp4_p_25ud12_l110ae+-1.98697237155978e-12*a5_p_25ud12_l110ae*comp5_p_25ud12_l110ae)
++ 	dcjswg_p_25ud12_l110ae_g	  =	alpha_p_25ud12_l110ae*(-2.36610213333003e-12*a1_p_25ud12_l110ae*comp1_p_25ud12_l110ae+-7.91159814569138e-12*a2_p_25ud12_l110ae*comp2_p_25ud12_l110ae+-2.48121673506763e-12*a3_p_25ud12_l110ae*comp3_p_25ud12_l110ae+-7.76553582862539e-13*a4_p_25ud12_l110ae*comp4_p_25ud12_l110ae+-3.02006014999428e-12*a5_p_25ud12_l110ae*comp5_p_25ud12_l110ae)
++ 	djtsswgd_p_25ud12_l110ae_g_temp	  =	alpha_p_25ud12_l110ae*(7.44982134431543e-8*a1_p_25ud12_l110ae*comp1_p_25ud12_l110ae+2.38619248607216e-7*a2_p_25ud12_l110ae*comp2_p_25ud12_l110ae+2.10571907247864e-7*a3_p_25ud12_l110ae*comp3_p_25ud12_l110ae+-4.97434222688024e-7*a4_p_25ud12_l110ae*comp4_p_25ud12_l110ae+4.7366374573175e-10*a5_p_25ud12_l110ae*comp5_p_25ud12_l110ae)
+//*
+parameters djtsswgd_p_25ud12_l110ae_g   = (djtsswgd_p_25ud12_l110ae_g_temp > 0) ? djtsswgd_p_25ud12_l110ae_g_temp : -1.3e-7/5*a1_p_25ud12_l110ae
+//*
+//.unprot

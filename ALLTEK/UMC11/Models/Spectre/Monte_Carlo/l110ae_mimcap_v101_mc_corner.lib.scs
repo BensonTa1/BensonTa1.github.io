@@ -1,0 +1,26 @@
+simulator lang=spectre insensitive=yes
+library mylib
+
+section mc
+include "l110ae_mimcap_v101_mc_statistical_p.mdl.scs"
+include "l110ae_mimcap_v101_mc_statistical_m.mdl.scs"
+include "l110ae_mimcap_v101_mc.mdl.scs"
+endsection mc
+
+section tt
+include "l110ae_mimcap_v101_mc_statistical_m.mdl.scs"
+include "l110ae_mimcap_v101_mc.lib.scs" section=tt
+endsection tt
+
+section ss
+include "l110ae_mimcap_v101_mc_statistical_m.mdl.scs"
+include "l110ae_mimcap_v101_mc.lib.scs" section=ss
+endsection ss
+
+section ff
+include "l110ae_mimcap_v101_mc_statistical_m.mdl.scs"
+include "l110ae_mimcap_v101_mc.lib.scs" section=ff
+endsection ff
+
+endlibrary mylib
+

@@ -1,0 +1,568 @@
+//******************************************************************************** 
+//* Property of UMC 
+//* Unauthorized reproduction, modification and/or distribution are strictly 
+//* prohibited. 
+//* This product is protected under copyright law and trade secret law. 
+//* This model card may not be sent in any form outside of UMC without 
+//* the written consent of the UMC ATD Modeling Division. 
+//******************************************************************************** 
+//* Process:  0.11 um Logic and Mixed-Mode Metal Metal Capacitor Al Enhancement Process RESISTOR Model
+//* Device Type:  Resistor 
+//* Simulator: Spectre
+//* Model Version:V061 
+//* Model Features: 
+//*     Global model:  N/A 
+//*     Igate model:  N/A 
+//*     GIDL model: N/A 
+//*     Substrate current model: N/A 
+//*     Flicker noise: N/A 
+//*     LOD model: N/A 
+//*     RF model: N/A 
+//*     Well proximity effect: N/A 
+//******************************************************************************** 
+//* Revision History: 
+//* <Revision 1> 
+//* Version : t.0_p1 
+//* Date    : 2009/05/05
+//* Author  : Kelly Pao
+//* Remark  : (1) Original released.  
+//* <Revision 2>    
+//* Version : t.1_p1    
+//* Date  : 2009/05/20  
+//* Author  : Kelly Pao   
+//* Remark  : (1) Fixed ddw_rnpd_l110e form -1.6000e-008 to -8.4000e-008 of the res_max,
+//*               the drend_rnpd_l110e  -1.9000e-5 to -2.2000e-005 of  res_min
+//*           (2) Added w*0.9 and l*0.9 in all resistor formulas.
+//* <Revision 3>    
+//* Version : t.2_p1    
+//* Date  : 2009/12/11  
+//* Author  : Laney Fan
+//* Remark  :(1) Salicide N+ diffusion ,Salicide P+ diffusion ,salicide N+ poly ,
+//*               salicide P+ poly and NWell resistors are copied from  l110e_res_v031
+//* <Revision 4>    
+//* Version : 0.1_p1    
+//* Date  : 2010/01/08 
+//* Author  : Jian Zhi
+//* Remark  : 1. Modify vcr1 and vcr2 parameters in the Non-salicide N+Poly, Non-salicide P+Poly, Non-salicide N+Diffusion,
+//*              Non-salicide P+Diffusion and Non-salicide HR Poly devices.
+//*           2. Modify didoe parameters in the Non-salicide N+Diffusion, Non-salicide P+Diffusion,  Salicide N+ diffusion,
+//*              Salicide P+ diffusion and  NWell resistors. 
+//*           3. New DSM version definition from 2009/11/30.
+//*
+//* <Revision 5>    
+//* Version : 0.2_p1    
+//* Date  : 2010/07/07 
+//* Author  : Jian Zhi
+//* Remark  : 1. Modify rend and dw in the Non-salicide N+Poly, Non-salicide P+Poly, Non-salicide N+Diffusion,
+//*              Non-salicide P+Diffusion and Non-salicide HR Poly devices.
+//*
+//* <Revision 6>    
+//* Version : 0.3_p1    
+//* Date  : 2010/11/03 
+//* Author  : Shih-Hsin Yeh
+//* Remark  : 1. Add M1~M6 resistor models.
+//*           2. Revise w and l to (w*0.9) and (l*0.9) in salicide N+/P+ poly resistor models.
+//*
+//* <Revision 7>    
+//* Version : 0.4_p1    
+//* Date  : 2014/11/18
+//* Author  : Bing Chang Wu
+//* Remark  : 1. Revise BEOL metal resistor models as r_m1, r_1x, r_2x .
+//*
+//* <Revision 8>    
+//* Version : 0.5_p1    
+//* Date  : 2015/1/28
+//* Author  : Bing Chang Wu
+//* Remark  : 1. Update r_2x Rs from 0.04 to 0.035 ohm/sq.
+//*           2. Fixed the nodes of rnwell_mml110e.
+//* <Revision 9>    
+//* Version : 0.6_p1    
+//* Date  : 2016/07/15
+//* Author  : Tzu Kang Hsiung
+//* Remark  : 1.	Add  flicker noise model  of  rnnpo_l110e , rnppo_l110e , rnhr1000_l110e.
+//*           2.	Revise diode  parameters  according  to  l110ae_diode_v061 .
+//*           3.  Revise voltage coefficient of rnnd_l110e , rnpd_l110e according to the original measurement 
+//*               data.
+//*           4.	Add  Model  equation  and  Parameter  into  the  document .
+//*                   
+//*
+//******************************************************************************** 
+//* Temperature range: -55c ~ 135c ; nominal temperature  =  25c. 
+//***************************** Start of Model Card ****************************** 
+//*
+//*
+//****************************************************************************************************************  
+//*             Non-salicide N+Poly resistor subcircuit netlist for typical case                                * 
+//**************************************************************************************************************** 
+//*  Process: 0.11 um Logic and Mixed-Mode Metal Metal Capacitor Al Enhancement Process RESISTOR Model
+//*  Non-salicide N+Poly resistor  is copied from l110eal_res_vt11  
+//* Temperature range: -55c ~ 135c ; nominal temperature  =  25c.         
+//*
+simulator lang=spectre insensitive=yes
+inline subckt rnnpo_l110e ( n1 n2 well )
+parameters w  =  1.00e-05  l  =  1.00e-05 
+parameters rend  =  1.5e-5+drend_rnnpo_l110e rs  =  113+drs_rnnpo_l110e dw  =  -7.05e-8+ddw_rnnpo_l110e 
+parameters vcr1  =  0   vcr2  =  -0.0258e-12  tc1  =  1.6e-4  tc2  =  2.81e-7  
+parameters tcoef   =  1.0+tc1*(temp-25.0)+tc2*pow((temp-25.0),2)    
++ca     =   1.1524e-04
+
+parameters jmax=5.0e-4
+parameters i1=jmax*w*1e6
+parameters r=((2*rend/(w*0.9+dw))+(rs*l*0.9/(w*0.9+dw)))
+parameters vmax=i1*r
+
+c1 ( n1 well ) capacitor c=ca*(w*0.9+dw)*l*0.9/2
+rnnpo_l110e ( n1 n2 ) res2 r=((2*rend/(w*0.9+dw))+(rs*l*0.9/(w*0.9+dw)))*((1.0+(vcr1*v(n1,n2)/(l*0.9)))+((vcr2*pow((v(n1,n2))/(l*0.9),2))))*tcoef  bv_max=vmax
+//****************************************************************************************************************
+model res2 resistor 
++ w=w l=l 
++kf=1.37e-022   af=1.95000e+000 fexp=9.35e-001 wdexp=0.95500e+000 ldexp=1.0100e+000  
+
+c2 ( n2 well ) capacitor c=ca*(w*0.9+dw)*l*0.9/2
+
+
+ends rnnpo_l110e
+
+//*
+//*
+//****************************************************************************************************************  
+//*             Non-salicide P+Poly resistor subcircuit netlist for typical case                                * 
+//****************************************************************************************************************
+//*  Process: 0.11 um Logic and Mixed-Mode Metal Metal Capacitor Al Enhancement Process RESISTOR Model 
+//*  Non-salicide P+Poly resistor  is copied from l110eal_res_vt11            
+//*  Temperature range: -55c ~ 135c ; nominal temperature  =  25c.                     
+//* 
+inline subckt rnppo_l110e ( n1 n2 well )
+parameters w  =  1.00e-05  l  =  1.00e-05 
+parameters rend  =  3.65e-5+drend_rnppo_l110e rs  =  239+drs_rnppo_l110e dw  =  -4.05e-8+ddw_rnppo_l110e 
+parameters vcr1  =  0   vcr2  =  0.0586e-12  tc1  =  9.67e-5  tc2  =  5.60e-7  
+parameters tcoef   =  1.0+tc1*(temp-25.0)+tc2*pow((temp-25.0),2)  
++ca     =   1.1524e-04
+
+parameters jmax=5.0e-4
+parameters i1=jmax*w*1e6
+parameters r=((2*rend/(w*0.9+dw))+(rs*l*0.9/(w*0.9+dw)))
+parameters vmax=i1*r
+
+c1 ( n1 well ) capacitor c=ca*(w*0.9+dw)*l*0.9/2
+rnppo_l110e ( n1 n2 ) res2 r=((2*rend/(w*0.9+dw))+(rs*l*0.9/(w*0.9+dw)))*((1.0+(vcr1*v(n1,n2)/(l*0.9)))+((vcr2*pow((v(n1,n2))/(l*0.9),2))))*tcoef  bv_max=vmax
+//****************************************************************************************************************
+model res2 resistor 
++ w=w l=l 
++kf=3.25e-023   af=1.95000e+000 fexp=9.3000e-001 wdexp=0.96500e+000 ldexp=1.0100e+000   
+
+
+c2 ( n2 well ) capacitor c=ca*(w*0.9+dw)*l*0.9/2
+
+
+ends rnppo_l110e
+//*
+//*
+//****************************************************************************************************************  
+//*             Non-salicide N+Diffusion resistor subcircuit netlist for typical case                                * 
+//**************************************************************************************************************** 
+//*  Process: 0.11 um Logic and Mixed-Mode Metal Metal Capacitor Al Enhancement Process RESISTOR Model
+//*  Non-salicide N+Diffusion resistor  is copied from l110eal_res_vt11            
+//*  Temperature range: -55c ~ 135c ; nominal temperature  =  25c.                    
+//*
+inline subckt rnnd_l110e ( n1 n2 pw )
+parameters w=1.00e-05  l=1.00e-05
+parameters rend  =  1.34e-5+drend_rnnd_l110e rs  =  95+drs_rnnd_l110e dw  =  -1.7e-8+ddw_rnnd_l110e 
+parameters vcr1  =  0   vcr2  =  0.0146  tc1  =  1.41e-3  tc2  =  4.35e-7  
+parameters tcoef   =  1.0+tc1*(temp-25.0)+tc2*pow((temp-25.0),2) 
+parameters tc11=6032.8*((w*0.9+dw)*l*0.9/2)+2e-7
+
+parameters jmax=1.0e-3
+parameters i1=jmax*w*1e6
+parameters r=((2*rend/(w*0.9+dw))+(rs*l*0.9/(w*0.9+dw)))
+parameters vmax=i1*r
+
+r3 ( pw n3 ) resistor r=(8.2+2e-12/((w*0.9+dw)*l*0.9/2))  tc1=tc11
+d3 ( n3 n1 ) dion_l110e area=(w+dw)*l/2 perim=(w+dw)+l
+rnnd_l110e ( n1 n2 ) bsource r=((2*rend/(w*0.9+dw))+(rs*l*0.9/(w*0.9+dw)))*(1.0+vcr1*v(n1,n2)+vcr2*pow((v(n1,n2)),2))*tcoef  bv_max=vmax
+d2 ( n4 n2 ) dion_l110e area=(w+dw)*l/2 perim=(w+dw)+l
+r2 ( pw n4 ) resistor r=(8.2+2e-12/((w*0.9+dw)*l*0.9/2))  tc1=tc11
+
+model dion_l110e diode level = 3
++ hcomp=1.0000e+00 imax=1.00e+14
+//**************************************************************
+//*               GENERAL PARAMETERS 
+//**************************************************************
++area    = 3.6e-008        perim      = 0.00076         tnom    = 25            
+//**************************************************************
+//*               DC PARAMETERS 
+//**************************************************************
++is      = 8.81e-008            isw     = 9.61e-014             ik      = 1.4945e7          bv      = 13.36  
++ibv     = 27.778          ikr     = 2780            n       = 1.008                   rs      =0
+//**************************************************************
+//*               CAPACITANCE PARAMETERS 
+//**************************************************************
++cjo      = 0.00072  cjp     = 9.94e-011  vj      = 0.56            vjsw     = 0.54          
++mj      = 0.258           mjsw    = 0.13          
+//**************************************************************
+//*               NOISE PARAMETERS 
+//**************************************************************
+//**************************************************************
+//*               TEMPERATURE PARAMETERS 
+//**************************************************************
++tlev    = 1               tlevc   = 1               trs     =0               tbv1     = -0.000684     
++xti     = 3               cta     = 0.0009555       ctp     = 0.00073248      eg      = 1.16          
++pta     = 0.001632        ptp    = 0.00031         
+
+
+ends rnnd_l110e
+//*
+//*
+//****************************************************************************************************************  
+//*             Non-salicide P+Diffusion resistor subcircuit netlist for typical case                                * 
+//**************************************************************************************************************** 
+//*  Process: 0.11 um Logic and Mixed-Mode Metal Metal Capacitor Al Enhancement Process RESISTOR Model
+//*  Non-salicide P+Diffusion resistor  is copied from l110eal_res_vt11            
+//*  Temperature range: -55c ~ 135c ; nominal temperature  =  25c.                    
+//*
+inline subckt rnpd_l110e ( n1 n2 nw )
+parameters w=1.00e-05  l=1.00e-05
+parameters rend  =  1.07e-5+drend_rnpd_l110e rs  =  115+drs_rnpd_l110e dw  =  -1.5e-8+ddw_rnpd_l110e 
+parameters vcr1  =  0   vcr2  =  0.0143  tc1  =  1.47e-3  tc2  =  6.31e-7  
+parameters tcoef   =  1.0+tc1*(temp-25.0)+tc2*pow((temp-25.0),2)    
+parameters tc11=1e-12
+
+parameters jmax=1.0e-3
+parameters i1=jmax*w*1e6
+parameters r=((2*rend/(w*0.9+dw))+(rs*l*0.9/(w*0.9+dw)))
+parameters vmax=i1*r
+
+r3 ( n3 nw ) resistor r=(4.8+2e-12/((w*0.9+dw)*l*0.9/2))  tc1=tc11
+d3 ( n1 n3 ) diop_l110e area=(w+dw)*l/2 perim=(w+dw)+l
+rnpd_l110e ( n1 n2 ) bsource r=((2*rend/(w*0.9+dw))+(rs*l*0.9/(w*0.9+dw)))*(1.0+vcr1*v(n1,n2)+vcr2*pow((v(n1,n2)),2))*tcoef  bv_max=vmax
+d2 ( n2 n4 ) diop_l110e area=(w+dw)*l/2 perim=(w+dw)+l
+r2 ( n4 nw ) resistor r=(4.8+2e-12/((w*0.9+dw)*l*0.9/2))  tc1=tc11
+
+model diop_l110e diode level = 3
++ hcomp=1.0000e+00 imax=1.00e+14
+//**************************************************************
+//*               GENERAL PARAMETERS 
+//**************************************************************
++area    = 3.6e-008        perim      = 0.00076         tnom    = 25            
+//**************************************************************
+//*               DC PARAMETERS 
+//**************************************************************
++is      = 1.21e-007           isw     = 1.08e-013                  ik      = 1.4908e007          
++bv      = 10.64         
++ibv     = 27.778          ikr     = 2780            n       = 1.017              rs      = 0
+//**************************************************************
+//*               CAPACITANCE PARAMETERS 
+//**************************************************************
++cjo      = 9.69e-004  cjp     = 1.18e-010  vj      = 0.698           vjsw     = 0.75          
++mj      = 0.308           mjsw    = 0.1           
+//**************************************************************
+//*               NOISE PARAMETERS 
+//**************************************************************
+//**************************************************************
+//*               TEMPERATURE PARAMETERS 
+//**************************************************************
++tlev    = 1               tlevc   = 1               trs     = 0               tbv1     = -0.000645     
++xti     = 3               cta     = 0.0010049       ctp     = 0.0005243       eg      = 1.16          
++pta     = 0.0017088       ptp    = 0.0025864         
+
+
+ends rnpd_l110e
+//*
+//*
+//****************************************************************************************************************  
+//*             Non-salicide HR Poly resistor subcircuit netlist for typical case                                * 
+//**************************************************************************************************************** 
+//*  Process: 0.11 um Logic and Mixed-Mode Metal Metal Capacitor Al Enhancement Process RESISTOR Model
+//*  Non-salicide HR Poly resistor  is copied from l110eal_res_vt11            
+//*  Temperature range: -55c ~ 135c ; nominal temperature  =  25c.                   
+//*
+inline subckt rnhr1000_l110e ( n1 n2 well )
+parameters w=1.00e-05  l=1.00e-05
+parameters rend=2.02e-4+drend_rnhr1000_l110e rs=984+drs_rnhr1000_l110e dw=-4.7e-8+ddw_rnhr1000_l110e 
+parameters vcr1=0   vcr2=-0.107e-12  tc1=-4.96e-4  tc2=1.25e-6  
+parameters tcoef = 1.0+tc1*(temp-25.0)+tc2*pow((temp-25.0),2)   
++ca   = 1.1524e-04
+
+parameters jmax=5.0e-4
+parameters i1=jmax*w*1e6
+parameters r=((2*rend/(w*0.9+dw))+(rs*((l*0.9)-0.8e-6)/(w*0.9+dw)))
+parameters vmax=i1*r
+
+c1 ( n1 well ) capacitor c=ca*(w*0.9+dw)*l*0.9/2
+rnhr1000_l110e ( n1 n2 ) res2 r=((2*rend/(w*0.9+dw))+(rs*((l*0.9)-0.8e-6)/(w*0.9+dw)))*(1.0+vcr1*v(n1,n2)/(l*0.9)+vcr2*pow(v(n1,n2)/(l*0.9),2))*tcoef  bv_max=vmax
+//************************************************************************************************
+model res2 resistor 
++ w=w l=l 
++kf=1.05e-022   af=1.94000e+000 fexp=9.600e-001 wdexp=0.9900000e+000 ldexp=1.0100e+000 
+
+c2 ( n2 well ) capacitor c=ca*(w*0.9+dw)*l*0.9/2
+
+
+ends rnhr1000_l110e
+//*
+//*
+//*
+//*
+//*
+//****************************************************************************************************************
+//*              Salicide N+ diffusion resistor subcircuit netlist                                               * 
+//**************************************************************************************************************** 
+//* Process: 0.11 um Logic and Mixed-Mode 1P8M Metal Metal Capacitor FSG Enhancement Process   
+//* Salicide N+ diffusion resistor  is copied from l110e_res_v031
+//* Temperature range: -50c ~ 125c ; nominal temperature=25c. 
+//*
+inline subckt rsnd_mml110e ( n1 n2 pw )
+parameters w=1.00e-06  l=2.00e-06 
+parameters rs=8.3+drs_rsnd_mml110e   
+parameters dw=0
+parameters tc1=2.879e-03  tc2=1.379e-6  
+parameters tcoef = 1.0+tc1*(temp-25.0)+tc2*pow((temp-25.0),2)
+parameters tc11=6032.8*((w*0.9+dw)*l*0.9/2)+2e-7
+
+parameters jmax=2.0e-3
+parameters i1=jmax*w*1e6
+parameters r=(rs*l*0.9/(w*0.9+dw))
+parameters vmax=i1*r
+
+
+r3 ( pw n3 ) resistor r=(8.2+2e-12/((w*0.9+dw)*l*0.9/2))  tc1=tc11
+d3 ( n3 n1 ) dion_l110e area=(w+dw)*l/2 perim=(w+dw)+l
+rsnd_mml110e ( n1 n2 ) bsource r=(rs*l*0.9/(w*0.9+dw))*tcoef  bv_max=vmax
+d2 ( n4 n2 ) dion_l110e area=(w+dw)*l/2 perim=(w+dw)+l
+r2 ( pw n4 ) resistor r=(8.2+2e-12/((w*0.9+dw)*l*0.9/2))  tc1=tc11
+
+
+model dion_l110e diode level = 3
++ hcomp=1.0000e+00 imax=1.00e+14
+//**************************************************************
+//*               GENERAL PARAMETERS 
+//**************************************************************
++area    = 3.6e-008        perim      = 0.00076         tnom    = 25            
+//**************************************************************
+//*               DC PARAMETERS 
+//**************************************************************
++is      = 8.81e-008            isw     = 9.61e-014             ik      = 1.4945e7          bv      = 13.36  
++ibv     = 27.778          ikr     = 2780            n       = 1.008                   rs      =0
+//**************************************************************
+//*               CAPACITANCE PARAMETERS 
+//**************************************************************
++cjo      = 0.00072  cjp     = 9.94e-011  vj      = 0.56            vjsw     = 0.54          
++mj      = 0.258           mjsw    = 0.13          
+//**************************************************************
+//*               NOISE PARAMETERS 
+//**************************************************************
+//**************************************************************
+//*               TEMPERATURE PARAMETERS 
+//**************************************************************
++tlev    = 1               tlevc   = 1               trs     =0               tbv1     = -0.000684     
++xti     = 3               cta     = 0.0009555       ctp     = 0.00073248      eg      = 1.16          
++pta     = 0.001632        ptp    = 0.00031         
+
+
+
+ends rsnd_mml110e
+
+//****************************************************************************************************************
+//*              Salicide P+ diffusion resistor subcircuit netlist                                               * 
+//**************************************************************************************************************** 
+//* Process: 0.11 um Logic and Mixed-Mode 1P8M Metal Metal Capacitor FSG Enhancement Process 
+//* Salicide P+ diffusion resistor  is copied from l110e_res_v031
+//* Temperature range: -50c ~ 125c ; nominal temperature=25c. 
+//*
+inline subckt rspd_mml110e ( n1 n2 nw )
+parameters w=1.00e-06  l=2.00e-06 
+parameters rs=7.2+drs_rspd_mml110e  
+parameters  dw=0 
+parameters tc1=2.891e-03  tc2=1.457e-6  
+parameters tcoef = 1.0+tc1*(temp-25.0)+tc2*pow((temp-25.0),2)
+parameters tc11=1e-12
+
+parameters jmax=2.0e-3
+parameters i1=jmax*w*1e6
+parameters r=(rs*l*0.9/(w*0.9+dw))
+parameters vmax=i1*r
+
+r3 ( n3 nw ) resistor r=(4.8+2e-12/((w*0.9+dw)*l*0.9/2))  tc1=tc11
+d3 ( n1 n3 ) diop_l110e area=(w+dw)*l/2 perim=(w+dw)+l
+rspd_mml110e ( n1 n2 ) bsource r=(rs*l*0.9/(w*0.9+dw))*tcoef  bv_max=vmax
+d2 ( n2 n4 ) diop_l110e area=(w+dw)*l/2 perim=(w+dw)+l
+r2 ( n4 nw ) resistor r=(4.8+2e-12/((w*0.9+dw)*l*0.9/2))  tc1=tc11
+
+model diop_l110e diode level = 3
++ hcomp=1.0000e+00 imax=1.00e+14
+//**************************************************************
+//*               GENERAL PARAMETERS 
+//**************************************************************
++area    = 3.6e-008        perim      = 0.00076         tnom    = 25            
+//**************************************************************
+//*               DC PARAMETERS 
+//**************************************************************
++is      = 1.21e-007           isw     = 1.08e-013                  ik      = 1.4908e007          
++bv      = 10.64         
++ibv     = 27.778          ikr     = 2780            n       = 1.017              rs      = 0
+//**************************************************************
+//*               CAPACITANCE PARAMETERS 
+//**************************************************************
++cjo      = 9.69e-004  cjp     = 1.18e-010  vj      = 0.698           vjsw     = 0.75          
++mj      = 0.308           mjsw    = 0.1           
+//**************************************************************
+//*               NOISE PARAMETERS 
+//**************************************************************
+//**************************************************************
+//*               TEMPERATURE PARAMETERS 
+//**************************************************************
++tlev    = 1               tlevc   = 1               trs     = 0               tbv1     = -0.000645     
++xti     = 3               cta     = 0.0010049       ctp     = 0.0005243       eg      = 1.16          
++pta     = 0.0017088       ptp    = 0.0025864         
+
+ends rspd_mml110e
+
+//****************************************************************************************************************
+//*              salicide N+ poly resistor subcircuit netlist                                                    * 
+//**************************************************************************************************************** 
+//* Process: 0.11 um Logic and Mixed-Mode 1P8M Metal Metal Capacitor FSG Enhancement Process 
+//* Salicide N+ poly resistor  is copied from l110e_res_v031
+//* Temperature range: -50c ~ 125c ; nominal temperature=25c. 
+//*
+inline subckt rsnpo_mml110e ( n1 n2 well )
+parameters w=1.00e-06  l=2.00e-06 
+parameters rs=8.7+drs_rsnpo_mml110e 
+parameters ca=1.0367e-4 dw=0
+parameters tc1=2.667e-03  tc2=1.163e-6  
+parameters tcoef = 1.0+tc1*(temp-25.0)+tc2*pow((temp-25.0),2)
+
+
+parameters jmax=2.0e-3
+parameters i1=jmax*w*1e6
+parameters r=(rs*l*0.9/(w*0.9+dw))
+parameters vmax=i1*r
+
+
+c1 ( n1 well ) capacitor c=ca*(w*0.9+dw)*l*0.9/2
+rsnpo_mml110e ( n1 n2 ) bsource r=(rs*l*0.9/(w*0.9+dw))*tcoef  bv_max=vmax
+c2 ( n2 well ) capacitor c=ca*(w*0.9+dw)*l*0.9/2
+
+ends rsnpo_mml110e
+
+//****************************************************************************************************************
+//*              salicide P+ poly resistor subcircuit netlist                                                    * 
+//**************************************************************************************************************** 
+//* Process: 0.11 um Logic and Mixed-Mode 1P8M Metal Metal Capacitor FSG Enhancement Process 
+//* Salicide P+ poly resistor  is copied from l110e_res_v031
+//* Temperature range: -50c ~ 125c ; nominal temperature=25c. 
+//*
+inline subckt rsppo_mml110e ( n1 n2 well )
+parameters w=1.00e-06  l=2.00e-06 
+parameters rs=7.3+drs_rsppo_mml110e 
+parameters ca=1.0367e-4 dw=0
+parameters tc1=2.746e-03  tc2=1.631e-6  
+parameters tcoef = 1.0+tc1*(temp-25.0)+tc2*pow((temp-25.0),2)
+
+
+parameters jmax=2.0e-3
+parameters i1=jmax*w*1e6
+parameters r=(rs*l*0.9/(w*0.9+dw))
+parameters vmax=i1*r
+
+c1 ( n1 well ) capacitor c=ca*(w*0.9+dw)*l*0.9/2
+rsppo_mml110e ( n1 n2 ) bsource r=(rs*l*0.9/(w*0.9+dw))*tcoef  bv_max=vmax
+c2 ( n2 well ) capacitor c=ca*(w*0.9+dw)*l*0.9/2
+
+ends rsppo_mml110e
+
+//****************************************************************************************************************
+//*               NWell resistor subcircuit netlist                                                    * 
+//**************************************************************************************************************** 
+//* Process: 0.11 um Logic and Mixed-Mode 1P8M Metal Metal Capacitor FSG Enhancement Process 
+//* NWell resistor  is copied from l110e_res_v031
+//* Temperature range: -50c ~ 125c ; nominal temperature=25c. 
+//*
+inline subckt rnwell_mml110e ( n1 n2 sub )
+parameters w=20.00e-06  l=2.00e-06 
+parameters rs=370+drs_rnwell_mml110e   
+parameters dw=-0.51e-6
+parameters vc0=1.9571e-3  vc1=-3.4571e-4  vc2=5.7143e-5  tc1=1.485e-03  tc2=9.097e-6  
+parameters tcoef = 1.0+tc1*(temp-25.0)+tc2*pow((temp-25.0),2)
+
+
+parameters jmax=5.0e-5
+parameters i1=jmax*w*1e6
+parameters r=(rs*l*0.9/(w*0.9+dw))
+parameters vmax=i1*r
+
+d1 ( sub n1 ) dionw_l110e area=(w+dw)*l/2 perim=(w+dw)+l
+rnwell_mml110e ( n1 n2 ) bsource r=(rs*l*0.9/(w*0.9+dw))*(1.0+(vc0+vc1*min(v(n1),v(n2))+vc2*pow(min(v(n1),v(n2)),2))*abs(v(n1,n2)))*tcoef  bv_max=vmax
+d2 ( sub n2 ) dionw_l110e area=(w+dw)*l/2 perim=(w+dw)+l
+
+model dionw_l110e diode level = 3
++ hcomp=1.0000e+00 imax=1.00e+14
+//**************************************************************
+//*               GENERAL PARAMETERS 
+//**************************************************************
++area    = 1.68e-007       perim      = 0.00469         tnom    = 25            
+//**************************************************************
+//*               DC PARAMETERS 
+//**************************************************************
++is      = 2.05e-006       isw     = 5.34e-011       ik      = 17856           bv      = 9.662         
++ibv     = 5.952           ikr     = 595.2           n       = 1.0525          rs      = 3.0891e-007 
+//**************************************************************
+//*               CAPACITANCE PARAMETERS 
+//**************************************************************
++cjo      = 8.28e-005  cjp     = 9.92e-010  vj      = 0.588           vjsw     = 0.62          
++mj      = 0.474           mjsw    = 0.27          
+//**************************************************************
+//*               NOISE PARAMETERS 
+//**************************************************************
+//**************************************************************
+//*               TEMPERATURE PARAMETERS 
+//**************************************************************
++tlev    = 1               tlevc   = 1               trs     = 0.00322         tbv1     = -0.000539     
++xti     = 5.4936          cta     = 0.00332         ctp     = 0.001           eg      = 1.16          
++pta     = 0.0028          ptp    = 0.001
+
+ends rnwell_mml110e
+
+//**************************************************************************************************************** 
+//*             M1 resistor subcircuit netlist for typical case
+//**************************************************************************************************************** 
+inline subckt r_m1_l110e ( n1 n2 )
+parameters w=1.44e-07  l=1.00e-05
+parameters rs=(170e-03+drs_rsm1_l110e) 
+parameters tc1= 3.203e-03  tc2=-4.119e-07 
+parameters tcoef = 1.0+tc1*(temp-25.0)+tc2*pow((temp-25.0),2)  
+
+
+
+r_m1_l110e ( n1 n2 ) resistor r=(rs*(l*0.9)/(w*0.9))*tcoef
+
+ends r_m1_l110e
+
+//**************************************************************************************************************** 
+//*             1x resistor subcircuit netlist for typical case
+//**************************************************************************************************************** 
+inline subckt r_1x_l110e ( n1 n2 )
+parameters w=1.8e-07  l=1.00e-05
+parameters rs=(130e-03+drs_rsm2_l110e) 
+parameters tc1= 3.304e-03  tc2=-4.983e-07 
+parameters tcoef = 1.0+tc1*(temp-25.0)+tc2*pow((temp-25.0),2)
+
+
+
+r_1x_l110e ( n1 n2 ) resistor r=(rs*(l*0.9)/(w*0.9))*tcoef
+
+ends r_1x_l110e
+
+//**************************************************************************************************************** 
+//*             2x as top metal with 8KA thickness resistor subcircuit netlist for typical case
+//**************************************************************************************************************** 
+inline subckt r_2x_l110e ( n1 n2 )
+parameters w=3.96e-07  l=1.00e-05
+parameters rs=(35e-03+drs_rsm6t_8k_l110e) 
+parameters tc1= 3.415e-03  tc2=-2.26e-07 
+parameters tcoef = 1.0+tc1*(temp-25.0)+tc2*pow((temp-25.0),2)  
+
+
+
+r_2x_l110e ( n1 n2 ) resistor r=(rs*(l*0.9)/(w*0.9))*tcoef
+
+ends r_2x_l110e

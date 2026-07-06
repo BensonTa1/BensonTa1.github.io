@@ -1,0 +1,191 @@
+buffer 1000
+4.1M
+1 1 3 Apr  7 16:59:21 2022                     
+Rule File Pathname: /home/m10912086/UM180FDKMFC00000OA_B02/UM180FDKMFC00000OA_B02/Calibre/DRC/BASE/_G-DF-Mixed_Mode_RFCMOS18-1.8v_3.3v-1P6M-MMC-Calibre-DRC-2.16_P1.drc_
+Minimum DIFFUSION density over 500um x 500 um areas is 20%
+in % moved in 250um increments across the chip 
+p 1 4
+CN buffer c 1 0 0 1 0 0 0
+-9530 -20230
+28930 -20230
+28930 17830
+-9530 17830
+4.29M_MMC_3
+1 1 3 Apr  7 16:59:21 2022                     
+Rule File Pathname: /home/m10912086/UM180FDKMFC00000OA_B02/UM180FDKMFC00000OA_B02/Calibre/DRC/BASE/_G-DF-Mixed_Mode_RFCMOS18-1.8v_3.3v-1P6M-MMC-Calibre-DRC-2.16_P1.drc_
+Maximum MVIA density on METAL_CAP is 5%
+if 100 um*um <= MMC area <900 um*um
+p 1 4
+CN buffer c 1 0 0 1 0 0 0
+4700 -6000
+14700 -6000
+14700 4000
+4700 4000
+4.29NOTICE
+1 1 4 Apr  7 16:59:21 2022                     
+Rule File Pathname: /home/m10912086/UM180FDKMFC00000OA_B02/UM180FDKMFC00000OA_B02/Calibre/DRC/BASE/_G-DF-Mixed_Mode_RFCMOS18-1.8v_3.3v-1P6M-MMC-Calibre-DRC-2.16_P1.drc_
+There is NO RFMMCMK in the GDS file,
+all RF RULES ( 4.29G ~ 4.29K ) will not be checked,
+if the process is NOT a RF process, please unselect RF_RULES OPTION to bypass the rule check.
+p 1 4
+CN buffer c 1 0 0 1 0 0 0
+-10530 -21230
+29930 -21230
+29930 18830
+-10530 18830
+4.14Z.NO_IND_PO1
+1 1 2 Apr  7 16:59:21 2022                     
+Rule File Pathname: /home/m10912086/UM180FDKMFC00000OA_B02/UM180FDKMFC00000OA_B02/Calibre/DRC/BASE/_G-DF-Mixed_Mode_RFCMOS18-1.8v_3.3v-1P6M-MMC-Calibre-DRC-2.16_P1.drc_
+The PO1 coverage must be larger than 10% of entire chip area (exclude application for inductor)
+p 1 4
+CN buffer c 1 0 0 1 0 0 0
+-9530 -20230
+28930 -20230
+28930 17830
+-9530 17830
+4.22F.NO_IND_M2
+1 1 2 Apr  7 16:59:21 2022                     
+Rule File Pathname: /home/m10912086/UM180FDKMFC00000OA_B02/UM180FDKMFC00000OA_B02/Calibre/DRC/BASE/_G-DF-Mixed_Mode_RFCMOS18-1.8v_3.3v-1P6M-MMC-Calibre-DRC-2.16_P1.drc_
+The ME2 coverage must be larger than 30% of entire chip area (exclude application for inductor)
+p 1 4
+CN buffer c 1 0 0 1 0 0 0
+-9530 -20230
+28930 -20230
+28930 17830
+-9530 17830
+4.22G
+1 1 2 Apr  7 16:59:21 2022                     
+Rule File Pathname: /home/m10912086/UM180FDKMFC00000OA_B02/UM180FDKMFC00000OA_B02/Calibre/DRC/BASE/_G-DF-Mixed_Mode_RFCMOS18-1.8v_3.3v-1P6M-MMC-Calibre-DRC-2.16_P1.drc_
+The ME2 coverage must be larger than 25% for every 500*500um square
+p 1 4
+CN buffer c 1 0 0 1 0 0 0
+-9530 -20230
+28930 -20230
+28930 17830
+-9530 17830
+4.24F.NO_IND_M3
+1 1 2 Apr  7 16:59:21 2022                     
+Rule File Pathname: /home/m10912086/UM180FDKMFC00000OA_B02/UM180FDKMFC00000OA_B02/Calibre/DRC/BASE/_G-DF-Mixed_Mode_RFCMOS18-1.8v_3.3v-1P6M-MMC-Calibre-DRC-2.16_P1.drc_
+The ME3 coverage must be larger than 30% of entire chip area (exclude application for inductor)
+p 1 4
+CN buffer c 1 0 0 1 0 0 0
+-9530 -20230
+28930 -20230
+28930 17830
+-9530 17830
+4.24G
+1 1 2 Apr  7 16:59:21 2022                     
+Rule File Pathname: /home/m10912086/UM180FDKMFC00000OA_B02/UM180FDKMFC00000OA_B02/Calibre/DRC/BASE/_G-DF-Mixed_Mode_RFCMOS18-1.8v_3.3v-1P6M-MMC-Calibre-DRC-2.16_P1.drc_
+The ME3 coverage must be larger than 25% for every 500*500um square
+p 1 4
+CN buffer c 1 0 0 1 0 0 0
+-9530 -20230
+28930 -20230
+28930 17830
+-9530 17830
+4.26F.NO_IND_M4
+1 1 2 Apr  7 16:59:21 2022                     
+Rule File Pathname: /home/m10912086/UM180FDKMFC00000OA_B02/UM180FDKMFC00000OA_B02/Calibre/DRC/BASE/_G-DF-Mixed_Mode_RFCMOS18-1.8v_3.3v-1P6M-MMC-Calibre-DRC-2.16_P1.drc_
+The ME4 coverage must be larger than 30% of entire chip area (exclude application for inductor)
+p 1 4
+CN buffer c 1 0 0 1 0 0 0
+-9530 -20230
+28930 -20230
+28930 17830
+-9530 17830
+4.26G
+1 1 2 Apr  7 16:59:21 2022                     
+Rule File Pathname: /home/m10912086/UM180FDKMFC00000OA_B02/UM180FDKMFC00000OA_B02/Calibre/DRC/BASE/_G-DF-Mixed_Mode_RFCMOS18-1.8v_3.3v-1P6M-MMC-Calibre-DRC-2.16_P1.drc_
+The ME4 coverage must be larger than 25% for every 500*500um square
+p 1 4
+CN buffer c 1 0 0 1 0 0 0
+-9530 -20230
+28930 -20230
+28930 17830
+-9530 17830
+4.28F.NO_IND_M5
+1 1 2 Apr  7 16:59:21 2022                     
+Rule File Pathname: /home/m10912086/UM180FDKMFC00000OA_B02/UM180FDKMFC00000OA_B02/Calibre/DRC/BASE/_G-DF-Mixed_Mode_RFCMOS18-1.8v_3.3v-1P6M-MMC-Calibre-DRC-2.16_P1.drc_
+The ME5 coverage must be larger than 30% of entire chip area (exclude application for inductor)
+p 1 4
+CN buffer c 1 0 0 1 0 0 0
+-9530 -20230
+28930 -20230
+28930 17830
+-9530 17830
+4.28G
+1 1 2 Apr  7 16:59:21 2022                     
+Rule File Pathname: /home/m10912086/UM180FDKMFC00000OA_B02/UM180FDKMFC00000OA_B02/Calibre/DRC/BASE/_G-DF-Mixed_Mode_RFCMOS18-1.8v_3.3v-1P6M-MMC-Calibre-DRC-2.16_P1.drc_
+The ME5 coverage must be larger than 25% for every 500*500um square
+p 1 4
+CN buffer c 1 0 0 1 0 0 0
+-9530 -20230
+28930 -20230
+28930 17830
+-9530 17830
+4.31E.NO_IND_M6
+1 1 2 Apr  7 16:59:21 2022                     
+Rule File Pathname: /home/m10912086/UM180FDKMFC00000OA_B02/UM180FDKMFC00000OA_B02/Calibre/DRC/BASE/_G-DF-Mixed_Mode_RFCMOS18-1.8v_3.3v-1P6M-MMC-Calibre-DRC-2.16_P1.drc_
+The ME6 coverage must be larger than 30% of entire chip area (exclude application for inductor)
+p 1 4
+CN buffer c 1 0 0 1 0 0 0
+-9530 -20230
+28930 -20230
+28930 17830
+-9530 17830
+4.31F
+1 1 2 Apr  7 16:59:21 2022                     
+Rule File Pathname: /home/m10912086/UM180FDKMFC00000OA_B02/UM180FDKMFC00000OA_B02/Calibre/DRC/BASE/_G-DF-Mixed_Mode_RFCMOS18-1.8v_3.3v-1P6M-MMC-Calibre-DRC-2.16_P1.drc_
+The Metal6 coverage must be larger than 25% for every 500*500um square
+p 1 4
+CN buffer c 1 0 0 1 0 0 0
+-9530 -20230
+28930 -20230
+28930 17830
+-9530 17830
+4.22C
+1 1 2 Apr  7 16:59:21 2022                     
+Rule File Pathname: /home/m10912086/UM180FDKMFC00000OA_B02/UM180FDKMFC00000OA_B02/Calibre/DRC/BASE/_G-DF-Mixed_Mode_RFCMOS18-1.8v_3.3v-1P6M-MMC-Calibre-DRC-2.16_P1.drc_
+Maximum ME2 to ME2 spacing 500
+p 1 4
+CN buffer c 1 0 0 1 0 0 0
+-10530 -21230
+29930 -21230
+29930 18830
+-10530 18830
+4.24C
+1 1 2 Apr  7 16:59:21 2022                     
+Rule File Pathname: /home/m10912086/UM180FDKMFC00000OA_B02/UM180FDKMFC00000OA_B02/Calibre/DRC/BASE/_G-DF-Mixed_Mode_RFCMOS18-1.8v_3.3v-1P6M-MMC-Calibre-DRC-2.16_P1.drc_
+Maximum ME3 to ME3 spacing 500
+p 1 4
+CN buffer c 1 0 0 1 0 0 0
+-10530 -21230
+29930 -21230
+29930 18830
+-10530 18830
+4.26C
+1 1 2 Apr  7 16:59:21 2022                     
+Rule File Pathname: /home/m10912086/UM180FDKMFC00000OA_B02/UM180FDKMFC00000OA_B02/Calibre/DRC/BASE/_G-DF-Mixed_Mode_RFCMOS18-1.8v_3.3v-1P6M-MMC-Calibre-DRC-2.16_P1.drc_
+Maximum ME4 to ME4 spacing 500
+p 1 4
+CN buffer c 1 0 0 1 0 0 0
+-10530 -21230
+29930 -21230
+29930 18830
+-10530 18830
+DENSITY_PRINT_FILES
+0 0 14 Apr  7 16:59:21 2022
+4.01Z.NO_IND_OD.log
+4.14Z.NO_IND_PO1.log
+4.20F.NO_IND_M1.density
+4.20G_M1.density
+4.22F.NO_IND_M2.density
+4.22G_M2.density
+4.24F.NO_IND_M3.density
+4.24G_M3.density
+4.26F.NO_IND_M4.density
+4.26G_M4.density
+4.28F.NO_IND_M5.density
+4.28G_M5.density
+4.31E.NO_IND_M6.density
+4.31F_M6.density

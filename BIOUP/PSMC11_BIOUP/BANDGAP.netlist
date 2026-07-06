@@ -1,0 +1,118 @@
+*****************************************************************************
+* CDL Netlist:
+* Cell Name: BANDGAP
+* Netlisted on: Sep 17 17:12:31 2025
+*****************************************************************************
+
+*****************************************************************************
+* BIPOLAR Declarations
+*****************************************************************************
+*.BIPOLAR
+*.RESI = 2000.000000
+*.RESVAL
+*.CAPVAL
+*.DIOPERI
+*.DIOAREA
+*.SCALE METER
+
+
+*****************************************************************************
+* Parameter Statement
+*****************************************************************************
+.PARAM
+
+
+*******************************************************************************
+* Sub-Circuit Netlist:                                                        *
+*                                                                             *
+* Library: Bio_up                                                             *
+* Cell   : OP_N33                                                             *
+* View   : schematic                                                          *
+* Last Time Saved: Sep  2 10:26:40 2025                                       *
+*******************************************************************************
+.subckt OP_N33 OUT VCC33 VSS IN_N IN_P NCUR
+.ends OP_N33
+
+
+*******************************************************************************
+* Sub-Circuit Netlist:                                                        *
+*                                                                             *
+* Library: Bio_up                                                             *
+* Cell   : TRIM5                                                              *
+* View   : schematic                                                          *
+* Last Time Saved: Sep  2 11:22:27 2025                                       *
+*******************************************************************************
+.subckt TRIM5 OUT VSS DEC_0 DEC_1 DEC_2 DEC_3 DEC_4 DEC_5 DEC_6 DEC_7 DEC_8
++DEC_9 DEC_10 DEC_11 DEC_12 DEC_13 DEC_14 DEC_15 IN
+.ends TRIM5
+
+
+*******************************************************************************
+* Sub-Circuit Netlist:                                                        *
+*                                                                             *
+* Library: Bio_up                                                             *
+* Cell   : OP_P4                                                              *
+* View   : schematic                                                          *
+* Last Time Saved: Sep  2 11:14:50 2025                                       *
+*******************************************************************************
+.subckt OP_P4 OUT VCC18 VSS CUR IN_N IN_P
+.ends OP_P4
+
+
+*******************************************************************************
+* Sub-Circuit Netlist:                                                        *
+*                                                                             *
+* Library: Bio_up                                                             *
+* Cell   : OP_P7                                                              *
+* View   : schematic                                                          *
+* Last Time Saved: Sep  4 10:19:01 2025                                       *
+*******************************************************************************
+.subckt OP_P7 OUT VDD3p3 VSS IBIAS IN_N IN_P
+.ends OP_P7
+
+
+*******************************************************************************
+* Sub-Circuit Netlist:                                                        *
+*                                                                             *
+* Library: Bio_up                                                             *
+* Cell   : VI8T2                                                              *
+* View   : schematic                                                          *
+* Last Time Saved: Sep  2 10:20:03 2025                                       *
+*******************************************************************************
+.subckt VI8T2 Bias_N1 Bias_N2 Bias_P1 Bias_P2 IBIAS_CTRL IOUT1 IOUT2 AGND AVDD
++VBGR
+XI0 OPA_VOUT AVDD AGND IBIAS IBIAS_CTRL VBGR OP_P7
+.ends VI8T2
+
+
+*******************************************************************************
+* Sub-Circuit Netlist:                                                        *
+*                                                                             *
+* Library: Bio_up                                                             *
+* Cell   : DECODER_B                                                          *
+* View   : schematic                                                          *
+* Last Time Saved: Sep 17 15:58:03 2025                                       *
+*******************************************************************************
+.subckt DECODER_B D0 D1 D2 D3 D4 D5 D6 D7 D8 D9 D10 D11 D12 D13 D14 D15 AGND
++AVDD DBG[3] DBG[2] DBG[1] DBG[0]
+.ends DECODER_B
+
+
+*******************************************************************************
+* Main Circuit Netlist:                                                       *
+*                                                                             *
+* Library: Bio_up                                                             *
+* Cell   : BANDGAP                                                            *
+* View   : schematic                                                          *
+* Last Time Saved: Sep 17 16:01:14 2025                                       *
+*******************************************************************************
+.subckt BANDGAP AGND IBIAS1 IBIAS2 V2P5V VREF AVDD DBG[3] DBG[2] DBG[1] DBG[0]
++RI_OUT
+XI2 V2P5V AVDD AGND V2P5V VBG2_5 NN OP_N33
+XI1 AGND AGND DEC_0 DEC_1 DEC_2 DEC_3 DEC_4 DEC_5 DEC_6 DEC_7 DEC_8 DEC_9
++DEC_10 DEC_11 DEC_12 DEC_13 DEC_14 DEC_15 VBG1_0 TRIM5
+XI0 OP_OUT AVDD AGND IBIAS_OP net26 net47 OP_P4
+XI3 Bias_N1 Bias_N2 Bias_P1 Bias_P2 RI_OUT IBIAS1 IBIAS2 AGND AVDD VBG1_0 VI8T2
+XI4 DEC_0 DEC_1 DEC_2 DEC_3 DEC_4 DEC_5 DEC_6 DEC_7 DEC_8 DEC_9 DEC_10 DEC_11
++DEC_12 DEC_13 DEC_14 DEC_15 AGND AVDD DBG[3] DBG[2] DBG[1] DBG[0] DECODER_B
+.ends BANDGAP

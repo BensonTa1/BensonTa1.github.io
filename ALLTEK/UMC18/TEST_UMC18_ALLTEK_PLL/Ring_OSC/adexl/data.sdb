@@ -1,0 +1,1438 @@
+<?xml version="1.0"?>
+<setupdb version="6">data
+	<active>Active Setup
+		<corners>
+			<corner enabled="0">_default</corner>
+			<corner enabled="1">C0
+				<models>
+					<model enabled="1">mm180_reg18_v124.lib.scs
+						<modeltest>All</modeltest>
+						<modelblock>Global</modelblock>
+						<modelfile>/home/IC/Desktop/virtuoso/Process/UMC18/Models/Spectre/mm180_reg18_v124.lib.scs</modelfile>
+						<modelsection>"tt" "ff" "ss" "snfp" "fnsp"</modelsection>
+					</model>
+					<model enabled="1">rnnpo_rf_v2d4.lib.scs
+						<modeltest>All</modeltest>
+						<modelblock>Global</modelblock>
+						<modelfile>/home/IC/Desktop/virtuoso/Process/UMC18/Models/Spectre/rnnpo_rf_v2d4.lib.scs</modelfile>
+						<modelsection>"typ" "min" "max"</modelsection>
+					</model>
+					<model enabled="0">mm180_res_v141.lib.scs
+						<modeltest>All</modeltest>
+						<modelblock>Global</modelblock>
+						<modelfile>/home/IC/Desktop/virtuoso/Process/UMC18/Models/Spectre/mm180_res_v141.lib.scs</modelfile>
+						<modelsection>"res_max" "res_typ" "res_min"</modelsection>
+					</model>
+					<model enabled="0">mm180_bjt_v121.lib.scs
+						<modeltest>All</modeltest>
+						<modelblock>Global</modelblock>
+						<modelfile>/home/IC/Desktop/virtuoso/Process/UMC18/Models/Spectre/mm180_bjt_v121.lib.scs</modelfile>
+						<modelsection>"tt_bip"</modelsection>
+					</model>
+				</models>
+			</corner>
+		</corners>
+		<extensions>
+			<extension>Parasitics
+				<callback>_parSetupDBExtensionCB</callback>
+				<iconvalue></iconvalue>
+				<icontype></icontype>
+			</extension>
+		</extensions>
+		<currentmode>Single Run, Sweeps and Corners</currentmode>
+		<overwritehistory>0</overwritehistory>
+		<tests>
+			<test enabled="1">TEST_UMC18_ALLTEK_PLL:Ring_OSC:1
+				<tool>ADE</tool>
+				<tooloptions>
+					<option>cell
+						<value>Ring_OSC</value>
+					</option>
+					<option>lib
+						<value>TEST_UMC18_ALLTEK_PLL</value>
+					</option>
+					<option>sim
+						<value>spectre</value>
+					</option>
+					<option>view
+						<value>schematic</value>
+					</option>
+					<option>path
+						<value>$AXL_SETUPDB_DIR/test_states</value>
+					</option>
+					<option>state
+						<value>TEST_UMC18_ALLTEK_PLL:Ring_OSC:1_active</value>
+					</option>
+				</tooloptions>
+				<origoptions>
+					<option>cell
+						<value>Ring_OSC</value>
+					</option>
+					<option>lib
+						<value>TEST_UMC18_ALLTEK_PLL</value>
+					</option>
+					<option>sim
+						<value>spectre</value>
+					</option>
+					<option>view
+						<value>schematic</value>
+					</option>
+					<option>path
+						<value>$AXL_SETUPDB_DIR/test_states</value>
+					</option>
+					<option>state
+						<value>tmpstate.1498661368</value>
+					</option>
+				</origoptions>
+			</test>
+		</tests>
+		<vars>
+			<var enabled="0">VCTRL
+				<value>0.6</value>
+				<dependentTests>
+					<dependentTest enabled="1">TEST_UMC18_ALLTEK_PLL:Ring_OSC:1</dependentTest>
+				</dependentTests>
+			</var>
+			<var enabled="0">VS
+				<value>{Exclusion List}1.8{Exclusion List}{Center/Span%}Auto:1.8:3:20{Center/Span%}</value>
+				<dependentTests>
+					<dependentTest enabled="1">TEST_UMC18_ALLTEK_PLL:Ring_OSC:1</dependentTest>
+				</dependentTests>
+			</var>
+			<var enabled="0">temperature
+				<value>{Exclusion List}30{Exclusion List}{From/To}Auto:-25:5:125{From/To}</value>
+			</var>
+			<var>VC
+				<value>0</value>
+				<dependentTests>
+					<dependentTest enabled="1">TEST_UMC18_ALLTEK_PLL:Ring_OSC:1</dependentTest>
+				</dependentTests>
+			</var>
+		</vars>
+		<overwritehistoryname>Interactive.0</overwritehistoryname>
+		<plottingoptions>
+			<plottingoption>plottingmode
+				<value>Replace</value>
+			</plottingoption>
+			<plottingoption>plottype
+				<value>None</value>
+			</plottingoption>
+			<plottingoption>usewaveformtemplate
+				<value>no</value>
+			</plottingoption>
+			<plottingoption>useMaestroPlottingTemplate
+				<value>yes</value>
+			</plottingoption>
+			<plottingoption>waveformtemplate
+				<value></value>
+			</plottingoption>
+			<plottingoption>allplottingtemplates
+				<value></value>
+			</plottingoption>
+			<plottingoption>defaultplottingtemplate
+				<value></value>
+			</plottingoption>
+		</plottingoptions>
+	</active>
+	<history>History
+		<historyentry assemblerOrExplorer="adexl" roOrView="view">Interactive.0
+			<checkpoint>
+				<corners>
+					<corner enabled="1">_default</corner>
+					<corner enabled="1">C0
+						<models>
+							<model enabled="1">mm180_reg18_v124.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/UMC18/Models/Spectre/mm180_reg18_v124.lib.scs</modelfile>
+								<modelsection>"tt" "ff" "ss" "snfp" "fnsp"</modelsection>
+							</model>
+							<model enabled="1">rnnpo_rf_v2d4.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/UMC18/Models/Spectre/rnnpo_rf_v2d4.lib.scs</modelfile>
+								<modelsection>"typ" "min" "max"</modelsection>
+							</model>
+						</models>
+					</corner>
+				</corners>
+				<extensions>
+					<extension>Parasitics
+						<callback>_parSetupDBExtensionCB</callback>
+						<iconvalue></iconvalue>
+						<icontype></icontype>
+					</extension>
+				</extensions>
+				<currentmode>Single Run, Sweeps and Corners</currentmode>
+				<overwritehistory>0</overwritehistory>
+				<tests>
+					<test enabled="1">TEST_UMC18_ALLTEK_PLL:Ring_OSC:1
+						<tool>ADE</tool>
+						<tooloptions>
+							<option>cell
+								<value>Ring_OSC</value>
+							</option>
+							<option>lib
+								<value>TEST_UMC18_ALLTEK_PLL</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>schematic</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>TEST_UMC18_ALLTEK_PLL:Ring_OSC:1_tmpstate.1498661368_Interactive.0</value>
+							</option>
+						</tooloptions>
+						<origoptions>
+							<option>cell
+								<value>Ring_OSC</value>
+							</option>
+							<option>lib
+								<value>TEST_UMC18_ALLTEK_PLL</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>schematic</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>tmpstate.1498661368</value>
+							</option>
+						</origoptions>
+					</test>
+				</tests>
+				<vars>
+					<var>VCTRL
+						<value>0.6</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_UMC18_ALLTEK_PLL:Ring_OSC:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>VS
+						<value>{Exclusion List}1.8{Exclusion List}{Center/Span%}Auto:1.8:3:20{Center/Span%}</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_UMC18_ALLTEK_PLL:Ring_OSC:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>temperature
+						<value>{Exclusion List}30{Exclusion List}{From/To}Auto:-25:5:125{From/To}</value>
+					</var>
+				</vars>
+				<overwritehistoryname>Interactive.0</overwritehistoryname>
+				<plottingoptions>
+					<plottingoption>plottingmode
+						<value>Replace</value>
+					</plottingoption>
+					<plottingoption>plottype
+						<value>None</value>
+					</plottingoption>
+					<plottingoption>usewaveformtemplate
+						<value>no</value>
+					</plottingoption>
+					<plottingoption>useMaestroPlottingTemplate
+						<value>yes</value>
+					</plottingoption>
+					<plottingoption>waveformtemplate
+						<value></value>
+					</plottingoption>
+					<plottingoption>allplottingtemplates
+						<value></value>
+					</plottingoption>
+					<plottingoption>defaultplottingtemplate
+						<value></value>
+					</plottingoption>
+				</plottingoptions>
+				<sortVariableValues>0</sortVariableValues>
+			</checkpoint>
+			<timestamp>Mar 24 21:51:05 2026</timestamp>
+			<resultsname>/home/IC/Desktop/virtuoso/TEST_UMC18_ALLTEK_PLL/Ring_OSC/adexl/results/data/Interactive.0.rdb</resultsname>
+			<simresults>$AXL_SETUPDB_DIR/results/data/Interactive.0.rdb</simresults>
+			<rawdatadelstrategy>SaveAll
+				<simdatasavemode>All</simdatasavemode>
+			</rawdatadelstrategy>
+			<netlistdelstrategy>SaveAll</netlistdelstrategy>
+			<uselocalpsfdir>false</uselocalpsfdir>
+			<localpsfdir>/tmp/IC_IC_215105040</localpsfdir>
+			<psfdir>/home/IC/simulation/TEST_UMC18_ALLTEK_PLL/Ring_OSC/adexl/results/data/Interactive.0</psfdir>
+			<simdir>$AXL_PROJECT_DIR/TEST_UMC18_ALLTEK_PLL/Ring_OSC/adexl/results/data/Interactive.0</simdir>
+			<gendatasheetplotsonsimulation>1</gendatasheetplotsonsimulation>
+			<runlog>/home/IC/Desktop/virtuoso/TEST_UMC18_ALLTEK_PLL/Ring_OSC/adexl/results/data/Interactive.0.log</runlog>
+			<runlogfile>$AXL_SETUPDB_DIR/results/data/Interactive.0.log</runlogfile>
+			<schematicpoint>
+				<vars>
+					<var>VS
+						<value>1.8</value>
+					</var>
+				</vars>
+			</schematicpoint>
+			<test>all</test>
+		</historyentry>
+		<historyentry assemblerOrExplorer="adexl" roOrView="view">Interactive.1
+			<checkpoint>
+				<corners>
+					<corner enabled="1">_default</corner>
+					<corner enabled="1">C0
+						<models>
+							<model enabled="1">mm180_reg18_v124.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/UMC18/Models/Spectre/mm180_reg18_v124.lib.scs</modelfile>
+								<modelsection>"tt" "ff" "ss" "snfp" "fnsp"</modelsection>
+							</model>
+							<model enabled="1">rnnpo_rf_v2d4.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/UMC18/Models/Spectre/rnnpo_rf_v2d4.lib.scs</modelfile>
+								<modelsection>"typ" "min" "max"</modelsection>
+							</model>
+						</models>
+					</corner>
+				</corners>
+				<extensions>
+					<extension>Parasitics
+						<callback>_parSetupDBExtensionCB</callback>
+						<iconvalue></iconvalue>
+						<icontype></icontype>
+					</extension>
+				</extensions>
+				<currentmode>Single Run, Sweeps and Corners</currentmode>
+				<overwritehistory>0</overwritehistory>
+				<tests>
+					<test enabled="1">TEST_UMC18_ALLTEK_PLL:Ring_OSC:1
+						<tool>ADE</tool>
+						<tooloptions>
+							<option>cell
+								<value>Ring_OSC</value>
+							</option>
+							<option>lib
+								<value>TEST_UMC18_ALLTEK_PLL</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>schematic</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>TEST_UMC18_ALLTEK_PLL:Ring_OSC:1_tmpstate.1498661368_Interactive.1</value>
+							</option>
+						</tooloptions>
+						<origoptions>
+							<option>cell
+								<value>Ring_OSC</value>
+							</option>
+							<option>lib
+								<value>TEST_UMC18_ALLTEK_PLL</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>schematic</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>tmpstate.1498661368</value>
+							</option>
+						</origoptions>
+					</test>
+				</tests>
+				<vars>
+					<var>VCTRL
+						<value>0.6</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_UMC18_ALLTEK_PLL:Ring_OSC:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>VS
+						<value>{Exclusion List}1.8{Exclusion List}{Center/Span%}Auto:1.8:3:20{Center/Span%}</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_UMC18_ALLTEK_PLL:Ring_OSC:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>temperature
+						<value>{Exclusion List}30{Exclusion List}{From/To}Auto:-25:5:125{From/To}</value>
+					</var>
+				</vars>
+				<overwritehistoryname>Interactive.0</overwritehistoryname>
+				<plottingoptions>
+					<plottingoption>plottingmode
+						<value>Replace</value>
+					</plottingoption>
+					<plottingoption>plottype
+						<value>None</value>
+					</plottingoption>
+					<plottingoption>usewaveformtemplate
+						<value>no</value>
+					</plottingoption>
+					<plottingoption>useMaestroPlottingTemplate
+						<value>yes</value>
+					</plottingoption>
+					<plottingoption>waveformtemplate
+						<value></value>
+					</plottingoption>
+					<plottingoption>allplottingtemplates
+						<value></value>
+					</plottingoption>
+					<plottingoption>defaultplottingtemplate
+						<value></value>
+					</plottingoption>
+				</plottingoptions>
+				<sortVariableValues>0</sortVariableValues>
+			</checkpoint>
+			<timestamp>Mar 24 21:54:15 2026</timestamp>
+			<resultsname>/home/IC/Desktop/virtuoso/TEST_UMC18_ALLTEK_PLL/Ring_OSC/adexl/results/data/Interactive.1.rdb</resultsname>
+			<simresults>$AXL_SETUPDB_DIR/results/data/Interactive.1.rdb</simresults>
+			<rawdatadelstrategy>SaveAll
+				<simdatasavemode>All</simdatasavemode>
+			</rawdatadelstrategy>
+			<netlistdelstrategy>SaveAll</netlistdelstrategy>
+			<uselocalpsfdir>false</uselocalpsfdir>
+			<localpsfdir>/tmp/IC_IC_215415622</localpsfdir>
+			<psfdir>/home/IC/simulation/TEST_UMC18_ALLTEK_PLL/Ring_OSC/adexl/results/data/Interactive.1</psfdir>
+			<simdir>$AXL_PROJECT_DIR/TEST_UMC18_ALLTEK_PLL/Ring_OSC/adexl/results/data/Interactive.1</simdir>
+			<gendatasheetplotsonsimulation>1</gendatasheetplotsonsimulation>
+			<runlog>/home/IC/Desktop/virtuoso/TEST_UMC18_ALLTEK_PLL/Ring_OSC/adexl/results/data/Interactive.1.log</runlog>
+			<runlogfile>$AXL_SETUPDB_DIR/results/data/Interactive.1.log</runlogfile>
+			<schematicpoint>
+				<vars>
+					<var>VS
+						<value>1.8</value>
+					</var>
+				</vars>
+			</schematicpoint>
+			<test>all</test>
+		</historyentry>
+		<historyentry assemblerOrExplorer="adexl" roOrView="view">Interactive.2
+			<checkpoint>
+				<corners>
+					<corner enabled="1">_default</corner>
+					<corner enabled="1">C0
+						<models>
+							<model enabled="1">mm180_reg18_v124.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/UMC18/Models/Spectre/mm180_reg18_v124.lib.scs</modelfile>
+								<modelsection>"tt" "ff" "ss" "snfp" "fnsp"</modelsection>
+							</model>
+							<model enabled="1">rnnpo_rf_v2d4.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/UMC18/Models/Spectre/rnnpo_rf_v2d4.lib.scs</modelfile>
+								<modelsection>"typ" "min" "max"</modelsection>
+							</model>
+						</models>
+					</corner>
+				</corners>
+				<extensions>
+					<extension>Parasitics
+						<callback>_parSetupDBExtensionCB</callback>
+						<iconvalue></iconvalue>
+						<icontype></icontype>
+					</extension>
+				</extensions>
+				<currentmode>Single Run, Sweeps and Corners</currentmode>
+				<overwritehistory>0</overwritehistory>
+				<tests>
+					<test enabled="1">TEST_UMC18_ALLTEK_PLL:Ring_OSC:1
+						<tool>ADE</tool>
+						<tooloptions>
+							<option>cell
+								<value>Ring_OSC</value>
+							</option>
+							<option>lib
+								<value>TEST_UMC18_ALLTEK_PLL</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>schematic</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>TEST_UMC18_ALLTEK_PLL:Ring_OSC:1_tmpstate.1498661368_Interactive.2</value>
+							</option>
+						</tooloptions>
+						<origoptions>
+							<option>cell
+								<value>Ring_OSC</value>
+							</option>
+							<option>lib
+								<value>TEST_UMC18_ALLTEK_PLL</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>schematic</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>tmpstate.1498661368</value>
+							</option>
+						</origoptions>
+					</test>
+				</tests>
+				<vars>
+					<var>VCTRL
+						<value>0.6</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_UMC18_ALLTEK_PLL:Ring_OSC:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var enabled="0">VS
+						<value>{Exclusion List}1.8{Exclusion List}{Center/Span%}Auto:1.8:3:20{Center/Span%}</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_UMC18_ALLTEK_PLL:Ring_OSC:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var enabled="0">temperature
+						<value>{Exclusion List}30{Exclusion List}{From/To}Auto:-25:5:125{From/To}</value>
+					</var>
+				</vars>
+				<overwritehistoryname>Interactive.0</overwritehistoryname>
+				<plottingoptions>
+					<plottingoption>plottingmode
+						<value>Replace</value>
+					</plottingoption>
+					<plottingoption>plottype
+						<value>None</value>
+					</plottingoption>
+					<plottingoption>usewaveformtemplate
+						<value>no</value>
+					</plottingoption>
+					<plottingoption>useMaestroPlottingTemplate
+						<value>yes</value>
+					</plottingoption>
+					<plottingoption>waveformtemplate
+						<value></value>
+					</plottingoption>
+					<plottingoption>allplottingtemplates
+						<value></value>
+					</plottingoption>
+					<plottingoption>defaultplottingtemplate
+						<value></value>
+					</plottingoption>
+				</plottingoptions>
+				<sortVariableValues>0</sortVariableValues>
+			</checkpoint>
+			<timestamp>Mar 24 21:54:30 2026</timestamp>
+			<resultsname>/home/IC/Desktop/virtuoso/TEST_UMC18_ALLTEK_PLL/Ring_OSC/adexl/results/data/Interactive.2.rdb</resultsname>
+			<simresults>$AXL_SETUPDB_DIR/results/data/Interactive.2.rdb</simresults>
+			<rawdatadelstrategy>SaveAll
+				<simdatasavemode>All</simdatasavemode>
+			</rawdatadelstrategy>
+			<netlistdelstrategy>SaveAll</netlistdelstrategy>
+			<uselocalpsfdir>false</uselocalpsfdir>
+			<localpsfdir>/tmp/IC_IC_215430980</localpsfdir>
+			<psfdir>/home/IC/simulation/TEST_UMC18_ALLTEK_PLL/Ring_OSC/adexl/results/data/Interactive.2</psfdir>
+			<simdir>$AXL_PROJECT_DIR/TEST_UMC18_ALLTEK_PLL/Ring_OSC/adexl/results/data/Interactive.2</simdir>
+			<gendatasheetplotsonsimulation>1</gendatasheetplotsonsimulation>
+			<runlog>/home/IC/Desktop/virtuoso/TEST_UMC18_ALLTEK_PLL/Ring_OSC/adexl/results/data/Interactive.2.log</runlog>
+			<runlogfile>$AXL_SETUPDB_DIR/results/data/Interactive.2.log</runlogfile>
+			<schematicpoint></schematicpoint>
+			<test>all</test>
+		</historyentry>
+		<historyentry assemblerOrExplorer="adexl" roOrView="view">Interactive.3
+			<checkpoint>
+				<corners>
+					<corner enabled="0">_default</corner>
+					<corner enabled="1">C0
+						<models>
+							<model enabled="1">mm180_reg18_v124.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/UMC18/Models/Spectre/mm180_reg18_v124.lib.scs</modelfile>
+								<modelsection>"tt" "ff" "ss" "snfp" "fnsp"</modelsection>
+							</model>
+							<model enabled="1">rnnpo_rf_v2d4.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/UMC18/Models/Spectre/rnnpo_rf_v2d4.lib.scs</modelfile>
+								<modelsection>"typ" "min" "max"</modelsection>
+							</model>
+						</models>
+					</corner>
+				</corners>
+				<extensions>
+					<extension>Parasitics
+						<callback>_parSetupDBExtensionCB</callback>
+						<iconvalue></iconvalue>
+						<icontype></icontype>
+					</extension>
+				</extensions>
+				<currentmode>Single Run, Sweeps and Corners</currentmode>
+				<overwritehistory>0</overwritehistory>
+				<tests>
+					<test enabled="1">TEST_UMC18_ALLTEK_PLL:Ring_OSC:1
+						<tool>ADE</tool>
+						<tooloptions>
+							<option>cell
+								<value>Ring_OSC</value>
+							</option>
+							<option>lib
+								<value>TEST_UMC18_ALLTEK_PLL</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>schematic</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>TEST_UMC18_ALLTEK_PLL:Ring_OSC:1_tmpstate.1498661368_Interactive.3</value>
+							</option>
+						</tooloptions>
+						<origoptions>
+							<option>cell
+								<value>Ring_OSC</value>
+							</option>
+							<option>lib
+								<value>TEST_UMC18_ALLTEK_PLL</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>schematic</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>tmpstate.1498661368</value>
+							</option>
+						</origoptions>
+					</test>
+				</tests>
+				<vars>
+					<var>VCTRL
+						<value>0.6</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_UMC18_ALLTEK_PLL:Ring_OSC:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var enabled="0">VS
+						<value>{Exclusion List}1.8{Exclusion List}{Center/Span%}Auto:1.8:3:20{Center/Span%}</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_UMC18_ALLTEK_PLL:Ring_OSC:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var enabled="0">temperature
+						<value>{Exclusion List}30{Exclusion List}{From/To}Auto:-25:5:125{From/To}</value>
+					</var>
+				</vars>
+				<overwritehistoryname>Interactive.0</overwritehistoryname>
+				<plottingoptions>
+					<plottingoption>plottingmode
+						<value>Replace</value>
+					</plottingoption>
+					<plottingoption>plottype
+						<value>None</value>
+					</plottingoption>
+					<plottingoption>usewaveformtemplate
+						<value>no</value>
+					</plottingoption>
+					<plottingoption>useMaestroPlottingTemplate
+						<value>yes</value>
+					</plottingoption>
+					<plottingoption>waveformtemplate
+						<value></value>
+					</plottingoption>
+					<plottingoption>allplottingtemplates
+						<value></value>
+					</plottingoption>
+					<plottingoption>defaultplottingtemplate
+						<value></value>
+					</plottingoption>
+				</plottingoptions>
+				<sortVariableValues>0</sortVariableValues>
+			</checkpoint>
+			<timestamp>Mar 24 21:55:34 2026</timestamp>
+			<resultsname>/home/IC/Desktop/virtuoso/TEST_UMC18_ALLTEK_PLL/Ring_OSC/adexl/results/data/Interactive.3.rdb</resultsname>
+			<simresults>$AXL_SETUPDB_DIR/results/data/Interactive.3.rdb</simresults>
+			<rawdatadelstrategy>SaveAll
+				<simdatasavemode>All</simdatasavemode>
+			</rawdatadelstrategy>
+			<netlistdelstrategy>SaveAll</netlistdelstrategy>
+			<uselocalpsfdir>false</uselocalpsfdir>
+			<localpsfdir>/tmp/IC_IC_215534823</localpsfdir>
+			<psfdir>/home/IC/simulation/TEST_UMC18_ALLTEK_PLL/Ring_OSC/adexl/results/data/Interactive.3</psfdir>
+			<simdir>$AXL_PROJECT_DIR/TEST_UMC18_ALLTEK_PLL/Ring_OSC/adexl/results/data/Interactive.3</simdir>
+			<gendatasheetplotsonsimulation>1</gendatasheetplotsonsimulation>
+			<runlog>/home/IC/Desktop/virtuoso/TEST_UMC18_ALLTEK_PLL/Ring_OSC/adexl/results/data/Interactive.3.log</runlog>
+			<runlogfile>$AXL_SETUPDB_DIR/results/data/Interactive.3.log</runlogfile>
+			<schematicpoint></schematicpoint>
+			<test>all</test>
+		</historyentry>
+		<historyentry assemblerOrExplorer="adexl" roOrView="view">Interactive.4
+			<checkpoint>
+				<corners>
+					<corner enabled="0">_default</corner>
+					<corner enabled="1">C0
+						<models>
+							<model enabled="1">mm180_reg18_v124.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/UMC18/Models/Spectre/mm180_reg18_v124.lib.scs</modelfile>
+								<modelsection>"tt" "ff" "ss" "snfp" "fnsp"</modelsection>
+							</model>
+							<model enabled="1">rnnpo_rf_v2d4.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/UMC18/Models/Spectre/rnnpo_rf_v2d4.lib.scs</modelfile>
+								<modelsection>"typ" "min" "max"</modelsection>
+							</model>
+						</models>
+					</corner>
+				</corners>
+				<extensions>
+					<extension>Parasitics
+						<callback>_parSetupDBExtensionCB</callback>
+						<iconvalue></iconvalue>
+						<icontype></icontype>
+					</extension>
+				</extensions>
+				<currentmode>Single Run, Sweeps and Corners</currentmode>
+				<overwritehistory>0</overwritehistory>
+				<tests>
+					<test enabled="1">TEST_UMC18_ALLTEK_PLL:Ring_OSC:1
+						<tool>ADE</tool>
+						<tooloptions>
+							<option>cell
+								<value>Ring_OSC</value>
+							</option>
+							<option>lib
+								<value>TEST_UMC18_CDR</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>config</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>TEST_UMC18_ALLTEK_PLL:Ring_OSC:1_tmpstate.1498661368_Interactive.4</value>
+							</option>
+						</tooloptions>
+						<origoptions>
+							<option>cell
+								<value>Ring_OSC</value>
+							</option>
+							<option>lib
+								<value>TEST_UMC18_ALLTEK_PLL</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>schematic</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>tmpstate.1498661368</value>
+							</option>
+						</origoptions>
+					</test>
+				</tests>
+				<vars>
+					<var>VCTRL
+						<value>0.6</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_UMC18_ALLTEK_PLL:Ring_OSC:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var enabled="0">VS
+						<value>{Exclusion List}1.8{Exclusion List}{Center/Span%}Auto:1.8:3:20{Center/Span%}</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_UMC18_ALLTEK_PLL:Ring_OSC:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var enabled="0">temperature
+						<value>{Exclusion List}30{Exclusion List}{From/To}Auto:-25:5:125{From/To}</value>
+					</var>
+					<var>VC
+						<value>0</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_UMC18_ALLTEK_PLL:Ring_OSC:1</dependentTest>
+						</dependentTests>
+					</var>
+				</vars>
+				<overwritehistoryname>Interactive.0</overwritehistoryname>
+				<plottingoptions>
+					<plottingoption>plottingmode
+						<value>Replace</value>
+					</plottingoption>
+					<plottingoption>plottype
+						<value>None</value>
+					</plottingoption>
+					<plottingoption>usewaveformtemplate
+						<value>no</value>
+					</plottingoption>
+					<plottingoption>useMaestroPlottingTemplate
+						<value>yes</value>
+					</plottingoption>
+					<plottingoption>waveformtemplate
+						<value></value>
+					</plottingoption>
+					<plottingoption>allplottingtemplates
+						<value></value>
+					</plottingoption>
+					<plottingoption>defaultplottingtemplate
+						<value></value>
+					</plottingoption>
+				</plottingoptions>
+				<sortVariableValues>0</sortVariableValues>
+			</checkpoint>
+			<timestamp>Mar 24 23:19:01 2026</timestamp>
+			<resultsname>/home/IC/Desktop/virtuoso/TEST_UMC18_ALLTEK_PLL/Ring_OSC/adexl/results/data/Interactive.4.rdb</resultsname>
+			<simresults>$AXL_SETUPDB_DIR/results/data/Interactive.4.rdb</simresults>
+			<rawdatadelstrategy>SaveAll
+				<simdatasavemode>All</simdatasavemode>
+			</rawdatadelstrategy>
+			<netlistdelstrategy>SaveAll</netlistdelstrategy>
+			<uselocalpsfdir>false</uselocalpsfdir>
+			<localpsfdir>/tmp/IC_IC_231901754</localpsfdir>
+			<psfdir>/home/IC/simulation/TEST_UMC18_ALLTEK_PLL/Ring_OSC/adexl/results/data/Interactive.4</psfdir>
+			<simdir>$AXL_PROJECT_DIR/TEST_UMC18_ALLTEK_PLL/Ring_OSC/adexl/results/data/Interactive.4</simdir>
+			<gendatasheetplotsonsimulation>1</gendatasheetplotsonsimulation>
+			<runlog>/home/IC/Desktop/virtuoso/TEST_UMC18_ALLTEK_PLL/Ring_OSC/adexl/results/data/Interactive.4.log</runlog>
+			<runlogfile>$AXL_SETUPDB_DIR/results/data/Interactive.4.log</runlogfile>
+			<schematicpoint></schematicpoint>
+			<test>all</test>
+		</historyentry>
+		<historyentry assemblerOrExplorer="adexl" roOrView="view">Interactive.5
+			<checkpoint>
+				<corners>
+					<corner enabled="0">_default</corner>
+					<corner enabled="1">C0
+						<models>
+							<model enabled="1">mm180_reg18_v124.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/UMC18/Models/Spectre/mm180_reg18_v124.lib.scs</modelfile>
+								<modelsection>"tt" "ff" "ss" "snfp" "fnsp"</modelsection>
+							</model>
+							<model enabled="1">rnnpo_rf_v2d4.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/UMC18/Models/Spectre/rnnpo_rf_v2d4.lib.scs</modelfile>
+								<modelsection>"typ" "min" "max"</modelsection>
+							</model>
+							<model enabled="1">rnhr_rf_v2d4.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/UMC18/Models/Spectre/rnhr_rf_v2d4.lib.scs</modelfile>
+								<modelsection>"typ" "min" "max"</modelsection>
+							</model>
+						</models>
+					</corner>
+				</corners>
+				<extensions>
+					<extension>Parasitics
+						<callback>_parSetupDBExtensionCB</callback>
+						<iconvalue></iconvalue>
+						<icontype></icontype>
+					</extension>
+				</extensions>
+				<currentmode>Single Run, Sweeps and Corners</currentmode>
+				<overwritehistory>0</overwritehistory>
+				<tests>
+					<test enabled="1">TEST_UMC18_ALLTEK_PLL:Ring_OSC:1
+						<tool>ADE</tool>
+						<tooloptions>
+							<option>cell
+								<value>Ring_OSC</value>
+							</option>
+							<option>lib
+								<value>TEST_UMC18_CDR</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>config</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>TEST_UMC18_ALLTEK_PLL:Ring_OSC:1_tmpstate.1498661368_Interactive.5</value>
+							</option>
+						</tooloptions>
+						<origoptions>
+							<option>cell
+								<value>Ring_OSC</value>
+							</option>
+							<option>lib
+								<value>TEST_UMC18_ALLTEK_PLL</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>schematic</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>tmpstate.1498661368</value>
+							</option>
+						</origoptions>
+					</test>
+				</tests>
+				<vars>
+					<var>VCTRL
+						<value>0.6</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_UMC18_ALLTEK_PLL:Ring_OSC:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var enabled="0">VS
+						<value>{Exclusion List}1.8{Exclusion List}{Center/Span%}Auto:1.8:3:20{Center/Span%}</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_UMC18_ALLTEK_PLL:Ring_OSC:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var enabled="0">temperature
+						<value>{Exclusion List}30{Exclusion List}{From/To}Auto:-25:5:125{From/To}</value>
+					</var>
+					<var>VC
+						<value>0</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_UMC18_ALLTEK_PLL:Ring_OSC:1</dependentTest>
+						</dependentTests>
+					</var>
+				</vars>
+				<overwritehistoryname>Interactive.0</overwritehistoryname>
+				<plottingoptions>
+					<plottingoption>plottingmode
+						<value>Replace</value>
+					</plottingoption>
+					<plottingoption>plottype
+						<value>None</value>
+					</plottingoption>
+					<plottingoption>usewaveformtemplate
+						<value>no</value>
+					</plottingoption>
+					<plottingoption>useMaestroPlottingTemplate
+						<value>yes</value>
+					</plottingoption>
+					<plottingoption>waveformtemplate
+						<value></value>
+					</plottingoption>
+					<plottingoption>allplottingtemplates
+						<value></value>
+					</plottingoption>
+					<plottingoption>defaultplottingtemplate
+						<value></value>
+					</plottingoption>
+				</plottingoptions>
+				<sortVariableValues>0</sortVariableValues>
+			</checkpoint>
+			<timestamp>Mar 25 00:05:11 2026</timestamp>
+			<resultsname>/home/IC/Desktop/virtuoso/TEST_UMC18_ALLTEK_PLL/Ring_OSC/adexl/results/data/Interactive.5.rdb</resultsname>
+			<simresults>$AXL_SETUPDB_DIR/results/data/Interactive.5.rdb</simresults>
+			<rawdatadelstrategy>SaveAll
+				<simdatasavemode>All</simdatasavemode>
+			</rawdatadelstrategy>
+			<netlistdelstrategy>SaveAll</netlistdelstrategy>
+			<uselocalpsfdir>false</uselocalpsfdir>
+			<localpsfdir>/tmp/IC_IC_000511730</localpsfdir>
+			<psfdir>/home/IC/simulation/TEST_UMC18_ALLTEK_PLL/Ring_OSC/adexl/results/data/Interactive.5</psfdir>
+			<simdir>$AXL_PROJECT_DIR/TEST_UMC18_ALLTEK_PLL/Ring_OSC/adexl/results/data/Interactive.5</simdir>
+			<gendatasheetplotsonsimulation>1</gendatasheetplotsonsimulation>
+			<runlog>/home/IC/Desktop/virtuoso/TEST_UMC18_ALLTEK_PLL/Ring_OSC/adexl/results/data/Interactive.5.log</runlog>
+			<runlogfile>$AXL_SETUPDB_DIR/results/data/Interactive.5.log</runlogfile>
+			<schematicpoint></schematicpoint>
+			<test>all</test>
+		</historyentry>
+		<historyentry assemblerOrExplorer="adexl" roOrView="view">Interactive.6
+			<checkpoint>
+				<corners>
+					<corner enabled="0">_default</corner>
+					<corner enabled="1">C0
+						<models>
+							<model enabled="1">mm180_reg18_v124.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/UMC18/Models/Spectre/mm180_reg18_v124.lib.scs</modelfile>
+								<modelsection>"tt" "ff" "ss" "snfp" "fnsp"</modelsection>
+							</model>
+							<model enabled="1">rnnpo_rf_v2d4.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/UMC18/Models/Spectre/rnnpo_rf_v2d4.lib.scs</modelfile>
+								<modelsection>"typ" "min" "max"</modelsection>
+							</model>
+							<model enabled="1">mm180_res_v141.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/UMC18/Models/Spectre/mm180_res_v141.lib.scs</modelfile>
+								<modelsection>"res_max" "res_typ" "res_min"</modelsection>
+							</model>
+							<model enabled="1">mm180_bjt_v121.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/UMC18/Models/Spectre/mm180_bjt_v121.lib.scs</modelfile>
+								<modelsection>"tt_bip"</modelsection>
+							</model>
+						</models>
+					</corner>
+				</corners>
+				<extensions>
+					<extension>Parasitics
+						<callback>_parSetupDBExtensionCB</callback>
+						<iconvalue></iconvalue>
+						<icontype></icontype>
+					</extension>
+				</extensions>
+				<currentmode>Single Run, Sweeps and Corners</currentmode>
+				<overwritehistory>0</overwritehistory>
+				<tests>
+					<test enabled="1">TEST_UMC18_ALLTEK_PLL:Ring_OSC:1
+						<tool>ADE</tool>
+						<tooloptions>
+							<option>cell
+								<value>Ring_OSC</value>
+							</option>
+							<option>lib
+								<value>TEST_UMC18_CDR</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>config</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>TEST_UMC18_ALLTEK_PLL:Ring_OSC:1_tmpstate.1498661368_Interactive.6</value>
+							</option>
+						</tooloptions>
+						<origoptions>
+							<option>cell
+								<value>Ring_OSC</value>
+							</option>
+							<option>lib
+								<value>TEST_UMC18_ALLTEK_PLL</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>schematic</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>tmpstate.1498661368</value>
+							</option>
+						</origoptions>
+					</test>
+				</tests>
+				<vars>
+					<var>VCTRL
+						<value>0.6</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_UMC18_ALLTEK_PLL:Ring_OSC:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var enabled="0">VS
+						<value>{Exclusion List}1.8{Exclusion List}{Center/Span%}Auto:1.8:3:20{Center/Span%}</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_UMC18_ALLTEK_PLL:Ring_OSC:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var enabled="0">temperature
+						<value>{Exclusion List}30{Exclusion List}{From/To}Auto:-25:5:125{From/To}</value>
+					</var>
+					<var>VC
+						<value>0</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_UMC18_ALLTEK_PLL:Ring_OSC:1</dependentTest>
+						</dependentTests>
+					</var>
+				</vars>
+				<overwritehistoryname>Interactive.0</overwritehistoryname>
+				<plottingoptions>
+					<plottingoption>plottingmode
+						<value>Replace</value>
+					</plottingoption>
+					<plottingoption>plottype
+						<value>None</value>
+					</plottingoption>
+					<plottingoption>usewaveformtemplate
+						<value>no</value>
+					</plottingoption>
+					<plottingoption>useMaestroPlottingTemplate
+						<value>yes</value>
+					</plottingoption>
+					<plottingoption>waveformtemplate
+						<value></value>
+					</plottingoption>
+					<plottingoption>allplottingtemplates
+						<value></value>
+					</plottingoption>
+					<plottingoption>defaultplottingtemplate
+						<value></value>
+					</plottingoption>
+				</plottingoptions>
+				<sortVariableValues>0</sortVariableValues>
+			</checkpoint>
+			<timestamp>Mar 25 00:07:59 2026</timestamp>
+			<resultsname>/home/IC/Desktop/virtuoso/TEST_UMC18_ALLTEK_PLL/Ring_OSC/adexl/results/data/Interactive.6.rdb</resultsname>
+			<simresults>$AXL_SETUPDB_DIR/results/data/Interactive.6.rdb</simresults>
+			<rawdatadelstrategy>SaveAll
+				<simdatasavemode>All</simdatasavemode>
+			</rawdatadelstrategy>
+			<netlistdelstrategy>SaveAll</netlistdelstrategy>
+			<uselocalpsfdir>false</uselocalpsfdir>
+			<localpsfdir>/tmp/IC_IC_000759938</localpsfdir>
+			<psfdir>/home/IC/simulation/TEST_UMC18_ALLTEK_PLL/Ring_OSC/adexl/results/data/Interactive.6</psfdir>
+			<simdir>$AXL_PROJECT_DIR/TEST_UMC18_ALLTEK_PLL/Ring_OSC/adexl/results/data/Interactive.6</simdir>
+			<gendatasheetplotsonsimulation>1</gendatasheetplotsonsimulation>
+			<runlog>/home/IC/Desktop/virtuoso/TEST_UMC18_ALLTEK_PLL/Ring_OSC/adexl/results/data/Interactive.6.log</runlog>
+			<runlogfile>$AXL_SETUPDB_DIR/results/data/Interactive.6.log</runlogfile>
+			<schematicpoint></schematicpoint>
+			<test>all</test>
+		</historyentry>
+		<historyentry assemblerOrExplorer="adexl" roOrView="view">Interactive.7
+			<checkpoint>
+				<corners>
+					<corner enabled="0">_default</corner>
+					<corner enabled="1">C0
+						<models>
+							<model enabled="1">mm180_reg18_v124.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/UMC18/Models/Spectre/mm180_reg18_v124.lib.scs</modelfile>
+								<modelsection>"tt" "ff" "ss" "snfp" "fnsp"</modelsection>
+							</model>
+							<model enabled="1">rnnpo_rf_v2d4.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/UMC18/Models/Spectre/rnnpo_rf_v2d4.lib.scs</modelfile>
+								<modelsection>"typ" "min" "max"</modelsection>
+							</model>
+							<model enabled="0">mm180_res_v141.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/UMC18/Models/Spectre/mm180_res_v141.lib.scs</modelfile>
+								<modelsection>"res_max" "res_typ" "res_min"</modelsection>
+							</model>
+							<model enabled="0">mm180_bjt_v121.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/UMC18/Models/Spectre/mm180_bjt_v121.lib.scs</modelfile>
+								<modelsection>"tt_bip"</modelsection>
+							</model>
+						</models>
+					</corner>
+				</corners>
+				<extensions>
+					<extension>Parasitics
+						<callback>_parSetupDBExtensionCB</callback>
+						<iconvalue></iconvalue>
+						<icontype></icontype>
+					</extension>
+				</extensions>
+				<currentmode>Single Run, Sweeps and Corners</currentmode>
+				<overwritehistory>0</overwritehistory>
+				<tests>
+					<test enabled="1">TEST_UMC18_ALLTEK_PLL:Ring_OSC:1
+						<tool>ADE</tool>
+						<tooloptions>
+							<option>cell
+								<value>Ring_OSC</value>
+							</option>
+							<option>lib
+								<value>TEST_UMC18_ALLTEK_PLL</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>schematic</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>TEST_UMC18_ALLTEK_PLL:Ring_OSC:1_tmpstate.1498661368_Interactive.7</value>
+							</option>
+						</tooloptions>
+						<origoptions>
+							<option>cell
+								<value>Ring_OSC</value>
+							</option>
+							<option>lib
+								<value>TEST_UMC18_ALLTEK_PLL</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>schematic</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>tmpstate.1498661368</value>
+							</option>
+						</origoptions>
+					</test>
+				</tests>
+				<vars>
+					<var enabled="0">VCTRL
+						<value>0.6</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_UMC18_ALLTEK_PLL:Ring_OSC:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var enabled="0">VS
+						<value>{Exclusion List}1.8{Exclusion List}{Center/Span%}Auto:1.8:3:20{Center/Span%}</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_UMC18_ALLTEK_PLL:Ring_OSC:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var enabled="0">temperature
+						<value>{Exclusion List}30{Exclusion List}{From/To}Auto:-25:5:125{From/To}</value>
+					</var>
+					<var>VC
+						<value>0</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_UMC18_ALLTEK_PLL:Ring_OSC:1</dependentTest>
+						</dependentTests>
+					</var>
+				</vars>
+				<overwritehistoryname>Interactive.0</overwritehistoryname>
+				<plottingoptions>
+					<plottingoption>plottingmode
+						<value>Replace</value>
+					</plottingoption>
+					<plottingoption>plottype
+						<value>None</value>
+					</plottingoption>
+					<plottingoption>usewaveformtemplate
+						<value>no</value>
+					</plottingoption>
+					<plottingoption>useMaestroPlottingTemplate
+						<value>yes</value>
+					</plottingoption>
+					<plottingoption>waveformtemplate
+						<value></value>
+					</plottingoption>
+					<plottingoption>allplottingtemplates
+						<value></value>
+					</plottingoption>
+					<plottingoption>defaultplottingtemplate
+						<value></value>
+					</plottingoption>
+				</plottingoptions>
+				<sortVariableValues>0</sortVariableValues>
+			</checkpoint>
+			<timestamp>Mar 26 01:33:56 2026</timestamp>
+			<resultsname>/home/IC/Desktop/virtuoso/TEST_UMC18_ALLTEK_PLL/Ring_OSC/adexl/results/data/Interactive.7.rdb</resultsname>
+			<simresults>$AXL_SETUPDB_DIR/results/data/Interactive.7.rdb</simresults>
+			<rawdatadelstrategy>SaveAll
+				<simdatasavemode>All</simdatasavemode>
+			</rawdatadelstrategy>
+			<netlistdelstrategy>SaveAll</netlistdelstrategy>
+			<uselocalpsfdir>false</uselocalpsfdir>
+			<localpsfdir>/tmp/IC_IC_013356965</localpsfdir>
+			<psfdir>/home/IC/simulation/TEST_UMC18_ALLTEK_PLL/Ring_OSC/adexl/results/data/Interactive.7</psfdir>
+			<simdir>$AXL_PROJECT_DIR/TEST_UMC18_ALLTEK_PLL/Ring_OSC/adexl/results/data/Interactive.7</simdir>
+			<gendatasheetplotsonsimulation>1</gendatasheetplotsonsimulation>
+			<runlog>/home/IC/Desktop/virtuoso/TEST_UMC18_ALLTEK_PLL/Ring_OSC/adexl/results/data/Interactive.7.log</runlog>
+			<runlogfile>$AXL_SETUPDB_DIR/results/data/Interactive.7.log</runlogfile>
+			<schematicpoint></schematicpoint>
+			<test>all</test>
+		</historyentry>
+		<historyentry assemblerOrExplorer="adexl" roOrView="view">Interactive.8
+			<checkpoint>
+				<corners>
+					<corner enabled="0">_default</corner>
+					<corner enabled="1">C0
+						<models>
+							<model enabled="1">mm180_reg18_v124.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/UMC18/Models/Spectre/mm180_reg18_v124.lib.scs</modelfile>
+								<modelsection>"tt" "ff" "ss" "snfp" "fnsp"</modelsection>
+							</model>
+							<model enabled="1">rnnpo_rf_v2d4.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/UMC18/Models/Spectre/rnnpo_rf_v2d4.lib.scs</modelfile>
+								<modelsection>"typ" "min" "max"</modelsection>
+							</model>
+							<model enabled="0">mm180_res_v141.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/UMC18/Models/Spectre/mm180_res_v141.lib.scs</modelfile>
+								<modelsection>"res_max" "res_typ" "res_min"</modelsection>
+							</model>
+							<model enabled="0">mm180_bjt_v121.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/UMC18/Models/Spectre/mm180_bjt_v121.lib.scs</modelfile>
+								<modelsection>"tt_bip"</modelsection>
+							</model>
+						</models>
+					</corner>
+				</corners>
+				<extensions>
+					<extension>Parasitics
+						<callback>_parSetupDBExtensionCB</callback>
+						<iconvalue></iconvalue>
+						<icontype></icontype>
+					</extension>
+				</extensions>
+				<currentmode>Single Run, Sweeps and Corners</currentmode>
+				<overwritehistory>0</overwritehistory>
+				<tests>
+					<test enabled="1">TEST_UMC18_ALLTEK_PLL:Ring_OSC:1
+						<tool>ADE</tool>
+						<tooloptions>
+							<option>cell
+								<value>Ring_OSC</value>
+							</option>
+							<option>lib
+								<value>TEST_UMC18_ALLTEK_PLL</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>schematic</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>TEST_UMC18_ALLTEK_PLL:Ring_OSC:1_tmpstate.1498661368_Interactive.8</value>
+							</option>
+						</tooloptions>
+						<origoptions>
+							<option>cell
+								<value>Ring_OSC</value>
+							</option>
+							<option>lib
+								<value>TEST_UMC18_ALLTEK_PLL</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>schematic</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>tmpstate.1498661368</value>
+							</option>
+						</origoptions>
+					</test>
+				</tests>
+				<vars>
+					<var enabled="0">VCTRL
+						<value>0.6</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_UMC18_ALLTEK_PLL:Ring_OSC:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var enabled="0">VS
+						<value>{Exclusion List}1.8{Exclusion List}{Center/Span%}Auto:1.8:3:20{Center/Span%}</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_UMC18_ALLTEK_PLL:Ring_OSC:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var enabled="0">temperature
+						<value>{Exclusion List}30{Exclusion List}{From/To}Auto:-25:5:125{From/To}</value>
+					</var>
+					<var>VC
+						<value>0</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_UMC18_ALLTEK_PLL:Ring_OSC:1</dependentTest>
+						</dependentTests>
+					</var>
+				</vars>
+				<overwritehistoryname>Interactive.0</overwritehistoryname>
+				<plottingoptions>
+					<plottingoption>plottingmode
+						<value>Replace</value>
+					</plottingoption>
+					<plottingoption>plottype
+						<value>None</value>
+					</plottingoption>
+					<plottingoption>usewaveformtemplate
+						<value>no</value>
+					</plottingoption>
+					<plottingoption>useMaestroPlottingTemplate
+						<value>yes</value>
+					</plottingoption>
+					<plottingoption>waveformtemplate
+						<value></value>
+					</plottingoption>
+					<plottingoption>allplottingtemplates
+						<value></value>
+					</plottingoption>
+					<plottingoption>defaultplottingtemplate
+						<value></value>
+					</plottingoption>
+				</plottingoptions>
+				<sortVariableValues>0</sortVariableValues>
+			</checkpoint>
+			<timestamp>Mar 26 01:38:48 2026</timestamp>
+			<resultsname>/home/IC/Desktop/virtuoso/TEST_UMC18_ALLTEK_PLL/Ring_OSC/adexl/results/data/Interactive.8.rdb</resultsname>
+			<simresults>$AXL_SETUPDB_DIR/results/data/Interactive.8.rdb</simresults>
+			<rawdatadelstrategy>SaveAll
+				<simdatasavemode>All</simdatasavemode>
+			</rawdatadelstrategy>
+			<netlistdelstrategy>SaveAll</netlistdelstrategy>
+			<uselocalpsfdir>false</uselocalpsfdir>
+			<localpsfdir>/tmp/IC_IC_013848069</localpsfdir>
+			<psfdir>/home/IC/simulation/TEST_UMC18_ALLTEK_PLL/Ring_OSC/adexl/results/data/Interactive.8</psfdir>
+			<simdir>$AXL_PROJECT_DIR/TEST_UMC18_ALLTEK_PLL/Ring_OSC/adexl/results/data/Interactive.8</simdir>
+			<gendatasheetplotsonsimulation>1</gendatasheetplotsonsimulation>
+			<runlog>/home/IC/Desktop/virtuoso/TEST_UMC18_ALLTEK_PLL/Ring_OSC/adexl/results/data/Interactive.8.log</runlog>
+			<runlogfile>$AXL_SETUPDB_DIR/results/data/Interactive.8.log</runlogfile>
+			<schematicpoint></schematicpoint>
+			<test>all</test>
+		</historyentry>
+	</history>
+</setupdb>

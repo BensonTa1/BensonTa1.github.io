@@ -1,0 +1,150 @@
+(c3s
+  (LG1533 c3s symbol)
+  (
+      (plus PLUS)
+      (minus MINUS)
+  )
+)
+(cmim1p5fn
+  (LG1533 cmim1p5fn_34 symbol)
+  (
+      (plus PLUS)
+      (minus MINUS)
+  )
+)
+(cmim1p5fn
+  (LG1533 cmim1p5fn_34_1P4M symbol)
+  (
+      (plus PLUS)
+      (minus MINUS)
+  )
+)
+(cmim1p5fn
+  (LG1533 cmim1p5fn_45 symbol)
+  (
+      (plus PLUS)
+      (minus MINUS)
+  )
+)
+(hvn
+  (LG1533 hvn symbol)
+  (
+      (d D)
+      (g G)
+      (s S)
+      (b B)
+  )
+)
+(hvp
+  (LG1533 hvp symbol)
+  (
+      (d D)
+      (g G)
+      (s S)
+      (b B)
+  )
+)
+(lvn
+  (LG1533 lvn symbol)
+  (
+      (d D)
+      (g G)
+      (s S)
+      (b B)
+  )
+)
+(lvp
+  (LG1533 lvp symbol)
+  (
+      (d D)
+      (g G)
+      (s S)
+      (b B)
+  )
+)
+(npn
+  (LG1533 npn symbol)
+  (
+      (c C)
+      (b B)
+      (e E)
+  )
+)
+(model
+  (LG1533 nppw symbol)
+  (
+      (plus PLUS)
+      (minus MINUS)
+  )
+)
+(pnp
+  (LG1533 pnp symbol)
+  (
+      (c C)
+      (b B)
+      (e E)
+  )
+)
+(model
+  (LG1533 ppnw symbol)
+  (
+      (plus PLUS)
+      (minus MINUS)
+  )
+)
+(rnaa
+  (LG1533 rnaa symbol)
+  (
+      (plus PLUS)
+      (minus MINUS)
+  )
+)
+(rnp
+  (LG1533 rnp symbol)
+  (
+      (plus PLUS)
+      (minus MINUS)
+  )
+)
+(rnpoly
+  (LG1533 rnpoly symbol)
+  (
+      (plus PLUS)
+      (minus MINUS)
+  )
+)
+(rnpolync
+  (LG1533 rnpolync symbol)
+  (
+      (plus PLUS)
+      (minus MINUS)
+  )
+)
+(rpaa
+  (LG1533 rpaa symbol)
+  (
+      (plus PLUS)
+      (minus MINUS)
+  )
+)
+(rpp
+  (LG1533 rpp symbol)
+  (
+      (plus PLUS)
+      (minus MINUS)
+  )
+)
+(rppoly200
+  (LG1533 rppoly200 symbol)
+  (
+      (plus PLUS)
+      (minus MINUS)
+  )
+)
+(rppolync
+  (LG1533 rppolync symbol)
+  (
+      (plus PLUS)
+      (minus MINUS)
+  )
+)

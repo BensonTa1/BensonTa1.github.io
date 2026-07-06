@@ -1,0 +1,63 @@
+********************************************************************************
+Product   : Virtuoso(R) XStream Out
+Program   : @(#)$CDS: strmout version 6.1.8-64b 03/10/2020 21:43 (ip-172-18-22-58) $
+          : sub-version  IC6.1.8-64b.500.10 
+Started at: 07-Apr-2022  16:33:39
+User Name : m10912086
+Host Name : m10912086
+Directory : /home/m10912086/UM180FDKMFC0000OA_A02/UM180FDKMFC0000OA_A02
+CADENCE Design Systems, Inc.
+********************************************************************************
+Info: Cellview Rev Num:99,  Tech Rev Num:59
+
+WARNING (XSTRM-20): Output Stream file '/home/m10912086/UM180FDKMFC00000OA_B02/UM180FDKMFC00000OA_B02/Calibre/DRC/BASE/active_layout.calibre.db' already exists. It will be overwritten.
+INFO (XSTRM-288): Performing automatic layer mapping because either the layer mapping information is not provided or the XST_AUTO_LM  value is used with the -layerMap option. Additionally, the  'xStrmOut_layerMap.txt' file has been generated and the mapping information has been added to it.
+INFO (XSTRM-162): You have not used the viaMap option. If the OpenAccess design has native oaVia instances, use the -viaMap option for preserving oaVia instances in a Stream Out - Stream In round trip. Using the -viaMap option improves performance and VM usage of applications using the Streamed-In design.  For details on the viaMap option, refer to the "Design Data Translator's Reference" guide for XStream.
+
+Summary of Options :
+library                                 active
+strmFile                                /home/m10912086/UM180FDKMFC00000OA_B02/UM180FDKMFC00000OA_B02/Calibre/DRC/BASE/active_layout.calibre.db
+topCell                                 active_layout
+view                                    layout
+runDir                                  /home/m10912086/UM180FDKMFC00000OA_B02/UM180FDKMFC00000OA_B02/Calibre/DRC/BASE/
+logFile                                 PIPO.LOG.active_layout
+summaryFile                             PIPO.SUM.active_layout
+case                                    Preserve
+convertDot                              node
+convertPcellPin                         geometry
+
+INFO (XSTRM-223): 1. Translating cellView UMC_18_CMOS/vi5_p/layout as STRUCTURE vi5_p_CDNS_649320419751.
+INFO (XSTRM-223): 2. Translating cellView UMC_18_CMOS/vi5_p/layout as STRUCTURE vi5_p_CDNS_649320419752.
+INFO (XSTRM-223): 3. Translating cellView UMC_18_CMOS/vi5_p/layout as STRUCTURE vi5_p_CDNS_649320419753.
+INFO (XSTRM-223): 4. Translating cellView UMC_18_CMOS/cont_p/layout as STRUCTURE cont_p_CDNS_649320419754.
+INFO (XSTRM-223): 5. Translating cellView UMC_18_CMOS/cont_p/layout as STRUCTURE cont_p_CDNS_649320419755.
+INFO (XSTRM-223): 6. Translating cellView UMC_18_CMOS/MIMCAPM_RF/layout as STRUCTURE MIMCAPM_RF_CDNS_649320419750.
+INFO (XSTRM-223): 7. Translating cellView active/active_layout/layout as STRUCTURE active_layout.
+
+Summary of Objects Translated:
+	Scalar Instances:                       9
+	Array Instances:                        0
+	Polygons:                               3
+	Paths:                                  2
+	Rectangles:                             684
+	Lines:                                  0
+	Arcs:                                   0
+	Donuts:                                 0
+	Dots:                                   0
+	Ellipses:                               0
+	Boundaries:                             0
+	Area Blockages:                         0
+	Layer Blockages:                        0
+	Area Halos:                             0
+	Markers:                                0
+	Rows:                                   0
+	Standard Vias                           0
+	Custom Vias:                            0
+	CdsGen Vias:                            0
+	Pathsegs:                               0
+	Text:                                   8
+	TextDisplay:                            0
+	Cells:                                  7
+
+Elapsed Time: 0.4s   User Time: 0.1s   CPU Time: 0.1s   Peak VM: 8692KB
+INFO (XSTRM-234): Translation completed. '0' error(s) and '1' warning(s) found.

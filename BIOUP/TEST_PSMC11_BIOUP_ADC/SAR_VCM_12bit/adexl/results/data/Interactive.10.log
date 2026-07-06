@@ -1,0 +1,26 @@
+Starting Single Run, Sweeps and Corners...
+
+Current time: Mon Apr 27 04:53:20 2026 
+Best design point: 1
+Design specs: 
+	TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1	corner	C1 - 
+	v /CLKIN; tran (V)		Error	No
+	v /I2/VCAPP; tran (V)		Error	No
+	v /I2/VCAPN; tran (V)		Error	No
+	v /I2/VCMPP; tran (V)		Error	No
+	spectrum_enob		10.77
+Design parameters: 
+	VA		1
+	M		1
+	N		32
+	FCLK		1M
+	FS		62.5K
+	FIN		1.953K
+	START_TIME		168u
+	STOP_TIME		680u
+	VDD		2.97
+	temperature		-25
+
+Received stop signal from user. 
+Interactive.10 completed. 
+Current time: Mon Apr 27 16:04:31 2026 

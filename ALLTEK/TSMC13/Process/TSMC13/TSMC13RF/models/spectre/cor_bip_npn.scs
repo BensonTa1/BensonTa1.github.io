@@ -1,0 +1,16 @@
+library bip_npn_cor 
+
+section ff_bip_npn 
+include "cr013g_2d5_v1d4.scs" section = ff_bip_npn 
+endsection ff_bip_npn 
+
+section ss_bip_npn 
+include "cr013g_2d5_v1d4.scs" section = ss_bip_npn 
+endsection ss_bip_npn 
+
+section tt_bip_npn 
+include "cr013g_2d5_v1d4.scs" section = tt_bip_npn 
+endsection tt_bip_npn 
+
+
+endlibrary bip_npn_cor 

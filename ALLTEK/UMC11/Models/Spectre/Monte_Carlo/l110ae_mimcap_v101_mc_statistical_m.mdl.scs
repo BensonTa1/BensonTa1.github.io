@@ -1,0 +1,29 @@
+//
+simulator lang=spectre insensitive=yes
+parameters mc_mimcap_10f_ma=0
+statistics {
+    mismatch {
+        vary mc_mimcap_10f_ma dist=gauss std=1/1
+        }
+    }
+//
+
+//
+simulator lang=spectre insensitive=yes
+parameters mc_mimcap_15f_ma=0
+statistics {
+    mismatch {
+        vary mc_mimcap_15f_ma dist=gauss std=1/1
+        }
+    }
+//
+
+//
+simulator lang=spectre insensitive=yes
+parameters mc_mimcap_20f_ma=0
+statistics {
+    mismatch {
+        vary mc_mimcap_20f_ma dist=gauss std=1/1
+        }
+    }
+//

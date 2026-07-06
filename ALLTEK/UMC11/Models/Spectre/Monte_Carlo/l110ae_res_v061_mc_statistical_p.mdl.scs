@@ -1,0 +1,76 @@
+
+simulator lang=spectre insensitive=yes
+parameters mc_rend_rnnpo_l110e = 0
+parameters mc_rs_rnnpo_l110e = 0
+parameters mc_dw_rnnpo_l110e = 0
+parameters mc_rend_rnppo_l110e = 0
+parameters mc_rs_rnppo_l110e = 0
+parameters mc_dw_rnppo_l110e = 0
+parameters mc_rend_rnnd_l110e = 0
+parameters mc_rs_rnnd_l110e = 0
+parameters mc_dw_rnnd_l110e = 0
+parameters mc_rend_rnpd_l110e = 0
+parameters mc_rs_rnpd_l110e = 0
+parameters mc_dw_rnpd_l110e = 0
+parameters mc_rend_rnhr1000_l110e = 0
+parameters mc_rs_rnhr1000_l110e = 0
+parameters mc_dw_rnhr1000_l110e = 0
+parameters mc_rs_rsnd_mml110e = 0
+parameters mc_rs_rspd_mml110e = 0
+parameters mc_rs_rsnpo_mml110e = 0
+parameters mc_rs_rsppo_mml110e = 0
+parameters mc_rs_rnwell_mml110e = 0
+parameters mc_rs_rsm1_l110e = 0
+parameters mc_rs_rsm2_l110e = 0
+parameters mc_rs_rsm6t_8k_l110e = 0
+statistics {
+    process {
+        vary mc_rend_rnnpo_l110e dist=gauss std=sigma/3
+        vary mc_rs_rnnpo_l110e dist=gauss std=sigma/3
+        vary mc_dw_rnnpo_l110e dist=gauss std=sigma/3
+        vary mc_rend_rnppo_l110e dist=gauss std=sigma/3
+        vary mc_rs_rnppo_l110e dist=gauss std=sigma/3
+        vary mc_dw_rnppo_l110e dist=gauss std=sigma/3
+        vary mc_rend_rnnd_l110e dist=gauss std=sigma/3
+        vary mc_rs_rnnd_l110e dist=gauss std=sigma/3
+        vary mc_dw_rnnd_l110e dist=gauss std=sigma/3
+        vary mc_rend_rnpd_l110e dist=gauss std=sigma/3
+        vary mc_rs_rnpd_l110e dist=gauss std=sigma/3
+        vary mc_dw_rnpd_l110e dist=gauss std=sigma/3
+        vary mc_rend_rnhr1000_l110e dist=gauss std=sigma/3
+        vary mc_rs_rnhr1000_l110e dist=gauss std=sigma/3
+        vary mc_dw_rnhr1000_l110e dist=gauss std=sigma/3
+        vary mc_rs_rsnd_mml110e dist=gauss std=sigma/3
+        vary mc_rs_rspd_mml110e dist=gauss std=sigma/3
+        vary mc_rs_rsnpo_mml110e dist=gauss std=sigma/3
+        vary mc_rs_rsppo_mml110e dist=gauss std=sigma/3
+        vary mc_rs_rnwell_mml110e dist=gauss std=sigma/3
+        vary mc_rs_rsm1_l110e dist=gauss std=sigma/3
+        vary mc_rs_rsm2_l110e dist=gauss std=sigma/3
+        vary mc_rs_rsm6t_8k_l110e dist=gauss std=sigma/3
+    }
+}
+
+parameters drend_rnnpo_l110e = (1.20200e-05 / 3) * mc_rend_rnnpo_l110e 
+parameters drs_rnnpo_l110e = (2.80000e+01 / 3) * mc_rs_rnnpo_l110e 
+parameters ddw_rnnpo_l110e = (1.60000e-08 / 3) * mc_dw_rnnpo_l110e 
+parameters drend_rnppo_l110e = (1.60300e-05 / 3) * mc_rend_rnppo_l110e 
+parameters drs_rnppo_l110e = (6.00000e+01 / 3) * mc_rs_rnppo_l110e 
+parameters ddw_rnppo_l110e = (1.60000e-08 / 3) * mc_dw_rnppo_l110e 
+parameters drend_rnnd_l110e = (5.59000e-06 / 3) * mc_rend_rnnd_l110e 
+parameters drs_rnnd_l110e = (2.40000e+01 / 3) * mc_rs_rnnd_l110e 
+parameters ddw_rnnd_l110e = (5.10000e-08 / 3) * mc_dw_rnnd_l110e 
+parameters drend_rnpd_l110e = (6.87000e-06 / 3) * mc_rend_rnpd_l110e 
+parameters drs_rnpd_l110e = (2.90000e+01 / 3) * mc_rs_rnpd_l110e 
+parameters ddw_rnpd_l110e = (5.10000e-08 / 3) * mc_dw_rnpd_l110e 
+parameters drend_rnhr1000_l110e = (5.47400e-05 / 3) * mc_rend_rnhr1000_l110e 
+parameters drs_rnhr1000_l110e = (1.48000e+02 / 3) * mc_rs_rnhr1000_l110e 
+parameters ddw_rnhr1000_l110e = (1.30000e-08 / 3) * mc_dw_rnhr1000_l110e 
+parameters drs_rsnd_mml110e = (6.30000e+00 / 3) * mc_rs_rsnd_mml110e 
+parameters drs_rspd_mml110e = (6.80000e+00 / 3) * mc_rs_rspd_mml110e 
+parameters drs_rsnpo_mml110e = (6.70000e+00 / 3) * mc_rs_rsnpo_mml110e 
+parameters drs_rsppo_mml110e = (7.70000e+00 / 3) * mc_rs_rsppo_mml110e 
+parameters drs_rnwell_mml110e = (4.90000e+01 / 3) * mc_rs_rnwell_mml110e 
+parameters drs_rsm1_l110e = (6.50000e-02 / 3) * mc_rs_rsm1_l110e 
+parameters drs_rsm2_l110e = (4.50000e-02 / 3) * mc_rs_rsm2_l110e 
+parameters drs_rsm6t_8k_l110e = (4.00000e-02 / 3) * mc_rs_rsm6t_8k_l110e 

@@ -1,0 +1,15 @@
+Starting Single Run, Sweeps and Corners...
+
+Current time: Tue Jun 16 03:36:09 2026 
+Best design point: 1
+Design specs: 
+	TEST_UMC18_RRIO_OPA:CONSTANT_GM:1	corner	C0 - 
+	TEST_UMC18_RRIO_OPA:CONSTANT_GM:1	corner	Nominal - 
+	IDC("/IPRB0/PLUS")		5.1u
+Design parameters: 
+
+Interactive.1
+Number of points completed: 1
+Number of simulation errors: 1
+Interactive.1 completed. 
+Current time: Tue Jun 16 03:36:18 2026 

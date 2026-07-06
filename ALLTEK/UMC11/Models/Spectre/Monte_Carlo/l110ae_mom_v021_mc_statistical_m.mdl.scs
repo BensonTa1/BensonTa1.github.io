@@ -1,0 +1,19 @@
+
+simulator lang=spectre insensitive=yes
+parameters ma_sy_mom=0
+parameters ma_as_mom=0
+parameters ma_symesh_mom1=0
+parameters ma_asmesh_mom1=0
+parameters ma_symesh_mom3=0
+parameters ma_asmesh_mom3=0
+statistics {
+    mismatch {
+        vary ma_sy_mom dist=gauss std=1/1
+        vary ma_as_mom dist=gauss std=1/1
+        vary ma_symesh_mom1 dist=gauss std=1/1
+        vary ma_asmesh_mom1 dist=gauss std=1/1
+        vary ma_symesh_mom3 dist=gauss std=1/1
+        vary ma_asmesh_mom3 dist=gauss std=1/1  
+        
+        }
+    }

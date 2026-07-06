@@ -1,0 +1,31 @@
+simulator lang=spectre insensitive=yes 
+library myreslib 
+ 
+section mimcaps_typ 
+
+parameters dcm_mimcaps_mm= 0     //fera per unit um square
+parameters dcmf_mimcaps_mm= 0  //fera per unit um length
+
+include "./mm180_mimcap_v101.mdl.scs" 
+endsection mimcaps_typ  
+ 
+ 
+section mimcaps_min 
+
+parameters dcm_mimcaps_mm=-0.15e-15     //fera per unit um square
+parameters dcmf_mimcaps_mm=-0.0021e-15  //fera per unit um length
+
+include "./mm180_mimcap_v101.mdl.scs" 
+endsection mimcaps_min
+ 
+section mimcaps_max  
+
+
+parameters dcm_mimcaps_mm=0.15e-15     //fera per unit um square
+parameters dcmf_mimcaps_mm=0.0022e-15  //fera per unit um length
+
+include "./mm180_mimcap_v101.mdl.scs" 
+endsection mimcaps_max 
+ 
+endlibrary myreslib 
+ 

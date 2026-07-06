@@ -1,0 +1,78 @@
+simulator lang=spectre insensitive=yes
+library mylib
+
+section tt
+parameters dtox_n_bpw_33_mm=0
+parameters dlint_n_bpw_33_mm=0
+parameters dwint_n_bpw_33_mm=0
+parameters dvth0_n_bpw_33_mm=0
+parameters dcgdo_n_bpw_33_mm=0
+parameters dcgso_n_bpw_33_mm=0
+
+
+include "mm180_reg33bpw_v123.mdl.scs"
+ 
+endsection tt
+
+
+
+section ss
+parameters dtox_n_bpw_33_mm=5e-10
+parameters dlint_n_bpw_33_mm=-1.23e-8
+parameters dwint_n_bpw_33_mm=8e-9
+parameters dvth0_n_bpw_33_mm=0.05
+parameters dcgdo_n_bpw_33_mm=-2.7e-11
+parameters dcgso_n_bpw_33_mm=-2.7e-11
+
+include "mm180_reg33bpw_v123.mdl.scs"
+ 
+endsection ss
+
+
+
+
+section ff
+parameters dtox_n_bpw_33_mm=-5e-10
+parameters dlint_n_bpw_33_mm=9.4e-9
+parameters dwint_n_bpw_33_mm=-3e-9
+parameters dvth0_n_bpw_33_mm=-0.05
+parameters dcgdo_n_bpw_33_mm=2.7e-11
+parameters dcgso_n_bpw_33_mm=2.7e-11
+
+include "mm180_reg33bpw_v123.mdl.scs"
+ 
+endsection ff
+
+
+
+
+section snfp
+parameters dtox_n_bpw_33_mm=0
+parameters dlint_n_bpw_33_mm=-7.8e-9
+parameters dwint_n_bpw_33_mm=7e-9
+parameters dvth0_n_bpw_33_mm=0.040663
+parameters dcgdo_n_bpw_33_mm=0
+parameters dcgso_n_bpw_33_mm=0
+
+include "mm180_reg33bpw_v123.mdl.scs"
+ 
+endsection snfp
+
+
+
+
+
+section fnsp
+parameters dtox_n_bpw_33_mm=0
+parameters dlint_n_bpw_33_mm=9.2e-9
+parameters dwint_n_bpw_33_mm=-2e-9
+parameters dvth0_n_bpw_33_mm=-0.03
+parameters dcgdo_n_bpw_33_mm=0
+parameters dcgso_n_bpw_33_mm=0
+
+
+include "mm180_reg33bpw_v123.mdl.scs"
+ 
+endsection fnsp
+
+endlibrary mylib

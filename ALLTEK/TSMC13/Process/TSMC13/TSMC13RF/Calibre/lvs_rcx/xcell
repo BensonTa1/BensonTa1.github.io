@@ -1,0 +1,27 @@
+//cell name                    	model name
+crtmom*                        	crtmom
+mimcap_um*                     	mimcap_um_1p0_sin_rf
+mimcap_um*                     	mimcap_um_1p5_sin_rf
+mimcap_woum*                   	mimcap_woum_1p0_sin_rf
+mimcap_woum*                   	mimcap_woum_1p5_sin_rf
+mos_var*                       	moscap_rf
+mos_var25*                     	moscap_rf25
+mos_var25_nw*                  	moscap_rf25_nw
+mos_var_nw*                    	moscap_rf_nw
+rfnmos1v*                      	nmos_rf
+rfnmos2v*                      	nmos_rf25
+rfpmos1v*                      	pmos_rf
+rfpmos2v*                      	pmos_rf25
+rfpmos2v_nw*                   	pmos_rf25_nw
+rfpmos1v_nw*                   	pmos_rf_nw
+rphripoly_rf*                  	rppolyhri_rf
+rplpoly_rf*                    	rppolyl_rf
+rplpoly_rf*                    	rppolys_rf
+rphpoly_rf*                    	rppolywo_rf
+sbd_rf*                        	sbd_rf
+sbd_rf_nw*                     	sbd_rf_nw
+spiral_std*                    	spiral_std
+spiral_sym*                    	spiral_sym
+spiral_sym_ct*                 	spiral_sym_ct
+jvar*                          	xjvar
+jvar_nw*                       	xjvar_nw

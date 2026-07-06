@@ -1,0 +1,35 @@
+.lib typ
+.param
+*
++ dr_mim_rf=0
++ dcox1_mim_rf=0
++ dcox2_mim_rf=0.0000e+00
++ dcn_mim_rf=0.0000e+00
+*
+.include './mimcapm_rf_v2d3.mdl'
+* 
+.endl typ
+*
+.lib min
+.param
+*
++ dr_mim_rf=0.5
++ dcox1_mim_rf=0.15
++ dcox2_mim_rf=0.15
++ dcn_mim_rf=-0.15
+*
+.include './mimcapm_rf_v2d3.mdl'
+*
+.endl min
+*
+.lib max
+.param
+*
++ dr_mim_rf=-0.5
++ dcox1_mim_rf=-0.15
++ dcox2_mim_rf=-0.15
++ dcn_mim_rf=0.15
+*
+.include './mimcapm_rf_v2d3.mdl'
+* 
+.endl max

@@ -1,0 +1,4 @@
+TDMCHECKPOINT="1.0"
+tsmc13rf/spiral_std type="cell"
+tsmc13rf/spiral_sym type="cell"
+tsmc13rf/spiral_sym_ct type="cell"

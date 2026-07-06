@@ -1,0 +1,64 @@
+Starting Single Run, Sweeps and Corners...
+
+Current time: Wed Mar 18 21:54:00 2026 
+Best design point: 1
+Design specs: 
+	TEST_TSMC13_ALLTEK_PLL:CP:1	corner	C0_0 - 
+	Phase Margin		89.46	Yes
+	IDC("/M11/D")		64.98u
+	TEST_TSMC13_ALLTEK_PLL:CP:1	corner	C0_1 - 
+	Phase Margin		90.33	Yes
+	IDC("/M11/D")		63.82u
+	TEST_TSMC13_ALLTEK_PLL:CP:1	corner	C0_2 - 
+	Phase Margin		88.64	Yes
+	IDC("/M11/D")		66.3u
+	TEST_TSMC13_ALLTEK_PLL:CP:1	corner	C0_3 - 
+	Phase Margin		88.61	Yes
+	IDC("/M11/D")		65.29u
+	TEST_TSMC13_ALLTEK_PLL:CP:1	corner	C0_4 - 
+	Phase Margin		90.34	Yes
+	IDC("/M11/D")		64.77u
+	TEST_TSMC13_ALLTEK_PLL:CP:1	corner	C0_5 - 
+	Phase Margin		90.37	Yes
+	IDC("/M11/D")		64.98u
+	TEST_TSMC13_ALLTEK_PLL:CP:1	corner	C0_6 - 
+	Phase Margin		91.25	Yes
+	IDC("/M11/D")		63.82u
+	TEST_TSMC13_ALLTEK_PLL:CP:1	corner	C0_7 - 
+	Phase Margin		89.54	Yes
+	IDC("/M11/D")		66.3u
+	TEST_TSMC13_ALLTEK_PLL:CP:1	corner	C0_8 - 
+	Phase Margin		89.51	Yes
+	IDC("/M11/D")		65.29u
+	TEST_TSMC13_ALLTEK_PLL:CP:1	corner	C0_9 - 
+	Phase Margin		91.25	Yes
+	IDC("/M11/D")		64.77u
+	TEST_TSMC13_ALLTEK_PLL:CP:1	corner	C0_10 - 
+	Phase Margin		88.54	Yes
+	IDC("/M11/D")		64.98u
+	TEST_TSMC13_ALLTEK_PLL:CP:1	corner	C0_11 - 
+	Phase Margin		89.41	Yes
+	IDC("/M11/D")		63.82u
+	TEST_TSMC13_ALLTEK_PLL:CP:1	corner	C0_12 - 
+	Phase Margin		87.73	Yes
+	IDC("/M11/D")		66.3u
+	TEST_TSMC13_ALLTEK_PLL:CP:1	corner	C0_13 - 
+	Phase Margin		87.7	Yes
+	IDC("/M11/D")		65.29u
+	TEST_TSMC13_ALLTEK_PLL:CP:1	corner	C0_14 - 
+	Phase Margin		89.42	Yes
+	IDC("/M11/D")		64.77u
+Design parameters: 
+	ICP_SEL		0
+	D0		0
+	D1		0
+	D2		0
+	D3		1.2
+	D4		1.2
+	VOUT		100m
+
+Interactive.10
+Number of points completed: 4
+Number of simulation errors: 0
+Interactive.10 completed. 
+Current time: Wed Mar 18 21:54:54 2026 

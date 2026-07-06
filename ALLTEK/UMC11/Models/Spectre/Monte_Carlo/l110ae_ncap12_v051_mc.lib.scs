@@ -1,0 +1,34 @@
+//  ****************************************************************************** 
+simulator lang=spectre insensitive=yes
+//  TYP: Typical capacitor 
+//  MIN: Minimum capacitor 
+//  MAX: Maximum capacitor 
+//  DEVICE 1: ncap_12 
+//  ****************************************************************************** 
+ 
+library mylib
+
+section typ
+parameters dtoxe_ncap_12=0.0000e+00
+parameters dxl_ncap_12=0.0000e+00
+parameters dxw_ncap_12=0.0000e+00
+parameters dcmina_ncap_12=0.0000e+00
+include "l110ae_ncap12_v051_mc.mdl.scs"
+endsection typ
+ 
+section min
+parameters dtoxe_ncap_12=+8.40000e-11
+parameters dxl_ncap_12=-4.86300e-08
+parameters dxw_ncap_12=-9.2800e-08
+parameters dcmina_ncap_12=0.082820672
+include "l110ae_ncap12_v051_mc.mdl.scs"
+endsection min
+ 
+section max
+parameters dtoxe_ncap_12=-8.49000e-11
+parameters dxl_ncap_12=+4.005070e-08
+parameters dxw_ncap_12=+9.2800e-08
+parameters dcmina_ncap_12=-0.068470000
+include "l110ae_ncap12_v051_mc.mdl.scs"
+endsection max
+endlibrary mylib

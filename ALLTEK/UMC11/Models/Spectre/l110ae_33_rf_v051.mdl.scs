@@ -1,0 +1,758 @@
+//  ******************************************************************************* 
+//  Property of UMC. 
+//  Unauthorized reproduction, modification and/or distribution are strictly 
+//  prohibited. 
+//  This product is protected under copyright law and trade secret law. 
+//  This model card may not be sent in any form outside of UMC without 
+//  the written consent of the UMC ATD Modeling Division. 
+//  ****************************************************************************** 
+//  Process:      0.11um UMC RFCMOS Al Advanced Enhancement 3.3V Process 
+//  Device Type:  N- and P-FET   
+//  Description:  3.3V High Gain  
+//  Model:        Subcircuit BSIM3.2.4 RF model 
+//  Simulator:    SPCETRE  
+//  Model Version:0.4_p2 
+//  Model Features: 
+//      Global model:  Yes 
+//      Igate model:  No 
+//      GIDL model: No 
+//      Substrate current model: Yes 
+//      Flicker noise: Yes 
+//      LOD model: Yes 
+//      RF model: RF 
+//      Well proximity effect: No 
+//  ****************************************************************************** 
+//  Revision History: 
+//  
+//  <Revision 1> 
+//  Version : 0.1 phase 1 
+//  Date    : 2010/Feb/28 
+//  Author  : Chih hung Chuang 
+//  Remark  : This is paper model(without silicon data).  
+//            Two devices are included in this model file. 
+//            1. Pwell NMOs: n_33_rf 
+//            2. PMOS :  p_33_rf 
+//  
+//  <Revision 2> 
+//  Version : 0.2 phase 1 
+//  Date    : 2010/07/31 
+//  Author  : Chih hung Chuang 
+//  Remark  : Revise model with new silicon data.  
+//            Two devices are included in this model file. 
+//            1. Pwell NMOs: n_33_rf 
+//            2. PMOS :  p_33_rf 
+//
+//  <Revision 3> 
+//  Version : 0.2 phase 2 
+//  Date    : 2010/10/21 
+//  Author  : Chih hung Chuang 
+//  Remark  : Specify the geometry range
+//
+// <Revision 4>
+// Version : 0.3_p1
+// Date    : 2011/05/03
+// Author  : Laney Fan
+// Remark  :  1.Add noise figure in the models.
+//            2.Add the model of triple-well nmos transistor(copied from twin well nmos model).  
+//            3.Three devices are included in this model file.
+//           (1) Pwell NMOS      : n_33_rf
+//           (2) Nwell PMOS      : p_33_rf
+//           (3) Twell NMOS      : n_33bpw_rf
+//
+// <Revision 5>
+// Version : 0.4_p1
+// Date    : 2011/08/16
+// Author  : Laney Fan
+// Remark  :  1.Modify the 3.3V triple-well RF MOS model from 4 terminals to 6 terminals
+//
+// <Revision 6>
+// Version : 0.4_p2
+// Date    : 2013/04/12
+// Author  : Laney Fan
+// Remark  :  1.Modify the verilog file for avoiding the noise as device is off.
+//
+// <Revision 7>
+// Version : 0.5_p1
+// Date    : 2014/01/28
+// Author  : Laney Fan
+// Remark  :  1.Correct the node names from "mosm d g s b" to "mosm 10 20 30 40" .
+//  ****************************************************************************** 
+ 
+//   ***************************************************** 
+//   *  Subcircuit of the BSIM3 RF macro model           * 
+//   *  for  0.13um RFCMOS process                       * 
+//   *  3.3V Twin Well RF n-type MOS transistors         * 
+//   * 
+//  **  Scaling Range(before 90% shrink):                * 
+//  **    1. Finger width (wf): 3um ~ 12um               * 
+//  **    2. Finger length (lf): 0.34um ~ 1um            * 
+//  **    3. Finger No. (nf): 2 ~ 32                     * 
+//  **  Voltage range: upto 3.3V                         * 
+//  **  Temperature range:  -50C ~ 125C                  * 
+//  **  Frequency range: upto 20.1GHz                    * 
+//  **                                                   * 
+//  **  Node Definitions:                                * 
+//  **         d -- Drain                                * 
+//  **         g -- gate                                 * 
+//  **         s -- source                               * 
+//  **         b -- body                                 * 
+//  **                                                   * 
+//   ***************************************************** 
+simulator lang=spectre insensitive=yes
+ahdl_include "l110ae_33_rf_s.va"
+//   ! Do not change anything between the SUBCKT and ENDS statement ! 
+inline subckt n_33_rf ( d g s b ) 
+parameters lf=0.34u wf=12u nf=16 rde=1e6 hfn_flag=hfnoise mf=1 dtemp=0  
++lf_u=lf / 1e-6 wf_u=wf / 1e-6 nf_odd=nf - 2 * 
++ int(nf / 2) nf_even=1 - nf_odd lf_shrink=lf * 0.9 + 0.012e-6 wf_shrink=wf * 0.9 
++ lf_shrink_u=lf_shrink / 1e-6 wf_shrink_u=wf_shrink / 1e-6 p_u0=0.03639 p_lu0=6.321e-009 
++ p_a0=0.2176 p_ags=0.1284 p_vsat=8.289e+004 p_la0=-3.203e-007 p_dlc=2.524e-008 
++ p_llc=2e-015 p_dwc=-1e-007 p_cgdo=2.284e-010 p_cgbo=1e-011 p_cgdl=5.8e-011 p_cjdb=0.0012 
++ p_cjdbg=1.08e-010 p_cjdb_pb=0.3 p_cjdb_mj=0.35 p_vth0=0.71 p_lvth0=-1.5e-008 p_eta0=1.6 
++ p_lags=6.923e-008 p_wr=1 p_rdsw=500 p_pa0=-2.441e-013 p_pags=1.1e-013 p_pu0=1.168e-015 
++ p_wwlc=-6e-020 rshg=8 * (1 + drshg_n_33_l110aerf) rcnt=7 * (1 + drcnt_n_33_l110aerf) 
++ rvia=1.2 * (1 + drvia_n_33_l110aerf) sp_poly=0.44e-6 sp_edge=0.36e-6 xgw=0.22e-6 
++ no_cnt=1 no_via=3 sp_sub_w=1.7e-6 sp_sub_l=0.94e-6 sp_twell_w=2.24e-6 sp_twell_l=1.48e-6 
++ sp_nwell_w=3.74e-6 sp_nwell_l=2.98e-6 a_rch=5.571 b_rch=4.441e-010 c_rch=9.373e+004 
++ a_cgd_ext=1.243e-017 * (1 + dcgd_ext_n_33_l110aerf) a_rdrain=4.317 a_cds=-0.05061 
++ b_cds=0.05025 a_rsubd=16.67 b_rsubd=178.5 c_rsubd=-71.52 a_rsubb=35 b_rsubb=1210 
++ c_rsubb=5300 a_cgb_ext=4.812e-016 * (1 + dcgb_ext_n_33_l110aerf) 
+//*------- junction area and periphery:
++ p_area_s=nf_odd 
++ * (sp_edge * wf + sp_poly * wf * (nf - 1) / 2) + nf_even * (2 * 
++ sp_edge * wf + sp_poly * wf * (nf / 2 - 1)) p_area_d=nf_odd * (sp_edge 
++ * wf + sp_poly * wf * (nf - 1) / 2) + nf_even * (sp_poly * wf 
++ * nf / 2) p_pj_s=nf_odd * (sp_edge * 2 + wf + (nf - 1) / 2 * sp_poly * 
++ 2) + nf_even * (sp_edge * 2 * 2 + wf * 2 + (nf / 2 - 1) * sp_poly * 2) 
++ p_pj_d=nf_odd * (sp_edge * 2 + wf + (nf - 1) / 2 * sp_poly * 2) + nf_even 
++ * (nf / 2 * sp_poly * 2) p_pj_sg=nf * wf p_pj_dg=nf * wf 
+//*------- rgc scaling :
++ p_rgc=(xgw 
++ / lf_shrink * rshg + no_cnt * rcnt + no_via * rvia) / nf / 2 p_rgi=rshg * wf_shrink 
++ / lf_shrink / 12 / nf p_rch=a_rch + b_rch * (lf_shrink / wf_shrink / nf) + c_rch 
++ * (lf_shrink / wf_shrink / nf) * (lf_shrink / wf_shrink / nf) p_cgd_ext=a_cgd_ext 
++ * wf_shrink_u * nf p_cgs_ext=p_cgd_ext p_cgb_ext=a_cgb_ext * wf_shrink_u p_rdrain=a_rdrain 
++ / wf_shrink_u / nf p_rsource=p_rdrain cds_um=(a_cds + b_cds * (1 / lf_shrink_u)) 
++ * 1e-15 p_cds=(cds_um + abs(cds_um)) / 2 * wf_shrink_u * nf + 0.01e-15 p_rsubd=a_rsubd 
++ + b_rsubd * (1 / (nf * wf_shrink_u)) + c_rsubd * (1 / (nf * wf_shrink_u)) * (1 
++ / (nf * wf_shrink_u)) p_rsubs=p_rsubd rsub_w=(wf_shrink + 2 * sp_sub_w) / 1e-6 
++ rsub_l=(sp_edge * 2 + nf * lf_shrink + (nf - 1) * sp_poly + 2 * sp_sub_l) / 1e-6 
++ p_rsubb=a_rsubb + b_rsubb * (1 / (rsub_w * rsub_l)) + c_rsubb * (1 / (rsub_w * 
++ rsub_l)) * (1 / (rsub_w * rsub_l)) 
+//  
+// ------- user input parameters (scalable parameters): 
+// ------------------------------------------------------- 
+//   --------- Gate network ------------------------------ 
+rgc ( g 21 ) resistor r=p_rgc
+rgi ( 21 22 ) resistor r=p_rgi
+rch ( 22 20 ) resistor r=p_rch * (1 + drch_n_33_l110aerf) isnoisy=0
+cgd_ext ( 21 10 ) capacitor c=p_cgd_ext
+cgs_ext ( 21 30 ) capacitor c=p_cgs_ext
+cgb_ext ( 20 40 ) capacitor c=p_cgb_ext
+//   
+//   --------- Drain network ----------------------------- 
+rdrain ( d 10 ) resistor r=p_rdrain
+//   
+//   --------- Source network ----------------------------- 
+rsource ( s 30 ) resistor r=p_rsource
+//   
+//   --------- Substrate network ------------------------- 
+//  Diodes are for n-type MOS transistors 
+//  
+djdb ( 12 10 ) pwnmos_33_d area=p_area_d pj=p_pj_d
+djdb_g ( 12 10 ) pwnmos_33_dg area=1e-18 pj=p_pj_dg
+//   
+djsb ( 32 30 ) pwnmos_33_d area=p_area_s pj=p_pj_s
+djsb_g ( 32 30 ) pwnmos_33_dg area=1e-18 pj=p_pj_sg
+//  
+cds ( 30 10 ) capacitor c=p_cds * (1 + dcds_ext_n_33_l110aerf)
+//  
+rsubb ( b 40 ) resistor r=p_rsubb
+rsubd ( 40 12 ) resistor r=p_rsubd
+rsubs ( 40 32 ) resistor r=p_rsubs
+// ------------------------------------------------------------* 
+//    
+//   
+//  ** ----- Enhanced Channel Noise -----
+if (hfn_flag==1) {
+ide ( s d ) cccs probe=vde gain=1
+recn ( ecn b d g s b ) rde_n_33_rf  lf=lf_shrink wf=wf_shrink nf=nf r=rde
+vde ( ecn b ) vsource  dc=0
+  }
+//  * core device model  
+n_33_rf ( 10 20 30 40 ) n_33_rf_main trise=dtemp m=nf l=lf w=wf  sa=2.2u sb=2.2u ad=0 as=0 pd=0 ps=0
+//   
+//  -------------- MOS & Diode models--------------------------------------- 
+model n_33_rf_main bsim3v3 type=n 
++ minr = 0.01               imax = 0.1
++ lmin=3.4e-007             lmax=1.0e-006             wmin=3e-006
++ wmax=1.2e-005             version=3.24              mobmod=1
++ capmod=3                  nqsmod=0                  binunit=2
++ tnom=25                   xl=-9.0e-9+dxl_n_33_l110aerf+0.012e-6 
++ xw=1.0e-9 + dxw_n_33_l110aerf                            llc=p_llc
++ lwc=0                     lwlc=0                    wlc=0
++ wwc=0                     wwlc=p_wwlc               
++ tox=7.49e-009 + dtox_n_33_l110aerf                  toxm=7.49e-009
++ wint=4.909e-008           lint=0.85e-008             
++ dlc=p_dlc + ddlc_n_33_l110aerf                      
++ dwc=p_dwc + ddwc_n_33_l110aerf                      hdif=1.34e-007
++ ldif=9e-008               ll=-1e-016                wl=-1.899e-014
++ lln=1                     wln=1                     lw=-4.979e-015
++ ww=-5.92e-015             lwn=1                     wwn=1
++ lwl=7.333e-022            wwl=2.578e-021 + dwwl_n_33_l110aerf
++ cgbo=p_cgbo               cgso=p_cgdo * (1 + dcgdo_n_33_l110aerf)
++ cgdo=p_cgdo * (1 + dcgso_n_33_l110aerf)             xpart=0
++ vth0=p_vth0 + dvth0_n_33_l110aerf                   
++ lvth0=p_lvth0 +  + dlvth0_n_33_l110aerf             
++ pvth0=0 + dpvth0_n_33_l110aerf                      k1=0.9
++ k2=-0.004056              pk2=-6.6e-016             
++ k3=3.2 + dk3_n_33_l110aerf                          wk3=7.999e-007
++ k3b=0                     nlx=4e-008                dvt0=1.53
++ dvt1=0.536                dvt2=0.03264              ldvt2=-4.995e-008
++ dvt0w=-0.2921             pdvt0w=5e-015             dvt1w=1e+005
++ dvt2w=0.0792              nch=1.7e+017              voff=-0.1719
++ pvoff=-2.8e-015           nfactor=0.8               cdsc=0.00024
++ cdscb=9.13e-005           cdscd=0.00012             cit=0.00045
++ u0=p_u0 + du0_n_33_l110aerf                         lu0=p_lu0
++ wu0=-3.25e-010            pu0=p_pu0                 ua=-5e-010
++ lua=3.208e-016            wua=9.4e-016              pua=-4.59e-023
++ ub=1.5e-018               lub=6.904e-025            wub=-3.885e-024
++ pub=-5e-032               uc=6.475e-011             luc=8.832e-017
++ wuc=-5.596e-018           puc=-9.408e-024           ngate=2.95e+020
++ xj=1.05e-007              w0=2.75e-007              prwg=-0.031
++ prwb=0.4678               wr=p_wr                   
++ rdsw=p_rdsw + drdsw_n_33_l110aerf                   a0=p_a0
++ la0=p_la0                 pa0=p_pa0                 ags=p_ags
++ lags=p_lags               pags=p_pags               a1=0.005
++ a2=0.99                   b0=1.652e-005             b1=3.283e-005
++ vsat=p_vsat               keta=-0.00695             lketa=2.829e-009
++ pketa=2.12e-015           dwg=0                     dwb=3.558e-009
++ alpha0=4.755e-007         palpha0=-7.83e-020        beta0=19.78
++ pbeta0=-2.268e-013        pclm=2.054                pdiblc1=2.663e-007
++ pdiblc2=0.007493          ppdiblc2=7.6e-016         pdiblcb=0.1
++ drout=0.71                pvag=0.593                pscbe1=9.232e+008
++ pscbe2=0.0005955          delta=0.01                eta0=p_eta0
++ etab=-0.04                dsub=1.073                elm=2.86
++ alpha1=3.136              vfb=-0.8396               clc=1.0e-009
++ cle=1                     cf=0                      ckappa=0.6
++ cgdl=p_cgdl * (1 + dcgdl_n_33_l110aerf)             
++ cgsl=p_cgdl * (1 + dcgsl_n_33_l110aerf)             vfbcv=0
++ acde=0.4                  lacde=0                   moin=5
++ lmoin=1.86e-006           noff=1.669                lnoff=6.35e-007
++ voffcv=-0.0645            lvoffcv=-3.724e-008       wvoffcv=-3.816e-008
++ kt1=-0.3331               kt1l=-3e-009              kt2=-0.03645
++ lkt2=3.904e-009           ute=-0.1922               ua1=7.623e-009
++ ub1=-3.468e-018           uc1=3.746e-011            prt=-290
++ at=4.02e+004              pat=-9.9e-010             rsh=9
++ js=8.8e-007               jsw=1e-012                cj=0
++ mj=0.2766                 cjsw=0                    mjsw=0.1647
++ pb=0.528                  rd=0                      rdc=0
++ rs=0                      rsc=0                     xti=3
++ n=1.03                    pbsw=0.402                cjswg=0
++ pbswg=0.7561              mjswg=0.3428
+//noise parameter              
++ noimod=2
++ noia=1.7800000e+21        noib=1.4500000e+05        noic=-9.55000e-13
++ em=2.5000000e+07          ef=0.9077 
+//lod parameter
++ saref=2.2e-006
++ sbref=2.2e-006            wlod=0                    kvth0=5.250e-09
++ lkvth0=-2.710e-8          wkvth0=0                  pkvth0=0
++ llodvth=1                 wlodvth=1                 stk2=5.6e-10
++ lodk2=1                   lodeta0=1                 ku0=-1.51e-7
++ lku0=5.557e-7             wku0=0                    pku0=0
++ llodku0=1.120e+00         wlodku0=1                 kvsat=1
++ steta0=0.000e+00          tku0=0                           
+//  
+model pwnmos_33_d diode 
++ hcomp=1.0000e+00          imax=1.00e+14             level=3
++ tnom=25                   is=8.81e-08               ik=5.28e+04
++ bv=13.36                  n=1.008                   
++ cjo=p_cjdb * (1 + dcj_n_33_l110aerf)                
++ cjsw=1.06e-10 * (1 + dcjsw_n_33_l110aerf)           vj=p_cjdb_pb
++ mj=p_cjdb_mj              mjsw=0.13                 vjsw=0.54
++ cta=0.00105               ctp=0.00178               tlev=1
++ tlevc=1                   xti=3                     eg=1.11
+ 
+model pwnmos_33_dg diode 
++ hcomp=1.0000e+00          imax=1.00e+14             level=3
++ tnom=25                   cjo=0                     
++ cjsw=p_cjdbg * (1 + dcjswg_n_33_l110aerf)           mjsw=0.12
++ vjsw=0.8                  tlev=0                    tlevc=1
++ xti=3                     eg=1.11                   
+ 
+ends n_33_rf
+ 
+//   ***************************************************** 
+//   *  Subcircuit of the BSIM3 RF macro model           * 
+//   *  for  0.11um RFCMOS process                       * 
+//   *  3.3V  RF p-type MOS transistors                  * 
+//   *                                                   * 
+//  **  Scaling Range(before 90% shrink):                * 
+//  **    1. Finger width (wf): 2.5um ~ 15um             * 
+//  **    2. Finger length (lf): 0.34um ~ 1um            * 
+//  **    3. Finger No. (nf): 2 ~ 32                     * 
+//  **  Voltage range: upto 3.3V                         * 
+//  **  Temperature range:  -50C ~ 125C                  * 
+//  **  Frequency range: upto 20.1GHz                    * 
+//  **                                                   * 
+//  **  Node Definitions:                                * 
+//  **         d -- Drain                                * 
+//  **         g -- gate                                 * 
+//  **         s -- source                               * 
+//  **         b -- body                                 * 
+//  **         psub -- p substrate (should be ground)    * 
+//  **                                                   * 
+//   ***************************************************** 
+//  ****************************************************** 
+//   ! Do not change anything between the SUBCKT and ENDS statement ! 
+inline subckt p_33_rf ( d g s b psub ) 
+parameters lf=0.34u wf=10u nf=16 rde=1e6 hfn_flag=hfnoise mf=1 dtemp=0 
++lf_u=lf / 1e-6 wf_u=wf / 1e-6 nf_odd=nf - 2 * int(nf / 2) nf_even=1 - nf_odd 
+//*-------------shrink parameter----
++lf_shrink=lf * 0.9 + 0.012e-6 wf_shrink=wf * 0.9 lf_shrink_u=lf_shrink / 1e-6 wf_shrink_u=wf_shrink / 1e-6 
++ rshg=14.33 * (1 + drshg_p_33_l110aerf) rcnt=7 * (1 + drcnt_p_33_l110aerf) rvia=1.2 * (1 + drvia_p_33_l110aerf) 
++ sp_poly=0.44e-6 sp_edge=0.36e-6 xgw=1.04e-6 no_cnt=2 no_via=2 sp_sub_w=1.7e-6 
++ sp_sub_l=0.94e-6 sp_twell_w=2.24e-6 sp_twell_l=1.48e-6 sp_nwell_w=1.9e-6 sp_nwell_l=2.34e-6 
++ a_rch=2.731 b_rch=0.02587 c_rch=1.211e+005 a_cgd_ext=1.0e-18 * (1 + dcgd_ext_p_33_l110aerf) 
++ a_cds=0.00067 b_cds=0.022 a_rsubd=3.936 b_rsubd=52.25 c_rsubd=5.294e+004 a_rsubb=30.37 
++ b_rsubb=5000 c_rsubb=0.009439 a_cgb_ext=3.17e-016 o_u0=0.01429 a_u0=1.161 b_u0=-0.0497 
++ p_vsat=2.5e+005 p_lvsat=-0.01347 p_a0=0.6674 p_la0=0 p_ags=0.2922 p_lags=-2.281e-007 
++ p_pags=-3.06e-014 p_dlc=4e-008 p_dwc=1.414e-007 p_llc=4e-015 p_cgso=3e-010 p_cgbo=0 
++ p_cgdl=1e-010 ldrain=0 p_wwlc=5e-020 p_cj=0.00052 p_mj=0.208 p_pb=0.698 p_vth0=-0.66 
++ p_lvth0=3.3e-008 p_pvth0=-4.6e-016 p_eta0=0.027 
+//*------- junction area and periphery:
++ p_area_s=nf_odd * (sp_edge * wf 
++ + sp_poly * wf * (nf - 1) / 2) + nf_even * (2 * sp_edge * wf + sp_poly 
++ * wf * (nf / 2 - 1)) p_area_d=nf_odd * (sp_edge * wf + sp_poly * 
++ wf * (nf - 1) / 2) + nf_even * (sp_poly * wf * nf / 2) p_pj_s=nf_odd 
++ * (sp_edge * 2 + wf + (nf - 1) / 2 * sp_poly * 2) + nf_even * (sp_edge 
++ * 2 * 2 + wf * 2 + (nf / 2 - 1) * sp_poly * 2) p_pj_d=nf_odd * (sp_edge 
++ * 2 + wf + (nf - 1) / 2 * sp_poly * 2) + nf_even * (nf / 2 * sp_poly * 
++ 2) p_pj_sg=nf * wf p_pj_dg=nf * wf p_area_tw=(wf + 2 * sp_twell_w) 
++ * (2 * sp_edge + nf * (lf + 0.012e-6) + (nf - 1) * sp_poly + 2 * sp_twell_l) p_pj_tw=2 
++ * (wf + 2 * sp_twell_w + 2 * sp_edge + nf * (lf + 0.012e-6) + (nf - 1) * sp_poly 
++ + 2 * sp_twell_l) p_area_dnw=(wf + 2 * sp_nwell_w) * (2 * sp_edge + nf 
++ * (lf + 0.012e-6) + (nf - 1) * sp_poly + 2 * sp_nwell_l) p_pj_dnw=2 * (wf + 2 
++ * sp_nwell_w + 2 * sp_edge + nf * (lf + 0.012e-6) + (nf - 1) * sp_poly + 2 * sp_nwell_l) 
+//*------- rgc scaling :
++ p_rgc=(xgw / lf_shrink * rshg + no_cnt * rcnt + no_via * rvia) / nf / 2 p_rgi=rshg 
++ * wf_shrink / lf_shrink / 12 / nf p_rch=a_rch + b_rch * (lf_shrink / wf_shrink 
++ / nf) + c_rch * (lf_shrink / wf_shrink / nf) * (lf_shrink / wf_shrink / nf) p_cgd_ext=a_cgd_ext 
++ * wf_shrink_u * nf p_cgs_ext=p_cgd_ext p_cgb_ext=a_cgb_ext * wf_shrink_u a_rdain0=0 
++ a_rdrain=10 p_rdrain=a_rdain0 + a_rdrain / wf_shrink_u / nf p_rsource=p_rdrain 
++ cds_um=(a_cds + b_cds * (1 / lf_shrink_u)) * 1e-15 p_cds=(cds_um + abs(cds_um)) 
++ / 2 * wf_shrink_u * nf + 0.01e-15 p_rsubd=(a_rsubd + b_rsubd * (1 / (nf * wf_shrink_u)) 
++ + c_rsubd * (1 / (nf * wf_shrink_u)) * (1 / (nf * wf_shrink_u))) * 2 p_rsubs=p_rsubd 
++ rsub_w=(wf_shrink + 2 * sp_sub_w) / 1e-6 rsub_l=(sp_edge * 2 + nf * lf_shrink 
++ + (nf - 1) * sp_poly + 2 * sp_sub_l) / 1e-6 p_rsubb=(a_rsubb + b_rsubb * (1 / 
++ (rsub_w * rsub_l)) + c_rsubb * (1 / (rsub_w * rsub_l)) * (1 / (rsub_w * rsub_l))) 
++ * 0.6 p_u0=o_u0 * a_u0 * pow(nf,b_u0) 
+//  
+// ------- user input parameters (scalable parameters): 
+// --------------------------- 
+//   
+//   --------- Gate network ------------------------------ 
+rgc ( g 21 ) resistor r=p_rgc
+rgi ( 21 22 ) resistor r=p_rgi
+rch ( 22 20 ) resistor r=p_rch * (1 + drch_p_33_l110aerf) isnoisy=0
+cgd_ext ( 21 10 ) capacitor c=p_cgd_ext
+cgs_ext ( 21 30 ) capacitor c=p_cgs_ext
+cgb_ext ( 20 40 ) capacitor c=p_cgb_ext
+//   
+//   --------- Drain network ----------------------------- 
+rdrain ( d 10 ) resistor r=p_rdrain
+//   
+//   --------- Source network ----------------------------- 
+rsource ( s 30 ) resistor r=p_rsource
+//   
+//   --------- Substrate network ------------------------- 
+//  Diodes are for p-type MOS transistors 
+//  
+djdb ( 10 12 ) pmos_33_d area=p_area_d perim=p_pj_d
+djdb_g ( 10 12 ) pmos_33_dg area=1e-18 perim=p_pj_dg
+//   
+djsb ( 30 32 ) pmos_33_d area=p_area_s perim=p_pj_s
+djsb_g ( 30 32 ) pmos_33_dg area=1e-18 perim=p_pj_sg
+//  
+cds ( 30 10 ) capacitor c=p_cds * (1 + dcds_ext_p_33_l110aerf)
+//  
+rsubb ( b 40 ) resistor r=p_rsubb
+rsubd ( 40 12 ) resistor r=p_rsubd
+rsubs ( 40 32 ) resistor r=p_rsubs
+//     
+//  ** ----- Enhanced Channel Noise -----  
+if (hfn_flag==1) {
+ide ( s d ) cccs probe=vde gain=1
+recn ( ecn b d g s b ) rde_p_33_rf  lf=lf_shrink wf=wf_shrink nf=nf r=rde
+vde ( ecn b ) vsource  dc=0
+ }
+p_33_rf ( 10 20 30 40 ) p_33_rf_main trise=dtemp m=nf l=lf w=wf sa=2.2u sb=2.2u ad=0 as=0 pd=0 ps=0
+//   
+//  ----------- Nwell/Psub diode 
+dnw ( psub b ) dio_nw_psub area=p_area_dnw perim=p_pj_dnw
+//  
+//  -------------- MOS & Diode models--------------------------------------- 
+model p_33_rf_main bsim3v3 type=p 
++ lmin=3.4e-007            minr = 0.01               imax = 0.1
++ lmax=1.0e-006            wmin=2.5e-06            wmax=1.5e-05
++ version=3.24              mobmod=1                  capmod=3
++ nqsmod=0                  binunit=2                 
++ binflag=0                 tnom=25                   
++ xl= - 9e-009 + 0.012e-6 + dxl_p_33_l110aerf                    
++ xw=4e-009 + dxw_p_33_l110aerf                       
++ tox=7.68e-009 + dtox_p_33_l110aerf
++ toxm=7.68e-009            wint=4.408e-008           lint=2.434e-008
++ dlc=p_dlc + ddlc_p_33_l110aerf                      
++ dwc=p_dwc + ddwc_p_33_l110aerf                      hdif=1.34e-007
++ ldif=7.9e-008             ll=0                      wl=0
++ lln=1                     wln=1                     lw=-1.812e-014
++ ww=-5.636e-015            lwn=1                     wwn=1
++ lwl=3.865e-021            wwl= - 7.976e-022 + dwwl_p_33_l110aerf
++ cgbo=p_cgbo               cgso=p_cgso * (1 + dcgso_p_33_l110aerf)
++ cgdo=p_cgso * (1 + dcgdo_p_33_l110aerf)             clc=8.1e-08
++ cle=0.8918                xpart=1                   lwc=-2.901e-015
++ lwlc=3.798e-022           wlc=9.17e-017             wwc=-9.192e-013
++ wwlc=p_wwlc               llc=p_llc                 
++ vth0=p_vth0 + dvth0_p_33_l110aerf                   
++ pvth0=p_pvth0 + dpvth0_p_33_l110aerf                
++ lvth0=p_lvth0 + dlvth0_p_33_l110aerf                k1=0.921
++ k2=-0.01962               k3=1.126 + dk3_p_33_l110aerf
++ wk3=-1.09e-007            pk3=-2.4e-014             k3b=0.5428
++ pk3b=6.634e-014           nlx=7.532e-009            lnlx=0
++ dvt0=2.629                dvt1=1.685                dvt2=-0.8964
++ dvt0w=0                   dvt1w=5.3e+006            dvt2w=-0.032
++ nch=3.6e+017              voff=-0.1                 nfactor=1
++ cdsc=0.00359              cdscb=0.00135             cdscd=1e-020
++ cit=0                     u0=p_u0 + du0_p_33_l110aerf
++ lu0=-5.136e-010           ua=1.77e-009              ub=8.275e-019
++ uc=-2.347e-011            wuc=-1e-017               ngate=1.519e+020
++ xj=1.17e-007              w0=7.745e-008             prwg=0.2582
++ prwb=-0.1182              pprwb=-1.366e-015         wr=1.267
++ rdsw=618.1 + drdsw_p_33_l110aerf                    a0=p_a0
++ ags=p_ags                 lags=p_lags          pags=p_pags
++ a1=3.722e-005             a2=0.9                    la0=0
++ b0=2.832e-008             b1=9.996e-007             vsat=p_vsat
++ lvsat=p_lvsat             keta=-0.01525             lketa=-8.646e-009
++ pketa=-1.256e-016         dwg=-6.061e-008           dwb=-3.646e-009
++ alpha0=4.463e-006         beta0=29.6                pclm=1.933
++ pdiblc1=0.2938            pdiblc2=0.002229          pdiblcb=0
++ drout=0.7263              pvag=10                   pscbe1=4.712e+008
++ pscbe2=5.415e-012         delta=0.02674             eta0=p_eta0
++ etab=-0.06667             dsub=0.51                 elm=5
++ alpha1=12.87              vfb=-1.102                lvfb=0
++ ppclm=3.99e-013           pdvt2=-1.8e-014           cf=0
++ cgdl=p_cgdl * (1 + dcgdl_p_33_l110aerf)             
++ cgsl=p_cgdl * (1 + dcgsl_p_33_l110aerf)             ckappa=1
++ vfbcv=-1                  acde=1.049                moin=5.671
++ noff=2.21                 voffcv=-0.03762           lvoffcv=0
++ kt1=-0.39                 kt1l=3.74e-009            kt2=-0.0423
++ ute=-0.7235               ua1=2.42e-009             ub1=-3.309e-018
++ wub1=1.62e-025            uc1=-1.589e-013           prt=200
++ at=1e+004                 
+//noise paramater
++ noimod=2
++ noia=2.3611128e+20        noib=5.5303842e+03        noic=3.6108638e-11
++ em=2.1981607e+07          ef=1.2
+//   
++ rsh=7.67                  js=3.06e-007
++ jsw=1.5e-012              cj=0                      mj=0.33
++ cjsw=0                    mjsw=0.13                 pb=0.79
++ rd=0                      rdc=0                     rs=0
++ rsc=0                     xti=3                     acm=12
++ calcacm=1                 nj=1.03                   pbsw=0.78
++ cjswg=0                   pbswg=0.7                 mjswg=0.45
++ tcj=0.00072               tcjsw=0.0001              tcjswg=0.001416
++ pta=0.0015                tpbsw=0.0005              tpbswg=0.00258
+//lod parameter
++ saref=2.2e-006            sbref=2.2e-006
++ wlod=0                    kvth0=-1.440e-09          lkvth0=0
++ wkvth0=0                  pkvth0=0                  llodvth=1
++ wlodvth=1                 stk2=1.129e-09            lodk2=1.000e+00
++ lodeta0=1                 ku0=1.02e-007             lku0=3.1e-08
++ wku0=0                    pku0=0                    llodku0=1.22
++ wlodku0=1                 kvsat=0                   steta0=0
++ tku0=0                    
+//
+model pmos_33_d diode 
++ hcomp=1.0000e+00          imax=1.00e+14             level=3
++ tnom=25                   is=0                      isw=0
++ cjo=p_cj * (1 + dcj_p_33_l110aerf)                  mj=p_mj
++ cjsw=1.11e-10 * (1 + dcjsw_p_33_l110aerf)           mjsw=0.1
++ vj=p_pb                   xti=3                     tlev=0
++ tlevc=1                   n=1.017                   vjsw=0.75
++ cta=0.000995              ctp=0.00196               
+ 
+
+ 
+ 
+model pmos_33_dg diode 
++ hcomp=1.0000e+00          imax=1.00e+14             level=3
++ tnom=25                   cjo=0                     
++ cjsw=3.59e-10 * (1 + dcjswg_p_33_l110aerf)          mjsw=0.45
++ vjsw=0.7                  tlev=0                    tlevc=1
++ xti=3                     eg=1.16                   
+
+
+//  
+ 
+//  
+model dio_nw_psub diode 
++ hcomp=1.0000e+00          imax=1.00e+14             level=3
++ tnom=25                   area=1e-8                 perim=1.41e-3
++ is=2.05e-06               isw=5.34e-11              ik=517.6627
++ bv=10                     n=1.0525                  rs=2.2e-5
++ cjo=0.0000828 * (1 + dcj_nw_p_33_l110aerf)          mj=0.474
++ cjsw=9.92e-10 * (1 + dcjsw_nw_p_33_l110aerf)        mjsw=0.27
++ vj=0.588                  vjsw=0.62                 cta=0.00332
++ ctp=0.001                 tlev=0                    tlevc=1
++ trs=3.22e-03              xti=3                     eg=1.16
+
+
+//  
+ends p_33_rf
+//   
+//   ***************************************************** 
+//   *  Subcircuit of the BSIM3 RF macro model           * 
+//   *  for  0.13um RFCMOS process                       * 
+//   *  3.3V Triple Well RF n-type MOS transistors         * 
+//   * 
+//  **  Scaling Range(before 90% shrink):                * 
+//  **    1. Finger width (wf): 3um ~ 12um               * 
+//  **    2. Finger length (lf): 0.34um ~ 1um            * 
+//  **    3. Finger No. (nf): 2 ~ 32                     * 
+//  **  Voltage range: upto 3.3V                         * 
+//  **  Temperature range:  -50C ~ 125C                  * 
+//  **  Frequency range: upto 20.1GHz                    * 
+//  **                                                   * 
+//  **  Node Definitions:                                * 
+//  **         d -- Drain                                * 
+//  **         g -- gate                                 * 
+//  **         s -- source                               * 
+//  **         b -- body                                 * 
+//  **                                                   * 
+//   ***************************************************** 
+inline subckt n_33bpw_rf ( d g s b nw psub) 
+parameters lf=0.34u wf=12u nf=16 rde=1e6 hfn_flag=hfnoise mf=1 dtemp=0  
++ wg=wf*0.9 lg=lf*0.9+1.2e-8
++lf_u=lf / 1e-6 wf_u=wf / 1e-6 nf_odd=nf - 2 * 
++ int(nf / 2) nf_even=1 - nf_odd lf_shrink=lf * 0.9 + 0.012e-6 wf_shrink=wf * 0.9 
++ lf_shrink_u=lf_shrink / 1e-6 wf_shrink_u=wf_shrink / 1e-6 p_u0=0.03639 p_lu0=6.321e-009 
++ p_a0=0.2176 p_ags=0.1284 p_vsat=8.289e+004 p_la0=-3.203e-007 p_dlc=2.524e-008 
++ p_llc=2e-015 p_dwc=-1e-007 p_cgdo=2.284e-010 p_cgbo=1e-011 p_cgdl=5.8e-011 p_cjdb=0.0012 
++ p_cjdbg=1.08e-010 p_cjdb_pb=0.3 p_cjdb_mj=0.35 p_vth0=0.71 p_lvth0=-1.5e-008 p_eta0=1.6 
++ p_lags=6.923e-008 p_wr=1 p_rdsw=500 p_pa0=-2.441e-013 p_pags=1.1e-013 p_pu0=1.168e-015 
++ p_wwlc=-6e-020 rshg=8 * (1 + drshg_n_33_l110aerf) rcnt=7 * (1 + drcnt_n_33_l110aerf) 
++ rvia=1.2 * (1 + drvia_n_33_l110aerf) sp_poly=0.44e-6 sp_edge=0.36e-6 xgw=0.22e-6 
++ no_cnt=1 no_via=3 sp_sub_w=1.7e-6 sp_sub_l=0.94e-6 sp_twell_w=2.24e-6 sp_twell_l=1.48e-6 
++ sp_nwell_w=3.74e-6 sp_nwell_l=2.98e-6 a_rch=5.571 b_rch=4.441e-010 c_rch=9.373e+004 
++ a_cgd_ext=1.243e-017 * (1 + dcgd_ext_n_33_l110aerf) a_rdrain=4.317 a_cds=-0.05061 
++ b_cds=0.05025 a_rsubd=16.67 b_rsubd=178.5 c_rsubd=-71.52 a_rsubb=35 b_rsubb=1210 
++ c_rsubb=5300 a_cgb_ext=4.812e-016 * (1 + dcgb_ext_n_33_l110aerf) 
+// *******************dnw_psub**********
++ p_area_tw=((wf)+2*sp_twell_w)*(2*sp_edge+nf*(lf)+(nf-1)*sp_poly+2*sp_twell_l)
++ p_pj_tw=2*((wf)+2*sp_twell_w+ 2*sp_edge+nf*(lf)+(nf-1)*sp_poly+2*sp_twell_l)
++ p_area_dnw=((wf)+2*sp_nwell_w)*(2*sp_edge+nf*(lf)+(nf-1)*sp_poly+2*sp_nwell_l)
++ p_pj_dnw=2*((wf)+2*sp_nwell_w+ 2*sp_edge+nf*(lf)+(nf-1)*sp_poly+2*sp_nwell_l)
++ dev_l = (2*sp_edge+nf*lg+(nf-1)*sp_poly+2*sp_twell_l)
++ dev_w = wg+2*sp_twell_w
++ dev_access = dev_l * dev_w/(16*(dev_l*dev_l+dev_w*dev_w))
+//
+//
+//*------- junction area and periphery:
++ p_area_s=nf_odd 
++ * (sp_edge * wf + sp_poly * wf * (nf - 1) / 2) + nf_even * (2 * 
++ sp_edge * wf + sp_poly * wf * (nf / 2 - 1)) p_area_d=nf_odd * (sp_edge 
++ * wf + sp_poly * wf * (nf - 1) / 2) + nf_even * (sp_poly * wf 
++ * nf / 2) p_pj_s=nf_odd * (sp_edge * 2 + wf + (nf - 1) / 2 * sp_poly * 
++ 2) + nf_even * (sp_edge * 2 * 2 + wf * 2 + (nf / 2 - 1) * sp_poly * 2) 
++ p_pj_d=nf_odd * (sp_edge * 2 + wf + (nf - 1) / 2 * sp_poly * 2) + nf_even 
++ * (nf / 2 * sp_poly * 2) p_pj_sg=nf * wf p_pj_dg=nf * wf 
+//*------- rgc scaling :
++ p_rgc=(xgw 
++ / lf_shrink * rshg + no_cnt * rcnt + no_via * rvia) / nf / 2 p_rgi=rshg * wf_shrink 
++ / lf_shrink / 12 / nf p_rch=a_rch + b_rch * (lf_shrink / wf_shrink / nf) + c_rch 
++ * (lf_shrink / wf_shrink / nf) * (lf_shrink / wf_shrink / nf) p_cgd_ext=a_cgd_ext 
++ * wf_shrink_u * nf p_cgs_ext=p_cgd_ext p_cgb_ext=a_cgb_ext * wf_shrink_u p_rdrain=a_rdrain 
++ / wf_shrink_u / nf p_rsource=p_rdrain cds_um=(a_cds + b_cds * (1 / lf_shrink_u)) 
++ * 1e-15 p_cds=(cds_um + abs(cds_um)) / 2 * wf_shrink_u * nf + 0.01e-15 p_rsubd=a_rsubd 
++ + b_rsubd * (1 / (nf * wf_shrink_u)) + c_rsubd * (1 / (nf * wf_shrink_u)) * (1 
++ / (nf * wf_shrink_u)) p_rsubs=p_rsubd rsub_w=(wf_shrink + 2 * sp_sub_w) / 1e-6 
++ rsub_l=(sp_edge * 2 + nf * lf_shrink + (nf - 1) * sp_poly + 2 * sp_sub_l) / 1e-6 
++ p_rsubb=a_rsubb + b_rsubb * (1 / (rsub_w * rsub_l)) + c_rsubb * (1 / (rsub_w * 
++ rsub_l)) * (1 / (rsub_w * rsub_l)) 
+//  
+// ------- user input parameters (scalable parameters): 
+// ------------------------------------------------------- 
+//   --------- Gate network ------------------------------ 
+rgc ( g 21 ) resistor r=p_rgc
+rgi ( 21 22 ) resistor r=p_rgi
+rch ( 22 20 ) resistor r=p_rch * (1 + drch_n_33_l110aerf) isnoisy=0
+cgd_ext ( 21 10 ) capacitor c=p_cgd_ext
+cgs_ext ( 21 30 ) capacitor c=p_cgs_ext
+cgb_ext ( 20 40 ) capacitor c=p_cgb_ext
+//   
+//   --------- Drain network ----------------------------- 
+rdrain ( d 10 ) resistor r=p_rdrain
+//   
+//   --------- Source network ----------------------------- 
+rsource ( s 30 ) resistor r=p_rsource
+//   
+//   --------- Substrate network ------------------------- 
+//  Diodes are for n-type MOS transistors 
+//  
+djdb ( 12 10 ) pwnmos_33_d area=p_area_d pj=p_pj_d
+djdb_g ( 12 10 ) pwnmos_33_dg area=1e-18 pj=p_pj_dg
+//   
+djsb ( 32 30 ) pwnmos_33_d area=p_area_s pj=p_pj_s
+djsb_g ( 32 30 ) pwnmos_33_dg area=1e-18 pj=p_pj_sg
+//  
+cds ( 30 10 ) capacitor c=p_cds * (1 + dcds_ext_n_33_l110aerf)
+//  
+rsubb ( b 40 ) resistor r=p_rsubb
+rsubd ( 40 12 ) resistor r=p_rsubd
+rsubs ( 40 32 ) resistor r=p_rsubs
+//*...................dnw_psub...............................................*
+//*
+
+dnw ( b 50 ) dionw_l110e  area=p_area_tw  pj=p_pj_tw
+rdnw ( 50 nw )  resistor r=100*dev_access
+dnwp ( 60 50 ) dnw_psub  area=p_area_dnw  pj=p_pj_dnw
+rpsub ( 60 psub ) resistor r=390*dev_access
+//*
+//   
+//  ** ----- Enhanced Channel Noise -----
+if (hfn_flag==1) {
+ide ( s d ) cccs probe=vde gain=1
+recn ( ecn b d g s b ) rde_n_33bpw_rf  lf=lf_shrink wf=wf_shrink nf=nf r=rde
+vde ( ecn b ) vsource  dc=0
+  }
+//  * core device model  
+n_33bpw_rf ( 10 20 30 40 ) n_33bpw_rf_main trise=dtemp m=nf l=lf w=wf sa=2.2u sb=2.2u ad=0 as=0 pd=0 ps=0 
+//   
+//  -------------- MOS & Diode models--------------------------------------- 
+model n_33bpw_rf_main bsim3v3 type=n 
++ minr = 0.01               imax = 0.1
++ lmin=3.4e-007             lmax=1.0e-006             wmin=3e-006
++ wmax=1.2e-005             version=3.24              mobmod=1
++ capmod=3                  nqsmod=0                  binunit=2
++ tnom=25                   xl=-9.0e-9+dxl_n_33_l110aerf+0.012e-6 
++ xw=1.0e-9 + dxw_n_33_l110aerf                            llc=p_llc
++ lwc=0                     lwlc=0                    wlc=0
++ wwc=0                     wwlc=p_wwlc               
++ tox=7.49e-009 + dtox_n_33_l110aerf                  toxm=7.49e-009
++ wint=4.909e-008           lint=0.85e-008             
++ dlc=p_dlc + ddlc_n_33_l110aerf                      
++ dwc=p_dwc + ddwc_n_33_l110aerf                      hdif=1.34e-007
++ ldif=9e-008               ll=-1e-016                wl=-1.899e-014
++ lln=1                     wln=1                     lw=-4.979e-015
++ ww=-5.92e-015             lwn=1                     wwn=1
++ lwl=7.333e-022            wwl=2.578e-021 + dwwl_n_33_l110aerf
++ cgbo=p_cgbo               cgso=p_cgdo * (1 + dcgdo_n_33_l110aerf)
++ cgdo=p_cgdo * (1 + dcgso_n_33_l110aerf)             xpart=0
++ vth0=p_vth0 + dvth0_n_33_l110aerf                   
++ lvth0=p_lvth0 +  + dlvth0_n_33_l110aerf             
++ pvth0=0 + dpvth0_n_33_l110aerf                      k1=0.9
++ k2=-0.004056              pk2=-6.6e-016             
++ k3=3.2 + dk3_n_33_l110aerf                          wk3=7.999e-007
++ k3b=0                     nlx=4e-008                dvt0=1.53
++ dvt1=0.536                dvt2=0.03264              ldvt2=-4.995e-008
++ dvt0w=-0.2921             pdvt0w=5e-015             dvt1w=1e+005
++ dvt2w=0.0792              nch=1.7e+017              voff=-0.1719
++ pvoff=-2.8e-015           nfactor=0.8               cdsc=0.00024
++ cdscb=9.13e-005           cdscd=0.00012             cit=0.00045
++ u0=p_u0 + du0_n_33_l110aerf                         lu0=p_lu0
++ wu0=-3.25e-010            pu0=p_pu0                 ua=-5e-010
++ lua=3.208e-016            wua=9.4e-016              pua=-4.59e-023
++ ub=1.5e-018               lub=6.904e-025            wub=-3.885e-024
++ pub=-5e-032               uc=6.475e-011             luc=8.832e-017
++ wuc=-5.596e-018           puc=-9.408e-024           ngate=2.95e+020
++ xj=1.05e-007              w0=2.75e-007              prwg=-0.031
++ prwb=0.4678               wr=p_wr                   
++ rdsw=p_rdsw + drdsw_n_33_l110aerf                   a0=p_a0
++ la0=p_la0                 pa0=p_pa0                 ags=p_ags
++ lags=p_lags               pags=p_pags               a1=0.005
++ a2=0.99                   b0=1.652e-005             b1=3.283e-005
++ vsat=p_vsat               keta=-0.00695             lketa=2.829e-009
++ pketa=2.12e-015           dwg=0                     dwb=3.558e-009
++ alpha0=4.755e-007         palpha0=-7.83e-020        beta0=19.78
++ pbeta0=-2.268e-013        pclm=2.054                pdiblc1=2.663e-007
++ pdiblc2=0.007493          ppdiblc2=7.6e-016         pdiblcb=0.1
++ drout=0.71                pvag=0.593                pscbe1=9.232e+008
++ pscbe2=0.0005955          delta=0.01                eta0=p_eta0
++ etab=-0.04                dsub=1.073                elm=2.86
++ alpha1=3.136              vfb=-0.8396               clc=1.0e-009
++ cle=1                     cf=0                      ckappa=0.6
++ cgdl=p_cgdl * (1 + dcgdl_n_33_l110aerf)             
++ cgsl=p_cgdl * (1 + dcgsl_n_33_l110aerf)             vfbcv=0
++ acde=0.4                  lacde=0                   moin=5
++ lmoin=1.86e-006           noff=1.669                lnoff=6.35e-007
++ voffcv=-0.0645            lvoffcv=-3.724e-008       wvoffcv=-3.816e-008
++ kt1=-0.3331               kt1l=-3e-009              kt2=-0.03645
++ lkt2=3.904e-009           ute=-0.1922               ua1=7.623e-009
++ ub1=-3.468e-018           uc1=3.746e-011            prt=-290
++ at=4.02e+004              pat=-9.9e-010             rsh=9
++ js=8.8e-007               jsw=1e-012                cj=0
++ mj=0.2766                 cjsw=0                    mjsw=0.1647
++ pb=0.528                  rd=0                      rdc=0
++ rs=0                      rsc=0                     xti=3
++ n=1.03                    pbsw=0.402                cjswg=0
++ pbswg=0.7561              mjswg=0.3428
+//noise parameter              
++ noimod=2
++ noia=1.7800000e+21        noib=1.4500000e+05        noic=-9.55000e-13
++ em=2.5000000e+07          ef=0.9077 
+//lod parameter
++ saref=2.2e-006
++ sbref=2.2e-006            wlod=0                    kvth0=5.250e-09
++ lkvth0=-2.710e-8          wkvth0=0                  pkvth0=0
++ llodvth=1                 wlodvth=1                 stk2=5.6e-10
++ lodk2=1                   lodeta0=1                 ku0=-1.51e-7
++ lku0=5.557e-7             wku0=0                    pku0=0
++ llodku0=1.120e+00         wlodku0=1                 kvsat=1
++ steta0=0.000e+00          tku0=0                           
+//  
+model pwnmos_33_d diode 
++ hcomp=1.0000e+00          imax=1.00e+14             level=3
++ tnom=25                   is=8.81e-08               ik=5.28e+04
++ bv=13.36                  n=1.008                   
++ cjo=p_cjdb * (1 + dcj_n_33_l110aerf)                
++ cjsw=1.06e-10 * (1 + dcjsw_n_33_l110aerf)           vj=p_cjdb_pb
++ mj=p_cjdb_mj              mjsw=0.13                 vjsw=0.54
++ cta=0.00105               ctp=0.00178               tlev=1
++ tlevc=1                   xti=3                     eg=1.11
+ 
+model pwnmos_33_dg diode 
++ hcomp=1.0000e+00          imax=1.00e+14             level=3
++ tnom=25                   cjo=0                     
++ cjsw=p_cjdbg * (1 + dcjswg_n_33_l110aerf)           mjsw=0.12
++ vjsw=0.8                  tlev=0                    tlevc=1
++ xti=3                     eg=1.11                   
+ 
+//  * TW/DNW diode from 0.11um RF model                   
+model dionw_l110e diode  
++  hcomp=1.0000e+00          imax=1.00e+14             level=3 
++  area=1.68e-007            perim=0.00469             tnom=25 
++  is=2.05e-006              isw=5.34e-011             ik=17856 
++  bv=9.662                  ibv=5.952                 ikp=595.2 
++  n=1.0525                  rs=3.0891e-007             
++  cjo=8.28e-005 * (1 + dcj_nwtw_n_33bpw_rf)                     
++  cjp=9.92e-010 * (1 + dcjsw_nwtw_n_33bpw_rf)    vj=0.588 
++  vjsw=0.62                 mj=0.474                  mjsw=0.27 
++  tlev=1                    tlevc=1                   trs=0.00322 
++  tbv1=-0.000539            xti=5.4936                cta=0.00332 
++  ctp=0.001                 eg=1.16                   pta=0.0028 
++  ptp=0.001  
+//  * DNW/PSUB diode from 0.13um RF model 
+model dnw_psub diode 
++ hcomp=1.0000e+00          imax=1.00e+14             level=1
++ tnom=25                   area=1e-8                 perim=1.41e-3
++ is=0.0002528              isw=2.16e-009             bv=10
++ n=1.194                   cjo=9.5e-005 * (1 + dcj_nw_n_33bpw_rf)
++ mj=0.5                    cjsw=9.641e-010 * (1 + dcjsw_nw_n_33bpw_rf)
++ mjsw=0.304                vj=0.6                    vjsw=0.6463
++ cta=0.004168              ctp=0.002001              tlevc=1
++ trs=0.002847              xti=1.5                   eg=1.188                
+
+ends n_33bpw_rf
+ 

@@ -1,0 +1,60 @@
+
+//*  "0.11 um Logic and Mixed-Mode Metal Metal Capacitor Al Enhancement Process RESISTOR Model"
+simulator lang=spectre insensitive=yes
+library mylib
+
+section tt
+parameters
+
++drend_rnnpo_l110e    =  0.0000e+000  drs_rnnpo_l110e       =  0.0000e+000  ddw_rnnpo_l110e       =  0.0000e+000  
++drend_rnppo_l110e    =  0.0000e+000  drs_rnppo_l110e       =  0.0000e+000  ddw_rnppo_l110e       =  0.0000e+000  
++drend_rnnd_l110e     =  0.0000e+000  drs_rnnd_l110e        =  0.0000e+000  ddw_rnnd_l110e        =  0.0000e+000  
++drend_rnpd_l110e     =  0.0000e+000  drs_rnpd_l110e        =  0.0000e+000  ddw_rnpd_l110e        =  0.0000e+000  
++drend_rnhr1000_l110e =  0.0000e+000  drs_rnhr1000_l110e    =  0.0000e+000  ddw_rnhr1000_l110e    =  0.0000e+000  
++drs_rsnd_mml110e     =  0.0000e+00   drs_rspd_mml110e      =  0.0000e+00   drs_rsnpo_mml110e     =  0.0000e+00         
++drs_rsppo_mml110e    =  0.0000e+00   drs_rnwell_mml110e    =  0.0000e+00   
++drs_rsm1_l110e       =  0.0000e+00   drs_rsm2_l110e        =  0.0000e+00   
++drs_rsm6t_8k_l110e   =  0.0000e+00
+
+include "./l110ae_res_v061.mdl.scs"
+
+endsection  tt
+
+section ss
+parameters
+
++drend_rnnpo_l110e    =  1.2020e-005  drs_rnnpo_l110e       =  2.8000e+001  ddw_rnnpo_l110e       = -1.5000e-008  
++drend_rnppo_l110e    =  1.5470e-005  drs_rnppo_l110e       =  6.0000e+001  ddw_rnppo_l110e       = -1.5000e-008  
++drend_rnnd_l110e     =  5.5700e-006  drs_rnnd_l110e        =  2.4000e+001  ddw_rnnd_l110e        = -5.1000e-008  
++drend_rnpd_l110e     =  5.9500e-006  drs_rnpd_l110e        =  2.9000e+001  ddw_rnpd_l110e        = -5.1000e-008  
++drend_rnhr1000_l110e =  5.4740e-005  drs_rnhr1000_l110e    =  1.4800e+002  ddw_rnhr1000_l110e    = -1.3000e-008  
++drs_rsnd_mml110e     =  5.7000e+00   drs_rspd_mml110e      =  6.8000e+00   drs_rsnpo_mml110e     =  6.3000e+00                                                              
++drs_rsppo_mml110e    =  7.7000e+00   drs_rnwell_mml110e    =  4.9000e+01   
++drs_rsm1_l110e       =  5.5000e-02   drs_rsm2_l110e        =  4.5000e-02   
++drs_rsm6t_8k_l110e   =  4.0000e-02
+
+include "./l110ae_res_v061.mdl.scs"
+
+endsection  ss
+
+section ff
+parameters
+
++drend_rnnpo_l110e    = -1.1990e-005  drs_rnnpo_l110e       = -2.8000e+001  ddw_rnnpo_l110e       =  1.6000e-008    
++drend_rnppo_l110e    = -1.6030e-005  drs_rnppo_l110e       = -6.0000e+001  ddw_rnppo_l110e       =  1.6000e-008    
++drend_rnnd_l110e     = -5.5900e-006  drs_rnnd_l110e        = -2.4000e+001  ddw_rnnd_l110e        =  5.1000e-008    
++drend_rnpd_l110e     = -6.8700e-006  drs_rnpd_l110e        = -2.9000e+001  ddw_rnpd_l110e        =  5.1000e-008    
++drend_rnhr1000_l110e = -5.3310e-005  drs_rnhr1000_l110e    = -1.4800e+002  ddw_rnhr1000_l110e    =  1.3000e-008    
++drs_rsnd_mml110e     = -6.3000e+00   drs_rspd_mml110e      = -5.2000e+00   drs_rsnpo_mml110e     = -6.7000e+00                                                                
++drs_rsppo_mml110e    = -5.3000e+00   drs_rnwell_mml110e    = -4.8400e+01    
++drs_rsm1_l110e       = -6.5000e-02   drs_rsm2_l110e        = -4.5000e-02   
++drs_rsm6t_8k_l110e   = -3.0000e-02
+
+include "./l110ae_res_v061.mdl.scs"
+
+endsection  ff
+
+
+
+endlibrary mylib
+

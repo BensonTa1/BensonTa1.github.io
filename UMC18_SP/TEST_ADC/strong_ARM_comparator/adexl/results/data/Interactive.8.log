@@ -1,0 +1,31 @@
+Starting Single Run, Sweeps and Corners...
+
+Current time: Sun Mar 30 21:58:26 2025 
+Best design point: 1
+Design specs: 
+	TEST_ADC:strong_ARM_comparator:1	corner	C1_0 - 
+	Offset_Voltage		-196.1u
+	ymax(cross(abs((v("/I4/R" ?result "pss_tran") - v("/I4/S" ?result "pss_tran"))) 0.2 1 "either" nil nil nil))		6.393n
+	TEST_ADC:strong_ARM_comparator:1	corner	C1_1 - 
+	Offset_Voltage		-2.157m
+	ymax(cross(abs((v("/I4/R" ?result "pss_tran") - v("/I4/S" ?result "pss_tran"))) 0.2 1 "either" nil nil nil))		6.3n
+	TEST_ADC:strong_ARM_comparator:1	corner	C1_2 - 
+	Offset_Voltage		-196.1u
+	ymax(cross(abs((v("/I4/R" ?result "pss_tran") - v("/I4/S" ?result "pss_tran"))) 0.2 1 "either" nil nil nil))		6.523n
+	TEST_ADC:strong_ARM_comparator:1	corner	C1_3 - 
+	Offset_Voltage		-196.1u
+	ymax(cross(abs((v("/I4/R" ?result "pss_tran") - v("/I4/S" ?result "pss_tran"))) 0.2 1 "either" nil nil nil))		6.429n
+	TEST_ADC:strong_ARM_comparator:1	corner	C1_4 - 
+	Offset_Voltage		-196.1u
+	ymax(cross(abs((v("/I4/R" ?result "pss_tran") - v("/I4/S" ?result "pss_tran"))) 0.2 1 "either" nil nil nil))		6.366n
+	TEST_ADC:strong_ARM_comparator:1	corner	Nominal - 
+	Offset_Voltage		-196.1u
+	ymax(cross(abs((v("/I4/R" ?result "pss_tran") - v("/I4/S" ?result "pss_tran"))) 0.2 1 "either" nil nil nil))		6.393n
+Design parameters: 
+	sigma		1
+
+Interactive.8
+Number of points completed: 1
+Number of simulation errors: 0
+Interactive.8 completed. 
+Current time: Sun Mar 30 21:59:37 2025 

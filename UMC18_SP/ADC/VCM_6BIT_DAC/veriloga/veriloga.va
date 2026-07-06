@@ -1,0 +1,46 @@
+//test
+
+`include "constants.vams"
+`include "disciplines.vams"
+
+module VCM_6BIT_DAC(D1,D2,D3,D4,D5,D6,VOUT);
+	input D1,D2,D3,D4,D5,D6;
+	output VOUT;
+	electrical D1,D2,D3,D4,D5,D6;
+	electrical VOUT;
+
+	real B1,B2,B3,B4,B5,B6;
+	real SUM;
+	
+	parameter real sampling_rate = 10e6; 
+	real time_step;
+
+	analog begin
+		time_step = 1.0 / sampling_rate;
+
+		
+		@(timer(0, time_step)) begin
+			if(V(D1)>0.9) B1=1;
+			else B1=0;
+			if(V(D2)>0.9) B2=1;
+			else B2=0;
+			if(V(D3)>0.9) B3=1;
+			else B3=0;
+			if(V(D4)>0.9) B4=1;
+			else B4=0;
+			if(V(D5)>0.9) B5=1;
+			else B5=0;
+			if(V(D6)>0.9) B6=1;
+			else B6=0;
+			//SUM=1.8*(1/64)*(B6*32+B5*16+B4*8+B3*4+B2*2+B1*1);
+			SUM=1.8*(B6*32+B5*16+B4*8+B3*4+B2*2+B1*1)/64;
+			
+		end
+		
+
+		V(VOUT) <+ SUM; 
+	
+	end
+	
+
+endmodule

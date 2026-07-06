@@ -1,0 +1,2257 @@
+<?xml version="1.0"?>
+<setupdb version="6">data
+	<active>Active Setup
+		<corners>
+			<corner enabled="0">_default</corner>
+			<corner enabled="1">C0
+				<models>
+					<model enabled="1">cr013g_2d5_v1d4.scs
+						<modeltest>All</modeltest>
+						<modelblock>Global</modelblock>
+						<modelfile>/home/IC/Desktop/virtuoso/Process/TSMC13/TSMC13/models/spectre/cr013g_2d5_v1d4.scs</modelfile>
+						<modelsection>"tt" "ff" "ss" "sf" "fs"</modelsection>
+					</model>
+				</models>
+			</corner>
+		</corners>
+		<extensions>
+			<extension>Parasitics
+				<callback>_parSetupDBExtensionCB</callback>
+				<iconvalue></iconvalue>
+				<icontype></icontype>
+				<active>
+					<mode>No Parasitics/LDE</mode>
+					<parameters>
+						<device>
+							<enabled>1</enabled>
+						</device>
+						<parasitic>
+							<enabled>0</enabled>
+						</parasitic>
+					</parameters>
+				</active>
+				<modes>
+					<mode>No Parasitics/LDE
+						<schematic>
+							<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+							<cell>DIVIDER_POST_D1_D16</cell>
+							<view>schematic</view>
+						</schematic>
+					</mode>
+					<mode>Schematic Estimates (Parasitics)
+						<schematic>
+							<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+							<cell>DIVIDER_POST_D1_D16</cell>
+							<view>schematic</view>
+						</schematic>
+						<parasitic>
+							<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+							<cell>DIVIDER_POST_D1_D16</cell>
+							<view>estimated</view>
+						</parasitic>
+					</mode>
+					<mode>Layout (Parasitics/LDE)
+						<schematic>
+							<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+							<cell>DIVIDER_POST_D1_D16</cell>
+							<view>schematic</view>
+						</schematic>
+						<parasitic>
+							<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+							<cell>DIVIDER_POST_D1_D16</cell>
+							<view>netlist_layout</view>
+						</parasitic>
+					</mode>
+					<mode>Extracted (Parasitics/LDE)
+						<schematic>
+							<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+							<cell>DIVIDER_POST_D1_D16</cell>
+							<view>schematic</view>
+						</schematic>
+						<parasitic>
+							<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+							<cell>DIVIDER_POST_D1_D16</cell>
+							<view>&lt;None&gt;</view>
+						</parasitic>
+					</mode>
+				</modes>
+			</extension>
+		</extensions>
+		<currentmode>Single Run, Sweeps and Corners</currentmode>
+		<overwritehistory>0</overwritehistory>
+		<tests>
+			<test>TEST_TSMC13_ALLTEK_PLL:DIVIDER_POST:1
+				<tool>ADE</tool>
+				<tooloptions>
+					<option>cell
+						<value>DIVIDER_POST</value>
+					</option>
+					<option>lib
+						<value>TEST_TSMC13_ALLTEK_PLL</value>
+					</option>
+					<option>sim
+						<value>spectre</value>
+					</option>
+					<option>view
+						<value>config</value>
+					</option>
+					<option>path
+						<value>$AXL_SETUPDB_DIR/test_states</value>
+					</option>
+					<option>state
+						<value>TEST_TSMC13_ALLTEK_PLL:DIVIDER_POST:1_active</value>
+					</option>
+				</tooloptions>
+				<origoptions>
+					<option>cell
+						<value>DIVIDER_POST</value>
+					</option>
+					<option>lib
+						<value>TEST_TSMC13_ALLTEK_PLL</value>
+					</option>
+					<option>sim
+						<value>spectre</value>
+					</option>
+					<option>view
+						<value>schematic</value>
+					</option>
+					<option>path
+						<value>$AXL_SETUPDB_DIR/test_states</value>
+					</option>
+					<option>state
+						<value>state1</value>
+					</option>
+				</origoptions>
+				<outputs>
+					<output>(cross(vtime('tran "/FOUT2") 0.6 3 "rising" nil nil nil) - cross(vtime('tran "/FOUT2") 0.6 2 "rising" nil nil nil))
+						<evalType>point</evalType>
+					</output>
+				</outputs>
+			</test>
+		</tests>
+		<vars>
+			<var>POST_SEL
+				<value>{Exclusion List}0{Exclusion List}{From/To}Auto:0:2:1.2{From/To}</value>
+				<dependentTests>
+					<dependentTest enabled="1">TEST_TSMC13_ALLTEK_PLL:DIVIDER_POST:1</dependentTest>
+				</dependentTests>
+			</var>
+			<var>FS
+				<value>3.5G</value>
+				<dependentTests>
+					<dependentTest omitted="0">TEST_TSMC13_ALLTEK_PLL:DIVIDER_POST_D1_D16:1</dependentTest>
+					<dependentTest enabled="1">TEST_TSMC13_ALLTEK_PLL:DIVIDER_POST:1</dependentTest>
+				</dependentTests>
+			</var>
+			<var enabled="1">VS
+				<value>{Exclusion List}1.2{Exclusion List}{Center/Span%}Auto:1.2:3:20{Center/Span%}</value>
+				<dependentTests>
+					<dependentTest omitted="0">TEST_TSMC13_ALLTEK_PLL:DIVIDER_POST_D1_D16:1</dependentTest>
+					<dependentTest enabled="1">TEST_TSMC13_ALLTEK_PLL:DIVIDER_POST:1</dependentTest>
+				</dependentTests>
+			</var>
+			<var enabled="1">temperature
+				<value>{Exclusion List}30{Exclusion List}{From/To}Auto:-25:5:125{From/To}</value>
+			</var>
+		</vars>
+		<overwritehistoryname>Interactive.0</overwritehistoryname>
+		<plottingoptions>
+			<plottingoption>plottingmode
+				<value>Replace</value>
+			</plottingoption>
+			<plottingoption>plottype
+				<value>None</value>
+			</plottingoption>
+			<plottingoption>usewaveformtemplate
+				<value>no</value>
+			</plottingoption>
+			<plottingoption>useMaestroPlottingTemplate
+				<value>yes</value>
+			</plottingoption>
+			<plottingoption>waveformtemplate
+				<value></value>
+			</plottingoption>
+			<plottingoption>allplottingtemplates
+				<value></value>
+			</plottingoption>
+			<plottingoption>defaultplottingtemplate
+				<value></value>
+			</plottingoption>
+		</plottingoptions>
+		<specs></specs>
+	</active>
+	<history>History
+		<historyentry assemblerOrExplorer="adexl" roOrView="view">Interactive.101
+			<checkpoint>
+				<corners>
+					<corner enabled="0">_default</corner>
+					<corner enabled="1">C0
+						<models>
+							<model enabled="1">cr013g_2d5_v1d4.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/TSMC13/TSMC13/models/spectre/cr013g_2d5_v1d4.scs</modelfile>
+								<modelsection>"tt" "ff" "ss" "sf" "fs"</modelsection>
+							</model>
+						</models>
+					</corner>
+				</corners>
+				<extensions>
+					<extension>Parasitics
+						<callback>_parSetupDBExtensionCB</callback>
+						<iconvalue></iconvalue>
+						<icontype></icontype>
+						<active>
+							<mode>No Parasitics/LDE</mode>
+							<parameters>
+								<device>
+									<enabled>1</enabled>
+								</device>
+								<parasitic>
+									<enabled>0</enabled>
+								</parasitic>
+							</parameters>
+						</active>
+						<modes>
+							<mode>No Parasitics/LDE
+								<schematic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>DIVIDER_POST_D1_D16</cell>
+									<view>schematic</view>
+								</schematic>
+							</mode>
+							<mode>Schematic Estimates (Parasitics)
+								<schematic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>DIVIDER_POST_D1_D16</cell>
+									<view>schematic</view>
+								</schematic>
+								<parasitic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>DIVIDER_POST_D1_D16</cell>
+									<view>estimated</view>
+								</parasitic>
+							</mode>
+							<mode>Layout (Parasitics/LDE)
+								<schematic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>DIVIDER_POST_D1_D16</cell>
+									<view>schematic</view>
+								</schematic>
+								<parasitic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>DIVIDER_POST_D1_D16</cell>
+									<view>netlist_layout</view>
+								</parasitic>
+							</mode>
+							<mode>Extracted (Parasitics/LDE)
+								<schematic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>DIVIDER_POST_D1_D16</cell>
+									<view>schematic</view>
+								</schematic>
+								<parasitic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>DIVIDER_POST_D1_D16</cell>
+									<view>&lt;None&gt;</view>
+								</parasitic>
+							</mode>
+						</modes>
+					</extension>
+				</extensions>
+				<currentmode>Single Run, Sweeps and Corners</currentmode>
+				<overwritehistory>0</overwritehistory>
+				<tests>
+					<test>TEST_TSMC13_ALLTEK_PLL:DIVIDER_POST:1
+						<tool>ADE</tool>
+						<tooloptions>
+							<option>cell
+								<value>DIVIDER_POST</value>
+							</option>
+							<option>lib
+								<value>TEST_TSMC13_ALLTEK_PLL</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>schematic</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>TEST_TSMC13_ALLTEK_PLL:DIVIDER_POST:1_state1_Interactive.101</value>
+							</option>
+						</tooloptions>
+						<origoptions>
+							<option>cell
+								<value>DIVIDER_POST</value>
+							</option>
+							<option>lib
+								<value>TEST_TSMC13_ALLTEK_PLL</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>schematic</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>state1</value>
+							</option>
+						</origoptions>
+					</test>
+				</tests>
+				<vars>
+					<var>POST_SEL
+						<value>{Exclusion List}0{Exclusion List}{From/To}Auto:0:2:1.2{From/To}</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_TSMC13_ALLTEK_PLL:DIVIDER_POST:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>FS
+						<value>4.5G</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_TSMC13_ALLTEK_PLL:DIVIDER_POST_D1_D16:1</dependentTest>
+							<dependentTest enabled="1">TEST_TSMC13_ALLTEK_PLL:DIVIDER_POST:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var enabled="1">VS
+						<value>{Exclusion List}1.2{Exclusion List}{Center/Span%}Auto:1.2:3:20{Center/Span%}</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_TSMC13_ALLTEK_PLL:DIVIDER_POST_D1_D16:1</dependentTest>
+							<dependentTest enabled="1">TEST_TSMC13_ALLTEK_PLL:DIVIDER_POST:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var enabled="1">temperature
+						<value>{Exclusion List}30{Exclusion List}{From/To}Auto:-25:5:125{From/To}</value>
+					</var>
+				</vars>
+				<overwritehistoryname>Interactive.0</overwritehistoryname>
+				<plottingoptions>
+					<plottingoption>plottingmode
+						<value>Replace</value>
+					</plottingoption>
+					<plottingoption>plottype
+						<value>None</value>
+					</plottingoption>
+					<plottingoption>usewaveformtemplate
+						<value>no</value>
+					</plottingoption>
+					<plottingoption>useMaestroPlottingTemplate
+						<value>yes</value>
+					</plottingoption>
+					<plottingoption>waveformtemplate
+						<value></value>
+					</plottingoption>
+					<plottingoption>allplottingtemplates
+						<value></value>
+					</plottingoption>
+					<plottingoption>defaultplottingtemplate
+						<value></value>
+					</plottingoption>
+				</plottingoptions>
+				<sortVariableValues>0</sortVariableValues>
+			</checkpoint>
+			<timestamp>Mar 13 17:33:54 2026</timestamp>
+			<resultsname>/home/IC/Desktop/virtuoso/TEST_TSMC13_ALLTEK_PLL/DIVIDER_POST/adexl/results/data/Interactive.101.rdb</resultsname>
+			<simresults>$AXL_SETUPDB_DIR/results/data/Interactive.101.rdb</simresults>
+			<rawdatadelstrategy>SaveAll
+				<simdatasavemode>All</simdatasavemode>
+			</rawdatadelstrategy>
+			<netlistdelstrategy>SaveAll</netlistdelstrategy>
+			<uselocalpsfdir>false</uselocalpsfdir>
+			<localpsfdir>/tmp/IC_IC_173354561</localpsfdir>
+			<psfdir>/home/IC/simulation/TEST_TSMC13_ALLTEK_PLL/DIVIDER_POST/adexl/results/data/Interactive.101</psfdir>
+			<simdir>$AXL_PROJECT_DIR/TEST_TSMC13_ALLTEK_PLL/DIVIDER_POST/adexl/results/data/Interactive.101</simdir>
+			<gendatasheetplotsonsimulation>1</gendatasheetplotsonsimulation>
+			<runlog>/home/IC/Desktop/virtuoso/TEST_TSMC13_ALLTEK_PLL/DIVIDER_POST/adexl/results/data/Interactive.101.log</runlog>
+			<runlogfile>$AXL_SETUPDB_DIR/results/data/Interactive.101.log</runlogfile>
+			<schematicpoint>
+				<vars>
+					<var>POST_SEL
+						<value></value>
+					</var>
+					<var>VS
+						<value>1.2</value>
+					</var>
+				</vars>
+			</schematicpoint>
+			<test>all</test>
+		</historyentry>
+		<historyentry assemblerOrExplorer="adexl" roOrView="view">Interactive.102
+			<checkpoint>
+				<corners>
+					<corner enabled="0">_default</corner>
+					<corner enabled="1">C0
+						<models>
+							<model enabled="1">cr013g_2d5_v1d4.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/TSMC13/TSMC13/models/spectre/cr013g_2d5_v1d4.scs</modelfile>
+								<modelsection>"tt" "ff" "ss" "sf" "fs"</modelsection>
+							</model>
+						</models>
+					</corner>
+				</corners>
+				<extensions>
+					<extension>Parasitics
+						<callback>_parSetupDBExtensionCB</callback>
+						<iconvalue></iconvalue>
+						<icontype></icontype>
+						<active>
+							<mode>No Parasitics/LDE</mode>
+							<parameters>
+								<device>
+									<enabled>1</enabled>
+								</device>
+								<parasitic>
+									<enabled>0</enabled>
+								</parasitic>
+							</parameters>
+						</active>
+						<modes>
+							<mode>No Parasitics/LDE
+								<schematic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>DIVIDER_POST_D1_D16</cell>
+									<view>schematic</view>
+								</schematic>
+							</mode>
+							<mode>Schematic Estimates (Parasitics)
+								<schematic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>DIVIDER_POST_D1_D16</cell>
+									<view>schematic</view>
+								</schematic>
+								<parasitic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>DIVIDER_POST_D1_D16</cell>
+									<view>estimated</view>
+								</parasitic>
+							</mode>
+							<mode>Layout (Parasitics/LDE)
+								<schematic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>DIVIDER_POST_D1_D16</cell>
+									<view>schematic</view>
+								</schematic>
+								<parasitic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>DIVIDER_POST_D1_D16</cell>
+									<view>netlist_layout</view>
+								</parasitic>
+							</mode>
+							<mode>Extracted (Parasitics/LDE)
+								<schematic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>DIVIDER_POST_D1_D16</cell>
+									<view>schematic</view>
+								</schematic>
+								<parasitic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>DIVIDER_POST_D1_D16</cell>
+									<view>&lt;None&gt;</view>
+								</parasitic>
+							</mode>
+						</modes>
+					</extension>
+				</extensions>
+				<currentmode>Single Run, Sweeps and Corners</currentmode>
+				<overwritehistory>0</overwritehistory>
+				<tests>
+					<test>TEST_TSMC13_ALLTEK_PLL:DIVIDER_POST:1
+						<tool>ADE</tool>
+						<tooloptions>
+							<option>cell
+								<value>DIVIDER_POST</value>
+							</option>
+							<option>lib
+								<value>TEST_TSMC13_ALLTEK_PLL</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>schematic</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>TEST_TSMC13_ALLTEK_PLL:DIVIDER_POST:1_state1_Interactive.102</value>
+							</option>
+						</tooloptions>
+						<origoptions>
+							<option>cell
+								<value>DIVIDER_POST</value>
+							</option>
+							<option>lib
+								<value>TEST_TSMC13_ALLTEK_PLL</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>schematic</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>state1</value>
+							</option>
+						</origoptions>
+					</test>
+				</tests>
+				<vars>
+					<var>POST_SEL
+						<value>{Exclusion List}0{Exclusion List}{From/To}Auto:0:2:1.2{From/To}</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_TSMC13_ALLTEK_PLL:DIVIDER_POST:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>FS
+						<value>4.5G</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_TSMC13_ALLTEK_PLL:DIVIDER_POST_D1_D16:1</dependentTest>
+							<dependentTest enabled="1">TEST_TSMC13_ALLTEK_PLL:DIVIDER_POST:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var enabled="1">VS
+						<value>{Exclusion List}1.2{Exclusion List}{Center/Span%}Auto:1.2:3:20{Center/Span%}</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_TSMC13_ALLTEK_PLL:DIVIDER_POST_D1_D16:1</dependentTest>
+							<dependentTest enabled="1">TEST_TSMC13_ALLTEK_PLL:DIVIDER_POST:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var enabled="1">temperature
+						<value>{Exclusion List}30{Exclusion List}{From/To}Auto:-25:5:125{From/To}</value>
+					</var>
+				</vars>
+				<overwritehistoryname>Interactive.0</overwritehistoryname>
+				<plottingoptions>
+					<plottingoption>plottingmode
+						<value>Replace</value>
+					</plottingoption>
+					<plottingoption>plottype
+						<value>None</value>
+					</plottingoption>
+					<plottingoption>usewaveformtemplate
+						<value>no</value>
+					</plottingoption>
+					<plottingoption>useMaestroPlottingTemplate
+						<value>yes</value>
+					</plottingoption>
+					<plottingoption>waveformtemplate
+						<value></value>
+					</plottingoption>
+					<plottingoption>allplottingtemplates
+						<value></value>
+					</plottingoption>
+					<plottingoption>defaultplottingtemplate
+						<value></value>
+					</plottingoption>
+				</plottingoptions>
+				<sortVariableValues>0</sortVariableValues>
+			</checkpoint>
+			<timestamp>Mar 13 18:59:25 2026</timestamp>
+			<resultsname>/home/IC/Desktop/virtuoso/TEST_TSMC13_ALLTEK_PLL/DIVIDER_POST/adexl/results/data/Interactive.102.rdb</resultsname>
+			<simresults>$AXL_SETUPDB_DIR/results/data/Interactive.102.rdb</simresults>
+			<rawdatadelstrategy>SaveAll
+				<simdatasavemode>All</simdatasavemode>
+			</rawdatadelstrategy>
+			<netlistdelstrategy>SaveAll</netlistdelstrategy>
+			<uselocalpsfdir>false</uselocalpsfdir>
+			<localpsfdir>/tmp/IC_IC_185925054</localpsfdir>
+			<psfdir>/home/IC/simulation/TEST_TSMC13_ALLTEK_PLL/DIVIDER_POST/adexl/results/data/Interactive.102</psfdir>
+			<simdir>$AXL_PROJECT_DIR/TEST_TSMC13_ALLTEK_PLL/DIVIDER_POST/adexl/results/data/Interactive.102</simdir>
+			<gendatasheetplotsonsimulation>1</gendatasheetplotsonsimulation>
+			<runlog>/home/IC/Desktop/virtuoso/TEST_TSMC13_ALLTEK_PLL/DIVIDER_POST/adexl/results/data/Interactive.102.log</runlog>
+			<runlogfile>$AXL_SETUPDB_DIR/results/data/Interactive.102.log</runlogfile>
+			<schematicpoint>
+				<vars>
+					<var>POST_SEL
+						<value>0</value>
+					</var>
+					<var>VS
+						<value>1.08</value>
+					</var>
+				</vars>
+			</schematicpoint>
+			<test>all</test>
+		</historyentry>
+		<historyentry assemblerOrExplorer="adexl" roOrView="view">Interactive.103
+			<checkpoint>
+				<corners>
+					<corner enabled="0">_default</corner>
+					<corner enabled="1">C0
+						<models>
+							<model enabled="1">cr013g_2d5_v1d4.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/TSMC13/TSMC13/models/spectre/cr013g_2d5_v1d4.scs</modelfile>
+								<modelsection>"tt" "ff" "ss" "sf" "fs"</modelsection>
+							</model>
+						</models>
+					</corner>
+				</corners>
+				<extensions>
+					<extension>Parasitics
+						<callback>_parSetupDBExtensionCB</callback>
+						<iconvalue></iconvalue>
+						<icontype></icontype>
+						<active>
+							<mode>No Parasitics/LDE</mode>
+							<parameters>
+								<device>
+									<enabled>1</enabled>
+								</device>
+								<parasitic>
+									<enabled>0</enabled>
+								</parasitic>
+							</parameters>
+						</active>
+						<modes>
+							<mode>No Parasitics/LDE
+								<schematic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>DIVIDER_POST_D1_D16</cell>
+									<view>schematic</view>
+								</schematic>
+							</mode>
+							<mode>Schematic Estimates (Parasitics)
+								<schematic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>DIVIDER_POST_D1_D16</cell>
+									<view>schematic</view>
+								</schematic>
+								<parasitic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>DIVIDER_POST_D1_D16</cell>
+									<view>estimated</view>
+								</parasitic>
+							</mode>
+							<mode>Layout (Parasitics/LDE)
+								<schematic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>DIVIDER_POST_D1_D16</cell>
+									<view>schematic</view>
+								</schematic>
+								<parasitic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>DIVIDER_POST_D1_D16</cell>
+									<view>netlist_layout</view>
+								</parasitic>
+							</mode>
+							<mode>Extracted (Parasitics/LDE)
+								<schematic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>DIVIDER_POST_D1_D16</cell>
+									<view>schematic</view>
+								</schematic>
+								<parasitic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>DIVIDER_POST_D1_D16</cell>
+									<view>&lt;None&gt;</view>
+								</parasitic>
+							</mode>
+						</modes>
+					</extension>
+				</extensions>
+				<currentmode>Single Run, Sweeps and Corners</currentmode>
+				<overwritehistory>0</overwritehistory>
+				<tests>
+					<test>TEST_TSMC13_ALLTEK_PLL:DIVIDER_POST:1
+						<tool>ADE</tool>
+						<tooloptions>
+							<option>cell
+								<value>DIVIDER_POST</value>
+							</option>
+							<option>lib
+								<value>TEST_TSMC13_ALLTEK_PLL</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>schematic</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>TEST_TSMC13_ALLTEK_PLL:DIVIDER_POST:1_state1_Interactive.103</value>
+							</option>
+						</tooloptions>
+						<origoptions>
+							<option>cell
+								<value>DIVIDER_POST</value>
+							</option>
+							<option>lib
+								<value>TEST_TSMC13_ALLTEK_PLL</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>schematic</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>state1</value>
+							</option>
+						</origoptions>
+					</test>
+				</tests>
+				<vars>
+					<var>POST_SEL
+						<value>{Exclusion List}0{Exclusion List}{From/To}Auto:0:2:1.2{From/To}</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_TSMC13_ALLTEK_PLL:DIVIDER_POST:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>FS
+						<value>4G</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_TSMC13_ALLTEK_PLL:DIVIDER_POST_D1_D16:1</dependentTest>
+							<dependentTest enabled="1">TEST_TSMC13_ALLTEK_PLL:DIVIDER_POST:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var enabled="1">VS
+						<value>{Exclusion List}1.2{Exclusion List}{Center/Span%}Auto:1.2:3:20{Center/Span%}</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_TSMC13_ALLTEK_PLL:DIVIDER_POST_D1_D16:1</dependentTest>
+							<dependentTest enabled="1">TEST_TSMC13_ALLTEK_PLL:DIVIDER_POST:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var enabled="1">temperature
+						<value>{Exclusion List}30{Exclusion List}{From/To}Auto:-25:5:125{From/To}</value>
+					</var>
+				</vars>
+				<overwritehistoryname>Interactive.0</overwritehistoryname>
+				<plottingoptions>
+					<plottingoption>plottingmode
+						<value>Replace</value>
+					</plottingoption>
+					<plottingoption>plottype
+						<value>None</value>
+					</plottingoption>
+					<plottingoption>usewaveformtemplate
+						<value>no</value>
+					</plottingoption>
+					<plottingoption>useMaestroPlottingTemplate
+						<value>yes</value>
+					</plottingoption>
+					<plottingoption>waveformtemplate
+						<value></value>
+					</plottingoption>
+					<plottingoption>allplottingtemplates
+						<value></value>
+					</plottingoption>
+					<plottingoption>defaultplottingtemplate
+						<value></value>
+					</plottingoption>
+				</plottingoptions>
+				<sortVariableValues>0</sortVariableValues>
+			</checkpoint>
+			<timestamp>Mar 13 19:03:53 2026</timestamp>
+			<resultsname>/home/IC/Desktop/virtuoso/TEST_TSMC13_ALLTEK_PLL/DIVIDER_POST/adexl/results/data/Interactive.103.rdb</resultsname>
+			<simresults>$AXL_SETUPDB_DIR/results/data/Interactive.103.rdb</simresults>
+			<rawdatadelstrategy>SaveAll
+				<simdatasavemode>All</simdatasavemode>
+			</rawdatadelstrategy>
+			<netlistdelstrategy>SaveAll</netlistdelstrategy>
+			<uselocalpsfdir>false</uselocalpsfdir>
+			<localpsfdir>/tmp/IC_IC_190353636</localpsfdir>
+			<psfdir>/home/IC/simulation/TEST_TSMC13_ALLTEK_PLL/DIVIDER_POST/adexl/results/data/Interactive.103</psfdir>
+			<simdir>$AXL_PROJECT_DIR/TEST_TSMC13_ALLTEK_PLL/DIVIDER_POST/adexl/results/data/Interactive.103</simdir>
+			<gendatasheetplotsonsimulation>1</gendatasheetplotsonsimulation>
+			<runlog>/home/IC/Desktop/virtuoso/TEST_TSMC13_ALLTEK_PLL/DIVIDER_POST/adexl/results/data/Interactive.103.log</runlog>
+			<runlogfile>$AXL_SETUPDB_DIR/results/data/Interactive.103.log</runlogfile>
+			<schematicpoint>
+				<vars>
+					<var>POST_SEL
+						<value>0</value>
+					</var>
+					<var>VS
+						<value>1.08</value>
+					</var>
+				</vars>
+			</schematicpoint>
+			<test>all</test>
+		</historyentry>
+		<historyentry assemblerOrExplorer="adexl" roOrView="view">Interactive.104
+			<checkpoint>
+				<corners>
+					<corner enabled="0">_default</corner>
+					<corner enabled="1">C0
+						<models>
+							<model enabled="1">cr013g_2d5_v1d4.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/TSMC13/TSMC13/models/spectre/cr013g_2d5_v1d4.scs</modelfile>
+								<modelsection>"tt" "ff" "ss" "sf" "fs"</modelsection>
+							</model>
+						</models>
+					</corner>
+				</corners>
+				<extensions>
+					<extension>Parasitics
+						<callback>_parSetupDBExtensionCB</callback>
+						<iconvalue></iconvalue>
+						<icontype></icontype>
+						<active>
+							<mode>No Parasitics/LDE</mode>
+							<parameters>
+								<device>
+									<enabled>1</enabled>
+								</device>
+								<parasitic>
+									<enabled>0</enabled>
+								</parasitic>
+							</parameters>
+						</active>
+						<modes>
+							<mode>No Parasitics/LDE
+								<schematic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>DIVIDER_POST_D1_D16</cell>
+									<view>schematic</view>
+								</schematic>
+							</mode>
+							<mode>Schematic Estimates (Parasitics)
+								<schematic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>DIVIDER_POST_D1_D16</cell>
+									<view>schematic</view>
+								</schematic>
+								<parasitic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>DIVIDER_POST_D1_D16</cell>
+									<view>estimated</view>
+								</parasitic>
+							</mode>
+							<mode>Layout (Parasitics/LDE)
+								<schematic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>DIVIDER_POST_D1_D16</cell>
+									<view>schematic</view>
+								</schematic>
+								<parasitic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>DIVIDER_POST_D1_D16</cell>
+									<view>netlist_layout</view>
+								</parasitic>
+							</mode>
+							<mode>Extracted (Parasitics/LDE)
+								<schematic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>DIVIDER_POST_D1_D16</cell>
+									<view>schematic</view>
+								</schematic>
+								<parasitic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>DIVIDER_POST_D1_D16</cell>
+									<view>&lt;None&gt;</view>
+								</parasitic>
+							</mode>
+						</modes>
+					</extension>
+				</extensions>
+				<currentmode>Single Run, Sweeps and Corners</currentmode>
+				<overwritehistory>0</overwritehistory>
+				<tests>
+					<test>TEST_TSMC13_ALLTEK_PLL:DIVIDER_POST:1
+						<tool>ADE</tool>
+						<tooloptions>
+							<option>cell
+								<value>DIVIDER_POST</value>
+							</option>
+							<option>lib
+								<value>TEST_TSMC13_ALLTEK_PLL</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>schematic</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>TEST_TSMC13_ALLTEK_PLL:DIVIDER_POST:1_state1_Interactive.104</value>
+							</option>
+						</tooloptions>
+						<origoptions>
+							<option>cell
+								<value>DIVIDER_POST</value>
+							</option>
+							<option>lib
+								<value>TEST_TSMC13_ALLTEK_PLL</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>schematic</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>state1</value>
+							</option>
+						</origoptions>
+						<outputs>
+							<output>(cross(vtime('tran "/FOUT2") 0.6 3 "rising" nil nil nil) - cross(vtime('tran "/FOUT2") 0.6 2 "rising" nil nil nil))
+								<evalType>point</evalType>
+							</output>
+						</outputs>
+					</test>
+				</tests>
+				<vars>
+					<var>POST_SEL
+						<value>{Exclusion List}0{Exclusion List}{From/To}Auto:0:2:1.2{From/To}</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_TSMC13_ALLTEK_PLL:DIVIDER_POST:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>FS
+						<value>4G</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_TSMC13_ALLTEK_PLL:DIVIDER_POST_D1_D16:1</dependentTest>
+							<dependentTest enabled="1">TEST_TSMC13_ALLTEK_PLL:DIVIDER_POST:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var enabled="1">VS
+						<value>{Exclusion List}1.2{Exclusion List}{Center/Span%}Auto:1.2:3:20{Center/Span%}</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_TSMC13_ALLTEK_PLL:DIVIDER_POST_D1_D16:1</dependentTest>
+							<dependentTest enabled="1">TEST_TSMC13_ALLTEK_PLL:DIVIDER_POST:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var enabled="1">temperature
+						<value>{Exclusion List}30{Exclusion List}{From/To}Auto:-25:5:125{From/To}</value>
+					</var>
+				</vars>
+				<overwritehistoryname>Interactive.0</overwritehistoryname>
+				<plottingoptions>
+					<plottingoption>plottingmode
+						<value>Replace</value>
+					</plottingoption>
+					<plottingoption>plottype
+						<value>None</value>
+					</plottingoption>
+					<plottingoption>usewaveformtemplate
+						<value>no</value>
+					</plottingoption>
+					<plottingoption>useMaestroPlottingTemplate
+						<value>yes</value>
+					</plottingoption>
+					<plottingoption>waveformtemplate
+						<value></value>
+					</plottingoption>
+					<plottingoption>allplottingtemplates
+						<value></value>
+					</plottingoption>
+					<plottingoption>defaultplottingtemplate
+						<value></value>
+					</plottingoption>
+				</plottingoptions>
+				<sortVariableValues>0</sortVariableValues>
+				<specs>
+					<spec>TEST_TSMC13_ALLTEK_PLL:DIVIDER_POST:1.(cross(vtime('tran "/FOUT0") 0.6 4 "rising" nil nil nil) - cross(vtime('tran "/FOUT0") 0.6 3 "rising" nil nil nil))
+						<testname>TEST_TSMC13_ALLTEK_PLL:DIVIDER_POST:1</testname>
+						<resname>(cross(vtime('tran "/FOUT0") 0.6 4 "rising" nil nil nil) - cross(vtime('tran "/FOUT0") 0.6 3 "rising" nil nil nil))</resname>
+						<specType>range</specType>
+						<min>6.24n</min>
+						<max>6.26n</max>
+						<target></target>
+						<tol></tol>
+					</spec>
+				</specs>
+			</checkpoint>
+			<timestamp>Mar 13 22:43:45 2026</timestamp>
+			<resultsname>/home/IC/Desktop/virtuoso/TEST_TSMC13_ALLTEK_PLL/DIVIDER_POST/adexl/results/data/Interactive.104.rdb</resultsname>
+			<simresults>$AXL_SETUPDB_DIR/results/data/Interactive.104.rdb</simresults>
+			<rawdatadelstrategy>SaveAll
+				<simdatasavemode>All</simdatasavemode>
+			</rawdatadelstrategy>
+			<netlistdelstrategy>SaveAll</netlistdelstrategy>
+			<uselocalpsfdir>false</uselocalpsfdir>
+			<localpsfdir>/tmp/IC_IC_224345165</localpsfdir>
+			<psfdir>/home/IC/simulation/TEST_TSMC13_ALLTEK_PLL/DIVIDER_POST/adexl/results/data/Interactive.104</psfdir>
+			<simdir>$AXL_PROJECT_DIR/TEST_TSMC13_ALLTEK_PLL/DIVIDER_POST/adexl/results/data/Interactive.104</simdir>
+			<gendatasheetplotsonsimulation>1</gendatasheetplotsonsimulation>
+			<runlog>/home/IC/Desktop/virtuoso/TEST_TSMC13_ALLTEK_PLL/DIVIDER_POST/adexl/results/data/Interactive.104.log</runlog>
+			<runlogfile>$AXL_SETUPDB_DIR/results/data/Interactive.104.log</runlogfile>
+			<schematicpoint>
+				<vars>
+					<var>POST_SEL
+						<value>0</value>
+					</var>
+					<var>VS
+						<value>1.2</value>
+					</var>
+				</vars>
+			</schematicpoint>
+			<test>all</test>
+		</historyentry>
+		<historyentry assemblerOrExplorer="adexl" roOrView="view">Interactive.105
+			<checkpoint>
+				<corners>
+					<corner enabled="0">_default</corner>
+					<corner enabled="1">C0
+						<models>
+							<model enabled="1">cr013g_2d5_v1d4.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/TSMC13/TSMC13/models/spectre/cr013g_2d5_v1d4.scs</modelfile>
+								<modelsection>"tt" "ff" "ss" "sf" "fs"</modelsection>
+							</model>
+						</models>
+					</corner>
+				</corners>
+				<extensions>
+					<extension>Parasitics
+						<callback>_parSetupDBExtensionCB</callback>
+						<iconvalue></iconvalue>
+						<icontype></icontype>
+						<active>
+							<mode>No Parasitics/LDE</mode>
+							<parameters>
+								<device>
+									<enabled>1</enabled>
+								</device>
+								<parasitic>
+									<enabled>0</enabled>
+								</parasitic>
+							</parameters>
+						</active>
+						<modes>
+							<mode>No Parasitics/LDE
+								<schematic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>DIVIDER_POST_D1_D16</cell>
+									<view>schematic</view>
+								</schematic>
+							</mode>
+							<mode>Schematic Estimates (Parasitics)
+								<schematic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>DIVIDER_POST_D1_D16</cell>
+									<view>schematic</view>
+								</schematic>
+								<parasitic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>DIVIDER_POST_D1_D16</cell>
+									<view>estimated</view>
+								</parasitic>
+							</mode>
+							<mode>Layout (Parasitics/LDE)
+								<schematic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>DIVIDER_POST_D1_D16</cell>
+									<view>schematic</view>
+								</schematic>
+								<parasitic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>DIVIDER_POST_D1_D16</cell>
+									<view>netlist_layout</view>
+								</parasitic>
+							</mode>
+							<mode>Extracted (Parasitics/LDE)
+								<schematic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>DIVIDER_POST_D1_D16</cell>
+									<view>schematic</view>
+								</schematic>
+								<parasitic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>DIVIDER_POST_D1_D16</cell>
+									<view>&lt;None&gt;</view>
+								</parasitic>
+							</mode>
+						</modes>
+					</extension>
+				</extensions>
+				<currentmode>Single Run, Sweeps and Corners</currentmode>
+				<overwritehistory>0</overwritehistory>
+				<tests>
+					<test>TEST_TSMC13_ALLTEK_PLL:DIVIDER_POST:1
+						<tool>ADE</tool>
+						<tooloptions>
+							<option>cell
+								<value>DIVIDER_POST</value>
+							</option>
+							<option>lib
+								<value>TEST_TSMC13_ALLTEK_PLL</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>schematic</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>TEST_TSMC13_ALLTEK_PLL:DIVIDER_POST:1_state1_Interactive.105</value>
+							</option>
+						</tooloptions>
+						<origoptions>
+							<option>cell
+								<value>DIVIDER_POST</value>
+							</option>
+							<option>lib
+								<value>TEST_TSMC13_ALLTEK_PLL</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>schematic</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>state1</value>
+							</option>
+						</origoptions>
+						<outputs>
+							<output>(cross(vtime('tran "/FOUT2") 0.6 3 "rising" nil nil nil) - cross(vtime('tran "/FOUT2") 0.6 2 "rising" nil nil nil))
+								<evalType>point</evalType>
+							</output>
+						</outputs>
+					</test>
+				</tests>
+				<vars>
+					<var>POST_SEL
+						<value>{Exclusion List}0{Exclusion List}{From/To}Auto:0:2:1.2{From/To}</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_TSMC13_ALLTEK_PLL:DIVIDER_POST:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>FS
+						<value>1G</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_TSMC13_ALLTEK_PLL:DIVIDER_POST_D1_D16:1</dependentTest>
+							<dependentTest enabled="1">TEST_TSMC13_ALLTEK_PLL:DIVIDER_POST:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var enabled="1">VS
+						<value>{Exclusion List}1.2{Exclusion List}{Center/Span%}Auto:1.2:3:20{Center/Span%}</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_TSMC13_ALLTEK_PLL:DIVIDER_POST_D1_D16:1</dependentTest>
+							<dependentTest enabled="1">TEST_TSMC13_ALLTEK_PLL:DIVIDER_POST:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var enabled="1">temperature
+						<value>{Exclusion List}30{Exclusion List}{From/To}Auto:-25:5:125{From/To}</value>
+					</var>
+				</vars>
+				<overwritehistoryname>Interactive.0</overwritehistoryname>
+				<plottingoptions>
+					<plottingoption>plottingmode
+						<value>Replace</value>
+					</plottingoption>
+					<plottingoption>plottype
+						<value>None</value>
+					</plottingoption>
+					<plottingoption>usewaveformtemplate
+						<value>no</value>
+					</plottingoption>
+					<plottingoption>useMaestroPlottingTemplate
+						<value>yes</value>
+					</plottingoption>
+					<plottingoption>waveformtemplate
+						<value></value>
+					</plottingoption>
+					<plottingoption>allplottingtemplates
+						<value></value>
+					</plottingoption>
+					<plottingoption>defaultplottingtemplate
+						<value></value>
+					</plottingoption>
+				</plottingoptions>
+				<specs></specs>
+				<sortVariableValues>0</sortVariableValues>
+			</checkpoint>
+			<timestamp>Mar 14 00:05:17 2026</timestamp>
+			<resultsname>/home/IC/Desktop/virtuoso/TEST_TSMC13_ALLTEK_PLL/DIVIDER_POST/adexl/results/data/Interactive.105.rdb</resultsname>
+			<simresults>$AXL_SETUPDB_DIR/results/data/Interactive.105.rdb</simresults>
+			<rawdatadelstrategy>SaveAll
+				<simdatasavemode>All</simdatasavemode>
+			</rawdatadelstrategy>
+			<netlistdelstrategy>SaveAll</netlistdelstrategy>
+			<uselocalpsfdir>false</uselocalpsfdir>
+			<localpsfdir>/tmp/IC_IC_000517649</localpsfdir>
+			<psfdir>/home/IC/simulation/TEST_TSMC13_ALLTEK_PLL/DIVIDER_POST/adexl/results/data/Interactive.105</psfdir>
+			<simdir>$AXL_PROJECT_DIR/TEST_TSMC13_ALLTEK_PLL/DIVIDER_POST/adexl/results/data/Interactive.105</simdir>
+			<gendatasheetplotsonsimulation>1</gendatasheetplotsonsimulation>
+			<runlog>/home/IC/Desktop/virtuoso/TEST_TSMC13_ALLTEK_PLL/DIVIDER_POST/adexl/results/data/Interactive.105.log</runlog>
+			<runlogfile>$AXL_SETUPDB_DIR/results/data/Interactive.105.log</runlogfile>
+			<schematicpoint>
+				<vars>
+					<var>POST_SEL
+						<value>0</value>
+					</var>
+					<var>VS
+						<value>1.2</value>
+					</var>
+				</vars>
+			</schematicpoint>
+			<test>all</test>
+		</historyentry>
+		<historyentry assemblerOrExplorer="adexl" roOrView="view">Interactive.106
+			<checkpoint>
+				<corners>
+					<corner enabled="0">_default</corner>
+					<corner enabled="1">C0
+						<models>
+							<model enabled="1">cr013g_2d5_v1d4.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/TSMC13/TSMC13/models/spectre/cr013g_2d5_v1d4.scs</modelfile>
+								<modelsection>"tt" "ff" "ss" "sf" "fs"</modelsection>
+							</model>
+						</models>
+					</corner>
+				</corners>
+				<extensions>
+					<extension>Parasitics
+						<callback>_parSetupDBExtensionCB</callback>
+						<iconvalue></iconvalue>
+						<icontype></icontype>
+						<active>
+							<mode>No Parasitics/LDE</mode>
+							<parameters>
+								<device>
+									<enabled>1</enabled>
+								</device>
+								<parasitic>
+									<enabled>0</enabled>
+								</parasitic>
+							</parameters>
+						</active>
+						<modes>
+							<mode>No Parasitics/LDE
+								<schematic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>DIVIDER_POST_D1_D16</cell>
+									<view>schematic</view>
+								</schematic>
+							</mode>
+							<mode>Schematic Estimates (Parasitics)
+								<schematic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>DIVIDER_POST_D1_D16</cell>
+									<view>schematic</view>
+								</schematic>
+								<parasitic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>DIVIDER_POST_D1_D16</cell>
+									<view>estimated</view>
+								</parasitic>
+							</mode>
+							<mode>Layout (Parasitics/LDE)
+								<schematic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>DIVIDER_POST_D1_D16</cell>
+									<view>schematic</view>
+								</schematic>
+								<parasitic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>DIVIDER_POST_D1_D16</cell>
+									<view>netlist_layout</view>
+								</parasitic>
+							</mode>
+							<mode>Extracted (Parasitics/LDE)
+								<schematic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>DIVIDER_POST_D1_D16</cell>
+									<view>schematic</view>
+								</schematic>
+								<parasitic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>DIVIDER_POST_D1_D16</cell>
+									<view>&lt;None&gt;</view>
+								</parasitic>
+							</mode>
+						</modes>
+					</extension>
+				</extensions>
+				<currentmode>Single Run, Sweeps and Corners</currentmode>
+				<overwritehistory>0</overwritehistory>
+				<tests>
+					<test>TEST_TSMC13_ALLTEK_PLL:DIVIDER_POST:1
+						<tool>ADE</tool>
+						<tooloptions>
+							<option>cell
+								<value>DIVIDER_POST</value>
+							</option>
+							<option>lib
+								<value>TEST_TSMC13_ALLTEK_PLL</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>config</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>TEST_TSMC13_ALLTEK_PLL:DIVIDER_POST:1_state1_Interactive.106</value>
+							</option>
+						</tooloptions>
+						<origoptions>
+							<option>cell
+								<value>DIVIDER_POST</value>
+							</option>
+							<option>lib
+								<value>TEST_TSMC13_ALLTEK_PLL</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>schematic</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>state1</value>
+							</option>
+						</origoptions>
+						<outputs>
+							<output>(cross(vtime('tran "/FOUT2") 0.6 3 "rising" nil nil nil) - cross(vtime('tran "/FOUT2") 0.6 2 "rising" nil nil nil))
+								<evalType>point</evalType>
+							</output>
+						</outputs>
+					</test>
+				</tests>
+				<vars>
+					<var>POST_SEL
+						<value>{Exclusion List}0{Exclusion List}{From/To}Auto:0:2:1.2{From/To}</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_TSMC13_ALLTEK_PLL:DIVIDER_POST:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>FS
+						<value>3G</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_TSMC13_ALLTEK_PLL:DIVIDER_POST_D1_D16:1</dependentTest>
+							<dependentTest enabled="1">TEST_TSMC13_ALLTEK_PLL:DIVIDER_POST:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var enabled="1">VS
+						<value>{Exclusion List}1.2{Exclusion List}{Center/Span%}Auto:1.2:3:20{Center/Span%}</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_TSMC13_ALLTEK_PLL:DIVIDER_POST_D1_D16:1</dependentTest>
+							<dependentTest enabled="1">TEST_TSMC13_ALLTEK_PLL:DIVIDER_POST:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var enabled="1">temperature
+						<value>{Exclusion List}30{Exclusion List}{From/To}Auto:-25:5:125{From/To}</value>
+					</var>
+				</vars>
+				<overwritehistoryname>Interactive.0</overwritehistoryname>
+				<plottingoptions>
+					<plottingoption>plottingmode
+						<value>Replace</value>
+					</plottingoption>
+					<plottingoption>plottype
+						<value>None</value>
+					</plottingoption>
+					<plottingoption>usewaveformtemplate
+						<value>no</value>
+					</plottingoption>
+					<plottingoption>useMaestroPlottingTemplate
+						<value>yes</value>
+					</plottingoption>
+					<plottingoption>waveformtemplate
+						<value></value>
+					</plottingoption>
+					<plottingoption>allplottingtemplates
+						<value></value>
+					</plottingoption>
+					<plottingoption>defaultplottingtemplate
+						<value></value>
+					</plottingoption>
+				</plottingoptions>
+				<specs></specs>
+				<sortVariableValues>0</sortVariableValues>
+			</checkpoint>
+			<timestamp>Mar 24 20:00:43 2026</timestamp>
+			<resultsname>/home/IC/Desktop/virtuoso/TEST_TSMC13_ALLTEK_PLL/DIVIDER_POST/adexl/results/data/Interactive.106.rdb</resultsname>
+			<simresults>$AXL_SETUPDB_DIR/results/data/Interactive.106.rdb</simresults>
+			<rawdatadelstrategy>SaveAll
+				<simdatasavemode>All</simdatasavemode>
+			</rawdatadelstrategy>
+			<netlistdelstrategy>SaveAll</netlistdelstrategy>
+			<uselocalpsfdir>false</uselocalpsfdir>
+			<localpsfdir>/tmp/IC_IC_200043129</localpsfdir>
+			<psfdir>/home/IC/simulation/TEST_TSMC13_ALLTEK_PLL/DIVIDER_POST/adexl/results/data/Interactive.106</psfdir>
+			<simdir>$AXL_PROJECT_DIR/TEST_TSMC13_ALLTEK_PLL/DIVIDER_POST/adexl/results/data/Interactive.106</simdir>
+			<gendatasheetplotsonsimulation>1</gendatasheetplotsonsimulation>
+			<runlog>/home/IC/Desktop/virtuoso/TEST_TSMC13_ALLTEK_PLL/DIVIDER_POST/adexl/results/data/Interactive.106.log</runlog>
+			<runlogfile>$AXL_SETUPDB_DIR/results/data/Interactive.106.log</runlogfile>
+			<schematicpoint>
+				<vars>
+					<var>POST_SEL
+						<value>0</value>
+					</var>
+					<var>VS
+						<value>1.2</value>
+					</var>
+				</vars>
+			</schematicpoint>
+			<test>all</test>
+		</historyentry>
+		<historyentry assemblerOrExplorer="adexl" roOrView="view">Interactive.107
+			<checkpoint>
+				<corners>
+					<corner enabled="0">_default</corner>
+					<corner enabled="1">C0
+						<models>
+							<model enabled="1">cr013g_2d5_v1d4.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/TSMC13/TSMC13/models/spectre/cr013g_2d5_v1d4.scs</modelfile>
+								<modelsection>"tt" "ff" "ss" "sf" "fs"</modelsection>
+							</model>
+						</models>
+					</corner>
+				</corners>
+				<extensions>
+					<extension>Parasitics
+						<callback>_parSetupDBExtensionCB</callback>
+						<iconvalue></iconvalue>
+						<icontype></icontype>
+						<active>
+							<mode>No Parasitics/LDE</mode>
+							<parameters>
+								<device>
+									<enabled>1</enabled>
+								</device>
+								<parasitic>
+									<enabled>0</enabled>
+								</parasitic>
+							</parameters>
+						</active>
+						<modes>
+							<mode>No Parasitics/LDE
+								<schematic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>DIVIDER_POST_D1_D16</cell>
+									<view>schematic</view>
+								</schematic>
+							</mode>
+							<mode>Schematic Estimates (Parasitics)
+								<schematic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>DIVIDER_POST_D1_D16</cell>
+									<view>schematic</view>
+								</schematic>
+								<parasitic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>DIVIDER_POST_D1_D16</cell>
+									<view>estimated</view>
+								</parasitic>
+							</mode>
+							<mode>Layout (Parasitics/LDE)
+								<schematic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>DIVIDER_POST_D1_D16</cell>
+									<view>schematic</view>
+								</schematic>
+								<parasitic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>DIVIDER_POST_D1_D16</cell>
+									<view>netlist_layout</view>
+								</parasitic>
+							</mode>
+							<mode>Extracted (Parasitics/LDE)
+								<schematic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>DIVIDER_POST_D1_D16</cell>
+									<view>schematic</view>
+								</schematic>
+								<parasitic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>DIVIDER_POST_D1_D16</cell>
+									<view>&lt;None&gt;</view>
+								</parasitic>
+							</mode>
+						</modes>
+					</extension>
+				</extensions>
+				<currentmode>Single Run, Sweeps and Corners</currentmode>
+				<overwritehistory>0</overwritehistory>
+				<tests>
+					<test>TEST_TSMC13_ALLTEK_PLL:DIVIDER_POST:1
+						<tool>ADE</tool>
+						<tooloptions>
+							<option>cell
+								<value>DIVIDER_POST</value>
+							</option>
+							<option>lib
+								<value>TEST_TSMC13_ALLTEK_PLL</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>config</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>TEST_TSMC13_ALLTEK_PLL:DIVIDER_POST:1_state1_Interactive.107</value>
+							</option>
+						</tooloptions>
+						<origoptions>
+							<option>cell
+								<value>DIVIDER_POST</value>
+							</option>
+							<option>lib
+								<value>TEST_TSMC13_ALLTEK_PLL</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>schematic</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>state1</value>
+							</option>
+						</origoptions>
+						<outputs>
+							<output>(cross(vtime('tran "/FOUT2") 0.6 3 "rising" nil nil nil) - cross(vtime('tran "/FOUT2") 0.6 2 "rising" nil nil nil))
+								<evalType>point</evalType>
+							</output>
+						</outputs>
+					</test>
+				</tests>
+				<vars>
+					<var>POST_SEL
+						<value>{Exclusion List}0{Exclusion List}{From/To}Auto:0:2:1.2{From/To}</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_TSMC13_ALLTEK_PLL:DIVIDER_POST:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>FS
+						<value>3G</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_TSMC13_ALLTEK_PLL:DIVIDER_POST_D1_D16:1</dependentTest>
+							<dependentTest enabled="1">TEST_TSMC13_ALLTEK_PLL:DIVIDER_POST:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var enabled="1">VS
+						<value>{Exclusion List}1.2{Exclusion List}{Center/Span%}Auto:1.2:3:20{Center/Span%}</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_TSMC13_ALLTEK_PLL:DIVIDER_POST_D1_D16:1</dependentTest>
+							<dependentTest enabled="1">TEST_TSMC13_ALLTEK_PLL:DIVIDER_POST:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var enabled="1">temperature
+						<value>{Exclusion List}30{Exclusion List}{From/To}Auto:-25:5:125{From/To}</value>
+					</var>
+				</vars>
+				<overwritehistoryname>Interactive.0</overwritehistoryname>
+				<plottingoptions>
+					<plottingoption>plottingmode
+						<value>Replace</value>
+					</plottingoption>
+					<plottingoption>plottype
+						<value>None</value>
+					</plottingoption>
+					<plottingoption>usewaveformtemplate
+						<value>no</value>
+					</plottingoption>
+					<plottingoption>useMaestroPlottingTemplate
+						<value>yes</value>
+					</plottingoption>
+					<plottingoption>waveformtemplate
+						<value></value>
+					</plottingoption>
+					<plottingoption>allplottingtemplates
+						<value></value>
+					</plottingoption>
+					<plottingoption>defaultplottingtemplate
+						<value></value>
+					</plottingoption>
+				</plottingoptions>
+				<specs></specs>
+				<sortVariableValues>0</sortVariableValues>
+			</checkpoint>
+			<timestamp>Mar 24 20:20:34 2026</timestamp>
+			<resultsname>/home/IC/Desktop/virtuoso/TEST_TSMC13_ALLTEK_PLL/DIVIDER_POST/adexl/results/data/Interactive.107.rdb</resultsname>
+			<simresults>$AXL_SETUPDB_DIR/results/data/Interactive.107.rdb</simresults>
+			<rawdatadelstrategy>SaveAll
+				<simdatasavemode>All</simdatasavemode>
+			</rawdatadelstrategy>
+			<netlistdelstrategy>SaveAll</netlistdelstrategy>
+			<uselocalpsfdir>false</uselocalpsfdir>
+			<localpsfdir>/tmp/IC_IC_202034860</localpsfdir>
+			<psfdir>/home/IC/simulation/TEST_TSMC13_ALLTEK_PLL/DIVIDER_POST/adexl/results/data/Interactive.107</psfdir>
+			<simdir>$AXL_PROJECT_DIR/TEST_TSMC13_ALLTEK_PLL/DIVIDER_POST/adexl/results/data/Interactive.107</simdir>
+			<gendatasheetplotsonsimulation>1</gendatasheetplotsonsimulation>
+			<runlog>/home/IC/Desktop/virtuoso/TEST_TSMC13_ALLTEK_PLL/DIVIDER_POST/adexl/results/data/Interactive.107.log</runlog>
+			<runlogfile>$AXL_SETUPDB_DIR/results/data/Interactive.107.log</runlogfile>
+			<schematicpoint>
+				<vars>
+					<var>POST_SEL
+						<value>0</value>
+					</var>
+					<var>VS
+						<value>1.2</value>
+					</var>
+				</vars>
+			</schematicpoint>
+			<test>all</test>
+		</historyentry>
+		<historyentry assemblerOrExplorer="adexl" roOrView="view">Interactive.108
+			<checkpoint>
+				<corners>
+					<corner enabled="0">_default</corner>
+					<corner enabled="1">C0
+						<models>
+							<model enabled="1">cr013g_2d5_v1d4.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/TSMC13/TSMC13/models/spectre/cr013g_2d5_v1d4.scs</modelfile>
+								<modelsection>"tt" "ff" "ss" "sf" "fs"</modelsection>
+							</model>
+						</models>
+					</corner>
+				</corners>
+				<extensions>
+					<extension>Parasitics
+						<callback>_parSetupDBExtensionCB</callback>
+						<iconvalue></iconvalue>
+						<icontype></icontype>
+						<active>
+							<mode>No Parasitics/LDE</mode>
+							<parameters>
+								<device>
+									<enabled>1</enabled>
+								</device>
+								<parasitic>
+									<enabled>0</enabled>
+								</parasitic>
+							</parameters>
+						</active>
+						<modes>
+							<mode>No Parasitics/LDE
+								<schematic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>DIVIDER_POST_D1_D16</cell>
+									<view>schematic</view>
+								</schematic>
+							</mode>
+							<mode>Schematic Estimates (Parasitics)
+								<schematic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>DIVIDER_POST_D1_D16</cell>
+									<view>schematic</view>
+								</schematic>
+								<parasitic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>DIVIDER_POST_D1_D16</cell>
+									<view>estimated</view>
+								</parasitic>
+							</mode>
+							<mode>Layout (Parasitics/LDE)
+								<schematic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>DIVIDER_POST_D1_D16</cell>
+									<view>schematic</view>
+								</schematic>
+								<parasitic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>DIVIDER_POST_D1_D16</cell>
+									<view>netlist_layout</view>
+								</parasitic>
+							</mode>
+							<mode>Extracted (Parasitics/LDE)
+								<schematic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>DIVIDER_POST_D1_D16</cell>
+									<view>schematic</view>
+								</schematic>
+								<parasitic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>DIVIDER_POST_D1_D16</cell>
+									<view>&lt;None&gt;</view>
+								</parasitic>
+							</mode>
+						</modes>
+					</extension>
+				</extensions>
+				<currentmode>Single Run, Sweeps and Corners</currentmode>
+				<overwritehistory>0</overwritehistory>
+				<tests>
+					<test>TEST_TSMC13_ALLTEK_PLL:DIVIDER_POST:1
+						<tool>ADE</tool>
+						<tooloptions>
+							<option>cell
+								<value>DIVIDER_POST</value>
+							</option>
+							<option>lib
+								<value>TEST_TSMC13_ALLTEK_PLL</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>config</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>TEST_TSMC13_ALLTEK_PLL:DIVIDER_POST:1_state1_Interactive.108</value>
+							</option>
+						</tooloptions>
+						<origoptions>
+							<option>cell
+								<value>DIVIDER_POST</value>
+							</option>
+							<option>lib
+								<value>TEST_TSMC13_ALLTEK_PLL</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>schematic</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>state1</value>
+							</option>
+						</origoptions>
+						<outputs>
+							<output>(cross(vtime('tran "/FOUT2") 0.6 3 "rising" nil nil nil) - cross(vtime('tran "/FOUT2") 0.6 2 "rising" nil nil nil))
+								<evalType>point</evalType>
+							</output>
+						</outputs>
+					</test>
+				</tests>
+				<vars>
+					<var>POST_SEL
+						<value>{Exclusion List}0{Exclusion List}{From/To}Auto:0:2:1.2{From/To}</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_TSMC13_ALLTEK_PLL:DIVIDER_POST:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>FS
+						<value>3G</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_TSMC13_ALLTEK_PLL:DIVIDER_POST_D1_D16:1</dependentTest>
+							<dependentTest enabled="1">TEST_TSMC13_ALLTEK_PLL:DIVIDER_POST:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var enabled="1">VS
+						<value>{Exclusion List}1.2{Exclusion List}{Center/Span%}Auto:1.2:3:20{Center/Span%}</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_TSMC13_ALLTEK_PLL:DIVIDER_POST_D1_D16:1</dependentTest>
+							<dependentTest enabled="1">TEST_TSMC13_ALLTEK_PLL:DIVIDER_POST:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var enabled="1">temperature
+						<value>{Exclusion List}30{Exclusion List}{From/To}Auto:-25:5:125{From/To}</value>
+					</var>
+				</vars>
+				<overwritehistoryname>Interactive.0</overwritehistoryname>
+				<plottingoptions>
+					<plottingoption>plottingmode
+						<value>Replace</value>
+					</plottingoption>
+					<plottingoption>plottype
+						<value>None</value>
+					</plottingoption>
+					<plottingoption>usewaveformtemplate
+						<value>no</value>
+					</plottingoption>
+					<plottingoption>useMaestroPlottingTemplate
+						<value>yes</value>
+					</plottingoption>
+					<plottingoption>waveformtemplate
+						<value></value>
+					</plottingoption>
+					<plottingoption>allplottingtemplates
+						<value></value>
+					</plottingoption>
+					<plottingoption>defaultplottingtemplate
+						<value></value>
+					</plottingoption>
+				</plottingoptions>
+				<specs></specs>
+				<sortVariableValues>0</sortVariableValues>
+			</checkpoint>
+			<timestamp>Mar 24 20:20:45 2026</timestamp>
+			<resultsname>/home/IC/Desktop/virtuoso/TEST_TSMC13_ALLTEK_PLL/DIVIDER_POST/adexl/results/data/Interactive.108.rdb</resultsname>
+			<simresults>$AXL_SETUPDB_DIR/results/data/Interactive.108.rdb</simresults>
+			<rawdatadelstrategy>SaveAll
+				<simdatasavemode>All</simdatasavemode>
+			</rawdatadelstrategy>
+			<netlistdelstrategy>SaveAll</netlistdelstrategy>
+			<uselocalpsfdir>false</uselocalpsfdir>
+			<localpsfdir>/tmp/IC_IC_202045848</localpsfdir>
+			<psfdir>/home/IC/simulation/TEST_TSMC13_ALLTEK_PLL/DIVIDER_POST/adexl/results/data/Interactive.108</psfdir>
+			<simdir>$AXL_PROJECT_DIR/TEST_TSMC13_ALLTEK_PLL/DIVIDER_POST/adexl/results/data/Interactive.108</simdir>
+			<gendatasheetplotsonsimulation>1</gendatasheetplotsonsimulation>
+			<runlog>/home/IC/Desktop/virtuoso/TEST_TSMC13_ALLTEK_PLL/DIVIDER_POST/adexl/results/data/Interactive.108.log</runlog>
+			<runlogfile>$AXL_SETUPDB_DIR/results/data/Interactive.108.log</runlogfile>
+			<schematicpoint>
+				<vars>
+					<var>POST_SEL
+						<value>0</value>
+					</var>
+					<var>VS
+						<value>1.2</value>
+					</var>
+				</vars>
+			</schematicpoint>
+			<test>all</test>
+		</historyentry>
+		<historyentry assemblerOrExplorer="adexl" roOrView="view">Interactive.109
+			<checkpoint>
+				<corners>
+					<corner enabled="0">_default</corner>
+					<corner enabled="1">C0
+						<models>
+							<model enabled="1">cr013g_2d5_v1d4.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/TSMC13/TSMC13/models/spectre/cr013g_2d5_v1d4.scs</modelfile>
+								<modelsection>"tt" "ff" "ss" "sf" "fs"</modelsection>
+							</model>
+						</models>
+					</corner>
+				</corners>
+				<extensions>
+					<extension>Parasitics
+						<callback>_parSetupDBExtensionCB</callback>
+						<iconvalue></iconvalue>
+						<icontype></icontype>
+						<active>
+							<mode>No Parasitics/LDE</mode>
+							<parameters>
+								<device>
+									<enabled>1</enabled>
+								</device>
+								<parasitic>
+									<enabled>0</enabled>
+								</parasitic>
+							</parameters>
+						</active>
+						<modes>
+							<mode>No Parasitics/LDE
+								<schematic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>DIVIDER_POST_D1_D16</cell>
+									<view>schematic</view>
+								</schematic>
+							</mode>
+							<mode>Schematic Estimates (Parasitics)
+								<schematic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>DIVIDER_POST_D1_D16</cell>
+									<view>schematic</view>
+								</schematic>
+								<parasitic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>DIVIDER_POST_D1_D16</cell>
+									<view>estimated</view>
+								</parasitic>
+							</mode>
+							<mode>Layout (Parasitics/LDE)
+								<schematic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>DIVIDER_POST_D1_D16</cell>
+									<view>schematic</view>
+								</schematic>
+								<parasitic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>DIVIDER_POST_D1_D16</cell>
+									<view>netlist_layout</view>
+								</parasitic>
+							</mode>
+							<mode>Extracted (Parasitics/LDE)
+								<schematic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>DIVIDER_POST_D1_D16</cell>
+									<view>schematic</view>
+								</schematic>
+								<parasitic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>DIVIDER_POST_D1_D16</cell>
+									<view>&lt;None&gt;</view>
+								</parasitic>
+							</mode>
+						</modes>
+					</extension>
+				</extensions>
+				<currentmode>Single Run, Sweeps and Corners</currentmode>
+				<overwritehistory>0</overwritehistory>
+				<tests>
+					<test>TEST_TSMC13_ALLTEK_PLL:DIVIDER_POST:1
+						<tool>ADE</tool>
+						<tooloptions>
+							<option>cell
+								<value>DIVIDER_POST</value>
+							</option>
+							<option>lib
+								<value>TEST_TSMC13_ALLTEK_PLL</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>config</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>TEST_TSMC13_ALLTEK_PLL:DIVIDER_POST:1_state1_Interactive.109</value>
+							</option>
+						</tooloptions>
+						<origoptions>
+							<option>cell
+								<value>DIVIDER_POST</value>
+							</option>
+							<option>lib
+								<value>TEST_TSMC13_ALLTEK_PLL</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>schematic</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>state1</value>
+							</option>
+						</origoptions>
+						<outputs>
+							<output>(cross(vtime('tran "/FOUT2") 0.6 3 "rising" nil nil nil) - cross(vtime('tran "/FOUT2") 0.6 2 "rising" nil nil nil))
+								<evalType>point</evalType>
+							</output>
+						</outputs>
+					</test>
+				</tests>
+				<vars>
+					<var>POST_SEL
+						<value>{Exclusion List}0{Exclusion List}{From/To}Auto:0:2:1.2{From/To}</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_TSMC13_ALLTEK_PLL:DIVIDER_POST:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>FS
+						<value>3.5G</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_TSMC13_ALLTEK_PLL:DIVIDER_POST_D1_D16:1</dependentTest>
+							<dependentTest enabled="1">TEST_TSMC13_ALLTEK_PLL:DIVIDER_POST:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var enabled="1">VS
+						<value>{Exclusion List}1.2{Exclusion List}{Center/Span%}Auto:1.2:3:20{Center/Span%}</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_TSMC13_ALLTEK_PLL:DIVIDER_POST_D1_D16:1</dependentTest>
+							<dependentTest enabled="1">TEST_TSMC13_ALLTEK_PLL:DIVIDER_POST:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var enabled="1">temperature
+						<value>{Exclusion List}30{Exclusion List}{From/To}Auto:-25:5:125{From/To}</value>
+					</var>
+				</vars>
+				<overwritehistoryname>Interactive.0</overwritehistoryname>
+				<plottingoptions>
+					<plottingoption>plottingmode
+						<value>Replace</value>
+					</plottingoption>
+					<plottingoption>plottype
+						<value>None</value>
+					</plottingoption>
+					<plottingoption>usewaveformtemplate
+						<value>no</value>
+					</plottingoption>
+					<plottingoption>useMaestroPlottingTemplate
+						<value>yes</value>
+					</plottingoption>
+					<plottingoption>waveformtemplate
+						<value></value>
+					</plottingoption>
+					<plottingoption>allplottingtemplates
+						<value></value>
+					</plottingoption>
+					<plottingoption>defaultplottingtemplate
+						<value></value>
+					</plottingoption>
+				</plottingoptions>
+				<specs></specs>
+				<sortVariableValues>0</sortVariableValues>
+			</checkpoint>
+			<timestamp>Mar 25 05:06:13 2026</timestamp>
+			<resultsname>/home/IC/Desktop/virtuoso/TEST_TSMC13_ALLTEK_PLL/DIVIDER_POST/adexl/results/data/Interactive.109.rdb</resultsname>
+			<simresults>$AXL_SETUPDB_DIR/results/data/Interactive.109.rdb</simresults>
+			<rawdatadelstrategy>SaveAll
+				<simdatasavemode>All</simdatasavemode>
+			</rawdatadelstrategy>
+			<netlistdelstrategy>SaveAll</netlistdelstrategy>
+			<uselocalpsfdir>false</uselocalpsfdir>
+			<localpsfdir>/tmp/IC_IC_050613783</localpsfdir>
+			<psfdir>/home/IC/simulation/TEST_TSMC13_ALLTEK_PLL/DIVIDER_POST/adexl/results/data/Interactive.109</psfdir>
+			<simdir>$AXL_PROJECT_DIR/TEST_TSMC13_ALLTEK_PLL/DIVIDER_POST/adexl/results/data/Interactive.109</simdir>
+			<gendatasheetplotsonsimulation>1</gendatasheetplotsonsimulation>
+			<runlog>/home/IC/Desktop/virtuoso/TEST_TSMC13_ALLTEK_PLL/DIVIDER_POST/adexl/results/data/Interactive.109.log</runlog>
+			<runlogfile>$AXL_SETUPDB_DIR/results/data/Interactive.109.log</runlogfile>
+			<schematicpoint>
+				<vars>
+					<var>POST_SEL
+						<value>0</value>
+					</var>
+					<var>VS
+						<value>1.2</value>
+					</var>
+				</vars>
+			</schematicpoint>
+			<test>all</test>
+		</historyentry>
+		<historyentry assemblerOrExplorer="adexl" roOrView="view">Interactive.110
+			<checkpoint>
+				<corners>
+					<corner enabled="0">_default</corner>
+					<corner enabled="1">C0
+						<models>
+							<model enabled="1">cr013g_2d5_v1d4.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/TSMC13/TSMC13/models/spectre/cr013g_2d5_v1d4.scs</modelfile>
+								<modelsection>"tt" "ff" "ss" "sf" "fs"</modelsection>
+							</model>
+						</models>
+					</corner>
+				</corners>
+				<extensions>
+					<extension>Parasitics
+						<callback>_parSetupDBExtensionCB</callback>
+						<iconvalue></iconvalue>
+						<icontype></icontype>
+						<active>
+							<mode>No Parasitics/LDE</mode>
+							<parameters>
+								<device>
+									<enabled>1</enabled>
+								</device>
+								<parasitic>
+									<enabled>0</enabled>
+								</parasitic>
+							</parameters>
+						</active>
+						<modes>
+							<mode>No Parasitics/LDE
+								<schematic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>DIVIDER_POST_D1_D16</cell>
+									<view>schematic</view>
+								</schematic>
+							</mode>
+							<mode>Schematic Estimates (Parasitics)
+								<schematic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>DIVIDER_POST_D1_D16</cell>
+									<view>schematic</view>
+								</schematic>
+								<parasitic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>DIVIDER_POST_D1_D16</cell>
+									<view>estimated</view>
+								</parasitic>
+							</mode>
+							<mode>Layout (Parasitics/LDE)
+								<schematic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>DIVIDER_POST_D1_D16</cell>
+									<view>schematic</view>
+								</schematic>
+								<parasitic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>DIVIDER_POST_D1_D16</cell>
+									<view>netlist_layout</view>
+								</parasitic>
+							</mode>
+							<mode>Extracted (Parasitics/LDE)
+								<schematic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>DIVIDER_POST_D1_D16</cell>
+									<view>schematic</view>
+								</schematic>
+								<parasitic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>DIVIDER_POST_D1_D16</cell>
+									<view>&lt;None&gt;</view>
+								</parasitic>
+							</mode>
+						</modes>
+					</extension>
+				</extensions>
+				<currentmode>Single Run, Sweeps and Corners</currentmode>
+				<overwritehistory>0</overwritehistory>
+				<tests>
+					<test>TEST_TSMC13_ALLTEK_PLL:DIVIDER_POST:1
+						<tool>ADE</tool>
+						<tooloptions>
+							<option>cell
+								<value>DIVIDER_POST</value>
+							</option>
+							<option>lib
+								<value>TEST_TSMC13_ALLTEK_PLL</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>config</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>TEST_TSMC13_ALLTEK_PLL:DIVIDER_POST:1_state1_Interactive.110</value>
+							</option>
+						</tooloptions>
+						<origoptions>
+							<option>cell
+								<value>DIVIDER_POST</value>
+							</option>
+							<option>lib
+								<value>TEST_TSMC13_ALLTEK_PLL</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>schematic</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>state1</value>
+							</option>
+						</origoptions>
+						<outputs>
+							<output>(cross(vtime('tran "/FOUT2") 0.6 3 "rising" nil nil nil) - cross(vtime('tran "/FOUT2") 0.6 2 "rising" nil nil nil))
+								<evalType>point</evalType>
+							</output>
+						</outputs>
+					</test>
+				</tests>
+				<vars>
+					<var>POST_SEL
+						<value>{Exclusion List}0{Exclusion List}{From/To}Auto:0:2:1.2{From/To}</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_TSMC13_ALLTEK_PLL:DIVIDER_POST:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>FS
+						<value>3.5G</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_TSMC13_ALLTEK_PLL:DIVIDER_POST_D1_D16:1</dependentTest>
+							<dependentTest enabled="1">TEST_TSMC13_ALLTEK_PLL:DIVIDER_POST:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var enabled="1">VS
+						<value>{Exclusion List}1.2{Exclusion List}{Center/Span%}Auto:1.2:3:20{Center/Span%}</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_TSMC13_ALLTEK_PLL:DIVIDER_POST_D1_D16:1</dependentTest>
+							<dependentTest enabled="1">TEST_TSMC13_ALLTEK_PLL:DIVIDER_POST:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var enabled="1">temperature
+						<value>{Exclusion List}30{Exclusion List}{From/To}Auto:-25:5:125{From/To}</value>
+					</var>
+				</vars>
+				<overwritehistoryname>Interactive.0</overwritehistoryname>
+				<plottingoptions>
+					<plottingoption>plottingmode
+						<value>Replace</value>
+					</plottingoption>
+					<plottingoption>plottype
+						<value>None</value>
+					</plottingoption>
+					<plottingoption>usewaveformtemplate
+						<value>no</value>
+					</plottingoption>
+					<plottingoption>useMaestroPlottingTemplate
+						<value>yes</value>
+					</plottingoption>
+					<plottingoption>waveformtemplate
+						<value></value>
+					</plottingoption>
+					<plottingoption>allplottingtemplates
+						<value></value>
+					</plottingoption>
+					<plottingoption>defaultplottingtemplate
+						<value></value>
+					</plottingoption>
+				</plottingoptions>
+				<specs></specs>
+				<sortVariableValues>0</sortVariableValues>
+			</checkpoint>
+			<timestamp>Mar 26 01:44:02 2026</timestamp>
+			<resultsname>/home/IC/Desktop/virtuoso/TEST_TSMC13_ALLTEK_PLL/DIVIDER_POST/adexl/results/data/Interactive.110.rdb</resultsname>
+			<simresults>$AXL_SETUPDB_DIR/results/data/Interactive.110.rdb</simresults>
+			<rawdatadelstrategy>SaveAll
+				<simdatasavemode>All</simdatasavemode>
+			</rawdatadelstrategy>
+			<netlistdelstrategy>SaveAll</netlistdelstrategy>
+			<uselocalpsfdir>false</uselocalpsfdir>
+			<localpsfdir>/tmp/IC_IC_014402519</localpsfdir>
+			<psfdir>/home/IC/simulation/TEST_TSMC13_ALLTEK_PLL/DIVIDER_POST/adexl/results/data/Interactive.110</psfdir>
+			<simdir>$AXL_PROJECT_DIR/TEST_TSMC13_ALLTEK_PLL/DIVIDER_POST/adexl/results/data/Interactive.110</simdir>
+			<gendatasheetplotsonsimulation>1</gendatasheetplotsonsimulation>
+			<runlog>/home/IC/Desktop/virtuoso/TEST_TSMC13_ALLTEK_PLL/DIVIDER_POST/adexl/results/data/Interactive.110.log</runlog>
+			<runlogfile>$AXL_SETUPDB_DIR/results/data/Interactive.110.log</runlogfile>
+			<schematicpoint>
+				<vars>
+					<var>POST_SEL
+						<value>0</value>
+					</var>
+					<var>VS
+						<value>1.2</value>
+					</var>
+				</vars>
+			</schematicpoint>
+			<test>all</test>
+		</historyentry>
+	</history>
+</setupdb>

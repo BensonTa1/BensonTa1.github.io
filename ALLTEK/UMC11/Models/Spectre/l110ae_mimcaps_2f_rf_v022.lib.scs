@@ -1,0 +1,49 @@
+//  ********************************************************************* 
+//  simulator lang=spectre insensitive=yes
+//             Planar MIM capacitor RF subcircuit model Library 
+//             UMC 110nm 2.0fF/um2 FSG process  
+//             MIM Scheme
+//  
+//             Case Definition: 
+//             tt: Typical case 
+//             ff: Mimimum capacitance case 
+//             ss: Maximum capacitance case  
+//             
+//  ******************************************************************** 
+* 
+library mimcap
+//
+section tt
+parameters drtop_mimcap_20=0
+parameters drbot_mimcap_20=0
+parameters dcj_mimcap_20=0
+parameters dcjsw_mimcap_20=0
+parameters dcox_mimcap_20=0
+parameters dcj_dionw_l110e_mim_20=0
+parameters dcjp_dionw_l110e_mim_20=0
+include "l110ae_mimcaps_2f_rf_v022.mdl.scs"
+endsection tt
+//  *         
+section ss
+parameters drtop_mimcap_20=-0.3
+parameters drbot_mimcap_20=-0.3
+parameters dcj_mimcap_20=0.15
+parameters dcjsw_mimcap_20=0.30
+parameters dcox_mimcap_20=-0.15
+parameters dcj_dionw_l110e_mim_20=8.28e-006
+parameters dcjp_dionw_l110e_mim_20=9.92e-011
+include "l110ae_mimcaps_2f_rf_v022.mdl.scs"
+endsection ss
+//  *  
+section ff
+parameters drtop_mimcap_20=0.3
+parameters drbot_mimcap_20=0.3
+parameters dcj_mimcap_20=-0.15
+parameters dcjsw_mimcap_20=-0.30
+parameters dcox_mimcap_20=0.15
+parameters dcj_dionw_l110e_mim_20=-8.28e-006
+parameters dcjp_dionw_l110e_mim_20=-9.92e-011
+include "l110ae_mimcaps_2f_rf_v022.mdl.scs"
+endsection ff
+//  * 
+endlibrary mimcap

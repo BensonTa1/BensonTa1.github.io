@@ -1,0 +1,1022 @@
+********************************************************************************
+* Property of UMC.
+* Unauthorized reproduction, modification and/or distribution are strictly
+* prohibited.
+* This product is protected under copyright law and trade secret law.
+* This model card may not be sent in any form outside of UMC without
+* the written consent of the UMC ATD Modeling Division.
+********************************************************************************
+* Process:      0.11um Logic Standard Performance RF CMOS Process
+* Device Type:  N- and P-FET  
+* Description:  1.2V MOS Transistor
+* Model:        Subcircuit BSIM3.2.4 RF model(HSPICE Level=49)
+* Simulator:    HSPICE 
+* Model Version:0.2 p1
+* Model Features:
+*     Global model:  Yes
+*     Igate model:  Yes
+*     GIDL model: No
+*     Substrate current model: Yes
+*     Flicker noise: Yes
+*     LOD model: Yes
+*     RF model: Yes
+*     Well proximity effect: No
+********************************************************************************
+* Revision History:
+*
+* <Revision 1>
+* Version : 0.2 phase 1
+* Date    : 2011/February/11
+* Author  : Chih-Yang Kao
+* Remark  : Silicon-based model
+*           Three devices are included in this model file.
+*           (1) Pwell NMOS      : n_12_sprf
+*           (2) Nwell PMOS      : p_12_sprf
+*           (3) Twell NMOS      : n_12bpw_sprf
+********************************************************************************
+* 1.2V SP pwell RF NMOS transistor
+*
+* Geometry range:
+*   Finger width(wf) : 0.9um ~ 7.2um 
+*   Finger length(lf): 0.12um ~ 0.36um 
+*   Finger no.(nf)   : 2 ~ 22 
+* 
+* Voltage range:
+*   0V <= VGS <= 1.2V
+*   0V <= VDS <= 1.2V
+*         VBS  = 0V
+*
+* Temperature range:
+*   -50c ~ 125c ; nominal temperature=25c.
+*
+* Frequency range:
+*   Up to 20.1GHz
+*
+* Node Definition:
+*   drain : drain 
+*   gate  : gate
+*   source: source
+*   body  : body
+*
+********************************************************************************
+* 1.2V SP RF PMOS transistor
+*
+* Geometry range: 
+*   Finger width(wf) : 1.6um ~ 9.6um 
+*   Finger length(lf): 0.12um ~ 0.36um 
+*   Finger no.(nf)   : 2 ~ 22 
+* 
+* Voltage range:
+*   -1.2V <= VGS <= 0V
+*   -1.2V <= VDS <= 0V
+*            VBS  = 0V
+*
+* Temperature range:
+*   -50c ~ 125c ; nominal temperature=25c.
+*
+* Frequency range:
+*   Up to 20.1GHz
+*
+* Node Definition:
+*   drain : drain 
+*   gate  : gate
+*   source: source
+*   body  : body
+*   psub  : P-substrate(should be ground)
+*
+*******************************************************************************
+*  1.2V SP twell RF NMOS transistor 
+*  
+* Geometry range: 
+*   Finger width(wf) : 0.9um ~ 7.2um 
+*   Finger length(lf): 0.12um ~ 0.36um 
+*   Finger no.(nf)   : 2 ~ 22 
+*   
+*  Voltage range: 
+*    0V <= VGS <= 1.2V 
+*    0V <= VDS <= 1.2V 
+*          VBS  = 0V 
+*  
+*  Temperature range: 
+*    -50c ~ 125c ; nominal temperature=25c. 
+*  
+*  Frequency range: 
+*    Up to 20.1GHz 
+*  
+*  Node Definition: 
+*    drain : drain  
+*    gate  : gate 
+*    source: source 
+*    body  : body 
+*    nwell : nwell
+*    psub  : psub
+*
+***************************** Start of Model Card ******************************
+********************************************************************************
+*** 1.2V SP pwell RF NMOS transistor
+.subckt n_12_sprf drain gate source body
++ lf=0.12u wf=1.8u nf=1 sa=2.2u sb=2.2u dtemp=0       
+*** common parameters
++ nf_odd='nf-2*int(nf/2)' nf_even='1-nf_odd'
++ sp_poly=0.40e-6 sp_edge=0.34e-6 xgw=0.18e-6 no_cnt=1 no_via=3 sp_sub_w=1.7e-6
++ sp_sub_l=0.94e-6 sp_twell_w=2.24e-6 sp_twell_l=1.48e-6 sp_nwell_w=3.74e-6 sp_nwell_l=2.98e-6
++ wg='(wf*0.9)' lg='(lf*0.9+12e-9)'
+** junction area and periphery
++ p_area_s='nf_odd*(sp_edge*(wf)+sp_poly*(wf)*(nf-1)/2)+nf_even*(2*sp_edge*(wf)+sp_poly*(wf)*(nf/2-1))'
++ p_area_d='nf_odd*(sp_edge*(wf)+sp_poly*(wf)*(nf-1)/2)+nf_even*(sp_poly*(wf)*nf/2)'
++ p_pj_s='nf_odd*(sp_edge*2+(wf)+(nf-1)/2*sp_poly*2)+nf_even*(sp_edge*2*2+(wf)*2+(nf/2-1)*sp_poly*2)'
++ p_pj_d='nf_odd*(sp_edge*2+(wf)+(nf-1)/2*sp_poly*2)+nf_even*(nf/2*sp_poly*2)'
++ p_pj_sg='nf*(wf)'
++ p_pj_dg='nf*(wf)'
++ dev_l = '(nf-1)*4e-007*0.9 + nf*lg + 1.88e-006*0.9'
++ dev_w = 'wg + 1.04e-006*0.9'
++ dev_access = 'dev_l * dev_w/(16*(dev_l*dev_l+dev_w*dev_w))'
++ rbulk =  'rbo*dev_access + rbw*wg + rbl*lg + rbn*nf'
+*
++ cgn=0.2806
++ cgno=-4.4463
++ cgw= 56.94e-6
++ cgww= 1.134e-3
++ cgo=-1.360 
++ cgl=165.65
++ cgll=-191.07
++ cglll=71.507
++ cc=-1.854e-15
++ ccw= 119.0e-3
++ ccwn= 796.9e-3
+*
++ rn= 130.0 
++ rwl= 50.94e-9
++ rlw= 8.897e-3
++ rl= 2.741e-12
++ rw=-289.3e3
+*
++ cjn=0.0363853168
++ cjnn=-1.61872815
++ cjnnn=29.5851674
++ cjno=-208
++ cjo=0.44
++ cjl=15.26616
++ cjll=-12.12553
++ cjw=-5.00e-01
++ cjj='((2+cjl*lg*lg/1e-12+cjll*lg/1e-6)*(1.22+cjw/wg*1e-6)+cjo+(cjn*nf*nf*nf+cjnn*nf*nf+cjnnn*nf+cjno)*1e-3)*1e-3'
+*
++ rbb= 8.824e3
++ rbo= 24.74 
++ rbn= 126.1e-3
++ rbw= 5.849e6
++ rbl= 746.8e6
+**
+mos_n_12 10 20 30 40 nfet m='nf' l='lf' w='wf' ad=0 as=0 pd=0 ps=0 sa=2.2u sb=2.2u
+**
+rgc gate 22 '(rn/nf**1+ rw*wg) * (1+drgc_n_12_sprf)'
+rgi 22 21 '(rwl*wg/(lg) + rl/lg/wg ) * (1+drgi_n_12_sprf)'
+rch 21 20 'rlw*lg/(wg) * (1+drch_n_12_sprf)' noise = 0
+rdrain drain 10 '9.703 * 1e-6/(wg*nf)'
+rsource source 30 '9.703 * 1e-6/(wg*nf)'
+rsubd 40 45 'rbb * (0.4u*0.9 + lg)/(wg*nf)'
+rsubs 44 40 'rbb * (0.4u*0.9 + lg)/(wg*nf)'
+rsubbe 40 body 'rbulk'
+cgs_ext 22 30 '((cgw*wg*wg*nf/1e-12+cgww*wg*nf/1e-6 + cgl*lg*lg*lg/1e-18+cgll*lg*lg/1e-12+cglll*lg/1e-6 + cgo +cgn*nf+cgno) * 1e-15 + cc*abs(v(drain,source))*lg/1e-6*(ccw*(wg*nf/1e-6)**ccwn)*abs(v(gate,source)))*(1+dcgd_ext_n_12_sprf)'
+cgd_ext 22 10 '((cgw*wg*wg*nf/1e-12+cgww*wg*nf/1e-6 + cgl*lg*lg*lg/1e-18+cgll*lg*lg/1e-12+cglll*lg/1e-6 + cgo +cgn*nf+cgno) * 1e-15 + cc*abs(v(drain,source))*lg/1e-6*(ccw*(wg*nf/1e-6)**ccwn)*abs(v(gate,source)))*(1+dcgd_ext_n_12_sprf)'
+cds_ext 30 10 '(1.734e-016*wg*nf*1e6 + 3.13e-008*(lg-0.1u)) * (1+dcds_ext_n_12_sprf)'
+djsb 44 30 sd_diode_core_nchpw m=1 area='p_area_s'  pj='p_pj_sg'
+djsb_p 44 30 sdp_diode_core_nchpw m=1 area=1e-20 pj='p_pj_s'
+djdb 45 10 sd_diode_core_nchpw m=1 area='p_area_d'  pj='p_pj_dg'
+djdb_p 45 10 sdp_diode_core_nchpw m=1 area=1e-20 pj='p_pj_d'
+
+***Igate model***
+.param rsh='8.5'
+.param hdif='1.25e-07'
+.param tcig='1+1.55e-3*(temper+dtemp-25)'
+.param area='wg*(lg)*1e4*tcig*nf'
+.param toxg='(2.64e-09+dtox_n_12_sprf)*1e2'
+.param vdf0='3.11' vdfl='-0.3e-08' vdfw='3.5e-09'
+.param vaf0='0.7' vafl='-0.8e-10' vafw='1.0e-10'
+.param vdr0='5.78' vdrl='0e-07' vdrw='5.0e-09'
+.param var0='0.60' varl='0e-07' varw='1.0e-10' 
+.param vdf= '(vdf0+vdfl/(lg)+vdfw/(wg))*2.6e7*toxg'
+.param vaf= '(vaf0+vafl/(lg)+vafw/(wg))*2.6e7*toxg'
+.param vdr= '(vdr0+vdrl/(lg)+vdrw/(wg))*2.6e7*toxg'
+.param var= '(var0+varl/(lg)+varw/(wg))*2.6e7*toxg'
+.param igf= '2.1e-7*area*exp(-vdf)*pwr(1/toxg,2.0)'
+.param igr= '2.1e-7*area/(lg)*exp(-vdr)*pwr(1/toxg,2.0)'
+gigcd 20 10 cur='igf*pwr((abs(v(20,10))+v(20,10))/2,vaf)-igr*pwr((abs(v(20,10))-v(20,10))/2,var)'
+gigcs 20 30 cur='igf*pwr((abs(v(20,30))+v(20,30))/2,vaf)-igr*pwr((abs(v(20,30))-v(20,30))/2,var)'
+**************************************************************************************************
+
+** core device model
+.model nfet nmos
+*****model selectors/controllers*********************************
++  level     =   4.9000e+01                          version   =   3.2400e+00                        
++  mobmod    =   1.0000e+00                          capmod    =   3.0000e+00                        
++  nqsmod    =   0.0000e+00                          binunit   =   2.0000e+00                        
++  noimod    =   2.0000e+00                        
+
+
+*****process parameters******************************************
++  tox       =  '2.6400e-09+dtox_n_12_sprf'               toxm      =   2.6400e-09                        
++  nch       =   3.0300e+17                          ngate     =   3.2530e+21                        
++  xj        =   1.0700e-07                          rsh       =   8.4900e+00                        
+
+
+*****basic model parameters**************************************
++  wint      =   9.6070e-09                          lint      =   6.6620e-09                        
++  vth0      =  '3.5130e-01+dvth0_n_12_sprf'              k1        =   3.8160e-01                        
++  k2        =   1.7350e-18                          k3        = '-4.7090e+00+dk3_n_12_sprf'              
++  k3b       =   2.1000e+00                          nlx       =  '9.6000e-08+dnlx_n_12_sprf'             
++  dvt0      =   3.7400e-01                          dvt1      =   3.0150e+00                        
++  dvt2      =  -3.0000e-02                          dvt0w     =   1.7140e+00                        
++  dvt1w     =   5.1400e+06                          dvt2w     =   3.7410e-18                        
++  voff      =  -1.3200e-01                          nfactor   =   1.0000e+00                        
++  cdsc      =   2.3550e+00                          cdscb     =   9.0750e-03                        
++  cdscd     =   0.0000e+00                          cit       =  -1.6750e-08                        
++  u0        =  '3.5490e-02+du0_n_12_sprf'                ua        =   1.4000e-11                        
++  ub        =   1.6200e-18                          uc        =   1.2300e-10                        
++  w0        =   1.0790e-07                          a0        =   1.4710e-07                        
++  ags       =  '1.0720e+01+dags_n_12_sprf'               a1        =   0.0000e+00                        
++  a2        =   1.0000e+00                          b0        =  '7.8930e-06+db0_n_12_sprf'              
++  b1        =   1.1140e-05                          vsat      =  '1.1050e+04+dvsat_n_12_sprf'            
++  keta      =  -4.4500e-02                          dwg       =  -2.1050e-07                        
++  dwb       =  -2.0000e-09                          pclm      =   1.1230e+00                        
++  pdiblc1   =   2.6020e-02                          pdiblc2   =   1.6690e-02                        
++  pdiblcb   =   1.0000e-01                          drout     =   5.6000e-01                        
++  pvag      =   2.7390e-04                          pscbe1    =   7.1300e+09                        
++  pscbe2    =   2.5000e-03                          delta     =   1.8000e-02                        
++  eta0      =  '5.7150e-04+deta0_n_12_sprf'              etab      =  -1.8400e-02                        
++  dsub      =   5.6000e-01                          vfb       =  -8.2410e-01                        
+
+
+*****parameters for asymmetric and bias-dependent rds model******
++  prwg      =   4.3100e+00                          prwb      =  -1.0000e-01                        
++  wr        =   7.9220e-01                          rdsw      =  '1.2440e+01+drdsw_n_12_sprf'            
+
+
+*****impact ionization current model parameters******************
++  alpha0    =   4.5090e-05                          beta0     =   1.9170e+01                        
++  alpha1    =   6.3200e+00                        
+
+
+*****charge and capacitance model parameters*********************
++  dlc       =   2.0970e-08                          dwc       =   4.9520e-09                        
++  cgbo      =   0.0000e+00                          cgso      =  '2.6460e-10+dcgso_n_12_sprf'            
++  cgdo      =  '2.6460e-10+dcgdo_n_12_sprf'              xpart     =   0.0000e+00                        
++  clc       =   6.4000e-12                          cle       =   3.6840e+00                        
++  cf        =   0.0000e+00                          ckappa    =   5.1000e-01                        
++  cgdl      =   5.8000e-11                          cgsl      =   5.8000e-11                        
++  vfbcv     =  -1.0000e+00                          acde      =   2.8300e-01                        
++  moin      =   7.6250e+00                          noff      =   1.8440e+00                        
++  voffcv    =  -5.4040e-02                        
+
+
+*****high-speed/rf model parameters******************************
+
+
+*****flicker and thermal noise model parameters******************
++  noia      =   5.0000e+19                          noib      =   2.3130e+05                        
++  noic      =  -1.4010e-12                          em        =   4.9980e+06                        
++  ef        =   9.1970e-01                        
+
+
+*****layout-dependent parasitics model parameters****************
++  xl        = '-6.0000e-09+dxl_n_12_sprf'                xw        =  '1.4000e-08+dxw_n_12_sprf'              
+
+
+*****asymmetric source/drain junction diode model parameters*****
++  js        =   8.8100e-08                          jsw       =   9.6100e-14                        
++  cj        =   0.0000e+00                          mj        =   2.5800e-01                        
++  cjsw      =   0.0000e+00                          mjsw      =   1.3000e-01                        
++  cjswg     =   0.0000e+00                          mjswg     =   7.8000e-01                        
++  pb        =   5.6000e-01                          pbsw      =   5.4000e-01                        
++  pbswg     =   6.0000e-01                        
+
+
+*****temperature dependence parameters***************************
++  tnom      =   2.5000e+01                          kt1       =  -0.23698                        
++  kt1l      =  -1.2088e-009                          kt2       =  -4.0000e-02                        
++  ute       =  -0.85662                          ua1       =   4e-009                        
++  ub1       =  -5e-018                          uc1       =  -2.9000e-11                        
++  prt       =  -12.32                          at        =   20800                        
++  xti       =   3.0000e+00                          tpb       =   1.6320e-03                        
++  tpbsw     =   3.1000e-04                          tpbswg    =   2.0500e-03                        
++  tcj       =   9.5550e-04                          tcjsw     =   7.3250e-04                        
++  tcjswg    =   3.3000e-03                          nj        =   1.0080e+00                        
+
+
+
+*****dw and dl parameters****************************************
++  llc       =   3.5030e-16                          lwlc      =  -7.1720e-23                        
++  lwc       =   4.9560e-15                          wwlc      =  -7.5000e-22                        
++  ll        =  -5.1820e-16                          wl        =  -3.8340e-15                        
++  lln       =   1.0000e+00                          wln       =   1.0000e+00                        
++  lw        =   2.0920e-15                          ww        =  -6.1550e-15                        
++  lwn       =   1.0000e+00                          wwn       =   1.0000e+00                        
++  lwl       =  -4.9630e-22                          wwl       = '-1.1000e-21+dwwl_n_12_sprf'             
+
+
+*****range parameters for model application**********************
++  lmin      =   1.2000e-07                          lmax      =   3.6000e-07                        
++  wmin      =   9.0000e-07                          wmax      =   7.2000e-06                        
+
+
+*****other parameters********************************************
++  stimod    =   1.0000e+00                          lmlt      =   1.0000e+00                        
++  wmlt      =   1.0000e+00                          hdif      =   1.2500e-07                        
++  ldif      =   9.0000e-08                          pvth0     =  '4.8500e-15+dpvth0_n_12_sprf'           
++  pk2       =  -8.0000e-16                          pcit      =   1.6000e-16                        
++  lags      =  -2.3420e-06                          wags      =  -1.3210e-05                        
++  pags      =  -5.5500e-14                          pvsat     =   9.7500e-09                        
++  lketa     =  -5.8000e-09                          pketa     =  -2.8000e-15                        
++  ppclm     =   1.5830e-14                          peta0     =   1.2340e-14                        
++  elm       =   0.0000e+00                          wu0       =   '0.0000e+00+dwu0_n_12_sprf'                        
++  lvoffcv   =  -6.0000e-09                          rd        =   0.0000e+00                        
++  rdc       =   0.0000e+00                          rs        =   0.0000e+00                        
++  rsc       =   0.0000e+00                          acm       =   1.2000e+01                        
++  calcacm   =   1.0000e+00                          saref     =   2.2000e-06                        
++  sbref     =   2.2000e-06                          wlod      =   0.0000e+00                        
++  kvth0     =   3.2500e-09                          lkvth0    =  -2.7100e-11                        
++  wkvth0    =   0.0000e+00                          pkvth0    =   0.0000e+00                        
++  llodvth   =   1.0000e+00                          wlodvth   =   1.0000e+00                        
++  stk2      =   0.0000e+00                          lodk2     =   1.0000e+00                        
++  lodeta0   =   1.0000e+00                          ku0       =  -5.3200e-08                        
++  lku0      =   9.2570e-08                          wku0      =   0.0000e+00                        
++  pku0      =   0.0000e+00                          llodku0   =   1.1200e+00                        
++  wlodku0   =   1.0000e+00                          kvsat     =   1.0000e+00                        
++  steta0    =   0.0000e+00                          tku0      =   0.0000e+00                        
++  leta0     =   1.0660e-08                          ldvt0     =   1.3980e-05                        
++  wk3       = '-1.6070e-05+dwk3_n_12_sprf'               lvoff     =   3.6600e-14                        
++  lu0       =   2.1950e-10                          lrdsw     =   1.3390e-08                        
++  pa0       =   1.1750e-14                          la0       =   3.0030e-07                        
++  lpclm     =  -6.8150e-08                          lvsat     =   '2.4330e-02+dlvsat_n_12_sprf'                        
++  weta0     =  -5.5050e-08                          ldelta    =   1.8750e-10                        
++  pua       =   1.4720e-23                          pub       =   7.7430e-32                        
++  wpclm     =  -3.1820e-07                          wvsat     =   3.0070e-01
++  wdsub     =   37.16e-9                     
+*
+*** n+/tw diode for 0.11um pmos
+.model sd_diode_core_nchpw d
+*****diode parameters********************************************
++  level     =   3.0000e+00                          jsw       =   9.6100e-14                        
++  n         =   1.0080e+00                          rs        =   0.0000e+00                        
++  ik        =   5.2800e+04                          ikr       =   2.7800e+03                        
++  ibv       =   2.7780e+01                          trs       =   4.9500e-04                        
++  eg        =   1.1600e+00                          tref      =   2.5000e+01                        
++  xti       =   3.0000e+00                          area      =   3.6000e-08                        
++  pj        =   7.6000e-04                          tlev      =   1.0000e+00                        
++  cj        =  '(7.2000e-04+cjj)*(1+dcj_n_12_sprf)'            mj        =   2.5800e-01                        
++  pb        =   5.6000e-01                          mjsw      =   1.3000e-01                        
++  php       =   5.4000e-01                        
+
+
+*****other parameters********************************************
++  js        =   8.8100e-08                          vb        =   1.3360e+01                        
++  tcv       =  -6.8400e-04                          tlevc     =   1.0000e+00                        
++  cjp       =  '1.0600e-10*(1+dcjsw_n_12_sprf)'          tpb       =   1.6320e-03                        
++  tphp      =   3.1000e-04                          cta       =   9.5550e-04                        
++  ctp       =   7.3250e-04  
+***
+.model sdp_diode_core_nchpw d
++ level = 3
++ tref = 25
++ cj = 0
++ mjsw = 0.5727
++ php = 0.6
++ ctp = 0.0033
++ xti = 3
++ eg = 1.16
++ tphp = 0.00205
++ tlev = 0
++ tlevc = 1
++ cjp = '(3.76e-010)*(1+dcjswg_n_12_sprf)'
+.ends
+***
+***
+***
+***
+*** 1.2V SP RF PMOS transistor
+.subckt p_12_sprf drain gate source body psub
++ lf=0.12u wf=2.4u nf=16 sa=2.2u sb=2.2u dtemp=0
+*** common parameters
++ nf_odd='nf-2*int(nf/2)' nf_even='1-nf_odd'        
++ sp_poly=0.40e-6 sp_edge=0.34e-6 xgw=0.18e-6 no_cnt=1 no_via=3 sp_sub_w=1.7e-6
++ sp_sub_l=0.94e-6  sp_nwell_w=2.337e-6 sp_nwell_l=1.52e-6   
++ wg='wf*0.9' lg='lf*0.9+12e-9'
+*** junction area and periphery
++ p_area_s='nf_odd*(sp_edge*(wf)+sp_poly*(wf)*(nf-1)/2)+nf_even*(2*sp_edge*(wf)+sp_poly*(wf)*(nf/2-1))'
++ p_area_d='nf_odd*(sp_edge*(wf)+sp_poly*(wf)*(nf-1)/2)+nf_even*(sp_poly*(wf)*nf/2)'
++ p_pj_s='nf_odd*(sp_edge*2+(wf)+(nf-1)/2*sp_poly*2)+nf_even*(sp_edge*2*2+(wf)*2+(nf/2-1)*sp_poly*2)'
++ p_pj_d='nf_odd*(sp_edge*2+(wf)+(nf-1)/2*sp_poly*2)+nf_even*(nf/2*sp_poly*2)'
++ p_pj_sg='nf*(wf)'
++ p_pj_dg='nf*(wf)'
++ p_area_nw='((wf)+2*sp_nwell_w)*(2*sp_edge+nf*(lf+12e-9)+(nf-1)*sp_poly+2*sp_nwell_l)'
++ p_pj_nw='2*((wf)+2*sp_nwell_w+ 2*sp_edge+nf*(lf+12e-9)+(nf-1)*sp_poly+2*sp_nwell_l)'
++ dev_l = '(nf-1)*0.4u*0.9 + nf*lg + 1.88u*0.9'
++ dev_w = 'wg + 1.04u*0.9'
++ dev_access = 'dev_l * dev_w/(16*(dev_l*dev_l+dev_w*dev_w))'
++ rbulk =  'rbo*dev_access + rbw*wg + rbl*lg + rbn*nf'
+*
++ cgw= 5.000e-12
++ cgww= 3.837e-22 
++ cgo=-7
++ cgl=288.35
++ cgll=-255.01
++ cglll=78.968
++ cx= 3.970e-19 
++ cn= 2.147e-15
++ cc=-6.902e-15
++ ccw= 71.64e-3
++ ccwn= 860.3e-3
+*
++ rn= 10.60 
++ rwl= 1.207 
++ rlw= 3.229e3
+*
++ cjo=0.225
++ cjl=1.2491
++ cjln=-0.2816
++ cjw=-0.45
++ cjj='(cjo+cjl*(lg/1e-6)**cjln+cjw/wg*1e-6)*1e-3'
+*
++ rbb= 3.000e3
++ rbo= 1.000e3
++ rbn=0
++ rbw=-1.000e6
++ rbl=0
+**
+mos_p_12 10 20 30 40 pfet m='nf' l='lf' w='wf' ad=0 as=0 pd=0 ps=0 sa=2.2u sb=2.2u
+**
+rgc gate 22 'rn / nf * (1+drgc_p_12_sprf) '
+rgi 22 21 'rwl * wg / (lg*nf) * (1+drgi_p_12_sprf)'
+rch 21 20 'rlw * lg / (wg*nf) * (1+drch_p_12_sprf) '  noise = 0 
+rdrain drain 10 '6.383e-006 /(wg*nf)'
+rsource source 30 '6.383e-006 /(wg*nf)'
+rsubd 40 45 'rbb*(0.4u*0.9 + lg)/(wg*nf)'
+rsubs 44 40 'rbb*(0.4u*0.9 + lg)/(wg*nf)'
+rsubb 40 body 'rbulk'
+*
+cgs_ext 22 30 '(cgw*wg*nf+cgww/wg*nf+(cgl*(lg/1e-6)*(lg/1e-6)*(lg/1e-6)+cgll*(lg/1e-6)*(lg/1e-6)+cglll*(lg/1e-6)+cgo)*1e-15-cx/(lg/1e-6)**2+cn/nf**0.5+cc*abs(v(drain,source))*lg/1e-6*(ccw*(wg*nf/1e-6)**ccwn)*abs(v(gate,source)))*(1+dcgd_ext_p_12_sprf)'
+cgd_ext 22 10 '(cgw*wg*nf+cgww/wg*nf+(cgl*(lg/1e-6)*(lg/1e-6)*(lg/1e-6)+cgll*(lg/1e-6)*(lg/1e-6)+cglll*(lg/1e-6)+cgo)*1e-15-cx/(lg/1e-6)**2+cn/nf**0.5+cc*abs(v(drain,source))*lg/1e-6*(ccw*(wg*nf/1e-6)**ccwn)*abs(v(gate,source)))*(1+dcgd_ext_p_12_sprf)'
+cds_ext 30 10 '1.043e-016*wg*nf*1e6*(1+dcds_ext_p_12_sprf)'
+djsb 30 44 sd_diode_core_pch m=1 area='p_area_s'  pj='p_pj_sg' 
+djsb_p 30 44 sdp_diode_core_pch m=1 area=1e-20 pj='p_pj_s'    
+djdb 10 45 sd_diode_core_pch m=1 area='p_area_d'  pj='p_pj_dg' 
+djdb_p 10 45 sdp_diode_core_pch m=1 area=1e-20 pj='p_pj_d'  
+dbsub 50 body nw_psub_diode area='p_area_nw'  pj='p_pj_nw'
+rbsub psub 50  '390*dev_access'
+
+***Igate model***
+.param rsh='7.6'
+.param hdif='1.25e-07'
+.param tcig='1+2.25e-3*(temper+dtemp-25)'
+.param area='wg*(lg)*1e4*tcig*nf'
+.param toxg='(2.83e-09+dtox_p_12_sprf)*1e2'
+.param vdf0='3.22' vdfl='-7.00e-09' vdfw='-6.0e-8'
+.param vaf0='0.6' vafl='-1.5e-08' vafw='-3.0e-8'
+.param vdr0='5.50' vdrl='+1.50e-08' vdrw='-1.0e-07'
+.param var0='0.35' varl='+1.50e-08' varw='4.0e-8' 
+.param vdf= '(vdf0+vdfl/(lg)+vdfw/(wg))*2.6e7*toxg'
+.param vaf= '(vaf0+vafl/(lg)+vafw/(wg))*2.6e7*toxg'
+.param vdr= '(vdr0+vdrl/(lg)+vdrw/(wg))*2.6e7*toxg'
+.param var= '(var0+varl/(lg)+varw/(wg))*2.6e7*toxg'
+.param igf= '2.1e-7*area*exp(-vdf)*pwr(1/toxg,2.0)'
+.param igr= '2.1e-7*area/(lg)*exp(-vdr)*pwr(1/toxg,2.0)'
+gigcd 20 10 cur='-igf*pwr((abs(v(20,10))-v(20,10))/2,vaf)+igr*pwr((abs(v(20,10))+v(20,10))/2,var)'
+gigcs 20 30 cur='-igf*pwr((abs(v(20,30))-v(20,30))/2,vaf)+igr*pwr((abs(v(20,30))+v(20,30))/2,var)'
+***************************************************************************************************
+
+*** core device model
+.model pfet pmos
+*****model selectors/controllers*********************************
++  level     =   4.9000e+01                          version   =   3.2400e+00                        
++  mobmod    =   1.0000e+00                          capmod    =   3.0000e+00                        
++  nqsmod    =   0.0000e+00                          binunit   =   2.0000e+00                        
++  noimod    =   2.0000e+00                        
+
+
+*****process parameters******************************************
++  tox       =  '2.8400e-09+dtox_p_12_sprf'               toxm      =   2.8400e-09                        
++  nch       =   1.0700e+18                          ngate     =   1.2280e+21                        
++  xj        =   1.1700e-07                          rsh       =   7.6700e+00                        
+
+
+*****basic model parameters**************************************
++  wint      =   1.9620e-07                          lint      =  -2.3410e-08                        
++  vth0      = '-3.7290e-01+dvth0_p_12_sprf'              k1        =   5.3690e-01                        
++  k2        =  -1.0000e-10                          k3        = '-7.5620e+00+dk3_p_12_sprf'              
++  k3b       =   7.1980e+00                          nlx       =  '2.7030e-08+dnlx_p_12_sprf'             
++  dvt0      =   4.5110e+02                          dvt1      =   2.2190e+00                        
++  dvt2      =  -1.0000e-09                          dvt0w     =   4.5000e+00                        
++  dvt1w     =   4.2060e+07                          dvt2w     =  -2.8570e-02                        
++  voff      =  -9.8250e-02                          nfactor   =   5.2590e-01                        
++  cdsc      =   1.2030e+00                          cdscb     =   0.0000e+00                        
++  cdscd     =   1.0300e-04                          cit       =   2.7170e-06                        
++  u0        =  '8.0120e-03+du0_p_12_sprf'                ua        =   2.9060e-12                        
++  ub        =   9.9110e-19                          uc        =  -5.9600e-11                        
++  w0        =   3.5890e-07                          a0        =   1.2000e+00                        
++  ags       =  '7.6420e-01+dags_p_12_sprf'               a1        =   0.000e-00                        
++  a2        =   1.0000e+00                          b0        =  '1.8610e-05+db0_p_12_sprf'              
++  b1        =   1.7250e-05                          vsat      =  '9.2350e+04+dvsat_p_12_sprf'            
++  keta      =  -1.9000e-02                          dwg       =  -6.4260e-09                        
++  dwb       =   7.6600e-09                          pclm      =   1.7230e+00                        
++  pdiblc1   =   1.2500e-05                          pdiblc2   =   1.0660e-01                        
++  pdiblcb   =  -4.5800e-01                          drout     =   5.4000e-01                        
++  pvag      =   1.6160e-02                          pscbe1    =   3.5600e+09                        
++  pscbe2    =   3.0500e-03                          delta     =   1.9160e-02                        
++  eta0      =  '1.7940e-01+deta0_p_12_sprf'              etab      =  -4.7940e-02                        
++  dsub      =   5.6000e-01                          vfb       =  -1.1250e+00                        
+
+
+*****parameters for asymmetric and bias-dependent rds model******
++  prwg      =   1.5760e+01                          prwb      =  -9.9450e-02                        
++  wr        =   1.0000e+00                          rdsw      =  '9.9450e+00+drdsw_p_12_sprf'            
+
+
+*****impact ionization current model parameters******************
++  alpha0    =   9.6900e-01                          beta0     =   3.8540e+01                        
++  alpha1    =   1.0000e+01                        
+
+
+*****charge and capacitance model parameters*********************
++  dlc       =   1.7730e-08                          dwc       =   4.8840e-12                        
++  cgbo      =   0.0000e+00                          cgso      =  '1.7500e-10+dcgso_p_12_sprf'            
++  cgdo      =  '1.7500e-10+dcgdo_p_12_sprf'              xpart     =   0.0000e+00                        
++  ckappa    =   8.1000e-02                          cgdl      =   6.0980e-11                        
++  cgsl      =   6.0980e-11                          acde      =   8.5760e-01                        
++  moin      =   6.1620e+00                          noff      =   2.2000e+00                        
++  voffcv    =   1.6190e-03                          clc       =   2.5140e-14                        
++  cle       =   4.3860e+00                          cf        =  '10.8920e-11*(1+dcf_p_12_sprf)'
+
+
+*****high-speed/rf model parameters******************************
+
+
+*****flicker and thermal noise model parameters******************
++  noia      =   1.3190e+19                          noib      =   8.9950e+05                        
++  noic      =   3.0640e-11                          em        =   5.4220e+07                        
++  ef        =   1.1620e+00                        
+
+
+*****layout-dependent parasitics model parameters****************
++  xl        = '-6.0000e-09+dxl_p_12_sprf'                xw        =  '1.7000e-08+dxw_p_12_sprf'              
+
+
+*****asymmetric source/drain junction diode model parameters*****
++  js        =   1.2100e-07                          jsw       =   1.0800e-13                        
++  cj        =   0.0000e+00                          mj        =   3.0800e-01                        
++  cjsw      =   0.0000e+00                          mjsw      =   1.0000e-01                        
++  pb        =   6.8700e-01                          pbsw      =   4.5000e-01                        
++  cjswg     =   0.0000e+00                          pbswg     =   5.0000e-01                        
++  mjswg     =   3.9100e-01                          ijth      =   1.0000e-01                        
+
+
+*****temperature dependence parameters***************************
++  kt1       =  -2.1980e-01                          kt1l      =  -5.0000e-09                        
++  kt2       =  -2.4000e-02                          ute       =  -6.3110e-01                        
++  ua1       =   3.9280e-09                          ub1       =  -5.4500e-18                        
++  uc1       =  -5.0570e-10                          prt       =   4.3910e+01                        
++  at        =   2.0000e+04                          xti       =   3.0000e+00                        
++  nj        =   1.0170e+00                          tcj       =   1.0050e-03                        
++  tcjsw     =   5.2430e-04                          tcjswg    =   2.0400e-03                        
++  tpb       =   1.7090e-03                          tpbsw     =   2.5860e-03                        
++  tpbswg    =   2.0300e-03                        
+
+
+*****dw and dl parameters****************************************
++  llc       =   8.2480e-17                          lwc       =  -3.5410e-15                        
++  lwlc      =   2.0210e-23                          wlc       =   0.0000e+00                        
++  wwc       =   0.0000e+00                          wwlc      =  -4.8000e-23                        
++  ll        =   4.1130e-16                          wl        =  -5.5610e-15                        
++  lln       =   1.1000e+00                          wln       =   1.0000e+00                        
++  lw        =  -9.8960e-15                          ww        =  -9.1740e-14                        
++  lwn       =   1.0000e+00                          wwn       =   1.0000e+00                        
++  lwl       =   8.0950e-23                          wwl       =  '8.3020e-21+dwwl_p_12_sprf'             
+
+
+*****range parameters for model application**********************
++  lmin      =   1.2000e-07                          lmax      =   3.6000e-07                        
++  wmin      =   1.6000e-06                          wmax      =   9.6000e-06                        
+
+
+*****other parameters********************************************
++  stimod    =   1.0000e+00                          tnom      =   2.5000e+01                        
++  hdif      =   1.2500e-07                          ldif      =   9.0000e-08                        
++  pvth0     = '-9.0050e-16+dpvth0_p_12_sprf'             pk1       =  -5.9490e-15                        
++  lnfactor  =   9.4400e-08                          pu0       =   3.9180e-16                        
++  lags      =  '3.7120e-07+dlags_p_12_sprf'              pvsat     =  -4.2000e-09                        
++  lketa     =  -7.2000e-09                          pdelta    =   3.7520e-15                        
++  elm       =   5.0000e+00                          wags      =   6.8130e-07                        
++  pags      =   9.3530e-17                          wu0       =   0.0000e+00
++  lvoffcv   =  -6.0000e-09                          wkt1l     =   1.1000e-15                        
++  wub1      =   2.2000e-25                          acm       =   1.2000e+01                        
++  calcacm   =   1.0000e+00                          saref     =   2.2000e-06                        
++  sbref     =   2.2000e-06                          wlod      =   0.0000e+00                        
++  kvth0     =   0.0000e+00                          lkvth0    =   0.0000e+00                        
++  wkvth0    =   0.0000e+00                          pkvth0    =   0.0000e+00                        
++  llodvth   =   1.0000e+00                          wlodvth   =   1.0000e+00                        
++  stk2      =   0.0000e+00                          lodk2     =   1.0000e+00                        
++  lodeta0   =   1.0000e+00                          ku0       =   7.4200e-08                        
++  lku0      =   1.9570e-08                          wku0      =   0.0000e+00                        
++  pku0      =   0.0000e+00                          llodku0   =   1.1500e+00                        
++  wlodku0   =   1.0000e+00                          kvsat     =   1.0000e+00                        
++  steta0    =   0.0000e+00                          tku0      =   0.0000e+00                        
++  lvth0     =   1.2000e-11                          ppclm     =   1.0000e-06                        
++  lvsat     =  '7.2570e-03+dlvsat_p_12_sprf'             la0       =   2.0000e-08                        
++  wvsat     =   1.2000e-01                        
+*
+.model sd_diode_core_pch d
+*****diode parameters********************************************
++  level     =   3.0000e+00                          ibv       =   2.7780e+01                        
++  ik        =   5.7800e+04                          ikr       =   2.7800e+03                        
++  jsw       =   0.0000e+00                          n         =   1.0170e+00                        
++  rs        =   0.0000e+00                          pb        =   6.8700e-01                        
++  mj        =   4.6660e-01                          mjsw      =   1.0000e-01                        
++  php       =   4.5000e-01                          tlev      =   1.0000e+00                        
++  tref      =   2.5000e+01                          eg        =   1.1600e+00                        
++  xti       =   3.0000e+00                          trs       =  -1.1400e-04                        
++  cj        =  '(9.6900e-04+cjj)*(1+dcj_p_12_sprf)'                        
+
+
+*****other parameters********************************************
++  js        =   0.0000e+00                          vb        =   1.0640e+01                        
++  cjp       =  '1.1800e-10*(1+dcjsw_p_12_sprf)'          tlevc     =   1.0000e+00                        
++  cta       =   1.0050e-03                          ctp       =   5.2430e-04                        
++  tcv       =  -6.4500e-04                          tpb       =   1.7090e-03                        
++  tphp      =   2.5860e-03                        
+*
+.model sdp_diode_core_pch d
++ level = 3
++ cj = 0
++ cjp = '0.000000000543*(1+dcjswg_p_12_sprf)'
++ mjsw = 0.391
++ php = 0.5
++ tlev = 1
++ tlevc = 1
++ tref = 25
++ eg = 1.16
++ xti = 3
++ ctp = 0.00204
++ tphp = 0.00203
+*
+.model nw_psub_diode d
+*****diode parameters********************************************
++  level     =   3.0000e+00                          ibv       =   5.9520e+00                        
++  ik        =   5.1770e+02                          ikr       =   5.9520e+02                        
++  jsw       =   5.3400e-11                          n         =   1.0530e+00                        
++  rs        =   0.0000e+00                          cj        =  '8.2800e-05*(1+dcj_nw_p_12_sprf)'                        
++  pb        =   5.8800e-01                          mj        =   4.7400e-01                        
++  mjsw      =   2.7000e-01                          php       =   6.2000e-01                        
++  tlev      =   1.0000e+00                          tref      =   2.5000e+01                        
++  eg        =   1.1600e+00                          xti       =   5.4940e+00                        
++  trs       =   3.2200e-03                        
+
+
+*****other parameters********************************************
++  js        =   2.0500e-06                          vb        =   9.6620e+00                        
++  cjp       =  '9.9200e-10*(1+dcjsw_nw_p_12_sprf)'       tlevc     =   1.0000e+00                        
++  cta       =   3.3200e-03                          ctp       =   1.0000e-03                        
++  tcv       =  -5.3900e-04                          tpb       =   2.8000e-03                        
++  tphp      =   1.0000e-03                        
+.ends
+*
+*
+*
+*
+*
+*
+*** 1.2V SP twell RF NMOS transistor 
+.subckt n_12bpw_sprf drain gate source body nwell psub
++ lf=0.12u wf=1.8u nf=1 sa=2.2u sb=2.2u dtemp=0       
+*** common parameters
++ nf_odd='nf-2*int(nf/2)' nf_even='1-nf_odd'
++ sp_poly=0.40e-6 sp_edge=0.34e-6 xgw=0.18e-6 no_cnt=1 no_via=3 sp_sub_w=1.7e-6
++ sp_sub_l=0.94e-6 sp_twell_w=2.24e-6 sp_twell_l=1.48e-6 sp_nwell_w=3.74e-6 sp_nwell_l=2.98e-6
++ wg='(wf*0.9)' lg='(lf*0.9+12e-9)'
+** junction area and periphery
++ p_area_s='nf_odd*(sp_edge*(wf)+sp_poly*(wf)*(nf-1)/2)+nf_even*(2*sp_edge*(wf)+sp_poly*(wf)*(nf/2-1))'
++ p_area_d='nf_odd*(sp_edge*(wf)+sp_poly*(wf)*(nf-1)/2)+nf_even*(sp_poly*(wf)*nf/2)'
++ p_pj_s='nf_odd*(sp_edge*2+(wf)+(nf-1)/2*sp_poly*2)+nf_even*(sp_edge*2*2+(wf)*2+(nf/2-1)*sp_poly*2)'
++ p_pj_d='nf_odd*(sp_edge*2+(wf)+(nf-1)/2*sp_poly*2)+nf_even*(nf/2*sp_poly*2)'
++ p_pj_sg='nf*(wf)'
++ p_pj_dg='nf*(wf)'
++ p_area_tw='((wf)+2*sp_twell_w)*(2*sp_edge+nf*(lf)+(nf-1)*sp_poly+2*sp_twell_l)'
++ p_pj_tw='2*((wf)+2*sp_twell_w+ 2*sp_edge+nf*(lf)+(nf-1)*sp_poly+2*sp_twell_l)'
++ p_area_dnw='((wf)+2*sp_nwell_w)*(2*sp_edge+nf*(lf)+(nf-1)*sp_poly+2*sp_nwell_l)'
++ p_pj_dnw='2*((wf)+2*sp_nwell_w+ 2*sp_edge+nf*(lf)+(nf-1)*sp_poly+2*sp_nwell_l)'
++ dev_l = '(2*sp_edge+nf*lg+(nf-1)*sp_poly+2*sp_twell_l)'
++ dev_w = 'wg+2*sp_twell_w'
++ dev_access = 'dev_l * dev_w/(16*(dev_l*dev_l+dev_w*dev_w))'
++ rbulk =  'rbo*dev_access + rbw*wg + rbl*lg + rbn*nf'
+*
++ cgn=0.2806
++ cgno=-4.4463
++ cgw= 56.94e-6
++ cgww= 1.134e-3
++ cgo=-1.360 
++ cgl=165.65
++ cgll=-191.07
++ cglll=71.507
++ cc=-1.854e-15
++ ccw= 119.0e-3
++ ccwn= 796.9e-3
+*
++ rn= 130.0 
++ rwl= 50.94e-9
++ rlw= 8.897e-3
++ rl= 2.741e-12
++ rw=-289.3e3
+*
++ cjn=0.0363853168
++ cjnn=-1.61872815
++ cjnnn=29.5851674
++ cjno=-208
++ cjo=0.44
++ cjl=15.26616
++ cjll=-12.12553
++ cjw=-5.00e-01
++ cjj='((2+cjl*lg*lg/1e-12+cjll*lg/1e-6)*(1.22+cjw/wg*1e-6)+cjo+(cjn*nf*nf*nf+cjnn*nf*nf+cjnnn*nf+cjno)*1e-3)*1e-3'
+*
++ rbb= 8.824e3
++ rbo= 24.74 
++ rbn= 126.1e-3
++ rbw= 5.849e6
++ rbl= 746.8e6
+**
+mos_n_12 10 20 30 40 n_12bpw m='nf' l='lf' w='wf' ad=0 as=0 pd=0 ps=0 sa=2.2u sb=2.2u
+**
+rgc gate 22 '(rn/nf**1+ rw*wg) * (1+drgc_n_12_sprf)'
+rgi 22 21 '(rwl*wg/(lg) + rl/lg/wg ) * (1+drgi_n_12_sprf)'
+rch 21 20 'rlw*lg/(wg) * (1+drch_n_12_sprf)' noise = 0
+rdrain drain 10 '9.703 * 1e-6/(wg*nf)'
+rsource source 30 '9.703 * 1e-6/(wg*nf)'
+rsubd 40 45 'rbb * (0.4u*0.9 + lg)/(wg*nf)'
+rsubs 44 40 'rbb * (0.4u*0.9 + lg)/(wg*nf)'
+rsubbe 40 body 'rbulk'
+cgs_ext 22 30 '((cgw*wg*wg*nf/1e-12+cgww*wg*nf/1e-6 + cgl*lg*lg*lg/1e-18+cgll*lg*lg/1e-12+cglll*lg/1e-6 + cgo +cgn*nf+cgno) * 1e-15 + cc*abs(v(drain,source))*lg/1e-6*(ccw*(wg*nf/1e-6)**ccwn)*abs(v(gate,source)))*(1+dcgd_ext_n_12_sprf)'
+cgd_ext 22 10 '((cgw*wg*wg*nf/1e-12+cgww*wg*nf/1e-6 + cgl*lg*lg*lg/1e-18+cgll*lg*lg/1e-12+cglll*lg/1e-6 + cgo +cgn*nf+cgno) * 1e-15 + cc*abs(v(drain,source))*lg/1e-6*(ccw*(wg*nf/1e-6)**ccwn)*abs(v(gate,source)))*(1+dcgd_ext_n_12_sprf)'
+cds_ext 30 10 '(1.734e-016*wg*nf*1e6 + 3.13e-008*(lg-0.1u)) * (1+dcds_ext_n_12_sprf)'
+djsb 44 30 sd_diode_core_nchpw m=1 area='p_area_s'  pj='p_pj_sg'
+djsb_p 44 30 sdp_diode_core_nchpw m=1 area=1e-20 pj='p_pj_s'
+djdb 45 10 sd_diode_core_nchpw m=1 area='p_area_d'  pj='p_pj_dg'
+djdb_p 45 10 sdp_diode_core_nchpw m=1 area=1e-20 pj='p_pj_d'
+dnw body 50 dionw_l110e  area='p_area_tw' pj='p_pj_tw'
+rdnw 50 nwell '100*dev_access'
+dnwp 60 50 dnw_psub  area='p_area_dnw' pj='p_pj_dnw'
+rpsub 60 psub '390*dev_access'
+
+***Igate model***
+.param rsh='8.5'
+.param hdif='1.25e-07'
+.param tcig='1+1.55e-3*(temper+dtemp-25)'
+.param area='wg*(lg)*1e4*tcig*nf'
+.param toxg='(2.64e-09+dtox_n_12_sprf)*1e2'
+.param vdf0='3.11' vdfl='-0.3e-08' vdfw='3.5e-09'
+.param vaf0='0.7' vafl='-0.8e-10' vafw='1.0e-10'
+.param vdr0='5.78' vdrl='0e-07' vdrw='5.0e-09'
+.param var0='0.60' varl='0e-07' varw='1.0e-10' 
+.param vdf= '(vdf0+vdfl/(lg)+vdfw/(wg))*2.6e7*toxg'
+.param vaf= '(vaf0+vafl/(lg)+vafw/(wg))*2.6e7*toxg'
+.param vdr= '(vdr0+vdrl/(lg)+vdrw/(wg))*2.6e7*toxg'
+.param var= '(var0+varl/(lg)+varw/(wg))*2.6e7*toxg'
+.param igf= '2.1e-7*area*exp(-vdf)*pwr(1/toxg,2.0)'
+.param igr= '2.1e-7*area/(lg)*exp(-vdr)*pwr(1/toxg,2.0)'
+gigcd 20 10 cur='igf*pwr((abs(v(20,10))+v(20,10))/2,vaf)-igr*pwr((abs(v(20,10))-v(20,10))/2,var)'
+gigcs 20 30 cur='igf*pwr((abs(v(20,30))+v(20,30))/2,vaf)-igr*pwr((abs(v(20,30))-v(20,30))/2,var)'
+**************************************************************************************************
+
+** core device model
+.model n_12bpw nmos
+*****model selectors/controllers*********************************
++  level     =   4.9000e+01                          version   =   3.2400e+00                        
++  mobmod    =   1.0000e+00                          capmod    =   3.0000e+00                        
++  nqsmod    =   0.0000e+00                          binunit   =   2.0000e+00                        
++  noimod    =   2.0000e+00                        
+
+
+*****process parameters******************************************
++  tox       =  '2.6400e-09+dtox_n_12_sprf'               toxm      =   2.6400e-09                        
++  nch       =   3.0300e+17                          ngate     =   3.2530e+21                        
++  xj        =   1.0700e-07                          rsh       =   8.4900e+00                        
+
+
+*****basic model parameters**************************************
++  wint      =   9.6070e-09                          lint      =   6.6620e-09                        
++  vth0      =  '3.5130e-01+dvth0_n_12_sprf'              k1        =   3.8160e-01                        
++  k2        =   1.7350e-18                          k3        = '-4.7090e+00+dk3_n_12_sprf'              
++  k3b       =   2.1000e+00                          nlx       =  '9.6000e-08+dnlx_n_12_sprf'             
++  dvt0      =   3.7400e-01                          dvt1      =   3.0150e+00                        
++  dvt2      =  -3.0000e-02                          dvt0w     =   1.7140e+00                        
++  dvt1w     =   5.1400e+06                          dvt2w     =   3.7410e-18                        
++  voff      =  -1.3200e-01                          nfactor   =   1.0000e+00                        
++  cdsc      =   2.3550e+00                          cdscb     =   9.0750e-03                        
++  cdscd     =   0.0000e+00                          cit       =  -1.6750e-08                        
++  u0        =  '3.5490e-02+du0_n_12_sprf'                ua        =   1.4000e-11                        
++  ub        =   1.6200e-18                          uc        =   1.2300e-10                        
++  w0        =   1.0790e-07                          a0        =   1.4710e-07                        
++  ags       =  '1.0720e+01+dags_n_12_sprf'               a1        =   0.0000e+00                        
++  a2        =   1.0000e+00                          b0        =  '7.8930e-06+db0_n_12_sprf'              
++  b1        =   1.1140e-05                          vsat      =  '1.1050e+04+dvsat_n_12_sprf'            
++  keta      =  -4.4500e-02                          dwg       =  -2.1050e-07                        
++  dwb       =  -2.0000e-09                          pclm      =   1.1230e+00                        
++  pdiblc1   =   2.6020e-02                          pdiblc2   =   1.6690e-02                        
++  pdiblcb   =   1.0000e-01                          drout     =   5.6000e-01                        
++  pvag      =   2.7390e-04                          pscbe1    =   7.1300e+09                        
++  pscbe2    =   2.5000e-03                          delta     =   1.8000e-02                        
++  eta0      =  '5.7150e-04+deta0_n_12_sprf'              etab      =  -1.8400e-02                        
++  dsub      =   5.6000e-01                          vfb       =  -8.2410e-01                        
+
+
+*****parameters for asymmetric and bias-dependent rds model******
++  prwg      =   4.3100e+00                          prwb      =  -1.0000e-01                        
++  wr        =   7.9220e-01                          rdsw      =  '1.2440e+01+drdsw_n_12_sprf'            
+
+
+*****impact ionization current model parameters******************
++  alpha0    =   4.5090e-05                          beta0     =   1.9170e+01                        
++  alpha1    =   6.3200e+00                        
+
+
+*****charge and capacitance model parameters*********************
++  dlc       =   2.0970e-08                          dwc       =   4.9520e-09                        
++  cgbo      =   0.0000e+00                          cgso      =  '2.6460e-10+dcgso_n_12_sprf'            
++  cgdo      =  '2.6460e-10+dcgdo_n_12_sprf'              xpart     =   0.0000e+00                        
++  clc       =   6.4000e-12                          cle       =   3.6840e+00                        
++  cf        =   0.0000e+00                          ckappa    =   5.1000e-01                        
++  cgdl      =   5.8000e-11                          cgsl      =   5.8000e-11                        
++  vfbcv     =  -1.0000e+00                          acde      =   2.8300e-01                        
++  moin      =   7.6250e+00                          noff      =   1.8440e+00                        
++  voffcv    =  -5.4040e-02                        
+
+
+*****high-speed/rf model parameters******************************
+
+
+*****flicker and thermal noise model parameters******************
++  noia      =   5.0000e+19                          noib      =   2.3130e+05                        
++  noic      =  -1.4010e-12                          em        =   4.9980e+06                        
++  ef        =   9.1970e-01                        
+
+
+*****layout-dependent parasitics model parameters****************
++  xl        = '-6.0000e-09+dxl_n_12_sprf'                xw        =  '1.4000e-08+dxw_n_12_sprf'              
+
+
+*****asymmetric source/drain junction diode model parameters*****
++  js        =   8.8100e-08                          jsw       =   9.6100e-14                        
++  cj        =   0.0000e+00                          mj        =   2.5800e-01                        
++  cjsw      =   0.0000e+00                          mjsw      =   1.3000e-01                        
++  cjswg     =   0.0000e+00                          mjswg     =   7.8000e-01                        
++  pb        =   5.6000e-01                          pbsw      =   5.4000e-01                        
++  pbswg     =   6.0000e-01                        
+
+
+*****temperature dependence parameters***************************
++  tnom      =   2.5000e+01                          kt1       =  -0.23698                        
++  kt1l      =  -1.2088e-009                          kt2       =  -4.0000e-02                        
++  ute       =  -0.85662                          ua1       =   4e-009                        
++  ub1       =  -5e-018                          uc1       =  -2.9000e-11                        
++  prt       =  -12.32                          at        =   20800                        
++  xti       =   3.0000e+00                          tpb       =   1.6320e-03                        
++  tpbsw     =   3.1000e-04                          tpbswg    =   2.0500e-03                        
++  tcj       =   9.5550e-04                          tcjsw     =   7.3250e-04                        
++  tcjswg    =   3.3000e-03                          nj        =   1.0080e+00                        
+
+
+
+*****dw and dl parameters****************************************
++  llc       =   3.5030e-16                          lwlc      =  -7.1720e-23                        
++  lwc       =   4.9560e-15                          wwlc      =  -7.5000e-22                        
++  ll        =  -5.1820e-16                          wl        =  -3.8340e-15                        
++  lln       =   1.0000e+00                          wln       =   1.0000e+00                        
++  lw        =   2.0920e-15                          ww        =  -6.1550e-15                        
++  lwn       =   1.0000e+00                          wwn       =   1.0000e+00                        
++  lwl       =  -4.9630e-22                          wwl       = '-1.1000e-21+dwwl_n_12_sprf'             
+
+
+*****range parameters for model application**********************
++  lmin      =   1.2000e-07                          lmax      =   3.6000e-07                        
++  wmin      =   9.0000e-07                          wmax      =   7.2000e-06                        
+
+
+*****other parameters********************************************
++  stimod    =   1.0000e+00                          lmlt      =   1.0000e+00                        
++  wmlt      =   1.0000e+00                          hdif      =   1.2500e-07                        
++  ldif      =   9.0000e-08                          pvth0     =  '4.8500e-15+dpvth0_n_12_sprf'           
++  pk2       =  -8.0000e-16                          pcit      =   1.6000e-16                        
++  lags      =  -2.3420e-06                          wags      =  -1.3210e-05                        
++  pags      =  -5.5500e-14                          pvsat     =   9.7500e-09                        
++  lketa     =  -5.8000e-09                          pketa     =  -2.8000e-15                        
++  ppclm     =   1.5830e-14                          peta0     =   1.2340e-14                        
++  elm       =   0.0000e+00                          wu0       =   '0.0000e+00+dwu0_n_12_sprf'                        
++  lvoffcv   =  -6.0000e-09                          rd        =   0.0000e+00                        
++  rdc       =   0.0000e+00                          rs        =   0.0000e+00                        
++  rsc       =   0.0000e+00                          acm       =   1.2000e+01                        
++  calcacm   =   1.0000e+00                          saref     =   2.2000e-06                        
++  sbref     =   2.2000e-06                          wlod      =   0.0000e+00                        
++  kvth0     =   3.2500e-09                          lkvth0    =  -2.7100e-11                        
++  wkvth0    =   0.0000e+00                          pkvth0    =   0.0000e+00                        
++  llodvth   =   1.0000e+00                          wlodvth   =   1.0000e+00                        
++  stk2      =   0.0000e+00                          lodk2     =   1.0000e+00                        
++  lodeta0   =   1.0000e+00                          ku0       =  -5.3200e-08                        
++  lku0      =   9.2570e-08                          wku0      =   0.0000e+00                        
++  pku0      =   0.0000e+00                          llodku0   =   1.1200e+00                        
++  wlodku0   =   1.0000e+00                          kvsat     =   1.0000e+00                        
++  steta0    =   0.0000e+00                          tku0      =   0.0000e+00                        
++  leta0     =   1.0660e-08                          ldvt0     =   1.3980e-05                        
++  wk3       = '-1.6070e-05+dwk3_n_12_sprf'               lvoff     =   3.6600e-14                        
++  lu0       =   2.1950e-10                          lrdsw     =   1.3390e-08                        
++  pa0       =   1.1750e-14                          la0       =   3.0030e-07                        
++  lpclm     =  -6.8150e-08                          lvsat     =   '2.4330e-02+dlvsat_n_12_sprf'                        
++  weta0     =  -5.5050e-08                          ldelta    =   1.8750e-10                        
++  pua       =   1.4720e-23                          pub       =   7.7430e-32                        
++  wpclm     =  -3.1820e-07                          wvsat     =   3.0070e-01
++  wdsub     =   37.16e-9                     
+*
+*** n+/tw diode for 0.11um pmos
+.model sd_diode_core_nchpw d
+*****diode parameters********************************************
++  level     =   3.0000e+00                          jsw       =   9.6100e-14                        
++  n         =   1.0080e+00                          rs        =   0.0000e+00                        
++  ik        =   5.2800e+04                          ikr       =   2.7800e+03                        
++  ibv       =   2.7780e+01                          trs       =   4.9500e-04                        
++  eg        =   1.1600e+00                          tref      =   2.5000e+01                        
++  xti       =   3.0000e+00                          area      =   3.6000e-08                        
++  pj        =   7.6000e-04                          tlev      =   1.0000e+00                        
++  cj        =  '(7.2000e-04+cjj)*(1+dcj_n_12_sprf)'            mj        =   2.5800e-01                        
++  pb        =   5.6000e-01                          mjsw      =   1.3000e-01                        
++  php       =   5.4000e-01                        
+
+
+*****other parameters********************************************
++  js        =   8.8100e-08                          vb        =   1.3360e+01                        
++  tcv       =  -6.8400e-04                          tlevc     =   1.0000e+00                        
++  cjp       =  '1.0600e-10*(1+dcjsw_n_12_sprf)'          tpb       =   1.6320e-03                        
++  tphp      =   3.1000e-04                          cta       =   9.5550e-04                        
++  ctp       =   7.3250e-04  
+***
+.model sdp_diode_core_nchpw d
++ level = 3
++ tref = 25
++ cj = 0
++ mjsw = 0.5727
++ php = 0.6
++ ctp = 0.0033
++ xti = 3
++ eg = 1.16
++ tphp = 0.00205
++ tlev = 0
++ tlevc = 1
++ cjp = '(3.76e-010)*(1+dcjswg_n_12_sprf)'
+*
+*** tw/dnw diode from 0.11um rf model
+*
+.model dionw_l110e   d  level = 3
++area    = 1.68e-007       pj      = 0.00469         tref    = 25            
+**************************************************************
+*               DC PARAMETERS 
+**************************************************************
++is      = 2.05e-006       jsw     = 5.34e-011       ik      = 17856           vb      = 9.662         
++ibv     = 5.952           ikr     = 595.2           n       = 1.0525          rs      = 3.0891e-007   
+**************************************************************
+*               CAPACITANCE PARAMETERS 
+**************************************************************
++cj      = '8.28e-005*(1+dcj_nwtw_n_12bpw_sprf)'  cjsw     = '9.92e-010*(1+dcjsw_nwtw_n_12bpw_sprf)'  
++pb      = 0.588           php     = 0.62          
++mj      = 0.474           mjsw    = 0.27          
+**************************************************************
+*               NOISE PARAMETERS 
+**************************************************************
+**************************************************************
+*               TEMPERATURE PARAMETERS 
+**************************************************************
++tlev    = 1               tlevc   = 1               trs     = 0.00322         tcv     = -0.000539     
++xti     = 5.4936          cta     = 0.00332         ctp     = 0.001           eg      = 1.16          
++tpb     = 0.0028          tphp    = 0.001         
+*
+*** dnw/psub diode from 0.13um rf model**
+*
+.model dnw_psub d
++ level = 3
+**************************************************************
+*               general parameters
+**************************************************************
++tref    = 25
+**************************************************************
+*               dc parameters
+**************************************************************
++area    = 1e-8         pj      = 1.41e-3
++js      = 0.0002528    jsw     = 2.16e-009
++bv      = 10
++n       = 1.194
+**************************************************************
+*               capacitance parameters
+**************************************************************
++cj      = '9.5e-005*(1+dcj_nw_n_12bpw_sprf)'      mj      = 0.5
++cjsw    = '9.641e-010*(1+dcjsw_nw_n_12bpw_sprf)'  mjsw    = 0.304
++pb      = 0.6                                     php     = 0.6463
+**************************************************************
+*               temperature parameters
+**************************************************************
++cta     = 0.004168     ctp     = 0.002001
++tlevc   = 1            trs     = 0.002847
++xti     = 1.5          eg      = 1.188
+.ends

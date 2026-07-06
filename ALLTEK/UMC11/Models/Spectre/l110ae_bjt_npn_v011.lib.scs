@@ -1,0 +1,46 @@
+library mylib
+
+simulator lang=spectre insensitive=yes
+section tt
+parameters
++is_npn_sv4p5x4p5_l110ae=1     bf_npn_sv4p5x4p5_l110ae=1    nf_npn_sv4p5x4p5_l110ae=1    re_npn_sv4p5x4p5_l110ae=1                    
++rc_npn_sv4p5x4p5_l110ae=1     ise_npn_sv4p5x4p5_l110ae=1	cje_npn_sv4p5x4p5_l110ae=1   cjc_npn_sv4p5x4p5_l110ae=1                            
++is_npn_sv9x9_l110ae=1         bf_npn_sv9x9_l110ae=1        nf_npn_sv9x9_l110ae=1        re_npn_sv9x9_l110ae=1                    
++rc_npn_sv9x9_l110ae=1         ise_npn_sv9x9_l110ae=1	    cje_npn_sv9x9_l110ae=1       cjc_npn_sv9x9_l110ae=1                       
++is_npn_sv13p5x13p5_l110ae=1   bf_npn_sv13p5x13p5_l110ae=1  nf_npn_sv13p5x13p5_l110ae=1  re_npn_sv13p5x13p5_l110ae=1                    
++rc_npn_sv13p5x13p5_l110ae=1   ise_npn_sv13p5x13p5_l110ae=1 cje_npn_sv13p5x13p5_l110ae=1 cjc_npn_sv13p5x13p5_l110ae=1            
+
+include "l110ae_bjt_npn_v011.mdl.scs"
+endsection tt
+
+
+
+section ff
+parameters
++is_npn_sv4p5x4p5_l110ae=0.8     bf_npn_sv4p5x4p5_l110ae=1.2     nf_npn_sv4p5x4p5_l110ae=0.995     re_npn_sv4p5x4p5_l110ae=0.8     
++rc_npn_sv4p5x4p5_l110ae=0.8	    ise_npn_sv4p5x4p5_l110ae=0.75   cje_npn_sv4p5x4p5_l110ae=0.9      cjc_npn_sv4p5x4p5_l110ae=0.9 
++is_npn_sv9x9_l110ae=0.8         bf_npn_sv9x9_l110ae=1.2         nf_npn_sv9x9_l110ae=0.995         re_npn_sv9x9_l110ae=0.8     
++rc_npn_sv9x9_l110ae=0.8	        ise_npn_sv9x9_l110ae=0.75       cje_npn_sv9x9_l110ae=0.9          cjc_npn_sv9x9_l110ae=0.9                  
++is_npn_sv13p5x13p5_l110ae=0.70  bf_npn_sv13p5x13p5_l110ae=1.2   nf_npn_sv13p5x13p5_l110ae=0.995   re_npn_sv13p5x13p5_l110ae=0.8     
++rc_npn_sv13p5x13p5_l110ae=0.8	ise_npn_sv13p5x13p5_l110ae=0.75 cje_npn_sv13p5x13p5_l110ae=0.9    cjc_npn_sv13p5x13p5_l110ae=0.9 
+
+include "l110ae_bjt_npn_v011.mdl.scs"
+endsection ff
+
+
+
+section ss
+parameters    
++is_npn_sv4p5x4p5_l110ae=1.2     bf_npn_sv4p5x4p5_l110ae=0.8     nf_npn_sv4p5x4p5_l110ae=1.004     re_npn_sv4p5x4p5_l110ae=1.2     
++rc_npn_sv4p5x4p5_l110ae=1.2	    ise_npn_sv4p5x4p5_l110ae=1.25   cje_npn_sv4p5x4p5_l110ae=1.1      cjc_npn_sv4p5x4p5_l110ae=1.1                
++is_npn_sv9x9_l110ae=1.3         bf_npn_sv9x9_l110ae=0.8         nf_npn_sv9x9_l110ae=1.005         re_npn_sv9x9_l110ae=1.2     
++rc_npn_sv9x9_l110ae=1.2	        ise_npn_sv9x9_l110ae=1.25       cje_npn_sv9x9_l110ae=1.1          cjc_npn_sv9x9_l110ae=1.1  
++is_npn_sv13p5x13p5_l110ae=1.2   bf_npn_sv13p5x13p5_l110ae=0.8   nf_npn_sv13p5x13p5_l110ae=1.005   re_npn_sv13p5x13p5_l110ae=1.2     
++rc_npn_sv13p5x13p5_l110ae=1.2	ise_npn_sv13p5x13p5_l110ae=1.25 cje_npn_sv13p5x13p5_l110ae=1.1    cjc_npn_sv13p5x13p5_l110ae=1.1 
+
+include "l110ae_bjt_npn_v011.mdl.scs"
+endsection ss
+
+
+
+

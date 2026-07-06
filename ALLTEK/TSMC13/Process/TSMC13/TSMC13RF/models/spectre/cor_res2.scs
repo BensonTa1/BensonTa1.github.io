@@ -1,0 +1,16 @@
+library res_cor 
+
+section res_b 
+include "ResModel.scs" section = res_b 
+endsection res_b 
+
+section res_t 
+include "ResModel.scs" section = res_t 
+endsection res_t 
+
+section res_w 
+include "ResModel.scs" section = res_w 
+endsection res_w 
+
+
+endlibrary res_cor 

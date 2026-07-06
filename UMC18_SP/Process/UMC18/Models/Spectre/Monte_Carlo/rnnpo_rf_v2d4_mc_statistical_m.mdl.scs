@@ -1,0 +1,9 @@
+//  
+simulator lang=spectre insensitive=yes 
+parameters mc_res_ma_nnpo_rf=0 
+statistics { 
+mismatch { 
+vary mc_res_ma_nnpo_rf dist=gauss std=1/1 
+ } 
+} 
+ 

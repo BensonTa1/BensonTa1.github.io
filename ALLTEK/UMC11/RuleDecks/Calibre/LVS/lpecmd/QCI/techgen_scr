@@ -1,0 +1,44 @@
+#!/bin/sh
+Techgen -compilation -lvs lvsfile -layer_setup G-DF-LOGIC_MIXED_MODE11-1P6M1T-AL_L110AE-CALIBRE-MAP_FOR_QCI-1.2_P4.txt \
+-length_units meters \
+-genericMos WNGATE33TWRF,D,G,S \
+-genericMos DNGATE33RF,D,G,S \
+-genericMos WPGATE33RF,D,G,S \
+-genericMos DNGATE12RF,D,G,S \
+-genericMos DNGATE12LLRF,D,G,S \
+-genericMos DNGATE12SPRF,D,G,S \
+-genericMos WNGATE12TWRF,D,G,S \
+-genericMos WNGATE12TWSPRF,D,G,S \
+-genericMos WNGATE12TWLLRF,D,G,S \
+-genericMos WPGATE12RF,D,G,S \
+-genericMos WPGATE12LLRF,D,G,S \
+-genericMos WPGATE12SPRF,D,G,S \
+-blocking NSD_I:0.001,PSD_C \
+-blocking PSD_I:0.001,PSD_C \
+-blocking PLY_I:0.001,PLY_C \
+-blocking ME1_I:0.001,ME1_C \
+-blocking ME2_I:0.001,ME2_C \
+-blocking ME3_I:0.001,ME3_C \
+-blocking ME4_I:0.001,ME4_C \
+-blocking ME5_I:0.001,ME5_C \
+-blocking ME1_I_MOM:0.001,ME1_C \
+-blocking ME2_I_MOM:0.001,ME2_C \
+-blocking ME3_I_MOM:0.001,ME3_C \
+-blocking ME4_I_MOM:0.001,ME4_C \
+-blocking ME5_I_MOM:0.001,ME5_C \
+-blocking NSD_MOSCAP:0.001,PSD_C \
+-blocking PSD_MOSCAP:0.001,PSD_C \
+-blocking PLY_MOSCAP:0.001,PLY_C \
+-blocking ME1_MOSCAP:0.001,ME1_C \
+-blocking CMMC:0.001,MMCTP_C,ME5_C \
+-blocking QRC_RF_BLOCKING:0.001,ME1_C,ME2_C,ME3_C,ME4_C,PLY_C,PSD_C,DIFF_diel \
+-blocking QRC_MOSCAP_BLOCKING:0.001,ME1_C,PLY_C,PSD_C,DIFF_diel \
+-blocking QRC_RF_MOM_BLOCKING:0.001,ME1_C,ME2_C,ME3_C,ME4_C,ME4_C,DIFF_diel \
+-blocking qrcgate:0.001,PLY_C,PSD_C,DIFF_diel \
+-blocking NSD_C:0.001,PSD_C,DIFF_diel \
+-blocking PSD_C:0.001,PSD_C,DIFF_diel \
+-cap_unit 1 .
+
+# This techgen file is for 1P6M1T metal option and M56_MMC option.
+#This file is just for reference. If you need other metal options or MMC option, you need to modify this file.
+

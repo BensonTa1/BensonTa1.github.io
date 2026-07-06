@@ -1,0 +1,5 @@
+layoutXL setPPConn boolean nil
+layout xSnapSpacing float 0.01
+layout ySnapSpacing float 0.01
+layout updatePCellIncrement float 0.01
+layoutXL initIOPinLayer string "ME1 drawing"

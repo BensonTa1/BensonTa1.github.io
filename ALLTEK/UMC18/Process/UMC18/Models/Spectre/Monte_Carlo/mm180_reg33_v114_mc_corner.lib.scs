@@ -1,0 +1,144 @@
+simulator lang=spectre insensitive=yes
+library mylib
+section mc
+include "mm180_reg33_v114_mc_statistical_p.mdl.scs"
+include "mm180_reg33_v114_mc_statistical_m.mdl.scs"
+include "mm180_reg33_v114_mc.mdl.scs"
+include "mm180_reg33_v114_mc.lib.scs" section=tt
+parameters total_flag_n_33_mm  = 0
+parameters global_flag_n_33_mm = 1
+parameters local_flag_n_33_mm  = 1
+parameters total_flag_p_33_mm  = 0
+parameters global_flag_p_33_mm = 1
+parameters local_flag_p_33_mm  = 1
+endsection mc
+
+section tt
+include "mm180_reg33_v114_mc_statistical_m.mdl.scs"
+include "mm180_reg33_v114_mc.mdl.scs"
+include "mm180_reg33_v114_mc.lib.scs" section=tt
+include "mm180_reg33_v114_mc.lib.scs" section=tt_g
+parameters total_flag_n_33_mm  = 1
+parameters global_flag_n_33_mm = 0
+parameters local_flag_n_33_mm  = 0
+parameters total_flag_p_33_mm  = 1
+parameters global_flag_p_33_mm = 0
+parameters local_flag_p_33_mm  = 0
+endsection tt
+
+section ss
+include "mm180_reg33_v114_mc_statistical_m.mdl.scs"
+include "mm180_reg33_v114_mc.mdl.scs"
+include "mm180_reg33_v114_mc.lib.scs" section=ss
+include "mm180_reg33_v114_mc.lib.scs" section=ss_g
+parameters total_flag_n_33_mm  = 1
+parameters global_flag_n_33_mm = 0
+parameters local_flag_n_33_mm  = 0
+parameters total_flag_p_33_mm  = 1
+parameters global_flag_p_33_mm = 0
+parameters local_flag_p_33_mm  = 0
+endsection ss
+
+section ff
+include "mm180_reg33_v114_mc_statistical_m.mdl.scs"
+include "mm180_reg33_v114_mc.mdl.scs"
+include "mm180_reg33_v114_mc.lib.scs" section=ff
+include "mm180_reg33_v114_mc.lib.scs" section=ff_g
+parameters total_flag_n_33_mm  = 1
+parameters global_flag_n_33_mm = 0
+parameters local_flag_n_33_mm  = 0
+parameters total_flag_p_33_mm  = 1
+parameters global_flag_p_33_mm = 0
+parameters local_flag_p_33_mm  = 0
+endsection ff
+
+section snfp
+include "mm180_reg33_v114_mc_statistical_m.mdl.scs"
+include "mm180_reg33_v114_mc.mdl.scs"
+include "mm180_reg33_v114_mc.lib.scs" section=snfp
+include "mm180_reg33_v114_mc.lib.scs" section=snfp_g
+parameters total_flag_n_33_mm  = 1
+parameters global_flag_n_33_mm = 0
+parameters local_flag_n_33_mm  = 0
+parameters total_flag_p_33_mm  = 1
+parameters global_flag_p_33_mm = 0
+parameters local_flag_p_33_mm  = 0
+endsection snfp
+
+section fnsp
+include "mm180_reg33_v114_mc_statistical_m.mdl.scs"
+include "mm180_reg33_v114_mc.mdl.scs"
+include "mm180_reg33_v114_mc.lib.scs" section=fnsp
+include "mm180_reg33_v114_mc.lib.scs" section=fnsp_g
+parameters total_flag_n_33_mm  = 1
+parameters global_flag_n_33_mm = 0
+parameters local_flag_n_33_mm  = 0
+parameters total_flag_p_33_mm  = 1
+parameters global_flag_p_33_mm = 0
+parameters local_flag_p_33_mm  = 0
+endsection fnsp
+section tt_g
+include "mm180_reg33_v114_mc_statistical_m.mdl.scs"
+include "mm180_reg33_v114_mc.mdl.scs"
+include "mm180_reg33_v114_mc.lib.scs" section=tt
+include "mm180_reg33_v114_mc.lib.scs" section=tt_g
+parameters total_flag_n_33_mm  = 0
+parameters global_flag_n_33_mm = 1
+parameters local_flag_n_33_mm  = 1
+parameters total_flag_p_33_mm  = 0
+parameters global_flag_p_33_mm = 1
+parameters local_flag_p_33_mm  = 1
+endsection tt_g
+
+section ss_g
+include "mm180_reg33_v114_mc_statistical_m.mdl.scs"
+include "mm180_reg33_v114_mc.mdl.scs"
+include "mm180_reg33_v114_mc.lib.scs" section=ss
+include "mm180_reg33_v114_mc.lib.scs" section=ss_g
+parameters total_flag_n_33_mm  = 0
+parameters global_flag_n_33_mm = 1
+parameters local_flag_n_33_mm  = 1
+parameters total_flag_p_33_mm  = 0
+parameters global_flag_p_33_mm = 1
+parameters local_flag_p_33_mm  = 1
+endsection ss_g
+
+section ff_g
+include "mm180_reg33_v114_mc_statistical_m.mdl.scs"
+include "mm180_reg33_v114_mc.mdl.scs"
+include "mm180_reg33_v114_mc.lib.scs" section=ff
+include "mm180_reg33_v114_mc.lib.scs" section=ff_g
+parameters total_flag_n_33_mm  = 0
+parameters global_flag_n_33_mm = 1
+parameters local_flag_n_33_mm  = 1
+parameters total_flag_p_33_mm  = 0
+parameters global_flag_p_33_mm = 1
+parameters local_flag_p_33_mm  = 1
+endsection ff_g
+
+section snfp_g
+include "mm180_reg33_v114_mc_statistical_m.mdl.scs"
+include "mm180_reg33_v114_mc.mdl.scs"
+include "mm180_reg33_v114_mc.lib.scs" section=snfp
+include "mm180_reg33_v114_mc.lib.scs" section=snfp_g
+parameters total_flag_n_33_mm  = 0
+parameters global_flag_n_33_mm = 1
+parameters local_flag_n_33_mm  = 1
+parameters total_flag_p_33_mm  = 0
+parameters global_flag_p_33_mm = 1
+parameters local_flag_p_33_mm  = 1
+endsection snfp_g
+
+section fnsp_g
+include "mm180_reg33_v114_mc_statistical_m.mdl.scs"
+include "mm180_reg33_v114_mc.mdl.scs"
+include "mm180_reg33_v114_mc.lib.scs" section=fnsp
+include "mm180_reg33_v114_mc.lib.scs" section=fnsp_g
+parameters total_flag_n_33_mm  = 0
+parameters global_flag_n_33_mm = 1
+parameters local_flag_n_33_mm  = 1
+parameters total_flag_p_33_mm  = 0
+parameters global_flag_p_33_mm = 1
+parameters local_flag_p_33_mm  = 1
+endsection fnsp_g
+endlibrary mylib

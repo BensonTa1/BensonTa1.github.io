@@ -1,0 +1,534 @@
+//  
+//  
+simulator lang=spectre insensitive=yes
+// 
+//      ############################################
+//      #                                          #
+//      #  018RFCMOS 1.8V NMOS scalable with NF    #
+//      #  SPECTRE MODEL                            #            
+//      #                                          #  
+//      ############################################
+// 
+// 
+subckt n_l18w500_18_rf ( 1 2 3 4 ) 
+parameters nf=21 p_wr=(841.3723 + 1543.5167 / nf - 4288.7956 / (nf * nf)) * 1e-3 
++ p_rg= - 0.8966 + 107.7889 / nf - 364.622 / (nf * nf) p_cd=(0.9008 + 0.2570 * nf 
++ + 0.2297 * (nf * nf)) * 1e-15 p_cgs=( - 2.0811 + 1.4629 * nf + 0.009752 * (nf 
++ * nf)) * 1e-15 p_ld=(24.8301 + 396.8130 / nf - 1112.3751 / (nf * nf)) * 1e-12 
++ p_ls=(24.8301 + 396.8130 / nf - 1112.3751 / (nf * nf)) * 1e-12 p_djdb_a=(4.25 
++ * ((nf + 1) / 2)) * 1e-12 p_djdb_p=(1.7 * ((nf + 1) / 2) + 5) * 1e-6 p_djdb_g=(5 
++ * nf + 5 * nf) * 1e-6 p_djsb_a=(4.25 * ((nf + 1) / 2)) * 1e-12 p_djsb_p=(1.7 * ((nf + 1) 
++ / 2) + 5) * 1e-6 p_djsb_g=(5 * nf + 5 *nf) * 1e-6 p_rsub1=120.783 - 258.189 / nf + 939.7544 
++ / (nf * nf) p_rsub2=2 p_rsub3=2 
+// 
+// 
+//  #### Define Bsim3v3 Model Variable #####
+// 
+// 
+//  #### Define RF Extension Model Variable #####
+// 
+// 
+//  --------- Gate network ------------------------------
+cgs_ext ( 21 30 ) capacitor c=p_cgs *(1+dcgs_n_18_rf)
+rgate ( 2 21 ) resistor r=p_rg *(1+drgate_n_18_rf)
+// 
+//  --------- Drain network -----------------------------
+ldrain ( 1 11 ) inductor l=p_ld
+lsource ( 30 3 ) inductor l=p_ls
+cd ( 11 30 ) capacitor c=p_cd* (1+dcd_n_18_rf)
+// 
+//  --------- Substrate network -------------------------
+//  Diodes are for n-type MOS transistors
+// 
+djdb_area ( 12 11 ) bsim_diode_area area=p_djdb_a
+djdb_perim ( 12 11 ) bsim_diode_perim area=p_djdb_p
+djdb_swg ( 12 11 ) bsim_diode_swg area=p_djdb_g
+// 
+djsb_area ( 31 30 ) bsim_diode_area area=p_djsb_a
+djsb_perim ( 31 30 ) bsim_diode_perim area=p_djsb_p
+djsb_swg ( 31 30 ) bsim_diode_swg area=p_djsb_g
+// 
+rsub2 ( 12 40 ) resistor r=p_rsub2
+rsub3 ( 31 40 ) resistor r=p_rsub3
+rsub1 ( 40 4 ) resistor r=p_rsub1
+// 
+//  --------- Ideal mos transistor ----------------------
+main ( 11 21 30 40 ) bsim_mos_transistor_mos l=1.8e-07 w=5e-6 ad=0 as=0 pd=0 ps=0 
++ m=nf
+// 
+//  -------- DIODES & NMOSFET SPICE PARAMETERS ------------
+// 
+model bsim_diode_area diode 
++ cj0=0.00103*(1+dcj_n_18_rf )              vj=0.813                  m=0.443
++ is=1e-06                  n=1                       
+// 
+model bsim_diode_perim diode 
++ cj0=1.34e-10*(1+dcjsw_n_18_rf )             vj=0.88                   m=0.33
++ is=7e-11                  n=1                       
+// 
+model bsim_diode_swg diode 
++ cj0=5e-10 *(1+ dcjgate_n_18_rf)               vj=0.88                   m=0.33
++ is=7e-11                  n=1                       
+// 
+model bsim_mos_transistor_mos bsim3v3 type=n 
++ version=3.2               binunit=1                 mobmod=1
++ capmod=2                  nqsmod=0                  noimod=2
++ tox=4.2e-09 + dtox_n_18_rf              toxm=4.2e-09              xj=1.6e-07
++ nch=3.745e+17             rsh=8                     ngate=1e+23
++ vth0=0.3075 + dvth0_n_18_rf             k1=0.4578                 k2=-0.02638
++ k3=-10.88                 k3b=0.2379                w0=-8.813e-08
++ nlx=4.279e-07             dvt0=0.4042               dvt1=0.3237
++ dvt2=-0.8602              dvt0w=0.383               dvt1w=6e+05
++ dvt2w=-0.025              lint=1.587e-08            wint=1.022e-08
++ dwg=-3.396e-09            dwb=1.346e-09             u0=332.1+ du0_n_18_rf
++ ua=-1.17e-09              ub=2.407e-18              uc=4.355e-11
++ vsat=8.1e+04              a0=1.93                   ags=0.5072
++ b0=1.486e-06              b1=9.064e-06              keta=0.01752
++ a1=0                      a2=1                      voff=-0.1208
++ nfactor=1.038             cit=-0.001511             cdsc=0.002175
++ cdscd=0                   cdscb=0.0008241           eta0=0.005504
++ etab=-0.001459            dsub=0.001592             pclm=0.741
++ pdiblc1=0.005061          pdiblc2=0.006001          pdiblcb=0
++ drout=0.001592            pscbe1=4.866e+08          pscbe2=3e-08
++ pvag=-0.2958              rdsw=9.905                prwg=1.1
++ prwb=0                    wr=p_wr                   alpha0=0
++ alpha1=0                  beta0=30                  xpart=1
++ cgso=1.55e-10 *(1+dcgso_n_18_rf )           cgdo=1.55e-10 *(1+dcgdo_n_18_rf )            cgbo=0
++ cgsl=3e-11*(1+dcgsl_n_18_rf )                cgdl=3e-11 *(1+dcgdl_n_18_rf )               ckappa=0.6
++ cf=2.33e-11 *(1+dcf_n_18_rf )              clc=1e-07                 cle=0.6
++ dlc=4e-08                 dwc=0                     vfbcv=-1
++ noff=1                    voffcv=0                  acde=1
++ moin=15                   noia=1.31826e+19          noib=1.44544e+05
++ noic=-1.24516e-12         em=4.1e+07                af=1
++ ef=0.92                   kf=0                      lmin=1.8e-07
++ lmax=1.805e-07              wmin=5e-06                wmax=1.05e-04
++ xl=-1.05e-08 +  dxl_n_18_rf           xw=0 + dxw_n_18_rf                     js=1e-06
++ jsw=7e-11                 cj=0.00103 *(1+dcj_n_18_rf)               mj=0.443
++ pb=0.813                  cjsw=1.34e-10  *(1+dcjsw_n_18_rf)           mjsw=0.33
++ tnom=25                   ute=-1.286                kt1=-0.2255
++ kt1l=-4.175e-09           kt2=-0.02527              ua1=2.153e-09
++ ub1=-2.673e-18            uc1=-3.832e-11            at=1.449e+04
++ prt=-46.18                xti=3                     wl=0
++ wln=1                     ww=7.262e-16              wwn=1
++ wwl=0                     ll=-1.062e-15             lln=1
++ lw=2.996e-15              lwn=1                     lwl=0
++ llc=-6.64e-15             lwc=0                     lwlc=0
++ wlc=0                     wwc=0                     wwlc=0
++ lvth0=-0.0001 + dlvth0_n_18_rf           wvth0=0.06027 + dwvth0_n_18_rf            pvth0=0+ dpvth0_n_18_rf
++ lnlx=-2.854e-08           wnlx=0                    pnlx=0
++ lnfactor=0.032            wua=-1.88e-11             wu0=0.54
++ pub=3.8e-20               pw0=1.3e-09               lua=1.5e-11
++ lub=9.76e-20              wrdsw=0                   weta0=0
++ wetab=0                   leta0=0.001574            letab=0
++ peta0=0                   petab=0                   wpclm=0
++ wvoff=-0.0004078          lvoff=-0.004208           pvoff=-0.0003788
++ wa0=-0.04731              la0=-0.4667               pa0=-0.02649
++ wags=0.004242             lags=0.3028               pags=0
++ wketa=0                   lketa=-0.01942            pketa=0
++ wute=0.06373              lute=0                    pute=0
++ wvsat=5066                lvsat=0                   pvsat=0+ dpvsat_n_18_rf
++ lpdiblc2=-0.004752        wat=7067                  wprt=0
++ ldif=8e-08                hdif=2.6e-07           n=1
++ pbsw=0.88                 cjswg=5e-10 *(1+dcjgate_n_18_rf)         ctp=0.000914
++ ptp=0.000924              cta=0.000919       pta=0.00158
++ elm=5                     tlevc=1
+ends n_l18w500_18_rf
+// 
+// 
+// 
+// 
+//      ############################################
+//      #                                          #
+//      #  018RFCMOS 1.8V NMOS scalable with Length#
+//      #  SPECTRE MODEL                            #            
+//      #                                          #  
+//      ############################################
+// 
+// 
+subckt n_po7w500_18_rf ( 1 2 3 4 ) 
+parameters l=0.5u l_um=l * 1e6 p_nlx=(475.2494 - 439.9303 * l_um + 1066.9945 * (l_um 
++ * l_um)) * 1e-9 p_pclm=0.1422 + 0.0846 / l_um + 0.0043 / (l_um * l_um) p_rg=30.0038 
++ - 10.2118 / l_um + 0.9998 / (l_um * l_um) p_cd=(16.3846 - 30.4825 * l_um + 21.6092 
++ * (l_um * l_um)) * 1e-15 p_cgs=(0.5460 + 55.9389 * l_um - 66.3582 * (l_um * l_um)) 
++ * 1e-15 p_ld=5.8e-11 p_ls=5.8e-11 p_djdb_a=(4.25 * ((7 + 1) / 2)) * 1e-12 p_djdb_p=(1.7 
++ * ((7 + 1) / 2) + 5) * 1e-6 p_djdb_g=(5 * 7 + 5 * 7) * 1e-6 p_djsb_a=(4.25 * ((7 + 1) 
++ / 2)) * 1e-12 p_djsb_p=(1.7 * ((7 + 1) / 2) + 5) * 1e-6 p_djsb_g=(5 * 7 + 5 * 7) * 1e-6 
++ p_rsub1=93.1907 - 8.5107 / l_um + 1.8334 / (l_um * l_um) p_rsub2=2 p_rsub3=2 
+// 
+// 
+//  #### Define Bsim3v3 Model Variable #####
+// 
+// 
+//  #### Define RF Extension Model Variable #####
+// 
+// 
+//  --------- Gate network ------------------------------
+cgs_ext ( 21 30 ) capacitor c=p_cgs* (1+dcgs_n_18_rf)
+rgate ( 2 21 ) resistor r=p_rg* (1+drgate_n_18_rf)
+// 
+//  --------- Drain network -----------------------------
+ldrain ( 1 11 ) inductor l=p_ld
+lsource ( 30 3 ) inductor l=p_ls
+cd ( 11 30 ) capacitor c=p_cd* (1+dcd_n_18_rf)
+// 
+//  --------- Substrate network -------------------------
+//  Diodes are for n-type MOS transistors
+// 
+djdb_area ( 12 11 ) bsim_diode_area area=p_djdb_a
+djdb_perim ( 12 11 ) bsim_diode_perim area=p_djdb_p
+djdb_swg ( 12 11 ) bsim_diode_swg area=p_djdb_g
+// 
+djsb_area ( 31 30 ) bsim_diode_area area=p_djsb_a
+djsb_perim ( 31 30 ) bsim_diode_perim area=p_djsb_p
+djsb_swg ( 31 30 ) bsim_diode_swg area=p_djsb_g
+// 
+rsub2 ( 12 40 ) resistor r=p_rsub2
+rsub3 ( 31 40 ) resistor r=p_rsub3
+rsub1 ( 40 4 ) resistor r=p_rsub1
+// 
+//  --------- Ideal mos transistor ----------------------
+main ( 11 21 30 40 ) bsim_mos_transistor_mos l=l w=5u ad=0 as=0 pd=0 ps=0 m=7
+// 
+//  -------- DIODES & NMOSFET SPICE PARAMETERS ------------
+// 
+model bsim_diode_area diode 
++ cj0=0.00103 *(1+dcj_n_18_rf)              vj=0.813                  m=0.443
++ is=1e-06                  n=1                       
+// 
+model bsim_diode_perim diode 
++ cj0=1.34e-10 *(1+dcjsw_n_18_rf)              vj=0.88                   m=0.33
++ is=7e-11                  n=1                       
+// 
+model bsim_diode_swg diode 
++ cj0=5e-10 * (1+dcjgate_n_18_rf)                vj=0.88                   m=0.33
++ is=7e-11                  n=1                       
+// 
+model bsim_mos_transistor_mos bsim3v3 type=n 
++ version=3.2               binunit=1                 mobmod=1
++ capmod=2                  nqsmod=0                  noimod=2
++ tox=4.2e-09 + dtox_n_18_rf              toxm=4.2e-09              xj=1.6e-07
++ nch=3.745e+17             rsh=8                     ngate=1e+23
++ vth0=0.3075 + dvth0_n_18_rf              k1=0.4578                 k2=-0.02638
++ k3=-10.88                 k3b=0.2379                w0=-8.813e-08
++ nlx=p_nlx                 dvt0=0.4042               dvt1=0.3237
++ dvt2=-0.8602              dvt0w=0.383               dvt1w=6e+05
++ dvt2w=-0.025              lint=1.587e-08            wint=1.022e-08
++ dwg=-3.396e-09            dwb=1.346e-09             u0=332.1+ du0_n_18_rf
++ ua=-1.17e-09              ub=2.407e-18              uc=4.355e-11
++ vsat=8.1e+04              a0=1.93                   ags=0.5072
++ b0=1.486e-06              b1=9.064e-06              keta=0.01752
++ a1=0                      a2=1                      voff=-0.1208
++ nfactor=1.038             cit=-0.001511             cdsc=0.002175
++ cdscd=0                   cdscb=0.0008241           eta0=0.005504
++ etab=-0.001459            dsub=0.001592             pclm=p_pclm
++ pdiblc1=0.005061          pdiblc2=0.006001          pdiblcb=0
++ drout=0.001592            pscbe1=4.866e+08          pscbe2=3e-08
++ pvag=-0.2958              rdsw=9.905                prwg=1.1
++ prwb=0                    wr=0.97                   alpha0=0
++ alpha1=0                  beta0=30                  xpart=0
++ cgso=1.35e-10 *(1+dcgso_n_18_rf)            cgdo=1.35e-10*(1+dcgdo_n_18_rf)             cgbo=0
++ cgsl=2e-11*(1+dcgsl_n_18_rf)                cgdl=2e-11*(1+dcgdl_n_18_rf)                ckappa=0.6
++ cf=1.533e-10*(1+dcf_n_18_rf)              clc=1e-07                 cle=0.6
++ dlc=4e-08                 dwc=2e-07                 vfbcv=-1
++ noff=1                    voffcv=0                  acde=1
++ moin=15                   noia=1.31826e+19          noib=1.44544e+05
++ noic=-1.24516e-12         em=4.1e+07                af=1
++ ef=0.92                   kf=0                      lmin=2e-07
++ lmax=5e-07                wmin=5e-06                wmax=3.5e-05
++ xl=-1.05e-08 + dxl_n_18_rf             xw=0 + dxw_n_18_rf                     js=1e-06
++ jsw=7e-11                 cj=0.00103*(1+dcj_n_18_rf)                mj=0.443
++ pb=0.813                  cjsw=1.34e-10*(1+dcjsw_n_18_rf)             mjsw=0.33
++ tnom=25                   ute=-1.286                kt1=-0.2255
++ kt1l=-4.175e-09           kt2=-0.02527              ua1=2.153e-09
++ ub1=-2.673e-18            uc1=-3.832e-11            at=1.449e+04
++ prt=-46.18                xti=3                     wl=0
++ wln=1                     ww=7.262e-16              wwn=1
++ wwl=0                     ll=-1.062e-15             lln=1
++ lw=2.996e-15              lwn=1                     lwl=0
++ llc=-6.64e-15             lwc=0                     lwlc=0
++ wlc=0                     wwc=0                     wwlc=0
++ lvth0=-0.0001+dlvth0_n_18_rf             wvth0=0.06027 + dwvth0_n_18_rf            pvth0=0+dpvth0_n_18_rf
++ lnlx=-2.854e-08           wnlx=0                    pnlx=0
++ lnfactor=0.032            wua=-1.88e-11             wu0=0.54+ dwu0_n_18_rf
++ pub=3.8e-20               pw0=1.3e-09               lua=1.5e-11
++ lub=9.76e-20              wrdsw=0                   weta0=0
++ wetab=0                   leta0=0.001574            letab=0
++ peta0=0                   petab=0                   wpclm=0
++ wvoff=-0.0004078          lvoff=-0.004208           pvoff=-0.0003788
++ wa0=-0.04731              la0=-0.4667               pa0=-0.02649
++ wags=0.004242             lags=0.3028               pags=0
++ wketa=0                   lketa=-0.01942            pketa=0
++ wute=0.06373              lute=0                    pute=0
++ wvsat=5066                lvsat=0                   pvsat=0+ dpvsat_n_18_rf
++ lpdiblc2=-0.004752        wat=7067                  wprt=0
++ ldif=8e-08                hdif=2.6e-07          n=1
++ pbsw=0.88                 cjswg=5e-10*(1+dcjgate_n_18_rf)        ctp=0.000914
++ ptp=0.000924              cta=0.000919       pta=0.00158
++ elm=5                     tlevc=1
+ends n_po7w500_18_rf
+// 
+// 
+//      ############################################
+//      #                                          #
+//      #  018RFCMOS 1.8V PMOS scalable with NF    #
+//      #  SPECTRE MODEL                            #            
+//      #                                          #  
+//      ############################################
+// 
+// 
+subckt p_l18w500_18_rf ( 1 2 3 4 ) 
+parameters nf=21 p_wr=(808.0254 + 2116.1626 / nf - 2687.8868 / (nf * nf)) * 1e-3 
++ p_rg= - 6.3044 + 287.3248 / nf - 996.0158 / (nf * nf) p_cd=(3.0460 + 2.0138 * 
++ nf + 0.0467 * (nf * nf)) * 1e-15 p_cgs=(0.6197 + 0.0205 * nf + 0.0344 * (nf * 
++ nf)) * 1e-15 p_ld=(52.1818 + 160.1501 / nf + 649.7715 / (nf * nf)) * 1e-12 p_ls=(52.1818 
++ + 160.1501 / nf + 649.7715 / (nf * nf)) * 1e-12 p_djdb_a=(4.25 * ((nf + 1) / 2)) 
++ * 1e-12 p_djdb_p=(1.7 * ((nf + 1) / 2) + 5 + 5 * nf) * 1e-6 p_djdb_g=(5 * nf) * 1e-6 p_djsb_a=(4.25 
++ * ((nf + 1) / 2)) * 1e-12 p_djsb_p=(1.7 * ((nf + 1) / 2) + 5 + 5 * nf) * 1e-6 p_djsb_g=(5 
++ * nf) * 1e-6 p_rsub1=70.5835 - 147.6535 / nf - 144.7453 / (nf * nf) p_rsub2=1 
++ p_rsub3=1 
+// 
+// 
+//  #### Define Bsim3v3 Model Variable #####
+// 
+// 
+//  #### Define RF Extension Model Variable #####
+// 
+// 
+//  --------- Gate network ------------------------------
+cgs_ext ( 21 30 ) capacitor c=p_cgs*(1+dcgs_p_18_rf)
+rgate ( 2 21 ) resistor r=p_rg*(1+ drgate_p_18_rf)
+// 
+//  --------- Drain network -----------------------------
+ldrain ( 1 11 ) inductor l=p_ld
+lsource ( 30 3 ) inductor l=p_ls
+cd ( 11 30 ) capacitor c=p_cd* (1+ dcd_p_18_rf)
+// 
+//  --------- Substrate network -------------------------
+//  Diodes are for p-type MOS transistors
+// 
+djdb_area ( 11 12 ) bsim_diode_area area=p_djdb_a
+djdb_perim ( 11 12 ) bsim_diode_perim area=p_djdb_p
+djdb_swg ( 11 12 ) bsim_diode_swg area=p_djdb_g
+// 
+djsb_area ( 30 31 ) bsim_diode_area area=p_djsb_a
+djsb_perim ( 30 31 ) bsim_diode_perim area=p_djsb_p
+djsb_swg ( 30 31 ) bsim_diode_swg area=p_djsb_g
+// 
+rsub2 ( 12 40 ) resistor r=p_rsub2
+rsub3 ( 31 40 ) resistor r=p_rsub3
+rsub1 ( 40 4 ) resistor r=p_rsub1
+// 
+//  --------- Ideal mos transistor ----------------------
+main ( 11 21 30 40 ) bsim_mos_transistor_mos l=1.8e-07 w=5e-6 ad=0 as=0 pd=0 ps=0 
++ m=nf
+// 
+//  -------- DIODES & PMOSFET SPICE PARAMETERS ------------
+// 
+model bsim_diode_area diode 
++ cj0=0.00114 *(1+ dcj_p_18_rf)              vj=0.762                  m=0.395
++ is=3e-06                  n=1                       
+// 
+model bsim_diode_perim diode 
++ cj0=1.74e-10 *(1+ dcjsw_p_18_rf)             vj=0.665                  m=0.324
++ is=4.12e-11               n=1                       
+// 
+model bsim_diode_swg diode 
++ cj0=4.2e-10 *(1+ dcjgate_p_18_rf)              vj=0.665                  m=0.324
++ is=4.12e-11               n=1                       
+// 
+model bsim_mos_transistor_mos bsim3v3 type=p 
++ mobmod=3                  version=3.2               capmod=2
++ binunit=1                 nqsmod=0                  noimod=2
++ tox=4.2e-09 + dtox_p_18_rf              toxm=4.2e-09              xj=1e-07
++ nch=6.131e+17             ngate=1e+23               vth0=-0.4325+ dvth0_p_18_rf
++ k1=0.5704                 k2=0.006973               k3=-2.833
++ k3b=1.326                 w0=-1.943e-07             nlx=2.56e-07
++ dvt0=0.4885               dvt1=0.09578              dvt2=0.1287
++ dvt0w=-0.1261             dvt1w=2.479e+04           dvt2w=0.6915
++ lint=-1.041e-08           wint=-1.525e-07           dwg=-1.151e-07
++ dwb=-1.039e-07            u0=90+du0_p_18_rf                   ua=1.49e-09
++ ub=4.646e-19              uc=-0.09587               vsat=4.75e+04
++ a0=1.35                   ags=0.3818                b0=-3.088e-07
++ b1=0                      keta=0.01044              a1=0
++ a2=1                      voff=-0.1073              nfactor=0.984
++ cit=-0.001067             cdsc=0.0007578            cdscd=0
++ cdscb=0.0001              eta0=1.071                etab=-0.9291
++ dsub=1.919                pclm=0.553                pdiblc1=0.007
++ pdiblc2=0.008005          pdiblcb=0                 drout=0.157
++ pscbe1=4.866e+08          pscbe2=2.8e-07            pvag=-0.888
++ rdsw=202.1                prwg=1.2                  prwb=0
++ wr=p_wr                   alpha0=0                  alpha1=0
++ beta0=30                  cgdo=1.254e-10 *(1+dcgdo_p_18_rf )          cgbo=0
++ cgso=1.254e-10 *(1+dcgso_p_18_rf )           xpart=0                   cf=1.533e-10*(1+dcf_p_18_rf )
++ dlc=7.01e-08              cgsl=2e-11*(1+dcgsl_p_18_rf )                cgdl=2e-11*(1+dcgdl_p_18_rf )
++ ckappa=0.6                clc=1e-07                 cle=0.6
++ dwc=2.3e-07               vfbcv=-1                  noff=1
++ voffcv=0                  acde=1                    moin=15
++ noia=3.57456993317604e+18              noib=2.5e+03              noic=2.6126e-11
++ em=4.1e+07                af=1                      ef=1.1388
++ kf=0                      lmin=1.8e-07              lmax=1.805e-07
++ wmin=5e-06                wmax=1.05e-04             xl=-2e-09+ dxl_p_18_rf
++ xw=0  + dxw_p_18_rf                   js=3e-06                  jsw=4.12e-11
++ cj=0.00114*(1+dcj_p_18_rf)                mj=0.395                  pb=0.762
++ cjsw=1.74e-10 *(1+dcjsw_p_18_rf)            mjsw=0.324                tnom=25
++ ute=-0.4484               kt1=-0.2194               kt1l=-8.204e-09
++ kt2=-0.009487             ua1=4.571e-09             ub1=-6.026e-18
++ uc1=-0.0985               at=1.203e+04              prt=0
++ xti=3                     ww=1.236e-14              lw=-2.873e-16
++ ll=6.635e-15              wl=0                      wln=1
++ wwn=1                     wwl=0                     lln=1
++ lwn=1                     lwl=0                     llc=-1.31e-14
++ lwc=0                     lwlc=0                    wlc=0
++ wwc=0                     wwlc=0                    lvth0=0.0057+ dlvth0_p_18_rf
++ wvth0=-0.0148 + dwvth0_p_18_rf           lu0=-3                    lnfactor=0.03
++ pvth0=0.0031+ dpvth0_p_18_rf              lnlx=-1.584e-08           wrdsw=10.07
++ weta0=0                   wetab=0                   wpclm=0
++ wua=2.7e-09               lua=-2.37e-10             pua=5.855e-11
++ wub=0                     lub=0                     pub=0
++ wuc=0                     luc=0                     puc=0
++ wvoff=-0.009816           lvoff=-0.0009871          pvoff=-9.833e-05
++ wa0=-0.04807              la0=-0.281                pa0=0.08661
++ wags=-0.04177             lags=0.04454              pags=-0.04076
++ wketa=0                   lketa=-0.012              pketa=0
++ wute=-0.2682              lute=0                    pute=0
++ wvsat=-1.42e+04           lvsat=0                   pvsat=-350+ dpvsat_p_18_rf
++ lpdiblc2=0.003012         wat=-6405                 wprt=216.6
++ n=1                       pbsw=0.665                cta=0.001
++ ctp=0.000753              pta=0.00155               ptp=0.00124
++ ldif=8e-08                rsh=8                   rd=0
++ rsc=0                     rdc=0                   hdif=2.6e-07
++ rs=0                      
+ends p_l18w500_18_rf
+// 
+// 
+// 
+// 
+//      ############################################
+//      #                                          #
+//      # 018RFCMOS 1.8V PMOS scalable with Length #
+//      # SPECTRE MODEL                             #            
+//      #                                          #  
+//      ############################################
+// 
+// 
+subckt p_po7w500_18_rf ( 1 2 3 4 ) 
+parameters l=0.5u l_um=l * 1e6 p_nlx=(616.3333 - 1840 * l_um + 2266.6670 * (l_um 
++ * l_um)) * 1e-9 p_pclm=2.7030 - 0.6375 / l_um + 0.1313 / (l_um * l_um) p_rg=72.7967 
++ - 25.7375 / l_um + 2.8321 / (l_um * l_um) p_cd=(15.8033 + 4.660 * l_um - 8.9333 
++ * (l_um * l_um)) * 1e-15 p_cgs=(3.7967 - 18.190 * l_um + 36.7333 * (l_um * l_um)) 
++ * 1e-15 p_ld=9e-11 p_ls=9e-11 p_djdb_a=(4.25 * ((7 + 1) / 2)) * 1e-12 p_djdb_p=(1.7 
++ * ((7 + 1) / 2) + 5 + 5 * 7) * 1e-6 p_djdb_g=(5 * 7) * 1e-6 p_djsb_a=(4.25 * ((7 + 1) 
++ / 2)) * 1e-12 p_djsb_p=(1.7 * ((7 + 1) / 2) + 5 + 5 * 7) * 1e-6 p_djsb_g=(5 * 7) * 1e-6 
++ p_rsub1=157.35 - 17.0875 / l_um + 1.3563 / (l_um * l_um) p_rsub2=1 p_rsub3=1 
+// 
+// 
+//  #### Define Bsim3v3 Model Variable #####
+// 
+// 
+//  #### Define RF Extension Model Variable #####
+// 
+// 
+//  --------- Gate network ------------------------------
+cgs_ext ( 21 30 ) capacitor c=p_cgs*(1+dcgs_p_18_rf)
+rgate ( 2 21 ) resistor r=p_rg*(1+drgate_p_18_rf)
+// 
+//  --------- Drain network -----------------------------
+ldrain ( 1 11 ) inductor l=p_ld
+lsource ( 30 3 ) inductor l=p_ls
+cd ( 11 30 ) capacitor c=p_cd*(1+dcd_p_18_rf)
+// 
+//  --------- Substrate network -------------------------
+//  Diodes are for p-type MOS transistors
+// 
+djdb_area ( 11 12 ) bsim_diode_area area=p_djdb_a
+djdb_perim ( 11 12 ) bsim_diode_perim area=p_djdb_p
+djdb_swg ( 11 12 ) bsim_diode_swg area=p_djdb_g
+// 
+djsb_area ( 30 31 ) bsim_diode_area area=p_djsb_a
+djsb_perim ( 30 31 ) bsim_diode_perim area=p_djsb_p
+djsb_swg ( 30 31 ) bsim_diode_swg area=p_djsb_g
+// 
+rsub2 ( 12 40 ) resistor r=p_rsub2
+rsub3 ( 31 40 ) resistor r=p_rsub3
+rsub1 ( 40 4 ) resistor r=p_rsub1
+// 
+//  --------- Ideal mos transistor ----------------------
+main ( 11 21 30 40 ) bsim_mos_transistor_mos l=l w=5u ad=0 as=0 pd=0 ps=0 m=7
+// 
+//  -------- DIODES & PMOSFET SPICE PARAMETERS ------------
+// 
+model bsim_diode_area diode 
++ cj0=0.00114 *(1+ dcj_p_18_rf  )           vj=0.762                  m=0.395
++ is=3e-06                  n=1                       
+// 
+model bsim_diode_perim diode 
++ cj0=1.74e-10 *(1+ dcjsw_p_18_rf)            vj=0.665                  m=0.324
++ is=4.12e-11               n=1                       
+// 
+model bsim_diode_swg diode 
++ cj0=4.2e-10 *(1+ dcjgate_p_18_rf)              vj=0.665                  m=0.324
++ is=4.12e-11               n=1                       
+// 
+model bsim_mos_transistor_mos bsim3v3 type=p 
++ mobmod=3                  version=3.2               capmod=2
++ binunit=1                 nqsmod=0                  noimod=2
++ tox=4.2e-09+dtox_p_18_rf               toxm=4.2e-09              xj=1e-07
++ nch=6.131e+17             ngate=1e+23               vth0=-0.4325+dvth0_p_18_rf
++ k1=0.5704                 k2=0.006973               k3=-2.833
++ k3b=1.326                 w0=-1.943e-07             nlx=p_nlx
++ dvt0=0.4885               dvt1=0.07578              dvt2=0.1287
++ dvt0w=-0.1261             dvt1w=2.479e+04           dvt2w=0.6915
++ lint=-1.041e-08           wint=-1.525e-07           dwg=-1.151e-07
++ dwb=-1.039e-07            u0=113 + du0_p_18_rf                   ua=1.54e-09
++ ub=6.46e-20               uc=-0.09587               vsat=4.55e+04
++ a0=1.35                   ags=0.3818                b0=-3.088e-07
++ b1=0                      keta=0.01044              a1=0
++ a2=1                      voff=-0.1073              nfactor=0.984
++ cit=-0.001067             cdsc=0.0007578            cdscd=0
++ cdscb=0.0001              eta0=1.071                etab=-0.9291
++ dsub=1.919                pclm=p_pclm               pdiblc1=0.005
++ pdiblc2=0.01401           pdiblcb=0                 drout=1.457
++ pscbe1=4.866e+08          pscbe2=2.8e-07            pvag=1.162
++ rdsw=202.1                prwg=0                    prwb=0
++ wr=1                      alpha0=0                  alpha1=0
++ beta0=30                  cgdo=1.254e-10*(1+dcgdo_p_18_rf )           cgbo=0
++ cgso=1.254e-10 *(1+ dcgso_p_18_rf)          xpart=0                   cf=1.533e-10*(1+dcf_p_18_rf)
++ dlc=7.01e-08              cgsl=2e-11*(1+ dcgsl_p_18_rf)               cgdl=2e-11*(1+dcgdl_p_18_rf)
++ ckappa=0.6                clc=1e-07                 cle=0.6
++ dwc=0                     vfbcv=-1                  noff=1
++ voffcv=0                  acde=1                    moin=15
++ noia=3.57456993317604e+18              noib=2.5e+03              noic=2.6126e-11
++ em=4.1e+07                af=1                      ef=1.1388
++ kf=0                      lmin=2e-07                lmax=5e-07
++ wmin=5e-06                wmax=3.5e-05              xl=-2e-09 +dxl_p_18_rf
++ xw=0 + dxw_p_18_rf                    js=3e-06                  jsw=4.12e-11
++ cj=0.00114 *(1+ dcj_p_18_rf  )               mj=0.395                  pb=0.762
++ cjsw=1.74e-10 *(1+ dcjsw_p_18_rf  )            mjsw=0.324                tnom=25
++ ute=-0.4484               kt1=-0.2194               kt1l=-8.204e-09
++ kt2=-0.009487             ua1=4.571e-09             ub1=-6.026e-18
++ uc1=-0.0985               at=1.203e+04              prt=0
++ xti=3                     ww=1.236e-14              lw=-2.873e-16
++ ll=6.635e-15              wl=0                      wln=1
++ wwn=1                     wwl=0                     lln=1
++ lwn=1                     lwl=0                     llc=-1.31e-14
++ lwc=0                     lwlc=0                    wlc=0
++ wwc=0                     wwlc=0                    lvth0=0.0057+dlvth0_p_18_rf
++ wvth0=-0.0148 +dwvth0_p_18_rf            lu0=-3                    lnfactor=0.03
++ pvth0=0.0031 +dpvth0_p_18_rf             lnlx=-1.584e-08           wrdsw=10.07
++ weta0=0                   wetab=0                   wpclm=0
++ wua=2.7e-09               lua=-2.37e-10             pua=5.855e-11
++ wub=0                     lub=0                     pub=0
++ wuc=0                     luc=0                     puc=0
++ wvoff=-0.009816           lvoff=-0.0009871          pvoff=-9.833e-05
++ wa0=-0.04807              la0=-0.281                pa0=0.08661
++ wags=-0.04177             lags=0.04454              pags=-0.04076
++ wketa=0                   lketa=-0.012              pketa=0
++ wute=-0.2682              lute=0                    pute=0
++ wvsat=-1.42e+04           lvsat=0                   pvsat=-350+dpvsat_p_18_rf
++ lpdiblc2=0.003012         wat=-6405                 wprt=216.6
++ n=1                       pbsw=0.665                cta=0.001
++ ctp=0.000753              pta=0.00155               ptp=0.00124
++ ldif=8e-08                rsh=8                  rd=0
++ rsc=0                     rdc=0                hdif=2.6e-07
++ rs=0                      
+ends p_po7w500_18_rf

@@ -1,0 +1,73 @@
+.lib tt_bip
+.param
++is_pnp_sv45x45_l110e=1		  bf_pnp_sv45x45_l110e=1	    nf_pnp_sv45x45_l110e=1		  re_pnp_sv45x45_l110e=1	    
++rc_pnp_sv45x45_l110e=1		  cje_pnp_sv45x45_l110e=1	    cjc_pnp_sv45x45_l110e=1	
+
++is_pnp_sv90x90_l110e=1		  bf_pnp_sv90x90_l110e=1	    nf_pnp_sv90x90_l110e=1		  re_pnp_sv90x90_l110e=1	    
++rc_pnp_sv90x90_l110e=1		  cje_pnp_sv90x90_l110e=1	    cjc_pnp_sv90x90_l110e=1	
+
++is_pnp_sv135x135_l110e=1		bf_pnp_sv135x135_l110e=1	  nf_pnp_sv135x135_l110e=1		re_pnp_sv135x135_l110e=1	    
++rc_pnp_sv135x135_l110e=1		cje_pnp_sv135x135_l110e=1	  cjc_pnp_sv135x135_l110e=1	
+
++is_pnp_v45x45_l110e=1		  bf_pnp_v45x45_l110e=1	      nf_pnp_v45x45_l110e=1		    re_pnp_v45x45_l110e=1	    
++rc_pnp_v45x45_l110e=1		  cje_pnp_v45x45_l110e=1	    cjc_pnp_v45x45_l110e=1	    
+                                                                                          
++is_pnp_v90x90_l110e=1		  bf_pnp_v90x90_l110e=1	      nf_pnp_v90x90_l110e=1		    re_pnp_v90x90_l110e=1	    
++rc_pnp_v90x90_l110e=1		  cje_pnp_v90x90_l110e=1	    cjc_pnp_v90x90_l110e=1	  
+                                                                                        
++is_pnp_v135x135_l110e=1		bf_pnp_v135x135_l110e=1	    nf_pnp_v135x135_l110e=1		  re_pnp_v135x135_l110e=1	    
++rc_pnp_v135x135_l110e=1		cje_pnp_v135x135_l110e=1	  cjc_pnp_v135x135_l110e=1	
+.include './l110ae_bjt_pnp_v041.mdl'  
+.endl tt_bip
+
+
+
+.lib ff_bip
+.param
++is_pnp_sv45x45_l110e=0.8		  bf_pnp_sv45x45_l110e=1.15	    nf_pnp_sv45x45_l110e=0.995		  re_pnp_sv45x45_l110e=0.8	    
++rc_pnp_sv45x45_l110e=0.8		  cje_pnp_sv45x45_l110e=0.9	    cjc_pnp_sv45x45_l110e=0.9 
+
++is_pnp_sv90x90_l110e=0.8		  bf_pnp_sv90x90_l110e=1.15	    nf_pnp_sv90x90_l110e=0.995		  re_pnp_sv90x90_l110e=0.8	    
++rc_pnp_sv90x90_l110e=0.8		  cje_pnp_sv90x90_l110e=0.9		  cjc_pnp_sv90x90_l110e=0.9	
+
++is_pnp_sv135x135_l110e=0.8		bf_pnp_sv135x135_l110e=1.15	  nf_pnp_sv135x135_l110e=0.995		re_pnp_sv135x135_l110e=0.8    
++rc_pnp_sv135x135_l110e=0.8		cje_pnp_sv135x135_l110e=0.9	  cjc_pnp_sv135x135_l110e=0.9	
+
++is_pnp_v45x45_l110e=0.8		  bf_pnp_v45x45_l110e=1.15	    nf_pnp_v45x45_l110e=0.995		    re_pnp_v45x45_l110e=0.8	    
++rc_pnp_v45x45_l110e=0.8		  cje_pnp_v45x45_l110e=0.9		  cjc_pnp_v45x45_l110e=0.9	    
+                                                                                          
++is_pnp_v90x90_l110e=0.8		  bf_pnp_v90x90_l110e=1.15	    nf_pnp_v90x90_l110e=0.995		    re_pnp_v90x90_l110e=0.8    
++rc_pnp_v90x90_l110e=0.8		  cje_pnp_v90x90_l110e=0.9		  cjc_pnp_v90x90_l110e=0.9	  
+                                                                                        
++is_pnp_v135x135_l110e=0.8		bf_pnp_v135x135_l110e=1.15	  nf_pnp_v135x135_l110e=0.995		  re_pnp_v135x135_l110e=0.8	    
++rc_pnp_v135x135_l110e=0.8		cje_pnp_v135x135_l110e=0.9	 cjc_pnp_v135x135_l110e=0.9
+.include './l110ae_bjt_pnp_v041.mdl'  
+.endl ff_bip
+
+
+
+.lib ss_bip
+.param
++is_pnp_sv45x45_l110e=1.2		  bf_pnp_sv45x45_l110e=0.85	    nf_pnp_sv45x45_l110e=1.005		  re_pnp_sv45x45_l110e=1.2	    
++rc_pnp_sv45x45_l110e=1.2		  cje_pnp_sv45x45_l110e=1.1     cjc_pnp_sv45x45_l110e=1.1
+
++is_pnp_sv90x90_l110e=1.2		  bf_pnp_sv90x90_l110e=0.85	    nf_pnp_sv90x90_l110e=1.005		  re_pnp_sv90x90_l110e=1.2	    
++rc_pnp_sv90x90_l110e=1.2		  cje_pnp_sv90x90_l110e=1.1		  cjc_pnp_sv90x90_l110e=1.1	
+
++is_pnp_sv135x135_l110e=1.2		bf_pnp_sv135x135_l110e=0.85	  nf_pnp_sv135x135_l110e=1.005		re_pnp_sv135x135_l110e=1.2  
++rc_pnp_sv135x135_l110e=1.2		cje_pnp_sv135x135_l110e=1.1	  cjc_pnp_sv135x135_l110e=1.1	
+
++is_pnp_v45x45_l110e=1.2		  bf_pnp_v45x45_l110e=0.85	    nf_pnp_v45x45_l110e=1.005		    re_pnp_v45x45_l110e=1.2    
++rc_pnp_v45x45_l110e=1.2		  cje_pnp_v45x45_l110e=1.1		  cjc_pnp_v45x45_l110e=1.1	    
+                                                                                          
++is_pnp_v90x90_l110e=1.2		  bf_pnp_v90x90_l110e=0.85	    nf_pnp_v90x90_l110e=1.005		    re_pnp_v90x90_l110e=1.2   
++rc_pnp_v90x90_l110e=1.2		  cje_pnp_v90x90_l110e=1.1		  cjc_pnp_v90x90_l110e=1.1	  
+                                                                                        
++is_pnp_v135x135_l110e=1.2		bf_pnp_v135x135_l110e=0.85	  nf_pnp_v135x135_l110e=1.005		  re_pnp_v135x135_l110e=1.2   
++rc_pnp_v135x135_l110e=1.2		cje_pnp_v135x135_l110e=1.1	 cjc_pnp_v135x135_l110e=1.1
+.include './l110ae_bjt_pnp_v041.mdl'  
+.endl ss_bip
+
+
+
+

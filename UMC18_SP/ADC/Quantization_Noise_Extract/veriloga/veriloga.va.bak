@@ -1,0 +1,24 @@
+// VerilogA for ADC, Quantization_Noise_Extract, veriloga
+
+`include "constants.vams"
+`include "disciplines.vams"
+
+module Quantization_Noise_Extract(PHI1,y,v,QNOUT); 
+	electrical PHI1,y,v,QNOUT;
+	input PHI1,y,v;
+	output QNOUT;
+
+	real QN;
+
+	analog begin
+		@(cross(V(PHI1)-0.9,-1))
+			QN
+=V(y)-V(v);
+
+	V(QNOUT)<+QN;
+
+	end
+	
+	
+
+endmodule

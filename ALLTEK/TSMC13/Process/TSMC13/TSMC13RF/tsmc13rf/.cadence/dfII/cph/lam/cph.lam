@@ -1,0 +1,420 @@
+<!DOCTYPE LAM_FILE>
+<LIBRARY_DATA>
+  <VERSION NUMBER="0.3" />
+  <LOGICAL>
+    <LIB NAME="tsmc13rf" >
+      <CELL NAME="nmos1vcap" >
+        <VIEW NAME="ams" >
+          <PARAMETERS>
+            <IGNORE>
+              <GEN>simM</GEN>
+            </IGNORE>
+          </PARAMETERS>
+        </VIEW>
+        <VIEW NAME="auCdl" >
+          <PARAMETERS>
+            <IGNORE>
+              <GEN>simM</GEN>
+            </IGNORE>
+          </PARAMETERS>
+        </VIEW>
+        <VIEW NAME="auLvs" >
+          <PARAMETERS>
+            <IGNORE>
+              <GEN>simM</GEN>
+            </IGNORE>
+          </PARAMETERS>
+        </VIEW>
+        <VIEW NAME="eldoD" >
+          <PARAMETERS>
+            <IGNORE>
+              <GEN>simM</GEN>
+            </IGNORE>
+          </PARAMETERS>
+        </VIEW>
+        <VIEW NAME="hspiceD" >
+          <PARAMETERS>
+            <IGNORE>
+              <GEN>simM</GEN>
+            </IGNORE>
+          </PARAMETERS>
+        </VIEW>
+        <VIEW NAME="spectre" >
+          <PARAMETERS>
+            <IGNORE>
+              <GEN>simM</GEN>
+            </IGNORE>
+          </PARAMETERS>
+        </VIEW>
+        <VIEW NAME="symbol" >
+          <PARAMETERS>
+            <IGNORE>
+              <GEN>simM</GEN>
+            </IGNORE>
+          </PARAMETERS>
+        </VIEW>
+      </CELL>
+      <CELL NAME="nmos2vcap" >
+        <VIEW NAME="ams" >
+          <PARAMETERS>
+            <IGNORE>
+              <GEN>simM</GEN>
+            </IGNORE>
+          </PARAMETERS>
+        </VIEW>
+        <VIEW NAME="auCdl" >
+          <PARAMETERS>
+            <IGNORE>
+              <GEN>simM</GEN>
+            </IGNORE>
+          </PARAMETERS>
+        </VIEW>
+        <VIEW NAME="auLvs" >
+          <PARAMETERS>
+            <IGNORE>
+              <GEN>simM</GEN>
+            </IGNORE>
+          </PARAMETERS>
+        </VIEW>
+        <VIEW NAME="eldoD" >
+          <PARAMETERS>
+            <IGNORE>
+              <GEN>simM</GEN>
+            </IGNORE>
+          </PARAMETERS>
+        </VIEW>
+        <VIEW NAME="hspiceD" >
+          <PARAMETERS>
+            <IGNORE>
+              <GEN>simM</GEN>
+            </IGNORE>
+          </PARAMETERS>
+        </VIEW>
+        <VIEW NAME="spectre" >
+          <PARAMETERS>
+            <IGNORE>
+              <GEN>simM</GEN>
+            </IGNORE>
+          </PARAMETERS>
+        </VIEW>
+        <VIEW NAME="symbol" >
+          <PARAMETERS>
+            <IGNORE>
+              <GEN>simM</GEN>
+            </IGNORE>
+          </PARAMETERS>
+        </VIEW>
+      </CELL>
+      <CELL NAME="nmos3vcap" >
+        <VIEW NAME="ams" >
+          <PARAMETERS>
+            <IGNORE>
+              <GEN>simM</GEN>
+            </IGNORE>
+          </PARAMETERS>
+        </VIEW>
+        <VIEW NAME="auCdl" >
+          <PARAMETERS>
+            <IGNORE>
+              <GEN>simM</GEN>
+            </IGNORE>
+          </PARAMETERS>
+        </VIEW>
+        <VIEW NAME="auLvs" >
+          <PARAMETERS>
+            <IGNORE>
+              <GEN>simM</GEN>
+            </IGNORE>
+          </PARAMETERS>
+        </VIEW>
+        <VIEW NAME="eldoD" >
+          <PARAMETERS>
+            <IGNORE>
+              <GEN>simM</GEN>
+            </IGNORE>
+          </PARAMETERS>
+        </VIEW>
+        <VIEW NAME="hspiceD" >
+          <PARAMETERS>
+            <IGNORE>
+              <GEN>simM</GEN>
+            </IGNORE>
+          </PARAMETERS>
+        </VIEW>
+        <VIEW NAME="spectre" >
+          <PARAMETERS>
+            <IGNORE>
+              <GEN>simM</GEN>
+            </IGNORE>
+          </PARAMETERS>
+        </VIEW>
+        <VIEW NAME="symbol" >
+          <PARAMETERS>
+            <IGNORE>
+              <GEN>simM</GEN>
+            </IGNORE>
+          </PARAMETERS>
+        </VIEW>
+      </CELL>
+      <CELL NAME="pmos1vcap" >
+        <VIEW NAME="ams" >
+          <PARAMETERS>
+            <IGNORE>
+              <GEN>simM</GEN>
+            </IGNORE>
+          </PARAMETERS>
+        </VIEW>
+        <VIEW NAME="auCdl" >
+          <PARAMETERS>
+            <IGNORE>
+              <GEN>simM</GEN>
+            </IGNORE>
+          </PARAMETERS>
+        </VIEW>
+        <VIEW NAME="auLvs" >
+          <PARAMETERS>
+            <IGNORE>
+              <GEN>simM</GEN>
+            </IGNORE>
+          </PARAMETERS>
+        </VIEW>
+        <VIEW NAME="eldoD" >
+          <PARAMETERS>
+            <IGNORE>
+              <GEN>simM</GEN>
+            </IGNORE>
+          </PARAMETERS>
+        </VIEW>
+        <VIEW NAME="hspiceD" >
+          <PARAMETERS>
+            <IGNORE>
+              <GEN>simM</GEN>
+            </IGNORE>
+          </PARAMETERS>
+        </VIEW>
+        <VIEW NAME="spectre" >
+          <PARAMETERS>
+            <IGNORE>
+              <GEN>simM</GEN>
+            </IGNORE>
+          </PARAMETERS>
+        </VIEW>
+        <VIEW NAME="symbol" >
+          <PARAMETERS>
+            <IGNORE>
+              <GEN>simM</GEN>
+            </IGNORE>
+          </PARAMETERS>
+        </VIEW>
+      </CELL>
+      <CELL NAME="pmos2vcap" >
+        <VIEW NAME="ams" >
+          <PARAMETERS>
+            <IGNORE>
+              <GEN>simM</GEN>
+            </IGNORE>
+          </PARAMETERS>
+        </VIEW>
+        <VIEW NAME="auCdl" >
+          <PARAMETERS>
+            <IGNORE>
+              <GEN>simM</GEN>
+            </IGNORE>
+          </PARAMETERS>
+        </VIEW>
+        <VIEW NAME="auLvs" >
+          <PARAMETERS>
+            <IGNORE>
+              <GEN>simM</GEN>
+            </IGNORE>
+          </PARAMETERS>
+        </VIEW>
+        <VIEW NAME="eldoD" >
+          <PARAMETERS>
+            <IGNORE>
+              <GEN>simM</GEN>
+            </IGNORE>
+          </PARAMETERS>
+        </VIEW>
+        <VIEW NAME="hspiceD" >
+          <PARAMETERS>
+            <IGNORE>
+              <GEN>simM</GEN>
+            </IGNORE>
+          </PARAMETERS>
+        </VIEW>
+        <VIEW NAME="spectre" >
+          <PARAMETERS>
+            <IGNORE>
+              <GEN>simM</GEN>
+            </IGNORE>
+          </PARAMETERS>
+        </VIEW>
+        <VIEW NAME="symbol" >
+          <PARAMETERS>
+            <IGNORE>
+              <GEN>simM</GEN>
+            </IGNORE>
+          </PARAMETERS>
+        </VIEW>
+      </CELL>
+      <CELL NAME="pmos3vcap" >
+        <VIEW NAME="ams" >
+          <PARAMETERS>
+            <IGNORE>
+              <GEN>simM</GEN>
+            </IGNORE>
+          </PARAMETERS>
+        </VIEW>
+        <VIEW NAME="auCdl" >
+          <PARAMETERS>
+            <IGNORE>
+              <GEN>simM</GEN>
+            </IGNORE>
+          </PARAMETERS>
+        </VIEW>
+        <VIEW NAME="auLvs" >
+          <PARAMETERS>
+            <IGNORE>
+              <GEN>simM</GEN>
+            </IGNORE>
+          </PARAMETERS>
+        </VIEW>
+        <VIEW NAME="eldoD" >
+          <PARAMETERS>
+            <IGNORE>
+              <GEN>simM</GEN>
+            </IGNORE>
+          </PARAMETERS>
+        </VIEW>
+        <VIEW NAME="hspiceD" >
+          <PARAMETERS>
+            <IGNORE>
+              <GEN>simM</GEN>
+            </IGNORE>
+          </PARAMETERS>
+        </VIEW>
+        <VIEW NAME="spectre" >
+          <PARAMETERS>
+            <IGNORE>
+              <GEN>simM</GEN>
+            </IGNORE>
+          </PARAMETERS>
+        </VIEW>
+        <VIEW NAME="symbol" >
+          <PARAMETERS>
+            <IGNORE>
+              <GEN>simM</GEN>
+            </IGNORE>
+          </PARAMETERS>
+        </VIEW>
+      </CELL>
+    </LIB>
+  </LOGICAL>
+  <PHYSICAL>
+    <COMPONENT_TYPE_GROUPS>
+      <LIB NAME="tsmc13rf" >
+        <COMPONENT_TYPE_GROUP NAME="nmos" >
+          <COMP_CLASS>NMOS</COMP_CLASS>
+          <WIDTH>w</WIDTH>
+          <ACTIVE_LP>OD2 drawing</ACTIVE_LP>
+          <FOLD_THRESH>1e-05</FOLD_THRESH>
+        </COMPONENT_TYPE_GROUP>
+        <COMPONENT_TYPE_GROUP NAME="pmos" >
+          <COMP_CLASS>PMOS</COMP_CLASS>
+          <WIDTH>w</WIDTH>
+          <ACTIVE_LP>OD2 drawing</ACTIVE_LP>
+          <FOLD_THRESH>1e-05</FOLD_THRESH>
+        </COMPONENT_TYPE_GROUP>
+      </LIB>
+    </COMPONENT_TYPE_GROUPS>
+    <MAPPINGS>
+      <LIB NAME="tsmc13rf" >
+        <CELL NAME="nmos1v" >
+          <COMPONENT_TYPE>
+            <NAME>nmos</NAME>
+            <LIB>tsmc13rf</LIB>
+          </COMPONENT_TYPE>
+        </CELL>
+        <CELL NAME="nmos1vhvt" >
+          <COMPONENT_TYPE>
+            <NAME>nmos</NAME>
+            <LIB>tsmc13rf</LIB>
+          </COMPONENT_TYPE>
+        </CELL>
+        <CELL NAME="nmos1vlvt" >
+          <COMPONENT_TYPE>
+            <NAME>nmos</NAME>
+            <LIB>tsmc13rf</LIB>
+          </COMPONENT_TYPE>
+        </CELL>
+        <CELL NAME="nmos1vn" >
+          <COMPONENT_TYPE>
+            <NAME>nmos</NAME>
+            <LIB>tsmc13rf</LIB>
+          </COMPONENT_TYPE>
+        </CELL>
+        <CELL NAME="nmos2v" >
+          <COMPONENT_TYPE>
+            <NAME>nmos</NAME>
+            <LIB>tsmc13rf</LIB>
+          </COMPONENT_TYPE>
+        </CELL>
+        <CELL NAME="nmos2vlvt" >
+          <COMPONENT_TYPE>
+            <NAME>nmos</NAME>
+            <LIB>tsmc13rf</LIB>
+          </COMPONENT_TYPE>
+        </CELL>
+        <CELL NAME="nmos2vn" >
+          <COMPONENT_TYPE>
+            <NAME>nmos</NAME>
+            <LIB>tsmc13rf</LIB>
+          </COMPONENT_TYPE>
+        </CELL>
+        <CELL NAME="nmos3v" >
+          <COMPONENT_TYPE>
+            <NAME>nmos</NAME>
+            <LIB>tsmc13rf</LIB>
+          </COMPONENT_TYPE>
+        </CELL>
+        <CELL NAME="nmos3vn" >
+          <COMPONENT_TYPE>
+            <NAME>nmos</NAME>
+            <LIB>tsmc13rf</LIB>
+          </COMPONENT_TYPE>
+        </CELL>
+        <CELL NAME="pmos1v" >
+          <COMPONENT_TYPE>
+            <NAME>pmos</NAME>
+            <LIB>tsmc13rf</LIB>
+          </COMPONENT_TYPE>
+        </CELL>
+        <CELL NAME="pmos1vhvt" >
+          <COMPONENT_TYPE>
+            <NAME>pmos</NAME>
+            <LIB>tsmc13rf</LIB>
+          </COMPONENT_TYPE>
+        </CELL>
+        <CELL NAME="pmos1vlvt" >
+          <COMPONENT_TYPE>
+            <NAME>pmos</NAME>
+            <LIB>tsmc13rf</LIB>
+          </COMPONENT_TYPE>
+        </CELL>
+        <CELL NAME="pmos2v" >
+          <COMPONENT_TYPE>
+            <NAME>pmos</NAME>
+            <LIB>tsmc13rf</LIB>
+          </COMPONENT_TYPE>
+        </CELL>
+        <CELL NAME="pmos3v" >
+          <COMPONENT_TYPE>
+            <NAME>pmos</NAME>
+            <LIB>tsmc13rf</LIB>
+          </COMPONENT_TYPE>
+        </CELL>
+      </LIB>
+    </MAPPINGS>
+  </PHYSICAL>
+</LIBRARY_DATA>

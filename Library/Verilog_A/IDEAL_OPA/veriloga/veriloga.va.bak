@@ -1,0 +1,23 @@
+// VerilogA for Verilog_A, IDEAL_OPA, veriloga
+
+`include "constants.vams"
+`include "disciplines.vams"
+
+module IDEAL_OPA(VINP,VINN,VOUT);
+	electrical VINP,VINN,VOUT;
+	input VINP,VINN;
+	output VOUT;
+
+	real VDIFF=0;
+
+	parameter real AV=1000;
+	parameter real fp1=1e6;
+
+	analog begin
+		VDIFF=V(VINP)-V(VINN);
+		V(VOUT)<+laplace_nd(VDIFF,{AV},{1/(fp1*`M_TWO_PI),1});
+
+	end
+
+
+endmodule

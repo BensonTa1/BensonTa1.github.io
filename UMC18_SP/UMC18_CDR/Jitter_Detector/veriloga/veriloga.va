@@ -1,0 +1,66 @@
+// VerilogA for CDR, BER_Dector, veriloga
+
+`include "constants.vams"
+`include "disciplines.vams"
+
+`timescale 1ps/1fs
+
+module Jitter_Detector(CLKIN_Idela,CLKIN_Sample,Jitter_output);
+	input CLKIN_Idela,CLKIN_Sample;
+	output Jitter_output;
+
+	electrical CLKIN_Idela,CLKIN_Sample,Jitter_output;
+
+	real flag=0,flag1=0;
+	real start_times=0;
+	real jitter=0;
+	
+	parameter real VTH=1.5;
+
+	analog begin 
+		@(cross(V(CLKIN_Sample)-VTH,1))begin
+
+
+			if(flag==0)begin
+				flag=1;
+				start_times=$realtime*1;
+			end
+
+			else if(flag==1)begin
+				flag=0;
+				jitter=0+start_times-$realtime*1;
+			end
+
+		end
+
+		@(cross(V(CLKIN_Idela)-VTH,1))begin
+
+
+
+			if(flag==0)begin
+				flag=1;
+				start_times=$realtime*1;
+			end
+
+			else if(flag==1)begin
+				flag=0;
+				jitter=0+$realtime*1-start_times;
+			end
+	
+
+		end
+
+
+		@(cross(V(CLKIN_Idela)-VTH,-1))begin
+
+			flag=0;
+
+		end
+
+
+		V(Jitter_output) <+ jitter;
+
+	end
+
+endmodule
+

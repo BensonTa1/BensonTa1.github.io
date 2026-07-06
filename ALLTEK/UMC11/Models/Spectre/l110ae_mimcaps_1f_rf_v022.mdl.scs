@@ -1,0 +1,154 @@
+//  *** 
+simulator lang=spectre insensitive=yes
+//****
+//****      #########################################################################################
+//****      #                                                                             
+//****      #  110nm RFCMOS 1.0fF/um2 PLANAR MIM CAPACITOR RF MODEL   for FSG process  
+//****      #                             July 2010  
+//****      #                             Bing Chang Wu                                               
+//****      #                                                                             
+//****      #       * Scaling range:  drawn L: 3um ~ 50um					      
+//****      #                                  drawn W: 3um ~ 50um
+//****      #                                  L/W ratio:  0.5 ~ 1.5                                
+//****      #                                  Temperature: -55C to 125C                             
+//****      #                                  Freq:  upto 20G Hz     
+//****      #                                  Shrink factor : 0.9    
+//****      #                           
+//****      #       * Node definition:     top: top plate                                     
+//****      #                                        bottom: bottom plate                               
+//****      #                                        psub: substrate                                  
+//****      #                            
+//****      #       * Models included in this model file: 
+//****      #          mimcaps_1f_psub_rfkf : 3-terminal RF model with native P-sub underneath
+//****      #          mimcaps_1f_nwell_rfkf : 4-terminal RF model with nwell underneath
+//****      #          mimcaps_1f_mm : simplified 2 terminal model which considers only capacitance 
+//****      #                            without parasitics, for low frequency application only
+//****      #
+//****      #       * Backend metal options supported in this model:
+//****      #           
+//****      #       mo	Metal Options	 1X metal 2x metal top metal(8k, 12k, 20k, 40k)  MMC BP layer MIM TP location
+//****      #======================================================================================
+//****      #       26	1P8M             	  m2-m6    m7        m8                                          M6                     M6-M7
+//****      #       21	1P7M      	  m2-m5	  m6        m7  	                               M5                     M5-M6
+//****      #        15	1P7M      	  m2-m6	  m7  	-	                               M6                     M6-M7
+//****      #        12	1P6M      	  m2-m4	  m5        m6                                          M4                     M4-M5
+//****      #        9	1P6M      	  m2-m5	  m6        -                                              M5                     M5-M6
+//****      #        6	1P5M      	  m2-m3	  m4        m5	                              M3                     M3-M4
+//****      #        3	1P5M      	  m2-m4	  m5        -                                              M4                     M4-M5
+//****      #        1	1P4M      	  m2-m3	  m4        -	                               M3                     M3-M4
+//****      # =====================================================================================
+//****      # 
+//****      #       Version: V022
+//****      #       
+//****      #       Revison history:
+//****      #        V021 (07/25/2010): orignal release of Silicon-based model for all metal options   
+//****      #       Revison history:
+//****      #        V022 (08/19/2013): typo update
+//****      #        
+//****      ##########################################################################################
+//**** 
+    
+subckt mimcaps_1f_psub_rfkf ( top bottom psub ) 
+parameters w=10u l=10u mo=21 w_offset=2.5u l_offset=7u 
++ p_rtop=11.5/4/((l / 4.36u) * (w / 4.36u))+ 10 / ((l / 4.36u) * (w / 4.36u) * 4)
++ p_rbot=384.7323*(pow(log10((l+l_offset)*(w+w_offset)/1e-12),-6.815991))*0.65
++ p_cox=(l+l_offset)*(w+w_offset)*7.96e-6 + 2*(l+l_offset+w+w_offset)*2.62e-11
++ p_rsubx=20e-2 * (w + w_offset) / (540u * (l + l_offset))
++ p_rsuby=20e-2 * (l + l_offset) / (540u * (w + w_offset))
++ p_l=3.175e-7*(l+l_offset+w+w_offset)-5.008e-12
++ c26=0.9999999
++ c21=1.226257
++ c15=0.9999999
++ c12=1.5848375
++ c9=1.226257
++ c6=2.2397959
++ c3=1.5848375
++ c1=2.2397959
++ i1=(int(mo)==1) ? 1:0
++ i3=(int(mo)==3) ? 1:0
++ i6=(int(mo)==6) ? 1:0
++ i9=(int(mo)==9) ? 1:0
++ i12=(int(mo)==12) ? 1:0
++ i15=(int(mo)==15) ? 1:0
++ i21=(int(mo)==21) ? 1:0
++ i26=(int(mo)==26) ? 1:0
++ ratio=i1*c1+i3*c3+i6*c6+i9*c9+i12*c12+i15*c15+i21*c21+i26*c26
+lbot ( bottom 22 ) inductor l=p_l
+rtop ( top 4 ) resistor r=p_rtop * (1 + drtop_mimcap_10)
+cint ( 5 4 ) mimcaps_1f_mm l=l w=w
+cox1 ( 5 6 ) capacitor c=p_cox / 2 * (1 + dcox_mimcap_10)*ratio/1.226257
+cox2 ( 22 6 ) capacitor c=p_cox / 2 * (1 + dcox_mimcap_10)*ratio/1.226257
+rsubx ( 6 psub ) resistor r=p_rsubx
+rsuby ( 6 psub ) resistor r=p_rsuby
+rbot1 ( 5 22 ) resistor r=p_rbot * (1 + drbot_mimcap_10)
+ends mimcaps_1f_psub_rfkf
+ 
+subckt mimcaps_1f_nwell_rfkf ( top bottom nwell psub ) 
+parameters w=10u l=10u mo=21 dx=2.0u dy=2.0u w_offset=2.5u l_offset=7.0u d=0.5u 
++ rsh_sub=330 
++ p_rtop=11.5/4/((l / 4.36u) * (w / 4.36u))+ 10 / ((l / 4.36u) * (w / 4.36u) * 4)
++ p_rbot=384.7323*(pow(log10((l+l_offset)*(w+w_offset)/1e-12),-6.815991))*0.65
++ p_cox=(l+l_offset)*(w+w_offset)*7.96e-6 + 2*(l+l_offset+w+w_offset)*2.62e-11
++ p_rsubx=575 * (w + w_offset) / ((l + l_offset))
++ p_rsuby=575 * (l + l_offset) / ((w + w_offset))
++ p_l=3.175e-7*(l+l_offset+w+w_offset)-5.008e-12
++ p_lnw=l + l_offset + dx 
++ p_wnw=w + w_offset + dy 
++ nsq_sub=1 / (4 / log((p_lnw + 2 * d) / p_lnw) + 4 / log((p_wnw + 2 * d) / p_wnw)) 
++ p_rsub=rsh_sub * nsq_sub 
++ c26=0.9999999
++ c21=1.226257
++ c15=0.9999999
++ c12=1.5848375
++ c9=1.226257
++ c6=2.2397959
++ c3=1.5848375
++ c1=2.2397959
++ i1=(int(mo)==1) ? 1:0
++ i3=(int(mo)==3) ? 1:0
++ i6=(int(mo)==6) ? 1:0
++ i9=(int(mo)==9) ? 1:0
++ i12=(int(mo)==12) ? 1:0
++ i15=(int(mo)==15) ? 1:0
++ i21=(int(mo)==21) ? 1:0
++ i26=(int(mo)==26) ? 1:0
++ ratio=i1*c1+i3*c3+i6*c6+i9*c9+i12*c12+i15*c15+i21*c21+i26*c26
+lbot ( bottom 22 ) inductor l=p_l
+rtop ( top 4 ) resistor r=p_rtop * (1 + drtop_mimcap_10)
+cint ( 5 4 ) mimcaps_1f_mm l=l w=w
+cox1 ( 5 6 ) capacitor c=p_cox / 2 * (1 + dcox_mimcap_10) * ratio/1.226257
+cox2 ( 22 6 ) capacitor c=p_cox / 2 * (1 + dcox_mimcap_10) * ratio/1.226257
+rsubx ( 6 nwell ) resistor r=p_rsubx
+rsuby ( 6 nwell ) resistor r=p_rsuby
+rbot1 ( 5 22 ) resistor r=p_rbot * (1 + drbot_mimcap_10)
+d1 ( 3 nwell ) nwell_dio area=p_lnw * p_wnw pj=2 * (p_lnw + p_wnw)
+rsub ( 3 psub ) resistor r=p_rsub
+ 
+model nwell_dio diode 
++ hcomp=1.0000e+00          imax=1.00e+14             level=3
++ area=1.68e-007            perim=0.00469             tnom=25
++ is=2.05e-006              isw=5.34e-011             ik=17856
++ bv=9.662                  ibv=5.952                 ikp=595.2
++ n=1.0525                  rs=3.0891e-007            
++ cjo=8.28e-005 + dcj_dionw_l110e_mim_10                     
++ cjp=9.92e-010 + dcjp_dionw_l110e_mim_10                    vj=0.588
++ vjsw=0.62                 mj=0.474                  mjsw=0.27
++ tlev=1                    tlevc=1                   trs=0.00322
++ tbv1=-0.000539            xti=5.4936                cta=0.00332
++ ctp=0.001                 eg=1.16                   pta=0.0028
++ ptp=0.001                 
+
+ends mimcaps_1f_nwell_rfkf
+
+ //  #######################################################################################
+//  #                                                                                                                                                                           #
+//  #  110nm RFCMOS 1.0fF/um2 PLANAR MIM CAPACITOR    Mixed-Mode MODEL                               #
+//  #                                                                                                                                                                           #
+//  #                                                                                                                                                                           #
+//  #       Note: This is a simplified two-terminal model for MIM                                                                            #
+//  #######################################################################################
+//  **
+
+model mimcaps_1f_mm capacitor 
++ cox=1.0e-3 * (1+dcj_mimcap_10) capsw=0.0473e-9 * (1+dcjsw_mimcap_10) tc1=17.8u  tc2=0.0119u tnom=25
++ coeffs=[-18.1u -0.151u]                

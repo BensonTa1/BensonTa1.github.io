@@ -1,0 +1,48 @@
+Starting Single Run, Sweeps and Corners...
+
+Current time: Tue Apr 28 01:17:48 2026 
+Best design point: 1
+Design specs: 
+	TEST_PSMC11_BIOUP_DAC:8bit_DAC_V2:1	corner	C0_0 - 
+	spectrum_enob		8.04
+	TEST_PSMC11_BIOUP_DAC:8bit_DAC_V2:1	corner	C0_1 - 
+	spectrum_enob		8.042
+	TEST_PSMC11_BIOUP_DAC:8bit_DAC_V2:1	corner	C0_2 - 
+	spectrum_enob		8.039
+	TEST_PSMC11_BIOUP_DAC:8bit_DAC_V2:1	corner	C0_3 - 
+	spectrum_enob		8.042
+	TEST_PSMC11_BIOUP_DAC:8bit_DAC_V2:1	corner	C0_4 - 
+	spectrum_enob		8.044
+	TEST_PSMC11_BIOUP_DAC:8bit_DAC_V2:1	corner	C0_5 - 
+	spectrum_enob		8.039
+	TEST_PSMC11_BIOUP_DAC:8bit_DAC_V2:1	corner	C0_6 - 
+	spectrum_enob		8.041
+	TEST_PSMC11_BIOUP_DAC:8bit_DAC_V2:1	corner	C0_7 - 
+	spectrum_enob		8.038
+	TEST_PSMC11_BIOUP_DAC:8bit_DAC_V2:1	corner	C0_8 - 
+	spectrum_enob		8.041
+	TEST_PSMC11_BIOUP_DAC:8bit_DAC_V2:1	corner	C0_9 - 
+	spectrum_enob		8.041
+	TEST_PSMC11_BIOUP_DAC:8bit_DAC_V2:1	corner	C0_10 - 
+	spectrum_enob		8.038
+	TEST_PSMC11_BIOUP_DAC:8bit_DAC_V2:1	corner	C0_11 - 
+	spectrum_enob		8.04
+	TEST_PSMC11_BIOUP_DAC:8bit_DAC_V2:1	corner	C0_12 - 
+	spectrum_enob		8.042
+	TEST_PSMC11_BIOUP_DAC:8bit_DAC_V2:1	corner	C0_13 - 
+	spectrum_enob		8.04
+	TEST_PSMC11_BIOUP_DAC:8bit_DAC_V2:1	corner	C0_14 - 
+	spectrum_enob		8.04
+Design parameters: 
+	M		1
+	N		128
+	FCLK		10K
+	FIN		78.12
+	START_TIME		1.05m
+	STOP_TIME		13.85m
+
+Interactive.3
+Number of points completed: 1
+Number of simulation errors: 0
+Interactive.3 completed. 
+Current time: Tue Apr 28 04:29:11 2026 

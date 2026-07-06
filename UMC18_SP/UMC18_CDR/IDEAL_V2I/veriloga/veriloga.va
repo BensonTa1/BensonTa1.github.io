@@ -1,0 +1,9 @@
+// VerilogA for CDR, IDEAL_V2I, veriloga
+
+`include "constants.vams"
+`include "disciplines.vams"
+
+module IDEAL_V2I;
+
+
+endmodule

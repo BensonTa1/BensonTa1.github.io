@@ -1,0 +1,33 @@
+simulator lang=spectre insensitive=yes
+library l110ae_l_cr8k_vil_rf_v011_lib
+//
+section tt
+include "l110ae_l_cr8k_vil_rf_v011.mdl.scs"
+parameters slcr_drs_1p5m1t=1
+parameters slcr_drs_sub_1p5m1t=1
+parameters slcr_dls_1p5m1t=1
+endsection tt
+//
+section ff
+include "l110ae_l_cr8k_vil_rf_v011.mdl.scs"
+parameters slcr_drs_1p5m1t=1.15
+parameters slcr_drs_sub_1p5m1t=0.85
+parameters slcr_dls_1p5m1t=1.05
+endsection ff
+//
+section ss
+include "l110ae_l_cr8k_vil_rf_v011.mdl.scs"
+parameters slcr_drs_1p5m1t=0.85
+parameters slcr_drs_sub_1p5m1t=1.15
+parameters slcr_dls_1p5m1t=0.95
+endsection ss
+//
+endlibrary l110ae_l_cr8k_vil_rf_v011_lib
+
+
+
+
+
+
+
+

@@ -1,0 +1,142 @@
+\o Program:		@(#)$CDS: libManager version 6.1.8 - CAT37 09/24/2018 21:00 (ip-172-18-22-224) $
+\o Sub version:		sub-version  p015 
+\o Arguments:		-unmapped -mpssession virtuoso9642 -mpshost IC 
+\o Working Directory:	IC:/home/IC/Desktop/virtuoso/ALLTEK/UMC11
+\o 64-bit offsets
+\o Qt version: 		5.9.1
+\o changeWorkingDir("/home/IC/Desktop/virtuoso/ALLTEK/UMC11") unnecessary.
+\o ddSetForcedLib("") unnecessary.
+\o Log file is "/home/IC/Desktop/virtuoso/ALLTEK/UMC11/libManager.log".
+\o Opening libManager window.
+\a nrSetWindowVisibility(cdsLibManager "show")
+\o MPS service: map window
+\o Library Manager customization server connected.
+\a nrSetCurrentWindow(cdsLibManager)
+\a nrResizeWindow(cdsLibManager list(134 39 781 638))
+\a cdsLibManager->libListBox->value = "TEST_UMC11_STD_CELL"
+\a cdsLibManager->libLineEdit->value = "TEST_UMC11_STD_CELL"
+\a cdsLibManager->cellListBox->value = "PFD"
+\a cdsLibManager->cellLineEdit->value = "PFD"
+\a cdsLibManager->viewListBox->value = "schematic"
+\a cdsLibManager->viewLineEdit->value = "schematic"
+\a cdsLibManager->viewLineEdit->value = ""
+\a cdsLibManager->viewListBox->value = nil
+\a lmgrLogShowPopup("mainListPopup1" 35 110 2 "PFD")
+\a cdsLibManager->copySimpleButton->value = t
+\a copyCellForm->SkipLibrariesEdit->value = "*"
+\a copyCellForm->SkipLibrariesEdit->value = "*"
+\a copyCellForm->CopyFromLibrary->value = "TEST_UMC11_ALLTEK_PLL"
+\a copyCellForm->CopyToLibrary->value = "TEST_UMC11_ALLTEK_PLL"
+\a copyCellForm->CopyFromLibrary->value = "TEST_UMC11_STD_CELL"
+\a copyCellForm->CopyFromCell->value = "PFD"
+\a copyCellForm->CopyToLibrary->value = "TEST_UMC11_STD_CELL"
+\a copyCellForm->CopyToCell->value = "PFD"
+\a copyCellForm->ViewsToCopy->value = "schematic"
+\a copyCellForm->SkipLibrariesEdit->value = ""
+\a copyCellForm->SkipLibrariesEdit->value = "TEST_UMC11_ALLTEK_PLL UMC11_ALLTEK_PLL UMC11_STD_CELL ahdlLib analogLib basic bmslib cdsDefTechLib passiveLib pllLib pllMMLib rfLib rfTlineLib umc110ae"
+\a nrSetWindowVisibility(copyCellForm "show")
+\a nrSetCurrentWindow(copyCellForm)
+\a nrResizeWindow(copyCellForm list(280 28 468 659))
+\a copyCellForm->CopyToLibrary->value = "TEST_UMC11_STD_CELL"
+\a nrSetCurrentWindow(copyCellForm)
+\a nrResizeWindow(copyCellForm list(906 143 468 659))
+\a copyCellForm->CopyToLibrary->value = "TEST_UMC11_ALLTEK_PLL"
+\a copyCellForm->OK->value = t
+\o Beginning simple copy to library "TEST_UMC11_ALLTEK_PLL".
+\o Processing files to be copied...
+\a nrSetWindowVisibility(workingDialogForm "show")
+\a nrSetCurrentWindow(workingDialogForm)
+\o ERROR (CLM-173): One or more of the following problems have occurred:\n      1. The source file does not exist.\n      2. A destination file will be overwritten.\n      3. A destination file is checked out.\n      4. A destination file is opened for edit.\n      5. A destination file conflicts with another.\n      6. A source library file is not valid in a different library.\n      7. A source OpenAccess cellview master file has zero size.
+\a nrSetWindowVisibility(copyProblemsDialog "show")
+\a nrSetCurrentWindow(copyProblemsDialog)
+\a nrResizeWindow(workingDialogForm list(378 215 273 133))
+\a nrResizeWindow(copyProblemsDialog list(728 252 825 441))
+\a copyProblemsDialog->overwriteAll->value = t
+\a copyProblemsDialog->OK->value = t
+\a nrSetCurrentWindow(copyCellForm)
+\a nrSetCurrentWindow(cdsLibManager)
+\a nrSetCurrentWindow(workingDialogForm)
+\a nrResizeWindow(copyProblemsDialog list(728 215 825 441))
+\a nrResizeWindow(workingDialogForm list(378 289 273 133))
+\a nrResizeWindow(copyCellForm list(906 106 468 659))
+\a copyCellForm->SkipLibrariesEdit->value = "*"
+\a nrSetCurrentWindow(cdsLibManager)
+\a nrResizeWindow(workingDialogForm list(378 252 273 133))
+\a cdsLibManager->libListBox->value = "TEST_UMC11_ALLTEK_PLL"
+\a cdsLibManager->libLineEdit->value = "TEST_UMC11_ALLTEK_PLL"
+\a cdsLibManager->cellLineEdit->value = ""
+\a cdsLibManager->cellListBox->value = nil
+\a cdsLibManager->cellListBox->value = "PFD"
+\a cdsLibManager->cellLineEdit->value = "PFD"
+\a cdsLibManager->viewListBox->value = "schematic"
+\a cdsLibManager->viewLineEdit->value = "schematic"
+\a cdsLibManager->viewLineEdit->value = ""
+\a cdsLibManager->viewListBox->value = nil
+\a cdsLibManager->viewListBox->value = "schematic"
+\a cdsLibManager->viewLineEdit->value = "schematic"
+\a cdsLibManager->viewLineEdit->value = ""
+\a cdsLibManager->viewListBox->value = nil
+\a cdsLibManager->viewListBox->value = "schematic"
+\a cdsLibManager->viewLineEdit->value = "schematic"
+\a cdsLibManager->cellLineEdit->value = ""
+\a cdsLibManager->cellListBox->value = nil
+\a cdsLibManager->viewLineEdit->value = ""
+\a cdsLibManager->viewListBox->value = nil
+\a cdsLibManager->libLineEdit->value = ""
+\a cdsLibManager->libListBox->value = nil
+\a cdsLibManager->libListBox->value = "TEST_UMC11_ALLTEK_PLL"
+\a cdsLibManager->libLineEdit->value = "TEST_UMC11_ALLTEK_PLL"
+\a cdsLibManager->libListBox->value = "TEST_UMC11_STD_CELL"
+\a cdsLibManager->libLineEdit->value = "TEST_UMC11_STD_CELL"
+\a cdsLibManager->cellListBox->value = "PFD"
+\a cdsLibManager->cellLineEdit->value = "PFD"
+\a cdsLibManager->viewListBox->value = "schematic"
+\a cdsLibManager->viewLineEdit->value = "schematic"
+\a cdsLibManager->viewLineEdit->value = ""
+\a cdsLibManager->viewListBox->value = nil
+\a lmgrLogShowPopup("mainListPopup1" 26 113 2 "PFD")
+\a cdsLibManager->editDeleteButton->value = t
+\a deleteForm->deleteFilterEdit->value = "*"
+\a deleteForm->notDeleteFilterEdit->value = "*"
+\a nrSetWindowVisibility(deleteForm "show")
+\a nrSetCurrentWindow(deleteForm)
+\a nrResizeWindow(deleteForm list(201 143 627 425))
+\a deleteForm->OK->value = t
+\o QUESTION (CLM-199): The following 1 items are marked for deletion.  Are you sure?
+\a nrSetWindowVisibility(mcMBXDLG "show")
+\a nrSetCurrentWindow(mcMBXDLG)
+\a nrResizeWindow(mcMBXDLG list(380 273 268 91))
+\a mcMBXDLG->pushButton1->value = t
+\o Deleting cell "PFD" from library "TEST_UMC11_STD_CELL".
+\a nrSetCurrentWindow(cdsLibManager)
+\o Deleted cell 'TEST_UMC11_STD_CELL/PFD'.
+\o Deletion of 1 cell done.
+\a cdsLibManager->cellLineEdit->value = ""
+\a nrResizeWindow(deleteForm list(201 69 627 425))
+\a nrResizeWindow(workingDialogForm list(386 289 268 133))
+\a nrSetCurrentWindow(workingDialogForm)
+\a nrSetCurrentWindow(cdsLibManager)
+\a cdsLibManager->libListBox->value = nil
+\a cdsLibManager->libLineEdit->value = ""
+\a cdsLibManager->cellListBox->value = nil
+\a cdsLibManager->libListBox->value = "TEST_UMC11_STD_CELL"
+\a cdsLibManager->libLineEdit->value = "TEST_UMC11_STD_CELL"
+\a cdsLibManager->libListBox->value = nil
+\a cdsLibManager->libLineEdit->value = ""
+\a cdsLibManager->libListBox->value = "TEST_UMC11_STD_CELL"
+\a cdsLibManager->libLineEdit->value = "TEST_UMC11_STD_CELL"
+\a nrResizeWindow(workingDialogForm list(386 252 268 133))
+\a cdsLibManager->libListBox->value = "UMC11_ALLTEK_PLL"
+\a cdsLibManager->libLineEdit->value = "UMC11_ALLTEK_PLL"
+\a cdsLibManager->libLineEdit->value = ""
+\a cdsLibManager->libListBox->value = nil
+\a cdsLibManager->libListBox->value = "TEST_UMC11_STD_CELL"
+\a cdsLibManager->libLineEdit->value = "TEST_UMC11_STD_CELL"
+\a cdsLibManager->libListBox->value = "UMC11_ALLTEK_PLL"
+\a cdsLibManager->libLineEdit->value = "UMC11_ALLTEK_PLL"
+\a cdsLibManager->cellListBox->value = "PFD"
+\a cdsLibManager->cellLineEdit->value = "PFD"
+\a cdsLibManager->viewListBox->value = "schematic"
+\a cdsLibManager->viewLineEdit->value = "schematic"
+\a nrSetCurrentWindow(cdsLibManager)
+\a nrResizeWindow(cdsLibManager list(134 39 780 638))

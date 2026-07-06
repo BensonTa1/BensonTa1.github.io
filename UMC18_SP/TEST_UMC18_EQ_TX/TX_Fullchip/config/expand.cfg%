@@ -1,0 +1,21 @@
+//Revision 71
+//NOTE
+// Default template for spectre
+// Note:
+//      Please remember to replace Top Cell Library, Cell, and View
+//      fields with the actual names used by your design.
+//END_NOTE
+
+config TX_Fullchip;
+design TEST.TX_Fullchip:schematic;
+liblist myLib;
+
+viewlist spectre, cmos_sch, \cmos.sch , schematic, veriloga, ahdl, pspice, dspf;
+stoplist spectre;
+
+
+cell EQ.CML_PRBS_1 binding :schematic;
+cell EQ.TX_Fullchip binding :schematic;
+
+
+endconfig

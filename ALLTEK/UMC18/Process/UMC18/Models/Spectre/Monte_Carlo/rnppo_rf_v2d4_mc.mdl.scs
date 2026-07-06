@@ -1,0 +1,53 @@
+//###########################################
+simulator lang=spectre insensitive=yes
+//#               #
+//#  0.18um RFCMOS rnppo_sh HSPICE MODEL  #
+//#               #
+//###########################################
+//
+inline subckt rnppo_rf ( 1 2 999 )
+parameters l=20e-6                      w=20e-6						mis_flag=1
+//* 
+parameters dw=-0.046e-6*(1+ddw_rnppo_rf)
++ wi=w+dw                               dt=temp-25
++ tc1=-2.84e-4                          tc2=3e-7
++ rs=(2*105e-6/wi+352*(1+drsh_rnppo_rf)*l/wi)*(1+tc1*dt+tc2*dt*dt)
++ x=4e-7/wi                             ep=2.5+1.5/(sqrt(1+10*x))
++ f=2/(1/x+2.42-0.44*x+pow(1-x,6))      z0=120*3.14159*f/sqrt(ep)
++ fc=1.9895e12*z0*(sqrt(1/ep))          eeff=4-(4-ep)/(1+3e9/(fc*fc))
++ cox=(8.854e-12*eeff*l/f)+(2e-15+4e-10*wi-2e-5*wi*wi)
++ cox1=cox/2                            cox2=cox1
++ dgg=1e-5+2*wi                         dsg=5e-6+wi
++ rgg=l/dgg                             rsg=l/dsg
++ ps=2*(wi+2e-7)                        pg=2*(wi+1.48e-6)
++ ls=2e-7*l*(log(4*l/ps)+0.5)           lg=2e-7*l*(log(4*l/pg)+0.5)
++ mgg=2e-7*l*(log(rgg+sqrt(1+rgg*rgg))-sqrt(1+1*pow(rgg,-2)+1*pow(rgg,-1)))
++ msg=2e-7*l*(log(rsg+sqrt(1+rsg*rsg))-sqrt(1+1*pow(rsg,-2)+1*pow(rsg,-1)))
++ lsg=(lg+mgg)/2+ls-2*msg               f1=1.05e-6/lsg
++ rsub=1/(5*(5e-6+wi/2)*1.66e-3*f1)     rsub1=rsub*2
++ rsub2=rsub1                           csub=2.944e-12/rsub
++ csub1=csub/2                          csub2=csub1
+
+// * --------- mismatch -------------------
+
++ arnppo_rf=1.900e-02
++ dr_ma_nppo_rf_xx=arnppo_rf / sqrt(2 * w * l * 1e12)
++ pr_ma_nppo_rf=dr_ma_nppo_rf_xx * mc_res_ma_nppo_rf * mis_flag
+// 
+
+//* --------- Equivalent network -------------------
+//*
+rnppo_rf ( 1 2 ) bsource r=rs*(1+pr_ma_nppo_rf)*(1.0-0.0106e-6*abs(v(1,2)/l)-0.105e-12*abs(v(1,2)/l)*abs(v(1,2)/l))
+model bsource resistor  
++ w=w                       l=l                       kf=0
++ af=2.0                    fexp=1.2                    wdexp=1.0
++ ldexp=1.0                
+cox1 ( 1 11 ) capacitor c=cox1*(1+dcox_rnppo_rf)
+cox2 ( 2 22 ) capacitor c=cox2*(1+dcox_rnppo_rf)
+rsub1 ( 11 999 ) resistor r=rsub1
+csub1 ( 11 999 ) capacitor c=csub1
+rsub2 ( 22 999 ) resistor r=rsub2
+csub2 ( 22 999 ) capacitor c=csub2
+//*
+ends rnppo_rf
+

@@ -1,0 +1,51 @@
+// VerilogA for Verilog_A, IDEAL_CML_DFF_Single, veriloga
+
+`include "constants.vams"
+`include "disciplines.vams"
+
+module IDEAL_CML_DFF(D,DB,Q,QB,CLK,CLKB);
+	electrical D,DB,Q,QB,CLK,CLKB;
+	input D,DB,CLK,CLKB;
+	output Q,QB;
+
+	parameter real VOH = 1.8;
+	parameter real VOL = 1.2;
+	parameter real POS_TRIG = 1;
+	parameter real RT_FT=0.1p;
+
+	real TRIG=0;
+	real DATA=0;
+	real DOUT,DOUTB;
+
+	analog begin
+		if(POS_TRIG==1)
+			TRIG=1;
+		else
+			TRIG=0;
+
+		@cross(V(CLK)-V(CLKB),TRIG)begin
+
+			if((V(D)-V(DB))>0)begin
+				DATA=1;
+			end
+
+			if((V(DB)-V(D))>0)begin
+				DATA=0;
+			end
+
+		end
+
+		if(DATA==1)begin
+			DOUT=VOH;
+			DOUTB=VOL;
+		end
+		if(DATA==0)begin
+			DOUT=VOL;
+			DOUTB=VOH;
+		end
+
+		V(Q)<+transition(DOUT,0,RT_FT,RT_FT);
+		V(QB)<+transition(DOUTB,0,RT_FT,RT_FT);
+
+	end
+endmodule

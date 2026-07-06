@@ -1,0 +1,21 @@
+
+simulator lang=spectre insensitive=yes
+parameters mc_toxe_ncap_12 = 0
+parameters mc_xl_ncap_12 = 0
+parameters mc_xw_ncap_12 = 0
+parameters mc_cmina_ncap_12 = 0
+
+parameters dtoxe_ncap_12 = 2.83e-09 * (0.0300 / 3 * mc_toxe_ncap_12)
+parameters dxl_ncap_12 = (4.86300e-08 / 3) * mc_xl_ncap_12
+parameters dxw_ncap_12 = (9.28000e-08 / 3) * mc_xw_ncap_12
+parameters dcmina_ncap_12 = (8.28207e-02 / 3) * mc_cmina_ncap_12
+
+statistics {
+process {
+vary mc_toxe_ncap_12 dist=gauss std=sigma/3
+vary mc_xl_ncap_12 dist=gauss std=sigma/3
+vary mc_xw_ncap_12 dist=gauss std=sigma/3
+vary mc_cmina_ncap_12 dist=gauss std=sigma/3
+ }
+}
+

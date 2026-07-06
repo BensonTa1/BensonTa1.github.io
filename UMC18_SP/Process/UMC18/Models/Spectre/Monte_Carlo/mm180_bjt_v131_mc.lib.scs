@@ -1,0 +1,73 @@
+//  ******************************************************************************  
+//   
+simulator lang=spectre insensitive=yes 
+//  TT: Typical n-ch MOSFET and Typical p-ch MOSFET   
+//  FF: Fast n-ch MOSFET and Fast p-ch MOSFET   
+//  SS: Slow n-ch MOSFET and Slow p-ch MOSFET   
+//  FNSP: Fast n-ch MOSFET and Slow p-ch MOSFET   
+//  SNFP: Slow n-ch MOSFET and Fast p-ch MOSFET   
+//  ******************************************************************************  
+//   
+//     
+library mylib 
+ 
+section tt 
+parameters dis_pnp_v50x50_mm=0.0000000e+000 
+parameters dbf_pnp_v50x50_mm=0.0000000e+000 
+parameters dnf_pnp_v50x50_mm=0.0000000e+000 
+parameters dre_pnp_v50x50_mm=0.0000000e+000 
+parameters drc_pnp_v50x50_mm=0.0000000e+000 
+parameters dcjc_pnp_v50x50_mm=0.0000000e+000 
+parameters dcje_pnp_v50x50_mm=0.0000000e+000 
+parameters dis_pnp_v100x100_mm=0.0000000e+000 
+parameters dbf_pnp_v100x100_mm=0.0000000e+000 
+parameters dnf_pnp_v100x100_mm=0.0000000e+000 
+parameters dre_pnp_v100x100_mm=0.0000000e+000 
+parameters drc_pnp_v100x100_mm=0.0000000e+000 
+parameters dcjc_pnp_v100x100_mm=0.0000000e+000 
+parameters dcje_pnp_v100x100_mm=0.0000000e+000 
+//     
+include "mm180_bjt_v131_mc.mdl.scs"
+//     
+endsection tt 
+//     
+section ff 
+parameters dis_pnp_v50x50_mm=-0.2000000e+000 
+parameters dbf_pnp_v50x50_mm=0.1500000e+000 
+parameters dnf_pnp_v50x50_mm=-0.0050000e+000 
+parameters dre_pnp_v50x50_mm=-0.2000000e+000 
+parameters drc_pnp_v50x50_mm=-0.2000000e+000 
+parameters dcjc_pnp_v50x50_mm=-0.1000000e+000 
+parameters dcje_pnp_v50x50_mm=-0.1000000e+000 
+parameters dis_pnp_v100x100_mm=-0.2000000e+000 
+parameters dbf_pnp_v100x100_mm=0.1500000e+000 
+parameters dnf_pnp_v100x100_mm=-0.0050000e+000 
+parameters dre_pnp_v100x100_mm=-0.2000000e+000 
+parameters drc_pnp_v100x100_mm=-0.2000000e+000 
+parameters dcjc_pnp_v100x100_mm=-0.1000000e+000 
+parameters dcje_pnp_v100x100_mm=-0.1000000e+000 
+//     
+include "mm180_bjt_v131_mc.mdl.scs"
+//     
+endsection ff 
+//     
+section ss 
+parameters dis_pnp_v50x50_mm=0.2000000e+000 
+parameters dbf_pnp_v50x50_mm=-0.1500000e+000 
+parameters dnf_pnp_v50x50_mm=0.0050000e+000 
+parameters dre_pnp_v50x50_mm=0.2000000e+000 
+parameters drc_pnp_v50x50_mm=0.2000000e+000 
+parameters dcjc_pnp_v50x50_mm=0.1000000e+000 
+parameters dcje_pnp_v50x50_mm=0.1000000e+000 
+parameters dis_pnp_v100x100_mm=0.2000000e+000 
+parameters dbf_pnp_v100x100_mm=-0.1500000e+000 
+parameters dnf_pnp_v100x100_mm=0.0050000e+000 
+parameters dre_pnp_v100x100_mm=0.2000000e+000 
+parameters drc_pnp_v100x100_mm=0.2000000e+000 
+parameters dcjc_pnp_v100x100_mm=0.1000000e+000 
+parameters dcje_pnp_v100x100_mm=0.1000000e+000 
+//     
+include "mm180_bjt_v131_mc.mdl.scs"
+//     
+endsection ss 
+endlibrary mylib 

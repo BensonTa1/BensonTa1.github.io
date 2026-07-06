@@ -1,0 +1,7 @@
+define                 _libId (dbGetCurrentLibId)
+dbDefineAntennaRule    _libId 1 2 0 0
+dbAddAntennaLayerRule  _libId 1 "1M_MET" 400.0 '(0.2 0 400.00 2200)
+dbAddAntennaLayerRule  _libId 1 "2M_MET" 400.0 '(0.2 0 400.00 2200)
+dbAddAntennaLayerRule  _libId 1 "3M_MET" 400.0 '(0.2 0 400.00 1200)
+dbAddAntennaLayerRule  _libId 1 "4M_MET" 400.0 '(0.2 0 400.00 1200)
+dbAddAntennaLayerRule  _libId 1 "TM_MET" 400.0 '(0.2 0 8000.00 10000)

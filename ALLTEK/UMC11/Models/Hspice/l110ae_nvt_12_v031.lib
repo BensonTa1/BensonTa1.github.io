@@ -1,0 +1,57 @@
+********************************************************************************
+* TT:   Typical n-ch MOSFET and Typical p-ch MOSFET
+* FF:   Fast n-ch MOSFET and Fast p-ch MOSFET
+* SS:   Slow n-ch MOSFET and Slow p-ch MOSFET
+* FNSP: Fast n-ch MOSFET and Slow p-ch MOSFET
+* SNFP: Slow n-ch MOSFET and Fast p-ch MOSFET
+********************************************************************************
+* 
+.lib tt
+.param
+* 
+* Device1
++dtox_n_nvt_12_l110e   =  0.0000000e+000  dxl_n_nvt_12_l110e    =  0.0000000e+000  dxw_n_nvt_12_l110e    =  0.0000000e+000  
++dvth0_n_nvt_12_l110e  =  0.0000000e+000  du0_n_nvt_12_l110e    =  0.0000000e+000  dlvth0_n_nvt_12_l110e =  0.0000000e+000  
++drdsw_n_nvt_12_l110e  =  0.0000000e+000  dk3_n_nvt_12_l110e    =  0.0000000e+000  dpvth0_n_nvt_12_l110e =  0.0000000e+000  
++dwwl_n_nvt_12_l110e   =  0.0000000e+000  dcj_n_nvt_12_l110e    =  0.0000000e+000  dcjsw_n_nvt_12_l110e  =  0.0000000e+000  
++dcjswg_n_nvt_12_l110e =  0.0000000e+000  dcgdo_n_nvt_12_l110e  =  0.0000000e+000  dcgso_n_nvt_12_l110e  =  0.0000000e+000  
++dwu0_n_nvt_12_l110e   =  0.0000000e+000  dags_n_nvt_12_l110e   =  0.0000000e+000  dvsat_n_nvt_12_l110e  =  0.0000000e+000  
++dwags_n_nvt_12_l110e  =  0.0000000e+000  dpvsat_n_nvt_12_l110e =  0.0000000e+000  
+* 
+.include 'l110ae_nvt_12_v031.mdl'
+* 
+.endl tt
+* 
+.lib ff
+.param
+* 
+* Device1
++dtox_n_nvt_12_l110e   = -7.8900000e-011  dxl_n_nvt_12_l110e    = -5.0000000e-009  dxw_n_nvt_12_l110e    =  1.0000000e-010  
++dvth0_n_nvt_12_l110e  = -7.3212746e-002  du0_n_nvt_12_l110e    = -8.6408789e-004  dlvth0_n_nvt_12_l110e = -1.6227154e-002  
++drdsw_n_nvt_12_l110e  = -1.5121975e+002  dk3_n_nvt_12_l110e    = -7.3556721e+000  dpvth0_n_nvt_12_l110e = -2.4289782e-002  
++dwwl_n_nvt_12_l110e   =  1.2255226e-022  dcj_n_nvt_12_l110e    = -1.3200000e-005  dcjsw_n_nvt_12_l110e  = -3.1200000e-011  
++dcjswg_n_nvt_12_l110e = -1.2400000e-011  dcgdo_n_nvt_12_l110e  =  1.1000000e-011  dcgso_n_nvt_12_l110e  =  1.1000000e-011  
++dwu0_n_nvt_12_l110e   = -9.6856163e-004  dags_n_nvt_12_l110e   = -3.5111859e-001  dvsat_n_nvt_12_l110e  = -1.2833516e+005  
++dwags_n_nvt_12_l110e  =  1.3712086e-001  dpvsat_n_nvt_12_l110e =  1.1621402e+005  
+* 
+.include 'l110ae_nvt_12_v031.mdl'
+* 
+.endl ff
+* 
+.lib ss
+.param
+* 
+* Device1
++dtox_n_nvt_12_l110e   =  7.8900000e-011  dxl_n_nvt_12_l110e    =  5.0000000e-009  dxw_n_nvt_12_l110e    = -1.0000000e-010  
++dvth0_n_nvt_12_l110e  =  7.2492951e-002  du0_n_nvt_12_l110e    =  4.9609253e-004  dlvth0_n_nvt_12_l110e =  1.6042082e-002  
++drdsw_n_nvt_12_l110e  =  3.3422706e+002  dk3_n_nvt_12_l110e    =  6.8626193e+000  dpvth0_n_nvt_12_l110e =  2.6849364e-002  
++dwwl_n_nvt_12_l110e   = -1.5830294e-022  dcj_n_nvt_12_l110e    =  1.3200000e-005  dcjsw_n_nvt_12_l110e  =  3.1200000e-011  
++dcjswg_n_nvt_12_l110e =  1.2400000e-011  dcgdo_n_nvt_12_l110e  = -1.1000000e-011  dcgso_n_nvt_12_l110e  = -1.1000000e-011  
++dwu0_n_nvt_12_l110e   =  1.3367792e-003  dags_n_nvt_12_l110e   =  3.7313301e-001  dvsat_n_nvt_12_l110e  =  4.4571649e+005  
++dwags_n_nvt_12_l110e  = -1.7098277e-001  dpvsat_n_nvt_12_l110e = -5.8713097e+005  
+* 
+.include 'l110ae_nvt_12_v031.mdl'
+* 
+.endl ss
+* 
+* 

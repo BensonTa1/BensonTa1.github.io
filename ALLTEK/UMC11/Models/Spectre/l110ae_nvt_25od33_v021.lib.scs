@@ -1,0 +1,141 @@
+//******************************************************************************
+simulator lang=spectre insensitive=yes
+//tt: typical n-ch mosfet and typical p-ch mosfet
+//ff: fast n-ch mosfet and fast p-ch mosfet
+//ss: slow n-ch mosfet and slow p-ch mosfet
+//fnsp: fast n-ch mosfet and slow p-ch mosfet
+//snfp: slow n-ch mosfet and fast p-ch mosfet
+//******************************************************************************
+//
+library mylib
+section tt
+parameters dtox_n_nvt_25od33_l110ae=0.0000000e+000
+parameters dxl_n_nvt_25od33_l110ae=0.0000000e+000
+parameters dxw_n_nvt_25od33_l110ae=0.0000000e+000
+parameters dvth0_n_nvt_25od33_l110ae=0.0000000e+000
+parameters dlvth0_n_nvt_25od33_l110ae=0.0000000e+000
+parameters dk3_n_nvt_25od33_l110ae=0.0000000e+000
+parameters dpvth0_n_nvt_25od33_l110ae=0.0000000e+000
+parameters du0_n_nvt_25od33_l110ae=0.0000000e+000
+parameters drdsw_n_nvt_25od33_l110ae=0.0000000e+000
+parameters dwwl_n_nvt_25od33_l110ae=0.0000000e+000
+parameters dvsat_n_nvt_25od33_l110ae=0.0000000e+000
+parameters db0_n_nvt_25od33_l110ae=0.0000000e+000
+parameters dpvsat_n_nvt_25od33_l110ae=0.0000000e+000
+parameters dcj_n_nvt_25od33_l110ae=0.0000000e+000
+parameters dcjsw_n_nvt_25od33_l110ae=0.0000000e+000
+parameters dcjswg_n_nvt_25od33_l110ae=0.0000000e+000
+parameters dcgdo_n_nvt_25od33_l110ae=0.0000000e+000
+parameters dcgso_n_nvt_25od33_l110ae=0.0000000e+000
+parameters dcgdl_n_nvt_25od33_l110ae=0.0000000e+000
+parameters dcgsl_n_nvt_25od33_l110ae=0.0000000e+000
++
+include "l110ae_nvt_25od33_v021.mdl.scs"
++
+endsection tt
+//
+section ff
+parameters dtox_n_nvt_25od33_l110ae=-1.6200000e-010
+parameters dxl_n_nvt_25od33_l110ae=-2.0000000e-008
+parameters dxw_n_nvt_25od33_l110ae=1.5000000e-008
+parameters dvth0_n_nvt_25od33_l110ae=-6.4253813e-002
+parameters dlvth0_n_nvt_25od33_l110ae=-1.5678754e-008
+parameters dk3_n_nvt_25od33_l110ae=-2.1382455e+000
+parameters dpvth0_n_nvt_25od33_l110ae=2.9296810e-015
+parameters du0_n_nvt_25od33_l110ae=2.2046777e-003
+parameters drdsw_n_nvt_25od33_l110ae=-9.0000000e+001
+parameters dwwl_n_nvt_25od33_l110ae=-1.0878955e-020
+parameters dvsat_n_nvt_25od33_l110ae=3.5293397e+003
+parameters db0_n_nvt_25od33_l110ae=2.5244372e-007
+parameters dpvsat_n_nvt_25od33_l110ae=8.8322668e-009
+parameters dcj_n_nvt_25od33_l110ae=-1.1370000e-005
+parameters dcjsw_n_nvt_25od33_l110ae=-3.0903000e-011
+parameters dcjswg_n_nvt_25od33_l110ae=-9.9314000e-012
+parameters dcgdo_n_nvt_25od33_l110ae=2.2500000e-013
+parameters dcgso_n_nvt_25od33_l110ae=2.2500000e-013
+parameters dcgdl_n_nvt_25od33_l110ae=2.5048830e-011
+parameters dcgsl_n_nvt_25od33_l110ae=2.5048830e-011
++
+include "l110ae_nvt_25od33_v021.mdl.scs"
++
+endsection ff
+//
+section ss
+parameters dtox_n_nvt_25od33_l110ae=1.6200000e-010
+parameters dxl_n_nvt_25od33_l110ae=2.8000000e-008
+parameters dxw_n_nvt_25od33_l110ae=-2.3000000e-008
+parameters dvth0_n_nvt_25od33_l110ae=6.3584417e-002
+parameters dlvth0_n_nvt_25od33_l110ae=1.5716229e-008
+parameters dk3_n_nvt_25od33_l110ae=1.6882183e+000
+parameters dpvth0_n_nvt_25od33_l110ae=-3.6023282e-015
+parameters du0_n_nvt_25od33_l110ae=-2.6017848e-003
+parameters drdsw_n_nvt_25od33_l110ae=1.2500000e+002
+parameters dwwl_n_nvt_25od33_l110ae=1.1805569e-020
+parameters dvsat_n_nvt_25od33_l110ae=-4.0835608e+003
+parameters db0_n_nvt_25od33_l110ae=-2.9293892e-007
+parameters dpvsat_n_nvt_25od33_l110ae=-1.8686000e-008
+parameters dcj_n_nvt_25od33_l110ae=1.1370000e-005
+parameters dcjsw_n_nvt_25od33_l110ae=3.0903000e-011
+parameters dcjswg_n_nvt_25od33_l110ae=9.9314000e-012
+parameters dcgdo_n_nvt_25od33_l110ae=-2.2500000e-013
+parameters dcgso_n_nvt_25od33_l110ae=-2.2500000e-013
+parameters dcgdl_n_nvt_25od33_l110ae=-2.5048830e-011
+parameters dcgsl_n_nvt_25od33_l110ae=-2.5048830e-011
++
+include "l110ae_nvt_25od33_v021.mdl.scs"
++
+endsection ss
+//
+section fnsp
+parameters dtox_n_nvt_25od33_l110ae=0.0000000e+000
+parameters dxl_n_nvt_25od33_l110ae=-1.0000000e-008
+parameters dxw_n_nvt_25od33_l110ae=7.5000000e-009
+parameters dvth0_n_nvt_25od33_l110ae=-3.2227119e-002
+parameters dlvth0_n_nvt_25od33_l110ae=-7.9485396e-009
+parameters dk3_n_nvt_25od33_l110ae=-1.3496348e+000
+parameters dpvth0_n_nvt_25od33_l110ae=2.1839992e-015
+parameters du0_n_nvt_25od33_l110ae=1.2819139e-003
+parameters drdsw_n_nvt_25od33_l110ae=-4.5000000e+001
+parameters dwwl_n_nvt_25od33_l110ae=-7.0418762e-021
+parameters dvsat_n_nvt_25od33_l110ae=2.7821587e+003
+parameters db0_n_nvt_25od33_l110ae=1.3352693e-007
+parameters dpvsat_n_nvt_25od33_l110ae=6.1338605e-009
+parameters dcj_n_nvt_25od33_l110ae=-1.1370000e-005
+parameters dcjsw_n_nvt_25od33_l110ae=-3.0903000e-011
+parameters dcjswg_n_nvt_25od33_l110ae=-9.9314000e-012
+parameters dcgdo_n_nvt_25od33_l110ae=0.0000000e+000
+parameters dcgso_n_nvt_25od33_l110ae=0.0000000e+000
+parameters dcgdl_n_nvt_25od33_l110ae=0.0000000e+000
+parameters dcgsl_n_nvt_25od33_l110ae=0.0000000e+000
++
+include "l110ae_nvt_25od33_v021.mdl.scs"
++
+endsection fnsp
+//
+section snfp
+parameters dtox_n_nvt_25od33_l110ae=0.0000000e+000
+parameters dxl_n_nvt_25od33_l110ae=1.4000000e-008
+parameters dxw_n_nvt_25od33_l110ae=-1.1500000e-008
+parameters dvth0_n_nvt_25od33_l110ae=3.2490522e-002
+parameters dlvth0_n_nvt_25od33_l110ae=7.2051163e-009
+parameters dk3_n_nvt_25od33_l110ae=1.1093710e+000
+parameters dpvth0_n_nvt_25od33_l110ae=-5.8916445e-016
+parameters du0_n_nvt_25od33_l110ae=-1.3406530e-003
+parameters drdsw_n_nvt_25od33_l110ae=6.2500000e+001
+parameters dwwl_n_nvt_25od33_l110ae=2.8486020e-021
+parameters dvsat_n_nvt_25od33_l110ae=-2.1136530e+003
+parameters db0_n_nvt_25od33_l110ae=-1.6256156e-007
+parameters dpvsat_n_nvt_25od33_l110ae=-1.2040539e-008
+parameters dcj_n_nvt_25od33_l110ae=1.1370000e-005
+parameters dcjsw_n_nvt_25od33_l110ae=3.0903000e-011
+parameters dcjswg_n_nvt_25od33_l110ae=9.9314000e-012
+parameters dcgdo_n_nvt_25od33_l110ae=0.0000000e+000
+parameters dcgso_n_nvt_25od33_l110ae=0.0000000e+000
+parameters dcgdl_n_nvt_25od33_l110ae=0.0000000e+000
+parameters dcgsl_n_nvt_25od33_l110ae=0.0000000e+000
++
+include "l110ae_nvt_25od33_v021.mdl.scs"
++
+endsection snfp
+//
+endlibrary mylib

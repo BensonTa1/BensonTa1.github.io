@@ -1,0 +1,97 @@
+********************************************************************************
+Product   : Virtuoso(R) XStream Out
+Program   : @(#)$CDS: strmout version 6.1.8-64b 03/10/2020 21:43 (ip-172-18-22-58) $
+          : sub-version  IC6.1.8-64b.500.10 
+Started at: 07-Apr-2022  16:33:39
+User Name : m10912086
+Host Name : m10912086
+Directory : /home/m10912086/UM180FDKMFC0000OA_A02/UM180FDKMFC0000OA_A02
+CADENCE Design Systems, Inc.
+********************************************************************************
+Info: Cellview Rev Num:99,  Tech Rev Num:59
+
+
+                       Individual Cell Statistics - Basic Objects
+---------------------------------------------------------------------------------------------------------------------------------------
+Library/Cell/View               Instance Array   Polygon  Rect   Path   PathSeg   Text   TextDisplay   Line   Dot   Arc   Donut   Ellipse 
+---------------------------------------------------------------------------------------------------------------------------------------
+UMC_18_CMOS/vi5_p/layout        0        0       0        256    0      0         0      0             0      0     0     0       0       
+UMC_18_CMOS/vi5_p/layout        0        0       0        46     0      0         0      0             0      0     0     0       0       
+UMC_18_CMOS/vi5_p/layout        0        0       0        46     0      0         0      0             0      0     0     0       0       
+UMC_18_CMOS/MIMCAPM_RF/layout   8        0       3        50     2      0         8      0             0      0     0     0       0       
+active/active_layout/layout     1        0       0        0      0      0         0      0             0      0     0     0       0       
+UMC_18_CMOS/cont_p/layout       0        0       0        144    0      0         0      0             0      0     0     0       0       
+UMC_18_CMOS/cont_p/layout       0        0       0        142    0      0         0      0             0      0     0     0       0       
+---------------------------------------------------------------------------------------------------------------------------------------
+
+                       Individual Cell Statistics - Advanced Objects
+---------------------------------------------------------------------------------------------------------------------------------------
+Library/Cell/View               PRBdy    OtherBdy   AreaBlkg   LayerBlkg  AreaHalo   Row   Marker   CustVia   StdVia    CdsGenVia
+---------------------------------------------------------------------------------------------------------------------------------------
+UMC_18_CMOS/vi5_p/layout        0        0          0          0          0          0     0        0         0         0        
+UMC_18_CMOS/vi5_p/layout        0        0          0          0          0          0     0        0         0         0        
+UMC_18_CMOS/vi5_p/layout        0        0          0          0          0          0     0        0         0         0        
+UMC_18_CMOS/MIMCAPM_RF/layout   0        0          0          0          0          0     0        0         0         0        
+active/active_layout/layout     0        0          0          0          0          0     0        0         0         0        
+UMC_18_CMOS/cont_p/layout       0        0          0          0          0          0     0        0         0         0        
+UMC_18_CMOS/cont_p/layout       0        0          0          0          0          0     0        0         0         0        
+---------------------------------------------------------------------------------------------------------------------------------------
+
+                       Statistics of Layers 
+---------------------------------------------------------------------------------------------------------------------------------------
+Cadence         Cadence         Stream  Stream   
+Layer           Purpose         Layer   Datatype  Polygon  Rect     Path     Text     TextDisplay   Line Dot Arc Donut Ellipse Pathseg
+---------------------------------------------------------------------------------------------------------------------------------------
+SYMBOL          CSYMBOL         125     49        0        1        0        0        0             0    0   0   0     0      0      
+M1_CAD          Slot_Mark       72      73        0        1        0        0        0             0    0   0   0     0      0      
+VI5             drawing         55      0         0        364      0        0        0             0    0   0   0     0      0      
+ME5             drawing         54      0         0        1        0        0        0             0    0   0   0     0      0      
+M3_CAD          Dummy_Block     74      30        0        1        0        0        0             0    0   0   0     0      0      
+M6_CAD          Dummy_Block     77      30        0        1        0        0        0             0    0   0   0     0      0      
+MMC             drawing         65      0         0        1        0        0        0             0    0   0   0     0      0      
+M2_CAD          Dummy_Block     73      30        0        1        0        0        0             0    0   0   0     0      0      
+PPLUS           drawing         11      0         1        0        0        0        0             0    0   0   0     0      0      
+IPWM            drawing         119     0         0        0        0        5        0             0    0   0   0     0      0      
+DIFF_CAD        Dummy_Block     70      30        0        1        0        0        0             0    0   0   0     0      0      
+M1_CAD          Dummy_Block     72      30        0        1        0        0        0             0    0   0   0     0      0      
+TEXT            drawing         85      0         0        0        0        3        0             0    0   0   0     0      0      
+M5_CAD          Dummy_Block     76      30        0        1        0        0        0             0    0   0   0     0      0      
+CONT            drawing         39      0         0        302      0        0        0             0    0   0   0     0      0      
+MMC             MCAP            65      72        0        1        0        0        0             0    0   0   0     0      0      
+PO1_CAD         Dummy_Block     71      30        0        1        0        0        0             0    0   0   0     0      0      
+RFMMCMK         drawing         92      0         0        1        0        0        0             0    0   0   0     0      0      
+M4_CAD          Dummy_Block     75      30        0        1        0        0        0             0    0   0   0     0      0      
+SYMBOL          RFSYMBOL        125     55        0        1        0        0        0             0    0   0   0     0      0      
+ME1             drawing         46      0         2        0        0        0        0             0    0   0   0     0      0      
+ME6             drawing         56      0         0        3        1        0        0             0    0   0   0     0      0      
+DIFF            drawing         1       0         0        0        1        0        0             0    0   0   0     0      0      
+---------------------------------------------------------------------------------------------------------------------------------------
+
+Summary of Objects Translated:
+	Scalar Instances:		9
+	Array Instances:		0
+	Polygons:			3
+	Paths:				2
+	Rectangles:			684
+	Lines:				0
+	Arcs:				0
+	Donuts:				0
+	Dots:				0
+	Ellipses:			0
+	Boundaries:			0
+	Area Blockages:			0
+	Layer Blockages:		0
+	Area Halos:			0
+	Markers:			0
+	Rows:				0
+	Standard Vias:			0
+	Custom Vias:			0
+	CdsGen Vias:			0
+	Pathsegs:			0
+	Text:				8
+	TextDisplay:		0
+	Cells:				7
+Design Libraries: 
+
+DEFINE active	/home/m10912086/UM180FDKMFC0000OA_A02/UM180FDKMFC0000OA_A02/active
+DEFINE UMC_18_CMOS	/home/m10912086/UM180FDKMFC0000OA_A02/UM180FDKMFC0000OA_A02/UMC_18_CMOS

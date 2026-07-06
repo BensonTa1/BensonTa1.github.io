@@ -1,0 +1,62 @@
+// VerilogA for CDR, IDEAL_IQ_DIVIDER, veriloga
+
+`include "constants.vams"
+`include "disciplines.vams"
+
+module IDEAL_IQ_DIVIDER(CLKIN,CLKI,CLKQ,CLKIB,CLKQB);
+		
+	input CLKIN;
+	output CLKQ,CLKI,CLKIB,CLKQB;
+	electrical  CLKIN,CLKQ,CLKI,CLKIB,CLKQB;
+
+	parameter real VINTH=0.6;
+	parameter VOH=1.8;
+	parameter VOL=1.0;
+
+	parameter TRF=10p;
+
+	real Istate=VOL;
+	real Qstate=VOH;
+	real IBstate=VOH;
+	real QBstate=VOH;
+
+	analog begin
+		
+		@(cross(V(CLKIN)-VINTH,1))begin
+
+			if(Qstate==VOH)
+				Qstate=VOL;
+			else 
+				Qstate=VOH;
+
+		end
+
+		@(cross(V(CLKIN)-VINTH,-1))begin
+
+			if(Istate==VOH)
+				Istate=VOL;
+			else 
+				Istate=VOH;
+
+		end
+
+		if(Qstate==VOH)
+			QBstate=VOL;
+		else 
+			QBstate=VOH;
+
+		if(Istate==VOH)
+			IBstate=VOL;
+		else 
+			IBstate=VOH;
+
+
+		V(CLKI)<+transition(Istate,0,TRF,TRF);
+		V(CLKQ)<+transition(Qstate,0,TRF,TRF);
+		V(CLKQB)<+transition(QBstate,0,TRF,TRF);
+		V(CLKIB)<+transition(IBstate,0,TRF,TRF);
+
+
+	end
+
+endmodule

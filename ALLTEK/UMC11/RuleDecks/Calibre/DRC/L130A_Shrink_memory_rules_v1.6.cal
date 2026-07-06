@@ -1,0 +1,3223 @@
+//****************
+// MEMORY CHECK
+//****************
+
+//******************************************************************************
+// revision    date        who              changes
+//========= ==========  ========  ========================================
+//   V1     03/09/2009  K.C.Hsu     New Creation from L130E (Cu)
+//                                  6TSRAM1.85HSSP - SPS   95(10)
+//                                  6TSRAM1.85LL   - SPLLS 95(33)
+//                                  8TSRAM3.39HSSP - DP4S  94(35)
+//                                  8TSRAM3.39LL   - DP3S  94(34)
+//
+//   V1.1   06/24/2009  K.C.Hsu     1. Modify SPS.4A.9D.a1_4A.9D.c1_2,
+//                                     SPS.4A.9D.a1_4A.9D.c1_3, SPS.4A.9E_4,
+//                                     SPS.4A.9E_5, SPS.4A.9F, SPS.4A.9H.a__4A.9O_6,
+//                                     SPS.4A.13A, SPS.4A.13B_1, SPS.4A.13B_2,
+//                                     SPS.4A.13C.a, SPLLS.4A.9E_3, SPLLS.4A.9E_5,
+//                                     SPLLS.4A.9F, SPLLS.4A.9H.a__4A.9O_4,
+//                                     SPLLS.4A.9H.a__4A.9O_5, SPLLS.4A.13A,
+//                                     SPLLS.4A.13B_2, SPLLS.4A.13B_3,
+//                                     SPLLS.4A.13C.a_2, SPLLS.4B.1D.a
+//                                  2. Add SPS.4A.9E_6, SPS.4A.9E_7, SPS.4A.9E_8,
+//                                     SPS.4A.9E_9, SPS.4A.9E_10, SPS.4A.13D,
+//                                     SPLLS.4A.9E_6, SPLLS.4A.9E_7, SPLLS.4A.9E_8,
+//                                     SPLLS.4A.9E_9, SPLLS.4A.9E_10 ,SPLLS.4A.9E_11,
+//                                     SPLLS.4A.9E_12, SPLLS.4A.13D
+//
+//   V1.2   05/03/2010  K.C.Hsu     1. Modify SPS.4A.9D.a1_4A.9D.c1_1,
+//                                     SPS.4A.9D.a1_4A.9D.c1_2, SPS.4A.9D.a1_4A.9D.c1_3,
+//                                     SPLLS.4A.9D.a1_4A.9D.c1_1, SPLLS.4A.9D.a1_4A.9D.c1_2,
+//                                     SPLLS.4A.9D.a1_4A.9D.c1_3, SPLLS.4A.9D.a1_4A.9D.c1_4,
+//                                     SPLLS.4A.9D.a1_4A.9D.c1_5, SPLLS.4A.9D.a1_4A.9D.c1_6,
+//                                     SPLLS.4A.9D.a1_4A.9D.c1_7, DP3S.4A.9D.c1_1, DP3S.4A.9D.c1_2
+//
+//   V1.3   02/18/2011  K.C.Hsu     1. Add new SRAM
+//                                     6TSRAM1.64LL - SP_4 95(4)
+//                                     6TSRAM1.64HSSP - SP_5 95(20)
+//
+//   V1.4   02/29/2012  K.C.Hsu     1. Add new SRAM
+//                                     6TSRAM1.41LL - SP_18 98(4)
+//                                     6TSRAM1.41HSSP - SP_16 98(2)
+//
+//   V1.5   03/11/2013  C.T Lai     1. Modify SPLLS.4A.9AaBaC_10 coding.
+//
+//******************************************************************************
+
+//L130-Shrink
+GROUP SPS_SRAM   SPS.?
+GROUP SPLLS_SRAM SPLLS.?
+GROUP DP3S_SRAM  DP3S.?
+GROUP DP4S_SRAM  DP4S.?
+GROUP SP_4_SRAM  SP_4.?
+GROUP SP_5_SRAM  SP_5.?
+GROUP SP_18_SRAM  SP_18.?
+GROUP SP_16_SRAM  SP_16.?
+
+//==============================================
+//==============================================
+//L130-Shrink SRAM
+//==============================================
+//
+OPC_BLOCK.C_CELL_BLOCK.1 {@ C_CELL_BLOCK layer must be covered by SRAM mark layers
+   A = SIZE SPS BY 5.0
+   (((((((C_CELL_BLOCK NOT A) NOT SPLLS ) NOT DP4S) NOT DP3S) NOT SP_4) NOT SP_5) NOT SP_18) NOT SP_16
+}
+
+//
+//==========================
+// SPS SRAM (6TSRAM1.85HSSP)
+//==========================
+
+DIFF_SPS  = DIFF INTERACT SPS
+NWEL_SPS  = NWEL INTERACT SPS
+PO1_SPS   = PO1  INTERACT SPS
+GATE_SPS  = GATE AND SPS
+GATE_W_SPS = PO1_SPS COIN INSIDE EDGE GATE_SPS
+GATE_Wc_SPS = GATE_W_SPS  COIN OUTSIDE EDGE CO_SD  //With contact
+GATE1_W_SPS = GATE_W_SPS NOT INSIDE EDGE TG
+ACTIVE_PS_SPS = DIFF_SPS OUTSIDE NWEL
+
+PDIF1_SPS = PDIF1 AND SPS
+NDIF1_SPS = NDIF1 AND SPS
+
+PPLUS_SPS  = PPLUS INTERACT SPS
+CONT_SPS   = CONT INTERACT SPS
+POLCNT_SPS = POLCNT AND SPS
+DIFCNT_SPS = DIFCNT AND SPS
+ME1_SPS  = ME1 INTERACT SPS
+
+SPS.4A.1AB_1 {@ Minimum dimension of an DIFF is 0.125 when common run length <=0.055
+   X = INT DIFF_SPS < 0.125 ABUT>0<90 SINGULAR PROJECTING <=0.055 REGION
+   X AND SPS
+}
+SPS.4A.1AB_2 {@ Minimum dimension of an DIFF is 0.145 when common run length 0.055< x <=0.105
+   X = INT DIFF_SPS < 0.145 ABUT>0<90 SINGULAR PROJECTING > 0.055 <= 0.105 REGION
+   X AND SPS
+}
+SPS.4A.1AB_3 {@ Minimum dimension of an DIFF is 0.12 when common run length 0.105< x <=0.165
+   X = INT DIFF_SPS < 0.12 ABUT>0<90 SINGULAR PROJECTING > 0.105 <= 0.165 REGION
+   X AND SPS
+}
+
+SPS.4A.1AB_4 {@ Minimum dimension of an DIFF is 0.13 when common run length 0.165< x <=0.21
+   X = INT DIFF_SPS < 0.13 ABUT>0<90 SINGULAR PROJECTING >0.165 <=0.21 REGION
+   X AND SPS
+}
+SPS.4A.1AB_5 {@ Minimum dimension of an DIFF is 0.16 when common run length >0.21
+   X = INT DIFF_SPS < 0.16 ABUT>0<90 SINGULAR PROJECTING >0.21 REGION
+   X AND SPS
+}
+
+SPS.4A.1C.a1b1_1 {@ Minimum space between two DIFF regions is 0.08um when common run length <=0.02
+   X = EXT DIFF_SPS < 0.08 ABUT>0<90 OPPOSITE REGION
+   Y = DIFF_SPS COIN OUTSIDE EDGE X
+   E = X WITH EDGE (LENGTH Y <=0.02)
+   E AND SPS
+}
+SPS.4A.1C.a1b1_2 {@ Minimum space between two DIFF regions is 0.165um when common run length 0.02<X<=0.03
+   X = EXT DIFF_SPS < 0.165 ABUT>0<90 OPPOSITE REGION
+   Y = DIFF_SPS COIN OUTSIDE EDGE X
+   E = X WITH EDGE (LENGTH Y >0.02 <=0.03 )
+   E AND SPS
+}
+SPS.4A.1C.a1b1_3 {@ Minimum space between two DIFF regions is 0.185um when common run length 0.03<X<=0.035
+   X = EXT DIFF_SPS < 0.185 ABUT>0<90 OPPOSITE REGION
+   Y = DIFF_SPS COIN OUTSIDE EDGE X
+   E = X WITH EDGE (LENGTH Y >0.03 <=0.035 )
+   E AND SPS
+}
+SPS.4A.1C.a1b1_4 {@ Minimum space between two DIFF regions is 0.055um when common run length 0.035<X<=0.04
+   X = EXT DIFF_SPS < 0.055 ABUT>0<90 OPPOSITE REGION
+   Y = DIFF_SPS COIN OUTSIDE EDGE X
+   E = X WITH EDGE (LENGTH Y >0.035 <=0.04 )
+   E AND SPS
+}
+SPS.4A.1C.a1b1_5 {@ Minimum space between two DIFF regions is 0.05um when common run length 0.004<X<=0.055
+   X = EXT DIFF_SPS < 0.05 ABUT>0<90 OPPOSITE REGION
+   Y = DIFF_SPS COIN OUTSIDE EDGE X
+   E = X WITH EDGE (LENGTH Y >0.04 <=0.055 )
+   E AND SPS
+}
+SPS.4A.1C.a1b1_6 {@ Minimum space between two DIFF regions is 0.18um when common run length 0.055<X<=0.165
+                  @ waive notch check(0.065/0.08/0.165/0.055)
+
+   X = EXT DIFF_SPS < 0.18 ABUT>0<90 OPPOSITE REGION
+   Y = DIFF_SPS COIN OUTSIDE EDGE X
+   Z = X WITH EDGE (LENGTH Y >0.055 <=0.165 )
+//   E AND SPS
+   A = EXT DIFF_SPS == 0.065 ABUT>0<90 NOTCH REGION
+   B = EXT DIFF_SPS == 0.08  ABUT>0<90 NOTCH REGION
+   C = EXT DIFF_SPS == 0.165 ABUT>0<90 NOTCH REGION
+   D = EXT DIFF_SPS == 0.055 ABUT>0<90 NOTCH REGION
+   D1 = D INTERACT C
+   E = (((A OR B) OR C) OR D1)  INTERACT Z
+   (Z NOT E) AND SPS
+}
+SPS.4A.1C.a1b1_7 {@ Minimum space between two DIFF regions is 0.19um when common run length 0.165<X<=0.335
+                  @ waive notch check(0.185/0.065)
+
+   X = EXT DIFF_SPS < 0.19 ABUT>0<90 OPPOSITE REGION
+   Y = DIFF_SPS COIN OUTSIDE EDGE X
+   E = X WITH EDGE (LENGTH Y >0.165 <=0.335 )
+   A = EXT DIFF_SPS == 0.185 ABUT>0<90 NOTCH REGION
+   B = EXT DIFF_SPS == 0.065 ABUT>0<90 NOTCH REGION
+   C = (A INTERACT B) OR (B INTERACT A)
+   Z = C  INTERACT E
+   (Z NOT E) AND SPS
+}
+SPS.4A.1C.a1b1_8 {@ Minimum space between two DIFF regions is 0.2um for others
+   X = EXT DIFF_SPS < 0.2 ABUT>0<90 OPPOSITE REGION
+   Y = DIFF_SPS COIN OUTSIDE EDGE X
+   E = X WITH EDGE (LENGTH Y >0.335 )
+   E AND SPS
+}
+
+
+SPS.4A.1D.a {@ Minimum NWEL to a N+ DIFF(1.2V) spacing is 0.245um
+   X = EXT NWEL_SPS NDIF1 < 0.245 ABUT<90 OVERLAP SINGULAR REGION
+   X AND SPS
+}
+SPS.4A.1E {@ Minimum NWEL overlap N+ DIFF is 0.15um
+   NTAP_SPS = NTAP INTERACT SPS
+   X = ENC NTAP_SPS NWEL < 0.15 ABUT<90 SINGULAR OVERLAP REGION
+   X AND SPS
+}
+SPS.4A.1G.a {@ Minimum NWEL overlap P+ DIFF(1.2V) is 0.24um
+   X = ENC PDIF1 NWEL_SPS < 0.24 ABUT<90 SINGULAR OVERLAP REGION
+   X AND SPS
+}
+
+SPS.4A.4.2D {@ Minimum VTN_SP to unrelated Poly gate spacing is 0.24um
+   X = EXT VTN_SP (GATE_NOT_VTN_SP INTERACT SPS) < 0.24 ABUT INSIDE ALSO REGION
+   X AND SPS
+}
+
+SPS.4A.5.2D {@ Minimum VTP_SP to unrelated Poly gate spacing is 0.245um
+   X = EXT VTP_SP (GATE_NOT_VTP_SP INTERACT SPS) < 0.245 ABUT INSIDE ALSO REGION
+   X AND SPS
+}
+
+   PG_GATE_SPS = RECTANGLE ( GATE INTERACT NPLUS )  == 0.18 BY == 0.15
+   PD_GATE_SPS = RECTANGLE ( GATE INTERACT NPLUS )  == 0.28 BY == 0.13
+   PL_GATE_SPS = RECTANGLE ( GATE INTERACT PPLUS )  == 0.165 BY == 0.13
+   GATE_O_SPS  = ((GATE NOT PD_GATE_SPS) NOT PG_GATE_SPS) NOT PL_GATE_SPS
+
+SPS.4A.9AaBaC_1 {@ Minimum PO1 width for 1.2V NMOS or PMOS or interconnect is 0.09um when PO1 interact PG_GATE
+   X = INT (PO1 INTERACT PG_GATE_SPS) < 0.09 ABUT>0<90 SINGULAR REGION
+   X AND SPS
+}
+SPS.4A.9AaBaC_2 {@ Minimum PO1 width for 1.2V NMOS or PMOS or interconnect is 0.045um when common run length <= 0.01
+   X = INT PO1_SPS < 0.045 ABUT>0<90 SINGULAR PROJECTING <= 0.01 REGION
+   X AND SPS
+}
+SPS.4A.9AaBaC_3 {@ Minimum PO1 width for 1.2V NMOS or PMOS or interconnect is 0.08um when common run length 0.01 <x <= 0.025
+   X = INT PO1_SPS < 0.08 ABUT>0<90 SINGULAR  PARALLEL ONLY PROJECTING >0.01 <=0.025 REGION
+   X AND SPS
+}
+SPS.4A.9AaBaC_4 {@ Minimum PO1 width for 1.2V NMOS or PMOS or interconnect is 0.115um when common run length 0.025 <x <= 0.03
+   X = INT PO1_SPS < 0.115 ABUT>0<90 SINGULAR  PARALLEL ONLY PROJECTING >0.025 <=0.03 REGION
+   X AND SPS
+}
+SPS.4A.9AaBaC_5 {@ Minimum PO1 width for 1.2V NMOS or PMOS or interconnect is 0.045um when common run length 0.03 <x <=0.045
+   X = INT PO1_SPS < 0.045 ABUT>0<90 SINGULAR  PROJECTING >0.03 <=0.045 REGION
+   X AND SPS
+}
+SPS.4A.9AaBaC_6 {@ Minimum PO1 width for 1.2V NMOS or PMOS or interconnect is 0.09um when common run length 0.045 <x <=0.12
+   X = INT PO1_SPS < 0.09 ABUT>0<90 SINGULAR  PROJECTING >0.045 <=0.12 REGION
+   X AND SPS
+}
+SPS.4A.9AaBaC_7 {@ Minimum PO1 width for 1.2V NMOS or PMOS or interconnect is 0.095um when common run length 0.12 <x <=0.22
+                 @ CORNER TO EDGE == 0.095 BYPASS
+   X = INT PO1_SPS < 0.095 ABUT>0<90 SINGULAR  PROJECTING >0.12 <=0.22 PARALLEL ONLY REGION
+   Y = X AND SPS
+   Z1 = INT PO1_SPS < 0.095 ABUT>0<90 SINGULAR  CORNER TO EDGE REGION
+   Z2 = Z1 INSIDE Y
+   Y NOT Z2
+}
+SPS.4A.9AaBaC_8 {@ Minimum PO1 width for 1.2V NMOS or PMOS or interconnect is 0.105um when common run length 0.22 <x <=0.28
+   X = INT PO1_SPS < 0.105 ABUT>0<90 SINGULAR  PROJECTING >0.22 <=0.28 REGION
+   X AND SPS
+}
+
+SPS.4A.9AaBaC_9 {@ Minimum PO1 width for 1.2V NMOS or PMOS or interconnect is 0.12 when common run length >0.28
+   X = INT PO1_SPS < 0.12 ABUT>0<90 SINGULAR PROJECTING >0.28 REGION
+   X AND SPS
+}
+
+SPS.4A.9D.a1_4A.9D.c1_1 {@ Minimum PO1 spacing on DIFF regions without contact is 0.1 when common run length <=0.055
+   E1 = EXT PO1 < 0.1 PROJ <= 0.055 ABUT>0<90 SINGULAR REGION
+   E2 = EXT PO1 < 0.1 NOT PROJ ABUT>0<90 SINGULAR REGION
+   E3 = EXT PO1 < 0.1 CORNER TO CORNER ABUT>0<90 SINGULAR REGION
+   E1 AND SPS
+   E2 AND SPS
+   E3 AND SPS
+}
+SPS.4A.9D.a1_4A.9D.c1_2 {@ Minimum PO1 spacing on DIFF regions without contact is 0.148um when common run length  0.055<X<=0.09
+   E = EXT PO1 < 0.148 PROJ > 0.055 <= 0.09 ABUT>0<90 SINGULAR REGION
+   E AND SPS
+}
+SPS.4A.9D.a1_4A.9D.c1_3 {@ Minimum PO1 spacing on DIFF regions without contact is 0.11um when common run length >0.09
+   E = EXT PO1 < 0.11 PROJ > 0.09 ABUT>0<90 SINGULAR REGION
+   E AND SPS
+}
+SPS.4A.9D.b1 {@ Minimum PO1 spacing on DIFF regions with contact
+              @ poly width > 0.24um is 0.24um
+   x = EXT GATE_Wc < 0.24 ABUT>0<90 REGION
+   x AND SPS
+}
+
+SPS.4A.9E_1 {@ Minimum overlap of a PO1 region extended into field oxide is 0.17um
+   ENC PD_GATE_SPS PO1_SPS < 0.17 ABUT>0<90 REGION
+}
+SPS.4A.9E_2 {@ Minimum overlap of a PO1 region extended into field oxide is 0.07um
+   ENC PG_GATE_SPS PO1_SPS < 0.07 ABUT>0<90 REGION
+}
+SPS.4A.9E_3 {@ Minimum overlap of a PO1 region extended into field oxide is 0.18um
+   ENC PL_GATE_SPS PO1_SPS < 0.18 ABUT>0<90 REGION
+}
+
+    GATE_SPS_1 = AREA GATE_SPS == 0.0031125
+    GATE_SPS_2 = AREA GATE_SPS == 0.00765
+    GATE_SPS_3 = (GATE_SPS_1 OR GATE_SPS_2) INTERACT CONT
+    GATE_SPS_7 = AREA GATE_SPS == 0.0071125
+
+SPS.4A.9E_4 {@ Minimum overlap of a PO1 region extended into field oxide is 0.045um
+             @ GATE AREA with CONT =0.0031125 or 0.00765 or 0.0071125 um2
+    ENC GATE_SPS_3 PO1_SPS < 0.045 ABUT>0<90 REGION
+    ENC (GATE_SPS_7 INTERACT CONT) PO1_SPS < 0.045 ABUT>0<90 REGION
+}
+SPS.4A.9E_5 {@ Minimum overlap of a PO1 region extended into field oxide is 0.035um
+             @ GATE AREA = 0.0071125 um2
+    ENC GATE_SPS_7 PO1_SPS < 0.035 ABUT>0<90 REGION
+}
+SPS.4A.9E_6 {@ Minimum overlap of a PO1 region extended into field oxide is 0.17um
+             @ When the common run length < 0.085
+   GATE_O_SPS_A = (GATE_O_SPS NOT GATE_SPS_3) NOT GATE_SPS_7
+   X1 = ENC GATE_O_SPS_A PO1_SPS < 0.17 ABUT>0<90 PROJ < 0.085 REGION
+   X2 = ENC GATE_O_SPS_A PO1_SPS < 0.17 ABUT>0<90 NOT PROJ REGION
+   X3 = ENC GATE_O_SPS_A PO1_SPS < 0.17 ABUT>0<90 CORNER TO CORNER REGION
+   Y1 = LENGTH (X1 COIN OUTSIDE EDGE GATE_SPS_8) == 0.111
+   Y2 = LENGTH (X2 COIN OUTSIDE EDGE GATE_SPS_8) == 0.111
+   Y3 = LENGTH (X3 COIN OUTSIDE EDGE GATE_SPS_8) == 0.111
+   (X1 NOT WITH EDGE Y1) AND SPS
+   (X2 NOT WITH EDGE Y2) AND SPS
+   (X3 NOT WITH EDGE Y3) AND SPS
+}
+SPS.4A.9E_7 {@ Minimum overlap of a PO1 region extended into field oxide is 0.164um
+             @ When the common run length == 0.085
+   GATE_O_SPS_A = (GATE_O_SPS NOT GATE_SPS_3) NOT GATE_SPS_7
+   X = ENC GATE_O_SPS_A PO1_SPS < 0.164 ABUT>0<90 PROJ == 0.085 REGION
+   x AND SPS
+}
+SPS.4A.9E_8 {@ Minimum overlap of a PO1 region extended into field oxide is 0.17um
+             @ When the common run length > 0.085 < 0.12
+   GATE_O_SPS_A = (GATE_O_SPS NOT GATE_SPS_3) NOT GATE_SPS_7
+   X = ENC GATE_O_SPS_A PO1_SPS < 0.17 ABUT>0<90 PROJ > 0.085 < 0.12 REGION
+   x AND SPS
+}
+SPS.4A.9E_9 {@ Minimum overlap of a PO1 region extended into field oxide is 0.035um
+             @ When the common run length == 0.12
+   GATE_O_SPS_A = (GATE_O_SPS NOT GATE_SPS_3) NOT GATE_SPS_7
+   X = ENC GATE_O_SPS_A PO1_SPS < 0.035 ABUT>0<90 PROJ == 0.12 REGION
+   x AND SPS
+}
+SPS.4A.9E_10 {@ Minimum overlap of a PO1 region extended into field oxide is 0.17um
+              @ When the common run length > 0.12
+   GATE_O_SPS_A = (GATE_O_SPS NOT GATE_SPS_3) NOT GATE_SPS_7
+   X = ENC GATE_O_SPS_A PO1_SPS < 0.17 ABUT>0<90 PROJ > 0.12 REGION
+   x AND SPS
+}
+
+SPS.4A.9F_1 {@ Minimum POLY1 on field region to DIFFUSION spacing is 0.06103um when corner to corner
+   E = EXT PO1_SPS DIFF < 0.06103 CORNER TO CORNER SINGULAR REGION
+   E AND SPS
+}
+
+SPS.4A.9F_2 {@ Minimum POLY1 on field region to DIFFUSION spacing is 0.025um when the common run length between <=0
+   E1 = EXT PO1_SPS DIFF < 0.025 PROJ <= 0 SINGULAR REGION
+   E2 = EXT PO1_SPS DIFF < 0.025 NOT PROJ SINGULAR REGION
+   E1 AND SPS
+   E2 AND SPS
+}
+
+SPS.4A.9F_3 {@ Minimum POLY1 on field region to DIFFUSION spacing is 0.07um when the common run length between 0 to 0.02 (0< x <=0.02)
+   E = EXT PO1_SPS DIFF < 0.07 PROJ > 0 <= 0.02 SINGULAR REGION
+   E AND SPS
+}
+
+SPS.4A.9F_4 {@ Minimum POLY1 on field region to DIFFUSION spacing is 0.015um when the common run length  between 0.02 to 0.105 (0.02< x <0.105)
+   E = EXT PO1_SPS DIFF < 0.015 PROJ > 0.02 <= 0.105 SINGULAR REGION
+   E AND SPS
+}
+
+SPS.4A.9F_5 {@ Minimum POLY1 on field region to DIFFUSION spacing is 0.045um when the common run length  between 0.105 to 0.125 (0.105< x <=0.125)
+   E = EXT PO1_SPS DIFF < 0.045 PROJ > 0.105 <= 0.125 SINGULAR REGION
+   E AND SPS
+}
+
+SPS.4A.9F_6 {@ Minimum POLY1 on field region to DIFFUSION spacing is 0.035um when the common run length  between 0.125 to 0.145 (0.125< x <=0.145)
+   E = EXT PO1_SPS DIFF < 0.035 PROJ > 0.125 <= 0.145 SINGULAR REGION
+   E AND SPS
+}
+
+SPS.4A.9F_7 {@ Minimum POLY1 on field region to DIFFUSION spacing is 0.065um when the common run length  between 0.145 to 0.165 (0.145< x <=0.165)
+   E = EXT PO1_SPS DIFF < 0.065 PROJ > 0.145 <= 0.165 SINGULAR REGION
+   E AND SPS
+}
+
+SPS.4A.9F_8 {@ Minimum POLY1 on field region to DIFFUSION spacing is 0.025um when the common run length  between 0.165 to 0.19 (0.165< x <=0.19)
+   E = EXT PO1_SPS DIFF < 0.025 PROJ > 0.165 <= 0.19 SINGULAR REGION
+   E AND SPS
+}
+
+SPS.4A.9F_9 {@ Minimum POLY1 on field region to DIFFUSION spacing is 0.077um when the common run length  between 0.19 to 0.2 (0.19< x <=0.2)
+   E = EXT PO1_SPS DIFF < 0.077 PROJ > 0.19 <= 0.2 SINGULAR REGION
+   E AND SPS
+}
+
+SPS.4A.9F_10 {@ Minimum POLY1 on field region to DIFFUSION spacing is 0.025um when the common run length  between 0.2 to 0.355 (0.2< x <0.355)
+   E = EXT PO1_SPS DIFF < 0.025 PROJ > 0.2 <= 0.355 SINGULAR REGION
+   E AND SPS
+}
+
+SPS.4A.9F_11 {@ Minimum POLY1 on field region to DIFFUSION spacing is 0.1um when the common run length  between 0.355 to 0.48 (0.355< x <0.48)
+   E = EXT PO1_SPS DIFF < 0.1 PROJ > 0.355 < 0.48 SINGULAR REGION
+   E AND SPS
+}
+
+SPS.4A.9F_12 {@ Minimum POLY1 on field region to DIFFUSION spacing is 0.03um when the common run length  ==0.48
+   E = EXT PO1_SPS DIFF < 0.03 PROJ == 0.48 SINGULAR REGION
+   E AND SPS
+}
+
+SPS.4A.9F_13 {@ Minimum POLY1 on field region to DIFFUSION spacing is 0.1um when the common run length  >0.48
+   E = EXT PO1_SPS DIFF < 0.1 PROJ > 0.48 SINGULAR REGION
+   E AND SPS
+}
+
+SPS.4A.9G {@ Minimum PO1 endcap to RELATED DIFF spacing is 0.06um
+   END_CAP =  INTPOL TOUCH GATE == 1
+   x = EXT DIFF_SPS GATE < 0.06 PERP ONLY ABUT == 90 REGION
+   x INTERACT END_CAP
+}
+
+    GATE_SPS_4 = AREA GATE_SPS == 0.0354
+    GATE_SPS_5 = AREA GATE_SPS == 0.0198
+    GATE_SPS_6 = OR GATE_SPS_4 GATE_SPS_5
+    GATE_SPS_8 = AREA GATE_SPS == 0.0102
+//    GATE_SPS_9 = GATE_SPS_8 INTERACT CONT
+
+SPS.4A.9H.a__4A.9O_1 {@ Minimum PO1 gate to field edge spacing is 0.005um
+   GATE_W_PL = PO1 COIN INSIDE EDGE PL_GATE_SPS
+   E = ENC GATE_W_PL DIFF_SPS < 0.005 REGION
+   E AND SPS
+}
+SPS.4A.9H.a__4A.9O_2 {@ Minimum PO1 gate to field edge spacing is 0.01um
+   GATE_W_PD = PO1 COIN INSIDE EDGE PD_GATE_SPS
+   E = ENC GATE_W_PD DIFF_SPS < 0.01 REGION
+   E AND SPS
+}
+SPS.4A.9H.a__4A.9O_3 {@ Minimum PO1 gate to field edge spacing is 0.185um
+   GATE_W_PG = PO1 COIN INSIDE EDGE PG_GATE_SPS
+   E = ENC GATE_W_PG DIFF_SPS < 0.185 REGION
+   E AND SPS
+}
+SPS.4A.9H.a__4A.9O_4 {@ Minimum PO1 gate to field edge spacing is 0.01um
+                      @ when gate area = 0.0354 or 0.0198um2
+//   GATE_W_4 = PO1 COIN INSIDE EDGE GATE_SPS_6
+   E = ENC GATE_SPS_6 DIFF_SPS < 0.01 REGION
+   E AND SPS
+}
+SPS.4A.9H.a__4A.9O_5 {@ Minimum PO1 gate to field edge spacing is 0.095um
+                      @ when gate area with cont = 0.0031125 or 0.00765 um2
+//   GATE_W_3 = PO1 COIN INSIDE EDGE ((GATE_SPS_1 OR GATE_SPS_2) INTERACT CONT)
+   E = ENC GATE_SPS_3 DIFF_SPS < 0.095 REGION
+   E AND SPS
+}
+SPS.4A.9H.a__4A.9O_6 {@ Minimum PO1 gate to field edge spacing is 0.06um for others
+   GATE_O_SPS_A = (GATE_O_SPS NOT GATE_SPS_3) NOT GATE_SPS_6
+   GATE_W_O = PO1 COIN INSIDE EDGE GATE_O_SPS_A
+   E = ENC GATE_W_O DIFF_SPS < 0.06 REGION
+   E AND SPS
+}
+
+// SPS.4A.9J {@ Gate at 90 degree angle is not allowed.
+//    Waive
+
+SPS.4A.9N {@ Minimum PO1 bent gate on field region to DIffusion spacing = 0.09
+   x = EXT GATE_W EXPO_E < 0.09 OBTUSE ONLY REGION
+   x AND SPS
+}
+
+CONT_SPS_A = RECTANGLE CONT_SPS == 0.16 BY == 0.16
+CONT_SPS_SINGLE = AREA CONT_SPS == 0.0255
+
+SPS.4A.13A {@ Minimum and maximum width of a CONT region is 0.16um
+            @ Waive Share CONT  : area is 0.0937 or 0.078475 or 0.086725
+            @ Waive Single CONT : area is 0.0255
+   X  = NOT RECTANGLE CONT_SPS == 0.16 BY == 0.16
+   Y1 = AREA X == 0.0937
+   Y2 = AREA X == 0.078475
+   Y3 = AREA X == 0.086725
+   Y4 = AREA X == 0.0255
+   (((X NOT Y1) NOT Y2) NOT Y3) NOT Y4
+}
+SPS.4A.13B_1 {@ Minimum space between two CONT regions is 0.152um, when point to edge (By Pass Shared Cont)
+              @ point to edge
+   X = EXT CONT_SPS_A CONT < 0.152 ABUT>0<90 CORNER TO EDGE REGION
+   Y = EXT CONT_SPS_SINGLE CONT < 0.152 ABUT>0<90 CORNER TO EDGE REGION
+   (X OR Y) AND SPS
+}
+SPS.4A.13B_2 {@ Minimum space between two CONT regions is 0.10um, By Pass Shared Cont
+   X = EXT CONT_SPS_A < 0.10 ABUT>0<90 SINGULAR REGION
+   Y = EXT CONT_SPS_A CONT_SPS_SINGLE < 0.10 ABUT>0<90 SINGULAR REGION
+   (X OR Y) AND SPS
+}
+
+SPS.4A.13C.a {@ Minimum DIFF CONT to Poly(1.2V) spacing is 0.025um, By Pass Shared Cont
+   DIFCNT_SPS_A = (CONT_SPS_A OR CONT_SPS_SINGLE) INTERACT DIFF
+   X = EXT DIFCNT_SPS_A GATE1_W < 0.025 ABUT>0<90 OPPOSITE REGION
+   x AND SPS
+}
+
+SPS.4A.13D {@ when the poly cont area=0.0255 um2,the common rule length<=0.16, waive
+            @ others is 0.12 um
+   x = AREA POLCNT_SPS == 0.0255
+   EXT x DIFF < 0.12 PROJ > 0.16 ABUT<90 SINGULAR REGION
+   EXT (POLCNT_SPS NOT x) DIFF < 0.12 ABUT<90 SINGULAR REGION
+}
+
+SPS.4A.13E {@ Minimum PO1 overlap CONT is 0.06um, no floating conntact
+            @ By pass (0.022 0.06 0.022 0.06)
+    POLCNT_SPS_A = CONT_SPS_A INTERACT PO1
+    X = ENC POLCNT_SPS_A PO1_SPS < 0.06 ABUT<90 SINGULAR OUTSIDE ALSO REGION
+    X1 = CONT INTERACT X
+    RECTANGLE ENC X1 PO1_SPS
+    GOOD 0.022 0.06 OPPOSITE 0.022 0.06 OPPOSITE
+}
+
+SPS.4A.13FG {@ Minimum extension of an DIFF region beyond a CONT region is
+             @ Size single size -0.015
+             @ By pass (0.025 0.055 0.025 0.07 )
+             @ By pass (0.02  0.065 0.011 0.075)
+             @ By pass (0     0.025 0.011 0.03)
+             @ By pass (0.035 0.05  0.035 0.05)
+             @ By pass (0.02  0.075 0.011 0.065)
+             @ By pass (0.025 0.075 0.025 0.075)
+             @ By pass (0.075 0.075 0.075 0.075)
+
+   CONT_SPS_SA = SIZE CONT_SPS_A BY -0.015
+   RECTANGLE ENC CONT_SPS_SA DIFF_SPS
+   GOOD 0.025 0.055 OPPOSITE 0.025 0.07  OPPOSITE
+   GOOD 0.02  0.065 OPPOSITE 0.011 0.075 OPPOSITE
+   GOOD 0     0.025 OPPOSITE 0.011 0.03  OPPOSITE
+   GOOD 0.035 0.05  OPPOSITE 0.035 0.05  OPPOSITE
+   GOOD 0.02  0.075 OPPOSITE 0.011 0.065 OPPOSITE
+   GOOD 0.025 0.075 OPPOSITE 0.025 0.075 OPPOSITE
+   GOOD 0.075 0.075 OPPOSITE 0.075 0.075 OPPOSITE
+}
+
+SPS.4A.13I {@ Poly contact on diffusion is not allowed.
+  DIFFCNT_SPS_A = CONT_SPS_A INTERACT DIFF
+   (GATE AND DIFFCNT_SPS_A) AND SPS
+}
+
+/////////////////////////////
+
+//SPS.4B.1A {@ Minimum width of ME1 region is 0.16um
+//    x = INT ME1 < 0.16 ABUT>0<90 SINGULAR REGION
+//    ( ((x NOT SRAM) NOT LOGOMK) NOT DP4 ) AND SPS
+//}// the same with main deck
+
+//SPS.4B.1C {@ Minimum space between ME1 regions is 0.16um
+//    x = EXT ME1 < 0.16 ABUT>0<90 REGION
+//    ((x NOT SRAM) NOT LOGOMK ) AND SPS
+//}// the same with main deck
+
+SPS.4B.1D.a {@ Minimum ME1 overlap contac is 0 um,waive share cont
+    x = CONT_SPS_A NOT ME1
+    x AND SPS
+}
+
+SPS.4B.1D.b {@ ME1 enclose CONT at end-of-line or outer corner is 0.06,when ME1 width < 0.24
+              @ waive share Cont
+              @  cont (GOOD 0.01 0.015 OPPOSITE 0.04 0.165 OPPOSITE)
+              @  cont (GOOD 0.00 0.06  OPPOSITE 0.00 0.06  OPPOSITE)
+              @  cont (GOOD0.01 0.00  0.05  0.05)
+
+    co_sm24 = CONT_SPS_A INTERACT SM1_024
+    y = RECTANGLE ENC co_sm24 ME1
+    GOOD 0.01 0.015 OPPOSITE 0.04 0.165 OPPOSITE
+    GOOD 0.00 0.06  OPPOSITE 0.00 0.06  OPPOSITE
+    GOOD 0.01 OPPOSITE 0.00  0.05  0.05
+    y AND SPS
+}
+
+//SPS.4B.3C {@ Minimum space between two ME2 regions is 0.20um
+//   X = EXT ME2 < 0.20 ABUT>0<90 REGION
+//   ( X NOT LOGOMK ) AND SPS
+//}// the same with main deck
+
+
+
+//==========================
+// SPLLS SRAM (6TSRAM1.85LL)
+//==========================
+
+DIFF_SPLLS  = DIFF INTERACT SPLLS
+NWEL_SPLLS  = NWEL INTERACT SPLLS
+PO1_SPLLS   = PO1  INTERACT SPLLS
+GATE_SPLLS  = GATE AND SPLLS
+GATE_W_SPLLS = PO1_SPLLS COIN INSIDE EDGE GATE_SPLLS
+GATE_Wc_SPLLS = GATE_W_SPLLS  COIN OUTSIDE EDGE CO_SD  //With contact
+GATE1_W_SPLLS = GATE_W_SPLLS NOT INSIDE EDGE TG
+ACTIVE_PS_SPLLS = DIFF_SPLLS OUTSIDE NWEL
+
+PDIF1_SPLLS = PDIF1 AND SPLLS
+NDIF1_SPLLS = NDIF1 AND SPLLS
+
+PPLUS_SPLLS  = PPLUS INTERACT SPLLS
+CONT_SPLLS   = CONT INTERACT SPLLS
+POLCNT_SPLLS = POLCNT AND SPLLS
+DIFCNT_SPLLS = DIFCNT AND SPLLS
+ME1_SPLLS  = ME1 INTERACT SPLLS
+
+
+SPLLS.4A.1AB_1 {@ Minimum dimension of an DIFF is 0.125 when common run length <=0.055
+   X = INT DIFF_SPLLS < 0.125 ABUT>0<90 SINGULAR PROJECTING <=0.055 REGION
+   X AND SPLLS
+}
+SPLLS.4A.1AB_2 {@ Minimum dimension of an DIFF is 0.145 when common run length 0.055< x <=0.08
+   X = INT DIFF_SPLLS < 0.145 ABUT>0<90 SINGULAR PROJECTING > 0.055 <= 0.08 REGION
+   X AND SPLLS
+}
+SPLLS.4A.1AB_3 {@ Minimum dimension of an DIFF is 0.12 when common run length 0.08< x <=0.165
+   X = INT DIFF_SPLLS < 0.12 ABUT>0<90 SINGULAR PROJECTING > 0.08 <= 0.165 REGION
+   X AND SPLLS
+}
+
+SPLLS.4A.1AB_4 {@ Minimum dimension of an DIFF is 0.13 when common run length 0.165< x <=0.21
+   X = INT DIFF_SPLLS < 0.13 ABUT>0<90 SINGULAR PROJECTING >0.165 <=0.21 REGION
+   X AND SPLLS
+}
+
+SPLLS.4A.1AB_5 {@ Minimum dimension of an DIFF is 0.125 when common run length 0.21< x <=0.23
+   X = INT DIFF_SPLLS < 0.125 ABUT>0<90 SINGULAR PROJECTING >0.21 <=0.23 REGION
+   X AND SPLLS
+}
+
+SPLLS.4A.1AB_6 {@ Minimum dimension of an DIFF is 0.16 when common run length >0.23
+   X = INT DIFF_SPLLS < 0.16 ABUT>0<90 SINGULAR PROJECTING >0.23 REGION
+   X AND SPLLS
+}
+
+
+
+SPLLS.4A.1C.a1b1_1 {@ Minimum space between two DIFF regions is 0.08um when common run length <=0.02
+   X = EXT DIFF_SPLLS < 0.08 ABUT>0<90 OPPOSITE REGION
+   Y = DIFF_SPLLS COIN OUTSIDE EDGE X
+   E = X WITH EDGE (LENGTH Y <=0.02)
+   E AND SPLLS
+}
+SPLLS.4A.1C.a1b1_2 {@ Minimum space between two DIFF regions is 0.165um when common run length 0.02<X<=0.03
+   X = EXT DIFF_SPLLS < 0.165 ABUT>0<90 OPPOSITE REGION
+   Y = DIFF_SPLLS COIN OUTSIDE EDGE X
+   E = X WITH EDGE (LENGTH Y >0.02 <=0.03 )
+   E AND SPLLS
+}
+SPLLS.4A.1C.a1b1_3 {@ Minimum space between two DIFF regions is 0.055um when common run length 0.03<X<=0.04
+   X = EXT DIFF_SPLLS < 0.055 ABUT>0<90 OPPOSITE REGION
+   Y = DIFF_SPLLS COIN OUTSIDE EDGE X
+   E = X WITH EDGE (LENGTH Y >0.03 <=0.04 )
+   E AND SPLLS
+}
+
+SPLLS.4A.1C.a1b1_4 {@ Minimum space between two DIFF regions is 0.18um when common run length 0.04<X<=0.165
+                    @ waive notch check
+   X = EXT DIFF_SPLLS < 0.18 ABUT>0<90 SPACE PROJ >0.04<=0.165 REGION
+   X AND SPLLS
+}
+SPLLS.4A.1C.a1b1_5 {@ Minimum space between two DIFF regions is 0.19um when common run length 0.165<X<=0.85
+                    @ waive notch check
+   X = EXT DIFF_SPLLS < 0.19 ABUT>0<90 SPACE PROJ >0.165<=0.85 REGION
+   X AND SPLLS
+}
+
+SPLLS.4A.1C.a1b1_6 {@ Minimum space between two DIFF regions is 0.19um when common run length X =1.62
+   X = EXT DIFF_SPLLS < 0.19 ABUT>0<90 OPPOSITE REGION
+   Y = DIFF_SPLLS COIN OUTSIDE EDGE X
+   E = X WITH EDGE (LENGTH Y == 1.62 )
+   E AND SPLLS
+}
+
+SPLLS.4A.1C.a1b1_7 {@ Minimum space between two DIFF regions is 0.2um for others
+   X = EXT DIFF_SPLLS < 0.2 ABUT>0<90 SINGULAR PROJ > 0.85 REGION
+   Y = EXT DIFF_SPLLS < 0.2 ABUT>0<90 PROJ == 1.62 REGION
+   (X NOT Y) AND SPLLS
+}
+
+SPLLS.4A.1D.a {@ Minimum NWEL to a N+ DIFF(1.2V) spacing is 0.25 um
+   X = EXT NWEL_SPLLS NDIF1 < 0.25 ABUT<90 OVERLAP SINGULAR REGION
+   X AND SPLLS
+}
+SPLLS.4A.1E {@ Minimum NWEL overlap N+ DIFF is 0.15um
+   NTAP_SPLLS = NTAP INTERACT SPLLS
+   X = ENC NTAP_SPLLS NWEL < 0.15 ABUT<90 SINGULAR OVERLAP REGION
+   X AND SPLLS
+}
+SPLLS.4A.1G.a {@ Minimum NWEL overlap P+ DIFF(1.2V) is 0.25um
+   X = ENC PDIF1 NWEL_SPLLS < 0.25 ABUT<90 SINGULAR OVERLAP REGION
+   X AND SPLLS
+}
+
+//GATE1_VTNH = (GATE1 AND VTNH ) NOT PPLUS
+//GATE_NOT_VTNH = GATE NOT GATE1_VTNH
+//GATE1_VTPH = (GATE1 AND VTPH ) AND PPLUS
+//GATE_NOT_VTPH = GATE NOT GATE1_VTPH
+
+SPLLS.4A.4.3D {@ Minimum VTNH to unrelated Poly gate spacing is 0.25um
+   X = EXT VTNH GATE_NOT_VTNH < 0.25 ABUT INSIDE ALSO REGION
+   X AND SPLLS
+}
+
+SPLLS.4A.5.3D {@ Minimum VTPH to unrelated Poly gate spacing is 0.25um
+   X = EXT VTPH GATE_NOT_VTPH < 0.25 ABUT INSIDE ALSO REGION
+   X AND SPLLS
+}
+
+   PG_GATE_SPLLS = RECTANGLE ( GATE INTERACT NPLUS )  == 0.185 BY == 0.13
+   PD_GATE_SPLLS = RECTANGLE ( GATE INTERACT NPLUS )  == 0.265 BY == 0.12
+   PL_GATE_SPLLS = RECTANGLE ( GATE INTERACT PPLUS )  == 0.165 BY == 0.12
+   GATE_O_SPLLS  = ((GATE NOT PD_GATE_SPLLS) NOT PG_GATE_SPLLS) NOT PL_GATE_SPLLS
+
+SPLLS.4A.9AaBaC_1 {@ Minimum PO1 width for 1.2V NMOS or PMOS or interconnect is 0.09 um when PO1 interact PG_GATE
+   X = INT (PO1 INTERACT PG_GATE_SPLLS) < 0.09 ABUT>0<90 SINGULAR REGION
+   X AND SPLLS
+}
+
+SPLLS.4A.9AaBaC_2 {@ Minimum PO1 width for 1.2V NMOS or PMOS or interconnect is 0.045um when common run length <= 0.01
+   X = INT PO1_SPLLS < 0.045 ABUT>0<90 SINGULAR PROJECTING <= 0.01 REGION
+   X AND SPLLS
+}
+
+SPLLS.4A.9AaBaC_3 {@ Minimum PO1 width for 1.2V NMOS or PMOS or interconnect is 0.08um when common run length 0.01 <x <= 0.025
+   X = INT PO1_SPLLS < 0.08 ABUT>0<90 SINGULAR  PARALLEL ONLY PROJECTING >0.01 <=0.025 REGION
+   X AND SPLLS
+}
+
+SPLLS.4A.9AaBaC_4 {@ Minimum PO1 width for 1.2V NMOS or PMOS or interconnect is 0.115um when common run length 0.025 <x <= 0.035
+   X = INT PO1_SPLLS < 0.115 ABUT>0<90 SINGULAR  PARALLEL ONLY PROJECTING >0.025 <=0.035 REGION
+   X AND SPLLS
+}
+
+SPLLS.4A.9AaBaC_5 {@ Minimum PO1 width for 1.2V NMOS or PMOS or interconnect is 0.045um when common run length 0.035 <x <=0.045
+   X = INT PO1_SPLLS < 0.045 ABUT>0<90 SINGULAR  PROJECTING >0.035 <=0.045 REGION
+   X AND SPLLS
+}
+
+SPLLS.4A.9AaBaC_6 {@ Minimum PO1 width for 1.2V NMOS or PMOS or interconnect is 0.09um when common run length 0.045 <x <=0.125
+   X = INT PO1_SPLLS < 0.09 ABUT>0<90 SINGULAR  PROJECTING >0.045 <=0.125 REGION
+   X AND SPLLS
+}
+
+SPLLS.4A.9AaBaC_7 {@ Minimum PO1 width for 1.2V NMOS or PMOS or interconnect is 0.095um when common run length 0.125 <x <=0.135
+                   @ CORNER TO EDGE == 0.095 BYPASS
+   X = INT PO1_SPLLS < 0.095 ABUT>0<90 SINGULAR  PROJECTING >0.125 <=0.135 REGION
+   X AND SPLLS
+}
+
+SPLLS.4A.9AaBaC_8 {@ Minimum PO1 width for 1.2V NMOS or PMOS or interconnect is 0.115um when common run length 0.135 <x <=0.14
+   X = INT PO1_SPLLS < 0.115 ABUT>0<90 SINGULAR  PROJECTING >0.135 <=0.14 REGION
+   X AND SPLLS
+}
+
+SPLLS.4A.9AaBaC_9 {@ Minimum PO1 width for 1.2V NMOS or PMOS or interconnect is 0.095um when common run length 0.14 <x <=0.155
+   X = INT PO1_SPLLS < 0.095 ABUT>0<90 SINGULAR  PROJECTING >0.14 <=0.155 REGION
+   X AND SPLLS
+}
+
+SPLLS.4A.9AaBaC_10 {@ Minimum PO1 width for 1.2V NMOS or PMOS or interconnect is 0.105um when common run length 0.155 <x <=0.22
+                    @ CORNER TO EDGE == 0.115 BYPASS, Parallel only
+   X = INT PO1_SPLLS < 0.105 ABUT>0<90 SINGULAR  PROJECTING >0.155 <=0.22 PARALLEL ONLY REGION
+   Y = X AND SPLLS
+   Z1 = INT PO1_SPLLS < 0.115 ABUT>0<90 SINGULAR  CORNER TO EDGE REGION
+   Z2 = Z1 INSIDE Y
+   Y NOT Z2
+}
+
+SPLLS.4A.9AaBaC_11 {@ Minimum PO1 width for 1.2V NMOS or PMOS or interconnect is 0.12 when common run length >0.22
+   X = INT PO1_SPLLS < 0.12 ABUT>0<90 SINGULAR PROJECTING >0.22 REGION
+   X AND SPLLS
+}
+
+
+
+SPLLS.4A.9D.a1_4A.9D.c1_1 {@ Minimum PO1 spacing on DIFF regions without contact is 0.09 when common run length <=0.045
+   E1 = EXT PO1 < 0.09 PROJ <= 0.045 ABUT>0<90 SINGULAR REGION
+   E2 = EXT PO1 < 0.09 NOT PROJ ABUT>0<90 SINGULAR REGION
+   E3 = EXT PO1 < 0.09 CORNER TO CORNER ABUT>0<90 SINGULAR REGION
+   E1 AND SPLLS
+   E2 AND SPLLS
+   E3 AND SPLLS
+}
+
+SPLLS.4A.9D.a1_4A.9D.c1_2 {@ Minimum PO1 spacing on DIFF regions without contact is 0.14um when common run length  0.045<X<=0.1
+   E = EXT PO1 < 0.14 PROJ > 0.045 <= 0.1 ABUT>0<90 SINGULAR REGION
+   E AND SPLLS
+}
+
+SPLLS.4A.9D.a1_4A.9D.c1_3 {@ Minimum PO1 spacing on DIFF regions without contact is 0.11um when common run length  0.1<X<=0.165
+   E = EXT PO1 < 0.11 PROJ > 0.1 <= 0.165 ABUT>0<90 SINGULAR REGION
+   E AND SPLLS
+}
+
+SPLLS.4A.9D.a1_4A.9D.c1_4 {@ Minimum PO1 spacing on DIFF regions without contact is 0.17um when common run length  0.165<X<=0.185
+   E = EXT PO1 < 0.17 PROJ > 0.165 <= 0.185 ABUT>0<90 SINGULAR REGION
+   E AND SPLLS
+}
+
+SPLLS.4A.9D.a1_4A.9D.c1_5 {@ Minimum PO1 spacing on DIFF regions without contact is 0.195um when common run length  0.185<X<=0.305
+   E = EXT PO1 < 0.195 PROJ > 0.185 <= 0.305 ABUT>0<90 SINGULAR REGION
+   E AND SPLLS
+}
+
+SPLLS.4A.9D.a1_4A.9D.c1_6 {@ Minimum PO1 spacing on DIFF regions without contact is 0.14um when common run length  X =0.33
+   E = EXT PO1 < 0.14 PROJ == 0.33 ABUT>0<90 SINGULAR REGION
+   E AND SPLLS
+}
+
+SPLLS.4A.9D.a1_4A.9D.c1_7 {@ Minimum PO1 spacing on DIFF regions without contact is 0.156um when common run length >0.305
+   E1 = EXT PO1 < 0.156 PROJ > 0.305 < 0.33 ABUT>0<90 SINGULAR REGION
+   E2 = EXT PO1 < 0.156 PROJ > 0.33 ABUT>0<90 SINGULAR REGION
+   E1 AND SPLLS
+   E2 AND SPLLS
+}
+
+
+
+SPLLS.4A.9D.b1 {@ Minimum PO1 spacing on DIFF regions with contact
+                @ poly width <= 0.24um is 0.25um
+   x = EXT GATE_Wc < 0.25 ABUT>0<90 REGION
+   x AND SPLLS
+}
+
+SPLLS.4A.9E_1 {@ Minimum overlap of a PO1 region extended into field oxide is 0.17um
+   ENC PD_GATE_SPLLS PO1_SPLLS < 0.17 ABUT>0<90 REGION
+}
+
+SPLLS.4A.9E_2 {@ Minimum overlap of a PO1 region extended into field oxide is 0.085um
+   ENC PG_GATE_SPLLS PO1_SPLLS < 0.085 ABUT>0<90 REGION
+}
+
+    GATE_SPLLS_1 = AREA GATE_SPLLS == 0.0033125
+    GATE_SPLLS_2 = AREA GATE_SPLLS == 0.00765
+    GATE_SPLLS_3 = (GATE_SPLLS_1 OR GATE_SPLLS_2) INTERACT CONT
+    GATE_SPLLS_4 = AREA GATE_SPLLS == 0.0313
+    GATE_SPLLS_5 = AREA GATE_SPLLS == 0.0075125
+//    GATE_SPLLS_6 = AREA GATE_SPLLS == 0.00945
+    GATE_SPLLS_7 = AREA GATE_SPLLS == 0.0102
+    GATE_SPLLS_8 = GATE_SPLLS_5 OR GATE_SPLLS_7
+
+SPLLS.4A.9E_3 {@ Minimum overlap of a PO1 region extended into field oxide is 0.045um
+               @ GATE AREA with CONT =0.0031125 or 0.00765 um2
+    ENC GATE_SPLLS_3 PO1_SPLLS < 0.045 ABUT>0<90 REGION
+}
+
+SPLLS.4A.9E_4 {@ Minimum overlap of a PO1 region extended into field oxide is 0.17 um
+               @ GATE AREA = 0.0313 um2
+    ENC GATE_SPLLS_4 PO1_SPLLS < 0.17 ABUT>0<90 REGION
+}
+
+SPLLS.4A.9E_5 {@ Minimum overlap of a PO1 region extended into field oxide is 0.03 um
+               @ GATE AREA = 0.0075125 um2
+    ENC GATE_SPLLS_5 PO1_SPLLS < 0.03 ABUT>0<90 REGION
+}
+
+SPLLS.4A.9E_6 {@ Minimum overlap of a PO1 region extended into field oxide is 0.17um
+               @ When the common run length < 0.008
+   GATE_O_SPLLS_A = GATE_SPLLS NOT ( ( ( ( GATE_SPLLS_3 OR GATE_SPLLS_4 ) OR GATE_SPLLS_5 ) OR PD_GATE_SPLLS ) OR PG_GATE_SPLLS )
+   X1 = ENC GATE_O_SPLLS_A PO1_SPLLS < 0.17 ABUT>0<90 PROJ < 0.008 REGION
+   X2 = ENC GATE_O_SPLLS_A PO1_SPLLS < 0.17 ABUT>0<90 NOT PROJ REGION
+   X3 = ENC GATE_O_SPLLS_A PO1_SPLLS < 0.17 ABUT>0<90 CORNER TO CORNER REGION
+   Y1 = LENGTH (X1 COIN OUTSIDE EDGE GATE_SPLLS_7) == 0.111
+   Y2 = LENGTH (X2 COIN OUTSIDE EDGE GATE_SPLLS_7) == 0.111
+   Y3 = LENGTH (X3 COIN OUTSIDE EDGE GATE_SPLLS_7) == 0.111
+   (X1 NOT WITH EDGE Y1) AND SPLLS
+   (X2 NOT WITH EDGE Y2) AND SPLLS
+   (X3 NOT WITH EDGE Y3) AND SPLLS
+}
+
+SPLLS.4A.9E_7 {@ Minimum overlap of a PO1 region extended into field oxide is 0.05um
+               @ When the common run length == 0.008
+   GATE_O_SPLLS_A = GATE_SPLLS NOT ( ( ( ( GATE_SPLLS_3 OR GATE_SPLLS_4 ) OR GATE_SPLLS_5 ) OR PD_GATE_SPLLS ) OR PG_GATE_SPLLS )
+   X1 = ENC GATE_O_SPLLS_A PO1_SPLLS < 0.05 ABUT>0<90 PROJ == 0.008 REGION
+   X1 AND SPLLS
+}
+
+SPLLS.4A.9E_8 {@ Minimum overlap of a PO1 region extended into field oxide is 0.17um
+               @ When the common run length > 0.008 < 0.085
+   GATE_O_SPLLS_A = GATE_SPLLS NOT ( ( ( ( GATE_SPLLS_3 OR GATE_SPLLS_4 ) OR GATE_SPLLS_5 ) OR PD_GATE_SPLLS ) OR PG_GATE_SPLLS )
+   X1 = ENC GATE_O_SPLLS_A PO1_SPLLS < 0.17 ABUT>0<90 PROJ > 0.008 < 0.085 REGION
+   X1 AND SPLLS
+}
+
+SPLLS.4A.9E_9 {@ Minimum overlap of a PO1 region extended into field oxide is 0.162um
+               @ When the common run length == 0.085
+   GATE_O_SPLLS_A = GATE_SPLLS NOT ( ( ( ( GATE_SPLLS_3 OR GATE_SPLLS_4 ) OR GATE_SPLLS_5 ) OR PD_GATE_SPLLS ) OR PG_GATE_SPLLS )
+   X1 = ENC GATE_O_SPLLS_A PO1_SPLLS < 0.162 ABUT>0<90 PROJ == 0.085 REGION
+   X1 AND SPLLS
+}
+
+SPLLS.4A.9E_10 {@ Minimum overlap of a PO1 region extended into field oxide is 0.17um
+               @ When the common run length > 0.085 < 0.12
+   GATE_O_SPLLS_A = GATE_SPLLS NOT ( ( ( ( GATE_SPLLS_3 OR GATE_SPLLS_4 ) OR GATE_SPLLS_5 ) OR PD_GATE_SPLLS ) OR PG_GATE_SPLLS )
+   X1 = ENC GATE_O_SPLLS_A PO1_SPLLS < 0.17 ABUT>0<90 PROJ > 0.085 < 0.12 REGION
+   X1 AND SPLLS
+}
+
+SPLLS.4A.9E_11 {@ Minimum overlap of a PO1 region extended into field oxide is 0.035um
+               @ When the common run length == 0.12
+   GATE_O_SPLLS_A = GATE_SPLLS NOT ( ( ( ( GATE_SPLLS_3 OR GATE_SPLLS_4 ) OR GATE_SPLLS_5 ) OR PD_GATE_SPLLS ) OR PG_GATE_SPLLS )
+   X1 = ENC GATE_O_SPLLS_A PO1_SPLLS < 0.035 ABUT>0<90 PROJ == 0.12 REGION
+   X1 AND SPLLS
+}
+
+SPLLS.4A.9E_12 {@ Minimum overlap of a PO1 region extended into field oxide is 0.17um
+               @ When the common run length > 0.12
+   GATE_O_SPLLS_A = GATE_SPLLS NOT ( ( ( ( GATE_SPLLS_3 OR GATE_SPLLS_4 ) OR GATE_SPLLS_5 ) OR PD_GATE_SPLLS ) OR PG_GATE_SPLLS )
+   X1 = ENC GATE_O_SPLLS_A PO1_SPLLS < 0.17 ABUT>0<90 PROJ > 0.12 REGION
+   X1 AND SPLLS
+}
+
+SPLLS.4A.9F_1 {@ Minimum POLY1 on field region to DIFFUSION spacing is 0.06801um when corner to corner
+   E = EXT PO1_SPLLS DIFF < 0.06801 CORNER TO CORNER SINGULAR REGION
+   E AND SPLLS
+}
+
+SPLLS.4A.9F_2 {@ Minimum POLY1 on field region to DIFFUSION spacing is 0.03um when the common run length between <=0
+   E1 = EXT PO1_SPLLS DIFF < 0.03 PROJ <= 0 SINGULAR REGION
+   E2 = EXT PO1_SPLLS DIFF < 0.03 NOT PROJ SINGULAR REGION
+   E1 AND SPLLS
+   E2 AND SPLLS
+}
+
+SPLLS.4A.9F_3 {@ Minimum POLY1 on field region to DIFFUSION spacing is 0.07um when the common run length between 0 to 0.02 (0< x <=0.02)
+   E = EXT PO1_SPLLS DIFF < 0.07 PROJ > 0 <= 0.02 SINGULAR REGION
+   E AND SPLLS
+}
+
+SPLLS.4A.9F_4 {@ Minimum POLY1 on field region to DIFFUSION spacing is 0.015um when the common run length  between 0.02 to 0.105 (0.02< x <0.105)
+   E = EXT PO1_SPLLS DIFF < 0.015 PROJ > 0.02 <= 0.105 SINGULAR REGION
+   E AND SPLLS
+}
+
+SPLLS.4A.9F_5 {@ Minimum POLY1 on field region to DIFFUSION spacing is 0.045um when the common run length  between 0.105 to 0.125 (0.105< x <=0.125)
+   E = EXT PO1_SPLLS DIFF < 0.045 PROJ > 0.105 <= 0.125 SINGULAR REGION
+   E AND SPLLS
+}
+
+SPLLS.4A.9F_6 {@ Minimum POLY1 on field region to DIFFUSION spacing is 0.035um when the common run length  between 0.125 to 0.145 (0.125< x <=0.145)
+   E = EXT PO1_SPLLS DIFF < 0.035 PROJ > 0.125 <= 0.145 SINGULAR REGION
+   E AND SPLLS
+}
+
+SPLLS.4A.9F_7 {@ Minimum POLY1 on field region to DIFFUSION spacing is 0.065um when the common run length  between 0.145 to 0.165 (0.145< x <=0.165)
+   E = EXT PO1_SPLLS DIFF < 0.065 PROJ > 0.145 <= 0.165 SINGULAR REGION
+   E AND SPLLS
+}
+
+SPLLS.4A.9F_8 {@ Minimum POLY1 on field region to DIFFUSION spacing is 0.025um when the common run length  between 0.165 to 0.19 (0.165< x <=0.19)
+   E = EXT PO1_SPLLS DIFF < 0.025 PROJ > 0.165 <= 0.19 SINGULAR REGION
+   E AND SPLLS
+}
+
+SPLLS.4A.9F_9 {@ Minimum POLY1 on field region to DIFFUSION spacing is 0.077um when the common run length  between 0.19 to 0.2 (0.19< x <=0.2)
+   E = EXT PO1_SPLLS DIFF < 0.077 PROJ > 0.19 <= 0.2 SINGULAR REGION
+   E AND SPLLS
+}
+
+SPLLS.4A.9F_10 {@ Minimum POLY1 on field region to DIFFUSION spacing is 0.025um when the common run length  between 0.2 to 0.355 (0.2< x <0.355)
+   E = EXT PO1_SPLLS DIFF < 0.025 PROJ > 0.2 <= 0.355 SINGULAR REGION
+   E AND SPLLS
+}
+
+SPLLS.4A.9F_11 {@ Minimum POLY1 on field region to DIFFUSION spacing is 0.1um when the common run length  between 0.355 to 0.48 (0.355< x <0.48)
+   E = EXT PO1_SPLLS DIFF < 0.1 PROJ > 0.355 < 0.48 SINGULAR REGION
+   E AND SPLLS
+}
+
+SPLLS.4A.9F_12 {@ Minimum POLY1 on field region to DIFFUSION spacing is 0.03um when the common run length  ==0.48
+   E = EXT PO1_SPLLS DIFF < 0.03 PROJ == 0.48 SINGULAR REGION
+   E AND SPLLS
+}
+
+SPLLS.4A.9F_13 {@ Minimum POLY1 on field region to DIFFUSION spacing is 0.1um when the common run length  >0.48
+   E = EXT PO1_SPLLS DIFF < 0.1 PROJ > 0.48 SINGULAR REGION
+   E AND SPLLS
+}
+
+SPLLS.4A.9G {@ Minimum PO1 endcap to RELATED DIFF spacing is 0.065um
+   END_CAP =  INTPOL TOUCH GATE == 1
+   x = EXT DIFF_SPLLS GATE < 0.065 PERP ONLY ABUT == 90 REGION
+   x INTERACT END_CAP
+}
+
+
+
+//    GATE_SPLLS_4 = AREA GATE_SPLLS == 0.0313
+
+
+SPLLS.4A.9H.a__4A.9O_1 {@ Minimum PO1 gate to field edge spacing is 0.01um
+   GATE_W_PL = PO1 COIN INSIDE EDGE PL_GATE_SPLLS
+   E = ENC GATE_W_PL DIFF_SPLLS < 0.01 REGION
+   E AND SPLLS
+}
+SPLLS.4A.9H.a__4A.9O_2 {@ Minimum PO1 gate to field edge spacing is 0.015um
+
+   GATE_W_PD = PO1 COIN INSIDE EDGE PD_GATE_SPLLS
+   E = ENC GATE_W_PD DIFF_SPLLS < 0.015 REGION
+   E AND SPLLS
+}
+
+SPLLS.4A.9H.a__4A.9O_3 {@ Minimum PO1 gate to field edge spacing is 0.01um
+                        @ when gate area = 0.0313
+   GATE_W_3 = GATE_SPLLS_4 COIN INSIDE EDGE GATE_SPLLS
+   E = ENC GATE_W_3 DIFF_SPLLS < 0.01 REGION
+   E AND SPLLS
+}
+
+SPLLS.4A.9H.a__4A.9O_4 {@ Minimum PO1 gate to field edge spacing is 0.01 um
+                        @ when gate area with cont = 0.0033125 or 0.00765 um2
+                        @ when gate area without cont = 0.00945 or 0.0102 um2
+   GATE_W_4 = (GATE_SPLLS_3 OR GATE_SPLLS_8) COIN INSIDE EDGE GATE_SPLLS
+   E = ENC GATE_W_4 DIFF_SPLLS < 0.01 REGION
+   E AND SPLLS
+}
+
+SPLLS.4A.9H.a__4A.9O_5 {@ Minimum PO1 gate to field edge spacing is 0.2um
+   X1 = GATE_SPLLS_8 OR ( PL_GATE_SPLLS OR ( PD_GATE_SPLLS OR ( GATE_SPLLS_4 OR GATE_SPLLS_3 ) ) )
+   X2 = ( PO1 NOT X1 ) INTERACT SPLLS
+   GATE_W_5 = X2 COIN INSIDE EDGE GATE_SPLLS
+   E1 = ENC GATE_W_5 DIFF_SPLLS < 0.2 REGION
+   E2 = ENC GATE_W_5 DIFF_SPLLS < 0.1 CORNER TO CORNER REGION
+   (E1 NOT E2) AND SPLLS
+}
+
+
+// SPLLS.4A.9J {@ Gate at 90 degree angle is not allowed.
+//    Waive
+
+SPLLS.4A.9N {@ Minimum PO1 bent gate on field region to DIffusion spacing = 0.085
+     x = EXT GATE_W EXPO_E < 0.085 OBTUSE ONLY REGION
+     x AND SPLLS
+}
+
+CONT_SPLLS_A = RECTANGLE CONT_SPLLS == 0.16 BY == 0.16
+CONT_SPLLS_SINGLE = AREA CONT_SPLLS == 0.0255
+
+SPLLS.4A.13A {@ Minimum and maximum width of a CONT region is 0.16um,
+              @ Waive Share CONT  : area is 0.0937 or 0.078475 or 0.086725
+              @ Waive Single CONT : area is 0.0255
+   x = (CONT_SPLLS NOT CONT_AREA) NOT CONT_SPLLS_SINGLE
+   y = NOT RECTANGLE x == 0.16 BY == 0.16
+   y AND SPLLS
+}// commented by 8D/PEI
+
+CONT_AREA_1 = AREA CONT_SPLLS == 0.0937
+CONT_AREA_2 = AREA CONT_SPLLS == 0.078475
+CONT_AREA_3 = AREA CONT_SPLLS == 0.086725
+CONT_AREA_4 = AREA CONT_SPLLS == 0.0255
+
+CONT_AREA = (CONT_AREA_1 OR CONT_AREA_2) OR CONT_AREA_3
+
+SPLLS.4A.13B_1 {@ Minimum space between two CONT regions is 0.185um,
+                @ when the area of CONT are 0.0937/0.078475/0.086725
+  X = EXT CONT_AREA < 0.185 ABUT>0<90 SINGULAR REGION
+  X AND SPLLS
+}
+
+SPLLS.4A.13B_2 {@ Minimum space between two CONT regions is 0.15um, By Pass Shared Cont
+                @ CORNER to edge (By Pass Shared Cont)
+  X = EXT CONT_SPLLS_A CONT < 0.15 ABUT>0<90 SINGULAR CORNER TO EDGE REGION
+  Y = EXT CONT_SPLLS_SINGLE CONT < 0.15 ABUT>0<90 SINGULAR CORNER TO EDGE REGION
+  (X OR Y) AND SPLLS
+}
+
+SPLLS.4A.13B_3 {@ Minimum space between two CONT regions is 0.1um
+  X = EXT CONT_SPLLS_A < 0.1 ABUT>0<90 SINGULAR REGION
+  Y = EXT CONT_SPLLS_SINGLE < 0.1 ABUT>0<90 SINGULAR REGION
+  (X OR Y) AND SPLLS
+}
+
+SPLLS.4A.13C.a_1 {@ Minimum DIFF CONT to Poly(1.2V) spacing is 0.11um,
+                  @ when the area of CONT are 0.0937/0.078475/0.086725
+  DIFCNT_SPLLS_A = CONT_AREA INTERACT DIFF
+  X = EXT DIFCNT_SPLLS_A GATE1_W < 0.11 ABUT>0<90 OPPOSITE REGION
+  x AND SPLLS
+}
+
+SPLLS.4A.13C.a_2 {@ Minimum DIFF CONT to Poly(1.2V) spacing is 0.025um,
+  DIFCNT_SPLLS_A = (CONT_SPLLS_A OR CONT_SPLLS_SINGLE) INTERACT DIFF
+  X = EXT DIFCNT_SPLLS_A GATE1_W < 0.025 ABUT>0<90 OPPOSITE REGION
+  x AND SPLLS
+}
+
+SPLLS.4A.13D {@ when the poly cont area=0.0255 um2,the common rule length<=0.16, waive
+              @ others is 0.12 um
+   x = AREA POLCNT_SPLLS == 0.0255
+   EXT x DIFF < 0.12 PROJ > 0.16 ABUT<90 SINGULAR REGION
+   EXT (POLCNT_SPLLS NOT x) DIFF < 0.12 ABUT<90 SINGULAR REGION
+}
+
+SPLLS.4A.13E {@ Minimum PO1 overlap CONT is 0.06um, no floating conntact
+    POLCNT_SPLLS_A = CONT_SPLLS_A INTERACT PO1
+    Y = RECTANGLE ENC POLCNT_SPLLS_A PO1_SPLLS
+    GOOD 0.022 0.06 0.022 0.06
+    Y AND SPLLS
+}
+
+SPLLS.4A.13FG {@ Minimum extension of an DIFF region beyond a CONT region is
+               @ By pass (0.075 0.075 0.075 0.075)
+   X1 = SIZE CONT_SPLLS_A BY -0.015
+   Y = RECTANGLE ENC X1 DIFF_SPLLS
+   GOOD 0.03 0.075 OPPOSITE 0.025 0.075 OPPOSITE
+   GOOD 0.025 0.07 OPPOSITE 0.025 0.07 OPPOSITE
+   GOOD 0.0 0.03 OPPOSITE 0.02 0.025 OPPOSITE
+   GOOD 0.035 0.05 OPPOSITE 0.035 0.05 OPPOSITE
+   GOOD 0.065 0.02 OPPOSITE 0.075 0.015 OPPOSITE
+   GOOD 0.075 0.075 OPPOSITE 0.075 0.075 OPPOSITE
+   Y AND SPLLS
+}
+
+SPLLS.4A.13I {@ Poly contact on diffusion is not allowed
+              @ waive when the area of CONT are 0.0937/0.078475/0.086725 um2
+   x = CONT_SPLLS NOT CONT_AREA
+   (GATE AND x) AND SPLLS
+} // commented by 8D/PEI
+
+/////////////////////////////
+
+
+SPLLS.4B.1D.a {@ Minimum ME1 overlap contac is 0 um,except the contact area is 0.0937, 0.078475 or 0.086725
+  X1 = CONT_SPLLS NOT ME1
+  (X1 NOT CONT_AREA) NOT CONT_AREA_4
+}
+
+SPLLS.4B.1D.b {@ ME1 enclose CONT at end-of-line or outer corner is 0.06,when ME1 width < 0.24
+                @ cont (GOOD 0.00 0.06  OPPOSITE 0.00 0.06  OPPOSITE)
+    co_sm24 = CONT_SPLLS_A INTERACT SM1_024
+    y = RECTANGLE ENC co_sm24 ME1
+    GOOD 0.04 0.06   0.01 0.005
+    GOOD 0.01 0.00   0.05 0.05
+    GOOD 0.00 0.06   0.00 0.06
+    y AND SPLLS
+}
+
+
+//===========================
+// DP4S SRAM (8TSRAM3.39HSSP)
+//===========================
+
+DIFF_DP4S  = DIFF INTERACT DP4S
+NWEL_DP4S  = NWEL INTERACT DP4S
+PO1_DP4S   = PO1  INTERACT DP4S
+GATE_DP4S  = GATE AND DP4S
+GATE_W_DP4S = PO1_DP4S COIN INSIDE EDGE GATE_DP4S
+GATE_Wc_DP4S = GATE_W_DP4S  COIN OUTSIDE EDGE CO_SD  //With contact
+GATE1_W_DP4S = GATE_W_DP4S NOT INSIDE EDGE TG
+ACTIVE_PS_DP4S = DIFF_DP4S OUTSIDE NWEL
+
+PDIF1_DP4S = PDIF1 AND DP4S
+NDIF1_DP4S = NDIF1 AND DP4S
+
+PPLUS_DP4S  = PPLUS INTERACT DP4S
+CONT_DP4S   = CONT INTERACT DP4S
+POLCNT_DP4S = POLCNT AND DP4S
+DIFCNT_DP4S = DIFCNT AND DP4S
+ME1_DP4S   = ME1 INTERACT DP4S
+
+DP4S.4A.1D.a {@ Minimum NWEL to a N+ DIFF(1.2V) spacing is 0.2 um
+   X = EXT NWEL_DP4S NDIF1 < 0.2 ABUT<90 OVERLAP SINGULAR REGION
+   X AND DP4S
+}
+
+DP4S.4A.1G.a {@ Minimum NWEL overlap P+ DIFF(1.2V) is 0.2um
+   X = ENC PDIF1 NWEL_DP4S < 0.2 ABUT<90 SINGULAR OVERLAP REGION
+   X AND DP4S
+}
+
+//DP4S.4A.4.2D {@ Minimum VTN_SP to unrelated Poly gate spacing is 0.24um
+//   X = EXT VTN_SP (GATE_NOT_VTN_SP INTERACT DP4S) < 0.24 ABUT INSIDE ALSO REGION
+//   X AND DP4S
+//}
+
+//DP4S.4A.5.2D {@ Minimum VTP_SP to unrelated Poly gate spacing is 0.245um
+//   X = EXT VTP_SP (GATE_NOT_VTP_SP INTERACT DP4S) < 0.245 ABUT INSIDE ALSO REGION
+//   X AND DP4S
+//}
+
+//GATE1_VTNH = (GATE1 AND VTNH ) NOT PPLUS
+//GATE_NOT_VTNH = GATE NOT GATE1_VTNH
+//GATE1_VTPH = (GATE1 AND VTPH ) AND PPLUS
+//GATE_NOT_VTPH = GATE NOT GATE1_VTPH
+
+
+   PG_GATE_DP4S = RECTANGLE ( GATE INTERACT NPLUS )  == 0.18 BY == 0.155
+   PD_GATE_DP4S = RECTANGLE ( GATE INTERACT NPLUS )  == 0.535 BY == 0.13
+   PL_GATE_DP4S = RECTANGLE ( GATE INTERACT PPLUS )  == 0.17 BY == 0.13
+   GATE_O_DP4S  = ((GATE NOT PD_GATE_DP4S) NOT PG_GATE_DP4S) NOT PL_GATE_DP4S
+
+
+
+DP4S.4A.9AaBaC_1 {@ Minimum PO1 width for 1.2V NMOS or PMOS or interconnect is 0.095um when common run length <= 0.03
+   X = INT PO1_DP4S < 0.095 ABUT>0<90 SINGULAR PROJECTING <= 0.03 REGION
+   X AND DP4S
+}
+
+DP4S.4A.9AaBaC_2 {@ Minimum PO1 width for 1.2V NMOS or PMOS or interconnect is 0.12um when common run length x > 0.03
+   X = INT PO1_DP4S < 0.12 ABUT>0<90 SINGULAR  PROJECTING >0.03 REGION
+   X AND DP4S
+}
+
+
+
+DP4S.4A.9F_1 {@ Minimum spacing of DIFF to PO1 on field oxide is 0.085um when common run length <=0.01um
+
+  X1 = EXT PO1_DP4S DIFF < 0.085 ABUT>0<90 SINGULAR PROJECTING <= 0.01 REGION
+  X1 AND DP4S
+}
+
+DP4S.4A.9F_2 {@ Minimum spacing of DIFF to PO1 on field oxide is 0.07um when common run length 0.01< x <=0.015um
+   X = EXT PO1_DP4S DIFF < 0.07 ABUT>0<90 OPPOSITE REGION
+   Y = PO1_DP4S COIN OUTSIDE EDGE X
+   E = X WITH EDGE (LENGTH Y > 0.01 <=0.015 )
+   E AND DP4S
+}
+
+DP4S.4A.9F_3 {@ Minimum spacing of DIFF to PO1 on field oxide is 0.055um when common run length 0.015< x <=0.017um
+   X = EXT PO1_DP4S DIFF < 0.055 ABUT>0<90 OPPOSITE REGION
+   Y = PO1_DP4S COIN OUTSIDE EDGE X
+   E = X WITH EDGE (LENGTH Y > 0.015 <=0.017 )
+   E AND DP4S
+}
+
+DP4S.4A.9F_4 {@ Minimum spacing of DIFF to PO1 on field oxide is 0.01um when common run length 0.017< x <=0.02um
+   X = EXT PO1_DP4S DIFF < 0.01 ABUT>0<90 OPPOSITE REGION
+   Y = PO1_DP4S COIN OUTSIDE EDGE X
+   E = X WITH EDGE (LENGTH Y > 0.017 <=0.02 )
+   E AND DP4S
+}
+
+DP4S.4A.9F_5 {@ Minimum spacing of DIFF to PO1 on field oxide is 0.055um when common run length 0.02< x <=0.027um
+   X = EXT PO1_DP4S DIFF < 0.055 ABUT>0<90 OPPOSITE REGION
+   Y = PO1_DP4S COIN OUTSIDE EDGE X
+   E = X WITH EDGE (LENGTH Y > 0.02 <=0.027 )
+   E AND DP4S
+}
+
+DP4S.4A.9F_6 {@ Minimum spacing of DIFF to PO1 on field oxide is 0.07um when common run length 0.027< x <=0.038um
+   X = EXT PO1_DP4S DIFF < 0.07 ABUT>0<90 OPPOSITE REGION
+   Y = PO1_DP4S COIN OUTSIDE EDGE X
+   E = X WITH EDGE (LENGTH Y > 0.027 <=0.038 )
+   E AND DP4S
+}
+
+DP4S.4A.9F_7 {@ Minimum spacing of DIFF to PO1 on field oxide is 0.055um when common run length 0.038< x <=0.06um
+   X = EXT PO1_DP4S DIFF < 0.055 ABUT>0<90 OPPOSITE REGION
+   Y = PO1_DP4S COIN OUTSIDE EDGE X
+   E = X WITH EDGE (LENGTH Y > 0.038 <=0.06 )
+   E AND DP4S
+}
+
+DP4S.4A.9F_8 {@ Minimum spacing of DIFF to PO1 on field oxide is 0.09um when common run length 0.06< x <=0.18um
+   X = EXT PO1_DP4S DIFF < 0.09 ABUT>0<90 OPPOSITE REGION
+   Y = PO1_DP4S COIN OUTSIDE EDGE X
+   E = X WITH EDGE (LENGTH Y > 0.06 <=0.18 )
+   E AND DP4S
+}
+
+DP4S.4A.9F_9 {@ Minimum spacing of DIFF to PO1 on field oxide is 0.05um when common run length 0.18< x <=0.19um
+   X = EXT PO1_DP4S DIFF < 0.05 ABUT>0<90 OPPOSITE REGION
+   Y = PO1_DP4S COIN OUTSIDE EDGE X
+   E = X WITH EDGE (LENGTH Y > 0.18 <=0.19 )
+   E AND DP4S
+}
+
+DP4S.4A.9F_10 {@ Minimum spacing of DIFF to PO1 on field oxide is 0.08um when common run length  x = 0.535 um
+   X = EXT PO1_DP4S DIFF < 0.08 ABUT>0<90 OPPOSITE REGION
+   Y = PO1_DP4S COIN OUTSIDE EDGE X
+   E = X WITH EDGE (LENGTH Y == 0.535 )
+   E AND DP4S
+}
+
+DP4S.4A.9F_11 {@ Minimum spacing of DIFF to PO1 on field oxide is 0.1um for others
+   X = EXT PO1_DP4S DIFF < 0.1 ABUT>0<90 OPPOSITE REGION
+   Y = PO1_DP4S COIN OUTSIDE EDGE X
+   E1 = X WITH EDGE (LENGTH Y >0.19)
+   E2 = X WITH EDGE (LENGTH Y == 0.535)
+   (E1 NOT E2) AND DP4S
+}
+
+DP4S.4A.9G {@ Minimum PO1 endcap to RELATED DIFF spacing is 0.07um
+   END_CAP =  INTPOL TOUCH GATE == 1
+   x = EXT DIFF_DP4S GATE < 0.07 PERP ONLY ABUT == 90 REGION
+   x INTERACT END_CAP
+}
+
+DP4S.4A.9H.a__4A.9O_1 {@ Minimum PO1 gate to field edge spacing is 0.135um
+
+   GATE_W_PD = PO1 COIN INSIDE EDGE PD_GATE_DP4S
+   E = ENC GATE_W_PD DIFF_DP4S < 0.135 REGION
+   E AND DP4S
+}
+
+DP4S.4A.9H.a__4A.9O_2 {@ Minimum PO1 gate to field edge spacing is 0.2um
+   X2 = ( PO1 NOT PD_GATE_DP4S ) INTERACT DP4S
+   GATE_W_5 = X2 COIN INSIDE EDGE GATE_DP4S
+   E1 = ENC GATE_W_5 DIFF_DP4S < 0.2 REGION
+   E1 AND DP4S
+}
+
+
+// DP4S.4A.9P {@ The POLY1 density 1mm X 1mm 500 um increments must > 15%
+//    Waive
+
+
+
+//CONT_DP4S_A = RECTANGLE CONT_DP4S == 0.16 BY == 0.16
+
+//CONT_AREA_1 = AREA CONT_DP4S == 0.0937
+//CONT_AREA_2 = AREA CONT_DP4S == 0.078475
+//CONT_AREA_3 = AREA CONT_DP4S == 0.086725
+
+//CONT_AREA = (CONT_AREA_1 OR CONT_AREA_2) OR CONT_AREA_3
+
+
+DP4S.4A.13C.a {@ Minimum DIFF CONT to Poly(1.2V) spacing is 0.085um,
+  X = EXT DIFCNT_DP4S GATE1_W < 0.085 ABUT>0<90 OPPOSITE REGION
+  x AND DP4S
+}
+
+DP4S.4A.13D {@ Minimum PO1 Contact to DIFF spaceing is 0.125um
+   x = EXT POLCNT_DP4S DIFF < 0.125 ABUT<90 SINGULAR REGION
+   x AND DP4S
+}
+
+DP4S.4A.13E {@ Minimum PO1 overlap CONT is 0.06um, no floating conntact
+    POLCNT_DP4S = CONT_DP4S INTERACT PO1
+    Y = RECTANGLE ENC POLCNT_DP4S PO1_DP4S
+    GOOD 0.020 0.035 0.035 0.035
+    GOOD 0.030 0.032 0.060 0.033
+    GOOD 0.060 0.032 0.030 0.033
+    //GOOD 0.000 0.032 0.030 0.033
+    GOOD 0.060 0.030 0.060 0.030
+    GOOD 0.023 0.035 0.032 0.035
+    GOOD 0.028 0.032 0.060 0.032
+    GOOD 0.040 0.030 0.040 0.030
+    GOOD 0.029 0.032 0.060 0.032
+    Y AND DP4S
+}
+
+DP4S.4A.13FG {@ Minimum extension of an DIFF region beyond a CONT region is
+   Y = RECTANGLE ENC CONT_DP4S DIFF_DP4S
+   GOOD 0.060 0.015 OPPOSITE 0.015 0.015 OPPOSITE
+   GOOD 0.060 0.035 OPPOSITE 0.060 0.030 OPPOSITE
+   GOOD 0.060 0.005 OPPOSITE 0.060 0.005 OPPOSITE
+   GOOD 0.055 0.015 OPPOSITE 0.016 0.015 OPPOSITE
+   GOOD 0.006 0.043 OPPOSITE 0.018 0.032 OPPOSITE
+   GOOD 0.017 0.005 OPPOSITE 0.009 0.015 OPPOSITE
+   GOOD 0.015 0.015 OPPOSITE 0.015 0.015 OPPOSITE
+   Y AND DP4S
+}
+
+//DP4S.4A.13I {@ Poly contact on diffusion is not allowed.
+
+/////////////////////////////
+
+
+DP4S.4B.1D.b {@ ME1 enclose CONT at end-of-line or outer corner is 0.06,when ME1 width < 0.24
+               @ cont (GOOD 0.00 0.06  OPPOSITE 0.00 0.06  OPPOSITE)
+    co_sm24 = CONT_DP4S INTERACT SM1_024
+    y = RECTANGLE ENC co_sm24 ME1
+    GOOD 0.046 0.027   0.025 0.022
+    GOOD 0.049 0.026   0.021 0.047
+    GOOD 0.060 0.024   0.056 0.016
+    GOOD 0.047 0.022   0.060 0.018
+    GOOD 0.004 0.060   0.006 0.058
+    GOOD 0.005 0.060   0.005 0.060
+    GOOD 0.000 0.060   0.010 0.060
+    GOOD 0.004 0.060   0.004 0.060
+    y AND DP4S
+}
+
+
+
+
+//=========================
+// DP3S SRAM (8TSRAM3.39LL)
+//=========================
+
+DIFF_DP3S  = DIFF INTERACT DP3S
+NWEL_DP3S  = NWEL INTERACT DP3S
+PO1_DP3S   = PO1  INTERACT DP3S
+GATE_DP3S  = GATE AND DP3S
+GATE_W_DP3S = PO1_DP3S COIN INSIDE EDGE GATE_DP3S
+GATE_Wc_DP3S = GATE_W_DP3S  COIN OUTSIDE EDGE CO_SD  //With contact
+GATE1_W_DP3S = GATE_W_DP3S NOT INSIDE EDGE TG
+ACTIVE_PS_DP3S = DIFF_DP3S OUTSIDE NWEL
+
+PDIF1_DP3S = PDIF1 AND DP3S
+NDIF1_DP3S = NDIF1 AND DP3S
+
+PPLUS_DP3S  = PPLUS INTERACT DP3S
+CONT_DP3S   = CONT INTERACT DP3S
+POLCNT_DP3S = POLCNT AND DP3S
+DIFCNT_DP3S = DIFCNT AND DP3S
+ME1_DP3S   = ME1 INTERACT DP3S
+
+DP3S.4A.1D.a {@ Minimum NWEL to a N+ DIFF(1.2V) spacing is 0.2 um
+   X = EXT NWEL_DP3S NDIF1 < 0.2 ABUT<90 SINGULAR OVERLAP REGION
+   X AND DP3S
+}
+
+DP3S.4A.1G.a {@ Minimum NWEL overlap P+ DIFF(1.2V) is 0.194 um
+   X = ENC PDIF1 NWEL_DP3S < 0.194 ABUT<90 SINGULAR OVERLAP REGION
+   X AND DP3S
+}
+
+   PG_GATE_DP3S = RECTANGLE ( GATE INTERACT NPLUS )  == 0.18 BY == 0.165
+   PD_GATE_DP3S = RECTANGLE ( GATE INTERACT NPLUS )  == 0.51 BY == 0.13
+   PL_GATE_DP3S = RECTANGLE ( GATE INTERACT PPLUS )  == 0.165 BY == 0.12
+   GATE_O_DP3S  = ((GATE NOT PD_GATE_DP3S) NOT PG_GATE_DP3S) NOT PL_GATE_DP3S
+
+
+DP3S.4A.4.3D {@ Minimum VTNH to unrelated Poly gate spacing is 0.209 um
+   X = EXT VTNH GATE_NOT_VTNH < 0.209 ABUT INSIDE ALSO REGION
+   X AND DP3S
+}
+
+DP3S.4A.5.3D_1 {@ Minimum VTPH to unrelated Poly gate spacing is 0.2 um when gate = PD_GATE_DP3S
+   X = EXT VTPH ( PD_GATE_DP3S AND GATE_NOT_VTPH ) < 0.2 ABUT INSIDE ALSO REGION
+   X AND DP3S
+}
+
+DP3S.4A.5.3D_2 {@ Minimum VTPH to unrelated Poly gate spacing is 0.228 um when gate = PG_GATE_DP3S
+   X = EXT VTPH ( PG_GATE_DP3S AND GATE_NOT_VTPH ) < 0.228 ABUT INSIDE ALSO REGION
+   X AND DP3S
+}
+
+
+DP3S.4A.9AaBaC_1 {@ Minimum PO1 width for 1.2V NMOS or PMOS or interconnect is 0.105 um when common run length <= 0.011
+   X = INT PO1_DP3S < 0.105 ABUT>0<90 SINGULAR PROJECTING <= 0.011 REGION
+   X AND DP3S
+}
+
+DP3S.4A.9AaBaC_2 {@ Minimum PO1 width for 1.2V NMOS or PMOS or interconnect is 0.1 um when common run length > 0.011 <= 0.013
+   X = INT PO1_DP3S < 0.1 ABUT>0<90 SINGULAR PROJECTING > 0.011 <= 0.013 REGION
+   X AND DP3S
+}
+
+DP3S.4A.9AaBaC_3 {@ Minimum PO1 width for 1.2V NMOS or PMOS or interconnect is 0.098 um when common run length > 0.013 <= 0.036
+   X = INT PO1_DP3S < 0.098 ABUT>0<90 SINGULAR PROJECTING > 0.013 <= 0.036 REGION
+   X AND DP3S
+}
+
+
+DP3S.4A.9AaBaC_4 {@ Minimum PO1 width for 1.2V NMOS or PMOS or interconnect is 0.12um when common run length x > 0.036
+   X = INT PO1_DP3S < 0.12 ABUT>0<90 SINGULAR  PROJECTING >0.036 REGION
+   X AND DP3S
+}
+
+
+DP3S.4A.9D.c1_1 {@ Minimum PO1 spacing on DIFF regions without contact is 0.18 when common run length ==0.142
+   E = EXT PO1 < 0.18 PROJ == 0.142 ABUT>0<90 SINGULAR REGION
+   E AND DP3S
+}
+
+DP3S.4A.9D.c1_2 {@ Minimum PO1 spacing on DIFF regions without contact is 0.18 when common run length !=0.142
+   E = EXT PO1 < 0.18 PROJ != 0.142 ABUT>0<90 SINGULAR REGION
+   E AND DP3S
+}
+
+
+DP3S.4A.9F_1 {@ Minimum spacing of DIFF to PO1 on field oxide is 0.012um when common run length x <=0.012um
+   X1 = EXT PO1_DP3S DIFF < 0.012 ABUT>0<90 SINGULAR PROJECTING <= 0.012 REGION
+   X1 AND DP3S
+}
+
+DP3S.4A.9F_2 {@ Minimum spacing of DIFF to PO1 on field oxide is 0.085um when common run length 0.012 < x <= 0.021 um
+   X1 = EXT PO1_DP3S DIFF < 0.085 ABUT>0<90 SINGULAR PROJECTING > 0.012 <= 0.021 REGION
+   X1 AND DP3S
+}
+
+
+DP3S.4A.9F_3 {@ Minimum spacing of DIFF to PO1 on field oxide is 0.06 um when common run length 0.021 < x <= 0.054 um
+
+  X1 = EXT PO1_DP3S DIFF < 0.06 ABUT>0<90 SINGULAR PROJECTING > 0.021 <= 0.054 REGION
+  X1 AND DP3S
+}
+
+DP3S.4A.9F_4 {@ Minimum spacing of DIFF to PO1 on field oxide is 0.075 um when common run length  x = 0.175 um
+
+  X1 = EXT PO1_DP3S DIFF < 0.075 ABUT>0<90 SINGULAR PROJECTING == 0.175 REGION
+  X1 AND DP3S
+}
+
+DP3S.4A.9F_5 {@ Minimum spacing of DIFF to PO1 on field oxide is 0.088 um when common run length  x = 0.185 um
+
+  X1 = EXT PO1_DP3S DIFF < 0.088 ABUT>0<90 SINGULAR PROJECTING == 0.185 REGION
+  X1 AND DP3S
+}
+
+DP3S.4A.9F_6 {@ Minimum spacing of DIFF to PO1 on field oxide is 0.1 um when common run length  x > 0.054 and not 0.175, 0.185 um
+  X1 = EXT PO1_DP3S DIFF < 0.1 ABUT>0<90 SINGULAR PROJECTING > 0.054 REGION
+  X2 = EXT PO1_DP3S DIFF < 0.1 ABUT>0<90 SINGULAR PROJECTING == 0.175 REGION
+  X3 = EXT PO1_DP3S DIFF < 0.1 ABUT>0<90 SINGULAR PROJECTING == 0.185 REGION
+  (( X1 NOT X2 ) NOT X3 ) AND DP3S
+}
+
+
+DP3S.4A.9H.a__4A.9O_1 {@ Minimum PO1 gate to field edge spacing is 0.14um when the common run length = 0.274
+   E = ENC GATE_W DIFF_DP3S < 0.14 PROJECTING == 0.274 REGION
+   E AND DP3S
+}
+
+DP3S.4A.9H.a__4A.9O_2 {@ Minimum PO1 gate to field edge spacing is 0.2um when the common run length != 0.274
+   E = ENC GATE_W DIFF_DP3S < 0.2 PROJECTING != 0.274 REGION
+   E AND DP3S
+}
+
+
+// DP3S.4A.9P {@ The POLY1 density 1mm X 1mm 500 um increments must > 15%
+//    Waive
+
+
+DP3S.4A.13C.a {@ Minimum DIFF CONT to Poly(1.2V) spacing is 0.084um,
+  X = EXT DIFCNT_DP3S GATE1_W < 0.084 ABUT>0<90 OPPOSITE REGION
+  x AND DP3S
+}
+
+DP3S.4A.13D {@ Minimum PO1 Contact to DIFF spaceing is 0.108um
+   x = EXT POLCNT_DP3S DIFF < 0.108 ABUT<90 SINGULAR REGION
+   x AND DP3S
+}
+
+DP3S.4A.13E {@ Minimum PO1 overlap CONT is 0.06um, no floating conntact
+    POLCNT_DP3S = CONT_DP3S INTERACT PO1
+    Y = RECTANGLE ENC POLCNT_DP3S PO1_DP3S
+    GOOD 0.035 0.035 0.025 0.035
+    GOOD 0.060 0.035 0.060 0.030
+    GOOD 0.030 0.030 0.030 0.030
+    GOOD 0.034 0.030 0.060 0.030
+    GOOD 0.039 0.023 0.039 0.002
+    GOOD 0.038 0.060 0.039 0.060
+    GOOD 0.030 0.060 0.030 0.060
+    GOOD 0.039 0.021 0.039 0.060
+    GOOD 0.035 0.030 0.035 0.030
+    GOOD 0.005 0.033 0.010 0.032
+    GOOD 0.000 0.038 0.025 0.039
+    GOOD 0.040 0.041 0.065 0.041
+    Y AND DP3S
+}
+
+DP3S.4A.13FG {@ Minimum extension of an DIFF region beyond a CONT region is
+   Y = RECTANGLE ENC CONT_DP3S DIFF_DP3S
+   GOOD 0.018 0.060 OPPOSITE 0.017 0.060 OPPOSITE
+   GOOD 0.010 0.060 OPPOSITE 0.010 0.060 OPPOSITE
+   GOOD 0.060 0.060 OPPOSITE 0.060 0.055 OPPOSITE
+   GOOD 0.018 0.055 OPPOSITE 0.017 0.060 OPPOSITE
+   GOOD 0.010 0.055 OPPOSITE 0.010 0.060 OPPOSITE
+   GOOD 0.017 0.060 OPPOSITE 0.003 0.060 OPPOSITE
+   GOOD 0.002 0.060 OPPOSITE 0.003 0.060 OPPOSITE
+   GOOD 0.017 0.060 OPPOSITE 0.003 0.026 OPPOSITE
+   GOOD 0.013 0.060 OPPOSITE 0.007 0.025 OPPOSITE
+   GOOD 0.010 0.060 OPPOSITE 0.010 0.060 OPPOSITE
+   GOOD 0.002 0.060 OPPOSITE 0.003 0.055 OPPOSITE
+   GOOD 0.016 0.060 OPPOSITE 0.004 0.060 OPPOSITE
+   GOOD 0.012 0.060 OPPOSITE 0.008 0.050 OPPOSITE
+   Y AND DP3S
+}
+
+//=========================
+// SP_4 SRAM (6TSRAM1.64LL)
+//=========================
+
+DIFF_SP_4  = DIFF INTERACT SP_4
+NWEL_SP_4  = NWEL INTERACT SP_4
+PO1_SP_4   = PO1  INTERACT SP_4
+GATE_SP_4  = GATE AND SP_4
+GATE_W_SP_4 = PO1_SP_4 COIN INSIDE EDGE GATE_SP_4
+GATE_Wc_SP_4 = GATE_W_SP_4  COIN OUTSIDE EDGE CO_SD  //With contact
+GATE1_W_SP_4 = GATE_W_SP_4 NOT INSIDE EDGE TG
+ACTIVE_PS_SP_4 = DIFF_SP_4 OUTSIDE NWEL
+
+PDIF1_SP_4 = PDIF1 AND SP_4
+NDIF1_SP_4 = NDIF1 AND SP_4
+
+PPLUS_SP_4  = PPLUS INTERACT SP_4
+CONT_SP_4   = CONT INTERACT SP_4
+POLCNT_SP_4 = POLCNT AND SP_4
+DIFCNT_SP_4 = DIFCNT AND SP_4
+ME1_SP_4  = ME1 INTERACT SP_4
+
+
+SP_4.4A.1C.a1b1 {@ Minimum space between two DIFF regions is 0.199 um
+    x = EXT DIFF_SP_4 < 0.199 ABUT>0<90 SINGULAR REGION
+    x AND SP_4
+}
+
+SP_4.4A.1D.a {@ Minimum NWEL to a N+ DIFF(1.2V) spacing is 0.169 um
+    x = EXT NWEL_SP_4 NDIF1 < 0.169 ABUT<90 OVERLAP SINGULAR REGION
+    x AND SP_4
+}
+
+SP_4.4A.1G.a {@ Minimum NWEL overlap P+ DIFF(1.2V) is 0.144 um
+    x = ENC PDIF1 NWEL_SP_4 < 0.144 ABUT<90 SINGULAR OVERLAP REGION
+    x AND SP_4
+}
+
+SP_4.4A.1H {@ Minimum DIFF/isolation area 0.1008 sq.um
+    E = AREA DIFF_SP_4 < 0.1008
+    E AND SP_4
+}
+
+//GATE1_VTNH = (GATE1 AND VTNH ) NOT PPLUS
+//GATE_NOT_VTNH = GATE NOT GATE1_VTNH
+//GATE1_VTPH = (GATE1 AND VTPH ) AND PPLUS
+//GATE_NOT_VTPH = GATE NOT GATE1_VTPH
+
+SP_4.4A.4.3D {@ Minimum VTNH to unrelated POLY1 gate spacing is 0.184 um
+    E = EXT VTNH GATE_NOT_VTNH < 0.184 ABUT INSIDE ALSO REGION
+    E AND SP_4
+}
+
+SP_4.4A.5.3D {@ Minimum VTPH to unrelated Poly gate spacing is 0.178 um
+    E = EXT VTPH GATE_NOT_VTPH < 0.178 ABUT INSIDE ALSO REGION
+    E AND SP_4
+}
+
+//   PG_GATE_SPLLS = RECTANGLE ( GATE INTERACT NPLUS )  == 0.185 BY == 0.13
+//   PD_GATE_SPLLS = RECTANGLE ( GATE INTERACT NPLUS )  == 0.265 BY == 0.12
+//   PL_GATE_SPLLS = RECTANGLE ( GATE INTERACT PPLUS )  == 0.165 BY == 0.12
+//   GATE_O_SPLLS  = ((GATE NOT PD_GATE_SPLLS) NOT PG_GATE_SPLLS) NOT PL_GATE_SPLLS
+
+SP_4.4A.9AaBaC {@ Minimum POLY1 width for 1.2V NMOS is 0.106 um
+                @ Minimum POLY1 width for 1.2V PMOS is 0.106 um
+                @ Minimum POLY1 width for interconnect is 0.106 um
+    E = INT PO1_SP_4 < 0.106 ABUT>0<90 SINGULAR REGION
+    E AND SP_4
+}
+
+SP_4.4A.9D.a1_4A.9D.c1 {@ Minimum POLY1 to POLY1 spacing on DIFFUSION regions is 0.118 um
+                        @ (without CONTACT)
+    E = EXT PO1_SP_4 < 0.118 ABUT>0<90 SINGULAR REGION
+    E AND SP_4
+}
+
+SP_4.4A.9E {@ Minimum POLY1 overhang of DIFFUSION is 0.177 um
+    E = ENC DIFF PO1_SP_4 < 0.177 ABUT<90 SINGULAR REGION
+    E AND SP_4
+}
+
+SP_4.4A.9F {@ Minimum POLY1 on field region to DIFFUSION spacing is 0.02 um
+    E = EXT PO1_SP_4 DIFF < 0.02 ABUT<90 SINGULAR REGION
+    E AND SP_4
+}
+
+SP_4.4A.9G {@ Minimum endcap POLY1 to related DIFFUSION spacing is 0.049 um
+    END_CAP =  INTPOL TOUCH GATE == 1
+    X = DIFF OUTSIDE EDGE GATE
+    Y = GATE TOUCH EDGE END_CAP
+    E = EXT Y X < 0.049 PERP ONLY ABUT == 90 REGION
+    E AND SP_4
+}
+
+//    GATE_SPLLS_4 = AREA GATE_SPLLS == 0.0313
+
+SP_4.4A.10D.a {@ Minimum N+ implant to P+ DIFFUSION spacing (inside N_WELL) is 0.144 um
+               @ (DIFFUSION overlap (N+ and P+) is not allowed)
+    E = EXT NPLUS ACTIVE_NT < 0.144 ABUT<90 SINGULAR REGION
+    E AND SP_4
+}
+
+SP_4.4A.11C.a {@ Minimum P+ implant overhang of P+ DIFFUSION (inside N_WELL) is 0.144 um
+    E = ENC ACTIVE_NT PPLUS < 0.144 ABUT<90 SINGULAR REGION
+    E AND SP_4
+}
+
+//CONT_SPLLS_A = RECTANGLE CONT_SPLLS == 0.16 BY == 0.16
+//CONT_SPLLS_SINGLE = AREA CONT_SPLLS == 0.0255
+
+SP_4.4A.13A {@ Maximum and Minimum CONTACT size is 0.16 um x 0.16 um
+             @ Maximum and Minimum CONTACT size is 0.186 um x 0.138 um
+             @ Maximum and Minimum CONTACT size is 0.156 um x 0.156 um
+    x = NOT RECTANGLE CONT_SP_4 == 0.16 BY == 0.16
+    y = NOT RECTANGLE x == 0.186 BY == 0.138
+    E = NOT RECTANGLE y == 0.156 BY == 0.156
+    E AND SP_4
+}
+
+//CONT_AREA_1 = AREA CONT_SPLLS == 0.0937
+//CONT_AREA_2 = AREA CONT_SPLLS == 0.078475
+//CONT_AREA_3 = AREA CONT_SPLLS == 0.086725
+//CONT_AREA_4 = AREA CONT_SPLLS == 0.0255
+
+//CONT_AREA = (CONT_AREA_1 OR CONT_AREA_2) OR CONT_AREA_3
+
+SP_4.4A.13B {@ Minimum CONTACT to CONTACT spacing is 0.16 um
+    E = EXT CONT_SP_4 < 0.16 ABUT>0<90 SINGULAR REGION
+    E AND SP_4
+}
+
+SP_4.4A.13C.a {@ Minimum DIFFUSION CONTACT to POLY1 (1.2V) spacing is 0.059 um
+               @ CONTACT over GATE is not allowed
+    E = EXT GATE1_W DIFCNT < 0.059 ABUT<90 REGION
+    E AND SP_4
+}
+
+SP_4.4A.13D {@ Minimum POLY1 CONTACT to DIFFUSION spaceing is 0.064 um
+    E = EXT POLCNT DIFF < 0.064 ABUT<90 SINGULAR REGION
+    E AND SP_4
+}
+
+SP_4.4A.13E {@ Minimum POLY1 enclosure of CONTACT is 0.016 um
+             @ Floating CONTACT is not allowed
+    E = ENC POLCNT PO1 < 0.016 ABUT<90 SINGULAR OUTSIDE ALSO REGION
+    E AND SP_4
+}
+
+SP_4.4A.13FG {@ Minimum P+ DIFFUSION enclosure of CONTACT is 0.008 um
+              @ Minimum N+ DIFFUSION enclosure of CONTACT is 0.008 um
+    E = ENC DIFCNT DIFF < 0.008 ABUT<90 SINGULAR OVERLAP REGION
+    E AND SP_4
+}
+
+/////////////////////////////
+
+SP_4.4B.1B.a {@ Minimum METAL1 to METAL1 spacing is 0.15 um
+              @ where one METAL1 width < 2.0um
+    E = EXT ME1 < 0.15 ABUT>0<90 SINGULAR REGION
+    E AND SP_4
+}
+
+SP_4.4B.1D.b {@ Minimum METAL1 enclosure of CONTACT at end-of-line or outer corner is 0.01 um
+              @ when METAL1 width < 0.24um
+    co_sm24 = CONT INTERACT SM1_024
+    E = RECTANGLE ENC co_sm24 ME1
+    GOOD 0.00 0.01 OPPOSITE 0.00 0.01 OPPOSITE
+    E AND SP_4
+}
+
+SP_4.4B.1E {@ Minimum area of METAL1 region 0.09744 sq.um
+    E = AREA ME1 < 0.09744
+    E AND SP_4
+}
+
+SP_4.4B.2B.a_b.VI1 {@ Minimum MVI1 to MVIA1 spacing is 0.187 um
+    E = EXT VI1 < 0.187 ABUT>0<90 SINGULAR REGION
+    E AND SP_4
+}
+
+//=========================
+// SP_5 SRAM (6TSRAM1.64SP)
+//=========================
+
+DIFF_SP_5  = DIFF INTERACT SP_5
+NWEL_SP_5  = NWEL INTERACT SP_5
+PO1_SP_5   = PO1  INTERACT SP_5
+GATE_SP_5  = GATE AND SP_5
+GATE_W_SP_5 = PO1_SP_5 COIN INSIDE EDGE GATE_SP_5
+GATE_Wc_SP_5 = GATE_W_SP_5  COIN OUTSIDE EDGE CO_SD  //With contact
+GATE1_W_SP_5 = GATE_W_SP_5 NOT INSIDE EDGE TG
+ACTIVE_PS_SP_5 = DIFF_SP_5 OUTSIDE NWEL
+
+PDIF1_SP_5 = PDIF1 AND SP_5
+NDIF1_SP_5 = NDIF1 AND SP_5
+
+PPLUS_SP_5  = PPLUS INTERACT SP_5
+CONT_SP_5   = CONT INTERACT SP_5
+POLCNT_SP_5 = POLCNT AND SP_5
+DIFCNT_SP_5 = DIFCNT AND SP_5
+ME1_SP_5  = ME1 INTERACT SP_5
+
+
+SP_5.4A.1C.a1b1 {@ Minimum space between two DIFF regions is 0.199 um
+    x = EXT DIFF_SP_5 < 0.199 ABUT>0<90 SINGULAR REGION
+    x AND SP_5
+}
+
+SP_5.4A.1D.a {@ Minimum NWEL to a N+ DIFF(1.2V) spacing is 0.176 um
+    x = EXT NWEL_SP_5 NDIF1 < 0.176 ABUT<90 OVERLAP SINGULAR REGION
+    x AND SP_5
+}
+
+SP_5.4A.1G.a {@ Minimum NWEL overlap P+ DIFF(1.2V) is 0.138 um
+    x = ENC PDIF1 NWEL_SP_5 < 0.138 ABUT<90 SINGULAR OVERLAP REGION
+    x AND SP_5
+}
+
+SP_5.4A.1H {@ Minimum DIFF/isolation area 0.1008 sq.um
+    E = AREA DIFF_SP_5 < 0.1008
+    E AND SP_5
+}
+
+//GATE1_VTNH = (GATE1 AND VTNH ) NOT PPLUS
+//GATE_NOT_VTNH = GATE NOT GATE1_VTNH
+//GATE1_VTPH = (GATE1 AND VTPH ) AND PPLUS
+//GATE_NOT_VTPH = GATE NOT GATE1_VTPH
+
+SP_5.4A.4.2D {@ Minimum VTN_SP to unrelated POLY1 gate spacing is 0.178 um
+    E = EXT VTN_SP GATE_NOT_VTN_SP < 0.178 ABUT INSIDE ALSO REGION
+    E AND SP_5
+}
+
+SP_5.4A.5.2D {@ Minimum VTP_SP to unrelated POLY1 gate spacing is 0.178 um
+    E = EXT VTP_SP GATE_NOT_VTP_SP < 0.178 ABUT INSIDE ALSO REGION
+    E AND SP_5
+}
+
+//   PG_GATE_SPLLS = RECTANGLE ( GATE INTERACT NPLUS )  == 0.185 BY == 0.13
+//   PD_GATE_SPLLS = RECTANGLE ( GATE INTERACT NPLUS )  == 0.265 BY == 0.12
+//   PL_GATE_SPLLS = RECTANGLE ( GATE INTERACT PPLUS )  == 0.165 BY == 0.12
+//   GATE_O_SPLLS  = ((GATE NOT PD_GATE_SPLLS) NOT PG_GATE_SPLLS) NOT PL_GATE_SPLLS
+
+SP_5.4A.9AaBaC {@ Minimum POLY1 width for 1.2V NMOS is 0.094 um
+                @ Minimum POLY1 width for 1.2V PMOS is 0.094 um
+                @ Minimum POLY1 width for interconnect is 0.094 um
+    E = INT PO1_SP_5 < 0.094 ABUT>0<90 SINGULAR REGION
+    E AND SP_5
+}
+
+SP_5.4A.9D.a1_4A.9D.c1 {@ Minimum POLY1 to POLY1 spacing on DIFFUSION regions is 0.128 um
+                        @ (without CONTACT)
+    E = EXT PO1_SP_5 < 0.128 ABUT>0<90 SINGULAR REGION
+    E AND SP_5
+}
+
+SP_5.4A.9E {@ Minimum POLY1 overhang of DIFFUSION is 0.17 um
+    E = ENC DIFF PO1_SP_5 < 0.17 ABUT<90 SINGULAR REGION
+    E AND SP_5
+}
+
+SP_5.4A.9F {@ Minimum POLY1 on field region to DIFFUSION spacing is 0.02 um
+    E = EXT PO1_SP_5 DIFF < 0.02 ABUT<90 SINGULAR REGION
+    E AND SP_5
+}
+
+SP_5.4A.9G {@ Minimum endcap POLY1 to related DIFFUSION spacing is 0.049 um
+    END_CAP =  INTPOL TOUCH GATE == 1
+    X = DIFF OUTSIDE EDGE GATE
+    Y = GATE TOUCH EDGE END_CAP
+    E = EXT Y X < 0.049 PERP ONLY ABUT == 90 REGION
+    E AND SP_5
+}
+
+//    GATE_SPLLS_4 = AREA GATE_SPLLS == 0.0313
+
+SP_5.4A.10B {@ Minimum N+ implant to N+ implant spacing is 0.233 um
+    E = EXT NPLUS < 0.233 ABUT>0<90 SINGULAR REGION
+    E AND SP_5
+}
+
+SP_5.4A.10C.b {@ Minimum N+ implant overhang of N+ DIFFUSION (inside N_WELL) is 0.054 um
+    E = ENC ACTIVE_NT NPLUS < 0.054 ABUT<90 SINGULAR REGION
+    E AND SP_5
+}
+
+SP_5.4A.10D.a {@ Minimum N+ implant to P+ DIFFUSION spacing (inside N_WELL) is 0.138 um
+               @ (DIFFUSION overlap (N+ and P+) is not allowed)
+    E = EXT NPLUS ACTIVE_NT < 0.138 ABUT<90 SINGULAR REGION
+    E AND SP_5
+}
+
+SP_5.4A.11C.a {@ Minimum P+ implant overhang of P+ DIFFUSION (inside N_WELL) is 0.138 um
+    E = ENC ACTIVE_NT PPLUS < 0.138 ABUT<90 SINGULAR REGION
+    E AND SP_5
+}
+
+//CONT_SPLLS_A = RECTANGLE CONT_SPLLS == 0.16 BY == 0.16
+//CONT_SPLLS_SINGLE = AREA CONT_SPLLS == 0.0255
+
+SP_5.4A.13A {@ Maximum and Minimum CONTACT size is 0.16 um x 0.16 um
+             @ Maximum and Minimum CONTACT size is 0.186 um x 0.138 um
+             @ Maximum and Minimum CONTACT size is 0.156 um x 0.156 um
+    x = NOT RECTANGLE CONT_SP_5 == 0.16 BY == 0.16
+    y = NOT RECTANGLE x == 0.186 BY == 0.138
+    E = NOT RECTANGLE y == 0.156 BY == 0.156
+    E AND SP_5
+}
+
+//CONT_AREA_1 = AREA CONT_SPLLS == 0.0937
+//CONT_AREA_2 = AREA CONT_SPLLS == 0.078475
+//CONT_AREA_3 = AREA CONT_SPLLS == 0.086725
+//CONT_AREA_4 = AREA CONT_SPLLS == 0.0255
+
+//CONT_AREA = (CONT_AREA_1 OR CONT_AREA_2) OR CONT_AREA_3
+
+SP_5.4A.13B {@ Minimum CONTACT to CONTACT spacing is 0.16 um
+    E = EXT CONT_SP_5 < 0.16 ABUT>0<90 SINGULAR REGION
+    E AND SP_5
+}
+
+SP_5.4A.13C.a {@ Minimum DIFFUSION CONTACT to POLY1 (1.2V) spacing is 0.059 um
+               @ CONTACT over GATE is not allowed
+    E = EXT GATE1_W DIFCNT < 0.059 ABUT<90 REGION
+    E AND SP_5
+}
+
+SP_5.4A.13D {@ Minimum POLY1 CONTACT to DIFFUSION spaceing is 0.064 um
+    E = EXT POLCNT DIFF < 0.064 ABUT<90 SINGULAR REGION
+    E AND SP_5
+}
+
+SP_5.4A.13E {@ Minimum POLY1 enclosure of CONTACT is 0.01 um
+             @ Floating CONTACT is not allowed
+    E = ENC POLCNT PO1 < 0.01 ABUT<90 SINGULAR OUTSIDE ALSO REGION
+    E AND SP_5
+}
+
+SP_5.4A.13FG {@ Minimum P+ DIFFUSION enclosure of CONTACT is 0 um
+              @ Minimum N+ DIFFUSION enclosure of CONTACT is 0 um
+    E = DIFCNT NOT DIFF
+    E AND SP_5
+}
+
+/////////////////////////////
+
+SP_5.4B.1B.a {@ Minimum METAL1 to METAL1 spacing is 0.15 um
+              @ where one METAL1 width < 2.0um
+    E = EXT ME1 < 0.15 ABUT>0<90 SINGULAR REGION
+    E AND SP_5
+}
+
+SP_5.4B.1D.b {@ Minimum METAL1 enclosure of CONTACT at end-of-line or outer corner is 0.01 um
+              @ when METAL1 width < 0.24um
+    co_sm24 = CONT INTERACT SM1_024
+    E = RECTANGLE ENC co_sm24 ME1
+    GOOD 0.00 0.01 OPPOSITE 0.00 0.01 OPPOSITE
+    E AND SP_5
+}
+
+SP_5.4B.1E {@ Minimum area of METAL1 region 0.09744 sq.um
+    E = AREA ME1 < 0.09744
+    E AND SP_5
+}
+
+SP_5.4B.2B.a_b.VI1 {@ Minimum MVI1 to MVIA1 spacing is 0.187 um
+    E = EXT VI1 < 0.187 ABUT>0<90 SINGULAR REGION
+    E AND SP_5
+}
+
+//=========================
+// SP_16 SRAM (6TSRAM1.41SP)
+//=========================
+
+DIFF_SP_16  = DIFF INTERACT SP_16
+NWEL_SP_16  = NWEL INTERACT SP_16
+PO1_SP_16   = PO1  INTERACT SP_16
+GATE_SP_16  = GATE AND SP_16
+GATE_W_SP_16 = PO1_SP_16 COIN INSIDE EDGE GATE_SP_16
+GATE_Wc_SP_16 = GATE_W_SP_16  COIN OUTSIDE EDGE CO_SD  //With contact
+GATE1_W_SP_16 = GATE_W_SP_16 NOT INSIDE EDGE TG
+ACTIVE_PS_SP_16 = DIFF_SP_16 OUTSIDE NWEL
+
+PDIF1_SP_16 = PDIF1 AND SP_16
+NDIF1_SP_16 = NDIF1 AND SP_16
+
+PPLUS_SP_16  = PPLUS INTERACT SP_16
+CONT_SP_16   = CONT INTERACT SP_16
+POLCNT_SP_16 = POLCNT AND SP_16
+DIFCNT_SP_16 = DIFCNT AND SP_16
+ME1_SP_16  = ME1 INTERACT SP_16
+VI1_SP_16  = VI1 INTERACT SP_16
+ME2_SP_16  = ME2 INTERACT SP_16
+VI2_SP_16  = VI2 INTERACT SP_16
+
+CONT_SP_16_AREA = AREA CONT_SP_16 > 0.023 <= 0.0235
+CONT_SP_16_AREA_NORMAL = CONT_SP_16 NOT CONT_SP_16_AREA
+
+VI2_SP_16_AREA = AREA VI2_SP_16 > 0.04 <= 0.0405
+VI2_SP_16_AREA_NORMAL = VI2_SP_16 NOT VI2_SP_16_AREA
+
+SP_16.4A.1A.a1b1__4A.1B_1 {@ Minimum DIFFUSION width for NMOS/PMOS is 0.16 um
+                           @ Minimum DIFFUSION width for interconnect is 0.16 um
+                           @ others, When the common run length (x <= 0.01)
+    x1 = INT DIFF_SP_16 < 0.16 ABUT>0<90 SINGULAR PROJ <=0.01 REGION
+    x1 AND SP_16
+    x2 = INT DIFF_SP_16 < 0.16 ABUT>0<90 SINGULAR NOT PROJ REGION
+    x2 AND SP_16
+    x3 = INT DIFF_SP_16 < 0.16 ABUT>0<90 SINGULAR CORNER TO CORNER REGION
+    x3 AND SP_16
+}
+
+SP_16.4A.1A.a1b1__4A.1B_2 {@ Minimum DIFFUSION width for NMOS/PMOS is 0.152 um
+                           @ Minimum DIFFUSION width for interconnect is 0.152 um
+                           @ When the common run length between 0.01 to 0.022 (0.01 < x <= 0.022)
+    x = INT DIFF_SP_16 < 0.152 ABUT>0<90 SINGULAR PROJ >0.01 <=0.022 REGION
+    x AND SP_16
+}
+
+SP_16.4A.1A.a1b1__4A.1B_3 {@ Minimum DIFFUSION width for NMOS/PMOS is 0.16 um
+                           @ Minimum DIFFUSION width for interconnect is 0.16 um
+                           @ others, When the common run length (x > 0.022)
+    x = INT DIFF_SP_16 < 0.16 ABUT>0<90 SINGULAR PROJ >0.022 REGION
+    x AND SP_16
+}
+
+SP_16.4A.1C.a1b1_1 {@ Minimum space between two DIFF regions is 0.2 um
+                    @ others, When the common run length <= 0.191
+    x1 = EXT DIFF_SP_16 < 0.2 ABUT>0<90 SINGULAR PROJ <=0.191 REGION
+    x1 AND SP_16
+    x2 = EXT DIFF_SP_16 < 0.2 ABUT>0<90 SINGULAR NOT PROJ REGION
+    x2 AND SP_16
+    x3 = EXT DIFF_SP_16 < 0.2 ABUT>0<90 SINGULAR CORNER TO CORNER REGION
+    x3 AND SP_16
+}
+
+SP_16.4A.1C.a1b1_2 {@ Minimum space between two DIFF regions is 0.186 um
+                    @ When the common run length between  0.191 to 1.1 (0.191 < x <= 1.1)
+    x = EXT DIFF_SP_16 < 0.186 ABUT>0<90 SINGULAR PROJ >0.191 <=1.1 REGION
+    x AND SP_16
+}
+
+SP_16.4A.1C.a1b1_3 {@ Minimum space between two DIFF regions is 0.2 um
+                    @ others, When the common run length > 1.1
+    x = EXT DIFF_SP_16 < 0.2 ABUT>0<90 SINGULAR PROJ >1.1 REGION
+    x AND SP_16
+}
+
+SP_16.4A.1D.a {@ Minimum NWEL to a N+ DIFF(1.2V) spacing is 0.144 um
+    x = EXT NWEL_SP_16 NDIF1 < 0.144 ABUT<90 OVERLAP SINGULAR REGION
+    x AND SP_16
+}
+
+SP_16.4A.1F {@ Minimum NWEL to P+ DIFF is 0.136 um
+    x = EXT NWEL_SP_16 PTAP < 0.136 ABUT<90 SINGULAR OVERLAP REGION
+    x AND SP_16
+}
+
+SP_16.4A.1G.a {@ Minimum NWEL overlap P+ DIFF(1.2V) is 0.159 um
+    x = ENC PDIF1 NWEL_SP_16 < 0.159 ABUT<90 SINGULAR OVERLAP REGION
+    x AND SP_16
+}
+
+SP_16.4A.4.2C {@ Minimum VTN_SP enclosure of POLY1 gate (POLY1 on DIFFUSION)
+               @ of the NMOS device is 0.144 um
+    E = ENC GATE1_VTN_SP VTN_SP < 0.144 ABUT<90 REGION
+    E AND SP_16
+
+    (VTN_SP INTERACT SP_16) INSIDE EDGE GATE
+}
+
+SP_16.4A.4.2D {@ Minimum VTN_SP to unrelated POLY1 gate spacing is 0.159 um
+    E = EXT VTN_SP GATE_NOT_VTN_SP < 0.159 ABUT INSIDE ALSO REGION
+    E AND SP_16
+
+    (VTN_SP INTERACT SP_16) INSIDE EDGE GATE
+}
+
+SP_16.4A.5.2C {@ Minimum VTP_SP enclosure of POLY1 gate (POLY1 on DIFFUSION)
+               @ of the PMOS device is 0.159 um
+    E = ENC GATE1_VTP_SP VTP_SP < 0.159 ABUT<90 REGION
+    E AND SP_16
+
+    (VTP_SP INTERACT SP_16) INSIDE EDGE GATE
+}
+
+SP_16.4A.5.2D {@ Minimum VTP_SP to unrelated POLY1 gate spacing is 0.144 um
+    E = EXT VTP_SP GATE_NOT_VTP_SP < 0.144 ABUT INSIDE ALSO REGION
+    E AND SP_16
+
+    (VTP_SP INTERACT SP_16) INSIDE EDGE GATE
+}
+
+SP_16.4A.9AaBaC_1 {@ Minimum POLY1 width for 1.2V NMOS is 0.08 um
+                   @ Minimum POLY1 width for 1.2V PMOS is 0.08 um
+                   @ Minimum POLY1 width for interconnect is 0.08 um
+                   @ When the common run length <= 0.027 (x <= 0.027)
+    E1 = INT PO1_SP_16 < 0.08 ABUT>0<90 SINGULAR PROJ <=0.027 REGION
+    E1 AND SP_16
+    E2 = INT PO1_SP_16 < 0.08 ABUT>0<90 SINGULAR NOT PROJ REGION
+    E2 AND SP_16
+    E3 = INT PO1_SP_16 < 0.08 ABUT>0<90 SINGULAR CORNER TO CORNER REGION
+    E3 AND SP_16
+}
+
+SP_16.4A.9AaBaC_2 {@ Minimum POLY1 width for 1.2V NMOS is 0.086 um
+                   @ Minimum POLY1 width for 1.2V PMOS is 0.086 um
+                   @ Minimum POLY1 width for interconnect is 0.086 um
+                   @ When the common run length between 0.027 to 0.032 (0.027 < x <= 0.032)
+    E = INT PO1_SP_16 < 0.086 ABUT>0<90 SINGULAR PROJ >0.027 <=0.032 REGION
+    E AND SP_16
+}
+
+SP_16.4A.9AaBaC_3 {@ Minimum POLY1 width for 1.2V NMOS is 0.089 um
+                   @ Minimum POLY1 width for 1.2V PMOS is 0.089 um
+                   @ Minimum POLY1 width for interconnect is 0.089 um
+                   @ When the common run length between 0.032 to 0.039 (0.032 < x <= 0.039)
+    E = INT PO1_SP_16 < 0.089 ABUT>0<90 SINGULAR PROJ >0.032 <=0.039 REGION
+    E AND SP_16
+}
+
+SP_16.4A.9AaBaC_4 {@ Minimum POLY1 width for 1.2V NMOS is 0.12 um
+                   @ Minimum POLY1 width for 1.2V PMOS is 0.12 um
+                   @ Minimum POLY1 width for interconnect is 0.12 um
+                   @ others, When the common run length > 0.039 (0.039 < x)
+    E = INT PO1_SP_16 < 0.12 ABUT>0<90 SINGULAR PROJ >0.039 REGION
+    E AND SP_16
+}
+
+SP_16.4A.9D.a1_4A.9D.c1_1 {@ Minimum POLY1 to POLY1 spacing on DIFFUSION regions is 0.024 um
+                           @ (without CONTACT) When the common run length <= 0.085 (x <= 0.085)
+    E1 = EXT PO1_SP_16 < 0.024 ABUT>0<90 SINGULAR PROJ <=0.085 REGION
+    E1 AND SP_16
+    E2 = EXT PO1_SP_16 < 0.024 ABUT>0<90 SINGULAR NOT PROJ REGION
+    E2 AND SP_16
+    E3 = EXT PO1_SP_16 < 0.024 ABUT>0<90 SINGULAR CORNER TO CORNER REGION
+    E3 AND SP_16
+}
+
+SP_16.4A.9D.a1_4A.9D.c1_2 {@ Minimum POLY1 to POLY1 spacing on DIFFUSION regions is 0.2 um
+                           @ (without CONTACT) When the common run length between 0.085 to 0.12 (0.085 < x <= 0.12)
+    E = EXT PO1_SP_16 < 0.2 ABUT>0<90 SINGULAR PROJ >0.085 <=0.12 REGION
+    E AND SP_16
+}
+
+SP_16.4A.9D.a1_4A.9D.c1_3 {@ Minimum POLY1 to POLY1 spacing on DIFFUSION regions is 0.126 um
+                           @ (without CONTACT) When the common run length between 0.12 to 0.21 (0.12 < x <= 0.21)
+    E = EXT PO1_SP_16 < 0.126 ABUT>0<90 SINGULAR PROJ >0.12 <=0.21 REGION
+    E AND SP_16
+}
+
+SP_16.4A.9D.a1_4A.9D.c1_4 {@ Minimum POLY1 to POLY1 spacing on DIFFUSION regions is 0.165 um
+                           @ (without CONTACT) When the common run length between 0.21 to 0.219 (0.21 < x <= 0.219)
+    E = EXT PO1_SP_16 < 0.165 ABUT>0<90 SINGULAR PROJ >0.21 <=0.219 REGION
+    E AND SP_16
+}
+
+SP_16.4A.9D.a1_4A.9D.c1_5 {@ Minimum POLY1 to POLY1 spacing on DIFFUSION regions is 0.14 um
+                           @ (without CONTACT) When the common run length between 0.219 to 0.236 (0.219 < x <= 0.236)
+    E = EXT PO1_SP_16 < 0.14 ABUT>0<90 SINGULAR PROJ >0.219 <=0.236 REGION
+    E AND SP_16
+}
+
+SP_16.4A.9D.a1_4A.9D.c1_6 {@ Minimum POLY1 to POLY1 spacing on DIFFUSION regions is 0.2 um
+                           @ (without CONTACT) When the common run length > 0.236 (0.236 < x)
+    E = EXT PO1_SP_16 < 0.2 ABUT>0<90 SINGULAR PROJ >0.236 REGION
+    E AND SP_16
+}
+
+SP_16.4A.9E_1 {@ Minimum POLY1 overhang of DIFFUSION is 0.18 um
+               @ others, When the common run length <= 0 (x <= 0)
+    E1 = ENC DIFF PO1_SP_16 < 0.18 ABUT<90 SINGULAR PROJ <=0 REGION
+    E1 AND SP_16
+    E2 = ENC DIFF PO1_SP_16 < 0.18 ABUT<90 SINGULAR NOT PROJ REGION
+    E2 AND SP_16
+    E3 = ENC DIFF PO1_SP_16 < 0.18 ABUT<90 SINGULAR CORNER TO CORNER REGION
+    E3 AND SP_16
+}
+
+SP_16.4A.9E_2 {@ Minimum POLY1 overhang of DIFFUSION is 0.103 um
+               @ When the common run length between 0 to 0.12 (0 < x <= 0.12)
+    E = ENC DIFF PO1_SP_16 < 0.103 ABUT<90 SINGULAR PROJ >0 <=0.12 REGION
+    E AND SP_16
+}
+
+SP_16.4A.9E_3 {@ Minimum POLY1 overhang of DIFFUSION is 0.15 um
+               @ When the common run length between 0.12 to 0.133 (0.12 < x <= 0.133)
+    E = ENC DIFF PO1_SP_16 < 0.15 ABUT<90 SINGULAR PROJ >0.12 <=0.133 REGION
+    E AND SP_16
+}
+
+SP_16.4A.9E_4 {@ Minimum POLY1 overhang of DIFFUSION is 0.103 um
+               @ When the common run length between 0.133 to 0.139 (0.133 < x <= 0.139)
+    E = ENC DIFF PO1_SP_16 < 0.103 ABUT<90 SINGULAR PROJ >0.133 <=0.139 REGION
+    E AND SP_16
+}
+
+SP_16.4A.9E_5 {@ Minimum POLY1 overhang of DIFFUSION is 0.153 um
+               @ When the common run length between 0.139 to 0.144 (0.139 < x <= 0.144)
+    E = ENC DIFF PO1_SP_16 < 0.153 ABUT<90 SINGULAR PROJ >0.139 <=0.144 REGION
+    E AND SP_16
+}
+
+SP_16.4A.9E_6 {@ Minimum POLY1 overhang of DIFFUSION is 0.18 um
+               @ When the common run length > 0.144 (0.144 < x)
+    E = ENC DIFF PO1_SP_16 < 0.18 ABUT<90 SINGULAR PROJ >0.144 REGION
+    E AND SP_16
+}
+
+SP_16.4A.9F_1 {@ Minimum POLY1 on field region to DIFFUSION spacing is 0.06 um
+               @ When the common run POLY1 length <= 0.022 (x <= 0.022)
+    E1 = EXT PO1_SP_16 DIFF < 0.06 ABUT<90 SINGULAR PROJ <=0.022 REGION
+    E1 AND SP_16
+    E2 = EXT PO1_SP_16 DIFF < 0.06 ABUT<90 SINGULAR NOT PROJ REGION
+    E2 AND SP_16
+    E3 = EXT PO1_SP_16 DIFF < 0.06 ABUT<90 SINGULAR CORNER TO CORNER REGION
+    E3 AND SP_16
+}
+
+SP_16.4A.9F_2 {@ Minimum POLY1 on field region to DIFFUSION spacing is 0.064 um
+               @ When the common run POLY1 length between 0.022 to 0.039 (0.022 < x <= 0.039)
+    E = EXT PO1_SP_16 DIFF < 0.064 ABUT<90 SINGULAR PROJ >0.022 <=0.039 REGION
+    E AND SP_16
+}
+
+SP_16.4A.9F_3 {@ Minimum POLY1 on field region to DIFFUSION spacing is 0.035 um
+               @ When the common run DIFFUSION length between 0.039 to 0.178 (0.039 < x <= 0.178)
+    E = EXT PO1_SP_16 DIFF < 0.035 ABUT<90 SINGULAR PROJ >0.039 <=0.178 REGION
+    E AND SP_16
+}
+
+SP_16.4A.9F_4 {@ Minimum POLY1 on field region to DIFFUSION spacing is 0.1 um
+               @ When the common run DIFFUSION length between 0.178 to 0.188 (0.178 < x <= 0.188)
+    E = EXT PO1_SP_16 DIFF < 0.1 ABUT<90 SINGULAR PROJ >0.178 <=0.188 REGION
+    E AND SP_16
+}
+
+SP_16.4A.9F_5 {@ Minimum POLY1 on field region to DIFFUSION spacing is 0.036 um
+               @ When the common run DIFFUSION length between 0.188 to 0.192 (0.188 < x <= 0.192)
+    E = EXT PO1_SP_16 DIFF < 0.036 ABUT<90 SINGULAR PROJ >0.188 <=0.192 REGION
+    E AND SP_16
+}
+
+SP_16.4A.9F_6 {@ Minimum POLY1 on field region to DIFFUSION spacing is 0.03 um
+               @ When the common run DIFFUSION length between 0.192 to 0.464 (0.192 < x <= 0.464)
+    E = EXT PO1_SP_16 DIFF < 0.03 ABUT<90 SINGULAR PROJ >0.192 <=0.464 REGION
+    E AND SP_16
+}
+
+SP_16.4A.9F_7 {@ Minimum POLY1 on field region to DIFFUSION spacing is 0.1 um
+               @ others, When the common run DIFFUSION length > 0.464 (0.464 < x)
+    E = EXT PO1_SP_16 DIFF < 0.1 ABUT<90 SINGULAR PROJ >0.464 REGION
+    E AND SP_16
+}
+
+SP_16.4A.10B {@ Minimum N+ implant to N+ implant spacing is 0.18 um
+    E = EXT NPLUS < 0.18 ABUT>0<90 SINGULAR REGION
+    E AND SP_16
+}
+
+SP_16.4A.10C.a {@ Minimum N+ implant overhang of N+ DIFFUSION (inside P_WELL) is 0.144 um
+    x = ENC ACTIVE_PS NPLUS < 0.144 ABUT<90 SINGULAR REGION
+    y = ENC ACTIVE_TW NPLUS < 0.144 ABUT<90 SINGULAR REGION
+    (x OR y) AND SP_16
+}
+
+SP_16.4A.10D.a {@ Minimum N+ implant to P+ DIFFUSION spacing (inside N_WELL) is 0.159 um
+                @ (DIFFUSION overlap (N+ and P+) is not allowed)
+    E = EXT NPLUS ACTIVE_NT < 0.159 ABUT<90 SINGULAR REGION
+    E AND SP_16
+}
+
+SP_16.4A.11B_1 {@ Minimum P+ implant to P+ implant spacing is 0.125 um
+                @ when the common run length <= 0.267 um (x <=0.267)
+    E1 = EXT PPLUS < 0.125 ABUT>0<90 SINGULAR PROJ <=0.267 REGION
+    E1 AND SP_16
+    E2 = EXT PPLUS < 0.125 ABUT>0<90 SINGULAR NOT PROJ REGION
+    E2 AND SP_16
+    E3 = EXT PPLUS < 0.125 ABUT>0<90 SINGULAR CORNER TO CORNER REGION
+    E3 AND SP_16
+}
+
+SP_16.4A.11B_2 {@ Minimum P+ implant to P+ implant spacing is 0.17 um
+                @ when the common run length between 0.267 to 0.827 (0.267 < x <=0.827)
+    E = EXT PPLUS < 0.17 ABUT>0<90 SINGULAR PROJ >0.267 <=0.827 REGION
+    E AND SP_16
+}
+
+SP_16.4A.11B_3 {@ Minimum P+ implant to P+ implant spacing is 0.125 um
+                @ when the common run length between 0.827 to 1.042 (0.827 < x <=1.042)
+    E = EXT PPLUS < 0.125 ABUT>0<90 SINGULAR PROJ >0.827 <=1.042 REGION
+    E AND SP_16
+}
+
+SP_16.4A.11B_4 {@ Minimum P+ implant to P+ implant spacing is 0.24 um
+                @ others, when the common run length > 1.042 (1.042 < x)
+    E = EXT PPLUS < 0.24 ABUT>0<90 SINGULAR PROJ >1.042 REGION
+    E AND SP_16
+}
+
+SP_16.4A.11C.a {@ Minimum P+ implant overhang of P+ DIFFUSION (inside N_WELL) is 0.159 um
+    E = ENC ACTIVE_NT PPLUS < 0.159 ABUT<90 SINGULAR REGION
+    E AND SP_16
+}
+
+SP_16.4A.11D.a {@ Minimum P+ implant to N+ DIFFUSION spacing (inside P_WELL) is 0.144 um
+    x = EXT PPLUS ACTIVE_PS < 0.144 ABUT<90 SINGULAR REGION
+    y = EXT PPLUS ACTIVE_TW < 0.144 ABUT<90 SINGULAR REGION
+    (x OR y) AND SP_16
+}
+
+SP_16.4A.13A {@ Maximum and Minimum CONTACT size is 0.16 um x 0.16 um
+              @ when CONTACT area 0.023 sq.um < x <= 0.0235 sq.um waive
+    E = NOT RECTANGLE CONT_SP_16_AREA_NORMAL == 0.16 BY == 0.16
+    E AND SP_16
+}
+
+SP_16.4A.13B_1 {@ Minimum CONTACT to CONTACT spacing is 0.15 um
+                @ When the common run length <= 0.13 (x <= 0.13)
+    E1 = EXT CONT < 0.15 ABUT>0<90 SINGULAR PROJ <=0.13 REGION
+    E1 AND SP_16
+    E2 = EXT CONT < 0.15 ABUT>0<90 SINGULAR NOT PROJ REGION
+    E2 AND SP_16
+    E3 = EXT CONT < 0.15 ABUT>0<90 SINGULAR CORNER TO CORNER REGION
+    E3 AND SP_16
+}
+
+SP_16.4A.13B_2 {@ Minimum CONTACT to CONTACT spacing is 0.16 um
+                @ When the common run length between 0.13 to 0.135 (0.13 < x <= 0.135)
+    E = EXT CONT < 0.16 ABUT>0<90 SINGULAR PROJ >0.13 <=0.135 REGION
+    E AND SP_16
+}
+
+SP_16.4A.13B_3 {@ Minimum CONTACT to CONTACT spacing is 0.148 um
+                @ When the common run length between 0.135 to 0.155 (0.135 < x <= 0.155)
+    E = EXT CONT < 0.148 ABUT>0<90 SINGULAR PROJ >0.135 <=0.155 REGION
+    E AND SP_16
+}
+
+SP_16.4A.13B_4 {@ Minimum CONTACT to CONTACT spacing is 0.2 um
+                @ When the common run length between 0.155 to 0.161 (0.155 < x <= 0.161)
+    E = EXT CONT < 0.2 ABUT>0<90 SINGULAR PROJ >0.155 <=0.161 REGION
+    E AND SP_16
+}
+
+SP_16.4A.13B_5 {@ Minimum CONTACT to CONTACT spacing is 0.19 um
+                @ When the common run length between 0.161 to 0.173 (0.161 < x <= 0.173)
+    E = EXT CONT < 0.19 ABUT>0<90 SINGULAR PROJ >0.161 <=0.173 REGION
+    E AND SP_16
+}
+
+SP_16.4A.13B_6 {@ Minimum CONTACT to CONTACT spacing is 0.2 um
+                @ others, When the common run length > 0.173 (0.173 < x)
+    E = EXT CONT < 0.2 ABUT>0<90 SINGULAR PROJ >0.173 REGION
+    E AND SP_16
+}
+
+SP_16.4A.13C.a {@ Minimum DIFFUSION CONTACT to POLY1 (1.2V) spacing is 0.069 um
+                @ CONTACT over GATE is not allowed
+    E = EXT GATE1_W DIFCNT < 0.069 ABUT<90 REGION
+    E AND SP_16
+}
+
+SP_16.4A.13D {@ Minimum CONTACT to DIFFUSION spaceing is 0.088 um
+    E = EXT POLCNT DIFF < 0.088 ABUT<90 SINGULAR REGION
+    E AND SP_16
+}
+
+SP_16.4A.13E {@ Minimum POLY1 enclosure of CONTACT is 0.06 um, Floating CONTACT is not allowed
+              @ waive (GOOD 0.029 0.024 0.029 0.024)
+              @ waive (GOOD 0.025 0.035 0.052 0.029)
+    x = ENC POLCNT_SP_16 PO1 < 0.06 ABUT<90 SINGULAR OUTSIDE ALSO REGION
+    y = POLCNT_SP_16 INTERACT x
+    E = RECTANGLE ENC y PO1 ABUT SINGULAR OUTSIDE ALSO
+        GOOD 0.029 0.024 0.029 0.024
+        GOOD 0.025 0.035 0.052 0.029
+    E AND SP_16
+}
+
+SP_16.4A.13FG {@ Minimum P+ DIFFUSION enclosure of CONTACT is 0.06 um
+               @ Minimum N+ DIFFUSION enclosure of CONTACT is 0.06 um
+               @ waive (GOOD 0.029 0.018 0 0)
+               @ waive (GOOD 0.035 0.012 0 0)
+               @ waive (GOOD 0.024 0.023 0 0)
+               @ waive (GOOD 0.014 0.025 0 0)
+               @ waive (GOOD 0.01 0.01 0 0)
+    x = ENC DIFCNT_SP_16 DIFF < 0.06 ABUT<90 SINGULAR OVERLAP REGION
+    y = DIFCNT_SP_16 INTERACT x
+    E = RECTANGLE ENC y DIFF ABUT SINGULAR
+        GOOD 0.029 0.018 0 0
+        GOOD 0.035 0.012 0 0
+        GOOD 0.024 0.023 0 0
+        GOOD 0.014 0.025 0 0
+        GOOD 0.01 0.01 0 0
+    E AND SP_16
+}
+
+/////////////////////////////
+
+SP_16.4B.1B.a_1 {@ Minimum METAL1 to METAL1 spacing is 0.114 um
+                 @ When METAL1 corner to METAL1 corner
+    E = EXT ME1 < 0.114 ABUT>0<90 SINGULAR CORNER TO CORNER REGION
+    E AND SP_16
+}
+
+SP_16.4B.1B.a_2 {@ Minimum METAL1 to METAL1 spacing is 0.02 um
+                 @ others, When the common run length <= 0.01 (x <= 0.01)
+    E1 = EXT ME1 < 0.02 ABUT>0<90 SINGULAR PROJ <=0.01 REGION
+    E1 AND SP_16
+    E2 = EXT ME1 < 0.02 ABUT>0<90 SINGULAR NOT PROJ REGION
+    E2 AND SP_16
+    E3 = EXT ME1 < 0.02 ABUT>0<90 SINGULAR CORNER TO EDGE REGION
+    E3 AND SP_16
+}
+
+SP_16.4B.1B.a_3 {@ Minimum METAL1 to METAL1 spacing is 0.125 um
+                 @ When the common run length between 0.01 to 0.012 (0.01 < x <= 0.012)
+    E = EXT ME1 < 0.125 ABUT>0<90 SINGULAR PROJ >0.01 <=0.012 REGION
+    E AND SP_16
+}
+
+SP_16.4B.1B.a_4 {@ Minimum METAL1 to METAL1 spacing is 0.02 um
+                 @ When the common run length between 0.012 to 0.037 (0.012 < x <= 0.037)
+    E = EXT ME1 < 0.02 ABUT>0<90 SINGULAR PROJ >0.012 <=0.037 REGION
+    E AND SP_16
+}
+
+SP_16.4B.1B.a_5 {@ Minimum METAL1 to METAL1 spacing is 0.071 um
+                 @ When the common run length between 0.037 to 0.043 (0.037 < x <= 0.043)
+    E = EXT ME1 < 0.071 ABUT>0<90 SINGULAR PROJ >0.037 <=0.043 REGION
+    E AND SP_16
+}
+
+SP_16.4B.1B.a_6 {@ Minimum METAL1 to METAL1 spacing is 0.086 um
+                 @ When the common run length between 0.043 to 0.066 (0.043 < x <= 0.066)
+    E = EXT ME1 < 0.086 ABUT>0<90 SINGULAR PROJ >0.043 <=0.066 REGION
+    E AND SP_16
+}
+
+SP_16.4B.1B.a_7 {@ Minimum METAL1 to METAL1 spacing is 0.13 um
+                 @ When the common run length between 0.066 to 0.085 (0.066 < x <= 0.085)
+    E = EXT ME1 < 0.13 ABUT>0<90 SINGULAR PROJ >0.066 <=0.085 REGION
+    E AND SP_16
+}
+
+SP_16.4B.1B.a_8 {@ Minimum METAL1 to METAL1 spacing is 0.085 um
+                 @ When the common run length between 0.085 to 0.094 (0.085 < x <= 0.094)
+    E = EXT ME1 < 0.085 ABUT>0<90 SINGULAR PROJ >0.085 <=0.094 REGION
+    E AND SP_16
+}
+
+SP_16.4B.1B.a_9 {@ Minimum METAL1 to METAL1 spacing is 0.114 um
+                 @ When the common run length between 0.094 to 0.134 (0.094 < x <= 0.134)
+    E = EXT ME1 < 0.114 ABUT>0<90 SINGULAR PROJ >0.094 <=0.134 REGION
+    E AND SP_16
+}
+
+SP_16.4B.1B.a_10 {@ Minimum METAL1 to METAL1 spacing is 0.124 um
+                  @ When the common run length between 0.134 to 0.154 (0.134 < x <= 0.154)
+    E = EXT ME1 < 0.124 ABUT>0<90 SINGULAR PROJ >0.134 <=0.154 REGION
+    E AND SP_16
+}
+
+SP_16.4B.1B.a_11 {@ Minimum METAL1 to METAL1 spacing is 0.132 um
+                  @ When the common run length between 0.154 to 0.188 (0.154 < x <= 0.188)
+    E = EXT ME1 < 0.132 ABUT>0<90 SINGULAR PROJ >0.154 <=0.188 REGION
+    E AND SP_16
+}
+
+SP_16.4B.1B.a_12 {@ Minimum METAL1 to METAL1 spacing is 0.14 um
+                  @ When the common run length between 0.188 to 0.239 (0.188 < x <= 0.239)
+    E = EXT ME1 < 0.14 ABUT>0<90 SINGULAR PROJ >0.188 <=0.239 REGION
+    E AND SP_16
+}
+
+SP_16.4B.1B.a_13 {@ Minimum METAL1 to METAL1 spacing is 0.145 um
+                  @ When the common run length between 0.239 to 0.418 (0.239 < x <= 0.418)
+    E = EXT ME1 < 0.145 ABUT>0<90 SINGULAR PROJ >0.239 <=0.418 REGION
+    E AND SP_16
+}
+
+SP_16.4B.1B.a_14 {@ Minimum METAL1 to METAL1 spacing is 0.16 um
+                  @ others, When the common run length > 0.418 (0.418 < x)
+    E = EXT ME1 < 0.16 ABUT>0<90 SINGULAR PROJ >0.418 REGION
+    E AND SP_16
+}
+
+SP_16.4B.1D.b {@ Minimum METAL1 enclosure of CONTACT at end-of-line or outer corner is 0.06 um when METAL1 width < 0.24um
+               @ when CONTACT area 0.023 sq.um < x <= 0.0235 sq.um waive
+    co_sm24 = CONT_SP_16_AREA_NORMAL INTERACT SM1_024
+    E = RECTANGLE ENC co_sm24 ME1
+    GOOD 0.00 0.06 OPPOSITE 0.00 0.06 OPPOSITE
+    E AND SP_16
+}
+
+SP_16.4B.1E {@ Minimum area of METAL1 region 0.0929 sq.um
+    E = AREA ME1_SP_16 < 0.0929
+    E AND SP_16
+}
+
+SP_16.4B.2C.a {@ Minimum extension from METAL1(width<10um) to MVIA1 is 0um, no VI1 outside ME1
+               @ when VI1 sizing -0.01um
+    x = SIZE VI1_SP_16 BY -0.01
+    E = NOT x ME1
+    E AND SP_16
+}
+
+CHK_SP_16_ME1_A_0 = VERTEX ME1_SP_16 == 6
+CHK_SP_16_ME1_A_1 = LENGTH CHK_SP_16_ME1_A_0 == 0.32
+CHK_SP_16_ME1_A_2 = LENGTH CHK_SP_16_ME1_A_0 == 0.224
+CHK_SP_16_ME1_A_3 = LENGTH CHK_SP_16_ME1_A_0 > 0.132 < 0.134
+CHK_SP_16_ME1_A_4 = LENGTH CHK_SP_16_ME1_A_0 == 0.132
+CHK_SP_16_ME1_A_5 = LENGTH CHK_SP_16_ME1_A_0 > 0.132 < 0.134
+CHK_SP_16_ME1_A_6 = LENGTH CHK_SP_16_ME1_A_0 == 0.224
+CHK_SP_16_ME1_A = (((((CHK_SP_16_ME1_A_0 WITH EDGE CHK_SP_16_ME1_A_1) WITH EDGE CHK_SP_16_ME1_A_2) WITH EDGE CHK_SP_16_ME1_A_3) WITH EDGE CHK_SP_16_ME1_A_4) WITH EDGE CHK_SP_16_ME1_A_5) WITH EDGE CHK_SP_16_ME1_A_6
+
+CHK_SP_16_ME1_B_0 = VERTEX ME1_SP_16 == 6
+CHK_SP_16_ME1_B_1 = LENGTH CHK_SP_16_ME1_B_0 == 0.324
+CHK_SP_16_ME1_B_2 = LENGTH CHK_SP_16_ME1_B_0 == 0.256
+CHK_SP_16_ME1_B_3 = LENGTH CHK_SP_16_ME1_B_0 > 0.119 < 0.121
+CHK_SP_16_ME1_B_4 = LENGTH CHK_SP_16_ME1_B_0 == 0.154
+CHK_SP_16_ME1_B_5 = LENGTH CHK_SP_16_ME1_B_0 > 0.119 < 0.121
+CHK_SP_16_ME1_B_6 = LENGTH CHK_SP_16_ME1_B_0 == 0.256
+CHK_SP_16_ME1_B = (((((CHK_SP_16_ME1_B_0 WITH EDGE CHK_SP_16_ME1_B_1) WITH EDGE CHK_SP_16_ME1_B_2) WITH EDGE CHK_SP_16_ME1_B_3) WITH EDGE CHK_SP_16_ME1_B_4) WITH EDGE CHK_SP_16_ME1_B_5) WITH EDGE CHK_SP_16_ME1_B_6
+
+MEX1_16 = ME1_SP_16 NOT (CHK_SP_16_ME1_A OR CHK_SP_16_ME1_B)
+MEX1P_16 = VERTEX MEX1_16 > 10
+ME1_EDGE_16 = CONVEX EDGE MEX1P_16 ANGLE1 > 90 < 180 ANGLE2 > 90 < 180 WITH LENGTH >0.119 < 0.155
+
+MEX1PX1_16 = EXTENTS (EXPAND EDGE ME1_EDGE_16 INSIDE BY 0.01 CORNER FILL)
+MEX1PX_16 = MEX1_16 OR MEX1PX1_16
+MEX2_16 = EXTENTS (CHK_SP_16_ME1_A OR CHK_SP_16_ME1_B)
+MEX_16 = MEX1PX_16 OR MEX2_16
+
+SP_16.4B.2C.c_d_e {@ METAL1 enclose MVIA1 at end-of-line or outer corner is 0.06 um
+                   @ waive (GOOD 0.06 0.027 0.06 0.091)
+                   @ waive (GOOD 0.06 0.062 0.081 0.062)
+                   @ waive (GOOD 0.04 0.083 0.04 0.083)
+                   @ waive (GOOD 0.04 0.236 0.04 0.236)
+                   @ waive (GOOD 0.017 0.334 0.017 0.334)
+                   @ waive (GOOD 0.04 0.321 0.04 0.321)
+    x = ENC [VI1] ME1_SP_16 < 0.06 ABUT<90 OPPOSITE      // via edge with metal enc < 0.06
+    y = INT x < 0.2 ABUT==90 INTERSECTING ONLY REGION    // 0.2 is MVIA1 size
+    z = VI1 INTERACT y
+    E = RECTANGLE ENC z MEX_16 ABUT SINGULAR OUTSIDE ALSO
+        GOOD 0.06 0.027 0.06 0.091
+        GOOD 0.06 0.062 0.081 0.062
+        GOOD 0.04 0.083 0.04 0.083
+        GOOD 0.04 0.236 0.04 0.236
+        GOOD 0.017 0.334 0.017 0.334
+        GOOD 0.04 0.321 0.04 0.321
+    E AND SP_16
+}
+
+SP_16.4B.3B.a_ME2_1 {@ Minimum METAL2 to METAL2 spacing is 0.152 um
+                     @ METAL2 corner to METAL2 corner
+    E = EXT ME2 < 0.152 ABUT>0<90 SINGULAR REGION
+    E AND SP_16
+}
+
+SP_16.4B.3B.a_ME2_2 {@ Minimum METAL2 to METAL2 spacing is 0.199 um
+                     @ others
+    E1 = EXT ME2 < 0.199 ABUT>0<90 SINGULAR NOT CORNER REGION EXCLUDE FALSE
+    E1 AND SP_16
+    E2 = EXT ME2 < 0.199 ABUT>0<90 SINGULAR CORNER TO EDGE REGION
+    E2 AND SP_16
+}
+
+SP_16.4B.3D.b_c_ME2 {@ METAL2 enclose MVIA1 at end-of-line or outer corner is 0.026 um
+    x = ENC [VI1_SP_16] ME2 < 0.026 ABUT<90 OPPOSITE   // via edge with metal enc < 0.026
+    E = INT x < 0.2 ABUT==90 INTERSECTING ONLY REGION  // 0.2 is MVIA1 size
+    E AND SP_16
+}
+
+SP_16.4B.4A_VI2 {@ Exact MVIA2 size is 0.20um
+                 @ when MVIA2 area 0.04 sq.um < x <= 0.0405 sq.um waive
+    E = NOT RECTANGLE VI2_SP_16_AREA_NORMAL == 0.20 BY == 0.20
+    E AND SP_16
+}
+
+SP_16.4B.4C.c_d_e_VI2 {@ METAL2 enclose MVIA2 at end-of-line or outer corner is 0.06 um
+                       @ waive (GOOD 0.034 0.363 0.034 0.066)
+                       @ waive (GOOD 0.034 0.082 0.034 0.186)
+                       @ waive (GOOD 0.034 0.159 0.034 0.159)
+                       @ waive (GOOD 0.026 0.021 0.026 0.021)
+                       @ waive (GOOD 0.04 0.247 0.04 0.321)
+                       @ waive (GOOD 0.04 0.057 0.04 0.109)
+                       @ waive (GOOD 0.04 0.236 0.04 0.236)
+                       @ waive (GOOD 0.034 0.159 0.034 1.736)
+    x = ENC [VI2] ME2_SP_16 < 0.06 ABUT<90 OPPOSITE     // via edge with metal enc < 0.06
+    y = INT x < 0.2 ABUT==90 INTERSECTING ONLY REGION   // 0.2 is MVIA2 size
+    z = VI2 INTERACT y
+    E = RECTANGLE ENC z ME2_SP_16 ABUT SINGULAR OUTSIDE ALSO
+        GOOD 0.034 0.363 0.034 0.066
+        GOOD 0.034 0.082 0.034 0.186
+        GOOD 0.034 0.159 0.034 0.159
+        GOOD 0.026 0.021 0.026 0.021
+        GOOD 0.04 0.247 0.04 0.321
+        GOOD 0.04 0.057 0.04 0.109
+        GOOD 0.04 0.236 0.04 0.236
+        GOOD 0.034 0.159 0.034 1.736
+    E AND SP_16
+}
+
+SP_16.4B.3D.b_c_ME3_1 {@ METAL3 enclose MVIA2 at end-of-line or outer corner is 0.04 um
+                       @ When the common run length <= 0.28um
+    x  = ENC [VI2_SP_16] ME3 < 0.04 ABUT<90 OPPOSITE PROJ <=0.28      // via edge with metal enc < 0.04
+    E1 = INT x < 0.2 ABUT==90 INTERSECTING ONLY REGION                // 0.2 is MVIA2 size
+    E1 AND SP_16
+    y  = ENC [VI2_SP_16] ME3 < 0.04 ABUT<90 OPPOSITE NOT PROJ         // via edge with metal enc < 0.04
+    E2 = INT y < 0.2 ABUT==90 INTERSECTING ONLY REGION                // 0.2 is MVIA2 size
+    E2 AND SP_16
+    z  = ENC [VI2_SP_16] ME3 < 0.04 ABUT<90 OPPOSITE CORNER TO CORNER // via edge with metal enc < 0.04
+    E3 = INT z < 0.2 ABUT==90 INTERSECTING ONLY REGION                // 0.2 is MVIA2 size
+    E3 AND SP_16
+}
+
+SP_16.4B.3D.b_c_ME3_2 {@ METAL3 enclose MVIA2 at end-of-line or outer corner is 0.06 um
+                       @ others, (When the common run length > 0.28um)
+    x = ENC [VI2_SP_16] ME3 < 0.06 ABUT<90 OPPOSITE PROJ > 0.28      // via edge with metal enc < 0.06
+    E = INT x < 0.2 ABUT==90 INTERSECTING ONLY REGION                // 0.2 is MVIA2 size
+    E AND SP_16
+}
+
+//=========================
+// SP_18 SRAM (6TSRAM1.41LL)
+//=========================
+
+DIFF_SP_18  = DIFF INTERACT SP_18
+NWEL_SP_18  = NWEL INTERACT SP_18
+PO1_SP_18   = PO1  INTERACT SP_18
+GATE_SP_18  = GATE AND SP_18
+GATE_W_SP_18 = PO1_SP_18 COIN INSIDE EDGE GATE_SP_18
+GATE_Wc_SP_18 = GATE_W_SP_18  COIN OUTSIDE EDGE CO_SD  //With contact
+GATE1_W_SP_18 = GATE_W_SP_18 NOT INSIDE EDGE TG
+ACTIVE_PS_SP_18 = DIFF_SP_18 OUTSIDE NWEL
+
+PDIF1_SP_18 = PDIF1 AND SP_18
+NDIF1_SP_18 = NDIF1 AND SP_18
+
+PPLUS_SP_18  = PPLUS INTERACT SP_18
+CONT_SP_18   = CONT INTERACT SP_18
+POLCNT_SP_18 = POLCNT AND SP_18
+DIFCNT_SP_18 = DIFCNT AND SP_18
+ME1_SP_18  = ME1 INTERACT SP_18
+VI1_SP_18  = VI1 INTERACT SP_18
+ME2_SP_18  = ME2 INTERACT SP_18
+VI2_SP_18  = VI2 INTERACT SP_18
+
+CONT_SP_18_AREA = AREA CONT_SP_18 > 0.023 <= 0.0235
+CONT_SP_18_AREA_NORMAL = CONT_SP_18 NOT CONT_SP_18_AREA
+
+VI2_SP_18_AREA = AREA VI2_SP_18 > 0.04 <= 0.0405
+VI2_SP_18_AREA_NORMAL = VI2_SP_18 NOT VI2_SP_18_AREA
+
+SP_18.4A.1A.a1b1__4A.1B_1 {@ Minimum DIFFUSION width for NMOS/PMOS is 0.16 um
+                           @ Minimum DIFFUSION width for interconnect is 0.16 um
+                           @ others, When the common run length (x <= 0.01)
+    x1 = INT DIFF_SP_18 < 0.16 ABUT>0<90 SINGULAR PROJ <=0.01 REGION
+    x1 AND SP_18
+    x2 = INT DIFF_SP_18 < 0.16 ABUT>0<90 SINGULAR NOT PROJ REGION
+    x2 AND SP_18
+    x3 = INT DIFF_SP_18 < 0.16 ABUT>0<90 SINGULAR CORNER TO CORNER REGION
+    x3 AND SP_18
+}
+
+SP_18.4A.1A.a1b1__4A.1B_2 {@ Minimum DIFFUSION width for NMOS/PMOS is 0.152 um
+                           @ Minimum DIFFUSION width for interconnect is 0.152 um
+                           @ When the common run length between 0.01 to 0.022 (0.01 < x <= 0.022)
+    x = INT DIFF_SP_18 < 0.152 ABUT>0<90 SINGULAR PROJ >0.01 <=0.022 REGION
+    x AND SP_18
+}
+
+SP_18.4A.1A.a1b1__4A.1B_3 {@ Minimum DIFFUSION width for NMOS/PMOS is 0.16 um
+                           @ Minimum DIFFUSION width for interconnect is 0.16 um
+                           @ others, When the common run length (x > 0.022)
+    x = INT DIFF_SP_18 < 0.16 ABUT>0<90 SINGULAR PROJ >0.022 REGION
+    x AND SP_18
+}
+
+SP_18.4A.1C.a1b1_1 {@ Minimum space between two DIFF regions is 0.2 um
+                    @ others, When the common run length <= 0.191
+    x1 = EXT DIFF_SP_18 < 0.2 ABUT>0<90 SINGULAR PROJ <=0.191 REGION
+    x1 AND SP_18
+    x2 = EXT DIFF_SP_18 < 0.2 ABUT>0<90 SINGULAR NOT PROJ REGION
+    x2 AND SP_18
+    x3 = EXT DIFF_SP_18 < 0.2 ABUT>0<90 SINGULAR CORNER TO CORNER REGION
+    x3 AND SP_18
+}
+
+SP_18.4A.1C.a1b1_2 {@ Minimum space between two DIFF regions is 0.186 um
+                    @ When the common run length between  0.191 to 1.1 (0.191 < x <= 1.1)
+    x = EXT DIFF_SP_18 < 0.186 ABUT>0<90 SINGULAR PROJ >0.191 <=1.1 REGION
+    x AND SP_18
+}
+
+SP_18.4A.1C.a1b1_3 {@ Minimum space between two DIFF regions is 0.2 um
+                    @ others, When the common run length > 1.1
+    x = EXT DIFF_SP_18 < 0.2 ABUT>0<90 SINGULAR PROJ >1.1 REGION
+    x AND SP_18
+}
+
+SP_18.4A.1D.a {@ Minimum NWEL to a N+ DIFF(1.2V) spacing is 0.144 um
+    x = EXT NWEL_SP_18 NDIF1 < 0.144 ABUT<90 OVERLAP SINGULAR REGION
+    x AND SP_18
+}
+
+SP_18.4A.1F {@ Minimum NWEL to P+ DIFF is 0.136 um
+    x = EXT NWEL_SP_18 PTAP < 0.136 ABUT<90 SINGULAR OVERLAP REGION
+    x AND SP_18
+}
+
+SP_18.4A.1G.a {@ Minimum NWEL overlap P+ DIFF(1.2V) is 0.159 um
+    x = ENC PDIF1 NWEL_SP_18 < 0.159 ABUT<90 SINGULAR OVERLAP REGION
+    x AND SP_18
+}
+
+SP_18.4A.4.3C {@ Minimum VTNH  enclosure of POLY1 gate (POLY1 on DIFFUSION)
+               @ of the low leakage NMOS device is 0.144 um
+    E = ENC GATE1_VTNH VTNH < 0.144 ABUT<90 REGION
+    E AND SP_18
+
+    (VTNH INTERACT SP_18) INSIDE EDGE GATE
+}
+
+SP_18.4A.4.3D {@ Minimum VTNH to unrelated POLY1 gate spacing is 0.159 um
+    E = EXT VTNH GATE_NOT_VTNH < 0.159 ABUT INSIDE ALSO REGION
+    E AND SP_18
+
+    (VTNH INTERACT SP_18) INSIDE EDGE GATE
+}
+
+SP_18.4A.5.3C {@ Minimum VTPH enclosure of POLY1 gate (POLY1 on DIFFUSION)
+               @ of low leakage PMOS device is 0.159 um
+    E = ENC GATE1_VTPH VTPH < 0.159 ABUT<90 REGION
+    E AND SP_18
+
+    (VTPH INTERACT SP_18) INSIDE EDGE GATE
+}
+
+SP_18.4A.5.3D {@ Minimum VTPH to unrelated POLY1 gate spacing is 0.144 um
+    E = EXT VTPH GATE_NOT_VTPH < 0.144 ABUT INSIDE ALSO REGION
+    E AND SP_18
+
+    (VTPH INTERACT SP_18) INSIDE EDGE GATE
+}
+
+SP_18.4A.9AaBaC_1 {@ Minimum POLY1 width for 1.2V NMOS is 0.08 um
+                   @ Minimum POLY1 width for 1.2V PMOS is 0.08 um
+                   @ Minimum POLY1 width for interconnect is 0.08 um
+                   @ When the common run length <= 0.027 (x <= 0.027)
+    E1 = INT PO1_SP_18 < 0.08 ABUT>0<90 SINGULAR PROJ <=0.027 REGION
+    E1 AND SP_18
+    E2 = INT PO1_SP_18 < 0.08 ABUT>0<90 SINGULAR NOT PROJ REGION
+    E2 AND SP_18
+    E3 = INT PO1_SP_18 < 0.08 ABUT>0<90 SINGULAR CORNER TO CORNER REGION
+    E3 AND SP_18
+}
+
+SP_18.4A.9AaBaC_2 {@ Minimum POLY1 width for 1.2V NMOS is 0.086 um
+                   @ Minimum POLY1 width for 1.2V PMOS is 0.086 um
+                   @ Minimum POLY1 width for interconnect is 0.086 um
+                   @ When the common run length between 0.027 to 0.032 (0.027 < x <= 0.032)
+    E = INT PO1_SP_18 < 0.086 ABUT>0<90 SINGULAR PROJ >0.027 <=0.032 REGION
+    E AND SP_18
+}
+
+SP_18.4A.9AaBaC_3 {@ Minimum POLY1 width for 1.2V NMOS is 0.089 um
+                   @ Minimum POLY1 width for 1.2V PMOS is 0.089 um
+                   @ Minimum POLY1 width for interconnect is 0.089 um
+                   @ When the common run length between 0.032 to 0.039 (0.032 < x <= 0.039)
+    E = INT PO1_SP_18 < 0.089 ABUT>0<90 SINGULAR PROJ >0.032 <=0.039 REGION
+    E AND SP_18
+}
+
+SP_18.4A.9AaBaC_4 {@ Minimum POLY1 width for 1.2V NMOS is 0.12 um
+                   @ Minimum POLY1 width for 1.2V PMOS is 0.12 um
+                   @ Minimum POLY1 width for interconnect is 0.12 um
+                   @ others, When the common run length > 0.039 (0.039 < x)
+    E = INT PO1_SP_18 < 0.12 ABUT>0<90 SINGULAR PROJ >0.039 REGION
+    E AND SP_18
+}
+
+SP_18.4A.9D.a1_4A.9D.c1_1 {@ Minimum POLY1 to POLY1 spacing on DIFFUSION regions is 0.024 um
+                           @ (without CONTACT) When the common run length <= 0.085 (x <= 0.085)
+    E1 = EXT PO1_SP_18 < 0.024 ABUT>0<90 SINGULAR PROJ <=0.085 REGION
+    E1 AND SP_18
+    E2 = EXT PO1_SP_18 < 0.024 ABUT>0<90 SINGULAR NOT PROJ REGION
+    E2 AND SP_18
+    E3 = EXT PO1_SP_18 < 0.024 ABUT>0<90 SINGULAR CORNER TO CORNER REGION
+    E3 AND SP_18
+}
+
+SP_18.4A.9D.a1_4A.9D.c1_2 {@ Minimum POLY1 to POLY1 spacing on DIFFUSION regions is 0.2 um
+                           @ (without CONTACT) When the common run length between 0.085 to 0.12 (0.085 < x <= 0.12)
+    E = EXT PO1_SP_18 < 0.2 ABUT>0<90 SINGULAR PROJ >0.085 <=0.12 REGION
+    E AND SP_18
+}
+
+SP_18.4A.9D.a1_4A.9D.c1_3 {@ Minimum POLY1 to POLY1 spacing on DIFFUSION regions is 0.126 um
+                           @ (without CONTACT) When the common run length between 0.12 to 0.21 (0.12 < x <= 0.21)
+    E = EXT PO1_SP_18 < 0.126 ABUT>0<90 SINGULAR PROJ >0.12 <=0.21 REGION
+    E AND SP_18
+}
+
+SP_18.4A.9D.a1_4A.9D.c1_4 {@ Minimum POLY1 to POLY1 spacing on DIFFUSION regions is 0.165 um
+                           @ (without CONTACT) When the common run length between 0.21 to 0.219 (0.21 < x <= 0.219)
+    E = EXT PO1_SP_18 < 0.165 ABUT>0<90 SINGULAR PROJ >0.21 <=0.219 REGION
+    E AND SP_18
+}
+
+SP_18.4A.9D.a1_4A.9D.c1_5 {@ Minimum POLY1 to POLY1 spacing on DIFFUSION regions is 0.14 um
+                           @ (without CONTACT) When the common run length between 0.219 to 0.236 (0.219 < x <= 0.236)
+    E = EXT PO1_SP_18 < 0.14 ABUT>0<90 SINGULAR PROJ >0.219 <=0.236 REGION
+    E AND SP_18
+}
+
+SP_18.4A.9D.a1_4A.9D.c1_6 {@ Minimum POLY1 to POLY1 spacing on DIFFUSION regions is 0.2 um
+                           @ (without CONTACT) When the common run length > 0.236 (0.236 < x)
+    E = EXT PO1_SP_18 < 0.2 ABUT>0<90 SINGULAR PROJ >0.236 REGION
+    E AND SP_18
+}
+
+SP_18.4A.9E_1 {@ Minimum POLY1 overhang of DIFFUSION is 0.18 um
+               @ others, When the common run length <= 0 (x <= 0)
+    E1 = ENC DIFF PO1_SP_18 < 0.18 ABUT<90 SINGULAR PROJ <=0 REGION
+    E1 AND SP_18
+    E2 = ENC DIFF PO1_SP_18 < 0.18 ABUT<90 SINGULAR NOT PROJ REGION
+    E2 AND SP_18
+    E3 = ENC DIFF PO1_SP_18 < 0.18 ABUT<90 SINGULAR CORNER TO CORNER REGION
+    E3 AND SP_18
+}
+
+SP_18.4A.9E_2 {@ Minimum POLY1 overhang of DIFFUSION is 0.103 um
+               @ When the common run length between 0 to 0.12 (0 < x <= 0.12)
+    E = ENC DIFF PO1_SP_18 < 0.103 ABUT<90 SINGULAR PROJ >0 <=0.12 REGION
+    E AND SP_18
+}
+
+SP_18.4A.9E_3 {@ Minimum POLY1 overhang of DIFFUSION is 0.15 um
+               @ When the common run length between 0.12 to 0.133 (0.12 < x <= 0.133)
+    E = ENC DIFF PO1_SP_18 < 0.15 ABUT<90 SINGULAR PROJ >0.12 <=0.133 REGION
+    E AND SP_18
+}
+
+SP_18.4A.9E_4 {@ Minimum POLY1 overhang of DIFFUSION is 0.103 um
+               @ When the common run length between 0.133 to 0.139 (0.133 < x <= 0.139)
+    E = ENC DIFF PO1_SP_18 < 0.103 ABUT<90 SINGULAR PROJ >0.133 <=0.139 REGION
+    E AND SP_18
+}
+
+SP_18.4A.9E_5 {@ Minimum POLY1 overhang of DIFFUSION is 0.153 um
+               @ When the common run length between 0.139 to 0.144 (0.139 < x <= 0.144)
+    E = ENC DIFF PO1_SP_18 < 0.153 ABUT<90 SINGULAR PROJ >0.139 <=0.144 REGION
+    E AND SP_18
+}
+
+SP_18.4A.9E_6 {@ Minimum POLY1 overhang of DIFFUSION is 0.18 um
+               @ When the common run length > 0.144 (0.144 < x)
+    E = ENC DIFF PO1_SP_18 < 0.18 ABUT<90 SINGULAR PROJ >0.144 REGION
+    E AND SP_18
+}
+
+SP_18.4A.9F_1 {@ Minimum POLY1 on field region to DIFFUSION spacing is 0.06 um
+               @ When the common run POLY1 length <= 0.022 (x <= 0.022)
+    E1 = EXT PO1_SP_18 DIFF < 0.06 ABUT<90 SINGULAR PROJ <=0.022 REGION
+    E1 AND SP_18
+    E2 = EXT PO1_SP_18 DIFF < 0.06 ABUT<90 SINGULAR NOT PROJ REGION
+    E2 AND SP_18
+    E3 = EXT PO1_SP_18 DIFF < 0.06 ABUT<90 SINGULAR CORNER TO CORNER REGION
+    E3 AND SP_18
+}
+
+SP_18.4A.9F_2 {@ Minimum POLY1 on field region to DIFFUSION spacing is 0.064 um
+               @ When the common run POLY1 length between 0.022 to 0.039 (0.022 < x <= 0.039)
+    E = EXT PO1_SP_18 DIFF < 0.064 ABUT<90 SINGULAR PROJ >0.022 <=0.039 REGION
+    E AND SP_18
+}
+
+SP_18.4A.9F_3 {@ Minimum POLY1 on field region to DIFFUSION spacing is 0.035 um
+               @ When the common run DIFFUSION length between 0.039 to 0.178 (0.039 < x <= 0.178)
+    E = EXT PO1_SP_18 DIFF < 0.035 ABUT<90 SINGULAR PROJ >0.039 <=0.178 REGION
+    E AND SP_18
+}
+
+SP_18.4A.9F_4 {@ Minimum POLY1 on field region to DIFFUSION spacing is 0.1 um
+               @ When the common run DIFFUSION length between 0.178 to 0.188 (0.178 < x <= 0.188)
+    E = EXT PO1_SP_18 DIFF < 0.1 ABUT<90 SINGULAR PROJ >0.178 <=0.188 REGION
+    E AND SP_18
+}
+
+SP_18.4A.9F_5 {@ Minimum POLY1 on field region to DIFFUSION spacing is 0.036 um
+               @ When the common run DIFFUSION length between 0.188 to 0.192 (0.188 < x <= 0.192)
+    E = EXT PO1_SP_18 DIFF < 0.036 ABUT<90 SINGULAR PROJ >0.188 <=0.192 REGION
+    E AND SP_18
+}
+
+SP_18.4A.9F_6 {@ Minimum POLY1 on field region to DIFFUSION spacing is 0.03 um
+               @ When the common run DIFFUSION length between 0.192 to 0.464 (0.192 < x <= 0.464)
+    E = EXT PO1_SP_18 DIFF < 0.03 ABUT<90 SINGULAR PROJ >0.192 <=0.464 REGION
+    E AND SP_18
+}
+
+SP_18.4A.9F_7 {@ Minimum POLY1 on field region to DIFFUSION spacing is 0.1 um
+               @ others, When the common run DIFFUSION length > 0.464 (0.464 < x)
+    E = EXT PO1_SP_18 DIFF < 0.1 ABUT<90 SINGULAR PROJ >0.464 REGION
+    E AND SP_18
+}
+
+SP_18.4A.10B {@ Minimum N+ implant to N+ implant spacing is 0.18 um
+    E = EXT NPLUS < 0.18 ABUT>0<90 SINGULAR REGION
+    E AND SP_18
+}
+
+SP_18.4A.10C.a {@ Minimum N+ implant overhang of N+ DIFFUSION (inside P_WELL) is 0.144 um
+    x = ENC ACTIVE_PS NPLUS < 0.144 ABUT<90 SINGULAR REGION
+    y = ENC ACTIVE_TW NPLUS < 0.144 ABUT<90 SINGULAR REGION
+    (x OR y) AND SP_18
+}
+
+SP_18.4A.10D.a {@ Minimum N+ implant to P+ DIFFUSION spacing (inside N_WELL) is 0.159 um
+                @ (DIFFUSION overlap (N+ and P+) is not allowed)
+    E = EXT NPLUS ACTIVE_NT < 0.159 ABUT<90 SINGULAR REGION
+    E AND SP_18
+}
+
+SP_18.4A.11B_1 {@ Minimum P+ implant to P+ implant spacing is 0.125 um
+                @ when the common run length <= 0.267 um (x <=0.267)
+    E1 = EXT PPLUS < 0.125 ABUT>0<90 SINGULAR PROJ <=0.267 REGION
+    E1 AND SP_18
+    E2 = EXT PPLUS < 0.125 ABUT>0<90 SINGULAR NOT PROJ REGION
+    E2 AND SP_18
+    E3 = EXT PPLUS < 0.125 ABUT>0<90 SINGULAR CORNER TO CORNER REGION
+    E3 AND SP_18
+}
+
+SP_18.4A.11B_2 {@ Minimum P+ implant to P+ implant spacing is 0.17 um
+                @ when the common run length between 0.267 to 0.827 (0.267 < x <=0.827)
+    E = EXT PPLUS < 0.17 ABUT>0<90 SINGULAR PROJ >0.267 <=0.827 REGION
+    E AND SP_18
+}
+
+SP_18.4A.11B_3 {@ Minimum P+ implant to P+ implant spacing is 0.125 um
+                @ when the common run length between 0.827 to 1.042 (0.827 < x <=1.042)
+    E = EXT PPLUS < 0.125 ABUT>0<90 SINGULAR PROJ >0.827 <=1.042 REGION
+    E AND SP_18
+}
+
+SP_18.4A.11B_4 {@ Minimum P+ implant to P+ implant spacing is 0.24 um
+                @ others, when the common run length > 1.042 (1.042 < x)
+    E = EXT PPLUS < 0.24 ABUT>0<90 SINGULAR PROJ >1.042 REGION
+    E AND SP_18
+}
+
+SP_18.4A.11C.a {@ Minimum P+ implant overhang of P+ DIFFUSION (inside N_WELL) is 0.159 um
+    E = ENC ACTIVE_NT PPLUS < 0.159 ABUT<90 SINGULAR REGION
+    E AND SP_18
+}
+
+SP_18.4A.11D.a {@ Minimum P+ implant to N+ DIFFUSION spacing (inside P_WELL) is 0.144 um
+    x = EXT PPLUS ACTIVE_PS < 0.144 ABUT<90 SINGULAR REGION
+    y = EXT PPLUS ACTIVE_TW < 0.144 ABUT<90 SINGULAR REGION
+    (x OR y) AND SP_18
+}
+
+SP_18.4A.13A {@ Maximum and Minimum CONTACT size is 0.16 um x 0.16 um
+              @ when CONTACT area 0.023 sq.um < x <= 0.0235 sq.um waive
+    E = NOT RECTANGLE CONT_SP_18_AREA_NORMAL == 0.16 BY == 0.16
+    E AND SP_18
+}
+
+SP_18.4A.13B_1 {@ Minimum CONTACT to CONTACT spacing is 0.15 um
+                @ When the common run length <= 0.13 (x <= 0.13)
+    E1 = EXT CONT < 0.15 ABUT>0<90 SINGULAR PROJ <=0.13 REGION
+    E1 AND SP_18
+    E2 = EXT CONT < 0.15 ABUT>0<90 SINGULAR NOT PROJ REGION
+    E2 AND SP_18
+    E3 = EXT CONT < 0.15 ABUT>0<90 SINGULAR CORNER TO CORNER REGION
+    E3 AND SP_18
+}
+
+SP_18.4A.13B_2 {@ Minimum CONTACT to CONTACT spacing is 0.16 um
+                @ When the common run length between 0.13 to 0.135 (0.13 < x <= 0.135)
+    E = EXT CONT < 0.16 ABUT>0<90 SINGULAR PROJ >0.13 <=0.135 REGION
+    E AND SP_18
+}
+
+SP_18.4A.13B_3 {@ Minimum CONTACT to CONTACT spacing is 0.148 um
+                @ When the common run length between 0.135 to 0.155 (0.135 < x <= 0.155)
+    E = EXT CONT < 0.148 ABUT>0<90 SINGULAR PROJ >0.135 <=0.155 REGION
+    E AND SP_18
+}
+
+SP_18.4A.13B_4 {@ Minimum CONTACT to CONTACT spacing is 0.2 um
+                @ When the common run length between 0.155 to 0.161 (0.155 < x <= 0.161)
+    E = EXT CONT < 0.2 ABUT>0<90 SINGULAR PROJ >0.155 <=0.161 REGION
+    E AND SP_18
+}
+
+SP_18.4A.13B_5 {@ Minimum CONTACT to CONTACT spacing is 0.19 um
+                @ When the common run length between 0.161 to 0.173 (0.161 < x <= 0.173)
+    E = EXT CONT < 0.19 ABUT>0<90 SINGULAR PROJ >0.161 <=0.173 REGION
+    E AND SP_18
+}
+
+SP_18.4A.13B_6 {@ Minimum CONTACT to CONTACT spacing is 0.2 um
+                @ others, When the common run length > 0.173 (0.173 < x)
+    E = EXT CONT < 0.2 ABUT>0<90 SINGULAR PROJ >0.173 REGION
+    E AND SP_18
+}
+
+SP_18.4A.13C.a {@ Minimum DIFFUSION CONTACT to POLY1 (1.2V) spacing is 0.069 um
+                @ CONTACT over GATE is not allowed
+    E = EXT GATE1_W DIFCNT < 0.069 ABUT<90 REGION
+    E AND SP_18
+}
+
+SP_18.4A.13D {@ Minimum CONTACT to DIFFUSION spaceing is 0.088 um
+    E = EXT POLCNT DIFF < 0.088 ABUT<90 SINGULAR REGION
+    E AND SP_18
+}
+
+SP_18.4A.13E {@ Minimum POLY1 enclosure of CONTACT is 0.06 um, Floating CONTACT is not allowed
+              @ waive (GOOD 0.029 0.024 0.029 0.024)
+              @ waive (GOOD 0.025 0.035 0.052 0.029)
+    x = ENC POLCNT_SP_18 PO1 < 0.06 ABUT<90 SINGULAR OUTSIDE ALSO REGION
+    y = POLCNT_SP_18 INTERACT x
+    E = RECTANGLE ENC y PO1 ABUT SINGULAR OUTSIDE ALSO
+        GOOD 0.029 0.024 0.029 0.024
+        GOOD 0.025 0.035 0.052 0.029
+    E AND SP_18
+}
+
+SP_18.4A.13FG {@ Minimum P+ DIFFUSION enclosure of CONTACT is 0.06 um
+               @ Minimum N+ DIFFUSION enclosure of CONTACT is 0.06 um
+               @ waive (GOOD 0.029 0.018 0 0)
+               @ waive (GOOD 0.035 0.012 0 0)
+               @ waive (GOOD 0.024 0.023 0 0)
+               @ waive (GOOD 0.014 0.025 0 0)
+               @ waive (GOOD 0.01 0.01 0 0)
+    x = ENC DIFCNT_SP_18 DIFF < 0.06 ABUT<90 SINGULAR OVERLAP REGION
+    y = DIFCNT_SP_18 INTERACT x
+    E = RECTANGLE ENC y DIFF ABUT SINGULAR
+        GOOD 0.029 0.018 0 0
+        GOOD 0.035 0.012 0 0
+        GOOD 0.024 0.023 0 0
+        GOOD 0.014 0.025 0 0
+        GOOD 0.01 0.01 0 0
+    E AND SP_18
+}
+
+/////////////////////////////
+
+SP_18.4B.1B.a_1 {@ Minimum METAL1 to METAL1 spacing is 0.114 um
+                 @ When METAL1 corner to METAL1 corner
+    E = EXT ME1 < 0.114 ABUT>0<90 SINGULAR CORNER TO CORNER REGION
+    E AND SP_18
+}
+
+SP_18.4B.1B.a_2 {@ Minimum METAL1 to METAL1 spacing is 0.02 um
+                 @ others, When the common run length <= 0.01 (x <= 0.01)
+    E1 = EXT ME1 < 0.02 ABUT>0<90 SINGULAR PROJ <=0.01 REGION
+    E1 AND SP_18
+    E2 = EXT ME1 < 0.02 ABUT>0<90 SINGULAR NOT PROJ REGION
+    E2 AND SP_18
+    E3 = EXT ME1 < 0.02 ABUT>0<90 SINGULAR CORNER TO EDGE REGION
+    E3 AND SP_18
+}
+
+SP_18.4B.1B.a_3 {@ Minimum METAL1 to METAL1 spacing is 0.125 um
+                 @ When the common run length between 0.01 to 0.012 (0.01 < x <= 0.012)
+    E = EXT ME1 < 0.125 ABUT>0<90 SINGULAR PROJ >0.01 <=0.012 REGION
+    E AND SP_18
+}
+
+SP_18.4B.1B.a_4 {@ Minimum METAL1 to METAL1 spacing is 0.02 um
+                 @ When the common run length between 0.012 to 0.037 (0.012 < x <= 0.037)
+    E = EXT ME1 < 0.02 ABUT>0<90 SINGULAR PROJ >0.012 <=0.037 REGION
+    E AND SP_18
+}
+
+SP_18.4B.1B.a_5 {@ Minimum METAL1 to METAL1 spacing is 0.071 um
+                 @ When the common run length between 0.037 to 0.043 (0.037 < x <= 0.043)
+    E = EXT ME1 < 0.071 ABUT>0<90 SINGULAR PROJ >0.037 <=0.043 REGION
+    E AND SP_18
+}
+
+SP_18.4B.1B.a_6 {@ Minimum METAL1 to METAL1 spacing is 0.086 um
+                 @ When the common run length between 0.043 to 0.066 (0.043 < x <= 0.066)
+    E = EXT ME1 < 0.086 ABUT>0<90 SINGULAR PROJ >0.043 <=0.066 REGION
+    E AND SP_18
+}
+
+SP_18.4B.1B.a_7 {@ Minimum METAL1 to METAL1 spacing is 0.13 um
+                 @ When the common run length between 0.066 to 0.085 (0.066 < x <= 0.085)
+    E = EXT ME1 < 0.13 ABUT>0<90 SINGULAR PROJ >0.066 <=0.085 REGION
+    E AND SP_18
+}
+
+SP_18.4B.1B.a_8 {@ Minimum METAL1 to METAL1 spacing is 0.085 um
+                 @ When the common run length between 0.085 to 0.094 (0.085 < x <= 0.094)
+    E = EXT ME1 < 0.085 ABUT>0<90 SINGULAR PROJ >0.085 <=0.094 REGION
+    E AND SP_18
+}
+
+SP_18.4B.1B.a_9 {@ Minimum METAL1 to METAL1 spacing is 0.114 um
+                 @ When the common run length between 0.094 to 0.134 (0.094 < x <= 0.134)
+    E = EXT ME1 < 0.114 ABUT>0<90 SINGULAR PROJ >0.094 <=0.134 REGION
+    E AND SP_18
+}
+
+SP_18.4B.1B.a_10 {@ Minimum METAL1 to METAL1 spacing is 0.124 um
+                  @ When the common run length between 0.134 to 0.154 (0.134 < x <= 0.154)
+    E = EXT ME1 < 0.124 ABUT>0<90 SINGULAR PROJ >0.134 <=0.154 REGION
+    E AND SP_18
+}
+
+SP_18.4B.1B.a_11 {@ Minimum METAL1 to METAL1 spacing is 0.132 um
+                  @ When the common run length between 0.154 to 0.188 (0.154 < x <= 0.188)
+    E = EXT ME1 < 0.132 ABUT>0<90 SINGULAR PROJ >0.154 <=0.188 REGION
+    E AND SP_18
+}
+
+SP_18.4B.1B.a_12 {@ Minimum METAL1 to METAL1 spacing is 0.14 um
+                  @ When the common run length between 0.188 to 0.239 (0.188 < x <= 0.239)
+    E = EXT ME1 < 0.14 ABUT>0<90 SINGULAR PROJ >0.188 <=0.239 REGION
+    E AND SP_18
+}
+
+SP_18.4B.1B.a_13 {@ Minimum METAL1 to METAL1 spacing is 0.145 um
+                  @ When the common run length between 0.239 to 0.418 (0.239 < x <= 0.418)
+    E = EXT ME1 < 0.145 ABUT>0<90 SINGULAR PROJ >0.239 <=0.418 REGION
+    E AND SP_18
+}
+
+SP_18.4B.1B.a_14 {@ Minimum METAL1 to METAL1 spacing is 0.16 um
+                  @ others, When the common run length > 0.418 (0.418 < x)
+    E = EXT ME1 < 0.16 ABUT>0<90 SINGULAR PROJ >0.418 REGION
+    E AND SP_18
+}
+
+SP_18.4B.1D.b {@ Minimum METAL1 enclosure of CONTACT at end-of-line or outer corner is 0.06 um when METAL1 width < 0.24um
+               @ when CONTACT area 0.023 sq.um < x <= 0.0235 sq.um waive
+    co_sm24 = CONT_SP_18_AREA_NORMAL INTERACT SM1_024
+    E = RECTANGLE ENC co_sm24 ME1
+    GOOD 0.00 0.06 OPPOSITE 0.00 0.06 OPPOSITE
+    E AND SP_18
+}
+
+SP_18.4B.1E {@ Minimum area of METAL1 region 0.0929 sq.um
+    E = AREA ME1_SP_18 < 0.0929
+    E AND SP_18
+}
+
+SP_18.4B.2C.a {@ Minimum extension from METAL1(width<10um) to MVIA1 is 0um, no VI1 outside ME1
+               @ when VI1 sizing -0.01um
+    x = SIZE VI1_SP_18 BY -0.01
+    E = NOT x ME1
+    E AND SP_18
+}
+
+CHK_SP_18_ME1_A_0 = VERTEX ME1_SP_18 == 6
+CHK_SP_18_ME1_A_1 = LENGTH CHK_SP_18_ME1_A_0 == 0.32
+CHK_SP_18_ME1_A_2 = LENGTH CHK_SP_18_ME1_A_0 == 0.224
+CHK_SP_18_ME1_A_3 = LENGTH CHK_SP_18_ME1_A_0 > 0.132 < 0.134
+CHK_SP_18_ME1_A_4 = LENGTH CHK_SP_18_ME1_A_0 == 0.132
+CHK_SP_18_ME1_A_5 = LENGTH CHK_SP_18_ME1_A_0 > 0.132 < 0.134
+CHK_SP_18_ME1_A_6 = LENGTH CHK_SP_18_ME1_A_0 == 0.224
+CHK_SP_18_ME1_A = (((((CHK_SP_18_ME1_A_0 WITH EDGE CHK_SP_18_ME1_A_1) WITH EDGE CHK_SP_18_ME1_A_2) WITH EDGE CHK_SP_18_ME1_A_3) WITH EDGE CHK_SP_18_ME1_A_4) WITH EDGE CHK_SP_18_ME1_A_5) WITH EDGE CHK_SP_18_ME1_A_6
+
+CHK_SP_18_ME1_B_0 = VERTEX ME1_SP_18 == 6
+CHK_SP_18_ME1_B_1 = LENGTH CHK_SP_18_ME1_B_0 == 0.324
+CHK_SP_18_ME1_B_2 = LENGTH CHK_SP_18_ME1_B_0 == 0.256
+CHK_SP_18_ME1_B_3 = LENGTH CHK_SP_18_ME1_B_0 > 0.119 < 0.121
+CHK_SP_18_ME1_B_4 = LENGTH CHK_SP_18_ME1_B_0 == 0.154
+CHK_SP_18_ME1_B_5 = LENGTH CHK_SP_18_ME1_B_0 > 0.119 < 0.121
+CHK_SP_18_ME1_B_6 = LENGTH CHK_SP_18_ME1_B_0 == 0.256
+CHK_SP_18_ME1_B = (((((CHK_SP_18_ME1_B_0 WITH EDGE CHK_SP_18_ME1_B_1) WITH EDGE CHK_SP_18_ME1_B_2) WITH EDGE CHK_SP_18_ME1_B_3) WITH EDGE CHK_SP_18_ME1_B_4) WITH EDGE CHK_SP_18_ME1_B_5) WITH EDGE CHK_SP_18_ME1_B_6
+
+MEX1_18 = ME1_SP_18 NOT (CHK_SP_18_ME1_A OR CHK_SP_18_ME1_B)
+MEX1P_18 = VERTEX MEX1_18 > 10
+ME1_EDGE_18 = CONVEX EDGE MEX1P_18 ANGLE1 > 90 < 180 ANGLE2 > 90 < 180 WITH LENGTH >0.119 < 0.155
+
+MEX1PX1_18 = EXTENTS (EXPAND EDGE ME1_EDGE_18 INSIDE BY 0.01 CORNER FILL)
+MEX1PX_18 = MEX1_18 OR MEX1PX1_18
+MEX2_18 = EXTENTS (CHK_SP_18_ME1_A OR CHK_SP_18_ME1_B)
+MEX_18 = MEX1PX_18 OR MEX2_18
+
+SP_18.4B.2C.c_d_e {@ METAL1 enclose MVIA1 at end-of-line or outer corner is 0.06 um
+                   @ waive (GOOD 0.06 0.027 0.06 0.091)
+                   @ waive (GOOD 0.06 0.062 0.081 0.062)
+                   @ waive (GOOD 0.04 0.083 0.04 0.083)
+                   @ waive (GOOD 0.04 0.236 0.04 0.236)
+                   @ waive (GOOD 0.017 0.334 0.017 0.334)
+                   @ waive (GOOD 0.04 0.321 0.04 0.321)
+    x = ENC [VI1] ME1_SP_18 < 0.06 ABUT<90 OPPOSITE      // via edge with metal enc < 0.06
+    y = INT x < 0.2 ABUT==90 INTERSECTING ONLY REGION    // 0.2 is MVIA1 size
+    z = VI1 INTERACT y
+    E = RECTANGLE ENC z MEX_18 ABUT SINGULAR OUTSIDE ALSO
+        GOOD 0.06 0.027 0.06 0.091
+        GOOD 0.06 0.062 0.081 0.062
+        GOOD 0.04 0.083 0.04 0.083
+        GOOD 0.04 0.236 0.04 0.236
+        GOOD 0.017 0.334 0.017 0.334
+        GOOD 0.04 0.321 0.04 0.321
+    E AND SP_18
+}
+
+SP_18.4B.3B.a_ME2_1 {@ Minimum METAL2 to METAL2 spacing is 0.152 um
+                     @ METAL2 corner to METAL2 corner
+    E = EXT ME2 < 0.152 ABUT>0<90 SINGULAR REGION
+    E AND SP_18
+}
+
+SP_18.4B.3B.a_ME2_2 {@ Minimum METAL2 to METAL2 spacing is 0.199 um
+                     @ others
+    E1 = EXT ME2 < 0.199 ABUT>0<90 SINGULAR NOT CORNER REGION EXCLUDE FALSE
+    E1 AND SP_18
+    E2 = EXT ME2 < 0.199 ABUT>0<90 SINGULAR CORNER TO EDGE REGION
+    E2 AND SP_18
+}
+
+SP_18.4B.3D.b_c_ME2 {@ METAL2 enclose MVIA1 at end-of-line or outer corner is 0.026 um
+    x = ENC [VI1_SP_18] ME2 < 0.026 ABUT<90 OPPOSITE   // via edge with metal enc < 0.026
+    E = INT x < 0.2 ABUT==90 INTERSECTING ONLY REGION  // 0.2 is MVIA1 size
+    E AND SP_18
+}
+
+SP_18.4B.4A_VI2 {@ Exact MVIA2 size is 0.20um
+                 @ when MVIA2 area 0.04 sq.um < x <= 0.0405 sq.um waive
+    E = NOT RECTANGLE VI2_SP_18_AREA_NORMAL == 0.20 BY == 0.20
+    E AND SP_18
+}
+
+SP_18.4B.4C.c_d_e_VI2 {@ METAL2 enclose MVIA2 at end-of-line or outer corner is 0.06 um
+                       @ waive (GOOD 0.034 0.363 0.034 0.066)
+                       @ waive (GOOD 0.034 0.082 0.034 0.186)
+                       @ waive (GOOD 0.034 0.159 0.034 0.159)
+                       @ waive (GOOD 0.026 0.021 0.026 0.021)
+                       @ waive (GOOD 0.04 0.247 0.04 0.321)
+                       @ waive (GOOD 0.04 0.057 0.04 0.109)
+                       @ waive (GOOD 0.04 0.236 0.04 0.236)
+                       @ waive (GOOD 0.034 0.159 0.034 1.736)
+    x = ENC [VI2] ME2_SP_18 < 0.06 ABUT<90 OPPOSITE     // via edge with metal enc < 0.06
+    y = INT x < 0.2 ABUT==90 INTERSECTING ONLY REGION   // 0.2 is MVIA2 size
+    z = VI2 INTERACT y
+    E = RECTANGLE ENC z ME2_SP_18 ABUT SINGULAR OUTSIDE ALSO
+        GOOD 0.034 0.363 0.034 0.066
+        GOOD 0.034 0.082 0.034 0.186
+        GOOD 0.034 0.159 0.034 0.159
+        GOOD 0.026 0.021 0.026 0.021
+        GOOD 0.04 0.247 0.04 0.321
+        GOOD 0.04 0.057 0.04 0.109
+        GOOD 0.04 0.236 0.04 0.236
+        GOOD 0.034 0.159 0.034 1.736
+    E AND SP_18
+}
+
+SP_18.4B.3D.b_c_ME3_1 {@ METAL3 enclose MVIA2 at end-of-line or outer corner is 0.04 um
+                       @ When the common run length <= 0.28um
+    x  = ENC [VI2_SP_18] ME3 < 0.04 ABUT<90 OPPOSITE PROJ <=0.28      // via edge with metal enc < 0.04
+    E1 = INT x < 0.2 ABUT==90 INTERSECTING ONLY REGION                // 0.2 is MVIA2 size
+    E1 AND SP_18
+    y  = ENC [VI2_SP_18] ME3 < 0.04 ABUT<90 OPPOSITE NOT PROJ         // via edge with metal enc < 0.04
+    E2 = INT y < 0.2 ABUT==90 INTERSECTING ONLY REGION                // 0.2 is MVIA2 size
+    E2 AND SP_18
+    z  = ENC [VI2_SP_18] ME3 < 0.04 ABUT<90 OPPOSITE CORNER TO CORNER // via edge with metal enc < 0.04
+    E3 = INT z < 0.2 ABUT==90 INTERSECTING ONLY REGION                // 0.2 is MVIA2 size
+    E3 AND SP_18
+}
+
+SP_18.4B.3D.b_c_ME3_2 {@ METAL3 enclose MVIA2 at end-of-line or outer corner is 0.06 um
+                       @ others, (When the common run length > 0.28um)
+    x = ENC [VI2_SP_18] ME3 < 0.06 ABUT<90 OPPOSITE PROJ > 0.28      // via edge with metal enc < 0.06
+    E = INT x < 0.2 ABUT==90 INTERSECTING ONLY REGION                // 0.2 is MVIA2 size
+    E AND SP_18
+}
+
+/////////////////////////////
+
+// END OF FILE

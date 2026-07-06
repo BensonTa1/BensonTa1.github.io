@@ -1,0 +1,45 @@
+// ****************************************************************************************
+// *            N+/Nwell core MOS varactor subcircuit model
+// *            UMC 0.11 um Logic and Mixed-Mode 1P8M Metal Metal Capacitor Al Advanced Enhancement Process 
+// *
+// *            Sep. 27 2011 by Shih-Hsin Yeh
+// *
+// *            Model coverage:
+// *            1. Gate finger width (w): 2.5um to 10um
+// *            2. Gate finger length (l): 0.35um to 2um
+// *            3. Gate finger number (nf): 2 to 8
+// *            4. Temperature Range: -50C to 125C 
+// *
+// *            Node definition:
+// *            port1:  gate
+// *            port2: nwell
+// *****************************************************************************************
+simulator lang=spectre insensitive=yes
+subckt ncap_33 ( port1 port2 ) 
+parameters wf=5u lf=2u nf=4 w=wf*0.9*1e6 l=lf*0.9*1e6+0.012 tpvb=-0.0004201 tpvc=-4.158e-005 tox0=7.49e-09 + dtoxe_ncap_33 toxc=7.49e-09 + dtoxe_ncap_33 
++ pva=0.12000753 pvb=0.67169332 + tpvb * (temp - 25) pvc=0.15559681 + tpvc * (temp 
++ - 25) pvd=1.1255255 pve=0.13970573 pvf=0.025327788 pvg=0.014590854 pvh=-0.027265864 
++ pvi=-0.0049672659 pvj=-0.0062160517 pvk=-0.001070722  
++ dcw= - 0.06908 + 1e6 * dxw_ncap_33 cww=-0.005138 cwl=-0.165 cwwl=0.7361 dcl= - 
++ 0.01338 + 1e6 * dxl_ncap_33 cll=0.000636 clw=3.138e-007 clwl=-0.001153 weff=wf 
++ * 0.9 * 1e6 + dcw + cww / (wf * 0.9 * 1e6) + cwl / l + cwwl / (wf * 0.9 * 1e6) 
++ / l leff=l + dcl + cll / l + clw / (wf * 0.9 * 1e6) + clwl / (wf * 0.9 * 1e6) 
++ / l cl3=9.561e-06 cl2=-191.3e-6 cl1=-1.96e-06 cl0=0.00106 cw0=0.002554 cwl0=-1.8e-05 
++ ccom=0.25 * (((cl3 * pow(l,3) + cl2 * pow(l,2) 
++ + cl1 * l + cl0) * (w + dcw) + cw0 / w) * (1 + cwl0 / (w * l))) cmina=0 + dcmina_ncap_33 
++ cminb=-1.43977 cminc=-0.194022 cmind=0.34732787 
+ 
+ 
+ 
+ 
+ 
+ 
+c1 ( port1 port2 ) bsource c=(((pva + pvc * pow(v(port1,port2),1) + pve * pow(v(port1,port2),2) 
++ + pvg * pow(v(port1,port2),3) + pvi * pow(v(port1,port2),4) + pvk * pow(v(port1,port2),5)) 
++ / (1 + pvb * pow(v(port1,port2),1) + pvd * pow(v(port1,port2),2) + pvf * pow(v(port1,port2),3) 
++ + pvh * pow(v(port1,port2),4) + pvj * pow(v(port1,port2),5)) * weff * leff / (4.5 
++ * 1.812 * 4) + ccom) * (tox0 / toxc) * nf * 1e-12) * (1 + cmina * (cminb + atan((v(port1,port2) 
++ - cminc) / cmind)))
+ 
+ends ncap_33
+ 

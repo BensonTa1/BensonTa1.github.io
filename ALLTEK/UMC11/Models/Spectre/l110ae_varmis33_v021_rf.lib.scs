@@ -1,0 +1,39 @@
+ 
+simulator lang=spectre insensitive=yes
+//   
+library mylib
+
+section typ
+parameters d_cj_varmis_33_rf=0.0000e+00
+parameters d_cjsw_varmis_33_rf=0.0000e+00
+parameters d_r_gate_varmis_33_rf=0.0000e+00
+parameters dtoxe_varmis_33_rf=0.0000e+00
+parameters dxw_varmis_33_rf=0.0000e+00
+parameters dxl_varmis_33_rf=0.0000e+00
+parameters dcmina_varmis_33_rf=0.0000e+00
+include "l110ae_varmis33_v021_rf.mdl.scs"
+endsection typ
+//   
+section min
+parameters d_cj_varmis_33_rf=0.1
+parameters d_cjsw_varmis_33_rf=0.1
+parameters d_r_gate_varmis_33_rf=0.15
+parameters dtoxe_varmis_33_rf=1.5000e-10
+parameters dxw_varmis_33_rf=-2.9050e-07
+parameters dxl_varmis_33_rf=-3.0700e-08
+parameters dcmina_varmis_33_rf=8.0000e-02
+include "l110ae_varmis33_v021_rf.mdl.scs"
+endsection min
+//   
+section max
+parameters d_cj_varmis_33_rf=-0.1
+parameters d_cjsw_varmis_33_rf=-0.1
+parameters d_r_gate_varmis_33_rf=-0.15
+parameters dtoxe_varmis_33_rf=-1.5000e-10
+parameters dxw_varmis_33_rf=2.8650e-07
+parameters dxl_varmis_33_rf=2.7050e-08
+parameters dcmina_varmis_33_rf=-6.7200e-02
+include "l110ae_varmis33_v021_rf.mdl.scs"
+endsection max
+//   
+endlibrary mylib

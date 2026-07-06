@@ -1,0 +1,47 @@
+***********************************************************************
+*            Planar MIM capacitor RF subcircuit model Library
+*            UMC 110nm 1.0fF/um2 FSG process 
+*            MIM Scheme
+*
+*            Case Definition:
+*            tt: Typical capacitance case
+*            ff: Mimimum capacitance case
+*            ss: Maximum capacitance case 
+*           
+**********************************************************************
+.lib tt
+.param 
++ drtop_mimcap_10=0
++ drbot_mimcap_10=0
++ dcj_mimcap_10=0
++ dcjsw_mimcap_10=0
++ dcox_mimcap_10=0
++dcj_dionw_l110e_mim_10       =   0                 
++dcjp_dionw_l110e_mim_10      =   0
+.include 'l110ae_mimcaps_1f_rf_v022.mdl'
+.endl tt
+***								
+.lib ss
+.param
++ drtop_mimcap_10=-0.3
++ drbot_mimcap_10=-0.3
++ dcj_mimcap_10=0.15
++ dcjsw_mimcap_10=0.30
++ dcox_mimcap_10=-0.15
++dcj_dionw_l110e_mim_10       =   8.28e-006                 
++dcjp_dionw_l110e_mim_10      =   9.92e-011
+.include 'l110ae_mimcaps_1f_rf_v022.mdl'
+.endl ss
+*** 
+.lib ff
+.param
++ drtop_mimcap_10=0.3
++ drbot_mimcap_10=0.3
++ dcj_mimcap_10=-0.15
++ dcjsw_mimcap_10=-0.30
++ dcox_mimcap_10=0.15
++dcj_dionw_l110e_mim_10       =   -8.28e-006                 
++dcjp_dionw_l110e_mim_10      =   -9.92e-011
+.include 'l110ae_mimcaps_1f_rf_v022.mdl'					
+.endl ff
+***

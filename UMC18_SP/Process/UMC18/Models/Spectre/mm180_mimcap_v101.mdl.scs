@@ -1,0 +1,17 @@
+simulator lang=spectre insensitive=yes 
+//************************************************************************
+// The following subcircuits refer to UMC 0.18um MM/RF EDR.              * 
+// SPEC NO: G-02-MIXED_MODE/RFCMOS18-1.8V/3.3V-1P6M-MMC-EDR              *
+//************************************************************************
+
+//  ******************************************************
+//              MIM Capacitance                          *
+//  ******************************************************
+//
+subckt mimcaps_mm  (n2  n1)
+parameters w=1e-6 l=1e-6  cm=1.0e-15+dcm_mimcaps_mm cmf=0.075e-15+dcmf_mimcaps_mm
++ctc1=40e-6 cvc1=30e-6 temper=temp
+// the capacitor of per unit um square is Cm Fera
+// the capacitor of per unit um length is Cmf Fera
+c1 ( n2 n1 ) capacitor c=(w*1e6*l*1e6*cm+2*(w*1e6+l*1e6)*cmf)*(1.0+cvc1*abs(v(n2, n1)))*(1.0+ctc1*(temper-25.0))
+ends mimcaps_mm

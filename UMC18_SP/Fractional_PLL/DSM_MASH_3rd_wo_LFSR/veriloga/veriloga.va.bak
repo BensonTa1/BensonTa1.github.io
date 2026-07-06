@@ -1,0 +1,9 @@
+// VerilogA for Fractional_PLL, DSM_MASH_3rd_wo_LFSR, veriloga
+
+`include "constants.vams"
+`include "disciplines.vams"
+
+module DSM_MASH_3rd_wo_LFSR;
+
+
+endmodule

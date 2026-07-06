@@ -1,0 +1,59 @@
+tnomoption  options tnom=25
+//
+//**********************************************
+//*  Spectre Libray Control file 
+//*              for
+//*  UMC 0.18um RFCMOS Process
+//*          
+//*          by  Zheng ZENGZ,  May 2004
+//*
+//*  Modify resistor RF by Chih hung Chuang, Jan 2014
+//*  How to use:
+//*  -----------
+//*    1. modify section=CornerCase for each device as you desire (default corner case for all devices is typ)
+//*    2. Inculde the following comment in the beginning of your simulation netlist:
+//*                 include "./018-rf-v2d5-control.scs"
+//*  
+//*  Please refer to the spice model document for detailed information 
+//
+//
+// 1.     1.8V RFNMOS : n_l18w500_18_rf   n_p07w500_18_rf
+// 3:     1.8V RFPMOS : p_l18w500_18_rf   p_p07w500_18_rf 
+include  "./core_rf_v2d4.lib.scs"	section= tt		// 	ss, snfp, tt, fnsp, ff
+ 
+// 5.	3.3V  RFNMOS :  n_l34w500_33_rf   n_p07w500_33_rf 
+// 7.	3.3V  RFPMOS : p_l34w500_33_rf   p_p07w500_33_rf
+
+include  "./io_rf_v2d3.lib.scs"       section= tt		//	ss, snfp, tt, fnsp, ff
+
+// 9. 	MIM CAPACITOR MODEL :  mimcapm_rf  
+include  "./mimcapm_rf_v2d3.lib.scs"	section= typ		//	min,  typ, max
+
+// 10.	SPIRAL INDUCTOR MODEL : l_slcr20k_rf 
+include  "./l_slcr20k_rf_v2d3.lib.scs"	section= typ		//	min,  typ, max
+
+// 11.	MIS VARACTOR MODEL :  varmis_18_rf 
+include  "./varmis_18_rf_v2d3.lib.scs" 	section= typ		//	min,  typ, max
+
+
+// 12.	P+/N VARACTOR MODEL :  vardiop_rf 
+include  "./vardiop_rf_v2d3.lib.scs"	section= typ		//	min, typ, max
+
+// 13.	N+ Poly RESISTOR MODEL : rnnpo_rf 
+include  "./rnnpo_rf_v2d4.lib.scs"	section= typ		//	min, typ, max
+
+
+// 14.	P+ Poly RESISTOR MODEL : rnppo_rf 
+include  "./rnppo_rf_v2d4.lib.scs"	section= typ		//	min, typ, max
+
+
+// 15.	HR Poly RESISTOR MODEL : rnhr_rf 
+include  "./rnhr_rf_v2d4.lib.scs"	section= typ		//	min, typ, max
+
+
+// 16	Pad : pad_rf
+include  "./pad_rf_v2d3.lib.scs"		section= typ		//	min, typ, max
+
+// end of the control file  
+
+ 

@@ -1,0 +1,53 @@
+simulator lang=spectre insensitive=yes
+//********************************************************************************
+//* Process:   0.18 um Mixed-Mode and RFCMOS 1.8V/3.3V Twin-Well Metal Metal Capacitor Process
+//* Simulator: SPECTRE
+//* <Revision 1> 
+//* Date:      2011/08/19      
+//* Owner:     Shih-Hsin Yeh
+//* Version:   1.2 P1          
+//* Remark:    Add BJT MC model.
+//* Usage:     Inculde the following comment in the beginning of your simulation netlist,
+//*            .include './mm18-mc-spectre-control-v121.lib.scs'
+//* 
+//* <Revision 1> 
+//* Date:      2013/09/05      
+//* Owner:     Ho Cheng Hu
+//* Version:   1.3_p1          
+//* Remark:    1. Update resistor model cards from  encrypted to non-encrypted and corner definition from "typ" to "tt"
+//*            2. Correct BJT model cards parameters for HSPICE add subs=1 and SPECTRE add struct=vertical and corner definition from "tt_bip" to "tt"
+//*            3. Resistor and BJT's SPECTRE model cards add "inline" subcircuit format
+//* Usage:     Inculde the following comment in the beginning of your simulation netlist,
+//*            .include './mm18-mc-spectre-control-v131.lib.scs'
+//********************************************************************************
+//* Library:
+//*                                                                                                                                      
+//*       1. mm180_reg18_v124_mc_corner.lib.scs                                                                                                    
+//*       (UMC 0.18um 1.8V LMixed-Mode and RFCMOS process Spice Model )                                                                    
+//*       Model Name:                                                                                                                    
+//*       n_18_mm ............. 1.8V NMOS Model                                                                                          
+//*       p_18_mm ............. 1.8V PMOS Model                                                                                          
+//*                                                                                                                                      
+//*       2. mm180_reg33_v114_mc_corner.lib.scs                                                                                                  
+//*       (UMC 0.18um 1.8V LMixed-Mode and RFCMOS process Spice Model)                                                                 
+//*       Model Name:                                                                                                                    
+//*       n_33_mm ............. 3.3V NMOS Model                                                                                        
+//*       p_33_mm ............. 3.3V PMOS Model                                                                                        
+//*  
+//*       3. mm180_bjt_v131_mc_corner.lib.scs                                                                                                   
+//*       (BJT Model)                                                                 
+//*       Model Name:                                                                                                                    
+//*       pnp_v50x50_mm ............. 4.5umx4.5um Vetical PNP Model                                                                        
+//*       pnp_v100x100_mm ............. 9umx9um Vetical PNP Model                                                                        
+//*                                                                                                                                    
+//*       4. mm180_res_v141_mc_corner.lib.scs                                                                                             
+//*       (Resistor Model)                                                                                                                  
+//*       Model Name:                                                                                                                    
+//*       rnnpo_mm ............... Non salicide N+ poly resistor model                                                                                                                
+//*       rnppo_mm ................ Non salicide P+ poly resistor model                                                                                                                
+//*       rnhr1000_mm .................. Non salicide HR poly resistor subcircuit netlist for typical case
+//*********************************************************************************************************************
+include "./spectre/mm180_reg18_v124_mc_corner.lib.scs" section= mc                   // mc, tt, ff, ss, fnsp, snfp, ff_g, ss_g, fnsp_g, snfp_g 
+include "./spectre/mm180_reg33_v114_mc_corner.lib.scs" section= mc                   // mc, tt, ff, ss, fnsp, snfp, ff_g, ss_g, fnsp_g, snfp_g  
+include "./spectre/mm180_bjt_v131_mc_corner.lib.scs" section= mc                     // mc, tt, ff, ss
+include "./spectre/mm180_res_v141_mc_corner.lib.scs" section= mc                     // mc, tt, ff, ss

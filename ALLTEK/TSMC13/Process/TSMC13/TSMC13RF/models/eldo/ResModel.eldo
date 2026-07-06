@@ -1,0 +1,377 @@
+************** Library of typical corner ******************************
+
+.lib res_t
+.param rnw=409.0 rnl=6.65 rns=6.65 rnwo=72.75 rpl=7.25 rps=7.25 rpwo=145.87
+.lib 'ResModel.eldo' res_macro
+.endl res_t
+
+************** Library of best corner *********************************
+
+.lib res_b
+.param rnw=334.0 rnl=5.05 rns=4.95 rnwo=59.42 rpl=5.37 rps=4.66 rpwo=116.7
+.lib 'ResModel.eldo' res_macro
+.endl res_b
+
+************** Library of worst corner ********************************
+
+.lib res_w
+.param rnw=484.0 rnl=8.25 rns=8.35 rnwo=86.08 rpl=9.13 rps=9.84 rpwo=175.04
+.lib 'ResModel.eldo' res_macro
+.endl res_w
+
+***********************************************************************
+
+.lib res_macro
+.subckt rnwod_m n2 n1 body lr=l wr=w mf=1
+
+.param rsh='rnw' dw=0.224u ptc1=2.33e-3 ptc2=8.76e-6 pvc1=1.45e-2 pvc2=-6.27e-4 pt='temper'
+.param tfac='1.0+ptc1*(pt-25.0)+ptc2*(pt-25.0)*(pt-25.0)'
+
+r1 n2 nm value='rsh/mf*lr/(4.0*(wr-dw))*(1+pvc1*abs(v(n2,n1))+pvc2*v(n2,n1)*v(n2,n1))*tfac'
+r2 nm nn value='rsh/mf*lr/(4.0*(wr-dw))*(1+pvc1*abs(v(n2,n1))+pvc2*v(n2,n1)*v(n2,n1))*tfac'
+r3 nn nx value='rsh/mf*lr/(4.0*(wr-dw))*(1+pvc1*abs(v(n2,n1))+pvc2*v(n2,n1)*v(n2,n1))*tfac'
+r4 nx n1 value='rsh/mf*lr/(4.0*(wr-dw))*(1+pvc1*abs(v(n2,n1))+pvc2*v(n2,n1)*v(n2,n1))*tfac'
+d1 body n2 nwdio area='mf*(wr-dw)*lr/5.0' PERI= 'mf*(wr-dw)+2.0*lr/5.0'
+d2 body nm nwdio area='mf*(wr-dw)*lr/5.0' PERI= 'mf*2.0*lr/5.0'
+d3 body nn nwdio area='mf*(wr-dw)*lr/5.0' PERI= 'mf*2.0*lr/5.0'
+d4 body nx nwdio area='mf*(wr-dw)*lr/5.0' PERI= 'mf*2.0*lr/5.0'
+d5 body n1 nwdio area='mf*(wr-dw)*lr/5.0' PERI= 'mf*(wr-dw)+2.0*lr/5.0'
+
+.ends rnwod_m
+
+.subckt rnodl_m n2 n1 body lr=l wr=w mf=1
+
+.param rsh='rnl' dw=-0.057u ptc1=2.97e-3 ptc2=2.89e-7 pvc1=-9.44e-5 pvc2=1.42e-3 pt='temper'
+.param tfac='1.0+ptc1*(pt-25.0)+ptc2*(pt-25.0)*(pt-25)'
+
+r1 n2 nm value='rsh/mf*lr/(4.0*(wr-dw))*(1+pvc1*abs(v(n2,n1))+pvc2*v(n2,n1)*v(n2,n1))*tfac'
+r2 nm nn value='rsh/mf*lr/(4.0*(wr-dw))*(1+pvc1*abs(v(n2,n1))+pvc2*v(n2,n1)*v(n2,n1))*tfac'
+r3 nn nx value='rsh/mf*lr/(4.0*(wr-dw))*(1+pvc1*abs(v(n2,n1))+pvc2*v(n2,n1)*v(n2,n1))*tfac'
+r4 nx n1 value='rsh/mf*lr/(4.0*(wr-dw))*(1+pvc1*abs(v(n2,n1))+pvc2*v(n2,n1)*v(n2,n1))*tfac'
+d1 body n2 ndio area='mf*(wr-dw)*lr/5.0' PERI= 'mf*(wr-dw)+2.0*lr/5.0'
+d2 body nm ndio area='mf*(wr-dw)*lr/5.0' PERI= 'mf*2.0*lr/5.0'
+d3 body nn ndio area='mf*(wr-dw)*lr/5.0' PERI= 'mf*2.0*lr/5.0'
+d4 body nx ndio area='mf*(wr-dw)*lr/5.0' PERI= 'mf*2.0*lr/5.0'
+d5 body n1 ndio area='mf*(wr-dw)*lr/5.0' PERI= 'mf*(wr-dw)+2.0*lr/5.0'
+
+.ends rnodl_m
+
+.subckt rnods_m n2 n1 body lr=l wr=w mf=1
+
+.param rsh='rns' dw=-0.057u ptc1=3.34e-3 ptc2=3.79e-7 pvc1=-1.67e-4 pvc2=6.88e-4 pt='temper'
+.param tfac='1.0+ptc1*(pt-25.0)+ptc2*(pt-25.0)*(pt-25)'
+ 
+r1 n2 nm value='rsh/mf*lr/(4.0*(wr-dw))*(1+pvc1*abs(v(n2,n1))+pvc2*v(n2,n1)*v(n2,n1))*tfac'
+r2 nm nn value='rsh/mf*lr/(4.0*(wr-dw))*(1+pvc1*abs(v(n2,n1))+pvc2*v(n2,n1)*v(n2,n1))*tfac'
+r3 nn nx value='rsh/mf*lr/(4.0*(wr-dw))*(1+pvc1*abs(v(n2,n1))+pvc2*v(n2,n1)*v(n2,n1))*tfac'
+r4 nx n1 value='rsh/mf*lr/(4.0*(wr-dw))*(1+pvc1*abs(v(n2,n1))+pvc2*v(n2,n1)*v(n2,n1))*tfac'
+d1 body n2 ndio area='mf*(wr-dw)*lr/5.0' PERI= 'mf*(wr-dw)+2.0*lr/5.0'
+d2 body nm ndio area='mf*(wr-dw)*lr/5.0' PERI= 'mf*2.0*lr/5.0'
+d3 body nn ndio area='mf*(wr-dw)*lr/5.0' PERI= 'mf*2.0*lr/5.0'
+d4 body nx ndio area='mf*(wr-dw)*lr/5.0' PERI= 'mf*2.0*lr/5.0'
+d5 body n1 ndio area='mf*(wr-dw)*lr/5.0' PERI= 'mf*(wr-dw)+2.0*lr/5.0'
+ 
+.ends rnods_m
+
+.subckt rnodwo_m n2 n1 body lr=l wr=w mf=1
+
+.param rsh='rnwo' dw=0.011u ptc1=1.32e-3 ptc2=5.53e-7 pvc1=2.99e-4 pvc2=5.56e-5 pt='temper'
+.param tfac='1.0+ptc1*(pt-25.0)+ptc2*(pt-25.0)*(pt-25)'
+ 
+r1 n2 nm value='rsh/mf*lr/(4.0*(wr-dw))*(1+pvc1*abs(v(n2,n1))+pvc2*v(n2,n1)*v(n2,n1))*tfac'
+r2 nm nn value='rsh/mf*lr/(4.0*(wr-dw))*(1+pvc1*abs(v(n2,n1))+pvc2*v(n2,n1)*v(n2,n1))*tfac'
+r3 nn nx value='rsh/mf*lr/(4.0*(wr-dw))*(1+pvc1*abs(v(n2,n1))+pvc2*v(n2,n1)*v(n2,n1))*tfac'
+r4 nx n1 value='rsh/mf*lr/(4.0*(wr-dw))*(1+pvc1*abs(v(n2,n1))+pvc2*v(n2,n1)*v(n2,n1))*tfac'
+d1 body n2 ndio area='mf*(wr-dw)*lr/5.0' PERI= 'mf*(wr-dw)+2.0*lr/5.0'
+d2 body nm ndio area='mf*(wr-dw)*lr/5.0' PERI= 'mf*2.0*lr/5.0'
+d3 body nn ndio area='mf*(wr-dw)*lr/5.0' PERI= 'mf*2.0*lr/5.0'
+d4 body nx ndio area='mf*(wr-dw)*lr/5.0' PERI= 'mf*2.0*lr/5.0'
+d5 body n1 ndio area='mf*(wr-dw)*lr/5.0' PERI= 'mf*(wr-dw)+2.0*lr/5.0'
+ 
+.ends rnodwo_m
+
+.subckt rpodl_m n2 n1 body lr=l wr=w mf=1
+
+.param rsh='rpl' dw=-0.07u ptc1=2.89e-3 ptc2=1.03e-6 pvc1=-1.94e-4 pvc2=1.2e-3 pt='temper'
+.param tfac='1.0+ptc1*(pt-25.0)+ptc2*(pt-25.0)*(pt-25)'
+
+r1 n2 nm value='rsh/mf*lr/(4.0*(wr-dw))*(1+pvc1*abs(v(n2,n1))+pvc2*v(n2,n1)*v(n2,n1))*tfac'
+r2 nm nn value='rsh/mf*lr/(4.0*(wr-dw))*(1+pvc1*abs(v(n2,n1))+pvc2*v(n2,n1)*v(n2,n1))*tfac'
+r3 nn nx value='rsh/mf*lr/(4.0*(wr-dw))*(1+pvc1*abs(v(n2,n1))+pvc2*v(n2,n1)*v(n2,n1))*tfac'
+r4 nx n1 value='rsh/mf*lr/(4.0*(wr-dw))*(1+pvc1*abs(v(n2,n1))+pvc2*v(n2,n1)*v(n2,n1))*tfac'
+d1 n2 body pdio area='mf*(wr-dw)*lr/5.0' PERI= 'mf*(wr-dw)+2.0*lr/5.0'
+d2 nm body pdio area='mf*(wr-dw)*lr/5.0' PERI= 'mf*2.0*lr/5.0'
+d3 nn body pdio area='mf*(wr-dw)*lr/5.0' PERI= 'mf*2.0*lr/5.0'
+d4 nx body pdio area='mf*(wr-dw)*lr/5.0' PERI= 'mf*2.0*lr/5.0'
+d5 n1 body pdio area='mf*(wr-dw)*lr/5.0' PERI= 'mf*(wr-dw)+2.0*lr/5.0'
+
+.ends rpodl_m
+
+.subckt rpods_m n2 n1 body lr=l wr=w mf=1
+
+.param rsh='rps' dw=-0.07u ptc1=3.45e-3 ptc2=4.16e-7 pvc1=-1.57e-4 pvc2=5.77e-4 pt='temper'
+.param tfac='1.0+ptc1*(pt-25.0)+ptc2*(pt-25.0)*(pt-25)'
+
+r1 n2 nm value='rsh/mf*lr/(4.0*(wr-dw))*(1+pvc1*abs(v(n2,n1))+pvc2*v(n2,n1)*v(n2,n1))*tfac'
+r2 nm nn value='rsh/mf*lr/(4.0*(wr-dw))*(1+pvc1*abs(v(n2,n1))+pvc2*v(n2,n1)*v(n2,n1))*tfac'
+r3 nn nx value='rsh/mf*lr/(4.0*(wr-dw))*(1+pvc1*abs(v(n2,n1))+pvc2*v(n2,n1)*v(n2,n1))*tfac'
+r4 nx n1 value='rsh/mf*lr/(4.0*(wr-dw))*(1+pvc1*abs(v(n2,n1))+pvc2*v(n2,n1)*v(n2,n1))*tfac'
+d1 n2 body pdio area='mf*(wr-dw)*lr/5.0' PERI= 'mf*(wr-dw)+2.0*lr/5.0'
+d2 nm body pdio area='mf*(wr-dw)*lr/5.0' PERI= 'mf*2.0*lr/5.0'
+d3 nn body pdio area='mf*(wr-dw)*lr/5.0' PERI= 'mf*2.0*lr/5.0'
+d4 nx body pdio area='mf*(wr-dw)*lr/5.0' PERI= 'mf*2.0*lr/5.0'
+d5 n1 body pdio area='mf*(wr-dw)*lr/5.0' PERI= 'mf*(wr-dw)+2.0*lr/5.0'
+
+.ends rpods_m
+
+.subckt rpodwo_m n2 n1 body lr=l wr=w mf=1
+
+.param rsh='rpwo' dw=0.068u ptc1=1.28e-3 ptc2=9.43e-7 pvc1=3.68e-5 pvc2=2.45e-4 pt='temper'
+.param tfac='1.0+ptc1*(pt-25.0)+ptc2*(pt-25.0)*(pt-25)'
+ 
+r1 n2 nm value='rsh/mf*lr/(4.0*(wr-dw))*(1+pvc1*abs(v(n2,n1))+pvc2*v(n2,n1)*v(n2,n1))*tfac'
+r2 nm nn value='rsh/mf*lr/(4.0*(wr-dw))*(1+pvc1*abs(v(n2,n1))+pvc2*v(n2,n1)*v(n2,n1))*tfac'
+r3 nn nx value='rsh/mf*lr/(4.0*(wr-dw))*(1+pvc1*abs(v(n2,n1))+pvc2*v(n2,n1)*v(n2,n1))*tfac'
+r4 nx n1 value='rsh/mf*lr/(4.0*(wr-dw))*(1+pvc1*abs(v(n2,n1))+pvc2*v(n2,n1)*v(n2,n1))*tfac'
+d1 n2 body pdio area='mf*(wr-dw)*lr/5.0' PERI= 'mf*(wr-dw)+2.0*lr/5.0'
+d2 nm body pdio area='mf*(wr-dw)*lr/5.0' PERI= 'mf*2.0*lr/5.0'
+d3 nn body pdio area='mf*(wr-dw)*lr/5.0' PERI= 'mf*2.0*lr/5.0'
+d4 nx body pdio area='mf*(wr-dw)*lr/5.0' PERI= 'mf*2.0*lr/5.0'
+d5 n1 body pdio area='mf*(wr-dw)*lr/5.0' PERI= 'mf*(wr-dw)+2.0*lr/5.0'
+ 
+.ends rpodwo_m
+
+.endl res_macro
+
+**************************************************************************
+*
+*   0.13um CL013G process resistor model
+*
+**************************************************************************
+.LIB TT_DISRES
+.param
++par_disres=0 dev/gauss=1
++disr_rppolyl  = 7.67    disr_rppolys  = 7.67    disr_rnpolyl  = 7.31    disr_rnpolys  = 7.31    
++disr_rnpolywo = 260.09  disr_rppolywo = 319.55  disr_rppolyhri  = 950
+.lib 'ResModel.eldo' DIS_RES
+.ENDL TT_DISRES
+
+.LIB SS_DISRES
+.param
++par_disres=0 dev/gauss=1
++disr_rppolyl  = '7.67 +1.92 '  disr_rppolys  = '7.67 +2.32 '  disr_rnpolyl  = '7.31 +1.90 '  disr_rnpolys  = '7.31 +2.36 ' 
++disr_rnpolywo = '260.09+43.52' disr_rppolywo = '319.55+63.91' disr_rppolyhri  = '950 + 190 '
+.lib  'ResModel.eldo' DIS_RES
+.ENDL SS_DISRES
+
+.LIB FF_DISRES
+.param
++par_disres=0 dev/gauss=1
++disr_rppolyl  = '7.67 -1.92 '  disr_rppolys  = '7.67 -2.32 '  disr_rnpolyl  = '7.31 -1.90 '  disr_rnpolys  = '7.31 -2.36 ' 
++disr_rnpolywo = '260.09-43.52' disr_rppolywo = '319.55-63.91' disr_rppolyhri  = '950 - 190 '
+.lib  'ResModel.eldo' DIS_RES
+.ENDL FF_DISRES
+
+**************************************************************************************************
+*	DISTRIBUTED RESISTOR MODEL
+*
+*              Model name      structure                                                  *
+*              -----------------------------------------                                  *
+*              rppolyl_dis    Distributed P+ Poly w/i Silicide w>=2um                     *
+*              rppolys_dis    Distributed P+ Poly w/i Silicide 0.13um<=w<2um               *
+*              rnpolyl_dis    Distributed N+ Poly w/i Silicide w>=2um                      *
+*              rnpolys_dis    Distributed N+ Poly w/i Silicide 0.13um<=w<2um               *
+*              rppolywo_dis   Distributed P+ Poly w/o Silicide w>1um,sqr>2                *
+*              rnpolywo_dis   Distributed N+ Poly w/o Silicide w>1um,sqr>2                *
+*              rppolyhri_dis  Distributed P- Poly w/o Silicide w>1um,sqr>2                *
+*              rppolyl_dis_mis    Distributed P+ Poly w/i Silicide w>=2um               *
+*              rppolys_dis_mis    Distributed P+ Poly w/i Silicide 0.13um<=w<2um        *
+*              rnpolyl_dis_mis    Distributed N+ Poly w/i Silicide w>=2um               *
+*              rnpolys_dis_mis    Distributed N+ Poly w/i Silicide 0.13um<=w<2um        *
+*              rppolywo_dis_mis   Distributed P+ Poly w/o Silicide w>1um,sqr>2              *
+*              rnpolywo_dis_mis   Distributed N+ Poly w/o Silicide w>1um,sqr>2              *
+*              rppolyhri_dis_mis  Distributed P- Poly w/o Silicide w>1um,sqr>2              *
+***************************************************************************************************
+
+.LIB DIS_RES
+.subckt rppolyl_dis n1 n2 gnode l=length w=width mf=1
+.param rsh= disr_rppolyl dw=-0.035u ptc1=2.64E-03 ptc2=1.92E-06 pvc1=3.14E-03 pvc2=6.18E-03 pt='temper'
+.param tfac='1.0+ptc1*(pt-25.0)+ptc2*(pt-25.0)*(pt-25.0)'
+r1 n1 n2 value='rsh/mf*l/(w-dw)*(1+pvc1*abs(v(n2,n1))+pvc2*v(n2,n1)*v(n2,n1))*tfac'
+Cox1 n1 gnode value='1/2*(0.09677*w*(l+0.9u)*1e+12+0.05582*2*(w+l+0.9u)*1e+6+0.1)*1e-15*mf'
+Cox2 n2 gnode value='1/2*(0.09677*w*(l+0.9u)*1e+12+0.05582*2*(w+l+0.9u)*1e+6+0.1)*1e-15*mf'
+.ends rppolyl_dis
+
+.subckt rppolys_dis n1 n2 gnode l=length w=width mf=1
+.param rsh= disr_rppolys dw=-0.035u ptc1=2.88E-03 ptc2=4.47E-07 pvc1=1.93E-04 pvc2=1.99E-03 pt='temper'
+.param tfac='1.0+ptc1*(pt-25.0)+ptc2*(pt-25.0)*(pt-25.0)'
+r1 n1 n2 value='rsh/mf*l/(w-dw)*(1+pvc1*abs(v(n2,n1))+pvc2*v(n2,n1)*v(n2,n1))*tfac'
+Cox1 n1 gnode value='1/2*(0.09677*w*(l+0.9u)*1e+12+0.05582*2*(w+l+0.9u)*1e+6+0.1)*1e-15*mf'
+Cox2 n2 gnode value='1/2*(0.09677*w*(l+0.9u)*1e+12+0.05582*2*(w+l+0.9u)*1e+6+0.1)*1e-15*mf'
+.ends rppolys_dis
+
+.subckt rnpolyl_dis n1 n2 gnode l=length w=width mf=1
+.param rsh= disr_rnpolyl dw=-0.055u ptc1=2.77E-03 ptc2=1.51E-06 pvc1=3.37E-03 pvc2=6.34E-03 pt='temper'
+.param tfac='1.0+ptc1*(pt-25.0)+ptc2*(pt-25.0)*(pt-25.0)'
+r1 n1 n2 value='rsh/mf*l/(w-dw)*(1+pvc1*abs(v(n2,n1))+pvc2*v(n2,n1)*v(n2,n1))*tfac'
+Cox1 n1 gnode value='1/2*(0.09677*w*(l+0.9u)*1e+12+0.05582*2*(w+l+0.9u)*1e+6+0.1)*1e-15*mf'
+Cox2 n2 gnode value='1/2*(0.09677*w*(l+0.9u)*1e+12+0.05582*2*(w+l+0.9u)*1e+6+0.1)*1e-15*mf'
+.ends rnpolyl_dis
+
+.subckt rnpolys_dis n1 n2 gnode l=length w=width mf=1
+.param rsh= disr_rnpolys dw=-0.055u ptc1=3.29E-03 ptc2=1.67E-07 pvc1=3.56E-04 pvc2=2.66E-03 pt='temper'
+.param tfac='1.0+ptc1*(pt-25.0)+ptc2*(pt-25.0)*(pt-25.0)'
+r1 n1 n2 value='rsh/mf*l/(w-dw)*(1+pvc1*abs(v(n2,n1))+pvc2*v(n2,n1)*v(n2,n1))*tfac'
+Cox1 n1 gnode value='1/2*(0.09677*w*(l+0.9u)*1e+12+0.05582*2*(w+l+0.9u)*1e+6+0.1)*1e-15*mf'
+Cox2 n2 gnode value='1/2*(0.09677*w*(l+0.9u)*1e+12+0.05582*2*(w+l+0.9u)*1e+6+0.1)*1e-15*mf'
+.ends rnpolys_dis
+
+.subckt rnpolywo_dis n1 n2 gnode l=length w=width mf=1
+.param Rend0=3.91E-05 Rsh= disr_rnpolywo dl=0.02051u dw=0.07157u
+.param pt='temper'
+.param pvce1=9.19E-01 pvce2=1.86E+01 pvce3=-1.64E+00 ptce1=2.75E-04 ptce2=-4.10E-06
+.param pvcp1=-2.73E-02 pvcp2=1.23E-05 pvcp3=-1.70E+00 ptcp1=-1.11E-03 ptcp2=1.51E-06
+.param tface='1.0+ptce1*(pt-25.0)+ptce2*(pt-25.0)*(pt-25.0)'
+.param tfacp='1.0+ptcp1*(pt-25.0)+ptcp2*(pt-25.0)*(pt-25.0)'
+Rend1 n1 3 value='Rend0/mf/(w-dw)*tface*(1+pvce1*(tanh(pvce2*abs(v(n1,3))+pvce3)-tanh(pvce3)))'
+Rpure 3 4 value='Rsh/mf*(l-dl)/(w-dw)*tfacp*(1+pvcp1*(tanh(pvcp2*abs(v(3,4)/(l-dl))+pvcp3)-tanh(pvcp3)))'
+Rend2 4 n2 value='Rend0/mf/(w-dw)*tface*(1+pvce1*(tanh(pvce2*abs(v(4,n2))+pvce3)-tanh(pvce3)))'
+Cox1 3 gnode value='1/2*(0.09677*w*(l+0.9u)*1e+12+0.05582*2*(w+l+0.9u)*1e+6+0.1)*1e-15*mf'
+Cox2 4 gnode value='1/2*(0.09677*w*(l+0.9u)*1e+12+0.05582*2*(w+l+0.9u)*1e+6+0.1)*1e-15*mf'
+.ends rnpolywo_dis
+
+.subckt rppolywo_dis n1 n2 gnode l=length w=width mf=1
+.param Rend0=1.01E-04 Rsh= disr_rppolywo dl=0.04698u dw=0.07953u
+.param pt='temper'
+.param pvce1=-9.40E-02 pvce2=6.39E+01 pvce3=-2.71E+00 ptce1=-1.71E-03 ptce2=1.06E-06  
+.param pvcp1=-1.99E-01 pvcp2=6.05E-06 pvcp3=-3.23E+00 ptcp1=-1.19E-04 ptcp2=6.54E-07  
+.param tface='1.0+ptce1*(pt-25.0)+ptce2*(pt-25.0)*(pt-25.0)'
+.param tfacp='1.0+ptcp1*(pt-25.0)+ptcp2*(pt-25.0)*(pt-25.0)'
+Rend1 n1 3 value='Rend0/mf/(w-dw)*tface*(1+pvce1*(tanh(pvce2*abs(v(n1,3))+pvce3)-tanh(pvce3)))'
+Rpure 3 4 value='Rsh/mf*(l-dl)/(w-dw)*tfacp*(1+pvcp1*(tanh(pvcp2*abs(v(3,4)/(l-dl))+pvcp3)-tanh(pvcp3)))'
+Rend2 4 n2 value='Rend0/mf/(w-dw)*tface*(1+pvce1*(tanh(pvce2*abs(v(4,n2))+pvce3)-tanh(pvce3)))'
+Cox1 3 gnode value='1/2*(0.09677*w*(l+0.9u)*1e+12+0.05582*2*(w+l+0.9u)*1e+6+0.1)*1e-15*mf'
+Cox2 4 gnode value='1/2*(0.09677*w*(l+0.9u)*1e+12+0.05582*2*(w+l+0.9u)*1e+6+0.1)*1e-15*mf'
+.ends rppolywo_dis
+
+.subckt rppolyhri_dis n1 n2 gnode l=length w=width mf=1
+.param Rend0=5.320E-05 Rsh=disr_rppolyhri dl=0u dw=0.093u
+.param pt='temper'
+.param pvce1=0.5 pvce2=1.25 pvce3=-1.25 ptce1=-6.5E-04 ptce2=3.5E-08  
+.param pvcp1=-0.095 pvcp2=1.205E-06 pvcp3=-0.873 ptcp1=-7.670E-04 ptcp2=7.594E-07  
+.param tface='1.0+ptce1*(pt-25.0)+ptce2*(pt-25.0)*(pt-25.0)'
+.param tfacp='1.0+ptcp1*(pt-25.0)+ptcp2*(pt-25.0)*(pt-25.0)'
+Rend1 n1 3 value='Rend0/mf/(w-dw)*tface*(1+pvce1*(tanh(pvce2*abs(v(n1,3))+pvce3)-tanh(pvce3)))'
+Rpure 3 4 value='Rsh/mf*(l-dl)/(w-dw)*tfacp*(1+pvcp1*(tanh(pvcp2*abs(v(3,4)/(l-dl))+pvcp3)-tanh(pvcp3)))'
+Rend2 4 n2 value='Rend0/mf/(w-dw)*tface*(1+pvce1*(tanh(pvce2*abs(v(4,n2))+pvce3)-tanh(pvce3)))'
+Cox1 3 gnode value='1/2*(0.09677*w*(l+0.9u)*1e+12+0.05582*2*(w+l+0.9u)*1e+6+0.1)*1e-15*mf'
+Cox2 4 gnode value='1/2*(0.09677*w*(l+0.9u)*1e+12+0.05582*2*(w+l+0.9u)*1e+6+0.1)*1e-15*mf'
+.ends rppolyhri_dis
+
+**********************************
+*       Mismatch   model         * 
+**********************************
+.subckt rppolyl_dis_mis n1 n2 gnode l=length w=width mf=1
+.param geo_fac ='1/sqrt(mf*l*w*1e12)'
+.param factmis='0.00871085*geo_fac*par_disres'
+.param rsh= 'disr_rppolyl*(1+factmis)' dw=-0.035u ptc1=2.64E-03 ptc2=1.92E-06 pvc1=3.14E-03 pvc2=6.18E-03 pt='temper'
+.param tfac='1.0+ptc1*(pt-25.0)+ptc2*(pt-25.0)*(pt-25.0)'
+r1 n1 n2 value='rsh/mf*l/(w-dw)*(1+pvc1*abs(v(n2,n1))+pvc2*v(n2,n1)*v(n2,n1))*tfac'
+Cox1 n1 gnode value='1/2*(0.09677*w*(l+0.9u)*1e+12+0.05582*2*(w+l+0.9u)*1e+6+0.1)*1e-15*mf'
+Cox2 n2 gnode value='1/2*(0.09677*w*(l+0.9u)*1e+12+0.05582*2*(w+l+0.9u)*1e+6+0.1)*1e-15*mf'
+.ends rppolyl_dis_mis
+
+.subckt rppolys_dis_mis n1 n2 gnode l=length w=width mf=1
+.param geo_fac ='1/sqrt(mf*l*w*1e12)'
+.param factmis='0.00871085*geo_fac*par_disres'
+.param rsh= 'disr_rppolys*(1+factmis)' dw=-0.035u ptc1=2.88E-03 ptc2=4.47E-07 pvc1=1.93E-04 pvc2=1.99E-03 pt='temper'
+.param tfac='1.0+ptc1*(pt-25.0)+ptc2*(pt-25.0)*(pt-25.0)'
+r1 n1 n2 value='rsh/mf*l/(w-dw)*(1+pvc1*abs(v(n2,n1))+pvc2*v(n2,n1)*v(n2,n1))*tfac'
+Cox1 n1 gnode value='1/2*(0.09677*w*(l+0.9u)*1e+12+0.05582*2*(w+l+0.9u)*1e+6+0.1)*1e-15*mf'
+Cox2 n2 gnode value='1/2*(0.09677*w*(l+0.9u)*1e+12+0.05582*2*(w+l+0.9u)*1e+6+0.1)*1e-15*mf'
+.ends rppolys_dis_mis
+
+.subckt rnpolyl_dis_mis n1 n2 gnode l=length w=width mf=1
+.param geo_fac ='1/sqrt(mf*l*w*1e12)'
+.param factmis='0.00919451*geo_fac*par_disres'
+.param rsh= 'disr_rnpolyl*(1+factmis)' dw=-0.055u ptc1=2.77E-03 ptc2=1.51E-06 pvc1=3.37E-03 pvc2=6.34E-03 pt='temper'
+.param tfac='1.0+ptc1*(pt-25.0)+ptc2*(pt-25.0)*(pt-25.0)'
+r1 n1 n2 value='rsh/mf*l/(w-dw)*(1+pvc1*abs(v(n2,n1))+pvc2*v(n2,n1)*v(n2,n1))*tfac'
+Cox1 n1 gnode value='1/2*(0.09677*w*(l+0.9u)*1e+12+0.05582*2*(w+l+0.9u)*1e+6+0.1)*1e-15*mf'
+Cox2 n2 gnode value='1/2*(0.09677*w*(l+0.9u)*1e+12+0.05582*2*(w+l+0.9u)*1e+6+0.1)*1e-15*mf'
+.ends rnpolyl_dis_mis
+
+.subckt rnpolys_dis_mis n1 n2 gnode l=length w=width mf=1
+.param geo_fac ='1/sqrt(mf*l*w*1e12)'
+.param factmis='0.00919451*geo_fac*par_disres'
+.param rsh= 'disr_rnpolys*(1+factmis)' dw=-0.055u ptc1=3.29E-03 ptc2=1.67E-07 pvc1=3.56E-04 pvc2=2.66E-03 pt='temper'
+.param tfac='1.0+ptc1*(pt-25.0)+ptc2*(pt-25.0)*(pt-25.0)'
+r1 n1 n2 value='rsh/mf*l/(w-dw)*(1+pvc1*abs(v(n2,n1))+pvc2*v(n2,n1)*v(n2,n1))*tfac'
+Cox1 n1 gnode value='1/2*(0.09677*w*(l+0.9u)*1e+12+0.05582*2*(w+l+0.9u)*1e+6+0.1)*1e-15*mf'
+Cox2 n2 gnode value='1/2*(0.09677*w*(l+0.9u)*1e+12+0.05582*2*(w+l+0.9u)*1e+6+0.1)*1e-15*mf'
+.ends rnpolys_dis_mis
+
+.subckt rnpolywo_dis_mis n1 n2 gnode l=length w=width mf=1
+.param geo_fac ='1/sqrt(mf*l*w*1e12)'
+.param factmis='0.02897*geo_fac*par_disres'
+.param Rend0=3.91E-05 Rsh= disr_rnpolywo dl=0.02051u dw=0.07157u
+.param pt='temper'
+.param pvce1=9.19E-01 pvce2=1.86E+01 pvce3=-1.64E+00 ptce1=2.75E-04 ptce2=-4.10E-06
+.param pvcp1=-2.73E-02 pvcp2=1.23E-05 pvcp3=-1.70E+00 ptcp1=-1.11E-03 ptcp2=1.51E-06
+.param tface='1.0+ptce1*(pt-25.0)+ptce2*(pt-25.0)*(pt-25.0)'
+.param tfacp='1.0+ptcp1*(pt-25.0)+ptcp2*(pt-25.0)*(pt-25.0)'
+.param R11='Rsh*(l-dl)/(w-dw)'
+.param R22='Rend0/(w-dw)'
+.param ra='(R11+2*R22)/sqrt(2*R22*R22+R11*R11)'
+.param R1m='R11*(1+factmis*ra)'
+.param R2m='R22*(1+factmis*ra)'
+Rend1 n1 3 value='R2m*tface*(1+pvce1*(tanh(pvce2*abs(v(n1,3))+pvce3)-tanh(pvce3)))'
+Rpure 3 4 value='R1m*tfacp*(1+pvcp1*(tanh(pvcp2*abs(v(3,4)/(l-dl))+pvcp3)-tanh(pvcp3)))'
+Rend2 4 n2 value='R2m*tface*(1+pvce1*(tanh(pvce2*abs(v(4,n2))+pvce3)-tanh(pvce3)))'
+Cox1 3 gnode value='1/2*(0.09677*w*(l+0.9u)*1e+12+0.05582*2*(w+l+0.9u)*1e+6+0.1)*1e-15*mf'
+Cox2 4 gnode value='1/2*(0.09677*w*(l+0.9u)*1e+12+0.05582*2*(w+l+0.9u)*1e+6+0.1)*1e-15*mf'
+.ends rnpolywo_dis_mis
+
+.subckt rppolywo_dis_mis n1 n2 gnode l=length w=width mf=1
+.param geo_fac ='1/sqrt(mf*l*w*1e12)'
+.param factmis='0.01456*geo_fac*par_disres'
+.param Rend0=1.01E-04 Rsh= disr_rppolywo dl=0.04698u dw=0.07953u
+.param pt='temper'
+.param pvce1=-9.40E-02 pvce2=6.39E+01 pvce3=-2.71E+00 ptce1=-1.71E-03 ptce2=1.06E-06  
+.param pvcp1=-1.99E-01 pvcp2=6.05E-06 pvcp3=-3.23E+00 ptcp1=-1.19E-04 ptcp2=6.54E-07  
+.param tface='1.0+ptce1*(pt-25.0)+ptce2*(pt-25.0)*(pt-25.0)'
+.param tfacp='1.0+ptcp1*(pt-25.0)+ptcp2*(pt-25.0)*(pt-25.0)'
+.param R11='Rsh*(l-dl)/(w-dw)'
+.param R22='Rend0/(w-dw)'
+.param ra='(R11+2*R22)/sqrt(2*R22*R22+R11*R11)'
+.param R1m='R11*(1+factmis*ra)'
+.param R2m='R22*(1+factmis*ra)'
+Rend1 n1 3 value='R2m*tface*(1+pvce1*(tanh(pvce2*abs(v(n1,3))+pvce3)-tanh(pvce3)))'
+Rpure 3 4 value='R1m*tfacp*(1+pvcp1*(tanh(pvcp2*abs(v(3,4)/(l-dl))+pvcp3)-tanh(pvcp3)))'
+Rend2 4 n2 value='R2m*tface*(1+pvce1*(tanh(pvce2*abs(v(4,n2))+pvce3)-tanh(pvce3)))'
+Cox1 3 gnode value='1/2*(0.09677*w*(l+0.9u)*1e+12+0.05582*2*(w+l+0.9u)*1e+6+0.1)*1e-15*mf'
+Cox2 4 gnode value='1/2*(0.09677*w*(l+0.9u)*1e+12+0.05582*2*(w+l+0.9u)*1e+6+0.1)*1e-15*mf'
+.ends rppolywo_dis_mis
+
+.subckt rppolyhri_dis_mis n1 n2 gnode l=length w=width mf=1
+.param geo_fac ='1/sqrt(mf*l*w*1e12)'
+.param factmis='0.011823*geo_fac*par_disres'
+.param Rend0=5.320E-05 Rsh=disr_rppolyhri dl=0u dw=0.093u
+.param pt='temper'
+.param pvce1=0.5 pvce2=1.25 pvce3=-1.25 ptce1=-6.5E-04 ptce2=3.5E-08  
+.param pvcp1=-0.095 pvcp2=1.205E-06 pvcp3=-0.873 ptcp1=-7.670E-04 ptcp2=7.594E-07  
+.param tface='1.0+ptce1*(pt-25.0)+ptce2*(pt-25.0)*(pt-25.0)'
+.param tfacp='1.0+ptcp1*(pt-25.0)+ptcp2*(pt-25.0)*(pt-25.0)'
+.param R11='Rsh*(l-dl)/(w-dw)'
+.param R22='Rend0/(w-dw)'
+.param ra='(R11+2*R22)/sqrt(2*R22*R22+R11*R11)'
+.param R1m='R11*(1+factmis*ra)'
+.param R2m='R22*(1+factmis*ra)'
+Rend1 n1 3 value='R2m*tface*(1+pvce1*(tanh(pvce2*abs(v(n1,3))+pvce3)-tanh(pvce3)))'
+Rpure 3 4 value='R1m*tfacp*(1+pvcp1*(tanh(pvcp2*abs(v(3,4)/(l-dl))+pvcp3)-tanh(pvcp3)))'
+Rend2 4 n2 value='R2m*tface*(1+pvce1*(tanh(pvce2*abs(v(4,n2))+pvce3)-tanh(pvce3)))'
+Cox1 3 gnode value='1/2*(0.09677*w*(l+0.9u)*1e+12+0.05582*2*(w+l+0.9u)*1e+6+0.1)*1e-15*mf'
+Cox2 4 gnode value='1/2*(0.09677*w*(l+0.9u)*1e+12+0.05582*2*(w+l+0.9u)*1e+6+0.1)*1e-15*mf'
+.ends rppolyhri_dis_mis
+
+.ENDL DIS_RES

@@ -1,0 +1,75 @@
+# File Created by IC at Wed Feb  4 14:00:28 2026
+# assisted by CdsLibEditor
+#===============================================================================================Artist
+DEFINE analogLib $CDS_INST_DIR/tools/dfII/etc/cdslib/artist/analogLib
+DEFINE basic $CDS_INST_DIR/tools/dfII/etc/cdslib/basic
+DEFINE ahdlLib /opt/eda/cadence/IC618/tools.lnx86/dfII/samples/artist/ahdlLib
+DEFINE pllLib /opt/eda/cadence/IC618/tools.lnx86/dfII/samples/artist/pllLib
+DEFINE bmslib /opt/eda/cadence/IC618/tools.lnx86/dfII/samples/artist/bmslib
+DEFINE pllMMLib /opt/eda/cadence/IC618/tools.lnx86/dfII/samples/artist/pllMMLib
+DEFINE rfLib /opt/eda/cadence/IC618/tools.lnx86/dfII/samples/artist/rfLib
+DEFINE rfTlineLib /opt/eda/cadence/IC618/tools.lnx86/dfII/samples/artist/rfTlineLib
+DEFINE passiveLib /opt/eda/cadence/IC618/tools.lnx86/dfII/samples/artist/passiveLib
+
+#===============================================================================================Process
+DEFINE LG1533 ./Process/PSMC11/P12_LOGIC_110nm_1p5V_3p3V_Pcell_v0p52/LG1533
+DEFINE UMC_18_CMOS ./Process/UMC18/UMC_18_CMOS
+DEFINE tsmc13rf Process/TSMC13/TSMC13RF/tsmc13rf
+
+DEFINE Verilog_A ./Verilog_A
+DEFINE Fractional_PLL ./Fractional_PLL
+
+DEFINE TEST_Verilog_A /home/IC/Desktop/virtuoso/TEST_Verilog_A
+
+#===============================================================================================UMC18
+DEFINE UMC18_Standard_Cell ./UMC18_Standard_Cell
+
+DEFINE UMC18_CDR ./UMC18_CDR
+DEFINE UMC18_EQ_TX ./UMC18_EQ_TX
+DEFINE UMC18_Adaptive_CTLE ./UMC18_Adaptive_CTLE
+DEFINE UMC18_RRIO_OPA ./UMC18_RRIO_OPA
+DEFINE UMC18_Radar_4G_5G ./UMC18_Radar_4G_5G
+DEFINE PLL_5G ./PLL_5G
+DEFINE UMC18_ALLTEK_PLL ./UMC18_ALLTEK_PLL
+DEFINE UMC18_PLL_2p5G ./UMC18_PLL_2p5G
+
+DEFINE TEST_UMC18_RRIO_OPA ./TEST_UMC18_RRIO_OPA
+DEFINE TEST_UMC18_CDR ./TEST_UMC18_CDR
+DEFINE TEST_UMC18_Adaptive_CTLE ./TEST_UMC18_Adaptive_CTLE
+DEFINE TEST_UMC18_EQ_TX ./TEST_UMC18_EQ_TX
+DEFINE TEST_UMC18_ALLTEK_PLL ./TEST_UMC18_ALLTEK_PLL
+
+DEFINE ADC ./ADC
+DEFINE TEST_ADC ./TEST_ADC
+
+#===============================================================================================PSMC11
+DEFINE PSMC11_Standard_Cell ./PSMC11_Standard_Cell
+
+DEFINE PSMC11_BIOUP_ADC ./PSMC11_BIOUP_ADC
+DEFINE PSMC11_BIOUP_DAC ./PSMC11_BIOUP_DAC
+DEFINE PSMC11_BIOUP_IDAC ./PSMC11_BIOUP_IDAC
+DEFINE PSMC11_RRIO_OPA ./PSMC11_RRIO_OPA
+
+DEFINE TEST_PSMC11_BIOUP_ADC ./TEST_PSMC11_BIOUP_ADC
+DEFINE TEST_PSMC11_BIOUP_DAC ./TEST_PSMC11_BIOUP_DAC
+DEFINE TEST_PSMC11_BIOUP_IDAC ./TEST_PSMC11_BIOUP_IDAC
+DEFINE TEST_PSMC11_RRIO_OPA ./TEST_PSMC11_RRIO_OPA
+DEFINE TEST_PSMC11_BIOUP ./TEST_PSMC11_BIOUP
+
+DEFINE PSMC11_BIOUP ./PSMC11_BIOUP
+
+
+#===============================================================================================TSMC13
+DEFINE TSMC13_Standard_Cell ./TSMC13_Standard_Cell
+
+DEFINE TSMC13_ALLTEK_PLL ./TSMC13_ALLTEK_PLL
+
+
+DEFINE TEST_TSMC13_Standard_Cell ./TEST_TSMC13_Standard_Cell
+DEFINE TEST_TSMC13_ALLTEK_PLL ./TEST_TSMC13_ALLTEK_PLL
+
+
+
+
+DEFINE TEST_UMC18_PWR /home/IC/Desktop/virtuoso/TEST_UMC18_PWR
+DEFINE UMC18_PWR /home/IC/Desktop/virtuoso/UMC18_PWR

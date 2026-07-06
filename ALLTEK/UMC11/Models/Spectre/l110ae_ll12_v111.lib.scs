@@ -1,0 +1,352 @@
+simulator lang=spectre insensitive=yes
+library mylib
+
+section tt
+setoption11 options gmin=1e-13
+parameters dtox_n_12_lll110e=0
+parameters du0_n_12_lll110e=0
+parameters dvth0_n_12_lll110e=0
+parameters dxl_n_12_lll110e=0
+parameters dxw_n_12_lll110e=0
+parameters dnlx_n_12_lll110e=0
+parameters dk3_n_12_lll110e=0
+parameters dpvth0_n_12_lll110e=0
+parameters dwwl_n_12_lll110e=0
+parameters dcj_n_12_lll110e=0
+parameters dcjsw_n_12_lll110e=0
+parameters dcjswg_n_12_lll110e=0
+parameters dcgdo_n_12_lll110e=0
+parameters dcgso_n_12_lll110e=0
+parameters dcf_n_12_lll110e=0
+parameters dcgdl_n_12_lll110e=0
+parameters dcgsl_n_12_lll110e=0
+parameters dvsat_n_12_lll110e=0
+parameters dags_n_12_lll110e=0
+parameters drdsw_n_12_lll110e=0
+parameters dwags_n_12_lll110e=0
+parameters dpvsat_n_12_lll110e=0
+parameters dtox_p_12_lll110e=0
+parameters dxl_p_12_lll110e=0
+parameters du0_p_12_lll110e=0
+parameters dvth0_p_12_lll110e=0
+parameters drdsw_p_12_lll110e=0
+parameters dxw_p_12_lll110e=0
+parameters dnlx_p_12_lll110e=0
+parameters dk3_p_12_lll110e=0
+parameters dpvth0_p_12_lll110e=0
+parameters dwwl_p_12_lll110e=0
+parameters dcgdo_p_12_lll110e=0
+parameters dcgso_p_12_lll110e=0
+parameters dcj_p_12_lll110e=0
+parameters dcjsw_p_12_lll110e=0
+parameters dcjswg_p_12_lll110e=0
+parameters dcgdl_p_12_lll110e=0
+parameters dcgsl_p_12_lll110e=0
+parameters dcf_p_12_lll110e=0
+parameters dags_p_12_lll110e=0
+parameters dwags_p_12_lll110e=0
+parameters dpvsat_p_12_lll110e=0
+parameters dvsat_p_12_lll110e=0
+parameters dwu0_p_12_lll110e=0
+parameters dpu0_p_12_lll110e=0
+parameters dlags_p_12_lll110e=0
+parameters dpags_p_12_lll110e=0
+//  
+include "l110ae_ll12_v111.mdl.scs"
+include "l110ae_ll12_v111.lib.scs" section=igate
+endsection tt
+//  ******************************* 
+section ff
+setoption12 options gmin=1e-13
+parameters dtox_n_12_lll110e=-8.0000e-11
+parameters du0_n_12_lll110e=0.5761e-03
+parameters dvth0_n_12_lll110e=-2.0050e-02
+parameters dxl_n_12_lll110e=-6.0599e-10
+parameters dxw_n_12_lll110e=1.1618e-08
+parameters dnlx_n_12_lll110e=-8.8082e-09
+parameters dk3_n_12_lll110e=-6.5590e+00
+parameters dpvth0_n_12_lll110e=-9.1999e-16
+parameters dwwl_n_12_lll110e=8.8091e-19
+parameters dcj_n_12_lll110e=-7.2000e-05
+parameters dcjsw_n_12_lll110e=-9.94e-012
+parameters dcjswg_n_12_lll110e=-4.11e-011
+parameters dcgdo_n_12_lll110e=1.86501e-011
+parameters dcgso_n_12_lll110e=1.86501e-011
+parameters dcf_n_12_lll110e=9.0586e-012
+parameters dcgdl_n_12_lll110e=3.1552e-012
+parameters dcgsl_n_12_lll110e=3.1552e-012
+parameters dvsat_n_12_lll110e=-7.08e+3
+parameters dags_n_12_lll110e=-0.1705
+parameters drdsw_n_12_lll110e=-0.7
+parameters dwags_n_12_lll110e=-6.05e-9
+parameters dpvsat_n_12_lll110e=-3.8e-11
+parameters dtox_p_12_lll110e=-8.49000e-11
+parameters dxl_p_12_lll110e=-6.00000e-10
+parameters du0_p_12_lll110e=3.98880e-04
+parameters dvth0_p_12_lll110e=2.00890e-02
+parameters drdsw_p_12_lll110e=-8.825720e+01
+parameters dxw_p_12_lll110e=2.20010e-9
+parameters dnlx_p_12_lll110e=-5.51230e-09
+parameters dk3_p_12_lll110e=-2.43320e+00
+parameters dpvth0_p_12_lll110e=1.83340e-15
+parameters dwwl_p_12_lll110e=7.04970e-23
+parameters dcgdo_p_12_lll110e=1.6275e-11
+parameters dcgso_p_12_lll110e=1.6275e-11
+parameters dcj_p_12_lll110e=-9.6900e-05
+parameters dcjsw_p_12_lll110e=-1.18000e-11
+parameters dcjswg_p_12_lll110e=-5.31e-011
+parameters dcgdl_p_12_lll110e=8.3591e-012
+parameters dcgsl_p_12_lll110e=8.3591e-012
+parameters dcf_p_12_lll110e=8.9044e-012
+parameters dags_p_12_lll110e=-0.169
+parameters dwags_p_12_lll110e=-1.05e-8
+parameters dpvsat_p_12_lll110e=0
+parameters dvsat_p_12_lll110e=0
+parameters dwu0_p_12_lll110e=-5.8e-11
+parameters dpu0_p_12_lll110e=1.7e-17
+parameters dlags_p_12_lll110e=-2.19e-7
+parameters dpags_p_12_lll110e=-1.00e-13
+//  
+include "l110ae_ll12_v111.mdl.scs"
+include "l110ae_ll12_v111.lib.scs" section=igate
+endsection ff
+//  ******************************* 
+section ss
+setoption13 options gmin=1e-13
+parameters dtox_n_12_lll110e=8.0000e-11
+parameters du0_n_12_lll110e=-0.8035e-03
+parameters dvth0_n_12_lll110e=2.0051e-02
+parameters dxl_n_12_lll110e=1.0485e-09
+parameters dxw_n_12_lll110e=-1.6414e-08
+parameters dnlx_n_12_lll110e=8.5609e-09
+parameters dk3_n_12_lll110e=6.5618e+00
+parameters dpvth0_n_12_lll110e=8.9634e-16
+parameters dwwl_n_12_lll110e=-2.5050e-19
+parameters dcj_n_12_lll110e=7.2000e-05
+parameters dcjsw_n_12_lll110e=9.94e-012
+parameters dcjswg_n_12_lll110e=4.11e-011
+parameters dcgdo_n_12_lll110e=-1.86501e-011
+parameters dcgso_n_12_lll110e=-1.86501e-011
+parameters dcf_n_12_lll110e=-9.0586e-012
+parameters dcgdl_n_12_lll110e=-3.1552e-012
+parameters dcgsl_n_12_lll110e=-3.1552e-012
+parameters dvsat_n_12_lll110e=9.9e+3
+parameters dags_n_12_lll110e=0.1815
+parameters drdsw_n_12_lll110e=1.8
+parameters dwags_n_12_lll110e=6.15e-9
+parameters dpvsat_n_12_lll110e=6.1e-10
+parameters dtox_p_12_lll110e=8.49000e-11
+parameters dxl_p_12_lll110e=3.00000e-09
+parameters du0_p_12_lll110e=-5.14430e-04
+parameters dvth0_p_12_lll110e=-2.01100e-02
+parameters drdsw_p_12_lll110e=1.03470e+02
+parameters dxw_p_12_lll110e=-1.66090e-09
+parameters dnlx_p_12_lll110e=6.00120e-09
+parameters dk3_p_12_lll110e=2.32430e+00
+parameters dpvth0_p_12_lll110e=-1.77190e-15
+parameters dwwl_p_12_lll110e=6.84880e-23
+parameters dcgdo_p_12_lll110e=-1.6275e-11
+parameters dcgso_p_12_lll110e=-1.6275e-11
+parameters dcj_p_12_lll110e=9.6900e-05
+parameters dcjsw_p_12_lll110e=1.18000e-11
+parameters dcjswg_p_12_lll110e=5.31e-011
+parameters dcgdl_p_12_lll110e=-8.3591e-012
+parameters dcgsl_p_12_lll110e=-8.3591e-012
+parameters dcf_p_12_lll110e=-8.9044e-012
+parameters dags_p_12_lll110e=0.1675
+parameters dwags_p_12_lll110e=1.5e-8
+parameters dpvsat_p_12_lll110e=0
+parameters dvsat_p_12_lll110e=0
+parameters dwu0_p_12_lll110e=5.25e-11
+parameters dpu0_p_12_lll110e=-2.26e-17
+parameters dlags_p_12_lll110e=3.48e-7
+parameters dpags_p_12_lll110e=1.05e-13
+//  
+include "l110ae_ll12_v111.mdl.scs"
+include "l110ae_ll12_v111.lib.scs" section=igate
+endsection ss
+//  ******************************* 
+section fnsp
+setoption14 options gmin=1e-13
+parameters dtox_n_12_lll110e=0
+parameters du0_n_12_lll110e=0.4981e-03
+parameters dvth0_n_12_lll110e=-1.9000e-02
+parameters dxl_n_12_lll110e=-1.0061e-10
+parameters dxw_n_12_lll110e=0.640e-08
+parameters dnlx_n_12_lll110e=-6.3970e-09
+parameters dk3_n_12_lll110e=-3.0274e+00
+parameters dpvth0_n_12_lll110e=-4.7111e-16
+parameters dwwl_n_12_lll110e=3.9845e-19
+parameters dcj_n_12_lll110e=-7.2000e-05
+parameters dcjsw_n_12_lll110e=-9.94e-012
+parameters dcjswg_n_12_lll110e=-4.11e-011
+parameters dcgdo_n_12_lll110e=0
+parameters dcgso_n_12_lll110e=0
+parameters dcf_n_12_lll110e=0
+parameters dcgdl_n_12_lll110e=0
+parameters dcgsl_n_12_lll110e=0
+parameters dvsat_n_12_lll110e=-1.65e+3
+parameters dags_n_12_lll110e=-0.0805
+parameters drdsw_n_12_lll110e=-0.80
+parameters dwags_n_12_lll110e=-3.025e-9
+parameters dpvsat_n_12_lll110e=-7.5e-11
+parameters dtox_p_12_lll110e=0.00000e+00
+parameters dxl_p_12_lll110e=1.50000e-09
+parameters du0_p_12_lll110e=-2.90230e-04
+parameters dvth0_p_12_lll110e=-1.93110e-02
+parameters drdsw_p_12_lll110e=0.33770e+02
+parameters dxw_p_12_lll110e=-0.83090e-09
+parameters dnlx_p_12_lll110e=3.54220e-09
+parameters dk3_p_12_lll110e=1.17910e+00
+parameters dpvth0_p_12_lll110e=-8.49900e-16
+parameters dwwl_p_12_lll110e=2.50840e-23
+parameters dcgdo_p_12_lll110e=0
+parameters dcgso_p_12_lll110e=0
+parameters dcj_p_12_lll110e=9.6900e-05
+parameters dcjsw_p_12_lll110e=1.18000e-11
+parameters dcjswg_p_12_lll110e=5.31e-011
+parameters dcgdl_p_12_lll110e=0
+parameters dcgsl_p_12_lll110e=0
+parameters dcf_p_12_lll110e=0
+parameters dags_p_12_lll110e=0.0717
+parameters dwags_p_12_lll110e=0.85e-8
+parameters dpvsat_p_12_lll110e=0
+parameters dvsat_p_12_lll110e=0
+parameters dwu0_p_12_lll110e=3.40e-11
+parameters dpu0_p_12_lll110e=-0.85e-17
+parameters dlags_p_12_lll110e=2.09e-7
+parameters dpags_p_12_lll110e=0.370e-13
+//  
+include "l110ae_ll12_v111.mdl.scs"
+include "l110ae_ll12_v111.lib.scs" section=igate
+endsection fnsp
+//  ******************************* 
+section snfp
+setoption15 options gmin=1e-13
+parameters dtox_n_12_lll110e=0
+parameters du0_n_12_lll110e=-0.5417e-03
+parameters dvth0_n_12_lll110e=1.9000e-02
+parameters dxl_n_12_lll110e=0.2785e-09
+parameters dxw_n_12_lll110e=-0.7514e-08
+parameters dnlx_n_12_lll110e=6.5683e-09
+parameters dk3_n_12_lll110e=3.1034e+00
+parameters dpvth0_n_12_lll110e=4.7572e-16
+parameters dwwl_n_12_lll110e=-2.8050e-19
+parameters dcj_n_12_lll110e=7.2000e-05
+parameters dcjsw_n_12_lll110e=9.94e-012
+parameters dcjswg_n_12_lll110e=4.11e-011
+parameters dcgdo_n_12_lll110e=0
+parameters dcgso_n_12_lll110e=0
+parameters dcf_n_12_lll110e=0
+parameters dcgdl_n_12_lll110e=0
+parameters dcgsl_n_12_lll110e=0
+parameters dvsat_n_12_lll110e=2.50e+3
+parameters dags_n_12_lll110e=0.0855
+parameters drdsw_n_12_lll110e=0.7
+parameters dwags_n_12_lll110e=3.07e-9
+parameters dpvsat_n_12_lll110e=2.00e-10
+parameters dtox_p_12_lll110e=0.00000e+00
+parameters dxl_p_12_lll110e=-3.00000e-10
+parameters du0_p_12_lll110e=2.56440e-04
+parameters dvth0_p_12_lll110e=1.96890e-02
+parameters drdsw_p_12_lll110e=-5.212720e+01
+parameters dxw_p_12_lll110e=1.10010e-9
+parameters dnlx_p_12_lll110e=-2.95250e-09
+parameters dk3_p_12_lll110e=-1.09344e+00
+parameters dpvth0_p_12_lll110e=9.64610e-16
+parameters dwwl_p_12_lll110e=1.27070e-23
+parameters dcgdo_p_12_lll110e=0
+parameters dcgso_p_12_lll110e=0
+parameters dcj_p_12_lll110e=-9.6900e-05
+parameters dcjsw_p_12_lll110e=-1.18000e-11
+parameters dcjswg_p_12_lll110e=-5.31e-011
+parameters dcgdl_p_12_lll110e=0
+parameters dcgsl_p_12_lll110e=0
+parameters dcf_p_12_lll110e=0
+parameters dags_p_12_lll110e=-0.0782
+parameters dwags_p_12_lll110e=-0.442e-8
+parameters dpvsat_p_12_lll110e=0
+parameters dvsat_p_12_lll110e=0
+parameters dwu0_p_12_lll110e=-3.3e-11
+parameters dpu0_p_12_lll110e=0.77e-17
+parameters dlags_p_12_lll110e=-1.008e-7
+parameters dpags_p_12_lll110e=-0.546e-13
+//  
+include "l110ae_ll12_v111.mdl.scs"
+include "l110ae_ll12_v111.lib.scs" section=igate
+endsection snfp
+//  
+//  
+section igate
+subckt n_12_lll110e_ig ( n11 n2 n33 n4 ) 
+parameters w=1u l=1u rsh=8.5 hdif=1.25e-07 nrd=hdif / w nrs=hdif / w ad=2 * hdif * w as=2 * hdif 
++ * w pd=2 * (2 * hdif + w) ps=2 * (2 * hdif + w) trise=0 sa=2u sb=2u  
++ tcig=1 + 1.55e-3 * (temp + trise - 25) area=w * 0.9 * (l * 0.9 + 1.2e-8) * 1e4 * 
++ tcig toxg=(2.64e-09 + dtox_n_12_lll110e) * 1e2 vdf0=3.11 vdfl= - 0.3e-08 vdfw=3.5e-09 
++ vaf0=0.7 vafl= - 0.8e-10 vafw=1.0e-10 vdr0=5.78 vdrl=0e-07 vdrw=5.0e-09 var0=0.60 
++ varl=0e-07 varw=1.0e-10 vdf=(vdf0 + vdfl / (l * 0.9+ 1.2e-8) + vdfw / (w * 0.9)) * 2.6e7 
++ * toxg vaf=(vaf0 + vafl / (l * 0.9+ 1.2e-8) + vafw / (w * 0.9)) * 2.6e7 * toxg vdr=(vdr0 
++ + vdrl / (l * 0.9+ 1.2e-8) + vdrw / (w * 0.9)) * 2.6e7 * toxg var=(var0 + varl / (l * 
++ 0.9+ 1.2e-8) + varw / (w * 0.9)) * 2.6e7 * toxg igf=2.1e-7 * area * exp( - vdf) * pow(1 
++ / toxg,2.0) igr=2.1e-7 * area / (l * 0.9+ 1.2e-8) * exp( - vdr) * pow(1 / toxg,2.0) 
+// 
+mnig ( n1 n2 n3 n4 ) n_12_lll110e trise=trise w=w l=l m=1 nrd=nrd nrs=nrs ad=ad 
++ as=as pd=pd ps=ps sa=sa sb=sb
+gigcd ( n2 n1 ) bsource i =igf * pow((abs(v(n2,n1)) + v(n2,n1)) / 2,vaf) - igr * 
++ pow((abs(v(n2,n1)) - v(n2,n1)) / 2,var)
+gigcs ( n2 n3 ) bsource i =igf * pow((abs(v(n2,n3)) + v(n2,n3)) / 2,vaf) - igr * 
++ pow((abs(v(n2,n3)) - v(n2,n3)) / 2,var)
+rdn ( n1 n11 ) resistor r=rsh * nrd
+rsn ( n3 n33 ) resistor r=rsh * nrs
+ends n_12_lll110e_ig
+// 
+subckt p_12_lll110e_ig ( p11 p2 p33 p4 ) 
+parameters w=1u l=1u rsh=7.6 hdif=1.25e-07 nrd=hdif / w nrs=hdif / w ad=2 * hdif * w as=2 * hdif 
++ * w pd=2 * (2 * hdif + w) ps=2 * (2 * hdif + w) trise=0 sa=2u sb=2u  
++ tcig=1 + 2.25e-3 * (temp + trise - 25) area=w * 0.9 * (l * 0.9 + 1.2e-8) * 1e4 * 
++ tcig toxg=(2.83e-09 + dtox_p_12_lll110e) * 1e2 vdf0=3.22 vdfl= - 7.00e-09 vdfw= 
++ - 6.0e-8 vaf0=0.6 vafl= - 1.5e-08 vafw= - 3.0e-8 vdr0=5.50 vdrl= + 1.50e-08 vdrw= 
++ - 1.0e-07 var0=0.35 varl= + 1.50e-08 varw=4.0e-8 vdf=(vdf0 + vdfl / (l * 0.9+ 1.2e-8) 
++ + vdfw / (w * 0.9)) * 2.6e7 * toxg vaf=(vaf0 + vafl / (l * 0.9+ 1.2e-8) + vafw / (w * 
++ 0.9)) * 2.6e7 * toxg vdr=(vdr0 + vdrl / (l * 0.9+ 1.2e-8) + vdrw / (w * 0.9)) * 2.6e7 
++ * toxg var=(var0 + varl / (l * 0.9+ 1.2e-8) + varw / (w * 0.9)) * 2.6e7 * toxg igf=2.1e-7 
++ * area * exp( - vdf) * pow(1 / toxg,2.0) igr=2.1e-7 * area / (l * 0.9+ 1.2e-8) * exp( - vdr) * 
++ pow(1 / toxg,2.0) 
+// 
+mpig ( p1 p2 p3 p4 ) p_12_lll110e trise=trise w=w l=l m=1 nrd=nrd nrs=nrs ad=ad 
++ as=as pd=pd ps=ps sa=sa sb=sb
+gigcd ( p2 p1 ) bsource i = - igf * pow((abs(v(p2,p1)) - v(p2,p1)) / 2,vaf) + igr 
++ * pow((abs(v(p2,p1)) + v(p2,p1)) / 2,var)
+gigcs ( p2 p3 ) bsource i = - igf * pow((abs(v(p2,p3)) - v(p2,p3)) / 2,vaf) + igr 
++ * pow((abs(v(p2,p3)) + v(p2,p3)) / 2,var)
+rdp ( p1 p11 ) resistor r=rsh * nrd
+rsp ( p3 p33 ) resistor r=rsh * nrs
+ 
+ends p_12_lll110e_ig
+//
+subckt n_12bpw_lll110e_ig ( n11 n2 n33 n4 ) 
+parameters w=1u l=1u rsh=8.5 hdif=1.25e-07 nrd=hdif / w nrs=hdif / w ad=2 * hdif * w as=2 * hdif 
++ * w pd=2 * (2 * hdif + w) ps=2 * (2 * hdif + w) trise=0 sa=2u sb=2u  
++ tcig=1 + 1.55e-3 * (temp + trise - 25) area=w * 0.9 * (l * 0.9 +1.2e-8) * 1e4 * 
++ tcig toxg=(2.64e-09 + dtox_n_12_lll110e) * 1e2 vdf0=3.11 vdfl= - 0.3e-08 vdfw=3.5e-09 
++ vaf0=0.7 vafl= - 0.8e-10 vafw=1.0e-10 vdr0=5.78 vdrl=0e-07 vdrw=5.0e-09 var0=0.60 
++ varl=0e-07 varw=1.0e-10 vdf=(vdf0 + vdfl / (l * 0.9+ 1.2e-8) + vdfw / (w * 0.9)) * 2.6e7 
++ * toxg vaf=(vaf0 + vafl / (l * 0.9+ 1.2e-8) + vafw / (w * 0.9)) * 2.6e7 * toxg vdr=(vdr0 
++ + vdrl / (l * 0.9+ 1.2e-8) + vdrw / (w * 0.9)) * 2.6e7 * toxg var=(var0 + varl / (l * 
++ 0.9+ 1.2e-8) + varw / (w * 0.9)) * 2.6e7 * toxg igf=2.1e-7 * area * exp( - vdf) * pow(1 
++ / toxg,2.0) igr=2.1e-7 * area / (l * 0.9+ 1.2e-8) * exp( - vdr) * pow(1 / toxg,2.0) 
+// 
+mnig ( n1 n2 n3 n4 ) n_12bpw_lll110e trise=trise w=w l=l m=1 nrd=nrd nrs=nrs ad=ad 
++ as=as pd=pd ps=ps sa=sa sb=sb
+gigcd ( n2 n1 ) bsource i =igf * pow((abs(v(n2,n1)) + v(n2,n1)) / 2,vaf) - igr * 
++ pow((abs(v(n2,n1)) - v(n2,n1)) / 2,var)
+gigcs ( n2 n3 ) bsource i =igf * pow((abs(v(n2,n3)) + v(n2,n3)) / 2,vaf) - igr * 
++ pow((abs(v(n2,n3)) - v(n2,n3)) / 2,var)
+rdn ( n1 n11 ) resistor r=rsh * nrd
+rsn ( n3 n33 ) resistor r=rsh * nrs
+ends n_12bpw_lll110e_ig
+// 
+endsection igate
+
+ 
+endlibrary mylib

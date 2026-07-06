@@ -1,0 +1,400 @@
+//********************************************************************************
+//* TT:   TYPICAL N-CH MOSFET AND TYPICAL P-CH MOSFET
+//* FF:   FAST N-CH MOSFET AND FAST P-CH MOSFET
+//* SS:   SLOW N-CH MOSFET AND SLOW P-CH MOSFET
+//* FNSP: FAST N-CH MOSFET AND SLOW P-CH MOSFET
+//* SNFP: SLOW N-CH MOSFET AND FAST P-CH MOSFET
+//********************************************************************************
+simulator lang=spectre insensitive=yes
+library mylib
+
+section setup
+parameters noi_flag_n_25_l110ae     = 0
+parameters noi_flag_n_bpw_25_l110ae = 0
+parameters noi_flag_p_25_l110ae     = 0
+parameters noi_sigma_25_l110ae      = 3
+endsection setup
+//* 
+section tt
+parameters
+//* 
++dtox_n_25_l110ae_t         =  0.0000000e+000  dxl_n_25_l110ae_t           =  0.0000000e+000  du0_n_25_l110ae_t          =  0.0000000e+000  
++dvth0_n_25_l110ae_t        =  0.0000000e+000  drdsw_n_25_l110ae_t         =  0.0000000e+000  dxw_n_25_l110ae_t          =  0.0000000e+000  
++dnlx_n_25_l110ae_t         =  0.0000000e+000  dk3_n_25_l110ae_t           =  0.0000000e+000  dpvth0_n_25_l110ae_t       =  0.0000000e+000  
++dwwl_n_25_l110ae_t         =  0.0000000e+000  dvsat_n_25_l110ae_t         =  0.0000000e+000  dpvsat_n_25_l110ae_t       =  0.0000000e+000  
++dcj_n_25_l110ae_t          =  0.0000000e+000  dcjsw_n_25_l110ae_t         =  0.0000000e+000  dcjswg_n_25_l110ae_t       =  0.0000000e+000  
++dcgdo_n_25_l110ae_t        =  0.0000000e+000  dcgso_n_25_l110ae_t         =  0.0000000e+000  dags_n_25_l110ae_t         =  0.0000000e+000  
++deta0_n_25_l110ae_t        =  0.0000000e+000  dcgdl_n_25_l110ae_t         =  0.0000000e+000  dcgsl_n_25_l110ae_t        =  0.0000000e+000  
++dwags_n_25_l110ae_t        =  0.0000000e+000  dwb0_n_25_l110ae_t          =  0.0000000e+000  dwvsat_n_25_l110ae_t       =  0.0000000e+000  
++db0_n_25_l110ae_t          =  0.0000000e+000  djtsswd_n_25_l110ae_t       =  0.0000000e+000  djtsswgd_n_25_l110ae_t     =  0.0000000e+000  
++dprdsw_n_25_l110ae_t       =  0.0000000e+000  djtssws_n_25_l110ae_t       =  0.0000000e+000   djtsswgs_n_25_l110ae_t    =  0.0000000e+000
+//*                                                                          
++dtox_n_bpw_25_l110ae_t     =  0.0000000e+000  dxl_n_bpw_25_l110ae_t       =  0.0000000e+000  dxw_n_bpw_25_l110ae_t      =  0.0000000e+000  
++dvth0_n_bpw_25_l110ae_t    =  0.0000000e+000  dnlx_n_bpw_25_l110ae_t      =  0.0000000e+000  dk3_n_bpw_25_l110ae_t      =  0.0000000e+000  
++dpvth0_n_bpw_25_l110ae_t   =  0.0000000e+000  du0_n_bpw_25_l110ae_t       =  0.0000000e+000  dlu0_n_bpw_25_l110ae_t     =  0.0000000e+000  
++dwu0_n_bpw_25_l110ae_t     =  0.0000000e+000  dpu0_n_bpw_25_l110ae_t      =  0.0000000e+000  drdsw_n_bpw_25_l110ae_t    =  0.0000000e+000  
++dags_n_bpw_25_l110ae_t     =  0.0000000e+000  dvsat_n_bpw_25_l110ae_t     =  0.0000000e+000  dwags_n_bpw_25_l110ae_t    =  0.0000000e+000  
++dpvsat_n_bpw_25_l110ae_t   =  0.0000000e+000  dcj_n_bpw_25_l110ae_t       =  0.0000000e+000  dcjsw_n_bpw_25_l110ae_t    =  0.0000000e+000  
++dcjswg_n_bpw_25_l110ae_t   =  0.0000000e+000  dcgdo_n_bpw_25_l110ae_t     =  0.0000000e+000  dcgso_n_bpw_25_l110ae_t    =  0.0000000e+000  
++dcgdl_n_bpw_25_l110ae_t    =  0.0000000e+000  dcgsl_n_bpw_25_l110ae_t     =  0.0000000e+000  djtsswd_n_bpw_25_l110ae_t  =  0.0000000e+000  
++djtsswgd_n_bpw_25_l110ae_t =  0.0000000e+000  deta0_n_bpw_25_l110ae_t     =  0.0000000e+000  dpeta0_n_bpw_25_l110ae_t   =  0.0000000e+000
++djtssws_n_bpw_25_l110ae_t  =  0.0000000e+000  djtsswgs_n_bpw_25_l110ae_t  =  0.0000000e+000    
+//*                                                                          
++dtox_p_25_l110ae_t         =  0.0000000e+000  dxl_p_25_l110ae_t           =  0.0000000e+000  du0_p_25_l110ae_t          =  0.0000000e+000  
++dvth0_p_25_l110ae_t        =  0.0000000e+000  drdsw_p_25_l110ae_t         =  0.0000000e+000  dwu0_p_25_l110ae_t         =  0.0000000e+000  
++dlvth0_p_25_l110ae_t       =  0.0000000e+000  dwvth0_p_25_l110ae_t        =  0.0000000e+000  dpvth0_p_25_l110ae_t       =  0.0000000e+000  
++dprdsw_p_25_l110ae_t       =  0.0000000e+000  dags_p_25_l110ae_t          =  0.0000000e+000  dlags_p_25_l110ae_t        =  0.0000000e+000  
++dwags_p_25_l110ae_t        =  0.0000000e+000  dpags_p_25_l110ae_t         =  0.0000000e+000  dcgdo_p_25_l110ae_t        =  0.0000000e+000  
++dcgso_p_25_l110ae_t        =  0.0000000e+000  dcgdl_p_25_l110ae_t         =  0.0000000e+000  dcgsl_p_25_l110ae_t        =  0.0000000e+000  
++dcj_p_25_l110ae_t          =  0.0000000e+000  dcjsw_p_25_l110ae_t         =  0.0000000e+000  dcjswg_p_25_l110ae_t       =  0.0000000e+000  
++djtsswgd_p_25_l110ae_t     =  0.0000000e+000  djtsswgs_p_25_l110ae_t      =  0.0000000e+000
+//*                                                                          
+//*                                                                          
+//*                                                                          
+endsection tt                                                                   
+//*                                                                          
+section ff                                                                    
+parameters                                                                     
+//*                                                                          
++dtox_n_25_l110ae_t         = -1.6200000e-010  dxl_n_25_l110ae_t           = -1.5000000e-008  du0_n_25_l110ae_t          =  1.0946844e-003  
++dvth0_n_25_l110ae_t        = -5.5541429e-002  drdsw_n_25_l110ae_t         = -7.5984540e+001  dxw_n_25_l110ae_t          =  2.7508053e-009  
++dnlx_n_25_l110ae_t         = -4.4734033e-008  dk3_n_25_l110ae_t           = -4.7252257e-001  dpvth0_n_25_l110ae_t       = -8.1888582e-015  
++dwwl_n_25_l110ae_t         = -2.6716722e-021  dvsat_n_25_l110ae_t         =  1.4883801e+003  dpvsat_n_25_l110ae_t       = -1.4704853e-010  
++dcj_n_25_l110ae_t          = -7.8122000e-005  dcjsw_n_25_l110ae_t         = -1.1247000e-011  dcjswg_n_25_l110ae_t       = -2.1550000e-011  
++dcgdo_n_25_l110ae_t        =  1.2500000e-012  dcgso_n_25_l110ae_t         =  1.2500000e-012  dags_n_25_l110ae_t         = -4.4996367e-002  
++deta0_n_25_l110ae_t        = -2.4000000e-003  dcgdl_n_25_l110ae_t         =  2.7000000e-011  dcgsl_n_25_l110ae_t        =  2.7000000e-011  
++dwags_n_25_l110ae_t        =  0.0000000e+000  dwb0_n_25_l110ae_t          =  0.0000000e+000  dwvsat_n_25_l110ae_t       =  0.0000000e+000  
++db0_n_25_l110ae_t          = -3.9026392e-008  djtsswd_n_25_l110ae_t       =  1.0000000e-007  djtsswgd_n_25_l110ae_t     =  6.0000000e-006  
++dprdsw_n_25_l110ae_t       =  0.0000000e+000  djtssws_n_25_l110ae_t       =  1.0000000e-007  djtsswgs_n_25_l110ae_t     =  6.0000000e-006
+//*                                                                          
++dtox_n_bpw_25_l110ae_t     = -1.6200000e-010  dxl_n_bpw_25_l110ae_t       = -1.0000000e-008  dxw_n_bpw_25_l110ae_t      =  1.0000000e-008  
++dvth0_n_bpw_25_l110ae_t    = -5.5322324e-002  dnlx_n_bpw_25_l110ae_t      = -4.5720007e-008  dk3_n_bpw_25_l110ae_t      = -5.7457404e-001  
++dpvth0_n_bpw_25_l110ae_t   = -5.0487368e-015  du0_n_bpw_25_l110ae_t       =  1.0608897e-003  dlu0_n_bpw_25_l110ae_t     =  2.3513779e-010  
++dwu0_n_bpw_25_l110ae_t     = -1.2339636e-010  dpu0_n_bpw_25_l110ae_t      =  4.3530652e-016  drdsw_n_bpw_25_l110ae_t    = -5.9000000e+001  
++dags_n_bpw_25_l110ae_t     = -3.8029444e-002  dvsat_n_bpw_25_l110ae_t     =  1.1849878e+003  dwags_n_bpw_25_l110ae_t    = -1.4548860e-009  
++dpvsat_n_bpw_25_l110ae_t   =  1.9671276e-010  dcj_n_bpw_25_l110ae_t       = -7.8122000e-005  dcjsw_n_bpw_25_l110ae_t    = -1.1247000e-011  
++dcjswg_n_bpw_25_l110ae_t   = -2.1550000e-011  dcgdo_n_bpw_25_l110ae_t     =  1.2500000e-012  dcgso_n_bpw_25_l110ae_t    =  1.2500000e-012  
++dcgdl_n_bpw_25_l110ae_t    =  2.7000000e-011  dcgsl_n_bpw_25_l110ae_t     =  2.7000000e-011  djtsswd_n_bpw_25_l110ae_t  =  1.0000000e-007  
++djtsswgd_n_bpw_25_l110ae_t =  6.0000000e-006  deta0_n_bpw_25_l110ae_t     = -6.0852918e-003  dpeta0_n_bpw_25_l110ae_t   = -5.0675393e-016
++djtssws_n_bpw_25_l110ae_t  =  1.0000000e-007  djtsswgs_n_bpw_25_l110ae_t  =  6.0000000e-006     
+//*
++dtox_p_25_l110ae_t         = -1.1000000e-010  dxl_p_25_l110ae_t           = -5.0000000e-009  du0_p_25_l110ae_t          =  4.9388050e-004  
++dvth0_p_25_l110ae_t        =  5.4056946e-002  drdsw_p_25_l110ae_t         = -4.3758708e+001  dwu0_p_25_l110ae_t         =  1.4521193e-011  
++dlvth0_p_25_l110ae_t       =  1.2703258e-008  dwvth0_p_25_l110ae_t        =  3.1350796e-009  dpvth0_p_25_l110ae_t       =  2.5967959e-015  
++dprdsw_p_25_l110ae_t       = -1.0080601e-011  dags_p_25_l110ae_t          = -3.5932139e-002  dlags_p_25_l110ae_t        = -5.4385268e-008  
++dwags_p_25_l110ae_t        =  2.0089263e-009  dpags_p_25_l110ae_t         =  2.3306932e-015  dcgdo_p_25_l110ae_t        =  9.3000000e-012  
++dcgso_p_25_l110ae_t        =  9.3000000e-012  dcgdl_p_25_l110ae_t         =  2.1710000e-011  dcgsl_p_25_l110ae_t        =  2.1710000e-011  
++dcj_p_25_l110ae_t          = -9.6321000e-005  dcjsw_p_25_l110ae_t         = -1.0525000e-011  dcjswg_p_25_l110ae_t       = -3.3746000e-011  
++djtsswgd_p_25_l110ae_t     =  2.0000000e-006  djtsswgs_p_25_l110ae_t      =  2.0000000e-006
+//* 
+//* 
+//* 
+endsection ff
+//* 
+section ss
+parameters
+//* 
++dtox_n_25_l110ae_t         =  1.6200000e-010  dxl_n_25_l110ae_t           =  1.5000000e-008  du0_n_25_l110ae_t          = -1.2793484e-003  
++dvth0_n_25_l110ae_t        =  5.4670373e-002  drdsw_n_25_l110ae_t         =  1.1208350e+002  dxw_n_25_l110ae_t          = -4.3333382e-009  
++dnlx_n_25_l110ae_t         =  5.4247906e-008  dk3_n_25_l110ae_t           =  4.1557227e-001  dpvth0_n_25_l110ae_t       =  7.7943304e-015  
++dwwl_n_25_l110ae_t         =  1.7628178e-021  dvsat_n_25_l110ae_t         = -2.5903689e+003  dpvsat_n_25_l110ae_t       = -2.0378502e-010  
++dcj_n_25_l110ae_t          =  7.8122000e-005  dcjsw_n_25_l110ae_t         =  1.1247000e-011  dcjswg_n_25_l110ae_t       =  2.1550000e-011  
++dcgdo_n_25_l110ae_t        = -1.2500000e-012  dcgso_n_25_l110ae_t         = -1.2500000e-012  dags_n_25_l110ae_t         =  4.7519863e-002  
++deta0_n_25_l110ae_t        =  2.5000000e-003  dcgdl_n_25_l110ae_t         = -2.7000000e-011  dcgsl_n_25_l110ae_t        = -2.7000000e-011  
++dwags_n_25_l110ae_t        =  0.0000000e+000  dwb0_n_25_l110ae_t          =  0.0000000e+000  dwvsat_n_25_l110ae_t       =  0.0000000e+000  
++db0_n_25_l110ae_t          =  5.8004424e-008  djtsswd_n_25_l110ae_t       = -1.0000000e-009  djtsswgd_n_25_l110ae_t     = -1.0000000e-007  
++dprdsw_n_25_l110ae_t       =  6.8584745e-012  djtssws_n_25_l110ae_t       = -1.0000000e-009  djtsswgs_n_25_l110ae_t     = -1.0000000e-007
+//* 
++dtox_n_bpw_25_l110ae_t     =  1.6200000e-010  dxl_n_bpw_25_l110ae_t       =  1.0000000e-008  dxw_n_bpw_25_l110ae_t      = -1.0000000e-008  
++dvth0_n_bpw_25_l110ae_t    =  5.4527330e-002  dnlx_n_bpw_25_l110ae_t      =  5.0555336e-008  dk3_n_bpw_25_l110ae_t      =  4.8188535e-001  
++dpvth0_n_bpw_25_l110ae_t   =  4.8399791e-015  du0_n_bpw_25_l110ae_t       = -1.2449434e-003  dlu0_n_bpw_25_l110ae_t     = -4.1312173e-010  
++dwu0_n_bpw_25_l110ae_t     =  5.9316389e-011  dpu0_n_bpw_25_l110ae_t      = -3.7548146e-016  drdsw_n_bpw_25_l110ae_t    =  5.9000000e+001  
++dags_n_bpw_25_l110ae_t     =  4.0293273e-002  dvsat_n_bpw_25_l110ae_t     = -2.3601530e+003  dwags_n_bpw_25_l110ae_t    =  1.3603733e-009  
++dpvsat_n_bpw_25_l110ae_t   = -3.6346657e-010  dcj_n_bpw_25_l110ae_t       =  7.8122000e-005  dcjsw_n_bpw_25_l110ae_t    =  1.1247000e-011  
++dcjswg_n_bpw_25_l110ae_t   =  2.1550000e-011  dcgdo_n_bpw_25_l110ae_t     = -1.2500000e-012  dcgso_n_bpw_25_l110ae_t    = -1.2500000e-012  
++dcgdl_n_bpw_25_l110ae_t    = -2.7000000e-011  dcgsl_n_bpw_25_l110ae_t     = -2.7000000e-011  djtsswd_n_bpw_25_l110ae_t  = -1.0000000e-010  
++djtsswgd_n_bpw_25_l110ae_t = -1.0000000e-008  deta0_n_bpw_25_l110ae_t     =  5.8527984e-003  dpeta0_n_bpw_25_l110ae_t   =  4.4342263e-016
++djtssws_n_bpw_25_l110ae_t  = -1.0000000e-010  djtsswgs_n_bpw_25_l110ae_t  = -1.0000000e-008   
+//*
++dtox_p_25_l110ae_t         =  1.1000000e-010  dxl_p_25_l110ae_t           =  5.0000000e-009  du0_p_25_l110ae_t          = -5.6161544e-004  
++dvth0_p_25_l110ae_t        = -5.3461103e-002  drdsw_p_25_l110ae_t         =  1.1045294e+002  dwu0_p_25_l110ae_t         = -2.4800000e-011  
++dlvth0_p_25_l110ae_t       = -1.3246841e-008  dwvth0_p_25_l110ae_t        = -3.0238606e-009  dpvth0_p_25_l110ae_t       = -2.6954269e-015  
++dprdsw_p_25_l110ae_t       =  2.7529587e-011  dags_p_25_l110ae_t          =  3.8245188e-002  dlags_p_25_l110ae_t        =  4.7712216e-008  
++dwags_p_25_l110ae_t        = -1.7024053e-009  dpags_p_25_l110ae_t         = -1.6648007e-014  dcgdo_p_25_l110ae_t        = -9.3000000e-012  
++dcgso_p_25_l110ae_t        = -9.3000000e-012  dcgdl_p_25_l110ae_t         = -2.1710000e-011  dcgsl_p_25_l110ae_t        = -2.1710000e-011  
++dcj_p_25_l110ae_t          =  9.6321000e-005  dcjsw_p_25_l110ae_t         =  1.0525000e-011  dcjswg_p_25_l110ae_t       =  3.3746000e-011  
++djtsswgd_p_25_l110ae_t     = -1.9000000e-008  djtsswgs_p_25_l110ae_t      = -1.9000000e-008
+//* 
+//* 
+//* 
+endsection ss
+//* 
+section fnsp
+parameters
+//* 
++dtox_n_25_l110ae_t         =  0.0000000e+000  dxl_n_25_l110ae_t           = -1.5000000e-008  du0_n_25_l110ae_t          =  7.0346547e-004  
++dvth0_n_25_l110ae_t        = -2.8357935e-002  drdsw_n_25_l110ae_t         = -2.5194192e+001  dxw_n_25_l110ae_t          =  1.5340210e-009  
++dnlx_n_25_l110ae_t         = -1.1483355e-008  dk3_n_25_l110ae_t           = -2.2334804e-001  dpvth0_n_25_l110ae_t       = -3.8070480e-015  
++dwwl_n_25_l110ae_t         = -9.9376761e-022  dvsat_n_25_l110ae_t         =  1.5752926e+003  dpvsat_n_25_l110ae_t       = -2.2807956e-012  
++dcj_n_25_l110ae_t          = -7.8122000e-005  dcjsw_n_25_l110ae_t         = -1.1247000e-011  dcjswg_n_25_l110ae_t       = -2.1550000e-011  
++dcgdo_n_25_l110ae_t        =  0.0000000e+000  dcgso_n_25_l110ae_t         =  0.0000000e+000  dags_n_25_l110ae_t         = -2.3526647e-002  
++deta0_n_25_l110ae_t        = -3.6500000e-003  dcgdl_n_25_l110ae_t         =  0.0000000e+000  dcgsl_n_25_l110ae_t        =  0.0000000e+000  
++dwags_n_25_l110ae_t        =  0.0000000e+000  dwb0_n_25_l110ae_t          =  0.0000000e+000  dwvsat_n_25_l110ae_t       =  0.0000000e+000  
++db0_n_25_l110ae_t          = -2.1538398e-008  djtsswd_n_25_l110ae_t       =  7.5000000e-008  djtsswgd_n_25_l110ae_t     =  4.7000000e-006  
++dprdsw_n_25_l110ae_t       =  0.0000000e+000  djtssws_n_25_l110ae_t       =  7.5000000e-008  djtsswgs_n_25_l110ae_t     =  4.7000000e-006
+//* 
++dtox_n_bpw_25_l110ae_t     =  0.0000000e+000  dxl_n_bpw_25_l110ae_t       = -5.0000000e-009  dxw_n_bpw_25_l110ae_t      =  5.0000000e-009  
++dvth0_n_bpw_25_l110ae_t    = -2.8060673e-002  dnlx_n_bpw_25_l110ae_t      = -2.0882452e-008  dk3_n_bpw_25_l110ae_t      = -2.5225204e-001  
++dpvth0_n_bpw_25_l110ae_t   = -2.4095926e-015  du0_n_bpw_25_l110ae_t       =  6.8718341e-004  dlu0_n_bpw_25_l110ae_t     =  1.3917334e-010  
++dwu0_n_bpw_25_l110ae_t     = -5.6222851e-011  dpu0_n_bpw_25_l110ae_t      =  2.4945999e-016  drdsw_n_bpw_25_l110ae_t    = -2.9500000e+001  
++dags_n_bpw_25_l110ae_t     = -1.9893617e-002  dvsat_n_bpw_25_l110ae_t     =  1.8908809e+003  dwags_n_bpw_25_l110ae_t    = -6.8562649e-010  
++dpvsat_n_bpw_25_l110ae_t   =  9.6796933e-011  dcj_n_bpw_25_l110ae_t       = -7.8122000e-005  dcjsw_n_bpw_25_l110ae_t    = -1.1247000e-011  
++dcjswg_n_bpw_25_l110ae_t   = -2.1550000e-011  dcgdo_n_bpw_25_l110ae_t     =  0.0000000e+000  dcgso_n_bpw_25_l110ae_t    =  0.0000000e+000  
++dcgdl_n_bpw_25_l110ae_t    =  0.0000000e+000  dcgsl_n_bpw_25_l110ae_t     =  0.0000000e+000  djtsswd_n_bpw_25_l110ae_t  =  7.5000000e-008  
++djtsswgd_n_bpw_25_l110ae_t =  4.7000000e-006  deta0_n_bpw_25_l110ae_t     = -6.0457244e-003  dpeta0_n_bpw_25_l110ae_t   = -2.4633389e-016
++djtssws_n_bpw_25_l110ae_t  =  7.5000000e-008  djtsswgs_n_bpw_25_l110ae_t  =  4.7000000e-006  
+//*
++dtox_p_25_l110ae_t         =  0.0000000e+000  dxl_p_25_l110ae_t           =  5.0000000e-009  du0_p_25_l110ae_t          = -3.1329173e-004  
++dvth0_p_25_l110ae_t        = -2.6844190e-002  drdsw_p_25_l110ae_t         =  9.2728659e+000  dwu0_p_25_l110ae_t         = -6.3574859e-012  
++dlvth0_p_25_l110ae_t       = -6.0413534e-009  dwvth0_p_25_l110ae_t        = -1.4719195e-009  dpvth0_p_25_l110ae_t       = -1.3811224e-015  
++dprdsw_p_25_l110ae_t       =  1.0129718e-011  dags_p_25_l110ae_t          =  1.9061263e-002  dlags_p_25_l110ae_t        =  3.2752082e-008  
++dwags_p_25_l110ae_t        = -1.0000000e-009  dpags_p_25_l110ae_t         = -5.1548074e-015  dcgdo_p_25_l110ae_t        =  0.0000000e+000  
++dcgso_p_25_l110ae_t        =  0.0000000e+000  dcgdl_p_25_l110ae_t         =  0.0000000e+000  dcgsl_p_25_l110ae_t        =  0.0000000e+000  
++dcj_p_25_l110ae_t          =  9.6321000e-005  dcjsw_p_25_l110ae_t         =  1.0525000e-011  dcjswg_p_25_l110ae_t       =  3.3746000e-011  
++djtsswgd_p_25_l110ae_t     = -1.9000000e-008  djtsswgs_p_25_l110ae_t      = -1.9000000e-008
+//* 
+//* 
+//* 
+endsection fnsp
+//* 
+section snfp
+parameters
+//* 
++dtox_n_25_l110ae_t         =  0.0000000e+000  dxl_n_25_l110ae_t           =  1.5000000e-008  du0_n_25_l110ae_t          = -7.3982193e-004  
++dvth0_n_25_l110ae_t        =  2.8084161e-002  drdsw_n_25_l110ae_t         =  3.0662235e+001  dxw_n_25_l110ae_t          = -1.7454713e-009  
++dnlx_n_25_l110ae_t         =  1.5976413e-008  dk3_n_25_l110ae_t           =  2.2072350e-001  dpvth0_n_25_l110ae_t       =  3.7846787e-015  
++dwwl_n_25_l110ae_t         =  1.7430419e-021  dvsat_n_25_l110ae_t         = -1.8216151e+003  dpvsat_n_25_l110ae_t       =  9.3087134e-011  
++dcj_n_25_l110ae_t          =  7.8122000e-005  dcjsw_n_25_l110ae_t         =  1.1247000e-011  dcjswg_n_25_l110ae_t       =  2.1550000e-011  
++dcgdo_n_25_l110ae_t        =  0.0000000e+000  dcgso_n_25_l110ae_t         =  0.0000000e+000  dags_n_25_l110ae_t         =  2.4253558e-002  
++deta0_n_25_l110ae_t        =  4.0500000e-003  dcgdl_n_25_l110ae_t         =  0.0000000e+000  dcgsl_n_25_l110ae_t        =  0.0000000e+000  
++dwags_n_25_l110ae_t        =  0.0000000e+000  dwb0_n_25_l110ae_t          =  0.0000000e+000  dwvsat_n_25_l110ae_t       =  0.0000000e+000  
++db0_n_25_l110ae_t          =  2.5576090e-008  djtsswd_n_25_l110ae_t       = -9.0000000e-010  djtsswgd_n_25_l110ae_t     = -9.0000000e-008  
++dprdsw_n_25_l110ae_t       =  0.0000000e+000  djtssws_n_25_l110ae_t       = -9.0000000e-010  djtsswgs_n_25_l110ae_t     = -9.0000000e-008
+//* 
++dtox_n_bpw_25_l110ae_t     =  0.0000000e+000  dxl_n_bpw_25_l110ae_t       =  5.0000000e-009  dxw_n_bpw_25_l110ae_t      = -5.0000000e-009  
++dvth0_n_bpw_25_l110ae_t    =  2.7873255e-002  dnlx_n_bpw_25_l110ae_t      =  2.2105731e-008  dk3_n_bpw_25_l110ae_t      =  2.5907042e-001  
++dpvth0_n_bpw_25_l110ae_t   =  2.3551067e-015  du0_n_bpw_25_l110ae_t       = -7.2170632e-004  dlu0_n_bpw_25_l110ae_t     = -1.8043805e-010  
++dwu0_n_bpw_25_l110ae_t     =  4.1420157e-011  dpu0_n_bpw_25_l110ae_t      = -2.2335325e-016  drdsw_n_bpw_25_l110ae_t    =  2.9500000e+001  
++dags_n_bpw_25_l110ae_t     =  2.0503854e-002  dvsat_n_bpw_25_l110ae_t     = -2.1110667e+003  dwags_n_bpw_25_l110ae_t    =  7.3034951e-010  
++dpvsat_n_bpw_25_l110ae_t   = -1.3622256e-010  dcj_n_bpw_25_l110ae_t       =  7.8122000e-005  dcjsw_n_bpw_25_l110ae_t    =  1.1247000e-011  
++dcjswg_n_bpw_25_l110ae_t   =  2.1550000e-011  dcgdo_n_bpw_25_l110ae_t     =  0.0000000e+000  dcgso_n_bpw_25_l110ae_t    =  0.0000000e+000  
++dcgdl_n_bpw_25_l110ae_t    =  0.0000000e+000  dcgsl_n_bpw_25_l110ae_t     =  0.0000000e+000  djtsswd_n_bpw_25_l110ae_t  = -9.0000000e-011  
++djtsswgd_n_bpw_25_l110ae_t = -9.0000000e-009  deta0_n_bpw_25_l110ae_t     =  6.1324542e-003  dpeta0_n_bpw_25_l110ae_t   =  3.1431239e-016
++djtssws_n_bpw_25_l110ae_t  = -9.0000000e-011  djtsswgs_n_bpw_25_l110ae_t  = -9.0000000e-009
+//*
++dtox_p_25_l110ae_t         =  0.0000000e+000  dxl_p_25_l110ae_t           = -5.0000000e-009  du0_p_25_l110ae_t          =  2.9971677e-004  
++dvth0_p_25_l110ae_t        =  2.7014349e-002  drdsw_p_25_l110ae_t         =  3.0740860e+000  dwu0_p_25_l110ae_t         =  2.9038150e-012  
++dlvth0_p_25_l110ae_t       =  5.7396114e-009  dwvth0_p_25_l110ae_t        =  1.5940264e-009  dpvth0_p_25_l110ae_t       =  1.3157866e-015  
++dprdsw_p_25_l110ae_t       = -6.1236040e-012  dags_p_25_l110ae_t          = -1.8447949e-002  dlags_p_25_l110ae_t        = -3.4330144e-008  
++dwags_p_25_l110ae_t        =  9.7000000e-010  dpags_p_25_l110ae_t         =  2.0052280e-015  dcgdo_p_25_l110ae_t        =  0.0000000e+000  
++dcgso_p_25_l110ae_t        =  0.0000000e+000  dcgdl_p_25_l110ae_t         =  0.0000000e+000  dcgsl_p_25_l110ae_t        =  0.0000000e+000  
++dcj_p_25_l110ae_t          = -9.6321000e-005  dcjsw_p_25_l110ae_t         = -1.0525000e-011  dcjswg_p_25_l110ae_t       = -3.3746000e-011  
++djtsswgd_p_25_l110ae_t     =  2.0000000e-006  djtsswgs_p_25_l110ae_t      =  2.0000000e-006
+//* 
+//* 
+//* 
+endsection snfp
+//********************************************************************************************
+//********************************************************************************
+//* 
+section tt_g
+parameters
+//* 
++dtox_n_25_l110ae_g         =  0.0000000e+000  dxl_n_25_l110ae_g           =  0.0000000e+000  du0_n_25_l110ae_g          =  0.0000000e+000  
++dvth0_n_25_l110ae_g        =  0.0000000e+000  drdsw_n_25_l110ae_g         =  0.0000000e+000  dxw_n_25_l110ae_g          =  0.0000000e+000  
++dnlx_n_25_l110ae_g         =  0.0000000e+000  dk3_n_25_l110ae_g           =  0.0000000e+000  dpvth0_n_25_l110ae_g       =  0.0000000e+000  
++dwwl_n_25_l110ae_g         =  0.0000000e+000  dvsat_n_25_l110ae_g         =  0.0000000e+000  dpvsat_n_25_l110ae_g       =  0.0000000e+000  
++dcj_n_25_l110ae_g          =  0.0000000e+000  dcjsw_n_25_l110ae_g         =  0.0000000e+000  dcjswg_n_25_l110ae_g       =  0.0000000e+000  
++dcgdo_n_25_l110ae_g        =  0.0000000e+000  dcgso_n_25_l110ae_g         =  0.0000000e+000  dags_n_25_l110ae_g         =  0.0000000e+000  
++deta0_n_25_l110ae_g        =  0.0000000e+000  dcgdl_n_25_l110ae_g         =  0.0000000e+000  dcgsl_n_25_l110ae_g        =  0.0000000e+000  
++dwags_n_25_l110ae_g        =  0.0000000e+000  dwb0_n_25_l110ae_g          =  0.0000000e+000  dwvsat_n_25_l110ae_g       =  0.0000000e+000  
++db0_n_25_l110ae_g          =  0.0000000e+000  djtsswd_n_25_l110ae_g       =  0.0000000e+000  djtsswgd_n_25_l110ae_g     =  0.0000000e+000
++dprdsw_n_25_l110ae_g       =  0.0000000e+000  djtssws_n_25_l110ae_g       =  0.0000000e+000  djtsswgs_n_25_l110ae_g     =  0.0000000e+000                                                                          
+//*                                                                          
++dtox_n_bpw_25_l110ae_g     =  0.0000000e+000  dxl_n_bpw_25_l110ae_g       =  0.0000000e+000  dxw_n_bpw_25_l110ae_g      =  0.0000000e+000  
++dvth0_n_bpw_25_l110ae_g    =  0.0000000e+000  dnlx_n_bpw_25_l110ae_g      =  0.0000000e+000  dk3_n_bpw_25_l110ae_g      =  0.0000000e+000  
++dpvth0_n_bpw_25_l110ae_g   =  0.0000000e+000  du0_n_bpw_25_l110ae_g       =  0.0000000e+000  dlu0_n_bpw_25_l110ae_g     =  0.0000000e+000  
++dwu0_n_bpw_25_l110ae_g     =  0.0000000e+000  dpu0_n_bpw_25_l110ae_g      =  0.0000000e+000  drdsw_n_bpw_25_l110ae_g    =  0.0000000e+000  
++dags_n_bpw_25_l110ae_g     =  0.0000000e+000  dvsat_n_bpw_25_l110ae_g     =  0.0000000e+000  dwags_n_bpw_25_l110ae_g    =  0.0000000e+000  
++dpvsat_n_bpw_25_l110ae_g   =  0.0000000e+000  dcj_n_bpw_25_l110ae_g       =  0.0000000e+000  dcjsw_n_bpw_25_l110ae_g    =  0.0000000e+000  
++dcjswg_n_bpw_25_l110ae_g   =  0.0000000e+000  dcgdo_n_bpw_25_l110ae_g     =  0.0000000e+000  dcgso_n_bpw_25_l110ae_g    =  0.0000000e+000  
++dcgdl_n_bpw_25_l110ae_g    =  0.0000000e+000  dcgsl_n_bpw_25_l110ae_g     =  0.0000000e+000  djtsswd_n_bpw_25_l110ae_g  =  0.0000000e+000  
++djtsswgd_n_bpw_25_l110ae_g =  0.0000000e+000  deta0_n_bpw_25_l110ae_g     =  0.0000000e+000  dpeta0_n_bpw_25_l110ae_g   =  0.0000000e+000
++djtssws_n_bpw_25_l110ae_g  =  0.0000000e+000  djtsswgs_n_bpw_25_l110ae_g  =  0.0000000e+000
+//*
++dtox_p_25_l110ae_g         =  0.0000000e+000  dxl_p_25_l110ae_g           =  0.0000000e+000  du0_p_25_l110ae_g          =  0.0000000e+000  
++dvth0_p_25_l110ae_g        =  0.0000000e+000  drdsw_p_25_l110ae_g         =  0.0000000e+000  dwu0_p_25_l110ae_g         =  0.0000000e+000  
++dlvth0_p_25_l110ae_g       =  0.0000000e+000  dwvth0_p_25_l110ae_g        =  0.0000000e+000  dpvth0_p_25_l110ae_g       =  0.0000000e+000  
++dprdsw_p_25_l110ae_g       =  0.0000000e+000  dags_p_25_l110ae_g          =  0.0000000e+000  dlags_p_25_l110ae_g        =  0.0000000e+000  
++dwags_p_25_l110ae_g        =  0.0000000e+000  dpags_p_25_l110ae_g         =  0.0000000e+000  dcgdo_p_25_l110ae_g        =  0.0000000e+000  
++dcgso_p_25_l110ae_g        =  0.0000000e+000  dcgdl_p_25_l110ae_g         =  0.0000000e+000  dcgsl_p_25_l110ae_g        =  0.0000000e+000  
++dcj_p_25_l110ae_g          =  0.0000000e+000  dcjsw_p_25_l110ae_g         =  0.0000000e+000  dcjswg_p_25_l110ae_g       =  0.0000000e+000  
++djtsswgd_p_25_l110ae_g     =  0.0000000e+000  djtsswgs_p_25_l110ae_g      =  0.0000000e+000                                                                          
+//* 
+//*
+//* 
+endsection tt_g
+//* 
+section ff_g
+parameters
+//* 
++dtox_n_25_l110ae_g         = -1.6200000e-010  dxl_n_25_l110ae_g           = -1.5000000e-008  du0_n_25_l110ae_g          =  8.4296193e-004  
++dvth0_n_25_l110ae_g        = -5.4927930e-002  drdsw_n_25_l110ae_g         = -6.7485138e+001  dxw_n_25_l110ae_g          =  5.9699628e-009  
++dnlx_n_25_l110ae_g         = -4.5143941e-008  dk3_n_25_l110ae_g           = -4.2954191e-001  dpvth0_n_25_l110ae_g       = -7.8076890e-015  
++dwwl_n_25_l110ae_g         = -9.5003236e-022  dvsat_n_25_l110ae_g         =  2.0500000e+003  dpvsat_n_25_l110ae_g       = -2.0670000e-010  
++dcj_n_25_l110ae_g          = -7.8122000e-005  dcjsw_n_25_l110ae_g         = -1.1247000e-011  dcjswg_n_25_l110ae_g       = -2.1550000e-011*0.925  
++dcgdo_n_25_l110ae_g        =  1.2500000e-012  dcgso_n_25_l110ae_g         =  1.2500000e-012  dags_n_25_l110ae_g         = -3.5090000e-002  
++deta0_n_25_l110ae_g        = -2.4000000e-003  dcgdl_n_25_l110ae_g         =  2.7000000e-011  dcgsl_n_25_l110ae_g        =  2.7000000e-011  
++dwags_n_25_l110ae_g        =  0.0000000e+000  dwb0_n_25_l110ae_g          =  0.0000000e+000  dwvsat_n_25_l110ae_g       =  0.0000000e+000  
++db0_n_25_l110ae_g          =  4.8500000e-008  djtsswd_n_25_l110ae_g       =  1.0000000e-007  djtsswgd_n_25_l110ae_g     =  5.7000000e-006
++dprdsw_n_25_l110ae_g       =  0.0000000e+000  djtssws_n_25_l110ae_g       =  1.0000000e-007  djtsswgs_n_25_l110ae_g     =  5.7000000e-006 
+//* 
++dtox_n_bpw_25_l110ae_g     = -1.6200000e-010  dxl_n_bpw_25_l110ae_g       = -1.0000000e-008  dxw_n_bpw_25_l110ae_g      =  1.0000000e-008  
++dvth0_n_bpw_25_l110ae_g    = -5.4276875e-002  dnlx_n_bpw_25_l110ae_g      = -4.5720007e-008  dk3_n_bpw_25_l110ae_g      = -5.7457404e-001  
++dpvth0_n_bpw_25_l110ae_g   = -4.2624298e-015  du0_n_bpw_25_l110ae_g       =  9.7391562e-004  dlu0_n_bpw_25_l110ae_g     =  1.4803746e-010  
++dwu0_n_bpw_25_l110ae_g     = -1.1607816e-010  dpu0_n_bpw_25_l110ae_g      =  3.7649353e-016  drdsw_n_bpw_25_l110ae_g    = -5.9000000e+001  
++dags_n_bpw_25_l110ae_g     = -3.8029444e-002  dvsat_n_bpw_25_l110ae_g     =  1.1849878e+003  dwags_n_bpw_25_l110ae_g    = -1.4548860e-009  
++dpvsat_n_bpw_25_l110ae_g   =  1.9671276e-010  dcj_n_bpw_25_l110ae_g       = -7.8122000e-005  dcjsw_n_bpw_25_l110ae_g    = -1.1247000e-011  
++dcjswg_n_bpw_25_l110ae_g   = -2.1550000e-011  dcgdo_n_bpw_25_l110ae_g     =  1.2500000e-012  dcgso_n_bpw_25_l110ae_g    =  1.2500000e-012  
++dcgdl_n_bpw_25_l110ae_g    =  2.7000000e-011  dcgsl_n_bpw_25_l110ae_g     =  2.7000000e-011  djtsswd_n_bpw_25_l110ae_g  =  1.0000000e-007  
++djtsswgd_n_bpw_25_l110ae_g =  5.7000000e-006  deta0_n_bpw_25_l110ae_g     = -6.0852918e-003  dpeta0_n_bpw_25_l110ae_g   = -5.0675393e-016
++djtssws_n_bpw_25_l110ae_g  =  1.0000000e-007  djtsswgs_n_bpw_25_l110ae_g  =  5.7000000e-006
+//*
++dtox_p_25_l110ae_g         = -1.1000000e-010  dxl_p_25_l110ae_g           = -5.0000000e-009  du0_p_25_l110ae_g          =  4.7471048e-004  
++dvth0_p_25_l110ae_g        =  5.3047332e-002  drdsw_p_25_l110ae_g         = -4.7501890e+001  dwu0_p_25_l110ae_g         =  2.7562568e-011  
++dlvth0_p_25_l110ae_g       =  1.2056528e-008  dwvth0_p_25_l110ae_g        =  2.3145962e-009  dpvth0_p_25_l110ae_g       =  2.6240112e-015  
++dprdsw_p_25_l110ae_g       = -7.9958258e-012  dags_p_25_l110ae_g          = -3.5603696e-002  dlags_p_25_l110ae_g        = -5.3300102e-008  
++dwags_p_25_l110ae_g        = -1.8257933e-009  dpags_p_25_l110ae_g         = -2.1030028e-015  dcgdo_p_25_l110ae_g        =  9.3000000e-012  
++dcgso_p_25_l110ae_g        =  9.3000000e-012  dcgdl_p_25_l110ae_g         =  2.1710000e-011  dcgsl_p_25_l110ae_g        =  2.1710000e-011  
++dcj_p_25_l110ae_g          = -9.6321000e-005  dcjsw_p_25_l110ae_g         = -1.0525000e-011  dcjswg_p_25_l110ae_g       = -3.3746000e-011  
++djtsswgd_p_25_l110ae_g     =  1.9000000e-006  djtsswgs_p_25_l110ae_g      =  1.9000000e-006 
+//* 
+//*
+//* 
+endsection ff_g
+//* 
+section ss_g
+parameters
+//* 
++dtox_n_25_l110ae_g         =  1.6200000e-010  dxl_n_25_l110ae_g           =  1.5000000e-008  du0_n_25_l110ae_g          = -9.9002584e-004  
++dvth0_n_25_l110ae_g        =  5.4168080e-002  drdsw_n_25_l110ae_g         =  1.0561590e+002  dxw_n_25_l110ae_g          = -7.8583731e-009  
++dnlx_n_25_l110ae_g         =  5.2144293e-008  dk3_n_25_l110ae_g           =  3.5822553e-001  dpvth0_n_25_l110ae_g       =  7.1646690e-015  
++dwwl_n_25_l110ae_g         =  1.6483938e-021  dvsat_n_25_l110ae_g         = -3.3900000e+003  dpvsat_n_25_l110ae_g       =  1.8650000e-010  
++dcj_n_25_l110ae_g          =  7.8122000e-005  dcjsw_n_25_l110ae_g         =  1.1247000e-011  dcjswg_n_25_l110ae_g       =  2.1550000e-011  
++dcgdo_n_25_l110ae_g        = -1.2500000e-012  dcgso_n_25_l110ae_g         = -1.2500000e-012  dags_n_25_l110ae_g         =  3.4980000e-002  
++deta0_n_25_l110ae_g        =  2.5000000e-003  dcgdl_n_25_l110ae_g         = -2.7000000e-011  dcgsl_n_25_l110ae_g        = -2.7000000e-011  
++dwags_n_25_l110ae_g        =  0.0000000e+000  dwb0_n_25_l110ae_g          =  0.0000000e+000  dwvsat_n_25_l110ae_g       =  0.0000000e+000  
++db0_n_25_l110ae_g          = -2.6500000e-008  djtsswd_n_25_l110ae_g       = -1.0000000e-009  djtsswgd_n_25_l110ae_g     = -9.5000000e-008
++dprdsw_n_25_l110ae_g       =  0.0000000e+000  djtssws_n_25_l110ae_g       = -1.0000000e-009  djtsswgs_n_25_l110ae_g     = -9.5000000e-008 
+//* 
++dtox_n_bpw_25_l110ae_g     =  1.6200000e-010  dxl_n_bpw_25_l110ae_g       =  1.0000000e-008  dxw_n_bpw_25_l110ae_g      = -1.0000000e-008  
++dvth0_n_bpw_25_l110ae_g    =  5.3475391e-002  dnlx_n_bpw_25_l110ae_g      =  5.0555336e-008  dk3_n_bpw_25_l110ae_g      =  4.8769446e-001  
++dpvth0_n_bpw_25_l110ae_g   =  4.0280092e-015  du0_n_bpw_25_l110ae_g       = -1.1433927e-003  dlu0_n_bpw_25_l110ae_g     = -3.4133843e-010  
++dwu0_n_bpw_25_l110ae_g     =  5.6396971e-011  dpu0_n_bpw_25_l110ae_g      = -3.5569542e-016  drdsw_n_bpw_25_l110ae_g    =  5.9000000e+001  
++dags_n_bpw_25_l110ae_g     =  4.0293273e-002  dvsat_n_bpw_25_l110ae_g     = -2.3601530e+003  dwags_n_bpw_25_l110ae_g    =  1.3603733e-009  
++dpvsat_n_bpw_25_l110ae_g   = -3.6346657e-010  dcj_n_bpw_25_l110ae_g       =  7.8122000e-005  dcjsw_n_bpw_25_l110ae_g    =  1.1247000e-011  
++dcjswg_n_bpw_25_l110ae_g   =  2.1550000e-011  dcgdo_n_bpw_25_l110ae_g     = -1.2500000e-012  dcgso_n_bpw_25_l110ae_g    = -1.2500000e-012  
++dcgdl_n_bpw_25_l110ae_g    = -2.7000000e-011  dcgsl_n_bpw_25_l110ae_g     = -2.7000000e-011  djtsswd_n_bpw_25_l110ae_g  = -1.0000000e-010  
++djtsswgd_n_bpw_25_l110ae_g = -9.5000000e-009  deta0_n_bpw_25_l110ae_g     =  5.8527984e-003  dpeta0_n_bpw_25_l110ae_g   =  4.4342263e-016
++djtssws_n_bpw_25_l110ae_g  = -1.0000000e-010  djtsswgs_n_bpw_25_l110ae_g  = -9.5000000e-009
+//*
++dtox_p_25_l110ae_g         =  1.1000000e-010  dxl_p_25_l110ae_g           =  5.0000000e-009  du0_p_25_l110ae_g          = -5.3859664e-004  
++dvth0_p_25_l110ae_g        = -5.2482869e-002  drdsw_p_25_l110ae_g         =  1.1696549e+002  dwu0_p_25_l110ae_g         = -3.8568091e-011  
++dlvth0_p_25_l110ae_g       = -1.2571778e-08   dwvth0_p_25_l110ae_g        = -2.1486060e-009  dpvth0_p_25_l110ae_g       = -2.7258990e-015  
++dprdsw_p_25_l110ae_g       =  2.2748781e-011  dags_p_25_l110ae_g          =  3.7890628e-002  dlags_p_25_l110ae_g        =  4.6179111e-008  
++dwags_p_25_l110ae_g        =  2.8942875e-009  dpags_p_25_l110ae_g         = -7.5866997e-015  dcgdo_p_25_l110ae_g        = -9.3000000e-012  
++dcgso_p_25_l110ae_g        = -9.3000000e-012  dcgdl_p_25_l110ae_g         = -2.1710000e-011  dcgsl_p_25_l110ae_g        = -2.1710000e-011  
++dcj_p_25_l110ae_g          =  9.6321000e-005  dcjsw_p_25_l110ae_g         =  1.0525000e-011  dcjswg_p_25_l110ae_g       =  3.3746000e-011  
++djtsswgd_p_25_l110ae_g     = -1.8050000e-008  djtsswgs_p_25_l110ae_g      = -1.8050000e-008 
+//* 
+//*
+//* 
+endsection ss_g
+//* 
+section fnsp_g
+parameters
+//* 
++dtox_n_25_l110ae_g         =  0.0000000e+000  dxl_n_25_l110ae_g           = -1.5000000e-008  du0_n_25_l110ae_g          =  5.9467563e-004  
++dvth0_n_25_l110ae_g        = -2.7527823e-002  drdsw_n_25_l110ae_g         = -2.3557592e+001  dxw_n_25_l110ae_g          =  2.7909763e-009  
++dnlx_n_25_l110ae_g         = -1.1736912e-008  dk3_n_25_l110ae_g           = -1.9279187e-001  dpvth0_n_25_l110ae_g       = -3.5670024e-015  
++dwwl_n_25_l110ae_g         = -2.9869075e-022  dvsat_n_25_l110ae_g         =  1.7300000e+003  dpvsat_n_25_l110ae_g       = -1.0600000e-010  
++dcj_n_25_l110ae_g          = -7.8122000e-005  dcjsw_n_25_l110ae_g         = -1.1247000e-011  dcjswg_n_25_l110ae_g       = -2.1550000e-011*0.95  
++dcgdo_n_25_l110ae_g        =  0.0000000e+000  dcgso_n_25_l110ae_g         =  0.0000000e+000  dags_n_25_l110ae_g         = -1.8300000e-002  
++deta0_n_25_l110ae_g        = -3.6500000e-003  dcgdl_n_25_l110ae_g         =  0.0000000e+000  dcgsl_n_25_l110ae_g        =  0.0000000e+000  
++dwags_n_25_l110ae_g        =  0.0000000e+000  dwb0_n_25_l110ae_g          =  0.0000000e+000  dwvsat_n_25_l110ae_g       =  0.0000000e+000  
++db0_n_25_l110ae_g          =  3.0000000e-009  djtsswd_n_25_l110ae_g       =  7.5000000e-008  djtsswgd_n_25_l110ae_g     =  4.4650000e-006
++dprdsw_n_25_l110ae_g       =  0.0000000e+000  djtssws_n_25_l110ae_g       =  7.5000000e-008  djtsswgs_n_25_l110ae_g     =  4.4650000e-006 
+//* 
++dtox_n_bpw_25_l110ae_g     =  0.0000000e+000  dxl_n_bpw_25_l110ae_g       = -5.0000000e-009  dxw_n_bpw_25_l110ae_g      =  5.0000000e-009  
++dvth0_n_bpw_25_l110ae_g    = -2.7533982e-002  dnlx_n_bpw_25_l110ae_g      = -2.0882452e-008  dk3_n_bpw_25_l110ae_g      = -2.3478844e-001  
++dpvth0_n_bpw_25_l110ae_g   = -1.9828577e-015  du0_n_bpw_25_l110ae_g       =  5.7816510e-004  dlu0_n_bpw_25_l110ae_g     =  4.7311769e-011  
++dwu0_n_bpw_25_l110ae_g     = -4.8154228e-011  dpu0_n_bpw_25_l110ae_g      =  2.1915863e-016  drdsw_n_bpw_25_l110ae_g    = -2.9500000e+001  
++dags_n_bpw_25_l110ae_g     = -1.9893617e-002  dvsat_n_bpw_25_l110ae_g     =  1.8908809e+003  dwags_n_bpw_25_l110ae_g    = -6.8562649e-010  
++dpvsat_n_bpw_25_l110ae_g   =  9.6796933e-011  dcj_n_bpw_25_l110ae_g       = -7.8122000e-005  dcjsw_n_bpw_25_l110ae_g    = -1.1247000e-011  
++dcjswg_n_bpw_25_l110ae_g   = -2.1550000e-011  dcgdo_n_bpw_25_l110ae_g     =  0.0000000e+000  dcgso_n_bpw_25_l110ae_g    =  0.0000000e+000  
++dcgdl_n_bpw_25_l110ae_g    =  0.0000000e+000  dcgsl_n_bpw_25_l110ae_g     =  0.0000000e+000  djtsswd_n_bpw_25_l110ae_g  =  7.5000000e-008
++djtsswgd_n_bpw_25_l110ae_g =  4.4650000e-006  deta0_n_bpw_25_l110ae_g     = -6.0457244e-003  dpeta0_n_bpw_25_l110ae_g   = -2.4633389e-016
++djtssws_n_bpw_25_l110ae_g  =  7.5000000e-008  djtsswgs_n_bpw_25_l110ae_g  =  4.4650000e-006 
+//*
++dtox_p_25_l110ae_g         =  0.0000000e+000  dxl_p_25_l110ae_g           =  5.0000000e-009  du0_p_25_l110ae_g          = -3.0307795e-004  
++dvth0_p_25_l110ae_g        = -2.5841225e-002  drdsw_p_25_l110ae_g         =  1.1621833e+001  dwu0_p_25_l110ae_g         = -1.4064390e-011  
++dlvth0_p_25_l110ae_g       = -5.7378348e-009  dwvth0_p_25_l110ae_g        = -1.0808056e-009  dpvth0_p_25_l110ae_g       = -1.3707051e-015  
++dprdsw_p_25_l110ae_g       =  8.1667516e-012  dags_p_25_l110ae_g          =  1.8874825e-002  dlags_p_25_l110ae_g        =  3.2153251e-008  
++dwags_p_25_l110ae_g        =  1.3013757e-009  dpags_p_25_l110ae_g         = -2.2176976e-015  dcgdo_p_25_l110ae_g        =  0.0000000e+000  
++dcgso_p_25_l110ae_g        =  0.0000000e+000  dcgdl_p_25_l110ae_g         =  0.0000000e+000  dcgsl_p_25_l110ae_g        =  0.0000000e+000  
++dcj_p_25_l110ae_g          =  9.6321000e-005  dcjsw_p_25_l110ae_g         =  1.0525000e-011  dcjswg_p_25_l110ae_g       =  3.3746000e-011  
++djtsswgd_p_25_l110ae_g     = -1.8050000e-008  djtsswgs_p_25_l110ae_g      = -1.8050000e-008
+//* 
+//* 
+//* 
+endsection fnsp_g
+//* 
+section snfp_g
+parameters
+//* 
++dtox_n_25_l110ae_g         =  0.0000000e+000  dxl_n_25_l110ae_g           =  1.5000000e-008  du0_n_25_l110ae_g          = -5.9427076e-004  
++dvth0_n_25_l110ae_g        =  2.7339387e-002  drdsw_n_25_l110ae_g         =  2.8242208e+001  dxw_n_25_l110ae_g          = -3.2801596e-009  
++dnlx_n_25_l110ae_g         =  1.6271634e-008  dk3_n_25_l110ae_g           =  1.8086927e-001  dpvth0_n_25_l110ae_g       =  3.5260377e-015  
++dwwl_n_25_l110ae_g         =  4.8160404e-022  dvsat_n_25_l110ae_g         = -2.0200000e+003  dpvsat_n_25_l110ae_g       =  8.4500000e-011  
++dcj_n_25_l110ae_g          =  7.8122000e-005  dcjsw_n_25_l110ae_g         =  1.1247000e-011  dcjswg_n_25_l110ae_g       = 2.1550000e-011*0.925  
++dcgdo_n_25_l110ae_g        =  0.0000000e+000  dcgso_n_25_l110ae_g         =  0.0000000e+000  dags_n_25_l110ae_g         =  1.7745000e-002  
++deta0_n_25_l110ae_g        =  4.0500000e-003  dcgdl_n_25_l110ae_g         =  0.0000000e+000  dcgsl_n_25_l110ae_g        =  0.0000000e+000  
++dwags_n_25_l110ae_g        =  0.0000000e+000  dwb0_n_25_l110ae_g          =  0.0000000e+000  dwvsat_n_25_l110ae_g       =  0.0000000e+000  
++db0_n_25_l110ae_g          =  0.0000000e+000  djtsswd_n_25_l110ae_g       = -9.0000000e-010  djtsswgd_n_25_l110ae_g     = -8.5500000e-008
++dprdsw_n_25_l110ae_g       =  0.0000000e+000  djtssws_n_25_l110ae_g       = -9.0000000e-010  djtsswgs_n_25_l110ae_g     = -8.5500000e-008 
+//* 
++dtox_n_bpw_25_l110ae_g     =  0.0000000e+000  dxl_n_bpw_25_l110ae_g       =  5.0000000e-009  dxw_n_bpw_25_l110ae_g      = -5.0000000e-009  
++dvth0_n_bpw_25_l110ae_g    =  2.7342036e-002  dnlx_n_bpw_25_l110ae_g      =  2.2105731e-008  dk3_n_bpw_25_l110ae_g      =  2.4179906e-001  
++dpvth0_n_bpw_25_l110ae_g   =  1.9179091e-015  du0_n_bpw_25_l110ae_g       = -6.0701980e-004  dlu0_n_bpw_25_l110ae_g     = -9.7166052e-011  
++dwu0_n_bpw_25_l110ae_g     =  3.4937002e-011  dpu0_n_bpw_25_l110ae_g      = -2.1248106e-016  drdsw_n_bpw_25_l110ae_g    =  2.9500000e+001  
++dags_n_bpw_25_l110ae_g     =  2.0503854e-002  dvsat_n_bpw_25_l110ae_g     = -2.1110667e+003  dwags_n_bpw_25_l110ae_g    =  7.3034951e-010  
++dpvsat_n_bpw_25_l110ae_g   = -1.3622256e-010  dcj_n_bpw_25_l110ae_g       =  7.8122000e-005  dcjsw_n_bpw_25_l110ae_g    =  1.1247000e-011  
++dcjswg_n_bpw_25_l110ae_g   =  2.1550000e-011  dcgdo_n_bpw_25_l110ae_g     =  0.0000000e+000  dcgso_n_bpw_25_l110ae_g    =  0.0000000e+000  
++dcgdl_n_bpw_25_l110ae_g    =  0.0000000e+000  dcgsl_n_bpw_25_l110ae_g     =  0.0000000e+000  djtsswd_n_bpw_25_l110ae_g  = -9.0000000e-011  
++djtsswgd_n_bpw_25_l110ae_g = -8.5000000e-009  deta0_n_bpw_25_l110ae_g     =  6.1324542e-003  dpeta0_n_bpw_25_l110ae_g   =  3.1431239e-016
++djtssws_n_bpw_25_l110ae_g  = -9.0000000e-011  djtsswgs_n_bpw_25_l110ae_g  = -8.5000000e-009
+//*
++dtox_p_25_l110ae_g         =  0.0000000e+000  dxl_p_25_l110ae_g           = -5.0000000e-009  du0_p_25_l110ae_g          =  2.9013596e-004  
++dvth0_p_25_l110ae_g        =  2.6013145e-002  drdsw_p_25_l110ae_g         =  1.2633508e+000  dwu0_p_25_l110ae_g         =  1.1202288e-011  
++dlvth0_p_25_l110ae_g       =  5.4468188e-009  dwvth0_p_25_l110ae_g        =  1.1225372e-009  dpvth0_p_25_l110ae_g       =  1.3308683e-015  
++dprdsw_p_25_l110ae_g       = -4.8516161e-012  dags_p_25_l110ae_g          = -1.8266640e-002  dlags_p_25_l110ae_g        = -3.3813750e-008  
++dwags_p_25_l110ae_g        = -1.0973016e-009  dpags_p_25_l110ae_g         =  4.5817802e-016  dcgdo_p_25_l110ae_g        =  0.0000000e+000  
++dcgso_p_25_l110ae_g        =  0.0000000e+000  dcgdl_p_25_l110ae_g         =  0.0000000e+000  dcgsl_p_25_l110ae_g        =  0.0000000e+000  
++dcj_p_25_l110ae_g          = -9.6321000e-005  dcjsw_p_25_l110ae_g         = -1.0525000e-011  dcjswg_p_25_l110ae_g       = -3.3746000e-011  
++djtsswgd_p_25_l110ae_g     =  1.9000000e-006  djtsswgs_p_25_l110ae_g      =  1.9000000e-006                                                                          
+//* 
+//* 
+endsection snfp_g
+//*
+endlibrary mylib
+

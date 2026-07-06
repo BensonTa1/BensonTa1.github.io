@@ -1,0 +1,30 @@
+// VerilogA for Verilog_A, IDEAL_Switch, veriloga
+
+`include "constants.vams"
+`include "disciplines.vams"
+
+module IDEAL_Switch(A,B,VC);
+	electrical A,B,VC;
+	input VC;
+	inout A,B;
+
+	parameter VTH = 0.5;
+	real RES=0.1;
+
+	analog begin 
+		if(V(VC)>VTH) begin
+			RES=0.1;
+		end
+		else begin
+			RES=1e12;
+		end
+
+	V(A,B)<+I(A,B)*RES;
+
+
+
+
+
+	end
+
+endmodule

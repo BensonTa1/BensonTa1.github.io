@@ -1,0 +1,160 @@
+Starting Single Run, Sweeps and Corners...
+
+Current time: Sat Apr 26 13:22:47 2025 
+Best design point: 1
+Design specs: 
+	TEST_Adaptive_CTLE:Gain_stage:1	corner	Corner_0 - 
+	(VDC("/VOUTN") - VDC("/VOUTP"))		2.892n
+	VDC("/VOUTN")		1.355
+	VDC("/VOUTP")		1.355
+	((VDC("/VOUTN") - VDC("/VOUTP")) / 50)		57.83p
+	OP("/I28/I0/M2" "vsat_marg")		538.6m
+	OP("/I28/I0/M2" "vdsat")		151.9m
+	OP("/I28/I17/M4" "vdsat")		185.4m
+	OP("/I28/I17/M4" "vsat_marg")		365.5m
+	TEST_Adaptive_CTLE:Gain_stage:1	corner	Corner_1 - 
+	(VDC("/VOUTN") - VDC("/VOUTP"))		-261.4n
+	VDC("/VOUTN")		1.257
+	VDC("/VOUTP")		1.257
+	((VDC("/VOUTN") - VDC("/VOUTP")) / 50)		-5.227n
+	OP("/I28/I0/M2" "vsat_marg")		533.7m
+	OP("/I28/I0/M2" "vdsat")		151.8m
+	OP("/I28/I17/M4" "vdsat")		184.6m
+	OP("/I28/I17/M4" "vsat_marg")		277.2m
+	TEST_Adaptive_CTLE:Gain_stage:1	corner	Corner_2 - 
+	(VDC("/VOUTN") - VDC("/VOUTP"))		1.256p
+	VDC("/VOUTN")		1.456
+	VDC("/VOUTP")		1.456
+	((VDC("/VOUTN") - VDC("/VOUTP")) / 50)		25.12f
+	OP("/I28/I0/M2" "vsat_marg")		543.1m
+	OP("/I28/I0/M2" "vdsat")		151.9m
+	OP("/I28/I17/M4" "vdsat")		186.2m
+	OP("/I28/I17/M4" "vsat_marg")		456.8m
+	TEST_Adaptive_CTLE:Gain_stage:1	corner	Corner_3 - 
+	(VDC("/VOUTN") - VDC("/VOUTP"))		11.82p
+	VDC("/VOUTN")		1.337
+	VDC("/VOUTP")		1.337
+	((VDC("/VOUTN") - VDC("/VOUTP")) / 50)		236.5f
+	OP("/I28/I0/M2" "vsat_marg")		588.6m
+	OP("/I28/I0/M2" "vdsat")		149m
+	OP("/I28/I17/M4" "vdsat")		181.2m
+	OP("/I28/I17/M4" "vsat_marg")		403.8m
+	TEST_Adaptive_CTLE:Gain_stage:1	corner	Corner_4 - 
+	(VDC("/VOUTN") - VDC("/VOUTP"))		-251.8p
+	VDC("/VOUTN")		1.235
+	VDC("/VOUTP")		1.235
+	((VDC("/VOUTN") - VDC("/VOUTP")) / 50)		-5.035p
+	OP("/I28/I0/M2" "vsat_marg")		582.8m
+	OP("/I28/I0/M2" "vdsat")		149m
+	OP("/I28/I17/M4" "vdsat")		180.4m
+	OP("/I28/I17/M4" "vsat_marg")		311.7m
+	TEST_Adaptive_CTLE:Gain_stage:1	corner	Corner_5 - 
+	(VDC("/VOUTN") - VDC("/VOUTP"))		-2.065n
+	VDC("/VOUTN")		1.443
+	VDC("/VOUTP")		1.443
+	((VDC("/VOUTN") - VDC("/VOUTP")) / 50)		-41.29p
+	OP("/I28/I0/M2" "vsat_marg")		593.7m
+	OP("/I28/I0/M2" "vdsat")		149.1m
+	OP("/I28/I17/M4" "vdsat")		182.1m
+	OP("/I28/I17/M4" "vsat_marg")		499m
+	TEST_Adaptive_CTLE:Gain_stage:1	corner	Corner_6 - 
+	(VDC("/VOUTN") - VDC("/VOUTP"))		-699.4p
+	VDC("/VOUTN")		1.372
+	VDC("/VOUTP")		1.372
+	((VDC("/VOUTN") - VDC("/VOUTP")) / 50)		-13.99p
+	OP("/I28/I0/M2" "vsat_marg")		481.2m
+	OP("/I28/I0/M2" "vdsat")		155.9m
+	OP("/I28/I17/M4" "vdsat")		191.2m
+	OP("/I28/I17/M4" "vsat_marg")		317.1m
+	TEST_Adaptive_CTLE:Gain_stage:1	corner	Corner_7 - 
+	(VDC("/VOUTN") - VDC("/VOUTP"))		26.71n
+	VDC("/VOUTN")		1.278
+	VDC("/VOUTP")		1.278
+	((VDC("/VOUTN") - VDC("/VOUTP")) / 50)		534.2p
+	OP("/I28/I0/M2" "vsat_marg")		477.1m
+	OP("/I28/I0/M2" "vdsat")		155.9m
+	OP("/I28/I17/M4" "vdsat")		190.4m
+	OP("/I28/I17/M4" "vsat_marg")		232.5m
+	TEST_Adaptive_CTLE:Gain_stage:1	corner	Corner_8 - 
+	(VDC("/VOUTN") - VDC("/VOUTP"))		-378.8n
+	VDC("/VOUTN")		1.47
+	VDC("/VOUTP")		1.47
+	((VDC("/VOUTN") - VDC("/VOUTP")) / 50)		-7.577n
+	OP("/I28/I0/M2" "vsat_marg")		485m
+	OP("/I28/I0/M2" "vdsat")		156m
+	OP("/I28/I17/M4" "vdsat")		192m
+	OP("/I28/I17/M4" "vsat_marg")		404.5m
+	TEST_Adaptive_CTLE:Gain_stage:1	corner	Corner_9 - 
+	(VDC("/VOUTN") - VDC("/VOUTP"))		3.09p
+	VDC("/VOUTN")		1.351
+	VDC("/VOUTP")		1.351
+	((VDC("/VOUTN") - VDC("/VOUTP")) / 50)		61.81f
+	OP("/I28/I0/M2" "vsat_marg")		565.6m
+	OP("/I28/I0/M2" "vdsat")		149.7m
+	OP("/I28/I17/M4" "vdsat")		182.4m
+	OP("/I28/I17/M4" "vsat_marg")		392.2m
+	TEST_Adaptive_CTLE:Gain_stage:1	corner	Corner_10 - 
+	(VDC("/VOUTN") - VDC("/VOUTP"))		301.9n
+	VDC("/VOUTN")		1.252
+	VDC("/VOUTP")		1.252
+	((VDC("/VOUTN") - VDC("/VOUTP")) / 50)		6.037n
+	OP("/I28/I0/M2" "vsat_marg")		560.4m
+	OP("/I28/I0/M2" "vdsat")		149.6m
+	OP("/I28/I17/M4" "vdsat")		181.5m
+	OP("/I28/I17/M4" "vsat_marg")		303.1m
+	TEST_Adaptive_CTLE:Gain_stage:1	corner	Corner_11 - 
+	(VDC("/VOUTN") - VDC("/VOUTP"))		-360.5p
+	VDC("/VOUTN")		1.454
+	VDC("/VOUTP")		1.454
+	((VDC("/VOUTN") - VDC("/VOUTP")) / 50)		-7.21p
+	OP("/I28/I0/M2" "vsat_marg")		570.4m
+	OP("/I28/I0/M2" "vdsat")		149.7m
+	OP("/I28/I17/M4" "vdsat")		183.2m
+	OP("/I28/I17/M4" "vsat_marg")		484.3m
+	TEST_Adaptive_CTLE:Gain_stage:1	corner	Corner_12 - 
+	(VDC("/VOUTN") - VDC("/VOUTP"))		4.426n
+	VDC("/VOUTN")		1.359
+	VDC("/VOUTP")		1.359
+	((VDC("/VOUTN") - VDC("/VOUTP")) / 50)		88.52p
+	OP("/I28/I0/M2" "vsat_marg")		509.5m
+	OP("/I28/I0/M2" "vdsat")		154.1m
+	OP("/I28/I17/M4" "vdsat")		188.4m
+	OP("/I28/I17/M4" "vsat_marg")		336.4m
+	TEST_Adaptive_CTLE:Gain_stage:1	corner	Corner_13 - 
+	(VDC("/VOUTN") - VDC("/VOUTP"))		502.5p
+	VDC("/VOUTN")		1.261
+	VDC("/VOUTP")		1.261
+	((VDC("/VOUTN") - VDC("/VOUTP")) / 50)		10.05p
+	OP("/I28/I0/M2" "vsat_marg")		505m
+	OP("/I28/I0/M2" "vdsat")		154m
+	OP("/I28/I17/M4" "vdsat")		187.6m
+	OP("/I28/I17/M4" "vsat_marg")		249m
+	TEST_Adaptive_CTLE:Gain_stage:1	corner	Corner_14 - 
+	(VDC("/VOUTN") - VDC("/VOUTP"))		138.8p
+	VDC("/VOUTN")		1.459
+	VDC("/VOUTP")		1.459
+	((VDC("/VOUTN") - VDC("/VOUTP")) / 50)		2.777p
+	OP("/I28/I0/M2" "vsat_marg")		513.7m
+	OP("/I28/I0/M2" "vdsat")		154.1m
+	OP("/I28/I17/M4" "vdsat")		189.2m
+	OP("/I28/I17/M4" "vsat_marg")		426.9m
+	TEST_Adaptive_CTLE:Gain_stage:1	corner	Nominal - 
+	(VDC("/VOUTN") - VDC("/VOUTP"))		2.892n
+	VDC("/VOUTN")		1.355
+	VDC("/VOUTP")		1.355
+	((VDC("/VOUTN") - VDC("/VOUTP")) / 50)		57.83p
+	OP("/I28/I0/M2" "vsat_marg")		538.6m
+	OP("/I28/I0/M2" "vdsat")		151.9m
+	OP("/I28/I17/M4" "vdsat")		185.4m
+	OP("/I28/I17/M4" "vsat_marg")		365.5m
+Design parameters: 
+	VCTLE		1
+	sigma		3
+	temperature		30
+	VDD		1.8
+
+Interactive.5
+Number of points completed: 1
+Number of simulation errors: 0
+Interactive.5 completed. 
+Current time: Sat Apr 26 13:23:01 2025 

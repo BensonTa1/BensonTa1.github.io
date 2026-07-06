@@ -1,0 +1,36 @@
+
+simulator lang=spectre insensitive=yes
+parameters mc_rend_rnnpo_mm = 0
+parameters mc_rs_rnnpo_mm = 0
+parameters mc_dw_rnnpo_mm = 0
+parameters mc_rend_rnppo_mm = 0
+parameters mc_rs_rnppo_mm = 0
+parameters mc_dw_rnppo_mm = 0
+parameters mc_rend_rnhr1000_mm = 0
+parameters mc_rs_rnhr1000_mm = 0
+parameters mc_dw_rnhr1000_mm = 0
+
+parameters drend_rnnpo_mm = (7.65000e-06 / 3) * mc_rend_rnnpo_mm
+parameters drs_rnnpo_mm = (2.82500e+01 / 3) * mc_rs_rnnpo_mm
+parameters ddw_rnnpo_mm = (5.10000e-08 / 3) * mc_dw_rnnpo_mm
+parameters drend_rnppo_mm = (2.35200e-05 / 3) * mc_rend_rnppo_mm
+parameters drs_rnppo_mm = (8.80000e+01 / 3) * mc_rs_rnppo_mm
+parameters ddw_rnppo_mm = (1.90000e-08 / 3) * mc_dw_rnppo_mm
+parameters drend_rnhr1000_mm = (1.84200e-04 / 3) * mc_rend_rnhr1000_mm
+parameters drs_rnhr1000_mm = (2.59750e+02 / 3) * mc_rs_rnhr1000_mm
+parameters ddw_rnhr1000_mm = (1.80000e-08 / 3) * mc_dw_rnhr1000_mm
+
+statistics {
+process {
+vary mc_rend_rnnpo_mm dist=gauss std=sigma/3
+vary mc_rs_rnnpo_mm dist=gauss std=sigma/3
+vary mc_dw_rnnpo_mm dist=gauss std=sigma/3
+vary mc_rend_rnppo_mm dist=gauss std=sigma/3
+vary mc_rs_rnppo_mm dist=gauss std=sigma/3
+vary mc_dw_rnppo_mm dist=gauss std=sigma/3
+vary mc_rend_rnhr1000_mm dist=gauss std=sigma/3
+vary mc_rs_rnhr1000_mm dist=gauss std=sigma/3
+vary mc_dw_rnhr1000_mm dist=gauss std=sigma/3
+ }
+}
+

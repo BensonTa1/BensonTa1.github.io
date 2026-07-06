@@ -1,0 +1,35 @@
+// MIMCAPM for VCR 
+`include "discipline.h"
+`include "constants.h"
+
+module mim_va(n1,n2);
+inout n1,n2;
+electrical n1,n2;
+
+parameter real nx=1;
+parameter real ny=1;
+parameter real l=60e-6;
+parameter real w=60e-6;
+parameter real cn=0.001;
+parameter real rtc1=3e-5;
+parameter real rtc2=1e-8;
+parameter real rvc1=0.0002;
+parameter real rvc2=3e-5;
+parameter real temper=25;
+parameter real (*integer inherited_mfactor;*)m=1;
+
+real v,n_S1,tcoef,ct,cs,q;
+
+analog begin
+
+v=V(n1,n2);
+n_S1=nx*ny;
+tcoef=1.0+(rtc1*(temper-25))+(rtc2 *(temper-25)*(temper-25));
+ct=n_S1*(l*w*cn+1.5e-10*(l+w))*tcoef*m;
+cs=ct*(1.0027+rvc1*v+rvc2*v*v)*m;
+q=ct*(1.0027*v+rvc1/2*v*v+rvc2/3*v*v*v);
+I(n1,n2) <+ ddt(q);
+
+end
+
+endmodule

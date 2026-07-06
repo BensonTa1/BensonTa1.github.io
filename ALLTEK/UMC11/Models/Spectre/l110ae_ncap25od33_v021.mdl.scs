@@ -1,0 +1,92 @@
+//*******************************************************************************
+simulator lang=spectre insensitive=yes
+//Property of UMC.
+//Unauthorized reproduction, modification and/or distribution are strictly prohibited.
+//This product is protected under copyright law and trade secret law.
+//This model card may not be sent in any form outside of UMC without
+//the written consent of the UMC ATD Modeling Division.
+//******************************************************************************
+//Process:  UMC 0.11 um Logic and Mixed-Mode 1P8M Metal Metal Capacitor Al Advanced Enhancement Process
+//Description:  3.3V NCAP
+//Simulator:  Spectre 10.1.1.111.isr8 32bit
+//Model Version:0.2p1
+//Model features:
+//Global model:  Yes
+//Gate current model:  No
+//Substrate Current model: No
+//Flicker Noise: No
+//LOD model: No
+//RF model: No
+//Well proximity effect: No
+//Mis-matching: No
+//******************************************************************************
+//Revision history:
+//<Revision 1>
+//Version : 0.2p1
+//Date  : 2012/04/25
+//Author  : Min Feng Jian
+//Remark  : Original release
+//******************************************************************************
+//Application ranges:
+//Geometry range:
+//
+//For Vcc=3.3 V NCAP:
+//0.25 um <=LF <=2 um
+//2.5 um <=WF <=10 um
+//2 <=Nf<=8
+//
+//Voltage range:
+//For 3.3 V NCAP:
+//-3.3V(*1.1) <=VGS <=3.3V(*1.1)
+//VDS=VBS=0V
+//
+//Temperature range:-50c ~ 125c ; nominal temperature=25c
+//******************************************************************************
+//3.3 V N+/Nwell NCAP subcircuit model   
+//
+//Model coverage:
+//1. Frequency : low frequency
+//2. port1 is gate; port2 is bulk.
+inline subckt ncap_25od33 ( port1 port2 )
+parameters wf=5u
++ lf=2u
++ nf=2
++ toxc=5.4e-09+dtoxe_ncap_25od33
++ pva=0.03711105
++ pve=0.13237597
++ pvg=0.071975246
++ pvi=0.020988083
++ pvk=0.002148433
++ pvf=1.2156703
++ pvh=0.43773118
++ pvj=0.045736008
++ tpvc=0.000015
++ tpvb=0.004
++ pvc=0.09161699+tpvc*(temp-25)
++ pvb=1.4274937+tpvb*(temp-25)
++ pvd=3.1076688*(-9e-7*temp*temp-8e-5*temp+1.0025)
++ dcw=-0.01+1e6*dxw_ncap_25od33
++ cww=0.001
++ cwl=0.016
++ cwwl=0.0090+1e06*dcwwl_ncap_25od33
++ dcl=-0.008+1e6*dxl_ncap_25od33
++ cll=-0.0015
++ clw=-0.04
++ clwl=0.005+1e06*dclwl_ncap_25od33
++ weff=(wf*0.9*1e6)+dcw+cww/(wf*0.9*1e6)+cwl/(lf*0.9*1e6+0.012)+cwwl/(wf*0.9*1e6)/(lf*1e6*0.9+0.012)
++ leff=(lf*0.9*1e6+0.012)+dcl+cll/(lf*1e6*0.9+0.012)+clw/(wf*0.9*1e6)+clwl/(wf*1e6*0.9)/(lf*1e6*0.9+0.012)
++ cl0=-8.72
++ cl1=-0.1
++ cl2=2.6 
++ cw0=-5.5000
++ cw1=-7
++ cw2=8
++ ccom=exp(cl0+cl1/(lf*1e6*0.9+0.012)+cl2*exp(-(lf*1e6*0.9+0.012)))/1+exp(cw0+cw1/(wf*1e6*0.9)+cw2*exp(-wf*1e6*0.9))
++ cmina=0+dcmina_ncap_25od33
++ cminb=-1.4969 
++ cminc=-0.1278
++ cmind=0.2302
+//* ----- equivalent network ------------------
+//*
+ncap_25od33 ( port1 port2 ) bsource c=1.0367*(((pva+pvc*pow(v(port1, port2),1)+pve*pow(v(port1, port2),2)+pvg*pow(v(port1, port2),3)+pvi*pow(v(port1, port2),4)+pvk*pow(v(port1, port2),5))/(1+pvb*pow(v(port1, port2),1)+pvd*pow(v(port1, port2),2)+pvf*pow(v(port1, port2),3)+pvh*pow(v(port1, port2),4)+pvj*pow(v(port1, port2),5)))/(4.5*1.812)*weff*leff*1+ccom)*5.4e-09*nf*1e-12/toxc/1*(1+cmina*(cminb+atan((v(port1, port2)-cminc)/cmind)))
+ends ncap_25od33

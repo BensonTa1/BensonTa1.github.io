@@ -1,0 +1,43 @@
+// VerilogA for Verilog_A, IDEAL_IQ_DIVIDER, veriloga
+
+`include "constants.vams"
+`include "disciplines.vams"
+
+module IDEAL_IQ_DIVIDER(CLKIN,CLKI,CLKIB,CLKQ,CLKQB);
+	electrical CLKIN,CLKI,CLKIB,CLKQ,CLKQB;
+	input CLKIN;
+	output CLKI,CLKIB,CLKQ,CLKQB;
+	
+	parameter real VTH=0.6;
+	parameter real VOH=1.8;
+	parameter real VOL=1.2;
+
+	parameter TR_TF =10p;
+
+	real Istate=VOL;
+	real Qstate=VOH;
+	real IBstate=VOH;
+	real QBstate=VOL;
+
+	analog begin
+		@(cross(V(CLKIN)-VTH,1))begin
+			if(Qstate==VOH) 
+				Qstate=VOL;
+			else
+				Qstate=VOH;
+		end
+		@(cross(V(CLKIN)-VTH,-1))begin
+			if(Qstate==VOH) 
+				Istate=VOL;
+			else
+				Istate=VOH;
+		end
+
+		V(CLKI)<+transition(Istate,0,TR_TF,TR_TF);
+		V(CLKQ)<+transition(Qstate,0,TR_TF,TR_TF);
+		V(CLKI)<+transition((Istate==VOH) ? VOL : VOH,0,TR_TF,TR_TF);
+		V(CLKQ)<+transition((Qstate==VOH) ? VOL : VOH,0,TR_TF,TR_TF);
+		
+
+
+endmodule

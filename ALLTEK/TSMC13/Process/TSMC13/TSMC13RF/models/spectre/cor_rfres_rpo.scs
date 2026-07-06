@@ -1,0 +1,16 @@
+library rfres_rpo_cor 
+
+section ff_rfres_rpo 
+include "cr013g_2d5_v1d4.scs" section = ff_rfres_rpo 
+endsection ff_rfres_rpo 
+
+section ss_rfres_rpo 
+include "cr013g_2d5_v1d4.scs" section = ss_rfres_rpo 
+endsection ss_rfres_rpo 
+
+section tt_rfres_rpo 
+include "cr013g_2d5_v1d4.scs" section = tt_rfres_rpo 
+endsection tt_rfres_rpo 
+
+
+endlibrary rfres_rpo_cor 

@@ -1,0 +1,174 @@
+********************************************************************************
+* TT:   Typical n-ch MOSFET and Typical p-ch MOSFET
+* FF:   Fast n-ch MOSFET and Fast p-ch MOSFET
+* SS:   Slow n-ch MOSFET and Slow p-ch MOSFET
+* FNSP: Fast n-ch MOSFET and Slow p-ch MOSFET
+* SNFP: Slow n-ch MOSFET and Fast p-ch MOSFET
+********************************************************************************
+.lib tt
+.param
+*
+*NMOS
++dtox_n_12_hsrf          =  0.0000000e+000   dxl_n_12_hsrf            =  0.0000000e+000   du0_n_12_hsrf            =  0.0000000e+000   
++dvth0_n_12_hsrf         =  0.0000000e+000   drdsw_n_12_hsrf          =  0.0000000e+000   dxw_n_12_hsrf            =  0.0000000e+000   
++dnlx_n_12_hsrf          =  0.0000000e+000   dk3_n_12_hsrf            =  0.0000000e+000   dpvth0_n_12_hsrf         =  0.0000000e+000   
++dwwl_n_12_hsrf          =  0.0000000e+000   ddlc_n_12_hsrf           =  0.0000000e+000   ddwc_n_12_hsrf           =  0.0000000e+000   
++dcgdo_n_12_hsrf         =  0.0000000e+000   dcgso_n_12_hsrf          =  0.0000000e+000   dleta0_n_12_hsrf         =  0.0000000e+000   
++dcj_n_12_hsrf           =  0.0000000e+000   dcjsw_n_12_hsrf          =  0.0000000e+000   dcjswg_n_12_hsrf         =  0.0000000e+000   
++dpvsat_n_12_hsrf        =  0.0000000e+000   
+*
++drgi_n_12_hsrf          =  0.0000000e+000   drch_n_12_hsrf           =  0.0000000e+000   drgc_n_12_hsrf           =  0.0000000e+000   
++dcgd_ext_n_12_hsrf      =  0.0000000e+000   dcds_ext_n_12_hsrf       =  0.0000000e+000   
+*
++dcj_nwtw_n_12bpw_hsrf   =  0.0000000e+000   dcjsw_nwtw_n_12bpw_hsrf  =  0.0000000e+000   dcj_nw_n_12bpw_hsrf      =  0.0000000e+000   
++dcjsw_nw_n_12bpw_hsrf   =  0.0000000e+000   
+*
+*PMOS
++dtox_p_12_hsrf          =  0.0000000e+000   dxl_p_12_hsrf            =  0.0000000e+000   du0_p_12_hsrf            =  0.0000000e+000   
++dvth0_p_12_hsrf         =  0.0000000e+000   drdsw_p_12_hsrf          =  0.0000000e+000   dxw_p_12_hsrf            =  0.0000000e+000   
++dnlx_p_12_hsrf          =  0.0000000e+000   dk3_p_12_hsrf            =  0.0000000e+000   dpvth0_p_12_hsrf         =  0.0000000e+000   
++dwwl_p_12_hsrf          =  0.0000000e+000   ddlc_p_12_hsrf           =  0.0000000e+000   dwlc_p_12_hsrf           =  0.0000000e+000   
++dcgdo_p_12_hsrf         =  0.0000000e+000   dcgso_p_12_hsrf          =  0.0000000e+000   dcj_p_12_hsrf            =  0.0000000e+000   
++dcjsw_p_12_hsrf         =  0.0000000e+000   dcjswg_p_12_hsrf         =  0.0000000e+000   
+*
++drgi_p_12_hsrf          =  0.0000000e+000   drch_p_12_hsrf           =  0.0000000e+000   drgc_p_12_hsrf           =  0.0000000e+000   
++dcgd_ext_p_12_hsrf      =  0.0000000e+000   dcds_ext_p_12_hsrf       =  0.0000000e+000   dcj_nw_p_12_hsrf         =  0.0000000e+000   
++cjsw_nw_p_12_hsrf       =  0.0000000e+000   
+*
+.include  'l110ae_hs12_v032_rf.mdl'
+.endl tt
+
+.lib ff
+.param
+*
+*NMOS
++dtox_n_12_hsrf          = -7.8900000e-011   dxl_n_12_hsrf            = -5.0000000e-009   du0_n_12_hsrf            =  5.1190000e-004   
++dvth0_n_12_hsrf         = -5.1189000e-002   drdsw_n_12_hsrf          = -1.0923300e+001   dxw_n_12_hsrf            =  7.5564000e-009   
++dnlx_n_12_hsrf          =  1.0000000e-009   dk3_n_12_hsrf            = -2.6662000e+000   dpvth0_n_12_hsrf         = -2.5658000e-015   
++dwwl_n_12_hsrf          =  0.0000000e+000   ddlc_n_12_hsrf           =  3.5000000e-009   ddwc_n_12_hsrf           =  0.0000000e+000   
++dcgdo_n_12_hsrf         =  1.8050000e-011   dcgso_n_12_hsrf          =  1.8050000e-011   dleta0_n_12_hsrf         = -1.5000000e-009   
++dcj_n_12_hsrf           = -7.2000000e-005   dcjsw_n_12_hsrf          = -1.0600000e-011   dcjswg_n_12_hsrf         = -1.0000000e-001   
++dpvsat_n_12_hsrf        = -3.0000000e-010     
+*
++drgi_n_12_hsrf          = -2.0000000e-001   drch_n_12_hsrf           = -2.0000000e-001   drgc_n_12_hsrf           = -2.0000000e-001   
++dcgd_ext_n_12_hsrf      = -2.0000000e-001   dcds_ext_n_12_hsrf       = -2.0000000e-001   
+*
++dcj_nwtw_n_12bpw_hsrf   = -1.0000000e-001   dcjsw_nwtw_n_12bpw_hsrf  = -1.0000000e-001   dcj_nw_n_12bpw_hsrf      = -1.0000000e-001   
++dcjsw_nw_n_12bpw_hsrf   = -1.0000000e-001   
+*
+*PMOS
++dtox_p_12_hsrf          = -8.4900000e-011   dxl_p_12_hsrf            = -5.0000000e-009   du0_p_12_hsrf            =  1.5100000e-006   
++dvth0_p_12_hsrf         =  3.9915000e-002   drdsw_p_12_hsrf          = -4.0000000e-003   dxw_p_12_hsrf            = -1.0000000e-008   
++dnlx_p_12_hsrf          = -9.8219000e-009   dk3_p_12_hsrf            = -2.0000000e+001   dpvth0_p_12_hsrf         =  2.1485000e-016   
++dwwl_p_12_hsrf          =  5.0901000e-023   ddlc_p_12_hsrf           =  6.0000000e-009   dwlc_p_12_hsrf           = -5.0000000e-015   
++dcgdo_p_12_hsrf         =  2.0000000e-011   dcgso_p_12_hsrf          =  2.0000000e-011   dcj_p_12_hsrf            = -1.0000000e-001   
++dcjsw_p_12_hsrf         = -1.1800000e-011   dcjswg_p_12_hsrf         = -4.8200000e-011   
+*
++drgi_p_12_hsrf          = -2.0000000e-001   drch_p_12_hsrf           = -2.0000000e-001   drgc_p_12_hsrf           = -2.0000000e-001   
++dcgd_ext_p_12_hsrf      = -2.0000000e-001   dcds_ext_p_12_hsrf       = -2.0000000e-001   dcj_nw_p_12_hsrf         = -1.0000000e-001   
++cjsw_nw_p_12_hsrf       = -1.0000000e-001   
+*
+.include  'l110ae_hs12_v032_rf.mdl'
+.endl ff
+
+.lib ss
+.param
+*
+*NMOS
++dtox_n_12_hsrf          =  7.8900000e-011   dxl_n_12_hsrf            =  5.0000000e-009   du0_n_12_hsrf            = -1.0046000e-003   
++dvth0_n_12_hsrf         =  4.8169000e-002   drdsw_n_12_hsrf          =  2.0759200e+001   dxw_n_12_hsrf            = -1.0000000e-008   
++dnlx_n_12_hsrf          =  1.0000000e-009   dk3_n_12_hsrf            =  1.4371000e+000   dpvth0_n_12_hsrf         =  2.5461000e-015   
++dwwl_n_12_hsrf          =  4.2822000e-023   ddlc_n_12_hsrf           = -7.0000000e-009   ddwc_n_12_hsrf           =  0.0000000e+000   
++dcgdo_n_12_hsrf         = -1.8050000e-011   dcgso_n_12_hsrf          = -1.8050000e-011   dleta0_n_12_hsrf         =  1.5000000e-009   
++dcj_n_12_hsrf           =  7.2000000e-005   dcjsw_n_12_hsrf          =  1.0600000e-011   dcjswg_n_12_hsrf         =  1.0000000e-001   
++dpvsat_n_12_hsrf        =  2.5000000e-010   
+*
++drgi_n_12_hsrf          =  2.0000000e-001   drch_n_12_hsrf           =  2.0000000e-001   drgc_n_12_hsrf           =  2.0000000e-001   
++dcgd_ext_n_12_hsrf      =  2.0000000e-001   dcds_ext_n_12_hsrf       =  2.0000000e-001   
+*
++dcj_nwtw_n_12bpw_hsrf   =  1.0000000e-001   dcjsw_nwtw_n_12bpw_hsrf  =  1.0000000e-001   dcj_nw_n_12bpw_hsrf      =  1.0000000e-001   
++dcjsw_nw_n_12bpw_hsrf   =  1.0000000e-001   
+*
+*PMOS
++dtox_p_12_hsrf          =  8.4900000e-011   dxl_p_12_hsrf            =  5.0000000e-009   du0_p_12_hsrf            =  1.5617000e-005   
++dvth0_p_12_hsrf         = -4.2811000e-002   drdsw_p_12_hsrf          =  1.3598000e+001   dxw_p_12_hsrf            =  8.0000000e-009   
++dnlx_p_12_hsrf          =  1.2649000e-008   dk3_p_12_hsrf            =  2.0000000e+001   dpvth0_p_12_hsrf         = -5.5495000e-016   
++dwwl_p_12_hsrf          =  5.7334000e-023   ddlc_p_12_hsrf           = -9.0000000e-009   dwlc_p_12_hsrf           =  2.0000000e-015   
++dcgdo_p_12_hsrf         = -2.0000000e-011   dcgso_p_12_hsrf          = -2.0000000e-011   dcj_p_12_hsrf            =  1.0000000e-001   
++dcjsw_p_12_hsrf         =  1.1800000e-011   dcjswg_p_12_hsrf         =  4.8200000e-011   
+*
++drgi_p_12_hsrf          =  2.0000000e-001   drch_p_12_hsrf           =  2.0000000e-001   drgc_p_12_hsrf           =  2.0000000e-001   
++dcgd_ext_p_12_hsrf      =  2.0000000e-001   dcds_ext_p_12_hsrf       =  2.0000000e-001   dcj_nw_p_12_hsrf         =  1.0000000e-001   
++cjsw_nw_p_12_hsrf       =  1.0000000e-001   
+*
+.include  'l110ae_hs12_v032_rf.mdl'
+.endl ss
+
+.lib fnsp
+.param
+*
+*NMOS
++dtox_n_12_hsrf          =  0.0000000e+000   dxl_n_12_hsrf            = -5.0000000e-009   du0_n_12_hsrf            =  1.5081000e-003   
++dvth0_n_12_hsrf         = -2.0012000e-002   drdsw_n_12_hsrf          = -6.1490000e+000   dxw_n_12_hsrf            =  4.2829000e-009   
++dnlx_n_12_hsrf          =  5.0000000e-009   dk3_n_12_hsrf            = -1.2683000e+000   dpvth0_n_12_hsrf         = -1.5028000e-015   
++dwwl_n_12_hsrf          = -2.7394000e-023   ddlc_n_12_hsrf           =  5.0000000e-010   ddwc_n_12_hsrf           =  0.0000000e+000   
++dcgdo_n_12_hsrf         =  0.0000000e+000   dcgso_n_12_hsrf          =  0.0000000e+000   dleta0_n_12_hsrf         = -1.8000000e-009   
++dcj_n_12_hsrf           = -7.2000000e-005   dcjsw_n_12_hsrf          = -1.0600000e-011   dcjswg_n_12_hsrf         = -1.0000000e-001   
++dpvsat_n_12_hsrf        = -3.0000000e-010   
+*
++drgi_n_12_hsrf          = -1.0000000e-001   drch_n_12_hsrf           = -1.0000000e-001   drgc_n_12_hsrf           = -1.0000000e-001   
++dcgd_ext_n_12_hsrf      = -1.0000000e-001   dcds_ext_n_12_hsrf       = -1.0000000e-001   
+*
++dcj_nwtw_n_12bpw_hsrf   = -5.0000000e-002   dcjsw_nwtw_n_12bpw_hsrf  = -5.0000000e-002   dcj_nw_n_12bpw_hsrf      = -5.0000000e-002   
++dcjsw_nw_n_12bpw_hsrf   = -5.0000000e-002   
+*
+*PMOS
++dtox_p_12_hsrf          =  0.0000000e+000   dxl_p_12_hsrf            =  2.0000000e-009   du0_p_12_hsrf            = -8.0676000e-005   
++dvth0_p_12_hsrf         = -1.8948000e-002   drdsw_p_12_hsrf          = -4.0000000e-002   dxw_p_12_hsrf            =  1.4198000e-009   
++dnlx_p_12_hsrf          =  8.0772000e-009   dk3_p_12_hsrf            =  9.3748000e+000   dpvth0_p_12_hsrf         = -3.5336000e-016   
++dwwl_p_12_hsrf          = -5.9500000e-024   ddlc_p_12_hsrf           = -2.5000000e-009   dwlc_p_12_hsrf           =  1.0000000e-015   
++dcgdo_p_12_hsrf         =  0.0000000e+000   dcgso_p_12_hsrf          =  0.0000000e+000   dcj_p_12_hsrf            =  1.0000000e-001   
++dcjsw_p_12_hsrf         =  1.1800000e-011   dcjswg_p_12_hsrf         =  4.8200000e-011   
+*
++drgi_p_12_hsrf          =  1.0000000e-001   drch_p_12_hsrf           =  1.0000000e-001   drgc_p_12_hsrf           =  1.0000000e-001   
++dcgd_ext_p_12_hsrf      =  1.0000000e-001   dcds_ext_p_12_hsrf       =  1.0000000e-001   dcj_nw_p_12_hsrf         =  5.0000000e-002   
++cjsw_nw_p_12_hsrf       =  5.0000000e-002   
+*
+.include  'l110ae_hs12_v032_rf.mdl'
+.endl fnsp
+
+.lib snfp
+.param
+*
+*NMOS
++dtox_n_12_hsrf          =  0.0000000e+000   dxl_n_12_hsrf            =  5.0000000e-009   du0_n_12_hsrf            = -8.1640000e-004   
++dvth0_n_12_hsrf         =  2.4992000e-002   drdsw_n_12_hsrf          =  5.0474000e+000   dxw_n_12_hsrf            = -5.6929000e-009   
++dnlx_n_12_hsrf          =  0.0000000e+000   dk3_n_12_hsrf            =  1.0893000e+000   dpvth0_n_12_hsrf         =  8.9597000e-016   
++dwwl_n_12_hsrf          =  2.2841000e-023   ddlc_n_12_hsrf           = -2.5000000e-009   ddwc_n_12_hsrf           =  0.0000000e+000   
++dcgdo_n_12_hsrf         =  0.0000000e+000   dcgso_n_12_hsrf          =  0.0000000e+000   dleta0_n_12_hsrf         =  2.1000000e-009   
++dcj_n_12_hsrf           =  7.2000000e-005   dcjsw_n_12_hsrf          =  1.0600000e-011   dcjswg_n_12_hsrf         =  1.0000000e-001   
++dpvsat_n_12_hsrf        =  3.0000000e-010   
+*
++drgi_n_12_hsrf          =  1.0000000e-001   drch_n_12_hsrf           =  1.0000000e-001   drgc_n_12_hsrf           =  1.0000000e-001   
++dcgd_ext_n_12_hsrf      =  1.0000000e-001   dcds_ext_n_12_hsrf       =  1.0000000e-001   
+*
++dcj_nwtw_n_12bpw_hsrf   =  5.0000000e-002   dcjsw_nwtw_n_12bpw_hsrf  =  5.0000000e-002   dcj_nw_n_12bpw_hsrf      =  5.0000000e-002   
++dcjsw_nw_n_12bpw_hsrf   =  5.0000000e-002   
+*
+*PMOS
++dtox_p_12_hsrf          =  0.0000000e+000   dxl_p_12_hsrf            = -2.0000000e-009   du0_p_12_hsrf            =  5.4315000e-005   
++dvth0_p_12_hsrf         =  2.1053000e-002   drdsw_p_12_hsrf          =  2.5000000e-002   dxw_p_12_hsrf            = -5.7936000e-009   
++dnlx_p_12_hsrf          = -5.4812000e-009   dk3_p_12_hsrf            = -8.5010000e+000   dpvth0_p_12_hsrf         =  3.8111000e-016   
++dwwl_p_12_hsrf          =  7.2640000e-024   ddlc_p_12_hsrf           =  2.5000000e-009   dwlc_p_12_hsrf           = -2.5000000e-015   
++dcgdo_p_12_hsrf         =  0.0000000e+000   dcgso_p_12_hsrf          =  0.0000000e+000   dcj_p_12_hsrf            = -1.0000000e-001   
++dcjsw_p_12_hsrf         = -1.1800000e-011   dcjswg_p_12_hsrf         = -4.8200000e-011   
+*
++drgi_p_12_hsrf          = -1.0000000e-001   drch_p_12_hsrf           = -1.0000000e-001   drgc_p_12_hsrf           = -1.0000000e-001   
++dcgd_ext_p_12_hsrf      = -1.0000000e-001   dcds_ext_p_12_hsrf       = -1.0000000e-001   dcj_nw_p_12_hsrf         = -5.0000000e-002   
++cjsw_nw_p_12_hsrf       = -5.0000000e-002   
+*
+.include  'l110ae_hs12_v032_rf.mdl'
+.endl snfp
+
+
+

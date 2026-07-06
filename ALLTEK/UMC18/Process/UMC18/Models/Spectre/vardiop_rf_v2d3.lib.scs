@@ -1,0 +1,31 @@
+simulator lang=spectre insensitive=yes
+library vardiop_rf
+
+section typ
+
+parameters dcj_vardiop_rf=0
+parameters dcjsw_vardiop_rf=0
+
+include "./vardiop_rf_v2d3.mdl.scs"
+ 
+endsection typ
+
+section min
+parameters dcj_vardiop_rf=-0.1
+parameters dcjsw_vardiop_rf=-0.1
+
+include "./vardiop_rf_v2d3.mdl.scs"
+
+endsection min
+
+section max
+parameters dcj_vardiop_rf=0.1
+parameters dcjsw_vardiop_rf=0.1
+
+include "./vardiop_rf_v2d3.mdl.scs"
+ 
+endsection max
+
+
+endlibrary vardiop_rf
+

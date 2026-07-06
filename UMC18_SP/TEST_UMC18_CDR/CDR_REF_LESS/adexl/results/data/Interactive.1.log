@@ -1,0 +1,17 @@
+Starting Single Run, Sweeps and Corners...
+
+Current time: Sun Aug 31 10:15:04 2025 
+Best design point: 1
+Design specs: 
+	TEST_CDR:CDR_REF_LESS:1	corner	Corner_0 - 
+	TEST_CDR:CDR_REF_LESS:1	corner	Corner_1 - 
+	TEST_CDR:CDR_REF_LESS:1	corner	Corner_2 - 
+	TEST_CDR:CDR_REF_LESS:1	corner	Corner_3 - 
+	TEST_CDR:CDR_REF_LESS:1	corner	Corner_4 - 
+	TEST_CDR:CDR_REF_LESS:1	corner	Nominal - 
+Design parameters: 
+	temperature		-40
+
+Received stop signal from user. 
+Interactive.1 completed. 
+Current time: Sun Aug 31 10:30:52 2025 

@@ -1,0 +1,19 @@
+conducting_layers
+  1M_MET          M1
+  2M_MET          M2
+  3M_MET          M3
+  4M_MET          M4
+  TM_MET          M5
+  1G_GATE         PO
+
+via_layers
+  1C_CON          CT   
+  1T_V1           V1
+  2T_V2           V2
+  3T_V3           V3
+  TT_V4           V4
+
+marker_layers
+
+remove_layers
+

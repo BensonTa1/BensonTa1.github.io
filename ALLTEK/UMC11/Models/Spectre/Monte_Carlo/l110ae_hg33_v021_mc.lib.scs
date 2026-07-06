@@ -1,0 +1,506 @@
+//  ******************************************************************************
+//  tt: typical n-ch mosfet and typical p-ch mosfet
+//  ff: fast n-ch mosfet and fast p-ch mosfet
+//  ss: slow n-ch mosfet and slow p-ch mosfet
+//  fnsp: fast n-ch mosfet and slow p-ch mosfet
+//  snfp: slow n-ch mosfet and fast p-ch mosfet
+//  ******************************************************************************
+simulator lang=spectre insensitive=yes
+//
+library mylib
+
+section tt
+setoption41 options gmin=1e-13
+parameters dtox_n_33_hgl110e_t=0.0000000e+000
+parameters dxl_n_33_hgl110e_t=0.0000000e+000
+parameters du0_n_33_hgl110e_t=0.0000000e+000
+parameters dvth0_n_33_hgl110e_t=0.0000000e+000
+parameters drdsw_n_33_hgl110e_t=0.0000000e+000
+parameters dxw_n_33_hgl110e_t=0.0000000e+000
+parameters dlvth0_n_33_hgl110e_t=0.0000000e+000
+parameters dk3_n_33_hgl110e_t=0.0000000e+000
+parameters dpvth0_n_33_hgl110e_t=0.0000000e+000
+parameters dwwl_n_33_hgl110e_t=0.0000000e+000
+parameters dvsat_n_33_hgl110e_t=0.0000000e+000
+parameters db0_n_33_hgl110e_t=0.0000000e+000
+parameters dcgdo_n_33_hgl110e_t=0.0000000e+000
+parameters dcgso_n_33_hgl110e_t=0.0000000e+000
+parameters dags_n_33_hgl110e_t=0.0000000e+000
+parameters dcj_n_33_hgl110e_t=0.0000000e+000
+parameters dcjsw_n_33_hgl110e_t=0.0000000e+000
+parameters dcjswg_n_33_hgl110e_t=0.0000000e+000
+parameters dcgdl_n_33_hgl110e_t=0.0000000e+000
+parameters dcgsl_n_33_hgl110e_t=0.0000000e+000
+parameters dpvsat_n_33_hgl110e_t=0.0000000e+000
+parameters dtox_p_33_hgl110e_t=0.0000000e+000
+parameters dxl_p_33_hgl110e_t=0.0000000e+000
+parameters du0_p_33_hgl110e_t=0.0000000e+000
+parameters dvth0_p_33_hgl110e_t=0.0000000e+000
+parameters drdsw_p_33_hgl110e_t=0.0000000e+000
+parameters dxw_p_33_hgl110e_t=0.0000000e+000
+parameters dlvth0_p_33_hgl110e_t=0.0000000e+000
+parameters dk3_p_33_hgl110e_t=0.0000000e+000
+parameters dpvth0_p_33_hgl110e_t=0.0000000e+000
+parameters dwwl_p_33_hgl110e_t=0.0000000e+000
+parameters dcgdl_p_33_hgl110e_t=0.0000000e+000
+parameters dcgsl_p_33_hgl110e_t=0.0000000e+000
+parameters dcgdo_p_33_hgl110e_t=0.0000000e+000
+parameters dcgso_p_33_hgl110e_t=0.0000000e+000
+parameters dags_p_33_hgl110e_t=0.0000000e+000
+parameters dcj_p_33_hgl110e_t=0.0000000e+000
+parameters dcjsw_p_33_hgl110e_t=0.0000000e+000
+parameters dcjswg_p_33_hgl110e_t=0.0000000e+000
+parameters dvsat_p_33_hgl110e_t=0.0000000e+000
+parameters db0_p_33_hgl110e_t=0.0000000e+000
+parameters dpags_p_33_hgl110e_t=0.0000000e+000
+
+//
+//
+endsection tt
+//
+section ff
+setoption42 options gmin=1e-13
+parameters dtox_n_33_hgl110e_t=-2.2500000e-010
+parameters dxl_n_33_hgl110e_t=-3.4000000e-008
+parameters du0_n_33_hgl110e_t=2.5270382e-003
+parameters dvth0_n_33_hgl110e_t=-1.2959188e-002
+parameters drdsw_n_33_hgl110e_t=-9.4727109e+001
+parameters dxw_n_33_hgl110e_t=7.9941214e-009
+parameters dlvth0_n_33_hgl110e_t=-1.0117572e-008
+parameters dk3_n_33_hgl110e_t=-1.8532690e+000
+parameters dpvth0_n_33_hgl110e_t=-2.3456373e-016
+parameters dwwl_n_33_hgl110e_t=3.2564506e-021
+parameters dvsat_n_33_hgl110e_t=1.1626913e+004
+parameters db0_n_33_hgl110e_t=5.9350063e-007
+parameters dcgdo_n_33_hgl110e_t=4.6000000e-012
+parameters dcgso_n_33_hgl110e_t=4.6000000e-012
+parameters dags_n_33_hgl110e_t=-7.0933630e-003
+parameters dcj_n_33_hgl110e_t=-1.0250000e-004
+parameters dcjsw_n_33_hgl110e_t=-1.4083000e-011
+parameters dcjswg_n_33_hgl110e_t=-1.9720000e-011
+parameters dcgdl_n_33_hgl110e_t=1.8000000e-011
+parameters dcgsl_n_33_hgl110e_t=1.8000000e-011
+parameters dpvsat_n_33_hgl110e_t=3.7226029e-011
+parameters dtox_p_33_hgl110e_t=-2.2500000e-010
+parameters dxl_p_33_hgl110e_t=-2.7200000e-008
+parameters du0_p_33_hgl110e_t=6.2990321e-004
+parameters dvth0_p_33_hgl110e_t=1.6423221e-002
+parameters drdsw_p_33_hgl110e_t=-8.7610280e+001
+parameters dxw_p_33_hgl110e_t=1.4120073e-008
+parameters dlvth0_p_33_hgl110e_t=1.9422164e-009
+parameters dk3_p_33_hgl110e_t=-1.0678961e+001
+parameters dpvth0_p_33_hgl110e_t=3.1530937e-015
+parameters dwwl_p_33_hgl110e_t=-4.5880211e-022
+parameters dcgdl_p_33_hgl110e_t=2.0171000e-011
+parameters dcgsl_p_33_hgl110e_t=2.0171000e-011
+parameters dcgdo_p_33_hgl110e_t=1.0600000e-011
+parameters dcgso_p_33_hgl110e_t=1.0600000e-011
+parameters dags_p_33_hgl110e_t=-2.5854088e-002
+parameters dcj_p_33_hgl110e_t=-9.6800000e-005
+parameters dcjsw_p_33_hgl110e_t=-8.8110000e-012
+parameters dcjswg_p_33_hgl110e_t=-2.2870000e-011
+parameters dvsat_p_33_hgl110e_t=-4.8375539e+003
+parameters db0_p_33_hgl110e_t=5.5055015e-009
+parameters dpags_p_33_hgl110e_t=-2.4191732e-014
+
+//
+//
+endsection ff
+//
+section ss
+setoption43 options gmin=1e-13
+parameters dtox_n_33_hgl110e_t=2.2500000e-010
+parameters dxl_n_33_hgl110e_t=3.4000000e-008
+parameters du0_n_33_hgl110e_t=-2.6497341e-003
+parameters dvth0_n_33_hgl110e_t=1.2187316e-002
+parameters drdsw_n_33_hgl110e_t=1.8047603e+002
+parameters dxw_n_33_hgl110e_t=-1.2172646e-008
+parameters dlvth0_n_33_hgl110e_t=1.2494691e-008
+parameters dk3_n_33_hgl110e_t=1.5974425e+000
+parameters dpvth0_n_33_hgl110e_t=5.2748233e-016
+parameters dwwl_n_33_hgl110e_t=-3.7666198e-021
+parameters dvsat_n_33_hgl110e_t=-1.6116516e+004
+parameters db0_n_33_hgl110e_t=-5.4613379e-007
+parameters dcgdo_n_33_hgl110e_t=-4.6000000e-012
+parameters dcgso_n_33_hgl110e_t=-4.6000000e-012
+parameters dags_n_33_hgl110e_t=7.3327767e-003
+parameters dcj_n_33_hgl110e_t=1.0250000e-004
+parameters dcjsw_n_33_hgl110e_t=1.4083000e-011
+parameters dcjswg_n_33_hgl110e_t=1.9720000e-011
+parameters dcgdl_n_33_hgl110e_t=-1.8000000e-011
+parameters dcgsl_n_33_hgl110e_t=-1.8000000e-011
+parameters dpvsat_n_33_hgl110e_t=-8.3378680e-012
+parameters dtox_p_33_hgl110e_t=2.2500000e-010
+parameters dxl_p_33_hgl110e_t=3.8760000e-008
+parameters du0_p_33_hgl110e_t=-6.8800000e-004
+parameters dvth0_p_33_hgl110e_t=-1.6050000e-002
+parameters drdsw_p_33_hgl110e_t=1.5215451e+002
+parameters dxw_p_33_hgl110e_t=-1.9500000e-008
+parameters dlvth0_p_33_hgl110e_t=-1.9000000e-009
+parameters dk3_p_33_hgl110e_t=9.4500000e+000
+parameters dpvth0_p_33_hgl110e_t=-3.0000000e-015
+parameters dwwl_p_33_hgl110e_t=6.3059158e-022
+parameters dcgdl_p_33_hgl110e_t=-2.0171000e-011
+parameters dcgsl_p_33_hgl110e_t=-2.0171000e-011
+parameters dcgdo_p_33_hgl110e_t=-1.0600000e-011
+parameters dcgso_p_33_hgl110e_t=-1.0600000e-011
+parameters dags_p_33_hgl110e_t=2.5004907e-002
+parameters dcj_p_33_hgl110e_t=9.6800000e-005
+parameters dcjsw_p_33_hgl110e_t=8.8110000e-012
+parameters dcjswg_p_33_hgl110e_t=2.2870000e-011
+parameters dvsat_p_33_hgl110e_t=7.0500000e+003
+parameters db0_p_33_hgl110e_t=-1.0400000e-008
+parameters dpags_p_33_hgl110e_t=0.0000000e+000
+//
+//
+endsection ss
+//
+section fnsp
+setoption44 options gmin=1e-13
+parameters dtox_n_33_hgl110e_t=0.0000000e+000
+parameters dxl_n_33_hgl110e_t=-1.0000000e-008
+parameters du0_n_33_hgl110e_t=1.4436704e-003
+parameters dvth0_n_33_hgl110e_t=-1.6652053e-002
+parameters drdsw_n_33_hgl110e_t=-6.9809183e+001
+parameters dxw_n_33_hgl110e_t=4.4196328e-009
+parameters dlvth0_n_33_hgl110e_t=-5.4991786e-009
+parameters dk3_n_33_hgl110e_t=-8.7740389e-001
+parameters dpvth0_n_33_hgl110e_t=-1.5886657e-016
+parameters dwwl_n_33_hgl110e_t=1.3207671e-021
+parameters dvsat_n_33_hgl110e_t=9.4750178e+003
+parameters db0_n_33_hgl110e_t=2.7706237e-007
+parameters dcgdo_n_33_hgl110e_t=0.0000000e+000
+parameters dcgso_n_33_hgl110e_t=0.0000000e+000
+parameters dags_n_33_hgl110e_t=-2.8998529e-003
+parameters dcj_n_33_hgl110e_t=-1.0250000e-004
+parameters dcjsw_n_33_hgl110e_t=-1.4083000e-011
+parameters dcjswg_n_33_hgl110e_t=-1.9720000e-011
+parameters dcgdl_n_33_hgl110e_t=0.0000000e+000
+parameters dcgsl_n_33_hgl110e_t=0.0000000e+000
+parameters dpvsat_n_33_hgl110e_t=2.4874867e-024
+parameters dtox_p_33_hgl110e_t=0.0000000e+000
+parameters dxl_p_33_hgl110e_t=6.5000000e-009
+parameters du0_p_33_hgl110e_t=-3.9415239e-004
+parameters dvth0_p_33_hgl110e_t=-2.1783303e-002
+parameters drdsw_p_33_hgl110e_t=2.1153229e+002
+parameters dxw_p_33_hgl110e_t=-8.2799792e-009
+parameters dlvth0_p_33_hgl110e_t=-2.5963477e-009
+parameters dk3_p_33_hgl110e_t=4.8959608e+000
+parameters dpvth0_p_33_hgl110e_t=-1.4557899e-015
+parameters dwwl_p_33_hgl110e_t=3.8087512e-022
+parameters dcgdl_p_33_hgl110e_t=0.0000000e+000
+parameters dcgsl_p_33_hgl110e_t=0.0000000e+000
+parameters dcgdo_p_33_hgl110e_t=0.0000000e+000
+parameters dcgso_p_33_hgl110e_t=0.0000000e+000
+parameters dags_p_33_hgl110e_t=9.6826654e-003
+parameters dcj_p_33_hgl110e_t=9.6800000e-005
+parameters dcjsw_p_33_hgl110e_t=8.8110000e-012
+parameters dcjswg_p_33_hgl110e_t=2.2870000e-011
+parameters dvsat_p_33_hgl110e_t=-7.1686432e+003
+parameters db0_p_33_hgl110e_t=-4.7804295e-009
+parameters dpags_p_33_hgl110e_t=-7.2490407e-016
+
+//
+//
+endsection fnsp
+//
+section snfp
+setoption45 options gmin=1e-13
+parameters dtox_n_33_hgl110e_t=0.0000000e+000
+parameters dxl_n_33_hgl110e_t=1.0000000e-008
+parameters du0_n_33_hgl110e_t=-1.4591535e-003
+parameters dvth0_n_33_hgl110e_t=1.6544911e-002
+parameters drdsw_n_33_hgl110e_t=9.2655218e+001
+parameters dxw_n_33_hgl110e_t=-5.4264458e-009
+parameters dlvth0_n_33_hgl110e_t=5.8375341e-009
+parameters dk3_n_33_hgl110e_t=8.4390008e-001
+parameters dpvth0_n_33_hgl110e_t=2.2814302e-016
+parameters dwwl_n_33_hgl110e_t=-1.4134610e-021
+parameters dvsat_n_33_hgl110e_t=-1.0320272e+004
+parameters db0_n_33_hgl110e_t=-3.3821010e-007
+parameters dcgdo_n_33_hgl110e_t=0.0000000e+000
+parameters dcgso_n_33_hgl110e_t=0.0000000e+000
+parameters dags_n_33_hgl110e_t=0.0000000e+000
+parameters dcj_n_33_hgl110e_t=1.0250000e-004
+parameters dcjsw_n_33_hgl110e_t=1.4083000e-011
+parameters dcjswg_n_33_hgl110e_t=1.9720000e-011
+parameters dcgdl_n_33_hgl110e_t=0.0000000e+000
+parameters dcgsl_n_33_hgl110e_t=0.0000000e+000
+parameters dpvsat_n_33_hgl110e_t=-7.1287430e-013
+parameters dtox_p_33_hgl110e_t=0.0000000e+000
+parameters dxl_p_33_hgl110e_t=-6.6120000e-009
+parameters du0_p_33_hgl110e_t=3.8399172e-004
+parameters dvth0_p_33_hgl110e_t=2.1967029e-002
+parameters drdsw_p_33_hgl110e_t=-1.4905167e+002
+parameters dxw_p_33_hgl110e_t=7.1518039e-009
+parameters dlvth0_p_33_hgl110e_t=2.3552603e-009
+parameters dk3_p_33_hgl110e_t=-5.0252599e+000
+parameters dpvth0_p_33_hgl110e_t=1.5482021e-015
+parameters dwwl_p_33_hgl110e_t=-2.6770717e-022
+parameters dcgdl_p_33_hgl110e_t=0.0000000e+000
+parameters dcgsl_p_33_hgl110e_t=0.0000000e+000
+parameters dcgdo_p_33_hgl110e_t=0.0000000e+000
+parameters dcgso_p_33_hgl110e_t=0.0000000e+000
+parameters dags_p_33_hgl110e_t=-9.6576210e-003
+parameters dcj_p_33_hgl110e_t=-9.6800000e-005
+parameters dcjsw_p_33_hgl110e_t=-8.8110000e-012
+parameters dcjswg_p_33_hgl110e_t=-2.2870000e-011
+parameters dvsat_p_33_hgl110e_t=5.3445166e+003
+parameters db0_p_33_hgl110e_t=4.5056734e-009
+parameters dpags_p_33_hgl110e_t=-1.3873620e-015
+
+//
+//
+endsection snfp
+//
+//
+//
+//
+//
+//
+section tt_g
+setoption51 options gmin=1e-13
+parameters dtox_n_33_hgl110e_g=0.0000000e+000
+parameters dxl_n_33_hgl110e_g=0.0000000e+000
+parameters du0_n_33_hgl110e_g=0.0000000e+000
+parameters dvth0_n_33_hgl110e_g=0.0000000e+000
+parameters drdsw_n_33_hgl110e_g=0.0000000e+000
+parameters dxw_n_33_hgl110e_g=0.0000000e+000
+parameters dlvth0_n_33_hgl110e_g=0.0000000e+000
+parameters dk3_n_33_hgl110e_g=0.0000000e+000
+parameters dpvth0_n_33_hgl110e_g=0.0000000e+000
+parameters dwwl_n_33_hgl110e_g=0.0000000e+000
+parameters dvsat_n_33_hgl110e_g=0.0000000e+000
+parameters db0_n_33_hgl110e_g=0.0000000e+000
+parameters dcgdo_n_33_hgl110e_g=0.0000000e+000
+parameters dcgso_n_33_hgl110e_g=0.0000000e+000
+parameters dags_n_33_hgl110e_g=0.0000000e+000
+parameters dcj_n_33_hgl110e_g=0.0000000e+000
+parameters dcjsw_n_33_hgl110e_g=0.0000000e+000
+parameters dcjswg_n_33_hgl110e_g=0.0000000e+000
+parameters dcgdl_n_33_hgl110e_g=0.0000000e+000
+parameters dcgsl_n_33_hgl110e_g=0.0000000e+000
+parameters dpvsat_n_33_hgl110e_g=0.0000000e+000
+parameters dtox_p_33_hgl110e_g=0.0000000e+000
+parameters dxl_p_33_hgl110e_g=0.0000000e+000
+parameters du0_p_33_hgl110e_g=0.0000000e+000
+parameters dvth0_p_33_hgl110e_g=0.0000000e+000
+parameters drdsw_p_33_hgl110e_g=0.0000000e+000
+parameters dxw_p_33_hgl110e_g=0.0000000e+000
+parameters dlvth0_p_33_hgl110e_g=0.0000000e+000
+parameters dk3_p_33_hgl110e_g=0.0000000e+000
+parameters dpvth0_p_33_hgl110e_g=0.0000000e+000
+parameters dwwl_p_33_hgl110e_g=0.0000000e+000
+parameters dcgdl_p_33_hgl110e_g=0.0000000e+000
+parameters dcgsl_p_33_hgl110e_g=0.0000000e+000
+parameters dcgdo_p_33_hgl110e_g=0.0000000e+000
+parameters dcgso_p_33_hgl110e_g=0.0000000e+000
+parameters dags_p_33_hgl110e_g=0.0000000e+000
+parameters dcj_p_33_hgl110e_g=0.0000000e+000
+parameters dcjsw_p_33_hgl110e_g=0.0000000e+000
+parameters dcjswg_p_33_hgl110e_g=0.0000000e+000
+parameters dvsat_p_33_hgl110e_g=0.0000000e+000
+parameters db0_p_33_hgl110e_g=0.0000000e+000
+parameters dpags_p_33_hgl110e_g=0.0000000e+000
+
+//
+//
+endsection tt_g
+//
+section ff_g
+setoption52 options gmin=1e-13
+parameters dtox_n_33_hgl110e_g=-2.2500000e-010
+parameters dxl_n_33_hgl110e_g=-3.4000000e-008
+parameters du0_n_33_hgl110e_g=2.5271798e-003
+parameters dvth0_n_33_hgl110e_g=-1.2938680e-002
+parameters drdsw_n_33_hgl110e_g=-9.5204522e+001
+parameters dxw_n_33_hgl110e_g=8.1079460e-009
+parameters dlvth0_n_33_hgl110e_g=-1.0100400e-008
+parameters dk3_n_33_hgl110e_g=-1.8438094e+000
+parameters dpvth0_n_33_hgl110e_g=7.8319510e-016
+parameters dwwl_n_33_hgl110e_g=3.0327982e-021
+parameters dvsat_n_33_hgl110e_g=1.1626913e+004
+parameters db0_n_33_hgl110e_g=5.9350063e-007
+parameters dcgdo_n_33_hgl110e_g=4.6000000e-012
+parameters dcgso_n_33_hgl110e_g=4.6000000e-012
+parameters dags_n_33_hgl110e_g=-7.0933630e-003
+parameters dcj_n_33_hgl110e_g=-1.0250000e-004
+parameters dcjsw_n_33_hgl110e_g=-1.4083000e-011
+parameters dcjswg_n_33_hgl110e_g=-1.9720000e-011
+parameters dcgdl_n_33_hgl110e_g=1.8000000e-011
+parameters dcgsl_n_33_hgl110e_g=1.8000000e-011
+parameters dpvsat_n_33_hgl110e_g=3.7226029e-011
+parameters dtox_p_33_hgl110e_g=-2.2500000e-010
+parameters dxl_p_33_hgl110e_g=-2.7200000e-008
+parameters du0_p_33_hgl110e_g=6.2982128e-004
+parameters dvth0_p_33_hgl110e_g=1.6448530e-002
+parameters drdsw_p_33_hgl110e_g=-8.8201013e+001
+parameters dxw_p_33_hgl110e_g=1.4159498e-008
+parameters dlvth0_p_33_hgl110e_g=1.9169385e-009
+parameters dk3_p_33_hgl110e_g=-1.0629035e+001
+parameters dpvth0_p_33_hgl110e_g=2.5928644e-015
+parameters dwwl_p_33_hgl110e_g=-4.7849014e-022
+parameters dcgdl_p_33_hgl110e_g=2.0171000e-011
+parameters dcgsl_p_33_hgl110e_g=2.0171000e-011
+parameters dcgdo_p_33_hgl110e_g=1.0600000e-011
+parameters dcgso_p_33_hgl110e_g=1.0600000e-011
+parameters dags_p_33_hgl110e_g=-2.5854088e-002
+parameters dcj_p_33_hgl110e_g=-9.6800000e-005
+parameters dcjsw_p_33_hgl110e_g=-8.8110000e-012
+parameters dcjswg_p_33_hgl110e_g=-2.2870000e-011
+parameters dvsat_p_33_hgl110e_g=-4.8375539e+003
+parameters db0_p_33_hgl110e_g=5.5055015e-009
+parameters dpags_p_33_hgl110e_g=-2.4191732e-014
+
+//
+//
+endsection ff_g
+//
+section ss_g
+setoption53 options gmin=1e-13
+parameters dtox_n_33_hgl110e_g=2.2500000e-010
+parameters dxl_n_33_hgl110e_g=3.4000000e-008
+parameters du0_n_33_hgl110e_g=-2.6495839e-003
+parameters dvth0_n_33_hgl110e_g=1.2175488e-002
+parameters drdsw_n_33_hgl110e_g=1.8105652e+002
+parameters dxw_n_33_hgl110e_g=-1.2280090e-008
+parameters dlvth0_n_33_hgl110e_g=1.2466900e-008
+parameters dk3_n_33_hgl110e_g=1.5908495e+000
+parameters dpvth0_n_33_hgl110e_g=-6.9818504e-016
+parameters dwwl_n_33_hgl110e_g=-3.5775834e-021
+parameters dvsat_n_33_hgl110e_g=-1.6116516e+004
+parameters db0_n_33_hgl110e_g=-5.4613379e-007
+parameters dcgdo_n_33_hgl110e_g=-4.6000000e-012
+parameters dcgso_n_33_hgl110e_g=-4.6000000e-012
+parameters dags_n_33_hgl110e_g=7.3327767e-003
+parameters dcj_n_33_hgl110e_g=1.0250000e-004
+parameters dcjsw_n_33_hgl110e_g=1.4083000e-011
+parameters dcjswg_n_33_hgl110e_g=1.9720000e-011
+parameters dcgdl_n_33_hgl110e_g=-1.8000000e-011
+parameters dcgsl_n_33_hgl110e_g=-1.8000000e-011
+parameters dpvsat_n_33_hgl110e_g=-8.3378680e-012
+parameters dtox_p_33_hgl110e_g=2.2500000e-010
+parameters dxl_p_33_hgl110e_g=3.8760000e-008
+parameters du0_p_33_hgl110e_g=-6.8797505e-004
+parameters dvth0_p_33_hgl110e_g=-1.6060396e-002
+parameters drdsw_p_33_hgl110e_g=1.5315650e+002
+parameters dxw_p_33_hgl110e_g=-1.9536448e-008
+parameters dlvth0_p_33_hgl110e_g=-1.8608712e-009
+parameters dk3_p_33_hgl110e_g=9.4204851e+000
+parameters dpvth0_p_33_hgl110e_g=-2.3943958e-015
+parameters dwwl_p_33_hgl110e_g=6.3649878e-022
+parameters dcgdl_p_33_hgl110e_g=-2.0171000e-011
+parameters dcgsl_p_33_hgl110e_g=-2.0171000e-011
+parameters dcgdo_p_33_hgl110e_g=-1.0600000e-011
+parameters dcgso_p_33_hgl110e_g=-1.0600000e-011
+parameters dags_p_33_hgl110e_g=2.5004907e-002
+parameters dcj_p_33_hgl110e_g=9.6800000e-005
+parameters dcjsw_p_33_hgl110e_g=8.8110000e-012
+parameters dcjswg_p_33_hgl110e_g=2.2870000e-011
+parameters dvsat_p_33_hgl110e_g=7.0500000e+003
+parameters db0_p_33_hgl110e_g=-1.0400000e-008
+parameters dpags_p_33_hgl110e_g=0.0000000e+000
+
+//
+//
+endsection ss_g
+//
+section fnsp_g
+setoption54 options gmin=1e-13
+parameters dtox_n_33_hgl110e_g=0.0000000e+000
+parameters dxl_n_33_hgl110e_g=-1.0000000e-008
+parameters du0_n_33_hgl110e_g=1.4442818e-003
+parameters dvth0_n_33_hgl110e_g=-1.6641636e-002
+parameters drdsw_n_33_hgl110e_g=-7.0113088e+001
+parameters dxw_n_33_hgl110e_g=4.4775869e-009
+parameters dlvth0_n_33_hgl110e_g=-5.4830578e-009
+parameters dk3_n_33_hgl110e_g=-8.7341585e-001
+parameters dpvth0_n_33_hgl110e_g=3.9976124e-016
+parameters dwwl_n_33_hgl110e_g=1.2254562e-021
+parameters dvsat_n_33_hgl110e_g=9.4750178e+003
+parameters db0_n_33_hgl110e_g=2.7706237e-007
+parameters dcgdo_n_33_hgl110e_g=0.0000000e+000
+parameters dcgso_n_33_hgl110e_g=0.0000000e+000
+parameters dags_n_33_hgl110e_g=-2.8998529e-003
+parameters dcj_n_33_hgl110e_g=-1.0250000e-004
+parameters dcjsw_n_33_hgl110e_g=-1.4083000e-011
+parameters dcjswg_n_33_hgl110e_g=-1.9720000e-011
+parameters dcgdl_n_33_hgl110e_g=0.0000000e+000
+parameters dcgsl_n_33_hgl110e_g=0.0000000e+000
+parameters dpvsat_n_33_hgl110e_g=2.4874867e-024
+parameters dtox_p_33_hgl110e_g=0.0000000e+000
+parameters dxl_p_33_hgl110e_g=6.5000000e-009
+parameters du0_p_33_hgl110e_g=-3.9360830e-004
+parameters dvth0_p_33_hgl110e_g=-2.1931256e-002
+parameters drdsw_p_33_hgl110e_g=2.1181881e+002
+parameters dxw_p_33_hgl110e_g=-8.3647887e-009
+parameters dlvth0_p_33_hgl110e_g=-2.5658733e-009
+parameters dk3_p_33_hgl110e_g=4.7984425e+000
+parameters dpvth0_p_33_hgl110e_g=-1.1747757e-015
+parameters dwwl_p_33_hgl110e_g=3.8597301e-022
+parameters dcgdl_p_33_hgl110e_g=0.0000000e+000
+parameters dcgsl_p_33_hgl110e_g=0.0000000e+000
+parameters dcgdo_p_33_hgl110e_g=0.0000000e+000
+parameters dcgso_p_33_hgl110e_g=0.0000000e+000
+parameters dags_p_33_hgl110e_g=9.6826654e-003
+parameters dcj_p_33_hgl110e_g=9.6800000e-005
+parameters dcjsw_p_33_hgl110e_g=8.8110000e-012
+parameters dcjswg_p_33_hgl110e_g=2.2870000e-011
+parameters dvsat_p_33_hgl110e_g=-7.1686432e+003
+parameters db0_p_33_hgl110e_g=-4.7804295e-009
+parameters dpags_p_33_hgl110e_g=-7.2490407e-016
+
+//
+//
+endsection fnsp_g
+//
+section snfp_g
+setoption55 options gmin=1e-13
+parameters dtox_n_33_hgl110e_g=0.0000000e+000
+parameters dxl_n_33_hgl110e_g=1.0000000e-008
+parameters du0_n_33_hgl110e_g=-1.3662558e-003
+parameters dvth0_n_33_hgl110e_g=1.6682702e-002
+parameters drdsw_n_33_hgl110e_g=9.4875303e+001
+parameters dxw_n_33_hgl110e_g=-6.2700884e-009
+parameters dlvth0_n_33_hgl110e_g=5.8137718e-009
+parameters dk3_n_33_hgl110e_g=8.3183113e-001
+parameters dpvth0_n_33_hgl110e_g=-3.1579686e-016
+parameters dwwl_n_33_hgl110e_g=-1.5409161e-021
+parameters dvsat_n_33_hgl110e_g=-1.0320272e+004
+parameters db0_n_33_hgl110e_g=-3.3821010e-007
+parameters dcgdo_n_33_hgl110e_g=0.0000000e+000
+parameters dcgso_n_33_hgl110e_g=0.0000000e+000
+parameters dags_n_33_hgl110e_g=0.0000000e+000
+parameters dcj_n_33_hgl110e_g=1.0250000e-004
+parameters dcjsw_n_33_hgl110e_g=1.4083000e-011
+parameters dcjswg_n_33_hgl110e_g=1.9720000e-011
+parameters dcgdl_n_33_hgl110e_g=0.0000000e+000
+parameters dcgsl_n_33_hgl110e_g=0.0000000e+000
+parameters dpvsat_n_33_hgl110e_g=-7.1287430e-013
+parameters dtox_p_33_hgl110e_g=0.0000000e+000
+parameters dxl_p_33_hgl110e_g=-6.6120000e-009
+parameters du0_p_33_hgl110e_g=3.8378866e-004
+parameters dvth0_p_33_hgl110e_g=2.1982958e-002
+parameters drdsw_p_33_hgl110e_g=-1.4948188e+002
+parameters dxw_p_33_hgl110e_g=7.1648355e-009
+parameters dlvth0_p_33_hgl110e_g=2.3400377e-009
+parameters dk3_p_33_hgl110e_g=-4.9999531e+000
+parameters dpvth0_p_33_hgl110e_g=1.2611884e-015
+parameters dwwl_p_33_hgl110e_g=-2.7753911e-022
+parameters dcgdl_p_33_hgl110e_g=0.0000000e+000
+parameters dcgsl_p_33_hgl110e_g=0.0000000e+000
+parameters dcgdo_p_33_hgl110e_g=0.0000000e+000
+parameters dcgso_p_33_hgl110e_g=0.0000000e+000
+parameters dags_p_33_hgl110e_g=-9.6576210e-003
+parameters dcj_p_33_hgl110e_g=-9.6800000e-005
+parameters dcjsw_p_33_hgl110e_g=-8.8110000e-012
+parameters dcjswg_p_33_hgl110e_g=-2.2870000e-011
+parameters dvsat_p_33_hgl110e_g=5.3445166e+003
+parameters db0_p_33_hgl110e_g=4.5056734e-009
+parameters dpags_p_33_hgl110e_g=-1.3873620e-015
+
+//
+//
+endsection snfp_g
+//
+endlibrary mylib

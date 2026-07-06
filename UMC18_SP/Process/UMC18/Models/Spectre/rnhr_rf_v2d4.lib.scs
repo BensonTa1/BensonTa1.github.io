@@ -1,0 +1,28 @@
+//
+simulator lang=spectre insensitive=yes
+library mylib
+section typ
+parameters ddw_rnhr_rf=0
+parameters drsh_rnhr_rf=0
+parameters dcox_rnhr_rf=0
+//
+include "./rnhr_rf_v2d4.mdl.scs"
+//
+endsection typ
+//
+section min
+parameters ddw_rnhr_rf=-0.1
+parameters drsh_rnhr_rf=-0.25
+parameters dcox_rnhr_rf=-0.12
+include "./rnhr_rf_v2d4.mdl.scs"
+//
+endsection min
+//
+section max
+parameters ddw_rnhr_rf=0.1
+parameters drsh_rnhr_rf=0.25
+parameters dcox_rnhr_rf=0.12
+include "./rnhr_rf_v2d4.mdl.scs"
+//
+endsection max
+endlibrary mylib

@@ -1,0 +1,27 @@
+simulator lang=spectre insensitive=yes
+library l110ae_l_sy40k_vil_rf_v021_lib
+//
+section tt
+parameters sy_drs=1
+parameters sy_drs_sub=1
+parameters sy_dls=1
+include "l110ae_l_sy40k_vil_rf_v021.mdl.scs"
+endsection tt
+//
+section ff
+parameters sy_drs=1.15
+parameters sy_drs_sub=0.85
+parameters sy_dls=1.05
+include "l110ae_l_sy40k_vil_rf_v021.mdl.scs"
+endsection ff
+//
+section ss
+parameters sy_drs=0.85
+parameters sy_drs_sub=1.15
+parameters sy_dls=0.95
+include "l110ae_l_sy40k_vil_rf_v021.mdl.scs"
+endsection ss
+//
+endlibrary l110ae_l_sy40k_vil_rf_v021_lib
+
+

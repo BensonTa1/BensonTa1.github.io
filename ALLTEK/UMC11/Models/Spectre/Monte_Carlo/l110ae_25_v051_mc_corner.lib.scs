@@ -1,0 +1,213 @@
+simulator lang=spectre insensitive=yes
+library mylib
+
+section mc
+include "l110ae_25_v051_mc_statistical_p.mdl.scs"
+include "l110ae_25_v051_mc_statistical_m.mdl.scs"
+include "l110ae_25_v051_mc.mdl.scs"
+include "l110ae_25_v051_mc.lib.scs" section=tt
+include "l110ae_25_v051_mc.lib.scs" section=setup
+parameters
++ total_flag_n_bpw_25_l110ae  = 0
++ global_flag_n_bpw_25_l110ae = 1
++ local_flag_n_bpw_25_l110ae  = 1
++ total_flag_n_25_l110ae  = 0
++ global_flag_n_25_l110ae = 1
++ local_flag_n_25_l110ae  = 1
++ total_flag_p_25_l110ae  = 0
++ global_flag_p_25_l110ae = 1
++ local_flag_p_25_l110ae  = 1
++ noi_flag_mc_25_l110ae   = 1
+endsection mc
+
+section tt
+include "l110ae_25_v051_mc_statistical_m.mdl.scs"
+include "l110ae_25_v051_mc.mdl.scs"
+include "l110ae_25_v051_mc.lib.scs" section=tt
+include "l110ae_25_v051_mc.lib.scs" section=tt_g
+include "l110ae_25_v051_mc.lib.scs" section=setup
+parameters
++ total_flag_n_bpw_25_l110ae  = 1
++ global_flag_n_bpw_25_l110ae = 0
++ local_flag_n_bpw_25_l110ae  = 0
++ total_flag_n_25_l110ae  = 1
++ global_flag_n_25_l110ae = 0
++ local_flag_n_25_l110ae  = 0
++ total_flag_p_25_l110ae  = 1
++ global_flag_p_25_l110ae = 0
++ local_flag_p_25_l110ae  = 0
++ noi_flag_mc_25_l110ae   = 0
+endsection tt
+
+section ss
+include "l110ae_25_v051_mc_statistical_m.mdl.scs"
+include "l110ae_25_v051_mc.mdl.scs"
+include "l110ae_25_v051_mc.lib.scs" section=ss
+include "l110ae_25_v051_mc.lib.scs" section=ss_g
+include "l110ae_25_v051_mc.lib.scs" section=setup
+parameters
++ total_flag_n_bpw_25_l110ae  = 1
++ global_flag_n_bpw_25_l110ae = 0
++ local_flag_n_bpw_25_l110ae  = 0
++ total_flag_n_25_l110ae  = 1
++ global_flag_n_25_l110ae = 0
++ local_flag_n_25_l110ae  = 0
++ total_flag_p_25_l110ae  = 1
++ global_flag_p_25_l110ae = 0
++ local_flag_p_25_l110ae  = 0
++ noi_flag_mc_25_l110ae   = 0
+endsection ss
+
+section ff
+include "l110ae_25_v051_mc_statistical_m.mdl.scs"
+include "l110ae_25_v051_mc.mdl.scs"
+include "l110ae_25_v051_mc.lib.scs" section=ff
+include "l110ae_25_v051_mc.lib.scs" section=ff_g
+include "l110ae_25_v051_mc.lib.scs" section=setup
+parameters
++ total_flag_n_bpw_25_l110ae  = 1
++ global_flag_n_bpw_25_l110ae = 0
++ local_flag_n_bpw_25_l110ae  = 0
++ total_flag_n_25_l110ae  = 1
++ global_flag_n_25_l110ae = 0
++ local_flag_n_25_l110ae  = 0
++ total_flag_p_25_l110ae  = 1
++ global_flag_p_25_l110ae = 0
++ local_flag_p_25_l110ae  = 0
++ noi_flag_mc_25_l110ae   = 0
+endsection ff
+
+section snfp
+include "l110ae_25_v051_mc_statistical_m.mdl.scs"
+include "l110ae_25_v051_mc.mdl.scs"
+include "l110ae_25_v051_mc.lib.scs" section=snfp
+include "l110ae_25_v051_mc.lib.scs" section=snfp_g
+include "l110ae_25_v051_mc.lib.scs" section=setup
+parameters
++ total_flag_n_bpw_25_l110ae  = 1
++ global_flag_n_bpw_25_l110ae = 0
++ local_flag_n_bpw_25_l110ae  = 0
++ total_flag_n_25_l110ae  = 1
++ global_flag_n_25_l110ae = 0
++ local_flag_n_25_l110ae  = 0
++ total_flag_p_25_l110ae  = 1
++ global_flag_p_25_l110ae = 0
++ local_flag_p_25_l110ae  = 0
++ noi_flag_mc_25_l110ae   = 0
+endsection snfp
+
+section fnsp
+include "l110ae_25_v051_mc_statistical_m.mdl.scs"
+include "l110ae_25_v051_mc.lib.scs" section=fnsp
+include "l110ae_25_v051_mc.mdl.scs"
+include "l110ae_25_v051_mc.lib.scs" section=fnsp_g
+include "l110ae_25_v051_mc.lib.scs" section=setup
+parameters
++ total_flag_n_bpw_25_l110ae  = 1
++ global_flag_n_bpw_25_l110ae = 0
++ local_flag_n_bpw_25_l110ae  = 0
++ total_flag_n_25_l110ae  = 1
++ global_flag_n_25_l110ae = 0
++ local_flag_n_25_l110ae  = 0
++ total_flag_p_25_l110ae  = 1
++ global_flag_p_25_l110ae = 0
++ local_flag_p_25_l110ae  = 0
++ noi_flag_mc_25_l110ae   = 0
+endsection fnsp
+
+section tt_g
+include "l110ae_25_v051_mc_statistical_m.mdl.scs"
+include "l110ae_25_v051_mc.mdl.scs"
+include "l110ae_25_v051_mc.lib.scs" section=tt
+include "l110ae_25_v051_mc.lib.scs" section=tt_g
+include "l110ae_25_v051_mc.lib.scs" section=setup
+parameters
++ total_flag_n_bpw_25_l110ae  = 0
++ global_flag_n_bpw_25_l110ae = 1
++ local_flag_n_bpw_25_l110ae  = 1
++ total_flag_n_25_l110ae  = 0
++ global_flag_n_25_l110ae = 1
++ local_flag_n_25_l110ae  = 1
++ total_flag_p_25_l110ae  = 0
++ global_flag_p_25_l110ae = 1
++ local_flag_p_25_l110ae  = 1
++ noi_flag_mc_25_l110ae   = 0
+endsection tt_g
+
+section ss_g
+include "l110ae_25_v051_mc_statistical_m.mdl.scs"
+include "l110ae_25_v051_mc.mdl.scs"
+include "l110ae_25_v051_mc.lib.scs" section=ss
+include "l110ae_25_v051_mc.lib.scs" section=ss_g
+include "l110ae_25_v051_mc.lib.scs" section=setup
+parameters
++ total_flag_n_bpw_25_l110ae  = 0
++ global_flag_n_bpw_25_l110ae = 1
++ local_flag_n_bpw_25_l110ae  = 1
++ total_flag_n_25_l110ae  = 0
++ global_flag_n_25_l110ae = 1
++ local_flag_n_25_l110ae  = 1
++ total_flag_p_25_l110ae  = 0
++ global_flag_p_25_l110ae = 1
++ local_flag_p_25_l110ae  = 1
++ noi_flag_mc_25_l110ae   = 0
+endsection ss_g
+
+section ff_g
+include "l110ae_25_v051_mc_statistical_m.mdl.scs"
+include "l110ae_25_v051_mc.mdl.scs"
+include "l110ae_25_v051_mc.lib.scs" section=ff
+include "l110ae_25_v051_mc.lib.scs" section=ff_g
+include "l110ae_25_v051_mc.lib.scs" section=setup
+parameters
++ total_flag_n_bpw_25_l110ae  = 0
++ global_flag_n_bpw_25_l110ae = 1
++ local_flag_n_bpw_25_l110ae  = 1
++ total_flag_n_25_l110ae  = 0
++ global_flag_n_25_l110ae = 1
++ local_flag_n_25_l110ae  = 1
++ total_flag_p_25_l110ae  = 0
++ global_flag_p_25_l110ae = 1
++ local_flag_p_25_l110ae  = 1
++ noi_flag_mc_25_l110ae   = 0
+endsection ff_g
+
+section snfp_g
+include "l110ae_25_v051_mc_statistical_m.mdl.scs"
+include "l110ae_25_v051_mc.mdl.scs"
+include "l110ae_25_v051_mc.lib.scs" section=snfp
+include "l110ae_25_v051_mc.lib.scs" section=snfp_g
+include "l110ae_25_v051_mc.lib.scs" section=setup
+parameters
++ total_flag_n_bpw_25_l110ae  = 0
++ global_flag_n_bpw_25_l110ae = 1
++ local_flag_n_bpw_25_l110ae  = 1
++ total_flag_n_25_l110ae  = 0
++ global_flag_n_25_l110ae = 1
++ local_flag_n_25_l110ae  = 1
++ total_flag_p_25_l110ae  = 0
++ global_flag_p_25_l110ae = 1
++ local_flag_p_25_l110ae  = 1
++ noi_flag_mc_25_l110ae   = 0
+endsection snfp_g
+
+section fnsp_g
+include "l110ae_25_v051_mc_statistical_m.mdl.scs"
+include "l110ae_25_v051_mc.mdl.scs"
+include "l110ae_25_v051_mc.lib.scs" section=fnsp
+include "l110ae_25_v051_mc.lib.scs" section=fnsp_g
+include "l110ae_25_v051_mc.lib.scs" section=setup
+parameters
++ total_flag_n_bpw_25_l110ae  = 0
++ global_flag_n_bpw_25_l110ae = 1
++ local_flag_n_bpw_25_l110ae  = 1
++ total_flag_n_25_l110ae  = 0
++ global_flag_n_25_l110ae = 1
++ local_flag_n_25_l110ae  = 1
++ total_flag_p_25_l110ae  = 0
++ global_flag_p_25_l110ae = 1
++ local_flag_p_25_l110ae  = 1
++ noi_flag_mc_25_l110ae   = 0
+endsection fnsp_g
+endlibrary mylib
+

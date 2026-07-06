@@ -1,0 +1,18 @@
+Starting Single Run, Sweeps and Corners...
+
+Current time: Sat Nov 16 22:36:55 2024 
+Best design point: 1
+Design specs: 
+	TEST:BGR:1	corner	C1_0 - 
+	TEST:BGR:1	corner	C1_1 - 
+	TEST:BGR:1	corner	C1_2 - 
+	TEST:BGR:1	corner	Nominal - 
+Design parameters: 
+	VDD		1.8
+	LL		63.6u
+
+Interactive.5
+Number of points completed: 1
+Number of simulation errors: 0
+Interactive.5 completed. 
+Current time: Sat Nov 16 22:37:04 2024 

@@ -1,0 +1,57 @@
+// VerilogA for Verilog_A, IDEAL_PFD, veriloga
+
+`include "constants.vams"
+`include "disciplines.vams"
+
+module IDEAL_PFD(REF,FB,UP,DN);
+	electrical REF,FB,UP,DN;
+	input REF,FB;
+	output UP,DN;
+
+	parameter real VOH=1.8;
+	parameter real VOL=0;
+	parameter real VTH=0.9;
+	parameter real TR_TF=0.1p;
+	parameter real TON=1n;
+
+	integer state,hide_state;
+	real Toff;
+
+	analog begin
+		@(initial_step)begin
+			state = 0;
+			hide_state = 0;
+			Toff = 0;
+		end
+
+		@(cross(V(REF)-VTH,1))begin
+			if(state==-1)begin
+				hide_state=1;
+				Toff = TON+$realtime;
+			end else begin
+				state = 1;
+			end
+		end
+		
+		@(cross(V(FB)-VTH,+1))begin
+			if(state==1)begin
+				hide_state = 1;
+				Toff = TON+$realtime;
+			end else begin
+				state = -1;
+			end
+		end
+
+		@(timer(Toff))begin
+			if(hide_state==1)begin
+				state=0;
+				hide_state=0;
+			end
+		end
+	
+		V(UP)<+transition((state==1)||(hide_state==1) ? VOH : VOL,0,TR_TF);
+		V(DN)<+transition((state==-1)||(hide_state==1) ? VOH : VOL,0,TR_TF);
+
+	end
+
+endmodule

@@ -1,0 +1,16 @@
+library rfres_sa_cor 
+
+section ff_rfres_sa 
+include "cr013g_2d5_v1d4.scs" section = ff_rfres_sa 
+endsection ff_rfres_sa 
+
+section ss_rfres_sa 
+include "cr013g_2d5_v1d4.scs" section = ss_rfres_sa 
+endsection ss_rfres_sa 
+
+section tt_rfres_sa 
+include "cr013g_2d5_v1d4.scs" section = tt_rfres_sa 
+endsection tt_rfres_sa 
+
+
+endlibrary rfres_sa_cor 

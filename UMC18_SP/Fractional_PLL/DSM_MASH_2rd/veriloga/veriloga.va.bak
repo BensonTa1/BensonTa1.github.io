@@ -1,0 +1,95 @@
+// VerilogA for Fractional_PLL, DSM_MASH_2rd, veriloga
+
+`include "constants.vams"
+`include "disciplines.vams"
+
+module DSM_MASH_2rd(D0,D1,D2,D3,D4,D5,D6,D7,CLKIN,DOUT0,DOUT1);
+	electrical D0,D1,D2,D3,D4,D5,D6,D7,CLKIN,DOUT0,DOUT1;
+	input D0,D1,D2,D3,D4,D5,D6,D7,CLKIN;
+	output DOUT0,DOUT1;
+
+	parameter real VOH=1;
+	parameter real VOL=0;
+	parameter real VTH=0.5;
+	
+	parameter FS=1024;			//Full scale 10bit=1024
+
+	real DD0,DD1,DD2,DD3,DD4,DD5,DD6,DD7;
+	
+	real Y1,INTG1_1=0,INTG1_2=0,V1=0,V1D=0;	
+	real Y2=0,INTG2_1=0,INTG2_2=0,V2=0,V2D=0;	
+	
+	real V1D_D=0,V2D_D=0,U;
+	real DDOUT1,DDOUT0;	
+
+	analog begin
+
+		DD0 = (V(D0)>VTH) ? 1 : 0;
+		DD1 = (V(D1)>VTH) ? 1 : 0;
+		DD2 = (V(D2)>VTH) ? 1 : 0;
+		DD3 = (V(D3)>VTH) ? 1 : 0;
+		DD4 = (V(D4)>VTH) ? 1 : 0;
+		DD5 = (V(D5)>VTH) ? 1 : 0;
+		DD6 = (V(D6)>VTH) ? 1 : 0;
+		DD7 = (V(D7)>VTH) ? 1 : 0;
+		Y1= DD0*1+DD1*2+DD2*4+DD3*8+DD4*16+DD5*32+DD6*64+DD7*128;
+
+		@(cross(V(CLKIN)-VTH,1))begin
+
+			//================================INTG2
+			INTG2_1=Y2-V2;
+			INTG2_2=INTG2_1+INTG2_2;
+
+			if(INTG2_2>=(FS/2)) begin 
+				V2=FS;
+				V2D=1;
+			end else begin
+				V2=0;
+				V2D=0;
+			end
+
+			//================================INTG1
+			INTG1_1=Y1-V1;
+			INTG1_2=INTG1_1+INTG1_2;
+
+			if(INTG1_2>=(FS/2)) begin 
+				V1=FS;
+				V1D=1;
+			end else begin
+				V1=0;
+				V1D=0;
+			end
+			
+			Y2=INTG1_2-V1;
+
+			//================================noise cancellation
+			V1D_D=V1D;		
+			V2D_D=V2D;
+
+			U=V1D_D-(V2D-V2D_D);
+			//================================DAC
+			if(U==3)begin 
+				DDOUT1=VOH;
+				DDOUT0=VOH;
+			end	
+			if(U==2)begin 
+				DDOUT1=VOH;
+				DDOUT0=VOL;
+			end	
+			if(U==1)begin 
+				DDOUT1=VOL;
+				DDOUT0=VOH;
+			end	
+			if(U==0)begin 
+				DDOUT1=VOL;
+				DDOUT0=VOL;
+			end	
+
+		end
+
+		V(DOUT1)=DDOUT1;
+		V(DOUT0)=DDOUT0;
+
+	end
+
+endmodule

@@ -1,0 +1,8 @@
+TDMCHECKPOINT="1.0"
+UMC_18_CMOS/VARDIOP_RF type="cell"
+UMC_18_CMOS/VARMIS_18_RF type="cell"
+UMC_18_CMOS/MIMCAPM_RF type="cell"
+UMC_18_CMOS/MIMCAPS_MM type="cell"
+UMC_18_CMOS/NCAP_MM type="cell"
+UMC_18_CMOS/PCAP_MM type="cell"
+

@@ -1,0 +1,67 @@
+//  *********************************************************************   
+//     P+/Nwell Junction Varactor RF subcircuit model   
+//     UMC 0.11um RFCMOS process    
+//     
+//     2010/07/20 Ho Cheng Hu   
+//     
+//     Model coverage:   
+//     1. P+ finger width (wp): 0.28um ~ 2um   
+//     2. P+ finger length (l): 0.5um ~ 18um   
+//     3. P+ finger number: 4 ~16    
+//     4. Frequency range: 0.1 ~ 20.1GHz   
+//     5. Temperature Range: -55C to 125C   
+//     
+//     Node definition:   
+//     1. pplus:  p+   
+//     2. nwell:  nwell   
+//     3. sub:  psub   
+//  ********************************************************************   
+//     
+simulator lang=spectre insensitive=yes 
+subckt vardiop_rf ( pplus nwell sub )  
+parameters l=10u          wp=1u                     nf=8 
++ m_s1=8                  p_area=l*wp*nf            p_peri=2*(l+wp)*nf 
++ nw_area=(nf*(wp+0.44u)+(nf+1)*0.3u+0.52u)*(l+1.34u) 
++ nw_peri=2*(nf*(wp+0.44u)+(nf+1)*0.3u+l+1.86u)
++ re_unit=4.5e18*(8e-10*pow((wp*0.9),2)-1e-9*pow((wp*0.9),1)+1e-9)*(3e-11*(l*0.9)+4e-10)*(-1e-11*nf+6e-10) 
++ rsh_nw=1e3
++ cf_m1=3.5e20*(-5e-11*(wp*0.9)+6e-11)*(-9e-13*(l*0.9)+7e-11)*(-2e-13*nf+6e-11) 
++ rsub_unit=6.31*pow(wp*0.9/l*0.9/nf,2)-0.1254*(wp*0.9/l*0.9/nf)+0.0014 
+ 
+  
+//     
+//  ----- equivalent network ------------------   
+//    
+re ( 55 1 ) resistor r=re_unit/(l*0.9*wp*0.9*nf)*(1+d_re_unit) 
+cf ( 55 66 ) capacitor c=2*cf_m1*l*0.9*nf*(1+d_cf_m1) 
+dppnw ( 1 2 ) ppnw_dio area=p_area pj=p_peri 
+rb ( 2 66 ) resistor r=rsh_nw*0.11u/(l*0.9*nf)*(1+d_rsh_nw) 
+dnwpsub ( 3 2 ) nwpsub_dio area=nw_area pj=nw_peri 
+rsub ( 3 sub ) resistor r=rsub_unit/nw_peri 
+l1 ( pplus 55 ) inductor l=1e-14*pow(l*0.9*wp*0.9*nf,-0.290) 
+l2 ( 66 nwell ) inductor l=1e-14*pow(l*0.9*wp*0.9*nf,-0.290) 
+//    
+//  -------------------------------------------   
+//    
+// ----- diode models ------------   
+model ppnw_dio diode  
++  hcomp=1.0000e+00          imax=1.00e+14             is=1.21e-07 
++  isw=1.08e-13              level=3                   n=1.017 
++  rs=0                      bv=10.64                  eg=1.16 
++  tnom=25.0                 xti=3.0                   tlevc=1 
++  cjo=9.69e-004*(1+d_cjo_ppnw)                    mj=0.308 
++  vj=0.687                  cjsw=1.18e-010*(1+d_cjsw_ppnw) 
++  mjsw=0.1                  vjsw=0.45                 pta=0.0017088 
++  ptp=0.0025864             cta=0.0010049             ctp=0.0005243 
+  
+model nwpsub_dio diode  
++  hcomp=1.0000e+00          imax=1.00e+14             is=2.05e-06 
++  isw=5.34e-11              level=3                   n=1.0525 
++  rs=0                      bv=9.662                  eg=1.16 
++  tnom=25.0                 xti=5.4936                tlevc=1 
++  cjo=0.0000828*(1+d_cjo_nwpsub)                  mj=0.474 
++  vj=0.588                  cjsw=9.92e-10*(1+d_cjsw_nwpsub) 
++  mjsw=0.27                 vjsw=0.62                 pta=0.0028 
++  ptp=0.001                 cta=0.00332               ctp=0.001 
+//     
+ends vardiop_rf 

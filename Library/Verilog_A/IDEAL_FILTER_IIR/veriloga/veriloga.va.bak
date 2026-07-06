@@ -1,0 +1,83 @@
+`include "constants.vams"
+`include "disciplines.vams"
+
+module IDEAL_IIR_FILTER (CLK, IN, OUT);
+
+input CLK;
+input IN;
+output OUT;
+
+electrical CLK, IN, OUT;
+
+// =========================
+// IIR coefficients
+// =========================
+parameter integer NB = 5;
+parameter integer NA = 5;
+
+parameter real b[0:4] = '{
+  8.984861e-07,
+  3.593945e-06,
+  5.390917e-06,
+  3.593945e-06,
+  8.984861e-07
+};
+
+parameter real a[0:4] = '{
+  1.0,
+ -3.835826,
+  5.520819,
+ -3.533535,
+  0.848556
+};
+
+
+// =========================
+// buffers
+// =========================
+real x_buf[0:4];
+real y_buf[0:4];
+
+integer i;
+real acc;
+
+// =========================
+// clocked behavior
+// =========================
+analog begin
+
+  @(cross(V(CLK) - 0.5, +1)) begin
+
+    // shift x
+    for (i = NB-1; i > 0; i = i - 1)
+      x_buf[i] = x_buf[i-1];
+
+    x_buf[0] = V(IN);
+
+    // shift y
+    for (i = NA-1; i > 0; i = i - 1)
+      y_buf[i] = y_buf[i-1];
+
+    // =========================
+    // IIR equation
+    // =========================
+    acc = 0.0;
+
+    // feedforward (b)
+    for (i = 0; i < NB; i = i + 1)
+      acc = acc + b[i] * x_buf[i];
+
+    // feedback (a)  1
+    for (i = 1; i < NA; i = i + 1)
+      acc = acc - a[i] * y_buf[i];
+
+    // current output
+    y_buf[0] = acc;
+
+  end
+
+  V(OUT) <+ acc;
+
+end
+
+endmodule

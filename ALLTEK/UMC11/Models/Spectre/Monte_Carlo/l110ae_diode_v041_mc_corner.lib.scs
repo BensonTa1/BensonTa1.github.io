@@ -1,0 +1,22 @@
+simulator lang=spectre insensitive=yes
+library mylib
+
+section mc
+include "l110ae_diode_v041_mc_statistical_p.mdl.scs"
+include "l110ae_diode_v041_mc.mdl.scs"
+endsection mc 
+
+section tt
+include "l110ae_diode_v041_mc.lib.scs" section=tt
+endsection tt 
+
+section ff
+include "l110ae_diode_v041_mc.lib.scs" section=ff
+endsection ff 
+
+section ss
+include "l110ae_diode_v041_mc.lib.scs" section=ss
+endsection ss 
+
+endlibrary mylib
+

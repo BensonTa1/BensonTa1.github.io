@@ -1,0 +1,40 @@
+//
+`include "constants.vams"
+`include "disciplines.vams"
+
+module IDEAL_FILTER_CIC (VIN,CLK,VOUT);
+
+input VIN,CLK;
+output VOUT;
+electrical VIN,CLK,VOUT;
+
+// =========================
+// Parameters
+// =========================
+parameter integer OSR = 16;
+
+// =========================
+// Internal states
+// =========================
+integer comb_out;
+integer sample_count;
+integer integ;
+integer comb_z;
+
+analog begin
+    @(cross(V(CLK)-0.5, +1)) begin
+		integ = integ + (V(VIN)>0.5 ? 1:0);
+
+		sample_count = sample_count + 1;
+
+		if (sample_count == OSR) begin
+			sample_count = 0;
+			comb_out = integ - comb_z;
+			comb_z = integ;
+
+        end
+    end
+	V(VOUT) <+ transition(comb_out/16, 0, 1p);
+end
+
+endmodule

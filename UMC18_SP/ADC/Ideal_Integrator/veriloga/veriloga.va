@@ -1,0 +1,32 @@
+// VerilogA for ADC, Ideal_Integrator, veriloga
+
+`include "constants.vams"
+`include "disciplines.vams"
+
+module Ideal_Integrator(vout, vip, vin);
+
+
+
+input  vip, vin;
+output vout;
+
+electrical vout, vin, vip;
+electrical vid;
+
+parameter real RC_val = 0.001 from (0:inf);
+parameter real gnd = 0;
+
+real pole;
+
+analog begin
+    @(initial_step)
+        pole = 1/RC_val;
+    
+    V(vid) <+ (V(vip) - V(vin));
+    V(vout) <+ pole * idt(V(vid), gnd);
+    
+    //$bound_step (1e-7);
+end
+
+endmodule
+

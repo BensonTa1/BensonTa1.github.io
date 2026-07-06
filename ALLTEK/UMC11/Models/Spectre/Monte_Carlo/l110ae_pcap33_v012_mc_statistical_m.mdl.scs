@@ -1,0 +1,9 @@
+//  
+simulator lang=spectre insensitive=yes 
+parameters mc_pcap_33_ma=0 
+ 
+statistics { 
+    mismatch { 
+        vary mc_pcap_33_ma dist=gauss std=1/1 
+        } 
+    } 

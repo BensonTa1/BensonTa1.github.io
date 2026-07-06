@@ -1,0 +1,92 @@
+.lib tt
+.param
+
+*3.3V NMOS 
++dtox_n_bpw_33_mm     = 0             dlint_n_bpw_33_mm    = 0           dwint_n_bpw_33_mm     = 0 
++dvth0_n_bpw_33_mm    = 0             dcgdo_n_bpw_33_mm    = 0           dcgso_n_bpw_33_mm     = 0
+
+
+
+
+.include 'mm180_reg33bpw_v123.mdl'
+ 
+.endl  tt
+
+
+
+.lib ss
+.param
+
+*3.3V NMOS 
++dtox_n_bpw_33_mm     = 5e-10         dlint_n_bpw_33_mm    = -1.23e-8    dwint_n_bpw_33_mm     = 8e-9
++dvth0_n_bpw_33_mm    = 0.05          dcgdo_n_bpw_33_mm    = -2.7e-11    dcgso_n_bpw_33_mm     = -2.7e-11
+
+
+.include 'mm180_reg33bpw_v123.mdl'
+ 
+.endl  ss
+
+
+
+
+.lib ff
+.param
+
+*3.3V NMOS 
++dtox_n_bpw_33_mm     = -5e-10        dlint_n_bpw_33_mm    = 9.4e-9      dwint_n_bpw_33_mm     = -3e-9
++dvth0_n_bpw_33_mm    = -0.05         dcgdo_n_bpw_33_mm    = 2.7e-11     dcgso_n_bpw_33_mm     = 2.7e-11
+
+
+
+
+.include 'mm180_reg33bpw_v123.mdl'
+ 
+.endl  ff
+
+
+
+
+.lib snfp
+.param
+
+*3.3V NMOS 
++dtox_n_bpw_33_mm     = 0             dlint_n_bpw_33_mm    = -7.8e-9     dwint_n_bpw_33_mm     = 7e-9
++dvth0_n_bpw_33_mm    = 0.040663      dcgdo_n_bpw_33_mm    = 0           dcgso_n_bpw_33_mm     = 0
+
+
+
+
+.include 'mm180_reg33bpw_v123.mdl'
+ 
+.endl  snfp
+
+
+
+
+
+.lib fnsp
+.param
+
+
+*3.3V NMOS 
++dtox_n_bpw_33_mm     = 0             dlint_n_bpw_33_mm    = 9.2e-9      dwint_n_bpw_33_mm     = -2e-9
++dvth0_n_bpw_33_mm    = -0.03         dcgdo_n_bpw_33_mm    = 0           dcgso_n_bpw_33_mm     = 0
+
+
+
+
+
+.include 'mm180_reg33bpw_v123.mdl'
+ 
+.endl  fnsp
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,121 @@
+*********************************************************************************
+* Property of UMC
+* Unauthorized reproduction, modification and/or distribution are strictly
+* prohibited.
+* This product is protected under copyright law and trade secret law.
+* This model card may not be sent in any form outside of UMC without
+* the written consent of the UMC ATD Modeling Division.
+********************************************************************************
+* Process:      0.11um Logic and Mixed-Mode 1P8M Metal Metal Capacitor Al Advanced Enhancement Process
+* Device Type:  N+/PW and P+/NW diode
+* Description:  Diode
+* Model:        subckt model
+* Simulator:    HSPICE
+* Model Version:0.2_p1
+********************************************************************************
+* <Revision 1>
+* Version : 0.2_p1
+* Date    : 2012/05/21
+* Owner   : Laney Fan
+* Comment : Original release.
+* <Revision 2>
+* Version : 0.3_p1
+* Date    : 2012/08/09
+* Owner   : Laney Fan
+* Comment : 1.Multiply 0.9 of w and l in the subckt for shrink methodology 
+* <Revision 3>
+* Version : 0.4_p1
+* Date    : 2012/10/17
+* Owner   : Laney Fan
+* Comment : 1. Correct from multiply 0.9 by w and l to multiply 0.9*0.9 by area.
+* <Revision 4>
+* Version : 0.5_p1
+* Date    : 2016/11/23
+* Owner   : Macro Chang
+* Comment : 1.Optimize leakage current and break down voltage
+********************************************************************************
+* Application Ranges:
+* Geometry range(Before shrinkage):
+*
+*   2.5V DION and 2.5V DIOP
+*
+*   5 um < =  LDES < =  25 um
+*   0.5 um < =  WDES < =  14.3 um
+*
+* Temperature range:-50c ~ 125c ; nominal temperature = 25c.
+***************************** Start of Model Card ******************************
+*
+* Device 2.5V n+/pw scalable diode
+.option tnom=25
+.subckt dion_25_l110ae  n1 n3 w=0.5e-6 l=20e-6
+.param area='(w*0.9)*(l*0.9)'  pj='2*(w*0.9+l*0.9)'
+
+r1 n1 n2 '(3.7+4.89e-11/area)*(1+drs_dion_25_l110ae)' tc1=4.34e-4
+d1 n2 n3 dion  area=area  pj=pj
+
+.model  dion d  level = 3
+**************************************************************
+*               GENERAL PARAMETERS 
+**************************************************************
++tref     = 25                                    
+**************************************************************
+*               DC PARAMETERS 
+**************************************************************
++is       = '1.198e-007*(1+djs_dion_25_l110ae)'    jsw      = '2.4256e-013*(1+djsw_dion_25_l110ae)'  ik       = 1.65e+007                                
++vb       = 12.35                                 ibv      = 0.0075                                ikr      = 595.2                                 
++n        = '1.0338*(1+dn_dion_25_l110ae)'         rs       = 0                                     jtun     = 1.239e-06                             
++ntun     = 55.86                                     jtunsw  = 2e-012                              nbv     = 0.85
+**************************************************************
+*               CAPACITANCE PARAMETERS 
+**************************************************************
++cj       = '0.00078122*(1+dcj_dion_25_l110ae)'    cjp      = '1.1247e-010*(1+dcjp_dion_25_l110ae)'  pb       = 0.61343                               
++php      = 0.91068                               mj       = 0.27981                               mjsw     = 0.1087                                
+**************************************************************
+*               NOISE PARAMETERS 
+**************************************************************
+**************************************************************
+*               TEMPERATURE PARAMETERS 
+**************************************************************
++tlev     = 1                                     tlevc    = 1                                     trs      = 0                                     
++tcv      = -0.000645                              xti      = 3                                     xtitun   = 0.096                                 
++cta      = 0.00086537                            ctp      = 0.00066436                            eg       = 1.16                                  
++tpb      = 0.0013743                             tphp     = 0.0030712                             keg     = 0.48821
+.ends dion_25_l110ae  
+
+* Device 2.5V p+/nw scalable diode
+*
+.subckt diop_25_l110ae  n1 n3 w=0.5e-6 l=20e-6
+.param area='(w*0.9)*(l*0.9)'  pj='2*(w*0.9+l*0.9)'
+
+r1 n1 n2 '(2+3e-11/area)*(1+drs_diop_25_l110ae)' tc1=1.42e-3
+d1 n2 n3 diop  area=area  pj=pj
+
+.model  diop  d  level = 3
+**************************************************************
+*               GENERAL PARAMETERS 
+**************************************************************
++tref     = 25                                    
+**************************************************************
+*               DC PARAMETERS 
+**************************************************************
++is       = '2.0349e-007*(1+djs_diop_25_l110ae)'   jsw      = '9.9321e-013*(1+djsw_diop_25_l110ae)'  ik       = 6.7e+007                                 
++vb       = 10.6                               ibv      = 0.0075                                  ikr      = 1130                                  
++n        = '1.1027*(1+dn_diop_25_l110ae)'         rs       = 0                                      jtun     = 1.239e-006                             
++ntun     = 49                                     jtunsw  = 6e-012                                  
++nbv = 0.7    
+**************************************************************
+*               CAPACITANCE PARAMETERS 
+**************************************************************
++cj       = '0.00096321*(1+dcj_diop_25_l110ae)'    cjp      = '1.0525e-010*(1+dcjp_diop_25_l110ae)'  pb       = 0.79                                  
++php      = 0.78                                  mj       = 0.33                                  mjsw     = 0.13                                  
+**************************************************************
+*               NOISE PARAMETERS 
+**************************************************************
+**************************************************************
+*               TEMPERATURE PARAMETERS 
+**************************************************************
++tlev     = 1                                     tlevc    = 1                                     trs      = 0                                     
++tcv      = -0.00075                              xti      = 3                                     xtitun   = 0.096                                 
++cta      = 0.00072                               ctp      = 0.0001                                eg       = 1.16                                  
++tpb      = 0.0015                                tphp     = 0.0005                                keg     = 0.50855
+.ends diop_25_l110ae  

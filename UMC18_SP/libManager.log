@@ -1,0 +1,217 @@
+\o Program:		@(#)$CDS: libManager version 6.1.8 - CAT37 09/24/2018 21:00 (ip-172-18-22-224) $
+\o Sub version:		sub-version  p015 
+\o Arguments:		-unmapped -mpssession virtuoso125545 -mpshost IC 
+\o Working Directory:	IC:/home/IC/Desktop/virtuoso/UMC18_SP
+\o 64-bit offsets
+\o Qt version: 		5.9.1
+\o changeWorkingDir("/home/IC/Desktop/virtuoso/UMC18_SP") unnecessary.
+\o ddSetForcedLib("") unnecessary.
+\o Log file is "/home/IC/Desktop/virtuoso/UMC18_SP/libManager.log".
+\o Opening libManager window.
+\a nrSetWindowVisibility(cdsLibManager "show")
+\o MPS service: map window
+\o Library Manager customization server connected.
+\a nrSetCurrentWindow(cdsLibManager)
+\w Warning: The directory: '/home/IC/Desktop/virtuoso/UMC18_SP/TEST_UMC18_ALLTEK_PLL' does not exist
+\w 	but was defined in libFile '/home/IC/Desktop/virtuoso/UMC18_SP/cds.lib' for Lib 'TEST_UMC18_ALLTEK_PLL'.
+\w Warning: The directory: '/home/IC/Desktop/virtuoso/UMC18_SP/UMC18_ALLTEK_PLL' does not exist
+\w 	but was defined in libFile '/home/IC/Desktop/virtuoso/UMC18_SP/cds.lib' for Lib 'UMC18_ALLTEK_PLL'.
+\w Warning: The directory: '/home/IC/Desktop/virtuoso/TEST_Verilog_A' does not exist
+\w 	but was defined in libFile '/home/IC/Desktop/virtuoso/UMC18_SP/cds.lib' for Lib 'TEST_Verilog_A'.
+\a nrResizeWindow(cdsLibManager list(14 58 781 679))
+\a nrSetCurrentWindow(cdsLibManager)
+\a nrResizeWindow(cdsLibManager list(329 42 781 679))
+\a cdsLibManager->libListBox->value = "UMC18_EQ_TX"
+\a cdsLibManager->libLineEdit->value = "UMC18_EQ_TX"
+\a cdsLibManager->libListBox->value = "UMC18_PLL_2p5G"
+\a cdsLibManager->libLineEdit->value = "UMC18_PLL_2p5G"
+\a cdsLibManager->libListBox->value = "TEST_UMC18_EQ_TX"
+\a cdsLibManager->libLineEdit->value = "TEST_UMC18_EQ_TX"
+\a cdsLibManager->cellListBox->value = "TX_Fullchip"
+\a cdsLibManager->cellLineEdit->value = "TX_Fullchip"
+\a cdsLibManager->viewListBox->value = "schematic"
+\a cdsLibManager->viewLineEdit->value = "schematic"
+\o MPS request: edit design
+\a nrListItemAction(cdsLibManager->gdmXTView 1 0)
+\a cdsLibManager->libListBox->value = nil
+\a cdsLibManager->libLineEdit->value = ""
+\a cdsLibManager->cellListBox->value = nil
+\a cdsLibManager->viewLineEdit->value = ""
+\a cdsLibManager->viewListBox->value = nil
+\a cdsLibManager->cellLineEdit->value = ""
+\w Warning: The directory: '/home/IC/Desktop/virtuoso/UMC18_SP/TEST_UMC18_ALLTEK_PLL' does not exist
+\w 	but was defined in libFile '/home/IC/Desktop/virtuoso/UMC18_SP/cds.lib' for Lib 'TEST_UMC18_ALLTEK_PLL'.
+\w Warning: The directory: '/home/IC/Desktop/virtuoso/UMC18_SP/UMC18_ALLTEK_PLL' does not exist
+\w 	but was defined in libFile '/home/IC/Desktop/virtuoso/UMC18_SP/cds.lib' for Lib 'UMC18_ALLTEK_PLL'.
+\w Warning: The directory: '/home/IC/Desktop/virtuoso/TEST_Verilog_A' does not exist
+\w 	but was defined in libFile '/home/IC/Desktop/virtuoso/UMC18_SP/cds.lib' for Lib 'TEST_Verilog_A'.
+\a cdsLibManager->libListBox->value = "TEST_UMC18_EQ_TX"
+\a cdsLibManager->libLineEdit->value = "TEST_UMC18_EQ_TX"
+\a cdsLibManager->cellListBox->value = "TX_Fullchip"
+\a cdsLibManager->cellLineEdit->value = "TX_Fullchip"
+\a cdsLibManager->viewListBox->value = "schematic"
+\a cdsLibManager->viewLineEdit->value = "schematic"
+\a cdsLibManager->viewLineEdit->value = ""
+\a cdsLibManager->viewListBox->value = nil
+\a cdsLibManager->viewListBox->value = "schematic"
+\a cdsLibManager->viewLineEdit->value = "schematic"
+\a nrSetCurrentWindow(cdsLibManager)
+\a nrSetCurrentWindow(cdsLibManager)
+\a nrResizeWindow(cdsLibManager list(366 57 781 679))
+\a cdsLibManager->cellListBox->value = "FFE"
+\a cdsLibManager->cellLineEdit->value = "FFE"
+\a cdsLibManager->viewLineEdit->value = ""
+\a cdsLibManager->viewListBox->value = nil
+\a cdsLibManager->viewListBox->value = "schematic"
+\a cdsLibManager->viewLineEdit->value = "schematic"
+\a cdsLibManager->viewListBox->value = nil
+\a cdsLibManager->viewLineEdit->value = ""
+\a cdsLibManager->viewListBox->value = "schematic"
+\a cdsLibManager->viewLineEdit->value = "schematic"
+\o MPS request: edit design
+\a nrListItemAction(cdsLibManager->gdmXTView 2 0)
+\a nrSetCurrentWindow(cdsLibManager)
+\a nrSetCurrentWindow(cdsLibManager)
+\a nrSetCurrentWindow(cdsLibManager)
+\a nrResizeWindow(cdsLibManager list(429 62 781 679))
+\a cdsLibManager->viewListBox->value = nil
+\a cdsLibManager->viewLineEdit->value = ""
+\a cdsLibManager->viewListBox->value = "schematic"
+\a cdsLibManager->viewLineEdit->value = "schematic"
+\o MPS request: edit design
+\a nrListItemAction(cdsLibManager->gdmXTView 2 0)
+\a nrSetCurrentWindow(cdsLibManager)
+\a nrSetCurrentWindow(cdsLibManager)
+\a cdsLibManager->cellListBox->value = "TX_Fullchip"
+\a cdsLibManager->cellLineEdit->value = "TX_Fullchip"
+\a cdsLibManager->viewLineEdit->value = ""
+\a cdsLibManager->viewListBox->value = nil
+\a cdsLibManager->viewListBox->value = "schematic"
+\a cdsLibManager->viewLineEdit->value = "schematic"
+\a cdsLibManager->viewListBox->value = nil
+\a cdsLibManager->viewLineEdit->value = ""
+\a cdsLibManager->viewListBox->value = "schematic"
+\a cdsLibManager->viewLineEdit->value = "schematic"
+\o MPS request: edit design
+\a nrListItemAction(cdsLibManager->gdmXTView 1 0)
+\a nrSetCurrentWindow(cdsLibManager)
+\a cdsLibManager->libListBox->value = "UMC18_PLL_2p5G"
+\a cdsLibManager->libLineEdit->value = "UMC18_PLL_2p5G"
+\a cdsLibManager->cellLineEdit->value = ""
+\a cdsLibManager->cellListBox->value = nil
+\a cdsLibManager->viewLineEdit->value = ""
+\a cdsLibManager->viewListBox->value = nil
+\a cdsLibManager->cellListBox->value = "PLL_2p5G"
+\a cdsLibManager->cellLineEdit->value = "PLL_2p5G"
+\a cdsLibManager->viewListBox->value = "schematic"
+\a cdsLibManager->viewLineEdit->value = "schematic"
+\a cdsLibManager->viewListBox->value = nil
+\a cdsLibManager->viewLineEdit->value = ""
+\a cdsLibManager->viewListBox->value = "schematic"
+\a cdsLibManager->viewLineEdit->value = "schematic"
+\o MPS request: edit design
+\a nrListItemAction(cdsLibManager->gdmXTView 1 0)
+\a nrSetCurrentWindow(cdsLibManager)
+\a cdsLibManager->cellListBox->value = "PLL_5G"
+\a cdsLibManager->cellLineEdit->value = "PLL_5G"
+\a cdsLibManager->viewLineEdit->value = ""
+\a cdsLibManager->viewListBox->value = nil
+\a cdsLibManager->viewListBox->value = "schematic"
+\a cdsLibManager->viewLineEdit->value = "schematic"
+\a cdsLibManager->cellListBox->value = "PLL_2p5G"
+\a cdsLibManager->cellLineEdit->value = "PLL_2p5G"
+\a cdsLibManager->viewLineEdit->value = ""
+\a cdsLibManager->viewListBox->value = nil
+\a cdsLibManager->viewListBox->value = "schematic"
+\a cdsLibManager->viewLineEdit->value = "schematic"
+\a cdsLibManager->libListBox->value = "TEST_UMC18_Adaptive_CTLE"
+\a cdsLibManager->libLineEdit->value = "TEST_UMC18_Adaptive_CTLE"
+\a cdsLibManager->cellLineEdit->value = ""
+\a cdsLibManager->cellListBox->value = nil
+\a cdsLibManager->viewLineEdit->value = ""
+\a cdsLibManager->viewListBox->value = nil
+\a cdsLibManager->libListBox->value = "TEST_UMC18_CDR"
+\a cdsLibManager->libLineEdit->value = "TEST_UMC18_CDR"
+\a cdsLibManager->libListBox->value = "PLL_5G"
+\a cdsLibManager->libLineEdit->value = "PLL_5G"
+\a cdsLibManager->cellListBox->value = "Divider_5G"
+\a cdsLibManager->cellLineEdit->value = "Divider_5G"
+\a cdsLibManager->viewListBox->value = "schematic"
+\a cdsLibManager->viewLineEdit->value = "schematic"
+\a cdsLibManager->libListBox->value = "TEST_UMC18_CDR"
+\a cdsLibManager->libLineEdit->value = "TEST_UMC18_CDR"
+\a cdsLibManager->cellLineEdit->value = ""
+\a cdsLibManager->cellListBox->value = nil
+\a cdsLibManager->viewLineEdit->value = ""
+\a cdsLibManager->viewListBox->value = nil
+\a cdsLibManager->libListBox->value = "TEST_UMC18_EQ_TX"
+\a cdsLibManager->libLineEdit->value = "TEST_UMC18_EQ_TX"
+\a cdsLibManager->libLineEdit->value = ""
+\a cdsLibManager->libListBox->value = nil
+\a cdsLibManager->libListBox->value = "TEST_UMC18_RRIO_OPA"
+\a cdsLibManager->libLineEdit->value = "TEST_UMC18_RRIO_OPA"
+\a cdsLibManager->libListBox->value = "TEST_UMC18_EQ_TX"
+\a cdsLibManager->libLineEdit->value = "TEST_UMC18_EQ_TX"
+\a cdsLibManager->cellListBox->value = "TX_Fullchip"
+\a cdsLibManager->cellLineEdit->value = "TX_Fullchip"
+\a cdsLibManager->viewListBox->value = "schematic"
+\a cdsLibManager->viewLineEdit->value = "schematic"
+\a cdsLibManager->viewListBox->value = nil
+\a cdsLibManager->viewLineEdit->value = ""
+\a cdsLibManager->viewListBox->value = "schematic"
+\a cdsLibManager->viewLineEdit->value = "schematic"
+\o MPS request: edit design
+\a nrListItemAction(cdsLibManager->gdmXTView 1 0)
+\a nrSetCurrentWindow(cdsLibManager)
+\a cdsLibManager->cellListBox->value = "PLL_2p5G"
+\a cdsLibManager->cellLineEdit->value = "PLL_2p5G"
+\a cdsLibManager->viewLineEdit->value = ""
+\a cdsLibManager->viewListBox->value = nil
+\a cdsLibManager->viewListBox->value = "schematic"
+\a cdsLibManager->viewLineEdit->value = "schematic"
+\a cdsLibManager->viewListBox->value = nil
+\a cdsLibManager->viewLineEdit->value = ""
+\a cdsLibManager->viewListBox->value = "schematic"
+\a cdsLibManager->viewLineEdit->value = "schematic"
+\o MPS request: edit design
+\a nrListItemAction(cdsLibManager->gdmXTView 1 0)
+\a nrSetCurrentWindow(cdsLibManager)
+\a cdsLibManager->viewListBox->value = nil
+\a cdsLibManager->viewLineEdit->value = ""
+\a cdsLibManager->viewListBox->value = "schematic"
+\a cdsLibManager->viewLineEdit->value = "schematic"
+\o MPS request: edit design
+\a nrListItemAction(cdsLibManager->gdmXTView 1 0)
+\a nrSetCurrentWindow(cdsLibManager)
+\a cdsLibManager->cellListBox->value = "cs_test"
+\a cdsLibManager->cellLineEdit->value = "cs_test"
+\a cdsLibManager->viewLineEdit->value = ""
+\a cdsLibManager->viewListBox->value = nil
+\a cdsLibManager->viewListBox->value = "schematic"
+\a cdsLibManager->viewLineEdit->value = "schematic"
+\a cdsLibManager->cellListBox->value = "VCO_2p5G"
+\a cdsLibManager->cellLineEdit->value = "VCO_2p5G"
+\a cdsLibManager->viewLineEdit->value = ""
+\a cdsLibManager->viewListBox->value = nil
+\a cdsLibManager->viewListBox->value = "schematic"
+\a cdsLibManager->viewLineEdit->value = "schematic"
+\a cdsLibManager->viewListBox->value = nil
+\a cdsLibManager->viewLineEdit->value = ""
+\a cdsLibManager->viewListBox->value = "schematic"
+\a cdsLibManager->viewLineEdit->value = "schematic"
+\o MPS request: edit design
+\a nrListItemAction(cdsLibManager->gdmXTView 1 0)
+\a nrSetCurrentWindow(cdsLibManager)
+\a cdsLibManager->viewListBox->value = "config"
+\a cdsLibManager->viewLineEdit->value = "config"
+\o MPS request: edit design
+\a nrListItemAction(cdsLibManager->gdmXTView 0 0)
+\a nrSetCurrentWindow(cdsLibManager)
+\a nrResizeWindow(cdsLibManager list(382 53 781 679))
+\a nrResizeWindow(cdsLibManager list(427 61 781 679))
+\a nrSetCurrentWindow(cdsLibManager)
+\a nrSetWindowVisibility(cdsLibManager "hide")
+\a _lmgrCloseIconify("cdsLibManager" 1)
+\o MPS service: shutdown
+\o libManager is exiting.
+\a exit(0)

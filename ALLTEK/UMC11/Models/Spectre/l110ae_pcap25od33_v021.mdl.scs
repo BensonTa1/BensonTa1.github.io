@@ -1,0 +1,91 @@
+//*******************************************************************************
+simulator lang=spectre insensitive=yes
+//Property of UMC.
+//Unauthorized reproduction, modification and/or distribution are strictly prohibited.
+//This product is protected under copyright law and trade secret law.
+//This model card may not be sent in any form outside of UMC without
+//the written consent of the UMC ATD Modeling Division.
+//******************************************************************************
+//Process:  UMC 0.11 um Logic and Mixed-Mode 1P8M Metal Metal Capacitor Al Advanced
+//Enhancement Process
+//Description:  3.3V PCAP
+//Simulator:  SPECTRE
+//Model Version:0.2p1
+//Model features:
+//Global model:  Yes
+//Gate current model:  No
+//Substrate Current model: No
+//Flicker Noise: No
+//LOD model: No
+//RF model: No
+//Well proximity effect: No
+//Mis-matching: No
+//******************************************************************************
+//Revision history:
+//<Revision 1>
+//Version : 0.2p1
+//Date  : 2012/05/15
+//Author  : Chen Hua Tsai
+//Remark  : Original release
+//******************************************************************************
+//Application ranges:
+//Geometry range:
+//
+//For Vcc=3.3 V PCAP:
+//0.25 um <=LF <=2 um
+//2.5 um <=WF <=10 um
+//2 <=Nf <=8
+//
+//Voltage range:
+//For 3.3 V PCAP:
+//-3.3V(*1.1) <=VGS <=3.3V(*1.1)
+//VDS=VBS=0V
+//
+//Temperature range:-50c ~ 125c ; nominal temperature=25c
+//******************************************************************************
+//3.3 V P+/Pwell/DNW PCAP subcircuit model   
+//
+//Model coverage:
+//1. Frequency : low frequency
+//2. port1 is gate; port2 is bulk.
+//***************************start of model card******************************
+inline subckt pcap_25od33 ( port1 port2 )
+parameters wf=5u lf=2u nf=2 scale_cap=0.9 offset_cap=0.012
++ toxc=5.4e-09+dtoxe_pcap_25od33
++ pva=0.07594
++ pvd=1.878
++ pve=0.16594
++ pvg=-0.07967
++ pvi=0.02149
++ pvk=-0.00214
++ pvf=-0.70452
++ pvh=0.22518
++ pvj=-0.02439
++ tpvc=0.00004
++ tpvb=0.0002
++ pvc=-0.14625+tpvc*(temp-25)
++ pvb=-1.2234+tpvb*(temp-25)
++ dcw=0+1e6*dxw_pcap_25od33
++ cww=0.15
++ cwl=0
++ cwwl=0+1e6*dcwwl_pcap_25od33
++ dcl=0+1e6*dxl_pcap_25od33
++ cll=0.00419
++ clw=0
++ clwl=0+1e6*dclwl_pcap_25od33
++ weff=(wf*1e6*scale_cap)+dcw+cww/(wf*1e6*scale_cap)+cwl/(lf*1e6*scale_cap+offset_cap)+cwwl/(wf*1e6*scale_cap)/(lf*1e6*scale_cap+offset_cap)
++ leff=(lf*1e6*scale_cap+offset_cap)+dcl+cll/(lf*1e6*scale_cap+offset_cap)+clw/(wf*1e6*scale_cap)+clwl/(wf*1e6*scale_cap)/(lf*1e6*scale_cap+offset_cap)
++ cl0=-6.7898
++ cl1=-0.2761
++ cl2=3.0528
++ cw0=0
++ cw1=0
++ ccom=(exp(cl0+cl1/(lf*1e6*scale_cap+offset_cap)+cl2*exp(-(lf*1e6*scale_cap+offset_cap)))/4.5*(wf*1e6*scale_cap)+cw0/(wf*1e6*scale_cap))*(1+cw1/(wf*1e6*scale_cap)/(lf*1e6*scale_cap+offset_cap))
++ cmina=0+dcmina_pcap_25od33
++ cminb=-1.43710
++ cminc=0.21591
++ cmind=-0.31090
+//* ----- equivalent network ------------------
+//*
+pcap_25od33 ( port1 port2 ) bsource c=(5.69e-09/5.4e-9)*(((pva+pvc*pow(v(port1, port2),1)+pve*pow(v(port1, port2),2)+pvg*pow(v(port1, port2),3)+pvi*pow(v(port1, port2),4)+pvk*pow(v(port1, port2),5))/(1+pvb*pow(v(port1, port2),1)+pvd*pow(v(port1, port2),2)+pvf*pow(v(port1, port2),3)+pvh*pow(v(port1, port2),4)+pvj*pow(v(port1, port2),5)))/(4.5*1.812*2)*weff*leff*4+ccom)*5.4e-09*nf*1e-12/toxc/4*(1+cmina*(cminb+atan((v(port1, port2)-cminc)/cmind)))
+ends pcap_25od33

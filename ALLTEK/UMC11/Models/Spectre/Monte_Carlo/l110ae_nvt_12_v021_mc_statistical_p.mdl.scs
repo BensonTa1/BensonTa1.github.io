@@ -1,0 +1,45 @@
+
+simulator lang=spectre insensitive=yes
+//
+parameters alpha_n_nvt_12_l110e = 0.2
+
+parameters a1_np_nvt_12_l110e_xx = 0
+parameters a2_np_nvt_12_l110e_xx = 0
+parameters a3_np_nvt_12_l110e_xx = 0
+parameters a4_np_nvt_12_l110e_xx = 0
+parameters a5_np_nvt_12_l110e_xx = 0
+statistics {
+process {
+vary a1_np_nvt_12_l110e_xx dist=gauss std=sigma/3
+vary a2_np_nvt_12_l110e_xx dist=gauss std=sigma/3
+vary a3_np_nvt_12_l110e_xx dist=gauss std=sigma/3
+vary a4_np_nvt_12_l110e_xx dist=gauss std=sigma/3
+vary a5_np_nvt_12_l110e_xx dist=gauss std=sigma/3
+ }
+}
+parameters a1_np_nvt_12_l110e = a1_np_nvt_12_l110e_xx
+parameters a2_np_nvt_12_l110e = a2_np_nvt_12_l110e_xx
+parameters a3_np_nvt_12_l110e = a3_np_nvt_12_l110e_xx
+parameters a4_np_nvt_12_l110e = a4_np_nvt_12_l110e_xx
+parameters a5_np_nvt_12_l110e = a5_np_nvt_12_l110e_xx
+parameters comp1_np_nvt_12_l110e	= 7.71480023235462
+parameters comp2_np_nvt_12_l110e	= 0.694159473652111
+parameters comp3_np_nvt_12_l110e	= 2.18517301560916e-14
+parameters comp4_np_nvt_12_l110e	= 4.04743743915263e-16
+parameters comp5_np_nvt_12_l110e	= 2.37041313039059e-30
+parameters 	dtox_n_nvt_12_l110e_g	  =	alpha_n_nvt_12_l110e*(-2.04524394721459e-11*a1_np_nvt_12_l110e*comp1_np_nvt_12_l110e+-2.97516674426337e-12*a2_np_nvt_12_l110e*comp2_np_nvt_12_l110e+2.98559875965895e-11*a3_np_nvt_12_l110e*comp3_np_nvt_12_l110e+1.30436882527317e-11*a4_np_nvt_12_l110e*comp4_np_nvt_12_l110e+-6.55645279822977e-11*a5_np_nvt_12_l110e*comp5_np_nvt_12_l110e)
+parameters 	dxl_n_nvt_12_l110e_g	  =	alpha_n_nvt_12_l110e*(-1.29609882586476e-09*a1_np_nvt_12_l110e*comp1_np_nvt_12_l110e+-1.88540351347508e-10*a2_np_nvt_12_l110e*comp2_np_nvt_12_l110e+3.95749870369704e-10*a3_np_nvt_12_l110e*comp3_np_nvt_12_l110e+3.31719978493579e-10*a4_np_nvt_12_l110e*comp4_np_nvt_12_l110e+1.80480339869435e-09*a5_np_nvt_12_l110e*comp5_np_nvt_12_l110e)
+parameters 	dxw_n_nvt_12_l110e_g	  =	alpha_n_nvt_12_l110e*(-5.27003200433615e-10*a1_np_nvt_12_l110e*comp1_np_nvt_12_l110e+-2.50932073330583e-10*a2_np_nvt_12_l110e*comp2_np_nvt_12_l110e+-2.30216576703899e-10*a3_np_nvt_12_l110e*comp3_np_nvt_12_l110e+-8.79523818082618e-10*a4_np_nvt_12_l110e*comp4_np_nvt_12_l110e+9.48311217698225e-11*a5_np_nvt_12_l110e*comp5_np_nvt_12_l110e)
+parameters 	dvth0_n_nvt_12_l110e_g	  =	alpha_n_nvt_12_l110e*(-1.15243110039223e-02*a1_np_nvt_12_l110e*comp1_np_nvt_12_l110e+-1.78366685776934e-03*a2_np_nvt_12_l110e*comp2_np_nvt_12_l110e+1.75151378463834e-03*a3_np_nvt_12_l110e*comp3_np_nvt_12_l110e+-2.09845963402377e-02*a4_np_nvt_12_l110e*comp4_np_nvt_12_l110e+-1.34979260762296e-03*a5_np_nvt_12_l110e*comp5_np_nvt_12_l110e)
+parameters 	du0_n_nvt_12_l110e_g	  =	alpha_n_nvt_12_l110e*(-1.47931697693195e-04*a1_np_nvt_12_l110e*comp1_np_nvt_12_l110e+-1.53208324157116e-04*a2_np_nvt_12_l110e*comp2_np_nvt_12_l110e+-4.93500782515508e-04*a3_np_nvt_12_l110e*comp3_np_nvt_12_l110e+9.15778134075939e-05*a4_np_nvt_12_l110e*comp4_np_nvt_12_l110e+-1.49078923545905e-04*a5_np_nvt_12_l110e*comp5_np_nvt_12_l110e)
+parameters 	dlvth0_n_nvt_12_l110e_g	  =	alpha_n_nvt_12_l110e*(-4.30291716558486e-03*a1_np_nvt_12_l110e*comp1_np_nvt_12_l110e+-2.74170284760077e-04*a2_np_nvt_12_l110e*comp2_np_nvt_12_l110e+9.2184762180721e-04*a3_np_nvt_12_l110e*comp3_np_nvt_12_l110e+-1.83515523924054e-04*a4_np_nvt_12_l110e*comp4_np_nvt_12_l110e+1.19009154317995e-03*a5_np_nvt_12_l110e*comp5_np_nvt_12_l110e)
+parameters 	drdsw_n_nvt_12_l110e_g	  =	alpha_n_nvt_12_l110e*(-38.3760474224143*a1_np_nvt_12_l110e*comp1_np_nvt_12_l110e+147.133175602354*a2_np_nvt_12_l110e*comp2_np_nvt_12_l110e+-32.2714460309525*a3_np_nvt_12_l110e*comp3_np_nvt_12_l110e+-0.430152077980542*a4_np_nvt_12_l110e*comp4_np_nvt_12_l110e+-7.29239532281253*a5_np_nvt_12_l110e*comp5_np_nvt_12_l110e)
+parameters 	dk3_n_nvt_12_l110e_g	  =	alpha_n_nvt_12_l110e*(-2.07645894173183*a1_np_nvt_12_l110e*comp1_np_nvt_12_l110e+-0.687840915512398*a2_np_nvt_12_l110e*comp2_np_nvt_12_l110e+0.694936717052515*a3_np_nvt_12_l110e*comp3_np_nvt_12_l110e+3.29862227771209*a4_np_nvt_12_l110e*comp4_np_nvt_12_l110e+1.90639032964915*a5_np_nvt_12_l110e*comp5_np_nvt_12_l110e)
+parameters 	dpvth0_n_nvt_12_l110e_g	  =	alpha_n_nvt_12_l110e*(-2.3762627205277e-03*a1_np_nvt_12_l110e*comp1_np_nvt_12_l110e+1.1840025792035e-04*a2_np_nvt_12_l110e*comp2_np_nvt_12_l110e+4.46793821512016e-04*a3_np_nvt_12_l110e*comp3_np_nvt_12_l110e+3.29096929910403e-03*a4_np_nvt_12_l110e*comp4_np_nvt_12_l110e+1.04778269192901e-03*a5_np_nvt_12_l110e*comp5_np_nvt_12_l110e)
+parameters 	dwwl_n_nvt_12_l110e_g	  =	alpha_n_nvt_12_l110e*(-4.56499822991661e-23*a1_np_nvt_12_l110e*comp1_np_nvt_12_l110e+-1.85823030157656e-23*a2_np_nvt_12_l110e*comp2_np_nvt_12_l110e+1.54647104888553e-23*a3_np_nvt_12_l110e*comp3_np_nvt_12_l110e+-8.08893044907138e-24*a4_np_nvt_12_l110e*comp4_np_nvt_12_l110e+1.63563832434886e-23*a5_np_nvt_12_l110e*comp5_np_nvt_12_l110e)
+parameters 	dcj_n_nvt_12_l110e_g	  =	alpha_n_nvt_12_l110e*(-3.42170090028296e-06*a1_np_nvt_12_l110e*comp1_np_nvt_12_l110e+-4.97746527557426e-07*a2_np_nvt_12_l110e*comp2_np_nvt_12_l110e+1.42497591386951e-06*a3_np_nvt_12_l110e*comp3_np_nvt_12_l110e+7.52989198372867e-07*a4_np_nvt_12_l110e*comp4_np_nvt_12_l110e+9.97976129666791e-07*a5_np_nvt_12_l110e*comp5_np_nvt_12_l110e)
+parameters 	dcjsw_n_nvt_12_l110e_g	  =	alpha_n_nvt_12_l110e*(-8.08765667339609e-12*a1_np_nvt_12_l110e*comp1_np_nvt_12_l110e+-1.17649179240844e-12*a2_np_nvt_12_l110e*comp2_np_nvt_12_l110e+2.04182655776943e-12*a3_np_nvt_12_l110e*comp3_np_nvt_12_l110e+-1.3946755837674e-11*a4_np_nvt_12_l110e*comp4_np_nvt_12_l110e+-1.1199567106742e-12*a5_np_nvt_12_l110e*comp5_np_nvt_12_l110e)
+parameters 	dcjswg_n_nvt_12_l110e_g	  =	alpha_n_nvt_12_l110e*(-3.2143250881446e-12*a1_np_nvt_12_l110e*comp1_np_nvt_12_l110e+-4.67580071341817e-13*a2_np_nvt_12_l110e*comp2_np_nvt_12_l110e+8.63343596733866e-13*a3_np_nvt_12_l110e*comp3_np_nvt_12_l110e+2.11929434728328e-12*a4_np_nvt_12_l110e*comp4_np_nvt_12_l110e+3.31438585262757e-13*a5_np_nvt_12_l110e*comp5_np_nvt_12_l110e)
+parameters 	dcgdo_n_nvt_12_l110e_g	  =	alpha_n_nvt_12_l110e*(2.85141741690247e-12*a1_np_nvt_12_l110e*comp1_np_nvt_12_l110e+4.14788772964516e-13*a2_np_nvt_12_l110e*comp2_np_nvt_12_l110e+-8.06752609878711e-13*a3_np_nvt_12_l110e*comp3_np_nvt_12_l110e+-1.16349883772972e-13*a4_np_nvt_12_l110e*comp4_np_nvt_12_l110e+-9.56014751644241e-13*a5_np_nvt_12_l110e*comp5_np_nvt_12_l110e)
+parameters 	dcgso_n_nvt_12_l110e_g	  =	alpha_n_nvt_12_l110e*(2.85141741690247e-12*a1_np_nvt_12_l110e*comp1_np_nvt_12_l110e+4.14788772964516e-13*a2_np_nvt_12_l110e*comp2_np_nvt_12_l110e+-8.06752609878711e-13*a3_np_nvt_12_l110e*comp3_np_nvt_12_l110e+-1.16349883772972e-13*a4_np_nvt_12_l110e*comp4_np_nvt_12_l110e+-9.56014751644241e-13*a5_np_nvt_12_l110e*comp5_np_nvt_12_l110e)
+

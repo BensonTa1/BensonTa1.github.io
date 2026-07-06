@@ -1,0 +1,16 @@
+simulator lang=spectre insensitive=yes
+parameters mc_mimcap_10f_mr = 0
+parameters mc_mimcap_15f_mr = 0
+parameters mc_mimcap_20f_mr = 0
+statistics {
+    process {
+        vary mc_mimcap_10f_mr dist=gauss std=sigma/3
+        vary mc_mimcap_15f_mr dist=gauss std=sigma/3
+        vary mc_mimcap_20f_mr dist=gauss std=sigma/3
+    }
+}
+
+
+parameters d_ca_mimcaps_10f_mml110e = (0.15 / 3) * mc_mimcap_10f_mr 
+parameters d_ca_mimcaps_15f_mml110e = (0.15 / 3) * mc_mimcap_15f_mr 
+parameters d_ca_mimcaps_20f_mml110e = (0.15 / 3) * mc_mimcap_20f_mr 

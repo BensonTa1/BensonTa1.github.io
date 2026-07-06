@@ -1,0 +1,2707 @@
+<?xml version="1.0"?>
+<setupdb version="6">data
+	<active>Active Setup
+		<corners>
+			<corner enabled="0">_default</corner>
+			<corner enabled="1">C0
+				<models>
+					<model enabled="1">cr013g_2d5_v1d4.scs
+						<modeltest>All</modeltest>
+						<modelblock>Global</modelblock>
+						<modelfile>/home/IC/Desktop/virtuoso/Process/TSMC13/TSMC13/models/spectre/cr013g_2d5_v1d4.scs</modelfile>
+						<modelsection>"tt" "ff" "ss" "sf" "fs"</modelsection>
+					</model>
+					<model enabled="1">cr013g_2d5_v1d4.scs:1
+						<modeltest>All</modeltest>
+						<modelblock>Global</modelblock>
+						<modelfile>/home/IC/Desktop/virtuoso/Process/TSMC13/TSMC13/models/spectre/cr013g_2d5_v1d4.scs</modelfile>
+						<modelsection>"tt_res" "ff_res" "ss_res"</modelsection>
+					</model>
+					<model enabled="1">cr013g_2d5_v1d4.scs:2
+						<modeltest>All</modeltest>
+						<modelblock>Global</modelblock>
+						<modelfile>/home/IC/Desktop/virtuoso/Process/TSMC13/TSMC13/models/spectre/cr013g_2d5_v1d4.scs</modelfile>
+						<modelsection>"tt_mim"</modelsection>
+					</model>
+					<model enabled="1">ResModel.scs
+						<modeltest>All</modeltest>
+						<modelblock>Global</modelblock>
+						<modelfile>/home/IC/Desktop/virtuoso/Process/TSMC13/TSMC13/models/spectre/ResModel.scs</modelfile>
+						<modelsection>"tt_disres"</modelsection>
+					</model>
+					<model enabled="0">tsmc13rf.scs
+						<modeltest>All</modeltest>
+						<modelblock>Global</modelblock>
+						<modelfile>/home/IC/Desktop/virtuoso/Process/TSMC13/TSMC13/models/spectre/tsmc13rf.scs</modelfile>
+						<modelsection></modelsection>
+					</model>
+				</models>
+			</corner>
+			<corner enabled="0">C1
+				<models>
+					<model enabled="1">cr013g_2d5_v1d4.scs
+						<modeltest>All</modeltest>
+						<modelblock>Global</modelblock>
+						<modelfile>/home/IC/Desktop/virtuoso/Process/TSMC13/TSMC13/models/spectre/cr013g_2d5_v1d4.scs</modelfile>
+						<modelsection>"tt"</modelsection>
+					</model>
+					<model enabled="1">cr013g_2d5_v1d4.scs:1
+						<modeltest>All</modeltest>
+						<modelblock>Global</modelblock>
+						<modelfile>/home/IC/Desktop/virtuoso/Process/TSMC13/TSMC13/models/spectre/cr013g_2d5_v1d4.scs</modelfile>
+						<modelsection>"tt_res" "ff_res" "ss_res"</modelsection>
+					</model>
+					<model enabled="0">cr013g_2d5_v1d4.scs:2
+						<modeltest>All</modeltest>
+						<modelblock>Global</modelblock>
+						<modelfile>/home/IC/Desktop/virtuoso/Process/TSMC13/TSMC13/models/spectre/cr013g_2d5_v1d4.scs</modelfile>
+						<modelsection></modelsection>
+					</model>
+					<model enabled="0">ResModel.scs
+						<modeltest>All</modeltest>
+						<modelblock>Global</modelblock>
+						<modelfile>/home/IC/Desktop/virtuoso/Process/TSMC13/TSMC13/models/spectre/ResModel.scs</modelfile>
+						<modelsection></modelsection>
+					</model>
+					<model enabled="0">tsmc13rf.scs
+						<modeltest>All</modeltest>
+						<modelblock>Global</modelblock>
+						<modelfile>/home/IC/Desktop/virtuoso/Process/TSMC13/TSMC13/models/spectre/tsmc13rf.scs</modelfile>
+						<modelsection></modelsection>
+					</model>
+				</models>
+			</corner>
+		</corners>
+		<extensions>
+			<extension>Parasitics
+				<callback>_parSetupDBExtensionCB</callback>
+				<iconvalue></iconvalue>
+				<icontype></icontype>
+				<active>
+					<mode>No Parasitics/LDE</mode>
+					<parameters>
+						<device>
+							<enabled>1</enabled>
+						</device>
+						<parasitic>
+							<enabled>0</enabled>
+						</parasitic>
+					</parameters>
+				</active>
+				<modes>
+					<mode>No Parasitics/LDE
+						<schematic>
+							<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+							<cell>VCO_RING</cell>
+							<view>schematic</view>
+						</schematic>
+					</mode>
+					<mode>Schematic Estimates (Parasitics)
+						<schematic>
+							<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+							<cell>VCO_RING</cell>
+							<view>schematic</view>
+						</schematic>
+						<parasitic>
+							<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+							<cell>VCO_RING</cell>
+							<view>estimated</view>
+						</parasitic>
+					</mode>
+					<mode>Layout (Parasitics/LDE)
+						<schematic>
+							<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+							<cell>VCO_RING</cell>
+							<view>schematic</view>
+						</schematic>
+						<parasitic>
+							<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+							<cell>VCO_RING</cell>
+							<view>netlist_layout</view>
+						</parasitic>
+					</mode>
+					<mode>Extracted (Parasitics/LDE)
+						<schematic>
+							<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+							<cell>VCO_RING</cell>
+							<view>schematic</view>
+						</schematic>
+						<parasitic>
+							<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+							<cell>VCO_RING</cell>
+							<view>&lt;None&gt;</view>
+						</parasitic>
+					</mode>
+				</modes>
+			</extension>
+		</extensions>
+		<currentmode>Single Run, Sweeps and Corners</currentmode>
+		<overwritehistory>0</overwritehistory>
+		<tests>
+			<test enabled="1">TEST_TSMC13_ALLTEK_PLL:VCO_RING:1
+				<tool>ADE</tool>
+				<tooloptions>
+					<option>cell
+						<value>VCO_RING1</value>
+					</option>
+					<option>lib
+						<value>TEST_TSMC13_ALLTEK_PLL</value>
+					</option>
+					<option>sim
+						<value>spectre</value>
+					</option>
+					<option>view
+						<value>config</value>
+					</option>
+					<option>path
+						<value>$AXL_SETUPDB_DIR/test_states</value>
+					</option>
+					<option>state
+						<value>TEST_TSMC13_ALLTEK_PLL:VCO_RING:1_active</value>
+					</option>
+				</tooloptions>
+				<origoptions>
+					<option>cell
+						<value>VCO_RING</value>
+					</option>
+					<option>lib
+						<value>TEST_TSMC13_ALLTEK_PLL</value>
+					</option>
+					<option>sim
+						<value>spectre</value>
+					</option>
+					<option>view
+						<value>schematic</value>
+					</option>
+					<option>path
+						<value>$AXL_SETUPDB_DIR/test_states</value>
+					</option>
+					<option>state
+						<value>tmpstate.157584038</value>
+					</option>
+				</origoptions>
+			</test>
+		</tests>
+		<vars>
+			<var enabled="0">VS
+				<value>{Exclusion List}1.2{Exclusion List}{Center/Span%}Auto:1.2:3:20{Center/Span%}</value>
+				<dependentTests>
+					<dependentTest enabled="1">TEST_TSMC13_ALLTEK_PLL:VCO_RING:1</dependentTest>
+				</dependentTests>
+			</var>
+			<var enabled="0">temperature
+				<value>{Exclusion List}30{Exclusion List}{From/To}Auto:-25:5:125{From/To}</value>
+			</var>
+			<var enabled="0">VCTRL
+				<value>{Exclusion List}0.6{Exclusion List}{From/To}Auto:0:3:1.2{From/To}</value>
+				<dependentTests>
+					<dependentTest enabled="1">TEST_TSMC13_ALLTEK_PLL:VCO_RING:1</dependentTest>
+				</dependentTests>
+			</var>
+			<var>D0
+				<value>1.2</value>
+				<dependentTests>
+					<dependentTest enabled="1">TEST_TSMC13_ALLTEK_PLL:VCO_RING:1</dependentTest>
+				</dependentTests>
+			</var>
+			<var>CAP_D0
+				<value>0</value>
+				<dependentTests>
+					<dependentTest omitted="0">TEST_TSMC13_ALLTEK_PLL:VCO_RING:1</dependentTest>
+				</dependentTests>
+			</var>
+			<var>CAP_D1
+				<value>1.2</value>
+				<dependentTests>
+					<dependentTest omitted="0">TEST_TSMC13_ALLTEK_PLL:VCO_RING:1</dependentTest>
+				</dependentTests>
+			</var>
+			<var>CAP_DALL
+				<value>1.2</value>
+				<dependentTests>
+					<dependentTest omitted="0">TEST_TSMC13_ALLTEK_PLL:VCO_RING:1</dependentTest>
+				</dependentTests>
+			</var>
+		</vars>
+		<overwritehistoryname>Interactive.0</overwritehistoryname>
+		<plottingoptions>
+			<plottingoption>plottingmode
+				<value>Replace</value>
+			</plottingoption>
+			<plottingoption>plottype
+				<value>None</value>
+			</plottingoption>
+			<plottingoption>usewaveformtemplate
+				<value>no</value>
+			</plottingoption>
+			<plottingoption>useMaestroPlottingTemplate
+				<value>yes</value>
+			</plottingoption>
+			<plottingoption>waveformtemplate
+				<value></value>
+			</plottingoption>
+			<plottingoption>allplottingtemplates
+				<value></value>
+			</plottingoption>
+			<plottingoption>defaultplottingtemplate
+				<value></value>
+			</plottingoption>
+		</plottingoptions>
+	</active>
+	<history>History
+		<historyentry assemblerOrExplorer="adexl" roOrView="view">Interactive.38
+			<checkpoint>
+				<corners>
+					<corner enabled="0">_default</corner>
+					<corner enabled="0">C0
+						<models>
+							<model enabled="1">cr013g_2d5_v1d4.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/TSMC13/TSMC13/models/spectre/cr013g_2d5_v1d4.scs</modelfile>
+								<modelsection>"tt" "ff" "ss" "sf" "fs"</modelsection>
+							</model>
+							<model enabled="1">cr013g_2d5_v1d4.scs:1
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/TSMC13/TSMC13/models/spectre/cr013g_2d5_v1d4.scs</modelfile>
+								<modelsection>"tt_res" "ff_res" "ss_res"</modelsection>
+							</model>
+						</models>
+					</corner>
+					<corner enabled="1">C1
+						<models>
+							<model enabled="1">cr013g_2d5_v1d4.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/TSMC13/TSMC13/models/spectre/cr013g_2d5_v1d4.scs</modelfile>
+								<modelsection>"tt"</modelsection>
+							</model>
+							<model enabled="1">cr013g_2d5_v1d4.scs:1
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/TSMC13/TSMC13/models/spectre/cr013g_2d5_v1d4.scs</modelfile>
+								<modelsection>"tt_res" "ff_res" "ss_res"</modelsection>
+							</model>
+						</models>
+					</corner>
+				</corners>
+				<extensions>
+					<extension>Parasitics
+						<callback>_parSetupDBExtensionCB</callback>
+						<iconvalue></iconvalue>
+						<icontype></icontype>
+						<active>
+							<mode>No Parasitics/LDE</mode>
+							<parameters>
+								<device>
+									<enabled>1</enabled>
+								</device>
+								<parasitic>
+									<enabled>0</enabled>
+								</parasitic>
+							</parameters>
+						</active>
+						<modes>
+							<mode>No Parasitics/LDE
+								<schematic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>VCO_RING</cell>
+									<view>schematic</view>
+								</schematic>
+							</mode>
+							<mode>Schematic Estimates (Parasitics)
+								<schematic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>VCO_RING</cell>
+									<view>schematic</view>
+								</schematic>
+								<parasitic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>VCO_RING</cell>
+									<view>estimated</view>
+								</parasitic>
+							</mode>
+							<mode>Layout (Parasitics/LDE)
+								<schematic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>VCO_RING</cell>
+									<view>schematic</view>
+								</schematic>
+								<parasitic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>VCO_RING</cell>
+									<view>netlist_layout</view>
+								</parasitic>
+							</mode>
+							<mode>Extracted (Parasitics/LDE)
+								<schematic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>VCO_RING</cell>
+									<view>schematic</view>
+								</schematic>
+								<parasitic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>VCO_RING</cell>
+									<view>&lt;None&gt;</view>
+								</parasitic>
+							</mode>
+						</modes>
+					</extension>
+				</extensions>
+				<currentmode>Single Run, Sweeps and Corners</currentmode>
+				<overwritehistory>0</overwritehistory>
+				<tests>
+					<test enabled="1">TEST_TSMC13_ALLTEK_PLL:VCO_RING:1
+						<tool>ADE</tool>
+						<tooloptions>
+							<option>cell
+								<value>VCO_RING1</value>
+							</option>
+							<option>lib
+								<value>TEST_TSMC13_ALLTEK_PLL</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>schematic</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>TEST_TSMC13_ALLTEK_PLL:VCO_RING:1_tmpstate.157584038_Interactive.38</value>
+							</option>
+						</tooloptions>
+						<origoptions>
+							<option>cell
+								<value>VCO_RING</value>
+							</option>
+							<option>lib
+								<value>TEST_TSMC13_ALLTEK_PLL</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>schematic</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>tmpstate.157584038</value>
+							</option>
+						</origoptions>
+					</test>
+				</tests>
+				<vars>
+					<var enabled="0">VS
+						<value>{Exclusion List}1.2{Exclusion List}{Center/Span%}Auto:1.2:3:20{Center/Span%}</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_TSMC13_ALLTEK_PLL:VCO_RING:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var enabled="0">temperature
+						<value>{Exclusion List}30{Exclusion List}{From/To}Auto:-25:5:125{From/To}</value>
+					</var>
+					<var enabled="0">VD1
+						<value>0</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_TSMC13_ALLTEK_PLL:VCO_RING:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var enabled="0">VD0
+						<value>0</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_TSMC13_ALLTEK_PLL:VCO_RING:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var enabled="0">VD2
+						<value>0</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_TSMC13_ALLTEK_PLL:VCO_RING:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var enabled="0">VCTRL
+						<value>{Exclusion List}0.6{Exclusion List}{From/To}Auto:0:3:1.2{From/To}</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_TSMC13_ALLTEK_PLL:VCO_RING:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>D0
+						<value>1.2</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_TSMC13_ALLTEK_PLL:VCO_RING:1</dependentTest>
+						</dependentTests>
+					</var>
+				</vars>
+				<overwritehistoryname>Interactive.0</overwritehistoryname>
+				<plottingoptions>
+					<plottingoption>plottingmode
+						<value>Replace</value>
+					</plottingoption>
+					<plottingoption>plottype
+						<value>None</value>
+					</plottingoption>
+					<plottingoption>usewaveformtemplate
+						<value>no</value>
+					</plottingoption>
+					<plottingoption>useMaestroPlottingTemplate
+						<value>yes</value>
+					</plottingoption>
+					<plottingoption>waveformtemplate
+						<value></value>
+					</plottingoption>
+					<plottingoption>allplottingtemplates
+						<value></value>
+					</plottingoption>
+					<plottingoption>defaultplottingtemplate
+						<value></value>
+					</plottingoption>
+				</plottingoptions>
+				<sortVariableValues>0</sortVariableValues>
+			</checkpoint>
+			<timestamp>Mar 24 19:27:02 2026</timestamp>
+			<resultsname>/home/IC/Desktop/virtuoso/TEST_TSMC13_ALLTEK_PLL/VCO_RING1/adexl/results/data/Interactive.38.rdb</resultsname>
+			<simresults>$AXL_SETUPDB_DIR/results/data/Interactive.38.rdb</simresults>
+			<rawdatadelstrategy>SaveAll
+				<simdatasavemode>All</simdatasavemode>
+			</rawdatadelstrategy>
+			<netlistdelstrategy>SaveAll</netlistdelstrategy>
+			<uselocalpsfdir>false</uselocalpsfdir>
+			<localpsfdir>/tmp/IC_IC_192702048</localpsfdir>
+			<psfdir>/home/IC/simulation/TEST_TSMC13_ALLTEK_PLL/VCO_RING1/adexl/results/data/Interactive.38</psfdir>
+			<simdir>$AXL_PROJECT_DIR/TEST_TSMC13_ALLTEK_PLL/VCO_RING1/adexl/results/data/Interactive.38</simdir>
+			<gendatasheetplotsonsimulation>1</gendatasheetplotsonsimulation>
+			<runlog>/home/IC/Desktop/virtuoso/TEST_TSMC13_ALLTEK_PLL/VCO_RING1/adexl/results/data/Interactive.38.log</runlog>
+			<runlogfile>$AXL_SETUPDB_DIR/results/data/Interactive.38.log</runlogfile>
+			<schematicpoint></schematicpoint>
+			<test>all</test>
+		</historyentry>
+		<historyentry assemblerOrExplorer="adexl" roOrView="view">Interactive.39
+			<checkpoint>
+				<corners>
+					<corner enabled="0">_default</corner>
+					<corner enabled="0">C0
+						<models>
+							<model enabled="1">cr013g_2d5_v1d4.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/TSMC13/TSMC13/models/spectre/cr013g_2d5_v1d4.scs</modelfile>
+								<modelsection>"tt" "ff" "ss" "sf" "fs"</modelsection>
+							</model>
+							<model enabled="1">cr013g_2d5_v1d4.scs:1
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/TSMC13/TSMC13/models/spectre/cr013g_2d5_v1d4.scs</modelfile>
+								<modelsection>"tt_res" "ff_res" "ss_res"</modelsection>
+							</model>
+						</models>
+					</corner>
+					<corner enabled="1">C1
+						<models>
+							<model enabled="1">cr013g_2d5_v1d4.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/TSMC13/TSMC13/models/spectre/cr013g_2d5_v1d4.scs</modelfile>
+								<modelsection>"tt"</modelsection>
+							</model>
+							<model enabled="1">cr013g_2d5_v1d4.scs:1
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/TSMC13/TSMC13/models/spectre/cr013g_2d5_v1d4.scs</modelfile>
+								<modelsection>"tt_res" "ff_res" "ss_res"</modelsection>
+							</model>
+						</models>
+					</corner>
+				</corners>
+				<extensions>
+					<extension>Parasitics
+						<callback>_parSetupDBExtensionCB</callback>
+						<iconvalue></iconvalue>
+						<icontype></icontype>
+						<active>
+							<mode>No Parasitics/LDE</mode>
+							<parameters>
+								<device>
+									<enabled>1</enabled>
+								</device>
+								<parasitic>
+									<enabled>0</enabled>
+								</parasitic>
+							</parameters>
+						</active>
+						<modes>
+							<mode>No Parasitics/LDE
+								<schematic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>VCO_RING</cell>
+									<view>schematic</view>
+								</schematic>
+							</mode>
+							<mode>Schematic Estimates (Parasitics)
+								<schematic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>VCO_RING</cell>
+									<view>schematic</view>
+								</schematic>
+								<parasitic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>VCO_RING</cell>
+									<view>estimated</view>
+								</parasitic>
+							</mode>
+							<mode>Layout (Parasitics/LDE)
+								<schematic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>VCO_RING</cell>
+									<view>schematic</view>
+								</schematic>
+								<parasitic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>VCO_RING</cell>
+									<view>netlist_layout</view>
+								</parasitic>
+							</mode>
+							<mode>Extracted (Parasitics/LDE)
+								<schematic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>VCO_RING</cell>
+									<view>schematic</view>
+								</schematic>
+								<parasitic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>VCO_RING</cell>
+									<view>&lt;None&gt;</view>
+								</parasitic>
+							</mode>
+						</modes>
+					</extension>
+				</extensions>
+				<currentmode>Single Run, Sweeps and Corners</currentmode>
+				<overwritehistory>0</overwritehistory>
+				<tests>
+					<test enabled="1">TEST_TSMC13_ALLTEK_PLL:VCO_RING:1
+						<tool>ADE</tool>
+						<tooloptions>
+							<option>cell
+								<value>VCO_RING1</value>
+							</option>
+							<option>lib
+								<value>TEST_TSMC13_ALLTEK_PLL</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>schematic</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>TEST_TSMC13_ALLTEK_PLL:VCO_RING:1_tmpstate.157584038_Interactive.39</value>
+							</option>
+						</tooloptions>
+						<origoptions>
+							<option>cell
+								<value>VCO_RING</value>
+							</option>
+							<option>lib
+								<value>TEST_TSMC13_ALLTEK_PLL</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>schematic</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>tmpstate.157584038</value>
+							</option>
+						</origoptions>
+					</test>
+				</tests>
+				<vars>
+					<var enabled="0">VS
+						<value>{Exclusion List}1.2{Exclusion List}{Center/Span%}Auto:1.2:3:20{Center/Span%}</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_TSMC13_ALLTEK_PLL:VCO_RING:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var enabled="0">temperature
+						<value>{Exclusion List}30{Exclusion List}{From/To}Auto:-25:5:125{From/To}</value>
+					</var>
+					<var enabled="0">VD1
+						<value>0</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_TSMC13_ALLTEK_PLL:VCO_RING:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var enabled="0">VD0
+						<value>0</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_TSMC13_ALLTEK_PLL:VCO_RING:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var enabled="0">VD2
+						<value>0</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_TSMC13_ALLTEK_PLL:VCO_RING:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var enabled="0">VCTRL
+						<value>{Exclusion List}0.6{Exclusion List}{From/To}Auto:0:3:1.2{From/To}</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_TSMC13_ALLTEK_PLL:VCO_RING:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>D0
+						<value>1.2</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_TSMC13_ALLTEK_PLL:VCO_RING:1</dependentTest>
+						</dependentTests>
+					</var>
+				</vars>
+				<overwritehistoryname>Interactive.0</overwritehistoryname>
+				<plottingoptions>
+					<plottingoption>plottingmode
+						<value>Replace</value>
+					</plottingoption>
+					<plottingoption>plottype
+						<value>None</value>
+					</plottingoption>
+					<plottingoption>usewaveformtemplate
+						<value>no</value>
+					</plottingoption>
+					<plottingoption>useMaestroPlottingTemplate
+						<value>yes</value>
+					</plottingoption>
+					<plottingoption>waveformtemplate
+						<value></value>
+					</plottingoption>
+					<plottingoption>allplottingtemplates
+						<value></value>
+					</plottingoption>
+					<plottingoption>defaultplottingtemplate
+						<value></value>
+					</plottingoption>
+				</plottingoptions>
+				<sortVariableValues>0</sortVariableValues>
+			</checkpoint>
+			<timestamp>Mar 24 19:28:32 2026</timestamp>
+			<resultsname>/home/IC/Desktop/virtuoso/TEST_TSMC13_ALLTEK_PLL/VCO_RING1/adexl/results/data/Interactive.39.rdb</resultsname>
+			<simresults>$AXL_SETUPDB_DIR/results/data/Interactive.39.rdb</simresults>
+			<rawdatadelstrategy>SaveAll
+				<simdatasavemode>All</simdatasavemode>
+			</rawdatadelstrategy>
+			<netlistdelstrategy>SaveAll</netlistdelstrategy>
+			<uselocalpsfdir>false</uselocalpsfdir>
+			<localpsfdir>/tmp/IC_IC_192832083</localpsfdir>
+			<psfdir>/home/IC/simulation/TEST_TSMC13_ALLTEK_PLL/VCO_RING1/adexl/results/data/Interactive.39</psfdir>
+			<simdir>$AXL_PROJECT_DIR/TEST_TSMC13_ALLTEK_PLL/VCO_RING1/adexl/results/data/Interactive.39</simdir>
+			<gendatasheetplotsonsimulation>1</gendatasheetplotsonsimulation>
+			<runlog>/home/IC/Desktop/virtuoso/TEST_TSMC13_ALLTEK_PLL/VCO_RING1/adexl/results/data/Interactive.39.log</runlog>
+			<runlogfile>$AXL_SETUPDB_DIR/results/data/Interactive.39.log</runlogfile>
+			<schematicpoint></schematicpoint>
+			<test>all</test>
+		</historyentry>
+		<historyentry assemblerOrExplorer="adexl" roOrView="view">Interactive.40
+			<checkpoint>
+				<corners>
+					<corner enabled="0">_default</corner>
+					<corner enabled="0">C0
+						<models>
+							<model enabled="1">cr013g_2d5_v1d4.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/TSMC13/TSMC13/models/spectre/cr013g_2d5_v1d4.scs</modelfile>
+								<modelsection>"tt" "ff" "ss" "sf" "fs"</modelsection>
+							</model>
+							<model enabled="1">cr013g_2d5_v1d4.scs:1
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/TSMC13/TSMC13/models/spectre/cr013g_2d5_v1d4.scs</modelfile>
+								<modelsection>"tt_res" "ff_res" "ss_res"</modelsection>
+							</model>
+						</models>
+					</corner>
+					<corner enabled="1">C1
+						<models>
+							<model enabled="1">cr013g_2d5_v1d4.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/TSMC13/TSMC13/models/spectre/cr013g_2d5_v1d4.scs</modelfile>
+								<modelsection>"tt"</modelsection>
+							</model>
+							<model enabled="1">cr013g_2d5_v1d4.scs:1
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/TSMC13/TSMC13/models/spectre/cr013g_2d5_v1d4.scs</modelfile>
+								<modelsection>"tt_res" "ff_res" "ss_res"</modelsection>
+							</model>
+						</models>
+					</corner>
+				</corners>
+				<extensions>
+					<extension>Parasitics
+						<callback>_parSetupDBExtensionCB</callback>
+						<iconvalue></iconvalue>
+						<icontype></icontype>
+						<active>
+							<mode>No Parasitics/LDE</mode>
+							<parameters>
+								<device>
+									<enabled>1</enabled>
+								</device>
+								<parasitic>
+									<enabled>0</enabled>
+								</parasitic>
+							</parameters>
+						</active>
+						<modes>
+							<mode>No Parasitics/LDE
+								<schematic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>VCO_RING</cell>
+									<view>schematic</view>
+								</schematic>
+							</mode>
+							<mode>Schematic Estimates (Parasitics)
+								<schematic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>VCO_RING</cell>
+									<view>schematic</view>
+								</schematic>
+								<parasitic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>VCO_RING</cell>
+									<view>estimated</view>
+								</parasitic>
+							</mode>
+							<mode>Layout (Parasitics/LDE)
+								<schematic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>VCO_RING</cell>
+									<view>schematic</view>
+								</schematic>
+								<parasitic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>VCO_RING</cell>
+									<view>netlist_layout</view>
+								</parasitic>
+							</mode>
+							<mode>Extracted (Parasitics/LDE)
+								<schematic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>VCO_RING</cell>
+									<view>schematic</view>
+								</schematic>
+								<parasitic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>VCO_RING</cell>
+									<view>&lt;None&gt;</view>
+								</parasitic>
+							</mode>
+						</modes>
+					</extension>
+				</extensions>
+				<currentmode>Single Run, Sweeps and Corners</currentmode>
+				<overwritehistory>0</overwritehistory>
+				<tests>
+					<test enabled="1">TEST_TSMC13_ALLTEK_PLL:VCO_RING:1
+						<tool>ADE</tool>
+						<tooloptions>
+							<option>cell
+								<value>VCO_RING1</value>
+							</option>
+							<option>lib
+								<value>TEST_TSMC13_ALLTEK_PLL</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>schematic</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>TEST_TSMC13_ALLTEK_PLL:VCO_RING:1_tmpstate.157584038_Interactive.40</value>
+							</option>
+						</tooloptions>
+						<origoptions>
+							<option>cell
+								<value>VCO_RING</value>
+							</option>
+							<option>lib
+								<value>TEST_TSMC13_ALLTEK_PLL</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>schematic</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>tmpstate.157584038</value>
+							</option>
+						</origoptions>
+					</test>
+				</tests>
+				<vars>
+					<var enabled="0">VS
+						<value>{Exclusion List}1.2{Exclusion List}{Center/Span%}Auto:1.2:3:20{Center/Span%}</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_TSMC13_ALLTEK_PLL:VCO_RING:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var enabled="0">temperature
+						<value>{Exclusion List}30{Exclusion List}{From/To}Auto:-25:5:125{From/To}</value>
+					</var>
+					<var enabled="0">VD1
+						<value>0</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_TSMC13_ALLTEK_PLL:VCO_RING:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var enabled="0">VD0
+						<value>0</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_TSMC13_ALLTEK_PLL:VCO_RING:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var enabled="0">VD2
+						<value>0</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_TSMC13_ALLTEK_PLL:VCO_RING:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var enabled="0">VCTRL
+						<value>{Exclusion List}0.6{Exclusion List}{From/To}Auto:0:3:1.2{From/To}</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_TSMC13_ALLTEK_PLL:VCO_RING:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>D0
+						<value>1.2</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_TSMC13_ALLTEK_PLL:VCO_RING:1</dependentTest>
+						</dependentTests>
+					</var>
+				</vars>
+				<overwritehistoryname>Interactive.0</overwritehistoryname>
+				<plottingoptions>
+					<plottingoption>plottingmode
+						<value>Replace</value>
+					</plottingoption>
+					<plottingoption>plottype
+						<value>None</value>
+					</plottingoption>
+					<plottingoption>usewaveformtemplate
+						<value>no</value>
+					</plottingoption>
+					<plottingoption>useMaestroPlottingTemplate
+						<value>yes</value>
+					</plottingoption>
+					<plottingoption>waveformtemplate
+						<value></value>
+					</plottingoption>
+					<plottingoption>allplottingtemplates
+						<value></value>
+					</plottingoption>
+					<plottingoption>defaultplottingtemplate
+						<value></value>
+					</plottingoption>
+				</plottingoptions>
+				<sortVariableValues>0</sortVariableValues>
+			</checkpoint>
+			<timestamp>Mar 24 19:34:26 2026</timestamp>
+			<resultsname>/home/IC/Desktop/virtuoso/TEST_TSMC13_ALLTEK_PLL/VCO_RING1/adexl/results/data/Interactive.40.rdb</resultsname>
+			<simresults>$AXL_SETUPDB_DIR/results/data/Interactive.40.rdb</simresults>
+			<rawdatadelstrategy>SaveAll
+				<simdatasavemode>All</simdatasavemode>
+			</rawdatadelstrategy>
+			<netlistdelstrategy>SaveAll</netlistdelstrategy>
+			<uselocalpsfdir>false</uselocalpsfdir>
+			<localpsfdir>/tmp/IC_IC_193426720</localpsfdir>
+			<psfdir>/home/IC/simulation/TEST_TSMC13_ALLTEK_PLL/VCO_RING1/adexl/results/data/Interactive.40</psfdir>
+			<simdir>$AXL_PROJECT_DIR/TEST_TSMC13_ALLTEK_PLL/VCO_RING1/adexl/results/data/Interactive.40</simdir>
+			<gendatasheetplotsonsimulation>1</gendatasheetplotsonsimulation>
+			<runlog>/home/IC/Desktop/virtuoso/TEST_TSMC13_ALLTEK_PLL/VCO_RING1/adexl/results/data/Interactive.40.log</runlog>
+			<runlogfile>$AXL_SETUPDB_DIR/results/data/Interactive.40.log</runlogfile>
+			<schematicpoint></schematicpoint>
+			<test>all</test>
+		</historyentry>
+		<historyentry assemblerOrExplorer="adexl" roOrView="view">Interactive.41
+			<checkpoint>
+				<corners>
+					<corner enabled="0">_default</corner>
+					<corner enabled="0">C0
+						<models>
+							<model enabled="1">cr013g_2d5_v1d4.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/TSMC13/TSMC13/models/spectre/cr013g_2d5_v1d4.scs</modelfile>
+								<modelsection>"tt" "ff" "ss" "sf" "fs"</modelsection>
+							</model>
+							<model enabled="1">cr013g_2d5_v1d4.scs:1
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/TSMC13/TSMC13/models/spectre/cr013g_2d5_v1d4.scs</modelfile>
+								<modelsection>"tt_res" "ff_res" "ss_res"</modelsection>
+							</model>
+						</models>
+					</corner>
+					<corner enabled="1">C1
+						<models>
+							<model enabled="1">cr013g_2d5_v1d4.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/TSMC13/TSMC13/models/spectre/cr013g_2d5_v1d4.scs</modelfile>
+								<modelsection>"tt"</modelsection>
+							</model>
+							<model enabled="1">cr013g_2d5_v1d4.scs:1
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/TSMC13/TSMC13/models/spectre/cr013g_2d5_v1d4.scs</modelfile>
+								<modelsection>"tt_res" "ff_res" "ss_res"</modelsection>
+							</model>
+						</models>
+					</corner>
+				</corners>
+				<extensions>
+					<extension>Parasitics
+						<callback>_parSetupDBExtensionCB</callback>
+						<iconvalue></iconvalue>
+						<icontype></icontype>
+						<active>
+							<mode>No Parasitics/LDE</mode>
+							<parameters>
+								<device>
+									<enabled>1</enabled>
+								</device>
+								<parasitic>
+									<enabled>0</enabled>
+								</parasitic>
+							</parameters>
+						</active>
+						<modes>
+							<mode>No Parasitics/LDE
+								<schematic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>VCO_RING</cell>
+									<view>schematic</view>
+								</schematic>
+							</mode>
+							<mode>Schematic Estimates (Parasitics)
+								<schematic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>VCO_RING</cell>
+									<view>schematic</view>
+								</schematic>
+								<parasitic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>VCO_RING</cell>
+									<view>estimated</view>
+								</parasitic>
+							</mode>
+							<mode>Layout (Parasitics/LDE)
+								<schematic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>VCO_RING</cell>
+									<view>schematic</view>
+								</schematic>
+								<parasitic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>VCO_RING</cell>
+									<view>netlist_layout</view>
+								</parasitic>
+							</mode>
+							<mode>Extracted (Parasitics/LDE)
+								<schematic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>VCO_RING</cell>
+									<view>schematic</view>
+								</schematic>
+								<parasitic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>VCO_RING</cell>
+									<view>&lt;None&gt;</view>
+								</parasitic>
+							</mode>
+						</modes>
+					</extension>
+				</extensions>
+				<currentmode>Single Run, Sweeps and Corners</currentmode>
+				<overwritehistory>0</overwritehistory>
+				<tests>
+					<test enabled="1">TEST_TSMC13_ALLTEK_PLL:VCO_RING:1
+						<tool>ADE</tool>
+						<tooloptions>
+							<option>cell
+								<value>VCO_RING1</value>
+							</option>
+							<option>lib
+								<value>TEST_TSMC13_ALLTEK_PLL</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>schematic</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>TEST_TSMC13_ALLTEK_PLL:VCO_RING:1_tmpstate.157584038_Interactive.41</value>
+							</option>
+						</tooloptions>
+						<origoptions>
+							<option>cell
+								<value>VCO_RING</value>
+							</option>
+							<option>lib
+								<value>TEST_TSMC13_ALLTEK_PLL</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>schematic</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>tmpstate.157584038</value>
+							</option>
+						</origoptions>
+					</test>
+				</tests>
+				<vars>
+					<var enabled="0">VS
+						<value>{Exclusion List}1.2{Exclusion List}{Center/Span%}Auto:1.2:3:20{Center/Span%}</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_TSMC13_ALLTEK_PLL:VCO_RING:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var enabled="0">temperature
+						<value>{Exclusion List}30{Exclusion List}{From/To}Auto:-25:5:125{From/To}</value>
+					</var>
+					<var enabled="0">VD1
+						<value>0</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_TSMC13_ALLTEK_PLL:VCO_RING:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var enabled="0">VD0
+						<value>0</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_TSMC13_ALLTEK_PLL:VCO_RING:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var enabled="0">VD2
+						<value>0</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_TSMC13_ALLTEK_PLL:VCO_RING:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var enabled="0">VCTRL
+						<value>{Exclusion List}0.6{Exclusion List}{From/To}Auto:0:3:1.2{From/To}</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_TSMC13_ALLTEK_PLL:VCO_RING:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>D0
+						<value>1.2</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_TSMC13_ALLTEK_PLL:VCO_RING:1</dependentTest>
+						</dependentTests>
+					</var>
+				</vars>
+				<overwritehistoryname>Interactive.0</overwritehistoryname>
+				<plottingoptions>
+					<plottingoption>plottingmode
+						<value>Replace</value>
+					</plottingoption>
+					<plottingoption>plottype
+						<value>None</value>
+					</plottingoption>
+					<plottingoption>usewaveformtemplate
+						<value>no</value>
+					</plottingoption>
+					<plottingoption>useMaestroPlottingTemplate
+						<value>yes</value>
+					</plottingoption>
+					<plottingoption>waveformtemplate
+						<value></value>
+					</plottingoption>
+					<plottingoption>allplottingtemplates
+						<value></value>
+					</plottingoption>
+					<plottingoption>defaultplottingtemplate
+						<value></value>
+					</plottingoption>
+				</plottingoptions>
+				<sortVariableValues>0</sortVariableValues>
+			</checkpoint>
+			<timestamp>Mar 24 19:35:51 2026</timestamp>
+			<resultsname>/home/IC/Desktop/virtuoso/TEST_TSMC13_ALLTEK_PLL/VCO_RING1/adexl/results/data/Interactive.41.rdb</resultsname>
+			<simresults>$AXL_SETUPDB_DIR/results/data/Interactive.41.rdb</simresults>
+			<rawdatadelstrategy>SaveAll
+				<simdatasavemode>All</simdatasavemode>
+			</rawdatadelstrategy>
+			<netlistdelstrategy>SaveAll</netlistdelstrategy>
+			<uselocalpsfdir>false</uselocalpsfdir>
+			<localpsfdir>/tmp/IC_IC_193551943</localpsfdir>
+			<psfdir>/home/IC/simulation/TEST_TSMC13_ALLTEK_PLL/VCO_RING1/adexl/results/data/Interactive.41</psfdir>
+			<simdir>$AXL_PROJECT_DIR/TEST_TSMC13_ALLTEK_PLL/VCO_RING1/adexl/results/data/Interactive.41</simdir>
+			<gendatasheetplotsonsimulation>1</gendatasheetplotsonsimulation>
+			<runlog>/home/IC/Desktop/virtuoso/TEST_TSMC13_ALLTEK_PLL/VCO_RING1/adexl/results/data/Interactive.41.log</runlog>
+			<runlogfile>$AXL_SETUPDB_DIR/results/data/Interactive.41.log</runlogfile>
+			<schematicpoint></schematicpoint>
+			<test>all</test>
+		</historyentry>
+		<historyentry assemblerOrExplorer="adexl" roOrView="view">Interactive.42
+			<checkpoint>
+				<corners>
+					<corner enabled="0">_default</corner>
+					<corner enabled="1">C0
+						<models>
+							<model enabled="1">cr013g_2d5_v1d4.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/TSMC13/TSMC13/models/spectre/cr013g_2d5_v1d4.scs</modelfile>
+								<modelsection>"tt" "ff" "ss" "sf" "fs"</modelsection>
+							</model>
+							<model enabled="1">cr013g_2d5_v1d4.scs:1
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/TSMC13/TSMC13/models/spectre/cr013g_2d5_v1d4.scs</modelfile>
+								<modelsection>"tt_res" "ff_res" "ss_res"</modelsection>
+							</model>
+						</models>
+					</corner>
+					<corner enabled="0">C1
+						<models>
+							<model enabled="1">cr013g_2d5_v1d4.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/TSMC13/TSMC13/models/spectre/cr013g_2d5_v1d4.scs</modelfile>
+								<modelsection>"tt"</modelsection>
+							</model>
+							<model enabled="1">cr013g_2d5_v1d4.scs:1
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/TSMC13/TSMC13/models/spectre/cr013g_2d5_v1d4.scs</modelfile>
+								<modelsection>"tt_res" "ff_res" "ss_res"</modelsection>
+							</model>
+						</models>
+					</corner>
+				</corners>
+				<extensions>
+					<extension>Parasitics
+						<callback>_parSetupDBExtensionCB</callback>
+						<iconvalue></iconvalue>
+						<icontype></icontype>
+						<active>
+							<mode>No Parasitics/LDE</mode>
+							<parameters>
+								<device>
+									<enabled>1</enabled>
+								</device>
+								<parasitic>
+									<enabled>0</enabled>
+								</parasitic>
+							</parameters>
+						</active>
+						<modes>
+							<mode>No Parasitics/LDE
+								<schematic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>VCO_RING</cell>
+									<view>schematic</view>
+								</schematic>
+							</mode>
+							<mode>Schematic Estimates (Parasitics)
+								<schematic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>VCO_RING</cell>
+									<view>schematic</view>
+								</schematic>
+								<parasitic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>VCO_RING</cell>
+									<view>estimated</view>
+								</parasitic>
+							</mode>
+							<mode>Layout (Parasitics/LDE)
+								<schematic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>VCO_RING</cell>
+									<view>schematic</view>
+								</schematic>
+								<parasitic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>VCO_RING</cell>
+									<view>netlist_layout</view>
+								</parasitic>
+							</mode>
+							<mode>Extracted (Parasitics/LDE)
+								<schematic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>VCO_RING</cell>
+									<view>schematic</view>
+								</schematic>
+								<parasitic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>VCO_RING</cell>
+									<view>&lt;None&gt;</view>
+								</parasitic>
+							</mode>
+						</modes>
+					</extension>
+				</extensions>
+				<currentmode>Single Run, Sweeps and Corners</currentmode>
+				<overwritehistory>0</overwritehistory>
+				<tests>
+					<test enabled="1">TEST_TSMC13_ALLTEK_PLL:VCO_RING:1
+						<tool>ADE</tool>
+						<tooloptions>
+							<option>cell
+								<value>VCO_RING1</value>
+							</option>
+							<option>lib
+								<value>TEST_TSMC13_ALLTEK_PLL</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>config</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>TEST_TSMC13_ALLTEK_PLL:VCO_RING:1_tmpstate.157584038_Interactive.42</value>
+							</option>
+						</tooloptions>
+						<origoptions>
+							<option>cell
+								<value>VCO_RING</value>
+							</option>
+							<option>lib
+								<value>TEST_TSMC13_ALLTEK_PLL</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>schematic</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>tmpstate.157584038</value>
+							</option>
+						</origoptions>
+					</test>
+				</tests>
+				<vars>
+					<var enabled="0">VS
+						<value>{Exclusion List}1.2{Exclusion List}{Center/Span%}Auto:1.2:3:20{Center/Span%}</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_TSMC13_ALLTEK_PLL:VCO_RING:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var enabled="0">temperature
+						<value>{Exclusion List}30{Exclusion List}{From/To}Auto:-25:5:125{From/To}</value>
+					</var>
+					<var enabled="0">VD1
+						<value>0</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_TSMC13_ALLTEK_PLL:VCO_RING:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var enabled="0">VD0
+						<value>0</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_TSMC13_ALLTEK_PLL:VCO_RING:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var enabled="0">VD2
+						<value>0</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_TSMC13_ALLTEK_PLL:VCO_RING:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var enabled="0">VCTRL
+						<value>{Exclusion List}0.6{Exclusion List}{From/To}Auto:0:3:1.2{From/To}</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_TSMC13_ALLTEK_PLL:VCO_RING:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>D0
+						<value>1.2</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_TSMC13_ALLTEK_PLL:VCO_RING:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>CAP_D0
+						<value>0</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_TSMC13_ALLTEK_PLL:VCO_RING:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>CAP_D1
+						<value>1.2</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_TSMC13_ALLTEK_PLL:VCO_RING:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>CAP_DALL
+						<value>1.2</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_TSMC13_ALLTEK_PLL:VCO_RING:1</dependentTest>
+						</dependentTests>
+					</var>
+				</vars>
+				<overwritehistoryname>Interactive.0</overwritehistoryname>
+				<plottingoptions>
+					<plottingoption>plottingmode
+						<value>Replace</value>
+					</plottingoption>
+					<plottingoption>plottype
+						<value>None</value>
+					</plottingoption>
+					<plottingoption>usewaveformtemplate
+						<value>no</value>
+					</plottingoption>
+					<plottingoption>useMaestroPlottingTemplate
+						<value>yes</value>
+					</plottingoption>
+					<plottingoption>waveformtemplate
+						<value></value>
+					</plottingoption>
+					<plottingoption>allplottingtemplates
+						<value></value>
+					</plottingoption>
+					<plottingoption>defaultplottingtemplate
+						<value></value>
+					</plottingoption>
+				</plottingoptions>
+				<sortVariableValues>0</sortVariableValues>
+			</checkpoint>
+			<timestamp>Apr 14 17:43:47 2026</timestamp>
+			<resultsname>/home/IC/Desktop/virtuoso/TEST_TSMC13_ALLTEK_PLL/VCO_RING1/adexl/results/data/Interactive.42.rdb</resultsname>
+			<simresults>$AXL_SETUPDB_DIR/results/data/Interactive.42.rdb</simresults>
+			<rawdatadelstrategy>SaveAll
+				<simdatasavemode>All</simdatasavemode>
+			</rawdatadelstrategy>
+			<netlistdelstrategy>SaveAll</netlistdelstrategy>
+			<uselocalpsfdir>false</uselocalpsfdir>
+			<localpsfdir>/tmp/IC_IC_174347205</localpsfdir>
+			<psfdir>/home/IC/simulation/TEST_TSMC13_ALLTEK_PLL/VCO_RING1/adexl/results/data/Interactive.42</psfdir>
+			<simdir>$AXL_PROJECT_DIR/TEST_TSMC13_ALLTEK_PLL/VCO_RING1/adexl/results/data/Interactive.42</simdir>
+			<gendatasheetplotsonsimulation>1</gendatasheetplotsonsimulation>
+			<runlog>/home/IC/Desktop/virtuoso/TEST_TSMC13_ALLTEK_PLL/VCO_RING1/adexl/results/data/Interactive.42.log</runlog>
+			<runlogfile>$AXL_SETUPDB_DIR/results/data/Interactive.42.log</runlogfile>
+			<schematicpoint></schematicpoint>
+			<test>all</test>
+		</historyentry>
+		<historyentry assemblerOrExplorer="adexl" roOrView="view">Interactive.43
+			<checkpoint>
+				<corners>
+					<corner enabled="0">_default</corner>
+					<corner enabled="1">C0
+						<models>
+							<model enabled="1">cr013g_2d5_v1d4.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/TSMC13/TSMC13/models/spectre/cr013g_2d5_v1d4.scs</modelfile>
+								<modelsection>"tt" "ff" "ss" "sf" "fs"</modelsection>
+							</model>
+							<model enabled="1">cr013g_2d5_v1d4.scs:1
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/TSMC13/TSMC13/models/spectre/cr013g_2d5_v1d4.scs</modelfile>
+								<modelsection>"tt_res" "ff_res" "ss_res"</modelsection>
+							</model>
+						</models>
+					</corner>
+					<corner enabled="0">C1
+						<models>
+							<model enabled="1">cr013g_2d5_v1d4.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/TSMC13/TSMC13/models/spectre/cr013g_2d5_v1d4.scs</modelfile>
+								<modelsection>"tt"</modelsection>
+							</model>
+							<model enabled="1">cr013g_2d5_v1d4.scs:1
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/TSMC13/TSMC13/models/spectre/cr013g_2d5_v1d4.scs</modelfile>
+								<modelsection>"tt_res" "ff_res" "ss_res"</modelsection>
+							</model>
+						</models>
+					</corner>
+				</corners>
+				<extensions>
+					<extension>Parasitics
+						<callback>_parSetupDBExtensionCB</callback>
+						<iconvalue></iconvalue>
+						<icontype></icontype>
+						<active>
+							<mode>No Parasitics/LDE</mode>
+							<parameters>
+								<device>
+									<enabled>1</enabled>
+								</device>
+								<parasitic>
+									<enabled>0</enabled>
+								</parasitic>
+							</parameters>
+						</active>
+						<modes>
+							<mode>No Parasitics/LDE
+								<schematic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>VCO_RING</cell>
+									<view>schematic</view>
+								</schematic>
+							</mode>
+							<mode>Schematic Estimates (Parasitics)
+								<schematic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>VCO_RING</cell>
+									<view>schematic</view>
+								</schematic>
+								<parasitic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>VCO_RING</cell>
+									<view>estimated</view>
+								</parasitic>
+							</mode>
+							<mode>Layout (Parasitics/LDE)
+								<schematic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>VCO_RING</cell>
+									<view>schematic</view>
+								</schematic>
+								<parasitic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>VCO_RING</cell>
+									<view>netlist_layout</view>
+								</parasitic>
+							</mode>
+							<mode>Extracted (Parasitics/LDE)
+								<schematic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>VCO_RING</cell>
+									<view>schematic</view>
+								</schematic>
+								<parasitic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>VCO_RING</cell>
+									<view>&lt;None&gt;</view>
+								</parasitic>
+							</mode>
+						</modes>
+					</extension>
+				</extensions>
+				<currentmode>Single Run, Sweeps and Corners</currentmode>
+				<overwritehistory>0</overwritehistory>
+				<tests>
+					<test enabled="1">TEST_TSMC13_ALLTEK_PLL:VCO_RING:1
+						<tool>ADE</tool>
+						<tooloptions>
+							<option>cell
+								<value>VCO_RING1</value>
+							</option>
+							<option>lib
+								<value>TEST_TSMC13_ALLTEK_PLL</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>config</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>TEST_TSMC13_ALLTEK_PLL:VCO_RING:1_tmpstate.157584038_Interactive.43</value>
+							</option>
+						</tooloptions>
+						<origoptions>
+							<option>cell
+								<value>VCO_RING</value>
+							</option>
+							<option>lib
+								<value>TEST_TSMC13_ALLTEK_PLL</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>schematic</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>tmpstate.157584038</value>
+							</option>
+						</origoptions>
+					</test>
+				</tests>
+				<vars>
+					<var enabled="0">VS
+						<value>{Exclusion List}1.2{Exclusion List}{Center/Span%}Auto:1.2:3:20{Center/Span%}</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_TSMC13_ALLTEK_PLL:VCO_RING:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var enabled="0">temperature
+						<value>{Exclusion List}30{Exclusion List}{From/To}Auto:-25:5:125{From/To}</value>
+					</var>
+					<var enabled="0">VD1
+						<value>0</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_TSMC13_ALLTEK_PLL:VCO_RING:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var enabled="0">VD0
+						<value>0</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_TSMC13_ALLTEK_PLL:VCO_RING:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var enabled="0">VD2
+						<value>0</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_TSMC13_ALLTEK_PLL:VCO_RING:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var enabled="0">VCTRL
+						<value>{Exclusion List}0.6{Exclusion List}{From/To}Auto:0:3:1.2{From/To}</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_TSMC13_ALLTEK_PLL:VCO_RING:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>D0
+						<value>1.2</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_TSMC13_ALLTEK_PLL:VCO_RING:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>CAP_D0
+						<value>0</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_TSMC13_ALLTEK_PLL:VCO_RING:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>CAP_D1
+						<value>1.2</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_TSMC13_ALLTEK_PLL:VCO_RING:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>CAP_DALL
+						<value>1.2</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_TSMC13_ALLTEK_PLL:VCO_RING:1</dependentTest>
+						</dependentTests>
+					</var>
+				</vars>
+				<overwritehistoryname>Interactive.0</overwritehistoryname>
+				<plottingoptions>
+					<plottingoption>plottingmode
+						<value>Replace</value>
+					</plottingoption>
+					<plottingoption>plottype
+						<value>None</value>
+					</plottingoption>
+					<plottingoption>usewaveformtemplate
+						<value>no</value>
+					</plottingoption>
+					<plottingoption>useMaestroPlottingTemplate
+						<value>yes</value>
+					</plottingoption>
+					<plottingoption>waveformtemplate
+						<value></value>
+					</plottingoption>
+					<plottingoption>allplottingtemplates
+						<value></value>
+					</plottingoption>
+					<plottingoption>defaultplottingtemplate
+						<value></value>
+					</plottingoption>
+				</plottingoptions>
+				<sortVariableValues>0</sortVariableValues>
+			</checkpoint>
+			<timestamp>Apr 14 18:20:23 2026</timestamp>
+			<resultsname>/home/IC/Desktop/virtuoso/TEST_TSMC13_ALLTEK_PLL/VCO_RING1/adexl/results/data/Interactive.43.rdb</resultsname>
+			<simresults>$AXL_SETUPDB_DIR/results/data/Interactive.43.rdb</simresults>
+			<rawdatadelstrategy>SaveAll
+				<simdatasavemode>All</simdatasavemode>
+			</rawdatadelstrategy>
+			<netlistdelstrategy>SaveAll</netlistdelstrategy>
+			<uselocalpsfdir>false</uselocalpsfdir>
+			<localpsfdir>/tmp/IC_IC_182023386</localpsfdir>
+			<psfdir>/home/IC/simulation/TEST_TSMC13_ALLTEK_PLL/VCO_RING1/adexl/results/data/Interactive.43</psfdir>
+			<simdir>$AXL_PROJECT_DIR/TEST_TSMC13_ALLTEK_PLL/VCO_RING1/adexl/results/data/Interactive.43</simdir>
+			<gendatasheetplotsonsimulation>1</gendatasheetplotsonsimulation>
+			<runlog>/home/IC/Desktop/virtuoso/TEST_TSMC13_ALLTEK_PLL/VCO_RING1/adexl/results/data/Interactive.43.log</runlog>
+			<runlogfile>$AXL_SETUPDB_DIR/results/data/Interactive.43.log</runlogfile>
+			<schematicpoint></schematicpoint>
+			<test>all</test>
+		</historyentry>
+		<historyentry assemblerOrExplorer="adexl" roOrView="view">Interactive.44
+			<checkpoint>
+				<corners>
+					<corner enabled="0">_default</corner>
+					<corner enabled="1">C0
+						<models>
+							<model enabled="1">cr013g_2d5_v1d4.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/TSMC13/TSMC13/models/spectre/cr013g_2d5_v1d4.scs</modelfile>
+								<modelsection>"tt" "ff" "ss" "sf" "fs"</modelsection>
+							</model>
+							<model enabled="1">cr013g_2d5_v1d4.scs:1
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/TSMC13/TSMC13/models/spectre/cr013g_2d5_v1d4.scs</modelfile>
+								<modelsection>"tt_res" "ff_res" "ss_res"</modelsection>
+							</model>
+							<model enabled="1">cr013g_2d5_v1d4.scs:2
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/TSMC13/TSMC13/models/spectre/cr013g_2d5_v1d4.scs</modelfile>
+								<modelsection>"tt_mim"</modelsection>
+							</model>
+						</models>
+					</corner>
+					<corner enabled="0">C1
+						<models>
+							<model enabled="1">cr013g_2d5_v1d4.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/TSMC13/TSMC13/models/spectre/cr013g_2d5_v1d4.scs</modelfile>
+								<modelsection>"tt"</modelsection>
+							</model>
+							<model enabled="1">cr013g_2d5_v1d4.scs:1
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/TSMC13/TSMC13/models/spectre/cr013g_2d5_v1d4.scs</modelfile>
+								<modelsection>"tt_res" "ff_res" "ss_res"</modelsection>
+							</model>
+							<model enabled="0">cr013g_2d5_v1d4.scs:2
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/TSMC13/TSMC13/models/spectre/cr013g_2d5_v1d4.scs</modelfile>
+								<modelsection></modelsection>
+							</model>
+						</models>
+					</corner>
+				</corners>
+				<extensions>
+					<extension>Parasitics
+						<callback>_parSetupDBExtensionCB</callback>
+						<iconvalue></iconvalue>
+						<icontype></icontype>
+						<active>
+							<mode>No Parasitics/LDE</mode>
+							<parameters>
+								<device>
+									<enabled>1</enabled>
+								</device>
+								<parasitic>
+									<enabled>0</enabled>
+								</parasitic>
+							</parameters>
+						</active>
+						<modes>
+							<mode>No Parasitics/LDE
+								<schematic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>VCO_RING</cell>
+									<view>schematic</view>
+								</schematic>
+							</mode>
+							<mode>Schematic Estimates (Parasitics)
+								<schematic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>VCO_RING</cell>
+									<view>schematic</view>
+								</schematic>
+								<parasitic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>VCO_RING</cell>
+									<view>estimated</view>
+								</parasitic>
+							</mode>
+							<mode>Layout (Parasitics/LDE)
+								<schematic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>VCO_RING</cell>
+									<view>schematic</view>
+								</schematic>
+								<parasitic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>VCO_RING</cell>
+									<view>netlist_layout</view>
+								</parasitic>
+							</mode>
+							<mode>Extracted (Parasitics/LDE)
+								<schematic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>VCO_RING</cell>
+									<view>schematic</view>
+								</schematic>
+								<parasitic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>VCO_RING</cell>
+									<view>&lt;None&gt;</view>
+								</parasitic>
+							</mode>
+						</modes>
+					</extension>
+				</extensions>
+				<currentmode>Single Run, Sweeps and Corners</currentmode>
+				<overwritehistory>0</overwritehistory>
+				<tests>
+					<test enabled="1">TEST_TSMC13_ALLTEK_PLL:VCO_RING:1
+						<tool>ADE</tool>
+						<tooloptions>
+							<option>cell
+								<value>VCO_RING1</value>
+							</option>
+							<option>lib
+								<value>TEST_TSMC13_ALLTEK_PLL</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>config</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>TEST_TSMC13_ALLTEK_PLL:VCO_RING:1_tmpstate.157584038_Interactive.44</value>
+							</option>
+						</tooloptions>
+						<origoptions>
+							<option>cell
+								<value>VCO_RING</value>
+							</option>
+							<option>lib
+								<value>TEST_TSMC13_ALLTEK_PLL</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>schematic</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>tmpstate.157584038</value>
+							</option>
+						</origoptions>
+					</test>
+				</tests>
+				<vars>
+					<var enabled="0">VS
+						<value>{Exclusion List}1.2{Exclusion List}{Center/Span%}Auto:1.2:3:20{Center/Span%}</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_TSMC13_ALLTEK_PLL:VCO_RING:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var enabled="0">temperature
+						<value>{Exclusion List}30{Exclusion List}{From/To}Auto:-25:5:125{From/To}</value>
+					</var>
+					<var enabled="0">VCTRL
+						<value>{Exclusion List}0.6{Exclusion List}{From/To}Auto:0:3:1.2{From/To}</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_TSMC13_ALLTEK_PLL:VCO_RING:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>D0
+						<value>1.2</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_TSMC13_ALLTEK_PLL:VCO_RING:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>CAP_D0
+						<value>0</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_TSMC13_ALLTEK_PLL:VCO_RING:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>CAP_D1
+						<value>1.2</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_TSMC13_ALLTEK_PLL:VCO_RING:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>CAP_DALL
+						<value>1.2</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_TSMC13_ALLTEK_PLL:VCO_RING:1</dependentTest>
+						</dependentTests>
+					</var>
+				</vars>
+				<overwritehistoryname>Interactive.0</overwritehistoryname>
+				<plottingoptions>
+					<plottingoption>plottingmode
+						<value>Replace</value>
+					</plottingoption>
+					<plottingoption>plottype
+						<value>None</value>
+					</plottingoption>
+					<plottingoption>usewaveformtemplate
+						<value>no</value>
+					</plottingoption>
+					<plottingoption>useMaestroPlottingTemplate
+						<value>yes</value>
+					</plottingoption>
+					<plottingoption>waveformtemplate
+						<value></value>
+					</plottingoption>
+					<plottingoption>allplottingtemplates
+						<value></value>
+					</plottingoption>
+					<plottingoption>defaultplottingtemplate
+						<value></value>
+					</plottingoption>
+				</plottingoptions>
+				<sortVariableValues>0</sortVariableValues>
+			</checkpoint>
+			<timestamp>Apr 14 18:21:30 2026</timestamp>
+			<resultsname>/home/IC/Desktop/virtuoso/TEST_TSMC13_ALLTEK_PLL/VCO_RING1/adexl/results/data/Interactive.44.rdb</resultsname>
+			<simresults>$AXL_SETUPDB_DIR/results/data/Interactive.44.rdb</simresults>
+			<rawdatadelstrategy>SaveAll
+				<simdatasavemode>All</simdatasavemode>
+			</rawdatadelstrategy>
+			<netlistdelstrategy>SaveAll</netlistdelstrategy>
+			<uselocalpsfdir>false</uselocalpsfdir>
+			<localpsfdir>/tmp/IC_IC_182130637</localpsfdir>
+			<psfdir>/home/IC/simulation/TEST_TSMC13_ALLTEK_PLL/VCO_RING1/adexl/results/data/Interactive.44</psfdir>
+			<simdir>$AXL_PROJECT_DIR/TEST_TSMC13_ALLTEK_PLL/VCO_RING1/adexl/results/data/Interactive.44</simdir>
+			<gendatasheetplotsonsimulation>1</gendatasheetplotsonsimulation>
+			<runlog>/home/IC/Desktop/virtuoso/TEST_TSMC13_ALLTEK_PLL/VCO_RING1/adexl/results/data/Interactive.44.log</runlog>
+			<runlogfile>$AXL_SETUPDB_DIR/results/data/Interactive.44.log</runlogfile>
+			<schematicpoint></schematicpoint>
+			<test>all</test>
+		</historyentry>
+		<historyentry assemblerOrExplorer="adexl" roOrView="view">Interactive.45
+			<checkpoint>
+				<corners>
+					<corner enabled="0">_default</corner>
+					<corner enabled="1">C0
+						<models>
+							<model enabled="0">cr013g_2d5_v1d4.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/TSMC13/TSMC13/models/spectre/cr013g_2d5_v1d4.scs</modelfile>
+								<modelsection>"tt" "ff" "ss" "sf" "fs"</modelsection>
+							</model>
+							<model enabled="0">cr013g_2d5_v1d4.scs:1
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/TSMC13/TSMC13/models/spectre/cr013g_2d5_v1d4.scs</modelfile>
+								<modelsection>"tt_res" "ff_res" "ss_res"</modelsection>
+							</model>
+							<model enabled="0">cr013g_2d5_v1d4.scs:2
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/TSMC13/TSMC13/models/spectre/cr013g_2d5_v1d4.scs</modelfile>
+								<modelsection>"tt_mim"</modelsection>
+							</model>
+							<model enabled="1">tsmc13rf.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/TSMC13/TSMC13/models/spectre/tsmc13rf.scs</modelfile>
+								<modelsection></modelsection>
+							</model>
+						</models>
+					</corner>
+					<corner enabled="0">C1
+						<models>
+							<model enabled="1">cr013g_2d5_v1d4.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/TSMC13/TSMC13/models/spectre/cr013g_2d5_v1d4.scs</modelfile>
+								<modelsection>"tt"</modelsection>
+							</model>
+							<model enabled="1">cr013g_2d5_v1d4.scs:1
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/TSMC13/TSMC13/models/spectre/cr013g_2d5_v1d4.scs</modelfile>
+								<modelsection>"tt_res" "ff_res" "ss_res"</modelsection>
+							</model>
+							<model enabled="0">cr013g_2d5_v1d4.scs:2
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/TSMC13/TSMC13/models/spectre/cr013g_2d5_v1d4.scs</modelfile>
+								<modelsection></modelsection>
+							</model>
+							<model enabled="0">tsmc13rf.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/TSMC13/TSMC13/models/spectre/tsmc13rf.scs</modelfile>
+								<modelsection></modelsection>
+							</model>
+						</models>
+					</corner>
+				</corners>
+				<extensions>
+					<extension>Parasitics
+						<callback>_parSetupDBExtensionCB</callback>
+						<iconvalue></iconvalue>
+						<icontype></icontype>
+						<active>
+							<mode>No Parasitics/LDE</mode>
+							<parameters>
+								<device>
+									<enabled>1</enabled>
+								</device>
+								<parasitic>
+									<enabled>0</enabled>
+								</parasitic>
+							</parameters>
+						</active>
+						<modes>
+							<mode>No Parasitics/LDE
+								<schematic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>VCO_RING</cell>
+									<view>schematic</view>
+								</schematic>
+							</mode>
+							<mode>Schematic Estimates (Parasitics)
+								<schematic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>VCO_RING</cell>
+									<view>schematic</view>
+								</schematic>
+								<parasitic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>VCO_RING</cell>
+									<view>estimated</view>
+								</parasitic>
+							</mode>
+							<mode>Layout (Parasitics/LDE)
+								<schematic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>VCO_RING</cell>
+									<view>schematic</view>
+								</schematic>
+								<parasitic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>VCO_RING</cell>
+									<view>netlist_layout</view>
+								</parasitic>
+							</mode>
+							<mode>Extracted (Parasitics/LDE)
+								<schematic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>VCO_RING</cell>
+									<view>schematic</view>
+								</schematic>
+								<parasitic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>VCO_RING</cell>
+									<view>&lt;None&gt;</view>
+								</parasitic>
+							</mode>
+						</modes>
+					</extension>
+				</extensions>
+				<currentmode>Single Run, Sweeps and Corners</currentmode>
+				<overwritehistory>0</overwritehistory>
+				<tests>
+					<test enabled="1">TEST_TSMC13_ALLTEK_PLL:VCO_RING:1
+						<tool>ADE</tool>
+						<tooloptions>
+							<option>cell
+								<value>VCO_RING1</value>
+							</option>
+							<option>lib
+								<value>TEST_TSMC13_ALLTEK_PLL</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>config</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>TEST_TSMC13_ALLTEK_PLL:VCO_RING:1_tmpstate.157584038_Interactive.45</value>
+							</option>
+						</tooloptions>
+						<origoptions>
+							<option>cell
+								<value>VCO_RING</value>
+							</option>
+							<option>lib
+								<value>TEST_TSMC13_ALLTEK_PLL</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>schematic</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>tmpstate.157584038</value>
+							</option>
+						</origoptions>
+					</test>
+				</tests>
+				<vars>
+					<var enabled="0">VS
+						<value>{Exclusion List}1.2{Exclusion List}{Center/Span%}Auto:1.2:3:20{Center/Span%}</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_TSMC13_ALLTEK_PLL:VCO_RING:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var enabled="0">temperature
+						<value>{Exclusion List}30{Exclusion List}{From/To}Auto:-25:5:125{From/To}</value>
+					</var>
+					<var enabled="0">VCTRL
+						<value>{Exclusion List}0.6{Exclusion List}{From/To}Auto:0:3:1.2{From/To}</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_TSMC13_ALLTEK_PLL:VCO_RING:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>D0
+						<value>1.2</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_TSMC13_ALLTEK_PLL:VCO_RING:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>CAP_D0
+						<value>0</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_TSMC13_ALLTEK_PLL:VCO_RING:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>CAP_D1
+						<value>1.2</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_TSMC13_ALLTEK_PLL:VCO_RING:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>CAP_DALL
+						<value>1.2</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_TSMC13_ALLTEK_PLL:VCO_RING:1</dependentTest>
+						</dependentTests>
+					</var>
+				</vars>
+				<overwritehistoryname>Interactive.0</overwritehistoryname>
+				<plottingoptions>
+					<plottingoption>plottingmode
+						<value>Replace</value>
+					</plottingoption>
+					<plottingoption>plottype
+						<value>None</value>
+					</plottingoption>
+					<plottingoption>usewaveformtemplate
+						<value>no</value>
+					</plottingoption>
+					<plottingoption>useMaestroPlottingTemplate
+						<value>yes</value>
+					</plottingoption>
+					<plottingoption>waveformtemplate
+						<value></value>
+					</plottingoption>
+					<plottingoption>allplottingtemplates
+						<value></value>
+					</plottingoption>
+					<plottingoption>defaultplottingtemplate
+						<value></value>
+					</plottingoption>
+				</plottingoptions>
+				<sortVariableValues>0</sortVariableValues>
+			</checkpoint>
+			<timestamp>Apr 14 18:23:38 2026</timestamp>
+			<resultsname>/home/IC/Desktop/virtuoso/TEST_TSMC13_ALLTEK_PLL/VCO_RING1/adexl/results/data/Interactive.45.rdb</resultsname>
+			<simresults>$AXL_SETUPDB_DIR/results/data/Interactive.45.rdb</simresults>
+			<rawdatadelstrategy>SaveAll
+				<simdatasavemode>All</simdatasavemode>
+			</rawdatadelstrategy>
+			<netlistdelstrategy>SaveAll</netlistdelstrategy>
+			<uselocalpsfdir>false</uselocalpsfdir>
+			<localpsfdir>/tmp/IC_IC_182338076</localpsfdir>
+			<psfdir>/home/IC/simulation/TEST_TSMC13_ALLTEK_PLL/VCO_RING1/adexl/results/data/Interactive.45</psfdir>
+			<simdir>$AXL_PROJECT_DIR/TEST_TSMC13_ALLTEK_PLL/VCO_RING1/adexl/results/data/Interactive.45</simdir>
+			<gendatasheetplotsonsimulation>1</gendatasheetplotsonsimulation>
+			<runlog>/home/IC/Desktop/virtuoso/TEST_TSMC13_ALLTEK_PLL/VCO_RING1/adexl/results/data/Interactive.45.log</runlog>
+			<runlogfile>$AXL_SETUPDB_DIR/results/data/Interactive.45.log</runlogfile>
+			<schematicpoint></schematicpoint>
+			<test>all</test>
+		</historyentry>
+		<historyentry assemblerOrExplorer="adexl" roOrView="view">Interactive.46
+			<checkpoint>
+				<corners>
+					<corner enabled="0">_default</corner>
+					<corner enabled="1">C0
+						<models>
+							<model enabled="1">cr013g_2d5_v1d4.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/TSMC13/TSMC13/models/spectre/cr013g_2d5_v1d4.scs</modelfile>
+								<modelsection>"tt" "ff" "ss" "sf" "fs"</modelsection>
+							</model>
+							<model enabled="1">cr013g_2d5_v1d4.scs:1
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/TSMC13/TSMC13/models/spectre/cr013g_2d5_v1d4.scs</modelfile>
+								<modelsection>"tt_res" "ff_res" "ss_res"</modelsection>
+							</model>
+							<model enabled="1">cr013g_2d5_v1d4.scs:2
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/TSMC13/TSMC13/models/spectre/cr013g_2d5_v1d4.scs</modelfile>
+								<modelsection>"tt_mim"</modelsection>
+							</model>
+							<model enabled="1">ResModel.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/TSMC13/TSMC13/models/spectre/ResModel.scs</modelfile>
+								<modelsection>"res_t"</modelsection>
+							</model>
+							<model enabled="0">tsmc13rf.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/TSMC13/TSMC13/models/spectre/tsmc13rf.scs</modelfile>
+								<modelsection></modelsection>
+							</model>
+						</models>
+					</corner>
+					<corner enabled="0">C1
+						<models>
+							<model enabled="1">cr013g_2d5_v1d4.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/TSMC13/TSMC13/models/spectre/cr013g_2d5_v1d4.scs</modelfile>
+								<modelsection>"tt"</modelsection>
+							</model>
+							<model enabled="1">cr013g_2d5_v1d4.scs:1
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/TSMC13/TSMC13/models/spectre/cr013g_2d5_v1d4.scs</modelfile>
+								<modelsection>"tt_res" "ff_res" "ss_res"</modelsection>
+							</model>
+							<model enabled="0">cr013g_2d5_v1d4.scs:2
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/TSMC13/TSMC13/models/spectre/cr013g_2d5_v1d4.scs</modelfile>
+								<modelsection></modelsection>
+							</model>
+							<model enabled="0">ResModel.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/TSMC13/TSMC13/models/spectre/ResModel.scs</modelfile>
+								<modelsection></modelsection>
+							</model>
+							<model enabled="0">tsmc13rf.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/TSMC13/TSMC13/models/spectre/tsmc13rf.scs</modelfile>
+								<modelsection></modelsection>
+							</model>
+						</models>
+					</corner>
+				</corners>
+				<extensions>
+					<extension>Parasitics
+						<callback>_parSetupDBExtensionCB</callback>
+						<iconvalue></iconvalue>
+						<icontype></icontype>
+						<active>
+							<mode>No Parasitics/LDE</mode>
+							<parameters>
+								<device>
+									<enabled>1</enabled>
+								</device>
+								<parasitic>
+									<enabled>0</enabled>
+								</parasitic>
+							</parameters>
+						</active>
+						<modes>
+							<mode>No Parasitics/LDE
+								<schematic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>VCO_RING</cell>
+									<view>schematic</view>
+								</schematic>
+							</mode>
+							<mode>Schematic Estimates (Parasitics)
+								<schematic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>VCO_RING</cell>
+									<view>schematic</view>
+								</schematic>
+								<parasitic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>VCO_RING</cell>
+									<view>estimated</view>
+								</parasitic>
+							</mode>
+							<mode>Layout (Parasitics/LDE)
+								<schematic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>VCO_RING</cell>
+									<view>schematic</view>
+								</schematic>
+								<parasitic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>VCO_RING</cell>
+									<view>netlist_layout</view>
+								</parasitic>
+							</mode>
+							<mode>Extracted (Parasitics/LDE)
+								<schematic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>VCO_RING</cell>
+									<view>schematic</view>
+								</schematic>
+								<parasitic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>VCO_RING</cell>
+									<view>&lt;None&gt;</view>
+								</parasitic>
+							</mode>
+						</modes>
+					</extension>
+				</extensions>
+				<currentmode>Single Run, Sweeps and Corners</currentmode>
+				<overwritehistory>0</overwritehistory>
+				<tests>
+					<test enabled="1">TEST_TSMC13_ALLTEK_PLL:VCO_RING:1
+						<tool>ADE</tool>
+						<tooloptions>
+							<option>cell
+								<value>VCO_RING1</value>
+							</option>
+							<option>lib
+								<value>TEST_TSMC13_ALLTEK_PLL</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>config</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>TEST_TSMC13_ALLTEK_PLL:VCO_RING:1_tmpstate.157584038_Interactive.46</value>
+							</option>
+						</tooloptions>
+						<origoptions>
+							<option>cell
+								<value>VCO_RING</value>
+							</option>
+							<option>lib
+								<value>TEST_TSMC13_ALLTEK_PLL</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>schematic</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>tmpstate.157584038</value>
+							</option>
+						</origoptions>
+					</test>
+				</tests>
+				<vars>
+					<var enabled="0">VS
+						<value>{Exclusion List}1.2{Exclusion List}{Center/Span%}Auto:1.2:3:20{Center/Span%}</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_TSMC13_ALLTEK_PLL:VCO_RING:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var enabled="0">temperature
+						<value>{Exclusion List}30{Exclusion List}{From/To}Auto:-25:5:125{From/To}</value>
+					</var>
+					<var enabled="0">VCTRL
+						<value>{Exclusion List}0.6{Exclusion List}{From/To}Auto:0:3:1.2{From/To}</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_TSMC13_ALLTEK_PLL:VCO_RING:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>D0
+						<value>1.2</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_TSMC13_ALLTEK_PLL:VCO_RING:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>CAP_D0
+						<value>0</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_TSMC13_ALLTEK_PLL:VCO_RING:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>CAP_D1
+						<value>1.2</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_TSMC13_ALLTEK_PLL:VCO_RING:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>CAP_DALL
+						<value>1.2</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_TSMC13_ALLTEK_PLL:VCO_RING:1</dependentTest>
+						</dependentTests>
+					</var>
+				</vars>
+				<overwritehistoryname>Interactive.0</overwritehistoryname>
+				<plottingoptions>
+					<plottingoption>plottingmode
+						<value>Replace</value>
+					</plottingoption>
+					<plottingoption>plottype
+						<value>None</value>
+					</plottingoption>
+					<plottingoption>usewaveformtemplate
+						<value>no</value>
+					</plottingoption>
+					<plottingoption>useMaestroPlottingTemplate
+						<value>yes</value>
+					</plottingoption>
+					<plottingoption>waveformtemplate
+						<value></value>
+					</plottingoption>
+					<plottingoption>allplottingtemplates
+						<value></value>
+					</plottingoption>
+					<plottingoption>defaultplottingtemplate
+						<value></value>
+					</plottingoption>
+				</plottingoptions>
+				<sortVariableValues>0</sortVariableValues>
+			</checkpoint>
+			<timestamp>Apr 14 18:27:08 2026</timestamp>
+			<resultsname>/home/IC/Desktop/virtuoso/TEST_TSMC13_ALLTEK_PLL/VCO_RING1/adexl/results/data/Interactive.46.rdb</resultsname>
+			<simresults>$AXL_SETUPDB_DIR/results/data/Interactive.46.rdb</simresults>
+			<rawdatadelstrategy>SaveAll
+				<simdatasavemode>All</simdatasavemode>
+			</rawdatadelstrategy>
+			<netlistdelstrategy>SaveAll</netlistdelstrategy>
+			<uselocalpsfdir>false</uselocalpsfdir>
+			<localpsfdir>/tmp/IC_IC_182708780</localpsfdir>
+			<psfdir>/home/IC/simulation/TEST_TSMC13_ALLTEK_PLL/VCO_RING1/adexl/results/data/Interactive.46</psfdir>
+			<simdir>$AXL_PROJECT_DIR/TEST_TSMC13_ALLTEK_PLL/VCO_RING1/adexl/results/data/Interactive.46</simdir>
+			<gendatasheetplotsonsimulation>1</gendatasheetplotsonsimulation>
+			<runlog>/home/IC/Desktop/virtuoso/TEST_TSMC13_ALLTEK_PLL/VCO_RING1/adexl/results/data/Interactive.46.log</runlog>
+			<runlogfile>$AXL_SETUPDB_DIR/results/data/Interactive.46.log</runlogfile>
+			<schematicpoint></schematicpoint>
+			<test>all</test>
+		</historyentry>
+		<historyentry assemblerOrExplorer="adexl" roOrView="view">Interactive.47
+			<checkpoint>
+				<corners>
+					<corner enabled="0">_default</corner>
+					<corner enabled="1">C0
+						<models>
+							<model enabled="1">cr013g_2d5_v1d4.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/TSMC13/TSMC13/models/spectre/cr013g_2d5_v1d4.scs</modelfile>
+								<modelsection>"tt" "ff" "ss" "sf" "fs"</modelsection>
+							</model>
+							<model enabled="1">cr013g_2d5_v1d4.scs:1
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/TSMC13/TSMC13/models/spectre/cr013g_2d5_v1d4.scs</modelfile>
+								<modelsection>"tt_res" "ff_res" "ss_res"</modelsection>
+							</model>
+							<model enabled="1">cr013g_2d5_v1d4.scs:2
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/TSMC13/TSMC13/models/spectre/cr013g_2d5_v1d4.scs</modelfile>
+								<modelsection>"tt_mim"</modelsection>
+							</model>
+							<model enabled="1">ResModel.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/TSMC13/TSMC13/models/spectre/ResModel.scs</modelfile>
+								<modelsection>"tt_disres"</modelsection>
+							</model>
+							<model enabled="0">tsmc13rf.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/TSMC13/TSMC13/models/spectre/tsmc13rf.scs</modelfile>
+								<modelsection></modelsection>
+							</model>
+						</models>
+					</corner>
+					<corner enabled="0">C1
+						<models>
+							<model enabled="1">cr013g_2d5_v1d4.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/TSMC13/TSMC13/models/spectre/cr013g_2d5_v1d4.scs</modelfile>
+								<modelsection>"tt"</modelsection>
+							</model>
+							<model enabled="1">cr013g_2d5_v1d4.scs:1
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/TSMC13/TSMC13/models/spectre/cr013g_2d5_v1d4.scs</modelfile>
+								<modelsection>"tt_res" "ff_res" "ss_res"</modelsection>
+							</model>
+							<model enabled="0">cr013g_2d5_v1d4.scs:2
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/TSMC13/TSMC13/models/spectre/cr013g_2d5_v1d4.scs</modelfile>
+								<modelsection></modelsection>
+							</model>
+							<model enabled="0">ResModel.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/TSMC13/TSMC13/models/spectre/ResModel.scs</modelfile>
+								<modelsection></modelsection>
+							</model>
+							<model enabled="0">tsmc13rf.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/TSMC13/TSMC13/models/spectre/tsmc13rf.scs</modelfile>
+								<modelsection></modelsection>
+							</model>
+						</models>
+					</corner>
+				</corners>
+				<extensions>
+					<extension>Parasitics
+						<callback>_parSetupDBExtensionCB</callback>
+						<iconvalue></iconvalue>
+						<icontype></icontype>
+						<active>
+							<mode>No Parasitics/LDE</mode>
+							<parameters>
+								<device>
+									<enabled>1</enabled>
+								</device>
+								<parasitic>
+									<enabled>0</enabled>
+								</parasitic>
+							</parameters>
+						</active>
+						<modes>
+							<mode>No Parasitics/LDE
+								<schematic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>VCO_RING</cell>
+									<view>schematic</view>
+								</schematic>
+							</mode>
+							<mode>Schematic Estimates (Parasitics)
+								<schematic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>VCO_RING</cell>
+									<view>schematic</view>
+								</schematic>
+								<parasitic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>VCO_RING</cell>
+									<view>estimated</view>
+								</parasitic>
+							</mode>
+							<mode>Layout (Parasitics/LDE)
+								<schematic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>VCO_RING</cell>
+									<view>schematic</view>
+								</schematic>
+								<parasitic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>VCO_RING</cell>
+									<view>netlist_layout</view>
+								</parasitic>
+							</mode>
+							<mode>Extracted (Parasitics/LDE)
+								<schematic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>VCO_RING</cell>
+									<view>schematic</view>
+								</schematic>
+								<parasitic>
+									<lib>TEST_TSMC13_ALLTEK_PLL</lib>
+									<cell>VCO_RING</cell>
+									<view>&lt;None&gt;</view>
+								</parasitic>
+							</mode>
+						</modes>
+					</extension>
+				</extensions>
+				<currentmode>Single Run, Sweeps and Corners</currentmode>
+				<overwritehistory>0</overwritehistory>
+				<tests>
+					<test enabled="1">TEST_TSMC13_ALLTEK_PLL:VCO_RING:1
+						<tool>ADE</tool>
+						<tooloptions>
+							<option>cell
+								<value>VCO_RING1</value>
+							</option>
+							<option>lib
+								<value>TEST_TSMC13_ALLTEK_PLL</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>config</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>TEST_TSMC13_ALLTEK_PLL:VCO_RING:1_tmpstate.157584038_Interactive.47</value>
+							</option>
+						</tooloptions>
+						<origoptions>
+							<option>cell
+								<value>VCO_RING</value>
+							</option>
+							<option>lib
+								<value>TEST_TSMC13_ALLTEK_PLL</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>schematic</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>tmpstate.157584038</value>
+							</option>
+						</origoptions>
+					</test>
+				</tests>
+				<vars>
+					<var enabled="0">VS
+						<value>{Exclusion List}1.2{Exclusion List}{Center/Span%}Auto:1.2:3:20{Center/Span%}</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_TSMC13_ALLTEK_PLL:VCO_RING:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var enabled="0">temperature
+						<value>{Exclusion List}30{Exclusion List}{From/To}Auto:-25:5:125{From/To}</value>
+					</var>
+					<var enabled="0">VCTRL
+						<value>{Exclusion List}0.6{Exclusion List}{From/To}Auto:0:3:1.2{From/To}</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_TSMC13_ALLTEK_PLL:VCO_RING:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>D0
+						<value>1.2</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_TSMC13_ALLTEK_PLL:VCO_RING:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>CAP_D0
+						<value>0</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_TSMC13_ALLTEK_PLL:VCO_RING:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>CAP_D1
+						<value>1.2</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_TSMC13_ALLTEK_PLL:VCO_RING:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>CAP_DALL
+						<value>1.2</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_TSMC13_ALLTEK_PLL:VCO_RING:1</dependentTest>
+						</dependentTests>
+					</var>
+				</vars>
+				<overwritehistoryname>Interactive.0</overwritehistoryname>
+				<plottingoptions>
+					<plottingoption>plottingmode
+						<value>Replace</value>
+					</plottingoption>
+					<plottingoption>plottype
+						<value>None</value>
+					</plottingoption>
+					<plottingoption>usewaveformtemplate
+						<value>no</value>
+					</plottingoption>
+					<plottingoption>useMaestroPlottingTemplate
+						<value>yes</value>
+					</plottingoption>
+					<plottingoption>waveformtemplate
+						<value></value>
+					</plottingoption>
+					<plottingoption>allplottingtemplates
+						<value></value>
+					</plottingoption>
+					<plottingoption>defaultplottingtemplate
+						<value></value>
+					</plottingoption>
+				</plottingoptions>
+				<sortVariableValues>0</sortVariableValues>
+			</checkpoint>
+			<timestamp>Apr 14 18:27:52 2026</timestamp>
+			<resultsname>/home/IC/Desktop/virtuoso/TEST_TSMC13_ALLTEK_PLL/VCO_RING1/adexl/results/data/Interactive.47.rdb</resultsname>
+			<simresults>$AXL_SETUPDB_DIR/results/data/Interactive.47.rdb</simresults>
+			<rawdatadelstrategy>SaveAll
+				<simdatasavemode>All</simdatasavemode>
+			</rawdatadelstrategy>
+			<netlistdelstrategy>SaveAll</netlistdelstrategy>
+			<uselocalpsfdir>false</uselocalpsfdir>
+			<localpsfdir>/tmp/IC_IC_182752379</localpsfdir>
+			<psfdir>/home/IC/simulation/TEST_TSMC13_ALLTEK_PLL/VCO_RING1/adexl/results/data/Interactive.47</psfdir>
+			<simdir>$AXL_PROJECT_DIR/TEST_TSMC13_ALLTEK_PLL/VCO_RING1/adexl/results/data/Interactive.47</simdir>
+			<gendatasheetplotsonsimulation>1</gendatasheetplotsonsimulation>
+			<runlog>/home/IC/Desktop/virtuoso/TEST_TSMC13_ALLTEK_PLL/VCO_RING1/adexl/results/data/Interactive.47.log</runlog>
+			<runlogfile>$AXL_SETUPDB_DIR/results/data/Interactive.47.log</runlogfile>
+			<schematicpoint></schematicpoint>
+			<test>all</test>
+		</historyentry>
+	</history>
+</setupdb>

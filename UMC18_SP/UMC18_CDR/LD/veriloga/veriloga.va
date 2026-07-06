@@ -1,0 +1,51 @@
+// VerilogA for CDR, LD, veriloga
+
+`include "constants.vams"
+`include "disciplines.vams"
+
+module LD(DIN,CKIN,REFIN,LDOUT,DATAOUT);
+	input DIN,CKIN,REFIN;
+	output LDOUT,DATAOUT;
+
+	electrical DIN,CKIN,REFIN,LDOUT,DATAOUT;
+
+	parameter VTH = 1.4;
+
+	real DATA=0,DATA_P1;
+	real flag=0;
+	real LD=0;
+
+
+	analog begin 
+		@(cross(V(DIN)-VTH,1))begin
+
+			if(V(CKIN)>VTH) DATA=1;
+			else DATA=0;
+		end
+		
+		if(DATA_P1!=DATA)begin 
+			flag=1;
+		end
+
+		DATA_P1=DATA;
+
+		@(cross(V(REFIN)-VTH,1))begin
+			
+			if(flag==1)begin
+				LD=0;
+			end
+			if(flag==0)begin
+				LD=1.8;
+			end
+			
+			flag=0;
+		end
+
+		V(LDOUT)<+LD;
+
+		V(DATAOUT)<+flag;
+	end
+			
+
+
+endmodule

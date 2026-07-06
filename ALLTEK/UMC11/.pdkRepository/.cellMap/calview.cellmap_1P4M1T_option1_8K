@@ -1,0 +1,2558 @@
+;;; Calibre cell mapping file
+
+;;; MetalOption: 1P4M1T_option1_8K
+
+(n_ldcd_d50g33_l110ae
+   (umc110ae N_LDCD_D50G33_L110AE symbol)
+   (
+      (g G)
+      (s S)
+      (d D)
+      (b B)
+   )
+   ( 
+      (nil m 1)
+   )
+)
+(p_ldcd_d50g33_l110ae
+   (umc110ae N_LDCD_D50G33_L110AE symbol)
+   (
+      (g G)
+      (s S)
+      (d D)
+      (b B)
+   )
+   ( 
+      (nil m 1)
+   )
+)
+(n_ldcd_d85g33_l110ae
+   (umc110ae N_LDCD_D85G33_L110AE symbol)
+   (
+      (g G)
+      (s S)
+      (d D)
+      (b B)
+   )
+   ( 
+      (nil m 1)
+   )
+)
+(p_ldcd_d85g33_l110ae
+   (umc110ae N_LDCD_D85G33_L110AE symbol)
+   (
+      (g G)
+      (s S)
+      (d D)
+      (b B)
+   )
+   ( 
+      (nil m 1)
+   )
+)
+(dion_l110e
+   (umc110ae DION_L110E symbol)
+   (
+      (pos PLUS)
+      (neg MINUS)
+   ) 
+   ( 
+      (nil m 1)
+   )
+)
+(diop_l110e
+   (umc110ae DIOP_L110E symbol)
+   (
+      (pos PLUS)
+      (neg MINUS)
+   )  
+   ( 
+      (nil m 1)
+   )
+)
+(dion_25_l110ae
+   (umc110ae DION_25_L110AE symbol)
+   (
+      (pos PLUS)
+      (neg MINUS)
+   )  
+   ( 
+      (nil m 1)
+   )
+)
+(diop_25_l110ae
+   (umc110ae DIOP_25_L110AE symbol)
+   (
+      (pos PLUS)
+      (neg MINUS)
+   )  
+   ( 
+      (nil m 1)
+   )
+)
+(dion_33_l110e
+   (umc110ae DION_33_L110E symbol)
+   (
+      (pos PLUS)
+      (neg MINUS)
+   )  
+   ( 
+      (nil m 1)
+   )
+)
+(diop_33_l110e
+   (umc110ae DIOP_33_L110E symbol)
+   (
+      (pos PLUS)
+      (neg MINUS)
+   )  
+   ( 
+      (nil m 1)
+   )
+)
+(dionw_l110e
+   (umc110ae DIONW_L110E symbol)
+   (
+      (pos PLUS)
+      (neg MINUS)
+   )   
+   ( 
+      (nil m 1)
+   )
+)
+(diodnw_l110e
+   (umc110ae DIODNW_L110E symbol)
+   (
+      (pos PLUS)
+      (neg MINUS)
+   )   
+   ( 
+      (nil m 1)
+   )
+)
+(diopw_l110e
+   (umc110ae DIOPW_L110E symbol)
+   (
+      (pos PLUS)
+      (neg MINUS)
+   )   
+   ( 
+      (nil m 1)
+   )
+)
+
+(n_12_hsl110e
+   (umc110ae N_12_HSL110E symbol)
+   (
+      (d D)
+      (g G)
+      (s S)
+      (b B)
+   ) 
+    (
+      (w fw)
+      (w w)
+      (nil fingers 1)
+      (nil m 1)
+      (ad shrunk_ad)
+      (as shrunk_as)
+      (pd shrunk_pd)
+      (ps shrunk_ps)
+      (sa shrunk_sa)
+      (sb shrunk_sb)
+    )
+)
+(n_12bpw_hsl110e
+   (umc110ae N_12BPW_HSL110E symbol)
+   (
+      (d D)
+      (g G)
+      (s S)
+      (b B)
+   ) 
+    (
+      (w fw)
+      (w w)
+      (nil fingers 1)
+      (nil m 1)
+      (ad shrunk_ad)
+      (as shrunk_as)
+      (pd shrunk_pd)
+      (ps shrunk_ps)
+      (sa shrunk_sa)
+      (sb shrunk_sb)
+    )
+)
+(n_12_spl110e
+   (umc110ae N_12_SPL110E symbol)
+   (
+      (d D)
+      (g G)
+      (s S)
+      (b B)
+   ) 
+   (
+      (w fw)
+      (w w)
+      (nil fingers 1)
+      (nil m 1)
+      (ad shrunk_ad)
+      (as shrunk_as)
+      (pd shrunk_pd)
+      (ps shrunk_ps)
+      (sa shrunk_sa)
+      (sb shrunk_sb)
+    )
+)
+(n_12bpw_spl110e
+   (umc110ae N_12BPW_SPL110E symbol)
+   (
+      (d D)
+      (g G)
+      (s S)
+      (b B)
+   ) 
+    (
+      (w fw)
+      (w w)
+      (nil fingers 1)
+      (nil m 1)
+      (ad shrunk_ad)
+      (as shrunk_as)
+      (pd shrunk_pd)
+      (ps shrunk_ps)
+      (sa shrunk_sa)
+      (sb shrunk_sb)
+    )
+)
+(n_12_lll110e
+   (umc110ae N_12_LLL110E symbol)
+   (
+      (d D)
+      (g G)
+      (s S)
+      (b B)
+   ) 
+   (
+      (w fw)
+      (w w)
+      (nil fingers 1)
+      (nil m 1)
+      (ad shrunk_ad)
+      (as shrunk_as)
+      (pd shrunk_pd)
+      (ps shrunk_ps)
+      (sa shrunk_sa)
+      (sb shrunk_sb)
+    )
+)
+(n_12bpw_lll110e
+   (umc110ae N_12BPW_LLL110E symbol)
+   (
+      (d D)
+      (g G)
+      (s S)
+      (b B)
+   ) 
+    (
+      (w fw)
+      (w w)
+      (nil fingers 1)
+      (nil m 1)
+      (ad shrunk_ad)
+      (as shrunk_as)
+      (pd shrunk_pd)
+      (ps shrunk_ps)
+      (sa shrunk_sa)
+      (sb shrunk_sb)
+    )
+)
+(n_12_hsl110e_ig
+   (umc110ae N_12_HSL110E_IG symbol)
+   (
+      (d D)
+      (g G)
+      (s S)
+      (b B)
+   ) 
+    (
+      (w fw)
+      (w w)
+      (nil fingers 1)
+      (nil m 1)
+      (ad shrunk_ad)
+      (as shrunk_as)
+      (pd shrunk_pd)
+      (ps shrunk_ps)
+      (sa shrunk_sa)
+      (sb shrunk_sb)
+    )
+)
+(n_12bpw_hsl110e_ig
+   (umc110ae N_12BPW_HSL110E_IG symbol)
+   (
+      (d D)
+      (g G)
+      (s S)
+      (b B)
+   ) 
+    (
+      (w fw)
+      (w w)
+      (nil fingers 1)
+      (nil m 1)
+      (ad shrunk_ad)
+      (as shrunk_as)
+      (pd shrunk_pd)
+      (ps shrunk_ps)
+      (sa shrunk_sa)
+      (sb shrunk_sb)
+    )
+)
+(n_12_spl110e_ig
+   (umc110ae N_12_SPL110E_IG symbol)
+   (
+      (d D)
+      (g G)
+      (s S)
+      (b B)
+   ) 
+   (
+      (w fw)
+      (w w)
+      (nil fingers 1)
+      (nil m 1)
+      (ad shrunk_ad)
+      (as shrunk_as)
+      (pd shrunk_pd)
+      (ps shrunk_ps)
+      (sa shrunk_sa)
+      (sb shrunk_sb)
+    )
+)
+(n_12bpw_spl110e_ig
+   (umc110ae N_12BPW_SPL110E_IG symbol)
+   (
+      (d D)
+      (g G)
+      (s S)
+      (b B)
+   ) 
+    (
+      (w fw)
+      (w w)
+      (nil fingers 1)
+      (nil m 1)
+      (ad shrunk_ad)
+      (as shrunk_as)
+      (pd shrunk_pd)
+      (ps shrunk_ps)
+      (sa shrunk_sa)
+      (sb shrunk_sb)
+    )
+)
+(n_12_lll110e_ig
+   (umc110ae N_12_LLL110E_IG symbol)
+   (
+      (d D)
+      (g G)
+      (s S)
+      (b B)
+   ) 
+   (
+      (w fw)
+      (w w)
+      (nil fingers 1)
+      (nil m 1)
+      (ad shrunk_ad)
+      (as shrunk_as)
+      (pd shrunk_pd)
+      (ps shrunk_ps)
+      (sa shrunk_sa)
+      (sb shrunk_sb)
+    )
+)
+(n_12bpw_lll110e_ig
+   (umc110ae N_12BPW_LLL110E_IG symbol)
+   (
+      (d D)
+      (g G)
+      (s S)
+      (b B)
+   ) 
+    (
+      (w fw)
+      (w w)
+      (nil fingers 1)
+      (nil m 1)
+      (ad shrunk_ad)
+      (as shrunk_as)
+      (pd shrunk_pd)
+      (ps shrunk_ps)
+      (sa shrunk_sa)
+      (sb shrunk_sb)
+    )
+)
+(n_nvt_12_l110e
+   (umc110ae N_NVT_12_L110E symbol)
+   (
+      (d D)
+      (g G)
+      (s S)
+      (b B)
+   ) 
+    (
+      (w fw)
+      (w w)
+      (nil fingers 1)
+      (nil m 1)
+      (ad shrunk_ad)
+      (as shrunk_as)
+      (pd shrunk_pd)
+      (ps shrunk_ps)
+    )
+)
+(p_12_hsl110e
+   (umc110ae P_12_HSL110E symbol)
+   (
+      (d D)
+      (g G)
+      (s S)
+      (b B)
+   ) 
+   (
+      (w fw)
+      (w w)
+      (nil fingers 1)
+      (nil m 1)
+      (ad shrunk_ad)
+      (as shrunk_as)
+      (pd shrunk_pd)
+      (ps shrunk_ps)
+      (sa shrunk_sa)
+      (sb shrunk_sb)
+    )
+)
+(p_12_spl110e
+   (umc110ae P_12_SPL110E symbol)
+   (
+      (d D)
+      (g G)
+      (s S)
+      (b B)
+   ) 
+   (
+      (w fw)
+      (w w)
+      (nil fingers 1)
+      (nil m 1)
+      (ad shrunk_ad)
+      (as shrunk_as)
+      (pd shrunk_pd)
+      (ps shrunk_ps)
+      (sa shrunk_sa)
+      (sb shrunk_sb)
+    )
+)
+(p_12_lll110e
+   (umc110ae P_12_LLL110E symbol)
+   (
+      (d D)
+      (g G)
+      (s S)
+      (b B)
+   ) 
+   (
+      (w fw)
+      (w w)
+      (nil fingers 1)
+      (nil m 1)
+      (ad shrunk_ad)
+      (as shrunk_as)
+      (pd shrunk_pd)
+      (ps shrunk_ps)
+      (sa shrunk_sa)
+      (sb shrunk_sb)
+    )
+)
+(p_12_hsl110e_ig
+   (umc110ae P_12_HSL110E_IG symbol)
+   (
+      (d D)
+      (g G)
+      (s S)
+      (b B)
+   ) 
+   (
+      (w fw)
+      (w w)
+      (nil fingers 1)
+      (nil m 1)
+      (ad shrunk_ad)
+      (as shrunk_as)
+      (pd shrunk_pd)
+      (ps shrunk_ps)
+      (sa shrunk_sa)
+      (sb shrunk_sb)
+    )
+)
+(p_12_spl110e_ig
+   (umc110ae P_12_SPL110E_IG symbol)
+   (
+      (d D)
+      (g G)
+      (s S)
+      (b B)
+   ) 
+   (
+      (w fw)
+      (w w)
+      (nil fingers 1)
+      (nil m 1)
+      (ad shrunk_ad)
+      (as shrunk_as)
+      (pd shrunk_pd)
+      (ps shrunk_ps)
+      (sa shrunk_sa)
+      (sb shrunk_sb)
+    )
+)
+(p_12_lll110e_ig
+   (umc110ae P_12_LLL110E_IG symbol)
+   (
+      (d D)
+      (g G)
+      (s S)
+      (b B)
+   ) 
+   (
+      (w fw)
+      (w w)
+      (nil fingers 1)
+      (nil m 1)
+      (ad shrunk_ad)
+      (as shrunk_as)
+      (pd shrunk_pd)
+      (ps shrunk_ps)
+      (sa shrunk_sa)
+      (sb shrunk_sb)
+    )
+)
+(n_33_l110e
+   (umc110ae N_33_L110E symbol)
+   (
+      (d D)
+      (g G)
+      (s S)
+      (b B)
+   ) 
+    (
+      (w fw)
+      (w w)
+      (nil fingers 1)
+      (nil m 1)
+      (ad shrunk_ad)
+      (as shrunk_as)
+      (pd shrunk_pd)
+      (ps shrunk_ps)
+      (sa shrunk_sa)
+      (sb shrunk_sb)
+    )
+)
+(n_33_hgl110e
+   (umc110ae N_33_HGL110E symbol)
+   (
+      (d D)
+      (g G)
+      (s S)
+      (b B)
+   ) 
+    (
+      (w fw)
+      (w w)
+      (nil fingers 1)
+      (nil m 1)
+      (ad shrunk_ad)
+      (as shrunk_as)
+      (pd shrunk_pd)
+      (ps shrunk_ps)
+      (sa shrunk_sa)
+      (sb shrunk_sb)
+    )
+)
+(n_25_l110ae
+   (umc110ae N_25_L110AE symbol)
+   (
+      (d D)
+      (g G)
+      (s S)
+      (b B)
+   ) 
+    (
+      (w fw)
+      (w w)
+      (nil fingers 1)
+      (nil m 1)
+      (ad shrunk_ad)
+      (as shrunk_as)
+      (pd shrunk_pd)
+      (ps shrunk_ps)
+      (sa shrunk_sa)
+      (sb shrunk_sb)
+    )
+)
+(n_25od33_l110ae
+   (umc110ae N_25OD33_L110AE symbol)
+   (
+      (d D)
+      (g G)
+      (s S)
+      (b B)
+   ) 
+    (
+      (w fw)
+      (w w)
+      (nil fingers 1)
+      (nil m 1)
+      (ad shrunk_ad)
+      (as shrunk_as)
+      (pd shrunk_pd)
+      (ps shrunk_ps)
+      (sa shrunk_sa)
+      (sb shrunk_sb)
+    )
+)
+(n_25ud18_l110ae
+   (umc110ae N_25UD18_L110AE symbol)
+   (
+      (d D)
+      (g G)
+      (s S)
+      (b B)
+   ) 
+    (
+      (w fw)
+      (w w)
+      (nil fingers 1)
+      (nil m 1)
+      (ad shrunk_ad)
+      (as shrunk_as)
+      (pd shrunk_pd)
+      (ps shrunk_ps)
+      (sa shrunk_sa)
+      (sb shrunk_sb)
+    )
+)
+(n_25ud12_l110ae
+   (umc110ae N_25UD12_L110AE symbol)
+   (
+      (d D)
+      (g G)
+      (s S)
+      (b B)
+   ) 
+    (
+      (w fw)
+      (w w)
+      (nil fingers 1)
+      (nil m 1)
+      (ad shrunk_ad)
+      (as shrunk_as)
+      (pd shrunk_pd)
+      (ps shrunk_ps)
+      (sa shrunk_sa)
+      (sb shrunk_sb)
+    )
+)
+(n_bpw_25_l110ae
+   (umc110ae N_BPW_25_L110AE symbol)
+   (
+      (d D)
+      (g G)
+      (s S)
+      (b B)
+   ) 
+    (
+      (w fw)
+      (w w)
+      (nil fingers 1)
+      (nil m 1)
+      (ad shrunk_ad)
+      (as shrunk_as)
+      (pd shrunk_pd)
+      (ps shrunk_ps)
+      (sa shrunk_sa)
+      (sb shrunk_sb)
+    )
+)
+(n_bpw_25od33_l110ae
+   (umc110ae N_BPW_25OD33_L110AE symbol)
+   (
+      (d D)
+      (g G)
+      (s S)
+      (b B)
+   ) 
+    (
+      (w fw)
+      (w w)
+      (nil fingers 1)
+      (nil m 1)
+      (ad shrunk_ad)
+      (as shrunk_as)
+      (pd shrunk_pd)
+      (ps shrunk_ps)
+      (sa shrunk_sa)
+      (sb shrunk_sb)
+    )
+)
+(n_bpw_25ud18_l110ae
+   (umc110ae N_BPW_25UD18_L110AE symbol)
+   (
+      (d D)
+      (g G)
+      (s S)
+      (b B)
+   ) 
+    (
+      (w fw)
+      (w w)
+      (nil fingers 1)
+      (nil m 1)
+      (ad shrunk_ad)
+      (as shrunk_as)
+      (pd shrunk_pd)
+      (ps shrunk_ps)
+      (sa shrunk_sa)
+      (sb shrunk_sb)
+    )
+)
+(n_bpw_25ud12_l110ae
+   (umc110ae N_BPW_25UD12_L110AE symbol)
+   (
+      (d D)
+      (g G)
+      (s S)
+      (b B)
+   ) 
+    (
+      (w fw)
+      (w w)
+      (nil fingers 1)
+      (nil m 1)
+      (ad shrunk_ad)
+      (as shrunk_as)
+      (pd shrunk_pd)
+      (ps shrunk_ps)
+      (sa shrunk_sa)
+      (sb shrunk_sb)
+    )
+)
+(n_nvt_25_l110ae
+   (umc110ae N_NVT_25_L110AE symbol)
+   (
+      (d D)
+      (g G)
+      (s S)
+      (b B)
+   ) 
+    (
+      (w fw)
+      (w w)
+      (nil fingers 1)
+      (nil m 1)
+      (ad shrunk_ad)
+      (as shrunk_as)
+      (pd shrunk_pd)
+      (ps shrunk_ps)
+    )
+)
+(n_nvt_25od33_l110ae
+   (umc110ae N_NVT_25OD33_L110AE symbol)
+   (
+      (d D)
+      (g G)
+      (s S)
+      (b B)
+   ) 
+    (
+      (w fw)
+      (w w)
+      (nil fingers 1)
+      (nil m 1)
+      (ad shrunk_ad)
+      (as shrunk_as)
+      (pd shrunk_pd)
+      (ps shrunk_ps)
+    )
+)
+(n_33bpw_l110e
+   (umc110ae N_33BPW_L110E symbol)
+   (
+      (d D)
+      (g G)
+      (s S)
+      (b B)
+   ) 
+    (
+      (w fw)
+      (w w)
+      (nil fingers 1)
+      (nil m 1)
+      (ad shrunk_ad)
+      (as shrunk_as)
+      (pd shrunk_pd)
+      (ps shrunk_ps)
+      (sa shrunk_sa)
+      (sb shrunk_sb)
+    )
+)
+(n_nvt_33_l110e
+   (umc110ae N_NVT_33_L110E symbol)
+   (
+      (d D)
+      (g G)
+      (s S)
+      (b B)
+   ) 
+    (
+      (w fw)
+      (w w)
+      (nil fingers 1)
+      (nil m 1)
+      (ad shrunk_ad)
+      (as shrunk_as)
+      (pd shrunk_pd)
+      (ps shrunk_ps)
+    )
+)
+(p_33_l110e
+   (umc110ae P_33_L110E symbol)
+   (
+      (d D)
+      (g G)
+      (s S)
+      (b B)
+   ) 
+    (
+      (w fw)
+      (w w)
+      (nil fingers 1)
+      (nil m 1)
+      (ad shrunk_ad)
+      (as shrunk_as)
+      (pd shrunk_pd)
+      (ps shrunk_ps)
+      (sa shrunk_sa)
+      (sb shrunk_sb)
+    )
+)
+(p_33_hgl110e
+   (umc110ae P_33_HGL110E symbol)
+   (
+      (d D)
+      (g G)
+      (s S)
+      (b B)
+   ) 
+    (
+      (w fw)
+      (w w)
+      (nil fingers 1)
+      (nil m 1)
+      (ad shrunk_ad)
+      (as shrunk_as)
+      (pd shrunk_pd)
+      (ps shrunk_ps)
+      (sa shrunk_sa)
+      (sb shrunk_sb)
+    )
+)
+(p_25_l110ae
+   (umc110ae P_25_L110AE symbol)
+   (
+      (d D)
+      (g G)
+      (s S)
+      (b B)
+   ) 
+    (
+      (w fw)
+      (w w)
+      (nil fingers 1)
+      (nil m 1)
+      (ad shrunk_ad)
+      (as shrunk_as)
+      (pd shrunk_pd)
+      (ps shrunk_ps)
+      (sa shrunk_sa)
+      (sb shrunk_sb)
+    )
+)
+(p_25od33_l110ae
+   (umc110ae P_25OD33_L110AE symbol)
+   (
+      (d D)
+      (g G)
+      (s S)
+      (b B)
+   ) 
+    (
+      (w fw)
+      (w w)
+      (nil fingers 1)
+      (nil m 1)
+      (ad shrunk_ad)
+      (as shrunk_as)
+      (pd shrunk_pd)
+      (ps shrunk_ps)
+      (sa shrunk_sa)
+      (sb shrunk_sb)
+    )
+)
+(p_25ud18_l110ae
+   (umc110ae P_25UD18_L110AE symbol)
+   (
+      (d D)
+      (g G)
+      (s S)
+      (b B)
+   ) 
+    (
+      (w fw)
+      (w w)
+      (nil fingers 1)
+      (nil m 1)
+      (ad shrunk_ad)
+      (as shrunk_as)
+      (pd shrunk_pd)
+      (ps shrunk_ps)
+      (sa shrunk_sa)
+      (sb shrunk_sb)
+    )
+)
+(p_25ud12_l110ae
+   (umc110ae P_25UD12_L110AE symbol)
+   (
+      (d D)
+      (g G)
+      (s S)
+      (b B)
+   ) 
+    (
+      (w fw)
+      (w w)
+      (nil fingers 1)
+      (nil m 1)
+      (ad shrunk_ad)
+      (as shrunk_as)
+      (pd shrunk_pd)
+      (ps shrunk_ps)
+      (sa shrunk_sa)
+      (sb shrunk_sb)
+    )
+)
+(n_50_lvtl110ae
+   (umc110ae N_50_LVTL110AE symbol)
+   (
+      (d D)
+      (g G)
+      (s S)
+      (b B)
+   ) 
+    (
+      (w fw)
+      (w w)
+      (nil fingers 1)
+      (nil m 1)
+      (ad shrunk_ad)
+      (as shrunk_as)
+      (pd shrunk_pd)
+      (ps shrunk_ps)
+      (sa shrunk_sa)
+      (sb shrunk_sb)
+    )
+)
+(p_50_lvtl110ae
+   (umc110ae P_50_LVTL110AE symbol)
+   (
+      (d D)
+      (g G)
+      (s S)
+      (b B)
+   ) 
+    (
+      (w fw)
+      (w w)
+      (nil fingers 1)
+      (nil m 1)
+      (ad shrunk_ad)
+      (as shrunk_as)
+      (pd shrunk_pd)
+      (ps shrunk_ps)
+      (sa shrunk_sa)
+      (sb shrunk_sb)
+    )
+)
+
+(n_50_rvtl110ae
+   (umc110ae N_50_RVTL110AE symbol)
+   (
+      (d D)
+      (g G)
+      (s S)
+      (b B)
+   ) 
+    (
+      (w fw)
+      (w w)
+      (nil fingers 1)
+      (nil m 1)
+      (ad shrunk_ad)
+      (as shrunk_as)
+      (pd shrunk_pd)
+      (ps shrunk_ps)
+      (sa shrunk_sa)
+      (sb shrunk_sb)
+    )
+)
+(p_50_rvtl110ae
+   (umc110ae P_50_RVTL110AE symbol)
+   (
+      (d D)
+      (g G)
+      (s S)
+      (b B)
+   ) 
+    (
+      (w fw)
+      (w w)
+      (nil fingers 1)
+      (nil m 1)
+      (ad shrunk_ad)
+      (as shrunk_as)
+      (pd shrunk_pd)
+      (ps shrunk_ps)
+      (sa shrunk_sa)
+      (sb shrunk_sb)
+    )
+)
+(n_nvt_50_l110ae
+   (umc110ae N_NVT_50_L110AE symbol)
+   (
+      (d D)
+      (g G)
+      (s S)
+      (b B)
+   ) 
+    (
+      (w fw)
+      (w w)
+      (nil fingers 1)
+      (nil m 1)
+      (ad shrunk_ad)
+      (as shrunk_as)
+      (pd shrunk_pd)
+      (ps shrunk_ps)
+      (sa shrunk_sa)
+      (sb shrunk_sb)
+    )
+)
+
+(pnp_v135x135_l110e
+   (umc110ae PNP_V135X135_L110E symbol)
+   (
+      (c C)
+      (b B)
+      (e E)
+   )    
+   ( 
+      (nil m 1)
+   )
+)
+(pnp_v90x90_l110e
+   (umc110ae PNP_V90X90_L110E symbol)
+   (
+      (c C)
+      (b B)
+      (e E)
+   )    
+   ( 
+      (nil m 1)
+   )
+)
+(pnp_v45x45_l110e
+   (umc110ae PNP_V45X45_L110E symbol)
+   (
+      (c C)
+      (b B)
+      (e E)
+   )    
+   ( 
+      (nil m 1)
+   )
+)
+(pnp_sv135x135_l110e
+   (umc110ae PNP_SV135X135_L110E symbol)
+   (
+      (c C)
+      (b B)
+      (e E)
+   )    
+   ( 
+      (nil m 1)
+   )
+)
+(pnp_sv90x90_l110e
+   (umc110ae PNP_SV90X90_L110E symbol)
+   (
+      (c C)
+      (b B)
+      (e E)
+   )    
+   ( 
+      (nil m 1)
+   )
+)
+(pnp_sv45x45_l110e
+   (umc110ae PNP_SV45X45_L110E symbol)
+   (
+      (c C)
+      (b B)
+      (e E)
+   )    
+   ( 
+      (nil m 1)
+   )
+)
+(npn_sv135x135_l110ae
+   (umc110ae NPN_SV135X135_L110AE symbol)
+   (
+      (c C)
+      (b B)
+      (e E)
+   )    
+   ( 
+      (nil m 1)
+   )
+)
+(npn_sv90x90_l110ae
+   (umc110ae NPN_SV90X90_L110AE symbol)
+   (
+      (c C)
+      (b B)
+      (e E)
+   )    
+   ( 
+      (nil m 1)
+   )
+)
+(npn_sv45x45_l110ae
+   (umc110ae NPN_SV45X45_L110AE symbol)
+   (
+      (c C)
+      (b B)
+      (e E)
+   )    
+   ( 
+      (nil m 1)
+   )
+)
+(rnpd_l110e
+   (umc110ae RNPD_L110E symbol)
+   (
+      (pos PLUS)
+      (neg MINUS)
+      (sub B)
+   ) 
+  (
+    (w segW) (w effW) (l segL) (l effL) (res r) (nil segments 1) (nil m 1)
+  )
+)
+(rnnpo_l110e
+   (umc110ae RNNPO_L110E symbol)
+   (
+      (pos PLUS)
+      (neg MINUS)
+      (sub B)
+   ) 
+  (
+    (w segW) (w effW) (l segL) (l effL) (res r) (nil segments 1) (nil m 1)
+  )
+)
+(rnnd_l110e
+   (umc110ae RNND_L110E symbol)
+   (
+      (pos PLUS)
+      (neg MINUS)
+      (sub B)
+   )
+   (
+    (w segW) (w effW) (l segL) (l effL) (res r) (nil segments 1) (nil m 1)
+  )
+)
+(rnppo_l110e
+   (umc110ae RNPPO_L110E symbol)
+   (
+      (pos PLUS)
+      (neg MINUS)
+      (sub B)
+   ) 
+  (
+    (w segW) (w effW) (l segL) (l effL) (res r) (nil segments 1) (nil m 1)
+  )
+)
+(rnhr1000_l110e 
+  (umc110ae RNHR1000_L110E symbol) 
+  ( 
+    (pos PLUS) 
+    (neg MINUS) 
+    (sub B) 
+  ) 
+  (
+    (w segW) (w effW) (l segL) (l effL) (res r) (nil segments 1) (nil m 1)
+  )
+) 
+(rspd_mml110e
+   (umc110ae RSPD_MML110E symbol)
+   (
+      (pos PLUS)
+      (neg MINUS)
+      (sub B)
+   ) 
+  (
+    (w segW) (w effW) (l segL) (l effL) (res r) (nil segments 1) (nil m 1)
+  )
+)
+(rsnpo_mml110e
+   (umc110ae RSNPO_MML110E symbol)
+   (
+      (pos PLUS)
+      (neg MINUS)
+      (sub B)
+   ) 
+  (
+    (w segW) (w effW) (l segL) (l effL) (res r) (nil segments 1) (nil m 1)
+  )
+)
+(rsnd_mml110e
+   (umc110ae RSND_MML110E symbol)
+   (
+      (pos PLUS)
+      (neg MINUS)
+      (sub B)
+   )
+   (
+    (w segW) (w effW) (l segL) (l effL) (res r) (nil segments 1) (nil m 1)
+  )
+)
+(rsppo_mml110e
+   (umc110ae RSPPO_MML110E symbol)
+   (
+      (pos PLUS)
+      (neg MINUS)
+      (sub B)
+   ) 
+  (
+    (w segW) (w effW) (l segL) (l effL) (res r) (nil segments 1) (nil m 1)
+  )
+)
+(rnwell_mml110e 
+  (umc110ae RNWELL_MML110E symbol) 
+  ( 
+    (pos PLUS) 
+    (neg MINUS) 
+    (sub B) 
+  ) 
+  (
+    (w segW) (w effW) (l segL) (l effL) (res r) (nil segments 1) (nil m 1)
+  )
+) 
+(mimcaps_20f_mml110e 
+  (umc110ae MIMCAPS_20F_MML110E symbol) 
+  ( 
+    (pos PLUS) 
+    (neg MINUS) 
+  )
+  (
+  (cap c)
+  (cap c_total)
+  (nil m 1)
+  )
+) 
+(mimcaps_15f_mml110e 
+  (umc110ae MIMCAPS_15F_MML110E symbol) 
+  ( 
+    (pos PLUS) 
+    (neg MINUS) 
+  ) 
+  (
+  (cap c)
+  (cap c_total)
+  (nil m 1)
+  )
+) 
+(mimcaps_10f_mml110e 
+  (umc110ae MIMCAPS_10F_MML110E symbol) 
+  ( 
+    (pos PLUS) 
+    (neg MINUS) 
+  )
+  (
+  (cap c)
+  (cap c_total)
+  (nil m 1)
+  )
+) 
+(ncap_12 
+  (umc110ae NCAP_12 symbol) 
+  ( 
+    (pos PLUS) 
+    (neg MINUS) 
+  )
+  (
+    (nil m 1)
+  ) 
+)
+(ncap_25od33 
+  (umc110ae NCAP_25OD33 symbol) 
+  ( 
+    (pos PLUS) 
+    (neg MINUS) 
+  )
+  (
+    (nil m 1)
+  ) 
+)
+(ncap_33 
+  (umc110ae NCAP_33 symbol) 
+  ( 
+    (pos PLUS) 
+    (neg MINUS)  
+  )
+  (
+    (nil m 1)
+  )
+)
+(pcap_12 
+  (umc110ae PCAP_12 symbol) 
+  ( 
+    (pos PLUS) 
+    (neg MINUS) 
+  )
+  (
+    (nil m 1) 
+  ) 
+)
+(pcap_25od33 
+  (umc110ae PCAP_25OD33 symbol) 
+  ( 
+    (pos PLUS) 
+    (neg MINUS)  
+  )
+  (
+    (nil m 1)
+  ) 
+)
+(pcap_33 
+  (umc110ae PCAP_33 symbol) 
+  ( 
+    (pos PLUS) 
+    (neg MINUS)  
+  )
+  (
+    (nil m 1)
+  )
+)
+
+(momcaps_sy_mml110ae
+  (umc110ae MOMCAPS_SY_MML110AE symbol) 
+  ( 
+    (plus PLUS) 
+    (minus MINUS) 
+    (b B) 
+  ) 
+  (
+  (c2 c)
+  (c2 effC) 
+  (nil m 1)
+  )
+)
+(momcaps_as_mml110ae
+  (umc110ae MOMCAPS_AS_MML110AE symbol) 
+  ( 
+    (plus PLUS) 
+    (minus MINUS) 
+    (b B) 
+  ) 
+  (
+  (c2 c)
+  (c2 effC) 
+  (nil m 1)
+  )
+)
+(momcaps_stripe_mml110ae
+  (umc110ae MOMCAPS_STRIPE_MML110AE symbol) 
+  ( 
+    (plus PLUS) 
+    (minus MINUS) 
+    (b B) 
+  ) 
+  (
+  (c2 c)
+  (c2 effC) 
+  (nil m 1)
+  )
+)
+(momcaps_asmesh_mml110ae 
+  (umc110ae MOMCAPS_ASMESH_MML110AE symbol) 
+  ( 
+    (plus1 PLUS1)  
+    (minus1 MINUS1) 
+    (plus2 PLUS2)  
+    (minus2 MINUS2) 
+    (b B)
+  ) 
+  (
+  (c2 cUnit)
+  (c c) 
+  (nil m 1)
+  ) 
+)
+(momcaps_symesh_mml110ae 
+  (umc110ae MOMCAPS_SYMESH_MML110AE symbol) 
+  ( 
+    (plus1 PLUS1)  
+    (minus1 MINUS1) 
+    (plus2 PLUS2)  
+    (minus2 MINUS2) 
+    (b B)
+  ) 
+  (
+  (c2 cUnit)
+  (c c) 
+  (nil m 1)
+  )  
+)
+(momcaps_stripemesh_mml110ae 
+  (umc110ae MOMCAPS_STRIPEMESH_MML110AE symbol) 
+  ( 
+    (plus1 PLUS1)  
+    (minus1 MINUS1) 
+    (plus2 PLUS2)  
+    (minus2 MINUS2) 
+    (b B)
+  ) 
+  (
+  (c2 cUnit)
+  (c c) 
+  (nil m 1)
+  )  
+)
+
+(mimcaps_1f_mm
+  (umc110ae MIMCAPS_1F_MM symbol) 
+  ( 
+    (pos PLUS)  
+    (neg MINUS) 
+  )     
+   ( 
+      (nil m 1)
+   )
+)  
+(mimcaps_1f_psub_rfkf
+  (umc110ae MIMCAPS_1F_PSUB_RFKF symbol) 
+  ( 
+    (plus PLUS)  
+    (minus MINUS) 
+    (psub PSUB) 
+  )       
+   ( 
+      (nil m 1)
+   )
+)  
+(mimcaps_1f_nwell_rfkf
+  (umc110ae MIMCAPS_1F_NWELL_RFKF symbol) 
+  ( 
+    (plus PLUS)  
+    (minus MINUS) 
+    (nw NW)
+    (psub PSUB) 
+  )       
+   ( 
+      (nil m 1)
+   )
+)  
+(mimcaps_1p5f_mm
+  (umc110ae MIMCAPS_1P5F_MM symbol) 
+  ( 
+    (pos PLUS)  
+    (neg MINUS) 
+  )     
+   ( 
+      (nil m 1)
+   )
+)  
+(mimcaps_1p5f_psub_rfkf
+  (umc110ae MIMCAPS_1P5F_PSUB_RFKF symbol) 
+  ( 
+    (plus PLUS)  
+    (minus MINUS) 
+    (psub PSUB) 
+  )       
+   ( 
+      (nil m 1)
+   )
+)  
+(mimcaps_1p5f_nwell_rfkf
+  (umc110ae MIMCAPS_1P5F_NWELL_RFKF symbol) 
+  ( 
+    (plus PLUS)  
+    (minus MINUS) 
+    (nw NW)
+    (psub PSUB) 
+  )       
+   ( 
+      (nil m 1)
+   )
+)  
+(mimcaps_2f_mm
+  (umc110ae MIMCAPS_2F_MM symbol) 
+  ( 
+    (pos PLUS)  
+    (neg MINUS) 
+  )     
+   ( 
+      (nil m 1)
+   )
+)  
+(mimcaps_2f_psub_rfkf
+  (umc110ae MIMCAPS_2F_PSUB_RFKF symbol) 
+  ( 
+    (plus PLUS)  
+    (minus MINUS) 
+    (psub PSUB) 
+  )       
+   ( 
+      (nil m 1)
+   )
+)  
+(mimcaps_2f_nwell_rfkf
+  (umc110ae MIMCAPS_2F_NWELL_RFKF symbol) 
+  ( 
+    (plus PLUS)  
+    (minus MINUS) 
+    (nw NW)
+    (psub PSUB) 
+  )       
+   ( 
+      (nil m 1)
+   )
+) 
+(rnppo_rf
+   (umc110ae RNPPO_RF symbol)
+   (
+      (plus PLUS)
+      (minus MINUS)
+      (nw NW)
+      (psub PSUB)
+   )        
+   ( 
+      (nil m 1)
+   )
+)
+(rnnpo_rf
+   (umc110ae RNNPO_RF symbol)
+   (
+      (plus PLUS)
+      (minus MINUS)
+      (nw NW)
+      (psub PSUB)
+   )        
+   ( 
+      (nil m 1)
+   )
+)
+(rnhr1000_rf
+   (umc110ae RNHR1000_RF symbol)
+   (
+      (plus PLUS)
+      (minus MINUS)
+      (nw NW)
+      (psub PSUB)
+   )        
+   ( 
+      (nil m 1)
+   )
+)
+
+(varmis_12_rf
+   (umc110ae VARMIS_12_RF symbol)
+   (
+      (plus PLUS)
+      (minus MINUS)
+      (psub PSUB)
+   )        
+   ( 
+      (nil m 1)
+   )
+)
+(varmis_33_rf
+   (umc110ae VARMIS_33_RF symbol)
+   (
+      (plus PLUS)
+      (minus MINUS)
+      (psub PSUB)
+   )        
+   ( 
+      (nil m 1)
+   )
+)
+(vardiop_rf
+   (umc110ae VARDIOP_RF symbol)
+   (
+      (plus PLUS)
+      (minus MINUS)
+      (psub PSUB)
+   )        
+   ( 
+      (nil m 1)
+   )
+)
+
+(momcaps_array_vp3_rf
+   (umc110ae MOMCAPS_ARRAY_VP3_RF symbol)
+   (
+      (plus PLUS)
+      (minus MINUS)
+      (nw NW)
+      (psub PSUB)
+   ) 
+  (
+    (array array)
+    (pin_l Pin_L)
+    (freq Freq)
+    (q    Q)
+    (nil m 1)
+  )
+)
+(momcaps_array_vp4_rf
+   (umc110ae MOMCAPS_ARRAY_VP4_RF symbol)
+   (
+      (plus PLUS)
+      (minus MINUS)
+      (nw NW)
+      (psub PSUB)
+   ) 
+  (
+    (array array)
+    (pin_l Pin_L)
+    (freq Freq)
+    (q    Q)
+    (nil m 1)
+  )
+)
+(momcaps_array_vp5_rfvcl
+   (umc110ae MOMCAPS_ARRAY_VP5_RF symbol)
+   (
+      (plus PLUS)
+      (minus MINUS)
+      (sh SH)
+   ) 
+  (
+    (array array)
+    (pin_l Pin_L)
+    (freq Freq)
+    (q    Q)
+    (nil m 1)
+  )
+)
+
+(l_sq_trans_rfvil
+   (umc110ae L_SQ_TRANS_RFVIL symbol)
+   (
+      (p1 P1)
+      (p2 P2)
+      (s1 S1)
+      (s2 S2)
+      (psub PSUB)
+   )         
+   ( 
+      (nil m 1)
+   )
+)
+
+(l_sqctin_trans_rfvil
+   (umc110ae L_SQCTIN_TRANS_RFVIL symbol)
+   (
+      (p1 P1)
+      (p2 P2)
+      (s1 S1)
+      (s2 S2)
+      (ctp CTP)
+      (psub PSUB)
+   )         
+   ( 
+      (nil m 1)
+   )
+)
+
+(l_sqctout_trans_rfvil
+   (umc110ae L_SQCTOUT_TRANS_RFVIL symbol)
+   (
+      (p1 P1)
+      (p2 P2)
+      (s1 S1)
+      (s2 S2)
+      (cts CTS)
+      (psub PSUB)
+   )         
+   ( 
+      (nil m 1)
+   )
+)
+
+(l_occtout_trans_rfvil
+   (umc110ae L_OCCTOUT_TRANS_RFVIL symbol)
+   (
+      (p1 P1)
+      (p2 P2)
+      (s1 S1)
+      (s2 S2)
+      (cts CTS)
+      (psub PSUB)
+   )         
+   ( 
+      (nil m 1)
+   )
+)
+
+(pad_rf
+  (umc110ae PAD_RF symbol) 
+  ( 
+    (plus PLUS)  
+    (psub PSUB) 
+  )          
+   ( 
+      (nil m 1)
+   )
+)
+
+(l_cr40k_rfvil
+   (umc110ae L_CR40K_RFVIL symbol)
+   (
+      (plus PLUS)
+      (minus MINUS)
+      (psub PSUB)
+   )         
+   ( 
+      (nil m 1)
+   )
+)
+
+(l_sy40k_rfvil
+   (umc110ae L_SY40K_RFVIL symbol)
+   (
+      (plus PLUS)
+      (minus MINUS)
+      (psub PSUB)
+   )         
+   ( 
+      (nil m 1)
+   )
+)
+
+(l_sy40kct_rfvil
+   (umc110ae L_SY40KCT_RFVIL symbol)
+   (
+      (plus PLUS)
+      (minus MINUS)
+      (ct CT)
+      (psub PSUB)
+   )         
+   ( 
+      (nil m 1)
+   )
+)
+
+(l_sqsk_rfvil
+   (umc110ae L_SQSK_RFVIL symbol)
+   (
+      (plus PLUS)
+      (minus MINUS)
+      (psub PSUB)
+   )         
+   ( 
+      (nil m 1)
+   )
+)
+
+(lnw_cr40k_rfvil
+   (umc110ae L_CR40KNW_RFVIL symbol)
+   (
+      (plus PLUS)
+      (minus MINUS)
+      (nw NW)
+      (psub PSUB)
+   )         
+   ( 
+      (nil m 1)
+   )
+)
+
+(lnw_sy40k_rfvil
+   (umc110ae L_SY40KNW_RFVIL symbol)
+   (
+      (plus PLUS)
+      (minus MINUS)
+      (nw NW)
+      (psub PSUB)
+   )         
+   ( 
+      (nil m 1)
+   )
+)
+
+(lnw_sy40kct_rfvil
+   (umc110ae L_SY40KNWCT_RFVIL symbol)
+   (
+      (plus PLUS)
+      (minus MINUS)
+      (ct CT)
+      (nw NW)
+      (psub PSUB)
+   )         
+   ( 
+      (nil m 1)
+   )
+)
+
+(l_sqsknw_rfvil
+   (umc110ae L_SQSKNW_RFVIL symbol)
+   (
+      (plus PLUS)
+      (minus MINUS)
+      (nw NW)
+      (psub PSUB)
+   )         
+   ( 
+      (nil m 1)
+   )
+)
+
+
+(n_33bpw_rf 
+  (umc110ae N_33BPW_RF symbol) 
+  ( 
+    (g G) 
+    (s S) 
+    (d D) 
+    (b B)
+    (nw NW)
+    (psub PSUB) 
+  )         
+   ( 
+      (nil m 1)
+   )
+)
+
+(n_33bpw_hgrf 
+  (umc110ae N_33BPW_HGRF symbol) 
+  ( 
+    (g G) 
+    (s S) 
+    (d D) 
+    (b B)
+    (nw NW)
+    (psub PSUB) 
+  )         
+   ( 
+      (nil m 1)
+   )
+)
+(n_12bpw_hsrf 
+  (umc110ae N_12BPW_HSRF symbol) 
+  ( 
+    (g G) 
+    (s S) 
+    (d D) 
+    (b B)
+    (nw NW)
+    (psub PSUB) 
+  )         
+   ( 
+      (nil m 1)
+   )
+)
+
+(n_12_hsrf
+   (umc110ae N_12_HSRF symbol)
+   (
+      (d D)
+      (g G)
+      (s S)
+      (b B)
+   )         
+   ( 
+      (nil m 1)
+   )
+)
+(n_33_rf
+   (umc110ae N_33_RF symbol)
+   (
+      (d D)
+      (g G)
+      (s S)
+      (b B)
+   )         
+   ( 
+      (nil m 1)
+   )
+)
+(n_33_hgrf
+   (umc110ae N_33_HGRF symbol)
+   (
+      (d D)
+      (g G)
+      (s S)
+      (b B)
+   )         
+   ( 
+      (nil m 1)
+   )
+)
+(p_12_hsrf
+   (umc110ae P_12_HSRF symbol)
+   (
+      (d D)
+      (g G)
+      (s S)
+      (b B)
+      (psub PSUB)
+   )         
+   ( 
+      (nil m 1)
+   )
+)
+(p_33_rf
+   (umc110ae P_33_RF symbol)
+   (
+      (d D)
+      (g G)
+      (s S)
+      (b B)
+      (psub PSUB)
+   )         
+   ( 
+      (nil m 1)
+   )
+)
+(p_33_hgrf
+   (umc110ae P_33_HGRF symbol)
+   (
+      (d D)
+      (g G)
+      (s S)
+      (b B)
+      (psub PSUB)
+   )         
+   ( 
+      (nil m 1)
+   )
+)
+
+(p_12_sprf
+   (umc110ae P_12_SPRF symbol)
+   (
+      (d D)
+      (g G)
+      (s S)
+      (b B)
+      (psub PSUB)
+   )         
+   ( 
+      (nil m 1)
+   )
+)
+
+(n_12_sprf
+   (umc110ae N_12_SPRF symbol)
+   (
+      (d D)
+      (g G)
+      (s S)
+      (b B)
+   )         
+   ( 
+      (nil m 1)
+   )
+)
+
+(n_12bpw_sprf 
+  (umc110ae N_12BPW_SPRF symbol) 
+  ( 
+    (g G) 
+    (s S) 
+    (d D) 
+    (b B)
+    (nw NW)
+    (psub PSUB) 
+  )         
+   ( 
+      (nil m 1)
+   )
+)
+
+(p_12_llrf
+   (umc110ae P_12_LLRF symbol)
+   (
+      (d D)
+      (g G)
+      (s S)
+      (b B)
+      (psub PSUB)
+   )         
+   ( 
+      (nil m 1)
+   )
+)
+
+(n_12_llrf
+   (umc110ae N_12_LLRF symbol)
+   (
+      (d D)
+      (g G)
+      (s S)
+      (b B)
+   )         
+   ( 
+      (nil m 1)
+   )
+)
+
+(n_12bpw_llrf 
+  (umc110ae N_12BPW_LLRF symbol) 
+  ( 
+    (g G) 
+    (s S) 
+    (d D) 
+    (b B)
+    (nw NW)
+    (psub PSUB) 
+  )         
+   ( 
+      (nil m 1)
+   )
+)
+
+(l_cr40k_rfvil_1p6m0t1u
+   (umc110ae L_CR40K_RFVIL_1P6M0T1U symbol)
+   (
+      (plus PLUS)
+      (minus MINUS)
+      (psub PSUB)
+   )         
+   ( 
+      (nil m 1)
+   )
+)
+
+(l_sy40k_rfvil_1p6m0t1u
+   (umc110ae L_SY40K_RFVIL_1P6M0T1U symbol)
+   (
+      (plus PLUS)
+      (minus MINUS)
+      (psub PSUB)
+   )         
+   ( 
+      (nil m 1)
+   )
+)
+
+(l_sy40kct_rfvil_1p6m0t1u
+   (umc110ae L_SY40KCT_RFVIL_1P6M0T1U symbol)
+   (
+      (plus PLUS)
+      (minus MINUS)
+      (ct CT)
+      (psub PSUB)
+   )         
+   ( 
+      (nil m 1)
+   )
+)
+
+(l_sqsk_rfvil_1p6m0t1u
+   (umc110ae L_SQSK_RFVIL_1P6M0T1U symbol)
+   (
+      (plus PLUS)
+      (minus MINUS)
+      (psub PSUB)
+   )         
+   ( 
+      (nil m 1)
+   )
+)
+
+(lnw_cr40k_rfvil_1p6m0t1u
+   (umc110ae LNW_CR40K_RFVIL_1P6M0T1U symbol)
+   (
+      (plus PLUS)
+      (minus MINUS)
+      (nw NW)
+      (psub PSUB)
+   )         
+   ( 
+      (nil m 1)
+   )
+)
+
+(lnw_sy40k_rfvil_1p6m0t1u
+   (umc110ae LNW_SY40K_RFVIL_1P6M0T1U symbol)
+   (
+      (plus PLUS)
+      (minus MINUS)
+      (nw NW)
+      (psub PSUB)
+   )         
+   ( 
+      (nil m 1)
+   )
+)
+
+(lnw_sy40kct_rfvil_1p6m0t1u
+   (umc110ae LNW_SY40KCT_RFVIL_1P6M0T1U symbol)
+   (
+      (plus PLUS)
+      (minus MINUS)
+      (ct CT)
+      (nw NW)
+      (psub PSUB)
+   )         
+   ( 
+      (nil m 1)
+   )
+)
+
+(lnw_sqsk_rfvil_1p6m0t1u
+   (umc110ae LNW_SQSK_RFVIL_1P6M0T1U symbol)
+   (
+      (plus PLUS)
+      (minus MINUS)
+      (nw NW)
+      (psub PSUB)
+   )         
+   ( 
+      (nil m 1)
+   )
+)
+
+
+(l_cr8k_rfvil_1p6m0t1f
+   (umc110ae L_CR8K_RFVIL_1P6M0T1F symbol)
+   (
+      (plus PLUS)
+      (minus MINUS)
+      (psub PSUB)
+   )         
+   ( 
+      (nil m 1)
+   )
+)
+
+(l_sy8k_rfvil_1p6m0t1f
+   (umc110ae L_SY8K_RFVIL_1P6M0T1F symbol)
+   (
+      (plus PLUS)
+      (minus MINUS)
+      (psub PSUB)
+   )         
+   ( 
+      (nil m 1)
+   )
+)
+
+(l_sy8kct_rfvil_1p6m0t1f
+   (umc110ae L_SY8KCT_RFVIL_1P6M0T1F symbol)
+   (
+      (plus PLUS)
+      (minus MINUS)
+      (ct CT)
+      (psub PSUB)
+   )         
+   ( 
+      (nil m 1)
+   )
+)
+
+(l_sqsk_rfvil_1p6m0t1f
+   (umc110ae L_SQSK_RFVIL_1P6M0T1F symbol)
+   (
+      (plus PLUS)
+      (minus MINUS)
+      (psub PSUB)
+   )         
+   ( 
+      (nil m 1)
+   )
+)
+
+(lnw_cr8k_rfvil_1p6m0t1f
+   (umc110ae LNW_CR8K_RFVIL_1P6M0T1F symbol)
+   (
+      (plus PLUS)
+      (minus MINUS)
+      (nw NW)
+      (psub PSUB)
+   )         
+   ( 
+      (nil m 1)
+   )
+)
+
+(lnw_sy8k_rfvil_1p6m0t1f
+   (umc110ae LNW_SY8K_RFVIL_1P6M0T1F symbol)
+   (
+      (plus PLUS)
+      (minus MINUS)
+      (nw NW)
+      (psub PSUB)
+   )         
+   ( 
+      (nil m 1)
+   )
+)
+
+(lnw_sy8kct_rfvil_1p6m0t1f
+   (umc110ae LNW_SY8KCT_RFVIL_1P6M0T1F symbol)
+   (
+      (plus PLUS)
+      (minus MINUS)
+      (ct CT)
+      (nw NW)
+      (psub PSUB)
+   )         
+   ( 
+      (nil m 1)
+   )
+)
+
+(l_sqsknw_rfvil_1p6m0t1f
+   (umc110ae LNW_SQSK_RFVIL_1P6M0T1F symbol)
+   (
+      (plus PLUS)
+      (minus MINUS)
+      (nw NW)
+      (psub PSUB)
+   )         
+   ( 
+      (nil m 1)
+   )
+)
+
+(l_cr8k_rfvil_1p5m1t
+   (umc110ae L_CR8K_RFVIL_1P5M1T symbol)
+   (
+      (plus PLUS)
+      (minus MINUS)
+      (psub PSUB)
+   )         
+   ( 
+      (nil m 1)
+   )
+)
+
+(l_sy8k_rfvil_1p5m1t
+   (umc110ae L_SY8K_RFVIL_1P5M1T symbol)
+   (
+      (plus PLUS)
+      (minus MINUS)
+      (psub PSUB)
+   )         
+   ( 
+      (nil m 1)
+   )
+)
+
+(l_sy8kct_rfvil_1p5m1t
+   (umc110ae L_SY8KCT_RFVIL_1P5M1T symbol)
+   (
+      (plus PLUS)
+      (minus MINUS)
+      (ct CT)
+      (psub PSUB)
+   )         
+   ( 
+      (nil m 1)
+   )
+)
+
+(l_sqsk_rfvil_1p5m1t
+   (umc110ae L_SQSK_RFVIL_1P5M1T symbol)
+   (
+      (plus PLUS)
+      (minus MINUS)
+      (psub PSUB)
+   )         
+   ( 
+      (nil m 1)
+   )
+)
+
+(l_cr20k_rfvil_1p7m0t1f1u
+   (umc110ae L_CR20K_RFVIL_1P7M0T1F1U symbol)
+   (
+      (plus PLUS)
+      (minus MINUS)
+      (psub PSUB)
+   )         
+   ( 
+      (nil m 1)
+   )
+)
+
+(l_sy20k_rfvil_1p7m0t1f1u
+   (umc110ae L_SY20K_RFVIL_1P7M0T1F1U symbol)
+   (
+      (plus PLUS)
+      (minus MINUS)
+      (psub PSUB)
+   )         
+   ( 
+      (nil m 1)
+   )
+)
+
+(l_sy20kct_rfvil_1p7m0t1f1u
+   (umc110ae L_SY20KCT_RFVIL_1P7M0T1F1U symbol)
+   (
+      (plus PLUS)
+      (minus MINUS)
+      (ct CT)
+      (psub PSUB)
+   )         
+   ( 
+      (nil m 1)
+   )
+)
+
+(l_sqsk_rfvil_1p7m0t1f1u
+   (umc110ae L_SQSK_RFVIL_1P7M0T1F1U symbol)
+   (
+      (plus PLUS)
+      (minus MINUS)
+      (psub PSUB)
+   )         
+   ( 
+      (nil m 1)
+   )
+)
+
+(l_cr12k_rfvil_1p8m0t1f1u
+   (umc110ae L_CR12K_RFVIL_1P8M0T1F1U symbol)
+   (
+      (plus PLUS)
+      (minus MINUS)
+      (psub PSUB)
+   )         
+   ( 
+      (nil m 1)
+   )
+)
+
+(l_sy12k_rfvil_1p8m0t1f1u
+   (umc110ae L_SY12K_RFVIL_1P8M0T1F1U symbol)
+   (
+      (plus PLUS)
+      (minus MINUS)
+      (psub PSUB)
+   )         
+   ( 
+      (nil m 1)
+   )
+)
+
+(l_sy12kct_rfvil_1p8m0t1f1u
+   (umc110ae L_SY12KCT_RFVIL_1P8M0T1F1U symbol)
+   (
+      (plus PLUS)
+      (minus MINUS)
+      (ct CT)
+      (psub PSUB)
+   )         
+   ( 
+      (nil m 1)
+   )
+)
+
+(l_sqsk_rfvil_1p8m0t1f1u
+   (umc110ae L_SQSK_RFVIL_1P8M0T1F1U symbol)
+   (
+      (plus PLUS)
+      (minus MINUS)
+      (psub PSUB)
+   )         
+   ( 
+      (nil m 1)
+   )
+)
+(l_cr8k_rfvil_1p5m1t
+   (umc110ae L_CR8K_RFVIL_1P5M1T symbol)
+   (
+      (plus PLUS)
+      (minus MINUS)
+      (psub PSUB)
+   )         
+   ( 
+      (nil m 1)
+   )
+)
+
+(l_sy8k_rfvil_1p5m1t
+   (umc110ae L_SY8K_RFVIL_1P5M1T symbol)
+   (
+      (plus PLUS)
+      (minus MINUS)
+      (psub PSUB)
+   )         
+   ( 
+      (nil m 1)
+   )
+)
+
+(l_sy8kct_rfvil_1p5m1t
+   (umc110ae L_SY8KCT_RFVIL_1P5M1T symbol)
+   (
+      (plus PLUS)
+      (minus MINUS)
+      (ct CT)
+      (psub PSUB)
+   )         
+   ( 
+      (nil m 1)
+   )
+)
+
+(l_sqsk_rfvil_1p5m1t
+   (umc110ae L_SQSK_RFVIL_1P5M1T symbol)
+   (
+      (plus PLUS)
+      (minus MINUS)
+      (psub PSUB)
+   )         
+   ( 
+      (nil m 1)
+   )
+)
+
+(l_cr40k_rfvil_1p6m2t40k
+   (umc110ae L_CR40K_RFVIL_1P6M2T40K symbol)
+   (
+      (plus PLUS)
+      (minus MINUS)
+      (psub PSUB)
+   )         
+   ( 
+      (nil m 1)
+   )
+)
+
+(l_sy40k_rfvil_1p6m2t40k
+   (umc110ae L_SY40K_RFVIL_1P6M2T40K symbol)
+   (
+      (plus PLUS)
+      (minus MINUS)
+      (psub PSUB)
+   )         
+   ( 
+      (nil m 1)
+   )
+)
+
+(l_sy40kct_rfvil_1p6m2t40k
+   (umc110ae L_SY40KCT_RFVIL_1P6M2T40K symbol)
+   (
+      (plus PLUS)
+      (minus MINUS)
+      (ct CT)
+      (psub PSUB)
+   )         
+   ( 
+      (nil m 1)
+   )
+)
+
+(l_sqsk_rfvil_1p6m2t40k
+   (umc110ae L_SQSK_RFVIL_1P6M2T40K symbol)
+   (
+      (plus PLUS)
+      (minus MINUS)
+      (psub PSUB)
+   )         
+   ( 
+      (nil m 1)
+   )
+)
+
+((p cap c)
+   (umc110ae pcapacitor symbol)
+   (
+      (PLUS)
+      (MINUS)
+   ) 
+)
+((p res r)
+   (umc110ae presistor symbol)
+   (
+      (PLUS)
+      (MINUS)
+   ) 
+)
+(r_m1_l110e
+  (umc110ae RSM1_L110E symbol)
+  ( 
+   (pos PLUS)
+   (neg MINUS)
+  )
+  ( 
+   (res r)
+   (nil m 1)
+  )
+)
+
+(r_1x_l110e
+  (umc110ae RSM2_L110E symbol)
+  ( 
+   (pos PLUS)
+   (neg MINUS)
+  )
+  ( 
+   (res r)
+   (nil m 1)
+  )
+)
+
+(r_1x_l110e
+  (umc110ae RSM3_L110E symbol)
+  ( 
+   (pos PLUS)
+   (neg MINUS)
+  )
+  ( 
+   (res r)
+   (nil m 1)
+  )
+)
+
+(r_2x_l110e
+  (umc110ae RSM4T_8K_L110E symbol)
+  ( 
+   (pos PLUS)
+   (neg MINUS)
+  )
+  ( 
+   (res r)
+   (nil m 1)
+  )
+)
+

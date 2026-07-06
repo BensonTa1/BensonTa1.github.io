@@ -1,0 +1,60 @@
+Starting Single Run, Sweeps and Corners...
+
+Current time: Thu Apr 24 12:41:12 2025 
+Best design point: 1
+Design specs: 
+	TEST_Adaptive_CTLE:Adaptive_CTLE:1	corner	Corner_0 - 
+	v /LA_LP; tstab (V)		Error	No
+	v /CTLE_LP; tstab (V)		Error	No
+	v /VC_LA; tstab (V)		Error	No
+	v /VOUTP; tstab (V)		Error	No
+	v /VLAP; tstab (V)		Error	No
+	v /VCTLEP1; tstab (V)		Error	No
+	v /VCTLEP; tstab (V)		Error	No
+	v /VINP; tstab (V)		Error	No
+	TEST_Adaptive_CTLE:Adaptive_CTLE:1	corner	Corner_1 - 
+	v /LA_LP; tstab (V)		Error	No
+	v /CTLE_LP; tstab (V)		Error	No
+	v /VC_LA; tstab (V)		Error	No
+	v /VOUTP; tstab (V)		Error	No
+	v /VLAP; tstab (V)		Error	No
+	v /VCTLEP1; tstab (V)		Error	No
+	v /VCTLEP; tstab (V)		Error	No
+	v /VINP; tstab (V)		Error	No
+	TEST_Adaptive_CTLE:Adaptive_CTLE:1	corner	Corner_2 - 
+	v /LA_LP; tstab (V)		Error	No
+	v /CTLE_LP; tstab (V)		Error	No
+	v /VC_LA; tstab (V)		Error	No
+	v /VOUTP; tstab (V)		Error	No
+	v /VLAP; tstab (V)		Error	No
+	v /VCTLEP1; tstab (V)		Error	No
+	v /VCTLEP; tstab (V)		Error	No
+	v /VINP; tstab (V)		Error	No
+	TEST_Adaptive_CTLE:Adaptive_CTLE:1	corner	Corner_3 - 
+	v /LA_LP; tstab (V)		Error	No
+	v /CTLE_LP; tstab (V)		Error	No
+	v /VC_LA; tstab (V)		Error	No
+	v /VOUTP; tstab (V)		Error	No
+	v /VLAP; tstab (V)		Error	No
+	v /VCTLEP1; tstab (V)		Error	No
+	v /VCTLEP; tstab (V)		Error	No
+	v /VINP; tstab (V)		Error	No
+	TEST_Adaptive_CTLE:Adaptive_CTLE:1	corner	Corner_4 - 
+	v /LA_LP; tstab (V)		Error	No
+	v /CTLE_LP; tstab (V)		Error	No
+	v /VC_LA; tstab (V)		Error	No
+	v /VOUTP; tstab (V)		Error	No
+	v /VLAP; tstab (V)		Error	No
+	v /VCTLEP1; tstab (V)		Error	No
+	v /VCTLEP; tstab (V)		Error	No
+	v /VINP; tstab (V)		Error	No
+Design parameters: 
+	VCTLE		1.05
+	VDIF		200m
+	VLA		1
+	VDD		1.71
+	temperature		30
+
+Received stop signal from user. 
+Interactive.1 completed. 
+Current time: Thu Apr 24 13:57:48 2025 

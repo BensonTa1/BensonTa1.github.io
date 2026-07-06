@@ -1,0 +1,53 @@
+//
+`include "constants.vams"
+`include "disciplines.vams"
+
+module IDEAL_FILTER_CIC_3RD (VIN,CLK,VOUT);
+
+input VIN,CLK;
+output VOUT;
+electrical VIN,CLK,VOUT;
+
+// =========================Parameters
+parameter integer OSR = 16;
+
+// =========================Internal states
+integer sample_count;
+integer INTG1,INTG2,INTG3;
+
+integer DIFF1,DIFF1_D;
+integer DIFF2,DIFF2_D;
+integer DIFF3,DIFF3_D;
+real COMB_OUT;
+
+analog begin
+    @(cross(V(CLK)-0.5, +1)) begin
+
+		
+		INTG1 = INTG1 + (V(VIN)>0.5 ? 1:0);
+		INTG2 = INTG2 + INTG1;
+		INTG3 = INTG3 + INTG2;
+
+		sample_count = sample_count + 1;
+
+		if (sample_count == OSR) begin
+			sample_count = 0;
+			
+			DIFF2 = INTG3-DIFF1_D;
+			DIFF1_D=INTG3;
+
+			DIFF3 = DIFF2 - DIFF2_D;
+			DIFF2_D = DIFF2;
+
+			COMB_OUT = DIFF3 - DIFF3_D;
+			DIFF3_D = DIFF3;
+
+			
+
+			
+        end
+    end
+	V(VOUT) <+ transition(COMB_OUT/OSR/OSR/OSR, 0, 1p);
+end
+
+endmodule

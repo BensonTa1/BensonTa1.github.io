@@ -1,0 +1,60 @@
+//
+simulator lang=spectre insensitive=yes
+//      #############################################
+//      #                                           #
+//      #  018RFCMOS MIS VARACTOR SPECTRE MODEL     #
+//      #                                           #  
+//      #############################################
+//
+subckt varmis_18_rf ( 1 2 999) 
+parameters nf=24 
++ p_l=(10.25+0.3854*nf)*1e-12 
++ p_r=(0.9850 + 0.0038 * nf) 
++ p_cp=( - 5.8082 + 0.4911 * nf) * 1e-15 
++ p_cbox=(19.9 + 3.9733 * nf) * 1e-15 
++ p_csub=( - 56.4685 + 57.8069 * log(nf)) * 1e-15 
++ p_rsub=(150.7322 - 27.8594 * log(nf)) 
++ p_sub_area=((10.14+(nf-1)*1.84)*17.94)*1e-12
++ p_sub_pj=2*((10.14+(nf-1)*1.84)+17.94)*1e-6
+//  **********************************************
+// 
+//   extension circuit
+// 
+//  **********************************************
+// 
+lgate ( 1 11 ) inductor l=p_l
+rgate ( 11 111 ) resistor r=p_r*(1+drgate_mis_rf)
+cp ( 11 999 ) capacitor c=p_cp
+lbulk ( 2 22 ) inductor l=p_l
+rbulk ( 22 222 ) resistor r=p_r
+cbox ( 22 333 ) capacitor c=p_cbox*(1+dcbox_mis_rf)
+rsub ( 333 999 ) resistor r=p_rsub
+csub ( 333 999 ) capacitor c=p_csub
+rd ( 3 999 ) resistor r=1e+09
+rs ( 4 999 ) resistor r=1e+09
+main ( 3 111 4 222 ) mosmode l=1u w=5u m=nf
+d2 ( 999 22 ) d_sub
+//  ***********************************************
+// 
+//  PMOS model
+// 
+//  **********************************************
+model mosmode bsim3v3 type=p version=3.2 capmod=3 
++ tox=4.17e-09+dtox_mis_rf xj=1.5e-07 a0=1.35 
++ ags=0.3818 b0=-3.088e-07 b1=1.4e-08 keta=0.1044 voff=-0.08 vth0=-0.4075 nch=6.5e+16 
++ nlx=5.717e-06 k1=0.8563 k2=-0.02497 k3=80 dvt0=2.2 dvt1=0.53 dvt2=-0.032 dsub=0.56 
++ eta0=0.08 etab=-0.07 u0=0.025 ua=2.25e-09 ub=5.87e-19 uc=-4.65e-11 vsat=80000 
++ delta=0.01 wr=1 pclm=1.3 pdiblc1=0.39 pdiblc2=0.0086 pdiblcb=0 pscbe1=4.24e+08 
++ pscbe2=1e-05 drout=0.56 nfactor=1 cdsc=0.00024 beta0=30 clc=1e-07 cle=0.6 
++ cgso=7.39957e-10 *(1+dcgso_mis_rf)
++ cgdo=7.39957e-10 *(1+dcgdo_mis_rf)
++ ckappa=0.6 
++ cf=1.00394e-10*(1+dcf_mis_rf) acde=1.165-0.0016*(temp-25) moin=15 toxm=4.17e-09 
++ kt1=0.085 kt1l=0 kt2=0 ute=-0.4484 ua1=4.57e-09 ub1=-6.026e-18 uc1=-0.0985 xl=2.3e-9 +dxl_mis_rf
++ xw=7e-9+dxw_mis_rf   dwc=2.1e-7
+//          
+model d_sub diode level=1 area=p_sub_area perim=p_sub_pj is=4.204e-06 isw=3.231e-12 
++ n=1.02 rs=9.223e-06 ik=400 ikp=3.4e+04 bv=14.38 ibv=1e-3 tlev=1 eg=1.11 
++ xti=3 trs=0.00249 cj=0.000107*(1+dcj_mis_rf) mj=0.458 vj=0.75 cjsw=2.4e-11*(1+dcjsw_mis_rf) mjsw=0.384 vjsw=0.75 
++ tlevc=1 imax =1e14
+ends varmis_18_rf

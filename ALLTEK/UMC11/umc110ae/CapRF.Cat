@@ -1,0 +1,11 @@
+TDMCHECKPOINT="1.0"
+umc110ae/MIMCAPS_2F_PSUB_RFKF type="cell"
+umc110ae/MIMCAPS_2F_NWELL_RFKF type="cell"
+umc110ae/MIMCAPS_2F_MM type="cell"
+umc110ae/MIMCAPS_1P5F_PSUB_RFKF type="cell"
+umc110ae/MIMCAPS_1P5F_NWELL_RFKF type="cell"
+umc110ae/MIMCAPS_1P5F_MM type="cell"
+umc110ae/MIMCAPS_1F_PSUB_RFKF type="cell"
+umc110ae/MIMCAPS_1F_NWELL_RFKF type="cell"
+umc110ae/MIMCAPS_1F_MM type="cell"
+

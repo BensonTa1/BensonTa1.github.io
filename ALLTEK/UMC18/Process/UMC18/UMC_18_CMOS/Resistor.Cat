@@ -1,0 +1,7 @@
+TDMCHECKPOINT="1.0"
+UMC_18_CMOS/RNHR1000_MM type="cell"
+UMC_18_CMOS/RNNPO_MM type="cell"
+UMC_18_CMOS/RNPPO_MM type="cell"
+UMC_18_CMOS/RNNPO_RF type="cell"
+UMC_18_CMOS/RNPPO_RF type="cell"
+UMC_18_CMOS/RNHR_RF type="cell"

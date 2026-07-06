@@ -1,0 +1,29 @@
+simulator lang=spectre insensitive=yes
+library pad_rf
+
+section typ
+
+parameters dc_pad_rf=0
+
+
+include "./pad_rf_v2d3.mdl.scs"
+ 
+endsection typ
+
+section min
+parameters dc_pad_rf=-0.15
+
+include "./pad_rf_v2d3.mdl.scs"
+endsection min
+
+section max
+parameters dc_pad_rf=0.15
+
+include "./pad_rf_v2d3.mdl.scs"
+
+ 
+endsection max
+
+
+endlibrary pad_rf
+

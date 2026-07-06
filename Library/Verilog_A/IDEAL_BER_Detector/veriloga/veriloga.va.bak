@@ -1,0 +1,42 @@
+// VerilogA for Verilog_A, IDEAL_BER_Detector, veriloga
+
+`include "constants.vams"
+`include "disciplines.vams"
+
+module IDEAL_BER_Detector(PRBSIN,DIN,Total_bit,Error_bit);
+	electrical PRBSIN,DIN,Total_bit,Error_bit;
+	input PRBSIN,DIN;
+	output Total_bit,Error_bit;
+	
+	real cnt_times=0;
+	real error_times=0;
+	real status_flag=0;
+
+	parameter real VTH=1.5;
+
+	analog begin
+		@(cross(V(PRBSIN)-VTH,1))begin
+
+			if(status_flag==1)begin
+				error_times=error_times+1;
+			end
+			cnt_times=cnt_times+1;
+			status_flag=1;
+		end
+		
+		@(cross(V(DIN)-VTH,-1))begin
+			status_flag=0;
+		end
+
+		@(cross(V(PRBSIN)-VTH,-1))begin
+
+			if(status_flag==1)
+				error_times=error_times+1;
+
+		end
+		V(Error_bit)<+error_times/1000000;
+		V(Total_bit)<+cnt_times/1000000;
+		
+	end
+
+endmodule

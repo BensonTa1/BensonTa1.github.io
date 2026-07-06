@@ -1,0 +1,138 @@
+//  ******************************************************************************
+//  tt: typical n-ch mosfet and typical p-ch mosfet
+//  ff: fast n-ch mosfet and fast p-ch mosfet
+//  ss: slow n-ch mosfet and slow p-ch mosfet
+//  fnsp: fast n-ch mosfet and slow p-ch mosfet
+//  snfp: slow n-ch mosfet and fast p-ch mosfet
+//  ******************************************************************************
+simulator lang=spectre insensitive=yes
+//
+library mylib
+
+section tt
+parameters dtox_n_nvt_12_l110e_t=0.0000000e+000
+parameters dxl_n_nvt_12_l110e_t=0.0000000e+000
+parameters dxw_n_nvt_12_l110e_t=0.0000000e+000
+parameters dvth0_n_nvt_12_l110e_t=0.0000000e+000
+parameters du0_n_nvt_12_l110e_t=0.0000000e+000
+parameters dlvth0_n_nvt_12_l110e_t=0.0000000e+000
+parameters drdsw_n_nvt_12_l110e_t=0.0000000e+000
+parameters dk3_n_nvt_12_l110e_t=0.0000000e+000
+parameters dpvth0_n_nvt_12_l110e_t=0.0000000e+000
+parameters dwwl_n_nvt_12_l110e_t=0.0000000e+000
+parameters dcj_n_nvt_12_l110e_t=0.0000000e+000
+parameters dcjsw_n_nvt_12_l110e_t=0.0000000e+000
+parameters dcjswg_n_nvt_12_l110e_t=0.0000000e+000
+parameters dcgdo_n_nvt_12_l110e_t=0.0000000e+000
+parameters dcgso_n_nvt_12_l110e_t=0.0000000e+000
+
+//
+//
+endsection tt
+//
+section ff
+parameters dtox_n_nvt_12_l110e_t=-7.8900000e-011
+parameters dxl_n_nvt_12_l110e_t=-5.0000000e-009
+parameters dxw_n_nvt_12_l110e_t=1.0000000e-010
+parameters dvth0_n_nvt_12_l110e_t=-4.4682200e-002
+parameters du0_n_nvt_12_l110e_t=-6.6400000e-004
+parameters dlvth0_n_nvt_12_l110e_t=-1.6838300e-002
+parameters drdsw_n_nvt_12_l110e_t=1.8000000e+001
+parameters dk3_n_nvt_12_l110e_t=-6.5453500e+000
+parameters dpvth0_n_nvt_12_l110e_t=-2.5448000e-002
+parameters dwwl_n_nvt_12_l110e_t=-1.2900000e-022
+parameters dcj_n_nvt_12_l110e_t=-1.3200000e-005
+parameters dcjsw_n_nvt_12_l110e_t=-3.1200000e-011
+parameters dcjswg_n_nvt_12_l110e_t=-1.2400000e-011
+parameters dcgdo_n_nvt_12_l110e_t=1.1000000e-011
+parameters dcgso_n_nvt_12_l110e_t=1.1000000e-011
+
+//
+//
+endsection ff
+//
+section ss
+parameters dtox_n_nvt_12_l110e_t=7.8900000e-011
+parameters dxl_n_nvt_12_l110e_t=5.0000000e-009
+parameters dxw_n_nvt_12_l110e_t=-1.0000000e-010
+parameters dvth0_n_nvt_12_l110e_t=4.4475900e-002
+parameters du0_n_nvt_12_l110e_t=4.5800000e-004
+parameters dlvth0_n_nvt_12_l110e_t=1.7580000e-002
+parameters drdsw_n_nvt_12_l110e_t=2.0600000e+002
+parameters dk3_n_nvt_12_l110e_t=6.2400000e+000
+parameters dpvth0_n_nvt_12_l110e_t=2.4500000e-002
+parameters dwwl_n_nvt_12_l110e_t=1.1800000e-022
+parameters dcj_n_nvt_12_l110e_t=1.3200000e-005
+parameters dcjsw_n_nvt_12_l110e_t=3.1200000e-011
+parameters dcjswg_n_nvt_12_l110e_t=1.2400000e-011
+parameters dcgdo_n_nvt_12_l110e_t=-1.1000000e-011
+parameters dcgso_n_nvt_12_l110e_t=-1.1000000e-011
+
+//
+//
+endsection ss
+//
+section tt_g
+parameters dtox_n_nvt_12_l110e_g=0.0000000e+000
+parameters dxl_n_nvt_12_l110e_g=0.0000000e+000
+parameters dxw_n_nvt_12_l110e_g=0.0000000e+000
+parameters dvth0_n_nvt_12_l110e_g=0.0000000e+000
+parameters du0_n_nvt_12_l110e_g=0.0000000e+000
+parameters dlvth0_n_nvt_12_l110e_g=0.0000000e+000
+parameters drdsw_n_nvt_12_l110e_g=0.0000000e+000
+parameters dk3_n_nvt_12_l110e_g=0.0000000e+000
+parameters dpvth0_n_nvt_12_l110e_g=0.0000000e+000
+parameters dwwl_n_nvt_12_l110e_g=0.0000000e+000
+parameters dcj_n_nvt_12_l110e_g=0.0000000e+000
+parameters dcjsw_n_nvt_12_l110e_g=0.0000000e+000
+parameters dcjswg_n_nvt_12_l110e_g=0.0000000e+000
+parameters dcgdo_n_nvt_12_l110e_g=0.0000000e+000
+parameters dcgso_n_nvt_12_l110e_g=0.0000000e+000
+
+//
+//
+endsection tt_g
+//
+section ff_g
+parameters dtox_n_nvt_12_l110e_g=-7.8900000e-011
+parameters dxl_n_nvt_12_l110e_g=-5.0000000e-009
+parameters dxw_n_nvt_12_l110e_g=-2.1690664e-009
+parameters dvth0_n_nvt_12_l110e_g=-4.4541405e-002
+parameters du0_n_nvt_12_l110e_g=-6.7347314e-004
+parameters dlvth0_n_nvt_12_l110e_g=-1.6324918e-002
+parameters drdsw_n_nvt_12_l110e_g=-2.8839214e+001
+parameters dk3_n_nvt_12_l110e_g=-8.3115500e+000
+parameters dpvth0_n_nvt_12_l110e_g=-8.8047426e-003
+parameters dwwl_n_nvt_12_l110e_g=-1.8542667e-022
+parameters dcj_n_nvt_12_l110e_g=-1.3200000e-005
+parameters dcjsw_n_nvt_12_l110e_g=-3.1200000e-011
+parameters dcjswg_n_nvt_12_l110e_g=-1.2400000e-011
+parameters dcgdo_n_nvt_12_l110e_g=1.1000000e-011
+parameters dcgso_n_nvt_12_l110e_g=1.1000000e-011
+
+//
+//
+endsection ff_g
+//
+section ss_g
+parameters dtox_n_nvt_12_l110e_g=7.8900000e-011
+parameters dxl_n_nvt_12_l110e_g=5.0000000e-009
+parameters dxw_n_nvt_12_l110e_g=1.8985895e-009
+parameters dvth0_n_nvt_12_l110e_g=4.4374942e-002
+parameters du0_n_nvt_12_l110e_g=4.6908450e-004
+parameters dlvth0_n_nvt_12_l110e_g=1.6870876e-002
+parameters drdsw_n_nvt_12_l110e_g=2.6586227e+002
+parameters dk3_n_nvt_12_l110e_g=7.7127929e+000
+parameters dpvth0_n_nvt_12_l110e_g=9.5250038e-003
+parameters dwwl_n_nvt_12_l110e_g=1.6689248e-022
+parameters dcj_n_nvt_12_l110e_g=1.3200000e-005
+parameters dcjsw_n_nvt_12_l110e_g=3.1200000e-011
+parameters dcjswg_n_nvt_12_l110e_g=1.2400000e-011
+parameters dcgdo_n_nvt_12_l110e_g=-1.1000000e-011
+parameters dcgso_n_nvt_12_l110e_g=-1.1000000e-011
+
+//
+//
+endsection ss_g
+
+endlibrary mylib

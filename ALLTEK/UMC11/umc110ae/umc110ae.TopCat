@@ -1,0 +1,18 @@
+TDMCHECKPOINT="1.0"
+umc110ae/Bipolar.Cat type="category"
+umc110ae/Cap.Cat type="category"
+umc110ae/Diode.Cat type="category"
+umc110ae/Mos.Cat type="category"
+umc110ae/DO_NOT_USE.Cat type="category"
+umc110ae/Res.Cat type="category"
+umc110ae/Symbolics.Cat type="category"
+umc110ae/VCL.Cat type="category"
+umc110ae/VIL.Cat type="category"
+umc110ae/VTL.Cat type="category"
+umc110ae/varRF.Cat type="category"
+umc110ae/padRF.Cat type="category"
+umc110ae/ResRF.Cat type="category"
+umc110ae/MosRF.Cat type="category"
+umc110ae/CapRF.Cat type="category"
+
+

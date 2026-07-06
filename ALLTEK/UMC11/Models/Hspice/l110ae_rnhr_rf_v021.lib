@@ -1,0 +1,28 @@
+*
+.lib tt
+.param drend_rnhr1000_rf=0
+.param drs_rnhr1000_rf=0
+.param ddw_rnhr1000_rf=0
+.param p_cox_rnhr1000_rf=0
+
+.include 'l110ae_rnhr_rf_v021.mdl'
+.endl tt
+
+.lib ss
+.param drend_rnhr1000_rf=5.4740e-005
+.param drs_rnhr1000_rf=1.4800e+002
+.param ddw_rnhr1000_rf=-1.3000e-008
+.param p_cox_rnhr1000_rf=0.1
+
+.include 'l110ae_rnhr_rf_v021.mdl'
+.endl ss
+
+.lib ff
+.param drend_rnhr1000_rf=-5.3310e-005
+.param drs_rnhr1000_rf=-1.4800e+002
+.param ddw_rnhr1000_rf=1.3000e-008
+.param p_cox_rnhr1000_rf=-0.1
+
+.include 'l110ae_rnhr_rf_v021.mdl'
+.endl ff
+

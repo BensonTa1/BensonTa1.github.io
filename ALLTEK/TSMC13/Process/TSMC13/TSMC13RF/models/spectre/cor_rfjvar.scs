@@ -1,0 +1,16 @@
+library rfjvar_cor 
+
+section ff_rfjvar 
+include "cr013g_2d5_v1d4.scs" section = ff_rfjvar 
+endsection ff_rfjvar 
+
+section ss_rfjvar 
+include "cr013g_2d5_v1d4.scs" section = ss_rfjvar 
+endsection ss_rfjvar 
+
+section tt_rfjvar 
+include "cr013g_2d5_v1d4.scs" section = tt_rfjvar 
+endsection tt_rfjvar 
+
+
+endlibrary rfjvar_cor 

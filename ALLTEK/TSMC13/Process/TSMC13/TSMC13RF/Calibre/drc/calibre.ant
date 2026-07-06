@@ -1,0 +1,734 @@
+//**************************************************************************************
+//* CALIBRE ANTENNA DRC COMMAND FILE -  CL013S_8M.ANT.23a (VER 2.3a, 12/24/2009)
+//* FOR TSMC 0.13UM/0.11UM CMOS LOGIC/MS/RF 1P8M PROCESS ANTENNA RULES (CL013G/LV/LP,CM013G,CL011G/LV+,CM011G)
+//* (DRC COMMAND FILE DOCUMENT: T-013-LO-DR-001-C1 VER 2.3a)
+//* (DESIGN RULE DOCUMENT:      T-013-LO-DR-001    VER 2.3)
+//************************************************************************************
+//* TSMC developed this deck using Mentor Graphics proprietary SVRF and TVF formats.
+//* The deck is to be used only in Calibre tools.
+//************************************************************************************
+
+
+
+//
+// ENVIRONMENT SETUP
+//==================
+
+PRECISION    1000
+RESOLUTION      5
+
+LAYOUT SYSTEM GDSII
+LAYOUT PROCESS BOX RECORD YES
+LAYOUT PATH "GDSFILENAME"
+LAYOUT PRIMARY "TOPCELLNAME"
+
+DRC RESULTS DATABASE "DRC_RES.db"
+DRC SUMMARY REPORT "DRC.rep"
+DRC KEEP EMPTY NO
+DRC CHECK TEXT ALL
+DRC MAXIMUM RESULTS ALL
+
+FLAG OFFGRID YES
+FLAG ACUTE YES
+FLAG SKEW YES
+FLAG NONSIMPLE YES
+DRC INCREMENTAL CONNECT YES
+
+// DRAWN LAYER DEFINITIONS
+//========================
+
+LAYER DIFFi      6   		// DIFF active areas
+LAYER PDIFFi     7   		// PDIFF active areas
+LAYER NDIFFi     8   		// NDIFF active areas
+LAYER OD2i       15
+LAYER POLYGi     17
+LAYER CONTi      30
+LAYER VIA1i      51             // VIA12           Define connect for M2 to M1
+LAYER VIA2i      52             // VIA23           Define connect for M3 to M2
+LAYER VIA3i      53             // VIA34           Define connect for M4 to M3
+LAYER VIA4i      54             // VIA45           Define connect for M5 to M4
+LAYER VIA5i      55             // VIA56           Define connect for M6 to M5
+LAYER VIA6i      56             // VIA67           Define connect for M7 to M6
+LAYER VIA7i      57             // VIA78           Define connect for M8 to M7
+LAYER VIADi      167	        // for RDL process
+LAYER M1i        31             // METAL1
+LAYER M2i        32             // METAL2
+LAYER M3i        33             // METAL3
+LAYER M4i        34             // METAL4
+LAYER M5i        35             // METAL5
+LAYER M6i        36             // METAL6
+LAYER M7i        37             // METAL7
+LAYER M8i        38             // METAL8
+LAYER MDi        168    	// MD For RDL interconnection
+LAYER CTMi       77     	// CTM MiM capacitor
+LAYER CBMi       88       	// Definition of capacitor bottom metal
+LAYER APi        42             // AP RDL 
+LAYER RVi        85             // RV Define connect for M8 to AP
+LAYER CBD        169            // CBD For solder Bump and RDL layer 
+LAYER CB         43             // Passivation opening for Bond Pad
+LAYER CB2        86             // Passivation-2 opening for Bond Pad
+
+// DOD should be an individual CAD layer and different from real OD
+LAYER DOD                  1001    	// Dummy OD (DIFF)
+LAYER MAP 6   DATATYPE 1   1001  	// Mapping (6;1) to 340 for dummy OD as default
+// DPO should be an individual CAD layer and different from real POLGY
+LAYER DPO                  1002   	// Dummy Poly
+LAYER MAP 17  DATATYPE 1   1002  	// Mapping (17;1) to 342 for dummy PO
+LAYER Cu_PPI               1003         // Cu_PPI interconnection between Polymide1 and Polymide2 for WLCSP
+LAYER MAP 42  DATATYPE 10  1003
+
+//In TSMC standard mapping, datatype 1 is for dummy metal and datatype 2 is for metal slot
+LAYER MDSLOTi              1004    	// MD slot (if drawn)
+LAYER MAP 168 DATATYPE 2   1004  	// Mapping (168;2) to 343 for MDSLOTi
+LAYER DUMD                 1005  	// dummy MD
+LAYER MAP 168 DATATYPE 1   1005  	// Mapping (168;1) to 344 for DUMD
+LAYER M1SLOTi              1101    	// Metal1 slot (if drawn)
+LAYER MAP 31  DATATYPE 2   1101  	// Mapping (31;2) to 321 for M1SLOTi
+LAYER DUM1                 1201  	// dummy Metal1
+LAYER MAP 31  DATATYPE 1   1201  	// Mapping (31;1) to 331 for DUM1
+LAYER M2SLOTi              1102    	// Metal2 slot (if drawn)
+LAYER MAP 32  DATATYPE 2   1102  	// Mapping (32;2) to 322 for M2SLOTi
+LAYER DUM2                 1202  	// dummy Metal2
+LAYER MAP 32  DATATYPE 1   1202  	// Mapping (32;1) to 332 for DUM2
+LAYER M3SLOTi              1103    	// Metal3 slot (if drawn)
+LAYER MAP 33  DATATYPE 2   1103  	// Mapping (33;2) to 323 for M3SLOTi
+LAYER DUM3                 1203  	// dummy Metal3
+LAYER MAP 33  DATATYPE 1   1203  	// Mapping (33;1) to 333 for DUM3
+LAYER M4SLOTi              1104    	// Metal4 slot (if drawn)
+LAYER MAP 34  DATATYPE 2   1104  	// Mapping (34;2) to 324 for M4SLOTi
+LAYER DUM4                 1204  	// dummy Metal4
+LAYER MAP 34  DATATYPE 1   1204  	// Mapping (34;1) to 334 for DUM4
+LAYER M5SLOTi              1105    	// Metal5 slot (if drawn)
+LAYER MAP 35  DATATYPE 2   1105  	// Mapping (35;2) to 325 for M5SLOTi
+LAYER DUM5                 1205  	// dummy Metal5
+LAYER MAP 35  DATATYPE 1   1205  	// Mapping (35;1) to 335 for DUM5
+LAYER M6SLOTi              1106    	// Metal6 slot (if drawn)
+LAYER MAP 36  DATATYPE 2   1106  	// Mapping (36;2) to 326 for M6SLOTi
+LAYER DUM6                 1206  	// dummy Metal6
+LAYER MAP 36  DATATYPE 1   1206  	// Mapping (36;1) to 336 for DUM6
+LAYER M7SLOTi              1107    	// Metal7 slot (if drawn)
+LAYER MAP 37  DATATYPE 2   1107  	// Mapping (37;2) to 327 for M7SLOTi
+LAYER DUM7                 1207  	// dummy Metal7
+LAYER MAP 37  DATATYPE 1   1207  	// Mapping (37;1) to 337 for DUM7
+LAYER M8SLOTi              1108    	// Metal8 slot (if drawn)
+LAYER MAP 38  DATATYPE 2   1108  	// Mapping (38;2) to 328 for M8SLOTi
+LAYER DUM8                 1208  	// dummy Metal8
+LAYER MAP 38  DATATYPE 1   1208  	// Mapping (38;1) to 338 for DUM8
+
+LAYOUT TOP LAYER M1i VIA1i M1SLOTi DUM1
+LAYOUT TOP LAYER M2i VIA2i M2SLOTi DUM2
+LAYOUT TOP LAYER M3i VIA3i M3SLOTi DUM3
+LAYOUT TOP LAYER M4i VIA4i M4SLOTi DUM4
+LAYOUT TOP LAYER M5i VIA5i M5SLOTi DUM5
+LAYOUT TOP LAYER M6i VIA6i M6SLOTi DUM6
+LAYOUT TOP LAYER M7i VIA7i M7SLOTi DUM7
+LAYOUT TOP LAYER M8i VIADi MDi MDSLOTi DUMD M8SLOTi DUM8
+
+ODi   = (DIFFi OR PDIFFi) OR NDIFFi  
+OD    = ODi INTERACT (POLYGi OR CONTi)
+POLY  = POLYGi INTERACT (OD OR CONTi)
+VIAD  = COPY VIADi
+
+//Separate the via upon CTM region
+VIAt  = VIA7i NOT INTERACT CTMi
+VIAc  = VIA7i AND CTMi
+
+GATE  = OD    AND POLY
+SD    = (OD   NOT POLY) INTERACT CONTi
+CO_PO = CONTi INTERACT POLY
+
+// metal in silicon
+M1x   = M1i NOT M1SLOTi
+M2x   = M2i NOT M2SLOTi
+M3x   = M3i NOT M3SLOTi
+M4x   = M4i NOT M4SLOTi
+M5x   = M5i NOT M5SLOTi
+M6x   = M6i NOT M6SLOTi
+M7x   = M7i NOT M7SLOTi
+M8x   = M8i NOT M8SLOTi
+MDx   = MDi NOT MDSLOTi
+M1    = M1x INTERACT (CONTi OR VIA1i)
+M2    = M2x INTERACT (VIA1i OR VIA2i)
+M3    = M3x INTERACT (VIA2i OR VIA3i)
+M4    = M4x INTERACT (VIA3i OR VIA4i)
+M5    = M5x INTERACT (VIA4i OR VIA5i)
+M6    = M6x INTERACT (VIA5i OR VIA6i)
+M7    = M7x INTERACT (VIA6i OR VIA7i)
+M8    = M8x INTERACT (VIA7i OR VIAD)
+MD    = MDx INTERACT VIAD
+AP    = APi INTERACT RVi
+
+HV_GATE = GATE AND OD2i
+
+VARIABLE LargeNumber     1000000000
+VARIABLE PO_THICKNESS    0.18
+VARIABLE DIODE_AREA      0.16
+VARIABLE DIODE_AREA_AP   0.06
+VARIABLE APn_THICKNESS    1.45
+
+//POLY CHECKS
+//===========
+CONNECT GATE HV_GATE POLY
+
+A.R.1.POLY { @ (Poly perim*thickness / gate area) > (500 in OD2, 1000 not in OD2)
+  NET AREA RATIO POLY HV_GATE GATE > 0
+      [
+        !!AREA(GATE) *
+	    (!!AREA(HV_GATE) * (PERIMETER(POLY) * PO_THICKNESS / AREA(GATE) - 500 ) +
+	      !AREA(HV_GATE) * (PERIMETER(POLY) * PO_THICKNESS / AREA(GATE) - 1000))
+      ] RDB A.R.1.POLY.rep POLY HV_GATE GATE
+}
+
+//CO CHECKS
+//=========
+CONNECT CO_PO POLY
+
+A.R.2.CO { @ (contact area / gate area) > (10 in OD2, 50 not in OD2)
+  NET AREA RATIO POLY CO_PO HV_GATE GATE > 0   // error highlight on POLY
+      [
+        !!AREA(GATE) *
+	    (!!AREA(HV_GATE)*(AREA(CO_PO)/AREA(GATE)-10) +
+	      !AREA(HV_GATE)*(AREA(CO_PO)/AREA(GATE)-50))
+      ] RDB A.R.2.CO.rep CO_PO HV_GATE GATE  
+}
+
+//M1 CHECKS
+//===============
+CONNECT M1 POLY SD BY CONTi
+M1_DIO = NET AREA RATIO SD M1 > 0
+M1_MIN_DIO = NET AREA M1_DIO > DIODE_AREA  // minimum effective diode
+
+A.R.4.M1.A { @ (M1 top area / gate area) without protection OD > 5500 (without OD2) 
+  NET AREA RATIO M1 M1_MIN_DIO HV_GATE GATE > 5500 ACCUMULATE
+  [((!!AREA(M1_MIN_DIO) +  !AREA(M1) + !!AREA(HV_GATE)) * (-1) * LargeNumber    ) + 
+   (( !AREA(M1_MIN_DIO) * !!AREA(M1) *  !AREA(HV_GATE)) * AREA(M1) / AREA(GATE) ) ]
+      RDB A.R.4.M1_without_OD2.rep M1 M1_MIN_DIO HV_GATE GATE BY LAYER
+}
+
+A.R.4.M1.B { @ (M1 top area / gate area) without protection OD > 600 (with OD2) 
+  NET AREA RATIO M1 M1_MIN_DIO HV_GATE GATE > 600 ACCUMULATE
+  [((!!AREA(M1_MIN_DIO) +  !AREA(M1) +  !AREA(HV_GATE)) * (-1) * LargeNumber    ) + 
+   (( !AREA(M1_MIN_DIO) * !!AREA(M1) * !!AREA(HV_GATE)) * AREA(M1) / AREA(GATE) ) ]
+      RDB A.R.4.M1_with_OD2.rep M1 M1_MIN_DIO HV_GATE GATE BY LAYER
+}
+A.R.6.M1 { @ (M1 top area / gate area) with protection OD > (protection OD area)*456 + 43000
+  NET AREA RATIO M1 M1_MIN_DIO GATE > 43000 ACCUMULATE
+      [(( !AREA(M1_MIN_DIO) +  !AREA(M1) +  !AREA(GATE)) * (-1) * LargeNumber ) + 
+       ((!!AREA(M1_MIN_DIO) * !!AREA(M1) * !!AREA(GATE)) * 
+        (AREA(M1) / AREA(GATE) - AREA(M1_MIN_DIO) * 456) )]
+      RDB A.R.6.M1.rep M1 M1_MIN_DIO GATE BY LAYER
+}
+
+
+ACC_M1 = NET AREA RATIO M1 GATE > 0 ACCUMULATE
+
+//VIA1 CHECKS
+//===============
+CONNECT VIA1i M1
+
+VIA1_DIO = NET AREA RATIO SD VIA1i > 0
+VIA1_MIN_DIO = NET AREA VIA1_DIO > DIODE_AREA
+
+A.R.3.VIA1 { @ (VIA1 area / gate area) without protection OD
+               @ > 50 (without OD2) 
+               @ > 20 (with OD2) 
+  NET AREA RATIO M1 VIA1i VIA1_MIN_DIO HV_GATE GATE > 0
+      [( !AREA(VIA1_MIN_DIO) * !!AREA(M1) * !!AREA(GATE)) * 
+       ( !AREA(HV_GATE) * (AREA(VIA1i) / AREA(GATE) - 50 ) + 
+        !!AREA(HV_GATE) * (AREA(VIA1i) / AREA(GATE) - 20 ) )]
+      RDB A.R.3.VIA1.rep VIA1i VIA1_MIN_DIO HV_GATE GATE
+}
+
+A.R.5.VIA1 { @ (VIA1 area / gate area) with protection OD > (protection OD area)*210 + 900
+  NET AREA RATIO M1 VIA1i VIA1_MIN_DIO GATE > 0
+      [(!!AREA(VIA1_MIN_DIO) * !!AREA(M1) * !!AREA(GATE)) * 
+       ( AREA(VIA1i) / AREA(GATE) - AREA(VIA1_MIN_DIO) * 210 - 900 )]
+      RDB A.R.5.VIA1.rep VIA1i VIA1_MIN_DIO GATE
+}
+
+
+//M2 CHECKS
+//===============
+CONNECT M2 VIA1i
+M2_DIO = NET AREA RATIO SD M2 > 0
+M2_MIN_DIO = NET AREA M2_DIO > DIODE_AREA  // minimum effective diode
+
+A.R.4.M2.A { @ (M2 top area / gate area) without protection OD > 5500 (without OD2) 
+  NET AREA RATIO M2 M2_MIN_DIO HV_GATE GATE > 5500 ACCUMULATE ACC_M1
+  [((!!AREA(M2_MIN_DIO) +  !AREA(M2) + !!AREA(HV_GATE)) * (-1) * LargeNumber    ) + 
+   (( !AREA(M2_MIN_DIO) * !!AREA(M2) *  !AREA(HV_GATE)) * AREA(M2) / AREA(GATE) ) ]
+      RDB A.R.4.M2_without_OD2.rep M2 M2_MIN_DIO HV_GATE GATE BY LAYER
+}
+
+A.R.4.M2.B { @ (M2 top area / gate area) without protection OD > 600 (with OD2) 
+  NET AREA RATIO M2 M2_MIN_DIO HV_GATE GATE > 600 ACCUMULATE ACC_M1
+  [((!!AREA(M2_MIN_DIO) +  !AREA(M2) +  !AREA(HV_GATE)) * (-1) * LargeNumber    ) + 
+   (( !AREA(M2_MIN_DIO) * !!AREA(M2) * !!AREA(HV_GATE)) * AREA(M2) / AREA(GATE) ) ]
+      RDB A.R.4.M2_with_OD2.rep M2 M2_MIN_DIO HV_GATE GATE BY LAYER
+}
+A.R.6.M2 { @ (M2 top area / gate area) with protection OD > (protection OD area)*456 + 43000
+  NET AREA RATIO M2 M2_MIN_DIO GATE > 43000 ACCUMULATE ACC_M1
+      [(( !AREA(M2_MIN_DIO) +  !AREA(M2) +  !AREA(GATE)) * (-1) * LargeNumber ) + 
+       ((!!AREA(M2_MIN_DIO) * !!AREA(M2) * !!AREA(GATE)) * 
+        (AREA(M2) / AREA(GATE) - AREA(M2_MIN_DIO) * 456) )]
+      RDB A.R.6.M2.rep M2 M2_MIN_DIO GATE BY LAYER
+}
+
+
+ACC_M2 = NET AREA RATIO M2 GATE > 0 ACCUMULATE ACC_M1
+
+//VIA2 CHECKS
+//===============
+CONNECT VIA2i M2
+
+VIA2_DIO = NET AREA RATIO SD VIA2i > 0
+VIA2_MIN_DIO = NET AREA VIA2_DIO > DIODE_AREA
+
+A.R.3.VIA2 { @ (VIA2 area / gate area) without protection OD
+               @ > 50 (without OD2) 
+               @ > 20 (with OD2) 
+  NET AREA RATIO M2 VIA2i VIA2_MIN_DIO HV_GATE GATE > 0
+      [( !AREA(VIA2_MIN_DIO) * !!AREA(M2) * !!AREA(GATE)) * 
+       ( !AREA(HV_GATE) * (AREA(VIA2i) / AREA(GATE) - 50 ) + 
+        !!AREA(HV_GATE) * (AREA(VIA2i) / AREA(GATE) - 20 ) )]
+      RDB A.R.3.VIA2.rep VIA2i VIA2_MIN_DIO HV_GATE GATE
+}
+
+A.R.5.VIA2 { @ (VIA2 area / gate area) with protection OD > (protection OD area)*210 + 900
+  NET AREA RATIO M2 VIA2i VIA2_MIN_DIO GATE > 0
+      [(!!AREA(VIA2_MIN_DIO) * !!AREA(M2) * !!AREA(GATE)) * 
+       ( AREA(VIA2i) / AREA(GATE) - AREA(VIA2_MIN_DIO) * 210 - 900 )]
+      RDB A.R.5.VIA2.rep VIA2i VIA2_MIN_DIO GATE
+}
+
+
+//M3 CHECKS
+//===============
+CONNECT M3 VIA2i
+M3_DIO = NET AREA RATIO SD M3 > 0
+M3_MIN_DIO = NET AREA M3_DIO > DIODE_AREA  // minimum effective diode
+
+A.R.4.M3.A { @ (M3 top area / gate area) without protection OD > 5500 (without OD2) 
+  NET AREA RATIO M3 M3_MIN_DIO HV_GATE GATE > 5500 ACCUMULATE ACC_M2
+  [((!!AREA(M3_MIN_DIO) +  !AREA(M3) + !!AREA(HV_GATE)) * (-1) * LargeNumber    ) + 
+   (( !AREA(M3_MIN_DIO) * !!AREA(M3) *  !AREA(HV_GATE)) * AREA(M3) / AREA(GATE) ) ]
+      RDB A.R.4.M3_without_OD2.rep M3 M3_MIN_DIO HV_GATE GATE BY LAYER
+}
+
+A.R.4.M3.B { @ (M3 top area / gate area) without protection OD > 600 (with OD2) 
+  NET AREA RATIO M3 M3_MIN_DIO HV_GATE GATE > 600 ACCUMULATE ACC_M2
+  [((!!AREA(M3_MIN_DIO) +  !AREA(M3) +  !AREA(HV_GATE)) * (-1) * LargeNumber    ) + 
+   (( !AREA(M3_MIN_DIO) * !!AREA(M3) * !!AREA(HV_GATE)) * AREA(M3) / AREA(GATE) ) ]
+      RDB A.R.4.M3_with_OD2.rep M3 M3_MIN_DIO HV_GATE GATE BY LAYER
+}
+A.R.6.M3 { @ (M3 top area / gate area) with protection OD > (protection OD area)*456 + 43000
+  NET AREA RATIO M3 M3_MIN_DIO GATE > 43000 ACCUMULATE ACC_M2
+      [(( !AREA(M3_MIN_DIO) +  !AREA(M3) +  !AREA(GATE)) * (-1) * LargeNumber ) + 
+       ((!!AREA(M3_MIN_DIO) * !!AREA(M3) * !!AREA(GATE)) * 
+        (AREA(M3) / AREA(GATE) - AREA(M3_MIN_DIO) * 456) )]
+      RDB A.R.6.M3.rep M3 M3_MIN_DIO GATE BY LAYER
+}
+
+
+ACC_M3 = NET AREA RATIO M3 GATE > 0 ACCUMULATE ACC_M2
+
+//VIA3 CHECKS
+//===============
+CONNECT VIA3i M3
+
+VIA3_DIO = NET AREA RATIO SD VIA3i > 0
+VIA3_MIN_DIO = NET AREA VIA3_DIO > DIODE_AREA
+
+A.R.3.VIA3 { @ (VIA3 area / gate area) without protection OD
+               @ > 50 (without OD2) 
+               @ > 20 (with OD2) 
+  NET AREA RATIO M3 VIA3i VIA3_MIN_DIO HV_GATE GATE > 0
+      [( !AREA(VIA3_MIN_DIO) * !!AREA(M3) * !!AREA(GATE)) * 
+       ( !AREA(HV_GATE) * (AREA(VIA3i) / AREA(GATE) - 50 ) + 
+        !!AREA(HV_GATE) * (AREA(VIA3i) / AREA(GATE) - 20 ) )]
+      RDB A.R.3.VIA3.rep VIA3i VIA3_MIN_DIO HV_GATE GATE
+}
+
+A.R.5.VIA3 { @ (VIA3 area / gate area) with protection OD > (protection OD area)*210 + 900
+  NET AREA RATIO M3 VIA3i VIA3_MIN_DIO GATE > 0
+      [(!!AREA(VIA3_MIN_DIO) * !!AREA(M3) * !!AREA(GATE)) * 
+       ( AREA(VIA3i) / AREA(GATE) - AREA(VIA3_MIN_DIO) * 210 - 900 )]
+      RDB A.R.5.VIA3.rep VIA3i VIA3_MIN_DIO GATE
+}
+
+
+//M4 CHECKS
+//===============
+CONNECT M4 VIA3i
+M4_DIO = NET AREA RATIO SD M4 > 0
+M4_MIN_DIO = NET AREA M4_DIO > DIODE_AREA  // minimum effective diode
+
+A.R.4.M4.A { @ (M4 top area / gate area) without protection OD > 5500 (without OD2) 
+  NET AREA RATIO M4 M4_MIN_DIO HV_GATE GATE > 5500 ACCUMULATE ACC_M3
+  [((!!AREA(M4_MIN_DIO) +  !AREA(M4) + !!AREA(HV_GATE)) * (-1) * LargeNumber    ) + 
+   (( !AREA(M4_MIN_DIO) * !!AREA(M4) *  !AREA(HV_GATE)) * AREA(M4) / AREA(GATE) ) ]
+      RDB A.R.4.M4_without_OD2.rep M4 M4_MIN_DIO HV_GATE GATE BY LAYER
+}
+
+A.R.4.M4.B { @ (M4 top area / gate area) without protection OD > 600 (with OD2) 
+  NET AREA RATIO M4 M4_MIN_DIO HV_GATE GATE > 600 ACCUMULATE ACC_M3
+  [((!!AREA(M4_MIN_DIO) +  !AREA(M4) +  !AREA(HV_GATE)) * (-1) * LargeNumber    ) + 
+   (( !AREA(M4_MIN_DIO) * !!AREA(M4) * !!AREA(HV_GATE)) * AREA(M4) / AREA(GATE) ) ]
+      RDB A.R.4.M4_with_OD2.rep M4 M4_MIN_DIO HV_GATE GATE BY LAYER
+}
+A.R.6.M4 { @ (M4 top area / gate area) with protection OD > (protection OD area)*456 + 43000
+  NET AREA RATIO M4 M4_MIN_DIO GATE > 43000 ACCUMULATE ACC_M3
+      [(( !AREA(M4_MIN_DIO) +  !AREA(M4) +  !AREA(GATE)) * (-1) * LargeNumber ) + 
+       ((!!AREA(M4_MIN_DIO) * !!AREA(M4) * !!AREA(GATE)) * 
+        (AREA(M4) / AREA(GATE) - AREA(M4_MIN_DIO) * 456) )]
+      RDB A.R.6.M4.rep M4 M4_MIN_DIO GATE BY LAYER
+}
+
+
+ACC_M4 = NET AREA RATIO M4 GATE > 0 ACCUMULATE ACC_M3
+
+//VIA4 CHECKS
+//===============
+CONNECT VIA4i M4
+
+VIA4_DIO = NET AREA RATIO SD VIA4i > 0
+VIA4_MIN_DIO = NET AREA VIA4_DIO > DIODE_AREA
+
+A.R.3.VIA4 { @ (VIA4 area / gate area) without protection OD
+               @ > 50 (without OD2) 
+               @ > 20 (with OD2) 
+  NET AREA RATIO M4 VIA4i VIA4_MIN_DIO HV_GATE GATE > 0
+      [( !AREA(VIA4_MIN_DIO) * !!AREA(M4) * !!AREA(GATE)) * 
+       ( !AREA(HV_GATE) * (AREA(VIA4i) / AREA(GATE) - 50 ) + 
+        !!AREA(HV_GATE) * (AREA(VIA4i) / AREA(GATE) - 20 ) )]
+      RDB A.R.3.VIA4.rep VIA4i VIA4_MIN_DIO HV_GATE GATE
+}
+
+A.R.5.VIA4 { @ (VIA4 area / gate area) with protection OD > (protection OD area)*210 + 900
+  NET AREA RATIO M4 VIA4i VIA4_MIN_DIO GATE > 0
+      [(!!AREA(VIA4_MIN_DIO) * !!AREA(M4) * !!AREA(GATE)) * 
+       ( AREA(VIA4i) / AREA(GATE) - AREA(VIA4_MIN_DIO) * 210 - 900 )]
+      RDB A.R.5.VIA4.rep VIA4i VIA4_MIN_DIO GATE
+}
+
+
+//M5 CHECKS
+//===============
+CONNECT M5 VIA4i
+M5_DIO = NET AREA RATIO SD M5 > 0
+M5_MIN_DIO = NET AREA M5_DIO > DIODE_AREA  // minimum effective diode
+
+A.R.4.M5.A { @ (M5 top area / gate area) without protection OD > 5500 (without OD2) 
+  NET AREA RATIO M5 M5_MIN_DIO HV_GATE GATE > 5500 ACCUMULATE ACC_M4
+  [((!!AREA(M5_MIN_DIO) +  !AREA(M5) + !!AREA(HV_GATE)) * (-1) * LargeNumber    ) + 
+   (( !AREA(M5_MIN_DIO) * !!AREA(M5) *  !AREA(HV_GATE)) * AREA(M5) / AREA(GATE) ) ]
+      RDB A.R.4.M5_without_OD2.rep M5 M5_MIN_DIO HV_GATE GATE BY LAYER
+}
+
+A.R.4.M5.B { @ (M5 top area / gate area) without protection OD > 600 (with OD2) 
+  NET AREA RATIO M5 M5_MIN_DIO HV_GATE GATE > 600 ACCUMULATE ACC_M4
+  [((!!AREA(M5_MIN_DIO) +  !AREA(M5) +  !AREA(HV_GATE)) * (-1) * LargeNumber    ) + 
+   (( !AREA(M5_MIN_DIO) * !!AREA(M5) * !!AREA(HV_GATE)) * AREA(M5) / AREA(GATE) ) ]
+      RDB A.R.4.M5_with_OD2.rep M5 M5_MIN_DIO HV_GATE GATE BY LAYER
+}
+A.R.6.M5 { @ (M5 top area / gate area) with protection OD > (protection OD area)*456 + 43000
+  NET AREA RATIO M5 M5_MIN_DIO GATE > 43000 ACCUMULATE ACC_M4
+      [(( !AREA(M5_MIN_DIO) +  !AREA(M5) +  !AREA(GATE)) * (-1) * LargeNumber ) + 
+       ((!!AREA(M5_MIN_DIO) * !!AREA(M5) * !!AREA(GATE)) * 
+        (AREA(M5) / AREA(GATE) - AREA(M5_MIN_DIO) * 456) )]
+      RDB A.R.6.M5.rep M5 M5_MIN_DIO GATE BY LAYER
+}
+
+
+ACC_M5 = NET AREA RATIO M5 GATE > 0 ACCUMULATE ACC_M4
+
+//VIA5 CHECKS
+//===============
+CONNECT VIA5i M5
+
+VIA5_DIO = NET AREA RATIO SD VIA5i > 0
+VIA5_MIN_DIO = NET AREA VIA5_DIO > DIODE_AREA
+
+A.R.3.VIA5 { @ (VIA5 area / gate area) without protection OD
+               @ > 50 (without OD2) 
+               @ > 20 (with OD2) 
+  NET AREA RATIO M5 VIA5i VIA5_MIN_DIO HV_GATE GATE > 0
+      [( !AREA(VIA5_MIN_DIO) * !!AREA(M5) * !!AREA(GATE)) * 
+       ( !AREA(HV_GATE) * (AREA(VIA5i) / AREA(GATE) - 50 ) + 
+        !!AREA(HV_GATE) * (AREA(VIA5i) / AREA(GATE) - 20 ) )]
+      RDB A.R.3.VIA5.rep VIA5i VIA5_MIN_DIO HV_GATE GATE
+}
+
+A.R.5.VIA5 { @ (VIA5 area / gate area) with protection OD > (protection OD area)*210 + 900
+  NET AREA RATIO M5 VIA5i VIA5_MIN_DIO GATE > 0
+      [(!!AREA(VIA5_MIN_DIO) * !!AREA(M5) * !!AREA(GATE)) * 
+       ( AREA(VIA5i) / AREA(GATE) - AREA(VIA5_MIN_DIO) * 210 - 900 )]
+      RDB A.R.5.VIA5.rep VIA5i VIA5_MIN_DIO GATE
+}
+
+
+//M6 CHECKS
+//===============
+CONNECT M6 VIA5i
+M6_DIO = NET AREA RATIO SD M6 > 0
+M6_MIN_DIO = NET AREA M6_DIO > DIODE_AREA  // minimum effective diode
+
+A.R.4.M6.A { @ (M6 top area / gate area) without protection OD > 5500 (without OD2) 
+  NET AREA RATIO M6 M6_MIN_DIO HV_GATE GATE > 5500 ACCUMULATE ACC_M5
+  [((!!AREA(M6_MIN_DIO) +  !AREA(M6) + !!AREA(HV_GATE)) * (-1) * LargeNumber    ) + 
+   (( !AREA(M6_MIN_DIO) * !!AREA(M6) *  !AREA(HV_GATE)) * AREA(M6) / AREA(GATE) ) ]
+      RDB A.R.4.M6_without_OD2.rep M6 M6_MIN_DIO HV_GATE GATE BY LAYER
+}
+
+A.R.4.M6.B { @ (M6 top area / gate area) without protection OD > 600 (with OD2) 
+  NET AREA RATIO M6 M6_MIN_DIO HV_GATE GATE > 600 ACCUMULATE ACC_M5
+  [((!!AREA(M6_MIN_DIO) +  !AREA(M6) +  !AREA(HV_GATE)) * (-1) * LargeNumber    ) + 
+   (( !AREA(M6_MIN_DIO) * !!AREA(M6) * !!AREA(HV_GATE)) * AREA(M6) / AREA(GATE) ) ]
+      RDB A.R.4.M6_with_OD2.rep M6 M6_MIN_DIO HV_GATE GATE BY LAYER
+}
+A.R.6.M6 { @ (M6 top area / gate area) with protection OD > (protection OD area)*456 + 43000
+  NET AREA RATIO M6 M6_MIN_DIO GATE > 43000 ACCUMULATE ACC_M5
+      [(( !AREA(M6_MIN_DIO) +  !AREA(M6) +  !AREA(GATE)) * (-1) * LargeNumber ) + 
+       ((!!AREA(M6_MIN_DIO) * !!AREA(M6) * !!AREA(GATE)) * 
+        (AREA(M6) / AREA(GATE) - AREA(M6_MIN_DIO) * 456) )]
+      RDB A.R.6.M6.rep M6 M6_MIN_DIO GATE BY LAYER
+}
+
+
+ACC_M6 = NET AREA RATIO M6 GATE > 0 ACCUMULATE ACC_M5
+
+//VIA6 CHECKS
+//===============
+CONNECT VIA6i M6
+
+VIA6_DIO = NET AREA RATIO SD VIA6i > 0
+VIA6_MIN_DIO = NET AREA VIA6_DIO > DIODE_AREA
+
+A.R.3.VIA6 { @ (VIA6 area / gate area) without protection OD
+               @ > 50 (without OD2) 
+               @ > 20 (with OD2) 
+  NET AREA RATIO M6 VIA6i VIA6_MIN_DIO HV_GATE GATE > 0
+      [( !AREA(VIA6_MIN_DIO) * !!AREA(M6) * !!AREA(GATE)) * 
+       ( !AREA(HV_GATE) * (AREA(VIA6i) / AREA(GATE) - 50 ) + 
+        !!AREA(HV_GATE) * (AREA(VIA6i) / AREA(GATE) - 20 ) )]
+      RDB A.R.3.VIA6.rep VIA6i VIA6_MIN_DIO HV_GATE GATE
+}
+
+A.R.5.VIA6 { @ (VIA6 area / gate area) with protection OD > (protection OD area)*210 + 900
+  NET AREA RATIO M6 VIA6i VIA6_MIN_DIO GATE > 0
+      [(!!AREA(VIA6_MIN_DIO) * !!AREA(M6) * !!AREA(GATE)) * 
+       ( AREA(VIA6i) / AREA(GATE) - AREA(VIA6_MIN_DIO) * 210 - 900 )]
+      RDB A.R.5.VIA6.rep VIA6i VIA6_MIN_DIO GATE
+}
+
+
+//M7 CHECKS
+//===============
+CONNECT M7 VIA6i
+M7_DIO = NET AREA RATIO SD M7 > 0
+M7_MIN_DIO = NET AREA M7_DIO > DIODE_AREA  // minimum effective diode
+
+A.R.4.M7.A { @ (M7 top area / gate area) without protection OD > 5500 (without OD2) 
+  NET AREA RATIO M7 M7_MIN_DIO HV_GATE GATE > 5500 ACCUMULATE ACC_M6
+  [((!!AREA(M7_MIN_DIO) +  !AREA(M7) + !!AREA(HV_GATE)) * (-1) * LargeNumber    ) + 
+   (( !AREA(M7_MIN_DIO) * !!AREA(M7) *  !AREA(HV_GATE)) * AREA(M7) / AREA(GATE) ) ]
+      RDB A.R.4.M7_without_OD2.rep M7 M7_MIN_DIO HV_GATE GATE BY LAYER
+}
+
+A.R.4.M7.B { @ (M7 top area / gate area) without protection OD > 600 (with OD2) 
+  NET AREA RATIO M7 M7_MIN_DIO HV_GATE GATE > 600 ACCUMULATE ACC_M6
+  [((!!AREA(M7_MIN_DIO) +  !AREA(M7) +  !AREA(HV_GATE)) * (-1) * LargeNumber    ) + 
+   (( !AREA(M7_MIN_DIO) * !!AREA(M7) * !!AREA(HV_GATE)) * AREA(M7) / AREA(GATE) ) ]
+      RDB A.R.4.M7_with_OD2.rep M7 M7_MIN_DIO HV_GATE GATE BY LAYER
+}
+A.R.6.M7 { @ (M7 top area / gate area) with protection OD > (protection OD area)*456 + 43000
+  NET AREA RATIO M7 M7_MIN_DIO GATE > 43000 ACCUMULATE ACC_M6
+      [(( !AREA(M7_MIN_DIO) +  !AREA(M7) +  !AREA(GATE)) * (-1) * LargeNumber ) + 
+       ((!!AREA(M7_MIN_DIO) * !!AREA(M7) * !!AREA(GATE)) * 
+        (AREA(M7) / AREA(GATE) - AREA(M7_MIN_DIO) * 456) )]
+      RDB A.R.6.M7.rep M7 M7_MIN_DIO GATE BY LAYER
+}
+
+
+ACC_M7 = NET AREA RATIO M7 GATE > 0 ACCUMULATE ACC_M6
+
+//VIA7 CHECKS
+//===============
+CONNECT VIA7i M7
+
+VIA7_DIO = NET AREA RATIO SD VIA7i > 0
+VIA7_MIN_DIO = NET AREA VIA7_DIO > DIODE_AREA
+
+A.R.3.VIA7 { @ (VIA7 area / gate area) without protection OD
+               @ > 50 (without OD2) 
+               @ > 20 (with OD2) 
+  NET AREA RATIO M7 VIA7i VIA7_MIN_DIO HV_GATE GATE > 0
+      [( !AREA(VIA7_MIN_DIO) * !!AREA(M7) * !!AREA(GATE)) * 
+       ( !AREA(HV_GATE) * (AREA(VIA7i) / AREA(GATE) - 50 ) + 
+        !!AREA(HV_GATE) * (AREA(VIA7i) / AREA(GATE) - 20 ) )]
+      RDB A.R.3.VIA7.rep VIA7i VIA7_MIN_DIO HV_GATE GATE
+}
+
+A.R.5.VIA7 { @ (VIA7 area / gate area) with protection OD > (protection OD area)*210 + 900
+  NET AREA RATIO M7 VIA7i VIA7_MIN_DIO GATE > 0
+      [(!!AREA(VIA7_MIN_DIO) * !!AREA(M7) * !!AREA(GATE)) * 
+       ( AREA(VIA7i) / AREA(GATE) - AREA(VIA7_MIN_DIO) * 210 - 900 )]
+      RDB A.R.5.VIA7.rep VIA7i VIA7_MIN_DIO GATE
+}
+
+
+//M8 CHECKS
+//===============
+CONNECT M8 VIA7i
+CONNECT CB  M8 
+CONNECT CBD M8
+M8_DIO = NET AREA RATIO SD M8 > 0
+M8_MIN_DIO = NET AREA M8_DIO > DIODE_AREA  // minimum effective diode
+
+CHIP = EXTENT
+CHIP_MD  = CHIP INTERACT MD
+M8_LAST  = M8 NOT INTERACT CHIP_MD  // last metal is M8
+M8_NLAST = M8 INTERACT CHIP_MD      // last metal is MD
+A.R.4.M8.A { @ (M8 top area / gate area) without protection OD > 5500 (without OD2) 
+  NET AREA RATIO M8 M8_MIN_DIO HV_GATE GATE > 5500 ACCUMULATE ACC_M7
+  [((!!AREA(M8_MIN_DIO) +  !AREA(M8) + !!AREA(HV_GATE)) * (-1) * LargeNumber    ) + 
+   (( !AREA(M8_MIN_DIO) * !!AREA(M8) *  !AREA(HV_GATE)) * AREA(M8) / AREA(GATE) ) ]
+      RDB A.R.4.M8_without_OD2.rep M8 M8_MIN_DIO HV_GATE GATE BY LAYER
+}
+
+A.R.4.M8.B { @ (M8 top area / gate area) without protection OD > 600 (with OD2) 
+  NET AREA RATIO M8 M8_MIN_DIO HV_GATE GATE > 600 ACCUMULATE ACC_M7
+  [((!!AREA(M8_MIN_DIO) +  !AREA(M8) +  !AREA(HV_GATE)) * (-1) * LargeNumber    ) + 
+   (( !AREA(M8_MIN_DIO) * !!AREA(M8) * !!AREA(HV_GATE)) * AREA(M8) / AREA(GATE) ) ]
+      RDB A.R.4.M8_with_OD2.rep M8 M8_MIN_DIO HV_GATE GATE BY LAYER
+}
+// with Cu-RDL
+A.R.6.M8.A { @ (M8 top area / gate area) with protection OD > (protection OD area)*456 + 43000
+  NET AREA RATIO M8_NLAST M8_MIN_DIO GATE > 43000 ACCUMULATE ACC_M7
+      [(( !AREA(M8_MIN_DIO) +  !AREA(M8_NLAST) +  !AREA(GATE)) * (-1) * LargeNumber ) + 
+       ((!!AREA(M8_MIN_DIO) * !!AREA(M8_NLAST) * !!AREA(GATE)) * 
+        (AREA(M8_NLAST) / AREA(GATE) - AREA(M8_MIN_DIO) * 456) )]
+      RDB A.R.6.M8.rep M8_NLAST M8_MIN_DIO GATE BY LAYER
+}
+// without Cu-RDL, M# is the last metal
+A.R.6.M8.B { @ (M8 top area / gate area) with protection OD > (protection OD area)*8000 + 50000
+  NET AREA RATIO M8_LAST M8_MIN_DIO GATE > 50000 
+      [(( !AREA(M8_MIN_DIO) +  !AREA(M8_LAST) +  !AREA(GATE)) * (-1) * LargeNumber ) + 
+       ((!!AREA(M8_MIN_DIO) * !!AREA(M8_LAST) * !!AREA(GATE)) * 
+        (AREA(M8_LAST) / AREA(GATE) - AREA(M8_MIN_DIO) * 8000) )]
+      RDB A.R.6.M8.rep M8_LAST M8_MIN_DIO GATE BY LAYER
+}
+
+
+
+ACC_M8 = NET AREA RATIO M8 GATE > 0 ACCUMULATE ACC_M7
+
+
+
+//AP CHECKS
+//===============
+CONNECT RVi M8
+
+RV_DIO = NET AREA RATIO SD RVi > 0
+RV_MIN_DIO = NET AREA RV_DIO > DIODE_AREA_AP
+
+A.R.10.RV { @ (RV area / gate area) without protection OD
+               @ > 200 (without OD2) 
+               @ > 20  (with OD2) 
+  NET AREA RATIO M8 RVi RV_MIN_DIO HV_GATE GATE > 0
+      [( !AREA(RV_MIN_DIO) * !!AREA(M8) * !!AREA(GATE)) * 
+       ( !AREA(HV_GATE) * (AREA(RVi) / AREA(GATE) - 200 ) + 
+        !!AREA(HV_GATE) * (AREA(RVi) / AREA(GATE) - 20  ) )]
+      RDB A.R.10.RV.rep RVi RV_MIN_DIO HV_GATE GATE
+}
+
+A.R.12.RV { @ (RV area / gate area) with protection OD > (protection OD area)*83 + 400
+  NET AREA RATIO M8 RVi RV_MIN_DIO GATE > 0
+      [(!!AREA(RV_MIN_DIO) * !!AREA(M8) * !!AREA(GATE)) * 
+       ( AREA(RVi) / AREA(GATE) - AREA(RV_MIN_DIO) * 83 - 400 )]
+      RDB A.R.12.RV.rep RVi RV_MIN_DIO GATE
+}
+
+APn = AP NOT INTERACT MD
+CONNECT APn M8 BY RVi
+CONNECT APn M8 BY CB
+CONNECT APn M8 BY CBD
+
+AP_DIO = NET AREA RATIO SD APn > 0
+APn_MIN_DIO = NET AREA AP_DIO > DIODE_AREA_AP  // minimum effective diode
+
+A.R.11.AP.A { @ (APn perimeter area / gate area) without effective diode > 2000 (without OD2) 
+  NET AREA RATIO APn APn_MIN_DIO HV_GATE GATE > 2000
+  [((!!AREA(APn_MIN_DIO) +  !AREA(APn) + !!AREA(HV_GATE)) * (-1) * LargeNumber    ) + 
+   (( !AREA(APn_MIN_DIO) * !!AREA(APn) *  !AREA(HV_GATE)) * PERIMETER(APn) * APn_THICKNESS / AREA(GATE) ) ]
+      RDB A.R.11.APn_without_OD2.rep APn APn_MIN_DIO HV_GATE GATE BY LAYER
+}
+
+A.R.11.AP.B { @ (APn perimeter area / gate area) without protection OD > 1000 (with OD2) 
+  NET AREA RATIO APn APn_MIN_DIO HV_GATE GATE > 1000
+  [((!!AREA(APn_MIN_DIO) +  !AREA(APn) +  !AREA(HV_GATE)) * (-1) * LargeNumber    ) + 
+   (( !AREA(APn_MIN_DIO) * !!AREA(APn) * !!AREA(HV_GATE)) * PERIMETER(APn) * APn_THICKNESS / AREA(GATE) ) ]
+      RDB A.R.11.APn_with_OD2.rep APn APn_MIN_DIO HV_GATE GATE BY LAYER
+}
+
+A.R.13.AP { @ (APn perimeter area / gate area) with protection OD > (protection OD area) * 8000 + 30000
+  NET AREA RATIO APn APn_MIN_DIO GATE > 30000
+  [(( !AREA(APn_MIN_DIO) +  !AREA(APn) +  !AREA(GATE)) * (-1) * LargeNumber) + 
+   ((!!AREA(APn_MIN_DIO) * !!AREA(APn) * !!AREA(GATE)) * 
+    (PERIMETER(APn) * APn_THICKNESS / AREA(GATE) - AREA(APn_MIN_DIO) * 8000 ) )]
+      RDB A.R.13.APn.rep APn APn_MIN_DIO GATE BY LAYER
+}
+
+
+//MD CHECKS
+//===============
+CONNECT VIADi M8
+
+VIAD_DIO = NET AREA RATIO SD VIADi > 0
+VIAD_MIN_DIO = NET AREA VIAD_DIO > DIODE_AREA
+
+A.R.3.VIAD { @ (VIAD area / gate area) without protection OD
+               @ > 50 (without OD2) 
+               @ > 20 (with OD2) 
+  NET AREA RATIO M8 VIADi VIAD_MIN_DIO HV_GATE GATE > 0
+      [( !AREA(VIAD_MIN_DIO) * !!AREA(M8) * !!AREA(GATE)) * 
+       ( !AREA(HV_GATE) * (AREA(VIADi) / AREA(GATE) - 50 ) + 
+        !!AREA(HV_GATE) * (AREA(VIADi) / AREA(GATE) - 20 ) )]
+      RDB A.R.3.VIAD.rep VIADi VIAD_MIN_DIO HV_GATE GATE
+}
+
+A.R.5.VIAD { @ (VIAD area / gate area) with protection OD > (protection OD area)*210 + 900
+  NET AREA RATIO M8 VIADi VIAD_MIN_DIO GATE > 0
+      [(!!AREA(VIAD_MIN_DIO) * !!AREA(M8) * !!AREA(GATE)) * 
+       ( AREA(VIADi) / AREA(GATE) - AREA(VIAD_MIN_DIO) * 210 - 900 )]
+      RDB A.R.5.VIAD.rep VIADi VIAD_MIN_DIO GATE
+}
+
+CONNECT MD M8 BY VIADi
+
+MD_DIO = NET AREA RATIO SD MD > 0
+MD_MIN_DIO = NET AREA MD_DIO > DIODE_AREA  // minimum effective diode
+A.R.4.MD.A { @ (MD top area / gate area) without protection OD > 5500 (without OD2) 
+  NET AREA RATIO MD MD_MIN_DIO HV_GATE GATE > 5500 ACCUMULATE ACC_M8
+  [((!!AREA(MD_MIN_DIO) +  !AREA(MD) + !!AREA(HV_GATE)) * (-1) * LargeNumber    ) + 
+   (( !AREA(MD_MIN_DIO) * !!AREA(MD) *  !AREA(HV_GATE)) * AREA(MD) / AREA(GATE) ) ]
+      RDB A.R.4.MD_without_OD2.rep MD MD_MIN_DIO HV_GATE GATE BY LAYER
+}
+
+A.R.4.MD.B { @ (MD top area / gate area) without protection OD > 600 (with OD2) 
+  NET AREA RATIO MD MD_MIN_DIO HV_GATE GATE > 600 ACCUMULATE ACC_M8
+  [((!!AREA(MD_MIN_DIO) +  !AREA(MD) +  !AREA(HV_GATE)) * (-1) * LargeNumber    ) + 
+   (( !AREA(MD_MIN_DIO) * !!AREA(MD) * !!AREA(HV_GATE)) * AREA(MD) / AREA(GATE) ) ]
+      RDB A.R.4.MD_with_OD2.rep MD MD_MIN_DIO HV_GATE GATE BY LAYER
+}
+A.R.6.MD { @ (MD top area / gate area) with protection OD > (protection OD area)*8000 + 50000
+  NET AREA RATIO MD MD_MIN_DIO GATE > 50000 
+      [(( !AREA(MD_MIN_DIO) +  !AREA(MD) +  !AREA(GATE)) * (-1) * LargeNumber ) + 
+       ((!!AREA(MD_MIN_DIO) * !!AREA(MD) * !!AREA(GATE)) * 
+        (AREA(MD) / AREA(GATE) - AREA(MD_MIN_DIO) * 8000) )]
+      RDB A.R.6.MD.rep MD MD_MIN_DIO GATE BY LAYER
+}
+
+
+
+

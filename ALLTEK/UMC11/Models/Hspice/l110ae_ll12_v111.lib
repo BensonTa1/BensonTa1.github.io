@@ -1,0 +1,208 @@
+.lib tt
+.param
++dtox_n_12_lll110e   = 0                du0_n_12_lll110e     = 0                dvth0_n_12_lll110e   = 0                
++dxl_n_12_lll110e    = 0                dxw_n_12_lll110e     = 0                dnlx_n_12_lll110e    = 0                
++dk3_n_12_lll110e    = 0                dpvth0_n_12_lll110e  = 0                dwwl_n_12_lll110e    = 0                
++dcj_n_12_lll110e    = 0                dcjsw_n_12_lll110e   = 0                dcjswg_n_12_lll110e  = 0                
++dcgdo_n_12_lll110e  = 0                dcgso_n_12_lll110e   = 0                dcf_n_12_lll110e     = 0                
++dcgdl_n_12_lll110e  = 0                dcgsl_n_12_lll110e   = 0                dvsat_n_12_lll110e   = 0                
++dags_n_12_lll110e   = 0                drdsw_n_12_lll110e   = 0                dwags_n_12_lll110e   = 0                
++dpvsat_n_12_lll110e = 0                
+*
++dtox_p_12_lll110e   = 0                dxl_p_12_lll110e     = 0                du0_p_12_lll110e     = 0                
++dvth0_p_12_lll110e  = 0                drdsw_p_12_lll110e   = 0                dxw_p_12_lll110e     = 0                
++dnlx_p_12_lll110e   = 0                dk3_p_12_lll110e     = 0                dpvth0_p_12_lll110e  = 0                
++dwwl_p_12_lll110e   = 0                dcgdo_p_12_lll110e   = 0                dcgso_p_12_lll110e   = 0                
++dcj_p_12_lll110e    = 0                dcjsw_p_12_lll110e   = 0                dcjswg_p_12_lll110e  = 0                
++dcgdl_p_12_lll110e  = 0                dcgsl_p_12_lll110e   = 0                dcf_p_12_lll110e     = 0                
++dags_p_12_lll110e   = 0                dwags_p_12_lll110e   = 0                dpvsat_p_12_lll110e  = 0                
++dvsat_p_12_lll110e  = 0                dwu0_p_12_lll110e    = 0                dpu0_p_12_lll110e    = 0                
++dlags_p_12_lll110e  = 0                dpags_p_12_lll110e   = 0                
+*
+.include  'l110ae_ll12_v111.mdl'
+.lib 'l110ae_ll12_v111.lib' igate
+.endl tt
+*********************************
+.lib ff
+.param
++dtox_n_12_lll110e   = -8.0000e-11      du0_n_12_lll110e     = 0.5761e-03       dvth0_n_12_lll110e   = -2.0050e-02      
++dxl_n_12_lll110e    = -6.0599e-10      dxw_n_12_lll110e     = 1.1618e-08       dnlx_n_12_lll110e    = -8.8082e-09      
++dk3_n_12_lll110e    = -6.5590e+00      dpvth0_n_12_lll110e  = -9.1999e-16      dwwl_n_12_lll110e    = 8.8091e-19       
++dcj_n_12_lll110e    = -7.2000e-05      dcjsw_n_12_lll110e   = -9.94e-012       dcjswg_n_12_lll110e  = -4.11e-011       
++dcgdo_n_12_lll110e  = 1.86501e-011     dcgso_n_12_lll110e   = 1.86501e-011     dcf_n_12_lll110e     = 9.0586e-012      
++dcgdl_n_12_lll110e  = 3.1552e-012      dcgsl_n_12_lll110e   = 3.1552e-012      dvsat_n_12_lll110e   = -7.08e+3         
++dags_n_12_lll110e   = -0.1705          drdsw_n_12_lll110e   = -0.7             dwags_n_12_lll110e   = -6.05e-9         
++dpvsat_n_12_lll110e = -3.8e-11         
+*
++dtox_p_12_lll110e   = -8.49000e-11     dxl_p_12_lll110e     = -6.00000e-10     du0_p_12_lll110e     = 3.98880e-04      
++dvth0_p_12_lll110e  = 2.00890e-02      drdsw_p_12_lll110e   = -8.825720e+01    dxw_p_12_lll110e     = 2.20010e-9       
++dnlx_p_12_lll110e   = -5.51230e-09     dk3_p_12_lll110e     = -2.43320e+00     dpvth0_p_12_lll110e  = 1.83340e-15      
++dwwl_p_12_lll110e   = 7.04970e-23      dcgdo_p_12_lll110e   = 1.6275e-11       dcgso_p_12_lll110e   = 1.6275e-11       
++dcj_p_12_lll110e    = -9.6900e-05      dcjsw_p_12_lll110e   = -1.18000e-11     dcjswg_p_12_lll110e  = -5.31e-011       
++dcgdl_p_12_lll110e  = 8.3591e-012      dcgsl_p_12_lll110e   = 8.3591e-012      dcf_p_12_lll110e     = 8.9044e-012      
++dags_p_12_lll110e   = -0.169           dwags_p_12_lll110e   = -1.05e-8         dpvsat_p_12_lll110e  = 0                
++dvsat_p_12_lll110e  = 0                dwu0_p_12_lll110e    = -5.8e-11         dpu0_p_12_lll110e    = 1.7e-17          
++dlags_p_12_lll110e  = -2.19e-7         dpags_p_12_lll110e   = -1.00e-13        
+*
+.include  'l110ae_ll12_v111.mdl'
+.lib 'l110ae_ll12_v111.lib' igate
+.endl ff
+*********************************
+.lib ss
+.param
++dtox_n_12_lll110e   = 8.0000e-11       du0_n_12_lll110e     = -0.8035e-03      dvth0_n_12_lll110e   = 2.0051e-02       
++dxl_n_12_lll110e    = 1.0485e-09       dxw_n_12_lll110e     = -1.6414e-08      dnlx_n_12_lll110e    = 8.5609e-09       
++dk3_n_12_lll110e    = 6.5618e+00       dpvth0_n_12_lll110e  = 8.9634e-16       dwwl_n_12_lll110e    = -2.5050e-19      
++dcj_n_12_lll110e    = 7.2000e-05       dcjsw_n_12_lll110e   = 9.94e-012        dcjswg_n_12_lll110e  = 4.11e-011        
++dcgdo_n_12_lll110e  = -1.86501e-011    dcgso_n_12_lll110e   = -1.86501e-011    dcf_n_12_lll110e     = -9.0586e-012     
++dcgdl_n_12_lll110e  = -3.1552e-012     dcgsl_n_12_lll110e   = -3.1552e-012     dvsat_n_12_lll110e   = 9.9e+3           
++dags_n_12_lll110e   = 0.1815           drdsw_n_12_lll110e   = 1.8              dwags_n_12_lll110e   = 6.15e-9          
++dpvsat_n_12_lll110e = 6.1e-10          
+*
++dtox_p_12_lll110e   = 8.49000e-11      dxl_p_12_lll110e     = 3.00000e-09      du0_p_12_lll110e     = -5.14430e-04     
++dvth0_p_12_lll110e  = -2.01100e-02     drdsw_p_12_lll110e   = 1.03470e+02      dxw_p_12_lll110e     = -1.66090e-09     
++dnlx_p_12_lll110e   = 6.00120e-09      dk3_p_12_lll110e     = 2.32430e+00      dpvth0_p_12_lll110e  = -1.77190e-15     
++dwwl_p_12_lll110e   = 6.84880e-23      dcgdo_p_12_lll110e   = -1.6275e-11      dcgso_p_12_lll110e   = -1.6275e-11      
++dcj_p_12_lll110e    = 9.6900e-05       dcjsw_p_12_lll110e   = 1.18000e-11      dcjswg_p_12_lll110e  = 5.31e-011        
++dcgdl_p_12_lll110e  = -8.3591e-012     dcgsl_p_12_lll110e   = -8.3591e-012     dcf_p_12_lll110e     = -8.9044e-012     
++dags_p_12_lll110e   = 0.1675           dwags_p_12_lll110e   = 1.5e-8           dpvsat_p_12_lll110e  = 0                
++dvsat_p_12_lll110e  = 0                dwu0_p_12_lll110e    = 5.25e-11         dpu0_p_12_lll110e    = -2.26e-17        
++dlags_p_12_lll110e  = 3.48e-7          dpags_p_12_lll110e   = 1.05e-13         
+*
+.include  'l110ae_ll12_v111.mdl'
+.lib 'l110ae_ll12_v111.lib' igate
+.endl ss
+*********************************
+.lib fnsp
+.param
++dtox_n_12_lll110e   = 0                du0_n_12_lll110e     = 0.4981e-03       dvth0_n_12_lll110e   = -1.9000e-02      
++dxl_n_12_lll110e    = -1.0061e-10      dxw_n_12_lll110e     = 0.640e-08        dnlx_n_12_lll110e    = -6.3970e-09      
++dk3_n_12_lll110e    = -3.0274e+00      dpvth0_n_12_lll110e  = -4.7111e-16      dwwl_n_12_lll110e    = 3.9845e-19       
++dcj_n_12_lll110e    = -7.2000e-05      dcjsw_n_12_lll110e   = -9.94e-012       dcjswg_n_12_lll110e  = -4.11e-011       
++dcgdo_n_12_lll110e  = 0                dcgso_n_12_lll110e   = 0                dcf_n_12_lll110e     = 0                
++dcgdl_n_12_lll110e  = 0                dcgsl_n_12_lll110e   = 0                dvsat_n_12_lll110e   = -1.65e+3         
++dags_n_12_lll110e   = -0.0805          drdsw_n_12_lll110e   = -0.80            dwags_n_12_lll110e   = -3.025e-9        
++dpvsat_n_12_lll110e = -7.5e-11         
+*
++dtox_p_12_lll110e   = 0.00000e+00      dxl_p_12_lll110e     = 1.50000e-09      du0_p_12_lll110e     = -2.90230e-04     
++dvth0_p_12_lll110e  = -1.93110e-02     drdsw_p_12_lll110e   = 0.33770e+02      dxw_p_12_lll110e     = -0.83090e-09     
++dnlx_p_12_lll110e   = 3.54220e-09      dk3_p_12_lll110e     = 1.17910e+00      dpvth0_p_12_lll110e  = -8.49900e-16     
++dwwl_p_12_lll110e   = 2.50840e-23      dcgdo_p_12_lll110e   = 0                dcgso_p_12_lll110e   = 0                
++dcj_p_12_lll110e    = 9.6900e-05       dcjsw_p_12_lll110e   = 1.18000e-11      dcjswg_p_12_lll110e  = 5.31e-011        
++dcgdl_p_12_lll110e  = 0                dcgsl_p_12_lll110e   = 0                dcf_p_12_lll110e     = 0                
++dags_p_12_lll110e   = 0.0717           dwags_p_12_lll110e   = 0.85e-8          dpvsat_p_12_lll110e  = 0                
++dvsat_p_12_lll110e  = 0                dwu0_p_12_lll110e    = 3.40e-11         dpu0_p_12_lll110e    = -0.85e-17        
++dlags_p_12_lll110e  = 2.09e-7          dpags_p_12_lll110e   = 0.370e-13        
+*
+.include  'l110ae_ll12_v111.mdl'
+.lib 'l110ae_ll12_v111.lib' igate
+.endl fnsp
+*********************************
+.lib snfp
+.param
++dtox_n_12_lll110e   = 0                du0_n_12_lll110e     = -0.5417e-03      dvth0_n_12_lll110e   = 1.9000e-02       
++dxl_n_12_lll110e    = 0.2785e-09       dxw_n_12_lll110e     = -0.7514e-08      dnlx_n_12_lll110e    = 6.5683e-09       
++dk3_n_12_lll110e    = 3.1034e+00       dpvth0_n_12_lll110e  = 4.7572e-16       dwwl_n_12_lll110e    = -2.8050e-19      
++dcj_n_12_lll110e    = 7.2000e-05       dcjsw_n_12_lll110e   = 9.94e-012        dcjswg_n_12_lll110e  = 4.11e-011        
++dcgdo_n_12_lll110e  = 0                dcgso_n_12_lll110e   = 0                dcf_n_12_lll110e     = 0                
++dcgdl_n_12_lll110e  = 0                dcgsl_n_12_lll110e   = 0                dvsat_n_12_lll110e   = 2.50e+3          
++dags_n_12_lll110e   = 0.0855           drdsw_n_12_lll110e   = 0.7              dwags_n_12_lll110e   = 3.07e-9          
++dpvsat_n_12_lll110e = 2.00e-10         
+*
++dtox_p_12_lll110e   = 0.00000e+00      dxl_p_12_lll110e     = -3.00000e-10     du0_p_12_lll110e     = 2.56440e-04      
++dvth0_p_12_lll110e  = 1.96890e-02      drdsw_p_12_lll110e   = -5.212720e+01    dxw_p_12_lll110e     = 1.10010e-9       
++dnlx_p_12_lll110e   = -2.95250e-09     dk3_p_12_lll110e     = -1.09344e+00     dpvth0_p_12_lll110e  = 9.64610e-16      
++dwwl_p_12_lll110e   = 1.27070e-23      dcgdo_p_12_lll110e   = 0                dcgso_p_12_lll110e   = 0                
++dcj_p_12_lll110e    = -9.6900e-05      dcjsw_p_12_lll110e   = -1.18000e-11     dcjswg_p_12_lll110e  = -5.31e-011       
++dcgdl_p_12_lll110e  = 0                dcgsl_p_12_lll110e   = 0                dcf_p_12_lll110e     = 0                
++dags_p_12_lll110e   = -0.0782          dwags_p_12_lll110e   = -0.442e-8        dpvsat_p_12_lll110e  = 0                
++dvsat_p_12_lll110e  = 0                dwu0_p_12_lll110e    = -3.3e-11         dpu0_p_12_lll110e    = 0.77e-17         
++dlags_p_12_lll110e  = -1.008e-7        dpags_p_12_lll110e   = -0.546e-13       
+*
+.include  'l110ae_ll12_v111.mdl'
+.lib 'l110ae_ll12_v111.lib' igate
+.endl snfp
+*
+*
+.lib igate
+.subckt n_12_lll110e_ig n11 n2 n33 n4 w=1u l=1u nrd='hdif/w' nrs='hdif/w'
++  ad='2*hdif*w' as='2*hdif*w' pd='2*(2*hdif+w)' ps='2*(2*hdif+w)' dtemp=0 sa=2u sb=2u
+*
+mnig n1 n2 n3 n4 n_12_lll110e w=w l=l m=1 nrd=nrd nrs=nrs ad=ad as=as pd=pd ps=ps dtemp=dtemp sa=sa sb=sb
+.param rsh='8.5'
+.param hdif='1.25e-07'
+.param tcig='1+1.55e-3*(temper+dtemp-25)'
+.param area='w*0.9*(l*0.9+1.2e-8)*1e4*tcig'
+.param toxg='(2.64e-09+dtox_n_12_lll110e)*1e2'
+.param vdf0='3.11' vdfl='-0.3e-08' vdfw='3.5e-09'
+.param vaf0='0.7' vafl='-0.8e-10' vafw='1.0e-10'
+.param vdr0='5.78' vdrl='0e-07' vdrw='5.0e-09'
+.param var0='0.60' varl='0e-07' varw='1.0e-10' 
+.param vdf= '(vdf0+vdfl/(l*0.9+1.2e-8)+vdfw/(w*0.9))*2.6e7*toxg'
+.param vaf= '(vaf0+vafl/(l*0.9+1.2e-8)+vafw/(w*0.9))*2.6e7*toxg'
+.param vdr= '(vdr0+vdrl/(l*0.9+1.2e-8)+vdrw/(w*0.9))*2.6e7*toxg'
+.param var= '(var0+varl/(l*0.9+1.2e-8)+varw/(w*0.9))*2.6e7*toxg'
+.param igf= '2.1e-7*area*exp(-vdf)*pwr(1/toxg,2.0)'
+.param igr= '2.1e-7*area/(l*0.9+1.2e-8)*exp(-vdr)*pwr(1/toxg,2.0)'
+gigcd n2 n1 cur='igf*pwr((abs(v(n2,n1))+v(n2,n1))/2,vaf)-igr*pwr((abs(v(n2,n1))-v(n2,n1))/2,var)'
+gigcs n2 n3 cur='igf*pwr((abs(v(n2,n3))+v(n2,n3))/2,vaf)-igr*pwr((abs(v(n2,n3))-v(n2,n3))/2,var)'
+rdn n1 n11  'rsh*nrd'
+rsn n3 n33  'rsh*nrs'
+.ends
+*
+.subckt p_12_lll110e_ig p11 p2 p33 p4 w=1u l=1u nrd='hdif/w' nrs='hdif/w'
++  ad='2*hdif*w' as='2*hdif*w' pd='2*(2*hdif+w)' ps='2*(2*hdif+w)' dtemp=0 sa=2u sb=2u
+*
+mpig p1 p2 p3 p4 p_12_lll110e w=w l=l m=1 nrd=nrd nrs=nrs ad=ad as=as pd=pd ps=ps dtemp=dtemp sa=sa sb=sb
+.param rsh='7.6'
+.param hdif='1.25e-07'
+.param tcig='1+2.25e-3*(temper+dtemp-25)'
+.param area='w*0.9*(l*0.9+1.2e-8)*1e4*tcig'
+.param toxg='(2.83e-09+dtox_p_12_lll110e)*1e2'
+.param vdf0='3.22' vdfl='-7.00e-09' vdfw='-6.0e-8'
+.param vaf0='0.6' vafl='-1.5e-08' vafw='-3.0e-8'
+.param vdr0='5.50' vdrl='+1.50e-08' vdrw='-1.0e-07'
+.param var0='0.35' varl='+1.50e-08' varw='4.0e-8' 
+.param vdf= '(vdf0+vdfl/(l*0.9+1.2e-8)+vdfw/(w*0.9))*2.6e7*toxg'
+.param vaf= '(vaf0+vafl/(l*0.9+1.2e-8)+vafw/(w*0.9))*2.6e7*toxg'
+.param vdr= '(vdr0+vdrl/(l*0.9+1.2e-8)+vdrw/(w*0.9))*2.6e7*toxg'
+.param var= '(var0+varl/(l*0.9+1.2e-8)+varw/(w*0.9))*2.6e7*toxg'
+.param igf= '2.1e-7*area*exp(-vdf)*pwr(1/toxg,2.0)'
+.param igr= '2.1e-7*area/(l*0.9+1.2e-8)*exp(-vdr)*pwr(1/toxg,2.0)'
+gigcd p2 p1 cur='-igf*pwr((abs(v(p2,p1))-v(p2,p1))/2,vaf)+igr*pwr((abs(v(p2,p1))+v(p2,p1))/2,var)'
+gigcs p2 p3 cur='-igf*pwr((abs(v(p2,p3))-v(p2,p3))/2,vaf)+igr*pwr((abs(v(p2,p3))+v(p2,p3))/2,var)'
+rdp p1 p11  'rsh*nrd'
+rsp p3 p33  'rsh*nrs'
+
+.ends
+*
+.subckt n_12bpw_lll110e_ig n11 n2 n33 n4 w=1u l=1u nrd='hdif/w' nrs='hdif/w'
++  ad='2*hdif*w' as='2*hdif*w' pd='2*(2*hdif+w)' ps='2*(2*hdif+w)' dtemp=0 sa=2u sb=2u
+*
+mnig n1 n2 n3 n4 n_12bpw_lll110e w=w l=l m=1 nrd=nrd nrs=nrs ad=ad as=as pd=pd ps=ps dtemp=dtemp sa=sa sb=sb
+.param rsh='8.5'
+.param hdif='1.25e-07'
+.param tcig='1+1.55e-3*(temper+dtemp-25)'
+.param area='w*0.9*(l*0.9+1.2e-8)*1e4*tcig'
+.param toxg='(2.64e-09+dtox_n_12_lll110e)*1e2'
+.param vdf0='3.11' vdfl='-0.3e-08' vdfw='3.5e-09'
+.param vaf0='0.7' vafl='-0.8e-10' vafw='1.0e-10'
+.param vdr0='5.78' vdrl='0e-07' vdrw='5.0e-09'
+.param var0='0.60' varl='0e-07' varw='1.0e-10' 
+.param vdf= '(vdf0+vdfl/(l*0.9+1.2e-8)+vdfw/(w*0.9))*2.6e7*toxg'
+.param vaf= '(vaf0+vafl/(l*0.9+1.2e-8)+vafw/(w*0.9))*2.6e7*toxg'
+.param vdr= '(vdr0+vdrl/(l*0.9+1.2e-8)+vdrw/(w*0.9))*2.6e7*toxg'
+.param var= '(var0+varl/(l*0.9+1.2e-8)+varw/(w*0.9))*2.6e7*toxg'
+.param igf= '2.1e-7*area*exp(-vdf)*pwr(1/toxg,2.0)'
+.param igr= '2.1e-7*area/(l*0.9+1.2e-8)*exp(-vdr)*pwr(1/toxg,2.0)'
+gigcd n2 n1 cur='igf*pwr((abs(v(n2,n1))+v(n2,n1))/2,vaf)-igr*pwr((abs(v(n2,n1))-v(n2,n1))/2,var)'
+gigcs n2 n3 cur='igf*pwr((abs(v(n2,n3))+v(n2,n3))/2,vaf)-igr*pwr((abs(v(n2,n3))-v(n2,n3))/2,var)'
+rdn n1 n11  'rsh*nrd'
+rsn n3 n33  'rsh*nrs'
+.ends
+*
+.endl igate
+
+
+
+

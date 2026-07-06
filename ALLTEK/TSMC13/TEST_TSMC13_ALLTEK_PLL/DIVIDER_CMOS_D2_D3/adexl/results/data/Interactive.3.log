@@ -1,0 +1,20 @@
+Starting Single Run, Sweeps and Corners...
+
+Current time: Tue Feb 10 16:09:23 2026 
+Best design point: 1
+Design specs: 
+	TEST_TSMC13_ALLTEK_PLL:DIVIDER_CMOS_D2_D3:1	corner	C0_0 - 
+	TEST_TSMC13_ALLTEK_PLL:DIVIDER_CMOS_D2_D3:1	corner	C0_1 - 
+	TEST_TSMC13_ALLTEK_PLL:DIVIDER_CMOS_D2_D3:1	corner	C0_2 - 
+	TEST_TSMC13_ALLTEK_PLL:DIVIDER_CMOS_D2_D3:1	corner	C0_3 - 
+	TEST_TSMC13_ALLTEK_PLL:DIVIDER_CMOS_D2_D3:1	corner	C0_4 - 
+Design parameters: 
+	FS		3G
+	VS		1.2
+	temperature		-50
+
+Interactive.3
+Number of points completed: 6
+Number of simulation errors: 0
+Interactive.3 completed. 
+Current time: Tue Feb 10 16:10:14 2026 

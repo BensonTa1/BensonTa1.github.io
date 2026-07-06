@@ -1,0 +1,55 @@
+
+//********************************************************************************
+//* tt:   typical bjt model
+//* ff:   fast bjt model (maximum beta model)
+//* ss:   slow bjt model (minimum beta model)
+//********************************************************************************
+
+library mylib
+
+simulator lang=spectre insensitive=yes
+section tt
+parameters
++dis_npn_sv4p5x4p5_l110ae=0     dbf_npn_sv4p5x4p5_l110ae=0    dnf_npn_sv4p5x4p5_l110ae=0    dre_npn_sv4p5x4p5_l110ae=0                    
++drc_npn_sv4p5x4p5_l110ae=0     dise_npn_sv4p5x4p5_l110ae=0   dcje_npn_sv4p5x4p5_l110ae=0     dcjc_npn_sv4p5x4p5_l110ae=0                            
++dis_npn_sv9x9_l110ae=0         dbf_npn_sv9x9_l110ae=0        dnf_npn_sv9x9_l110ae=0        dre_npn_sv9x9_l110ae=0                    
++drc_npn_sv9x9_l110ae=0         dise_npn_sv9x9_l110ae=0       dcje_npn_sv9x9_l110ae=0         dcjc_npn_sv9x9_l110ae=0                       
++dis_npn_sv13p5x13p5_l110ae=0   dbf_npn_sv13p5x13p5_l110ae=0  dnf_npn_sv13p5x13p5_l110ae=0  dre_npn_sv13p5x13p5_l110ae=0                    
++drc_npn_sv13p5x13p5_l110ae=0   dise_npn_sv13p5x13p5_l110ae=0 dcje_npn_sv13p5x13p5_l110ae=0 dcjc_npn_sv13p5x13p5_l110ae=0            
+
+include "l110ae_bjt_npn_v011_mc.mdl.scs"
+endsection tt
+
+
+
+section ff
+parameters
+
++dis_npn_sv4p5x4p5_l110ae=-0.2      dbf_npn_sv4p5x4p5_l110ae=0.2      dnf_npn_sv4p5x4p5_l110ae=-0.005     dre_npn_sv4p5x4p5_l110ae=-0.2     
++drc_npn_sv4p5x4p5_l110ae=-0.2     dise_npn_sv4p5x4p5_l110ae=-0.25   dcje_npn_sv4p5x4p5_l110ae=-0.1      dcjc_npn_sv4p5x4p5_l110ae=-0.1 
++dis_npn_sv9x9_l110ae=-0.2          dbf_npn_sv9x9_l110ae=0.2          dnf_npn_sv9x9_l110ae=-0.005         dre_npn_sv9x9_l110ae=-0.2     
++drc_npn_sv9x9_l110ae=-0.2         dise_npn_sv9x9_l110ae=-0.25       dcje_npn_sv9x9_l110ae=-0.1          dcjc_npn_sv9x9_l110ae=-0.1                  
++dis_npn_sv13p5x13p5_l110ae=-0.3    dbf_npn_sv13p5x13p5_l110ae=0.2    dnf_npn_sv13p5x13p5_l110ae=-0.005   dre_npn_sv13p5x13p5_l110ae=-0.2     
++drc_npn_sv13p5x13p5_l110ae=-0.2 dise_npn_sv13p5x13p5_l110ae=-0.25 dcje_npn_sv13p5x13p5_l110ae=-0.1    dcjc_npn_sv13p5x13p5_l110ae=-0.1  
+
+include "l110ae_bjt_npn_v011_mc.mdl.scs"
+endsection ff
+
+
+
+section ss
+parameters    
+
++dis_npn_sv4p5x4p5_l110ae=0.2      dbf_npn_sv4p5x4p5_l110ae=-0.2     dnf_npn_sv4p5x4p5_l110ae=0.004     dre_npn_sv4p5x4p5_l110ae=0.2     
++drc_npn_sv4p5x4p5_l110ae=0.2    dise_npn_sv4p5x4p5_l110ae=0.25    dcje_npn_sv4p5x4p5_l110ae=0.1      dcjc_npn_sv4p5x4p5_l110ae=0.1                
++dis_npn_sv9x9_l110ae=0.3          dbf_npn_sv9x9_l110ae=-0.2         dnf_npn_sv9x9_l110ae=0.005         dre_npn_sv9x9_l110ae=0.2     
++drc_npn_sv9x9_l110ae=0.2        dise_npn_sv9x9_l110ae=0.25        dcje_npn_sv9x9_l110ae=0.1          dcjc_npn_sv9x9_l110ae=0.1  
++dis_npn_sv13p5x13p5_l110ae=0.2    dbf_npn_sv13p5x13p5_l110ae=-0.2   dnf_npn_sv13p5x13p5_l110ae=0.005   dre_npn_sv13p5x13p5_l110ae=0.2     
++drc_npn_sv13p5x13p5_l110ae=0.2    dise_npn_sv13p5x13p5_l110ae=0.25  dcje_npn_sv13p5x13p5_l110ae=0.1    dcjc_npn_sv13p5x13p5_l110ae=0.1 
+
+include "l110ae_bjt_npn_v011_mc.mdl.scs"
+endsection ss
+
+
+
+

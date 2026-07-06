@@ -1,0 +1,9 @@
+// VerilogA for Verilog_A, IDEAL_DIODE, veriloga
+
+`include "constants.vams"
+`include "disciplines.vams"
+
+module IDEAL_DIODE;
+
+
+endmodule

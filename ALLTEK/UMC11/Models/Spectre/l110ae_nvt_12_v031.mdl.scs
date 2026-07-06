@@ -1,0 +1,116 @@
+//********************************************************************
+simulator lang=spectre insensitive=yes
+//Property of UMC.
+//Unauthorized reproduction, modification and/or distribution are strictly
+//prohibited.
+//This product is protected under copyright law and trade secret law.
+//This model card may not be sent in any form outside of UMC without
+//the written consent of the UMC ATD Modeling Division.
+//******************************************************************************
+//Revision history:
+//<Revision 1>
+//Version : 0.1 p1
+//Date  : 2010/01/08
+//Author  : Jian Zhi Huang
+//Remark  : 1. Copy model from l110e_nvt_12_v011.lib in the G-05-LOGIC/MIXED_MODE11-MMC/L110E-SPICE
+//2. DSM version definition from 2009/11/30.
+//
+//<Revision 2>
+//Version : 0.1 p2
+//Date  : 2010/01/27
+//Author  : Shih-Hsin Yeh
+//Remark  : Revise Lmin=1.092e-6 to Lmin=1.08e-6.
+//
+//<Revision 3>
+//Version : 0.2 p1
+//Date  : 2010/07/26
+//Author  : Ruei Chih Yen
+//Remark  : Base on new silicon data.  
+//
+//<Revision 4>
+//Version : 0.3 p1
+//Date  : 2013/03/04
+//Author  : Yealing Lin
+//Remark  : Revise corner range.
+//******************************************************************************
+model n_nvt_12_l110e bsim3v3 type=n
+//*** Flag Parameter ***
++ version=3.24              binunit=1
++ paramchk=0                mobmod=1                  capmod=3
++ nqsmod=0                
+//*** Geometry Range Parameter ***
++ lmin=1.08e-6
++ lmax=5e-5                 wmin=0.9e-6               wmax=1e-4
+//*** Process Parameter ***
++ tox=2.64e-9+dtox_n_nvt_12_l110e
++ toxm=2.64e-9              xj=1.07e-7                nch=1.7e17
+//*** dW and dL Parameter ***
++ wint=9.187242e-8          wl=-2.489921e-16
++ wln=1.354859              ww=-2.6612e-14            wwn=1
++ wwl=-1.4664e-22+dwwl_n_nvt_12_l110e             lint=1.575401e-7
++ ll=-3.675e-13             lln=0.886479              lw=0
++ lwn=1                     lwl=-4.60561e-20          llc=-5.48e-14
++ lwc=0                     lwlc=0                    wlc=0
++ wwc=0                     wwlc=0                    dwg=-2.319682e-8
++ dwb=6.625453e-9           lref=1e20                 wref=1e20
++ xl=-2.5e-8+1.2e-8+dxl_n_nvt_12_l110e        
++ xw=-1.8e-8+dxw_n_nvt_12_l110e                 
+//*** NQS Parameter ***
++ elm=5                   
+//*** Vth Related  Parameter ***
++ vth0=-8.57558e-2+dvth0_n_nvt_12_l110e         
++ lvth0=-4e-3+dlvth0_n_nvt_12_l110e               k1=0.067774
++ k2=-0.018551              k3=2.705416+dk3_n_nvt_12_l110e
++ k3b=-8.65695              w0=8.116925e-7            nlx=7.61671e-6
++ dvt0=8.345975             dvt1=0.252612             dvt2=0.17664
++ dvt0w=-5.57213e-2         dvt1w=1.74074e5           dvt2w=-0.1416
++ ngate=5e20                pvth0=0+dpvth0_n_nvt_12_l110e
+//*** Mobility Related Parameter ***
++ u0=4.53649e-2+du0_n_nvt_12_l110e
++ ua=5.99365e-10            ub=1.682905e-18         
++ wu0=0+dwu0_n_nvt_12_l110e                         uc=-1.555715e-11
++ puc=-1.9e-11              vsat=6.999999e5+dvsat_n_nvt_12_l110e
++ a0=4.2                    ags=1.46+dags_n_nvt_12_l110e
++ b0=2.588143e-6            b1=1.295654e-6            keta=-2.86623e-2
++ a1=1.00003e-2             a2=6.71974e-2           
++ rdsw=212.592+drdsw_n_nvt_12_l110e                 prwb=-0.395949
++ prwg=0                    wr=1.584116             
++ wags=0+dwags_n_nvt_12_l110e                     
++ pvsat=0+dpvsat_n_nvt_12_l110e                   
+//*** Subthreshold Related Parameter ***
++ voff=-0.078708            nfactor=2                 eta0=6.8
++ etab=0                    dsub=0.43                 cit=1.26225e-4
++ cdsc=0.01                 cdscb=0                   cdscd=0.09
+//*** Output Resistance Related Parameter ***
++ pclm=1.702045             pdiblc1=0.282131
++ pdiblc2=0.112143          pdiblcb=0.025             drout=0.54535
++ pscbe1=3e8                pscbe2=1.948382e-6        pvag=7
++ delta=0.01                alpha0=-2e-11             alpha1=0.012
++ beta0=10.2              
+//*** Diode Parameter ***
++ ldif=7e-8
++ hdif=1.8e-6               rsh=8.5                   rd=0
++ rs=0                      rsc=0                     rdc=0
+//*** Capacitance Parameter ***
++ xpart=1                 
++ cgso=1.1e-10+dcgso_n_nvt_12_l110e               
++ cgdo=1.1e-10+dcgdo_n_nvt_12_l110e                 cgbo=0
++ cj=1.318605e-4+dcj_n_nvt_12_l110e                 mj=0.297081
++ mjsw=4.88325e-2           cjsw=3.122074e-10+dcjsw_n_nvt_12_l110e
++ cjswg=1.241452e-10+dcjswg_n_nvt_12_l110e          mjswg=0.377627
++ js=1.788e-6               jsw=1.77e-12              pbsw=0.33
++ pb=0.34                   pbswg=0.31                ckappa=0.6
++ clc=1e-7                  cle=0.6                   dlc=7.58e-10
++ dwc=0                     vfbcv=-1                  noff=2.655
++ voffcv=-0.1               imelt=1                   acde=0.5
++ moin=15                   cgsl=9e-11                cgdl=9e-11
+//*** Temperature Coeffient ***
++ tnom=25                   ute=-2.45
++ wute=0.1764               kt1=-0.291776             kt1l=-1.7e-8
++ kt2=-1.57696e-2           ua1=-2.62736e-10          wua1=2.121117e-10
++ pua1=4.501709e-10         ub1=-2.4352e-18           uc1=-5.6e-11
++ luc1=6.79e-11             puc1=1.581898e-10         at=1.5972e5
++ prt=0                     nj=1.03                   xti=5.5
++ tpb=1.55e-3               tpbsw=1.9e-3              tpbswg=1.65e-3
++ tcj=1.8e-3                tcjsw=3.2e-4              tcjswg=2.45e-3
++ minr=0.01                 imax=0.1

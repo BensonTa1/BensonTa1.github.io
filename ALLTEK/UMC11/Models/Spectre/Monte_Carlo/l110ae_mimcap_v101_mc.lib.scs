@@ -1,0 +1,28 @@
+simulator lang=spectre insensitive=yes
+library mylib
+
+section tt
+parameters
++ d_ca_mimcaps_10f_mml110e  =   0.0000e+00
++ d_ca_mimcaps_15f_mml110e  =   0.0000e+00
++ d_ca_mimcaps_20f_mml110e  =   0.0000e+00
+include "./l110ae_mimcap_v101_mc.mdl.scs"
+endsection tt
+
+section ss 
+parameters
++ d_ca_mimcaps_10f_mml110e   =   0.15
++ d_ca_mimcaps_15f_mml110e   =   0.15
++ d_ca_mimcaps_20f_mml110e   =   0.15
+include "./l110ae_mimcap_v101_mc.mdl.scs"
+endsection ss
+
+section ff 
+parameters
++ d_ca_mimcaps_10f_mml110e  =   -0.15
++ d_ca_mimcaps_15f_mml110e  =   -0.15
++ d_ca_mimcaps_20f_mml110e  =   -0.15
+include "./l110ae_mimcap_v101_mc.mdl.scs"
+endsection ff
+endlibrary mylib
+

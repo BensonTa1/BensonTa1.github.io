@@ -1,0 +1,16 @@
+Starting Single Run, Sweeps and Corners...
+
+Current time: Tue Apr 22 16:33:22 2025 
+Best design point: 1
+Design specs: 
+	TEST:LA:1	corner	Nominal - 
+	v /VOUTN; ac dB20(V)		Error	No
+	(VDC("/VOUTN") - VDC("/VOUTP"))		22.65f
+Design parameters: 
+	sigma		3
+
+Interactive.0
+Number of points completed: 1
+Number of simulation errors: 1
+Interactive.0 completed. 
+Current time: Tue Apr 22 16:33:26 2025 

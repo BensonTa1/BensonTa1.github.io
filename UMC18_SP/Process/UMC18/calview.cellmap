@@ -1,0 +1,627 @@
+(l_slcr20k_rf 
+  (UMC_18_CMOS L_SLCR20K_RF symbol)
+  (
+    (pos PLUS)
+    (neg MINUS)
+    (sub B)
+  )
+)
+
+(mimcapm_rf 
+  (UMC_18_CMOS MIMCAPM_RF symbol)
+  (
+    (pos PLUS)
+    (neg MINUS)
+    (sub B)
+  )
+  (
+   (nil m 1)
+  ) 
+)
+
+
+(mimcaps_mm 
+  (UMC_18_CMOS MIMCAPS_MM symbol)
+  (
+     (pos PLUS)
+     (neg MINUS)
+  )
+  (
+   (nil m 1)
+  )
+)
+
+
+(n_l18w500_18_rf 
+  (UMC_18_CMOS N_L18W500_18_RF symbol)
+  (
+     (d D)
+     (g G)
+     (s S)
+     (b B)
+  )
+  (
+   (nil m 1)
+  )
+)
+
+(n_l34w500_33_rf 
+  (UMC_18_CMOS N_L34W500_33_RF symbol)
+  (
+     (d D)
+     (g G)
+     (s S)
+     (b B)
+  )
+  (
+   (nil m 1)
+  )
+)
+
+(n_po7w500_18_rf 
+  (UMC_18_CMOS N_PO7W500_18_RF symbol)
+  (
+     (d D)
+     (g G)
+     (s S)
+     (b B)
+  )
+  (
+   (nil m 1)
+  )
+)
+
+(n_po7w500_33_rf 
+  (UMC_18_CMOS N_PO7W500_33_RF symbol)
+  (
+     (d D)
+     (g G)
+     (s S)
+     (b B)
+  )
+  (
+   (nil m 1)
+  )
+)
+
+(pad_rf 
+  (UMC_18_CMOS PAD_RF symbol)
+  (
+     (pos PLUS)
+     (neg MINUS)
+  )
+)
+
+(p_l18w500_18_rf 
+  (UMC_18_CMOS P_L18W500_18_RF symbol)
+  (
+     (d D)
+     (g G)
+     (s S)
+     (b B)
+  )
+  (
+   (nil m 1)
+  )
+)
+
+(p_l34w500_33_rf 
+  (UMC_18_CMOS P_L34W500_33_RF symbol)
+  (
+     (d D)
+     (g G)
+     (s S)
+     (b B)
+  )
+  (
+   (nil m 1)
+  )
+)
+
+(p_po7w500_18_rf 
+  (UMC_18_CMOS P_PO7W500_18_RF symbol)
+  (
+     (d D)
+     (g G)
+     (s S)
+     (b B)
+  )
+  (
+   (nil m 1)
+  )
+)
+
+(p_po7w500_33_rf 
+  (UMC_18_CMOS P_PO7W500_33_RF symbol)
+  (
+     (d D)
+     (g G)
+     (s S)
+     (b B)
+  )
+  (
+   (nil m 1)
+  )
+)
+
+
+(rnhr1000_mm 
+  (UMC_18_CMOS RNHR1000_MM symbol)
+  (
+     (pos PLUS)
+     (neg MINUS)
+     (sub B)
+  )
+  (
+       (wr w)
+       (w w)       
+       (lr l)
+       (l l)  
+       (nil m 1)
+  )
+
+)
+
+(rnhr_rf 
+  (UMC_18_CMOS RNHR_RF symbol)
+  (
+     (pos PLUS)
+     (neg MINUS)
+     (sub B)
+  )
+  (
+   (nil m 1)
+  )
+
+)
+
+
+(rnnpo_mm 
+  (UMC_18_CMOS RNNPO_MM symbol)
+  (
+      (pos PLUS)
+      (neg MINUS)
+      (sub B)
+  )
+  (
+       (wr w)
+       (w w)       
+       (lr l)
+       (l l)  
+       (nil m 1)
+  )
+  
+)
+
+(rnnpo_rf 
+  (UMC_18_CMOS RNNPO_RF symbol)
+  (
+      (pos PLUS)
+      (neg MINUS)
+      (sub B)
+  )
+  (
+   (nil m 1)
+  )
+)
+
+
+(rnppo_mm 
+  (UMC_18_CMOS RNPPO_MM symbol)
+  (
+      (pos PLUS)
+      (neg MINUS)
+      (sub B)
+  )
+  (
+       (wr w)
+       (w w)       
+       (lr l)
+       (l l)  
+       (nil m 1)
+  )
+
+)
+
+(rnppo_rf 
+  (UMC_18_CMOS RNPPO_RF symbol)
+  (
+      (pos PLUS)
+      (neg MINUS)
+      (sub B)
+  )
+  (
+   (nil m 1)
+  )
+
+)
+
+
+(vardiop_rf 
+  (UMC_18_CMOS VARDIOP_RF symbol)
+  (
+      (pos PLUS)
+      (neg MINUS)
+  )
+  (
+   (nil m 1)
+  )
+)
+
+(varmis_18_rf 
+  (UMC_18_CMOS VARMIS_18_RF symbol)
+  (
+      (pos PLUS)
+      (neg MINUS)
+      (sub B)
+  )
+  (
+   (nil m 1)
+  )
+)
+
+(dionw_mm 
+  (UMC_18_CMOS DIONW_MM symbol)
+  (
+      (pos PLUS)
+      (neg MINUS)
+  )
+  (
+   (nil m 1)
+  )
+)
+
+(dion_mm 
+  (UMC_18_CMOS DION_MM symbol)
+  (
+      (pos PLUS)
+      (neg MINUS)
+  )
+  (
+   (nil m 1)
+  )
+)
+
+(diop_mm 
+  (UMC_18_CMOS DIOP_MM symbol)
+  (
+      (pos PLUS)
+      (neg MINUS)
+  )
+  (
+   (nil m 1)
+  )
+)
+
+(n_18_mm 
+  (UMC_18_CMOS N_18_MM symbol)
+  (
+      (d D)
+      (g G)
+      (s S)
+      (b B)
+  )
+  (
+       (w Wtotal)
+       (nil Nf 1)  
+       (pd pd_h)
+       (pd_s pd)
+       (ps ps_h)       
+       (ps_s ps)  
+       (nil m 1)
+  )
+)
+
+(n_18_mm 
+  (UMC_18_CMOS NCAP_MM symbol)
+  (
+      (d D)
+      (g G)
+      (s S)
+      (b B)
+  )
+  (
+       (w Wtotal)
+       (nil Nf 1)
+       (pd pd_h)
+       (pd_s pd)
+       (ps ps_h)       
+       (ps_s ps)
+       (nil m 1)
+  )
+)
+
+
+(n_33_mm 
+  (UMC_18_CMOS N_33_MM symbol)
+  (
+      (d D)
+      (g G)
+      (s S)
+      (b B)
+  )
+  (
+       (w Wtotal)
+       (nil Nf 1)
+       (pd pd_h)
+       (pd_s pd)
+       (ps ps_h)       
+       (ps_s ps) 
+       (nil m 1)       
+  )
+  
+)
+
+(n_bpw_18_mm 
+  (UMC_18_CMOS N_BPW_18_MM symbol)
+  (
+      (d D)
+      (g G)
+      (s S)
+      (b B)
+  )
+  (
+       (w Wtotal)
+       (nil Nf 1)
+       (pd pd_h)
+       (pd_s pd)
+       (ps ps_h)       
+       (ps_s ps) 
+       (nil m 1)       
+  )
+  
+)
+
+(n_bpw_33_mm 
+  (UMC_18_CMOS N_BPW_33_MM symbol)
+  (
+      (d D)
+      (g G)
+      (s S)
+      (b B)
+  )
+  (
+       (w Wtotal)
+       (nil Nf 1)
+       (pd pd_h)
+       (pd_s pd)
+       (ps ps_h)       
+       (ps_s ps) 
+       (nil m 1)       
+  )
+  
+)
+
+(n_lv_18_mm 
+  (UMC_18_CMOS N_LV_18_MM symbol)
+  (
+      (d D)
+      (g G)
+      (s S)
+      (b B)
+  )
+  (
+       (w Wtotal)
+       (nil Nf 1)
+       (pd pd_h)
+       (pd_s pd)
+       (ps ps_h)       
+       (ps_s ps)
+       (nil m 1)       
+  )
+  
+)
+
+(n_lv_33_mm 
+  (UMC_18_CMOS N_LV_33_MM symbol)
+  (
+      (d D)
+      (g G)
+      (s S)
+      (b B)
+  )
+  (
+       (w Wtotal)
+       (nil Nf 1)
+       (pd pd_h)
+       (pd_s pd)
+       (ps ps_h)       
+       (ps_s ps)  
+       (nil m 1)       
+  )
+  
+)
+
+(n_zero_18_mm 
+  (UMC_18_CMOS N_ZERO_18_MM symbol)
+  (
+      (d D)
+      (g G)
+      (s S)
+      (b B)
+  )
+  (
+       (w Wtotal)
+       (nil Nf 1)
+       (pd pd_h)
+       (pd_s pd)
+       (ps ps_h)       
+       (ps_s ps)
+       (nil m 1)       
+  )
+  
+)
+
+(n_zero_33_mm 
+  (UMC_18_CMOS N_ZERO_33_MM symbol)
+  (
+      (d D)
+      (g G)
+      (s S)
+      (b B)
+  )
+  (
+       (w Wtotal)
+       (nil Nf 1)
+       (pd pd_h)
+       (pd_s pd)
+       (ps ps_h)       
+       (ps_s ps)
+       (nil m 1)       
+  )
+  
+)
+
+(pnp_v100x100_mm 
+  (UMC_18_CMOS PNP_V100X100_MM symbol)
+  (
+      (c C)
+      (b B)
+      (e E)
+  )
+  (
+   (nil m 1)
+  )
+)
+
+(pnp_v50x50_mm 
+  (UMC_18_CMOS PNP_V50X50_MM symbol)
+  (
+      (c C)
+      (b B)
+      (e E)
+  )
+  (
+   (nil m 1)
+  )
+)
+
+(p_18_mm 
+  (UMC_18_CMOS P_18_MM symbol)
+  (
+      (d D)
+      (g G)
+      (s S)
+      (b B)
+  )
+  (
+       (w Wtotal)
+       (nil Nf 1)
+       (pd pd_h)
+       (pd_s pd)
+       (ps ps_h)       
+       (ps_s ps) 
+       (nil m 1)
+  )
+  
+)
+
+(p_18_mm 
+  (UMC_18_CMOS PCAP_MM symbol)
+  (
+      (d D)
+      (g G)
+      (s S)
+      (b B)
+  )
+  (
+       (w Wtotal)
+       (nil Nf 1)
+       (pd pd_h)
+       (pd_s pd)
+       (ps ps_h)       
+       (ps_s ps)   
+       (nil m 1)
+  )
+  
+)
+
+(p_33_mm 
+  (UMC_18_CMOS P_33_MM symbol)
+  (
+      (d D)
+      (g G)
+      (s S)
+      (b B)
+  )
+  (
+       (w Wtotal)
+       (nil Nf 1)
+       (pd pd_h)
+       (pd_s pd)
+       (ps ps_h)       
+       (ps_s ps)  
+       (nil m 1)
+  )
+  
+)
+
+(p_lv_18_mm 
+  (UMC_18_CMOS P_LV_18_MM symbol)
+  (
+      (d D)
+      (g G)
+      (s S)
+      (b B)
+  )
+  (
+       (w Wtotal)
+       (nil Nf 1)
+       (pd pd_h)
+       (pd_s pd)
+       (ps ps_h)       
+       (ps_s ps)  
+       (nil m 1)
+  )
+  
+)
+
+(p_lv_33_mm 
+  (UMC_18_CMOS P_LV_33_MM symbol)
+  (
+      (d D)
+      (g G)
+      (s S)
+      (b B)
+  )
+  (
+       (w Wtotal)
+       (nil Nf 1)
+       (pd pd_h)
+       (pd_s pd)
+       (ps ps_h)       
+       (ps_s ps) 
+       (nil m 1)
+  )
+ 
+)
+
+
+((p res r) 
+  (UMC_18_CMOS presistor symbol)
+  (
+    (PLUS)
+    (MINUS)
+  )
+)
+
+
+((p cap c)
+  (UMC_18_CMOS pcapacitor symbol)
+  (
+    (PLUS)
+    (MINUS)
+  )
+)
+
+((p ind l)
+  (analogLib ind symbol)
+  (
+    (PLUS)
+    (MINUS)
+  )
+)
+
+
+
+

@@ -1,0 +1,96 @@
+Starting Single Run, Sweeps and Corners...
+
+Current time: Sat Apr 26 13:11:57 2025 
+Best design point: 1
+Design specs: 
+	TEST_Adaptive_CTLE:Gain_stage:1	corner	Corner_0 - 
+	(VDC("/VOUTN") - VDC("/VOUTP"))		2.892n
+	VDC("/VOUTN")		1.355
+	VDC("/VOUTP")		1.355
+	((VDC("/VOUTN") - VDC("/VOUTP")) / 50)		57.83p
+	TEST_Adaptive_CTLE:Gain_stage:1	corner	Corner_1 - 
+	(VDC("/VOUTN") - VDC("/VOUTP"))		-261.4n
+	VDC("/VOUTN")		1.257
+	VDC("/VOUTP")		1.257
+	((VDC("/VOUTN") - VDC("/VOUTP")) / 50)		-5.227n
+	TEST_Adaptive_CTLE:Gain_stage:1	corner	Corner_2 - 
+	(VDC("/VOUTN") - VDC("/VOUTP"))		1.256p
+	VDC("/VOUTN")		1.456
+	VDC("/VOUTP")		1.456
+	((VDC("/VOUTN") - VDC("/VOUTP")) / 50)		25.12f
+	TEST_Adaptive_CTLE:Gain_stage:1	corner	Corner_3 - 
+	(VDC("/VOUTN") - VDC("/VOUTP"))		11.82p
+	VDC("/VOUTN")		1.337
+	VDC("/VOUTP")		1.337
+	((VDC("/VOUTN") - VDC("/VOUTP")) / 50)		236.5f
+	TEST_Adaptive_CTLE:Gain_stage:1	corner	Corner_4 - 
+	(VDC("/VOUTN") - VDC("/VOUTP"))		-251.8p
+	VDC("/VOUTN")		1.235
+	VDC("/VOUTP")		1.235
+	((VDC("/VOUTN") - VDC("/VOUTP")) / 50)		-5.035p
+	TEST_Adaptive_CTLE:Gain_stage:1	corner	Corner_5 - 
+	(VDC("/VOUTN") - VDC("/VOUTP"))		-2.065n
+	VDC("/VOUTN")		1.443
+	VDC("/VOUTP")		1.443
+	((VDC("/VOUTN") - VDC("/VOUTP")) / 50)		-41.29p
+	TEST_Adaptive_CTLE:Gain_stage:1	corner	Corner_6 - 
+	(VDC("/VOUTN") - VDC("/VOUTP"))		-699.4p
+	VDC("/VOUTN")		1.372
+	VDC("/VOUTP")		1.372
+	((VDC("/VOUTN") - VDC("/VOUTP")) / 50)		-13.99p
+	TEST_Adaptive_CTLE:Gain_stage:1	corner	Corner_7 - 
+	(VDC("/VOUTN") - VDC("/VOUTP"))		26.71n
+	VDC("/VOUTN")		1.278
+	VDC("/VOUTP")		1.278
+	((VDC("/VOUTN") - VDC("/VOUTP")) / 50)		534.2p
+	TEST_Adaptive_CTLE:Gain_stage:1	corner	Corner_8 - 
+	(VDC("/VOUTN") - VDC("/VOUTP"))		-378.8n
+	VDC("/VOUTN")		1.47
+	VDC("/VOUTP")		1.47
+	((VDC("/VOUTN") - VDC("/VOUTP")) / 50)		-7.577n
+	TEST_Adaptive_CTLE:Gain_stage:1	corner	Corner_9 - 
+	(VDC("/VOUTN") - VDC("/VOUTP"))		3.09p
+	VDC("/VOUTN")		1.351
+	VDC("/VOUTP")		1.351
+	((VDC("/VOUTN") - VDC("/VOUTP")) / 50)		61.81f
+	TEST_Adaptive_CTLE:Gain_stage:1	corner	Corner_10 - 
+	(VDC("/VOUTN") - VDC("/VOUTP"))		301.9n
+	VDC("/VOUTN")		1.252
+	VDC("/VOUTP")		1.252
+	((VDC("/VOUTN") - VDC("/VOUTP")) / 50)		6.037n
+	TEST_Adaptive_CTLE:Gain_stage:1	corner	Corner_11 - 
+	(VDC("/VOUTN") - VDC("/VOUTP"))		-360.5p
+	VDC("/VOUTN")		1.454
+	VDC("/VOUTP")		1.454
+	((VDC("/VOUTN") - VDC("/VOUTP")) / 50)		-7.21p
+	TEST_Adaptive_CTLE:Gain_stage:1	corner	Corner_12 - 
+	(VDC("/VOUTN") - VDC("/VOUTP"))		4.426n
+	VDC("/VOUTN")		1.359
+	VDC("/VOUTP")		1.359
+	((VDC("/VOUTN") - VDC("/VOUTP")) / 50)		88.52p
+	TEST_Adaptive_CTLE:Gain_stage:1	corner	Corner_13 - 
+	(VDC("/VOUTN") - VDC("/VOUTP"))		502.5p
+	VDC("/VOUTN")		1.261
+	VDC("/VOUTP")		1.261
+	((VDC("/VOUTN") - VDC("/VOUTP")) / 50)		10.05p
+	TEST_Adaptive_CTLE:Gain_stage:1	corner	Corner_14 - 
+	(VDC("/VOUTN") - VDC("/VOUTP"))		138.8p
+	VDC("/VOUTN")		1.459
+	VDC("/VOUTP")		1.459
+	((VDC("/VOUTN") - VDC("/VOUTP")) / 50)		2.777p
+	TEST_Adaptive_CTLE:Gain_stage:1	corner	Nominal - 
+	(VDC("/VOUTN") - VDC("/VOUTP"))		2.892n
+	VDC("/VOUTN")		1.355
+	VDC("/VOUTP")		1.355
+	((VDC("/VOUTN") - VDC("/VOUTP")) / 50)		57.83p
+Design parameters: 
+	VCTLE		1
+	sigma		3
+	temperature		30
+	VDD		1.8
+
+Interactive.2
+Number of points completed: 1
+Number of simulation errors: 0
+Interactive.2 completed. 
+Current time: Sat Apr 26 13:12:11 2025 

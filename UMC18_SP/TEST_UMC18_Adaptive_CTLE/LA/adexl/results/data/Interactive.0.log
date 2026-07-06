@@ -1,0 +1,30 @@
+Starting Single Run, Sweeps and Corners...
+
+Current time: Wed Apr 23 09:35:22 2025 
+Best design point: 1
+Design specs: 
+	TEST_Adaptive_CTLE:LA:1	corner	Corner_0 - 
+	OP("/I14/I3/M4" "vsat_marg")		379.3m
+	OP("/I14/I3/M4" "vdsat")		183.8m
+	TEST_Adaptive_CTLE:LA:1	corner	Corner_1 - 
+	OP("/I14/I3/M4" "vsat_marg")		418.7m
+	OP("/I14/I3/M4" "vdsat")		179.7m
+	TEST_Adaptive_CTLE:LA:1	corner	Corner_2 - 
+	OP("/I14/I3/M4" "vsat_marg")		330.2m
+	OP("/I14/I3/M4" "vdsat")		189.5m
+	TEST_Adaptive_CTLE:LA:1	corner	Corner_3 - 
+	OP("/I14/I3/M4" "vsat_marg")		406.3m
+	OP("/I14/I3/M4" "vdsat")		180.8m
+	TEST_Adaptive_CTLE:LA:1	corner	Corner_4 - 
+	OP("/I14/I3/M4" "vsat_marg")		350.1m
+	OP("/I14/I3/M4" "vdsat")		186.8m
+	TEST_Adaptive_CTLE:LA:1	corner	Nominal - 
+	OP("/I14/I3/M4" "vsat_marg")		379.3m
+	OP("/I14/I3/M4" "vdsat")		183.8m
+Design parameters: 
+
+Interactive.0
+Number of points completed: 1
+Number of simulation errors: 0
+Interactive.0 completed. 
+Current time: Wed Apr 23 09:35:30 2025 

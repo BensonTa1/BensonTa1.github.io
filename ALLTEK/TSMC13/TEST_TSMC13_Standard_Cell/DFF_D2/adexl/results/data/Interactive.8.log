@@ -1,0 +1,21 @@
+Starting Single Run, Sweeps and Corners...
+
+Current time: Fri Feb  6 00:10:16 2026 
+Best design point: 1
+Design specs: 
+	TEST_TSMC13_Standard_Cell:DFF_D2:1	corner	C0_0 - 
+	TEST_TSMC13_Standard_Cell:DFF_D2:1	corner	C0_1 - 
+	TEST_TSMC13_Standard_Cell:DFF_D2:1	corner	C0_2 - 
+	TEST_TSMC13_Standard_Cell:DFF_D2:1	corner	C0_3 - 
+	TEST_TSMC13_Standard_Cell:DFF_D2:1	corner	C0_4 - 
+Design parameters: 
+	TS		200p
+	temperature		-25
+	VS		1.14
+	W		2u
+
+Interactive.8
+Number of points completed: 15
+Number of simulation errors: 0
+Interactive.8 completed. 
+Current time: Fri Feb  6 00:12:34 2026 

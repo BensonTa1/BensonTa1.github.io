@@ -1,0 +1,34 @@
+simulator lang=spectre insensitive=yes
+// Model: l110ae_momcaps_array_vp4_rf
+// RF vp4 array MOM capacitor
+// Model coverage:
+// nf: 11 - 41 (Odd integer only)
+// lf: (10 - 40) * 1e-06
+// bm: 1 - 4
+// ns: 3 - 6
+// array: 1 - 4
+// Frequency range: 1 MHz - 0.8 * resonance (maximum 16.0 GHz)
+library mylib
+//
+section tt
+parameters d_cs4=1
+parameters dcj_dionw_l110e_vp4=0
+parameters dcjp_dionw_l110e_vp4=0
+include "./l110ae_momcaps_array_vp4_rf_v022.mdl.scs"
+endsection tt
+//
+section ff
+parameters d_cs4=0.85
+parameters dcj_dionw_l110e_vp4=-8.28e-006
+parameters dcjp_dionw_l110e_vp4=-9.92e-011
+include "./l110ae_momcaps_array_vp4_rf_v022.mdl.scs"
+endsection ff
+//
+section ss
+parameters d_cs4=1.15
+parameters dcj_dionw_l110e_vp4=8.28e-006
+parameters dcjp_dionw_l110e_vp4=9.92e-011
+include "./l110ae_momcaps_array_vp4_rf_v022.mdl.scs"
+endsection ss
+//
+endlibrary mylib

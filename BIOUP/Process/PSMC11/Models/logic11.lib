@@ -1,0 +1,569 @@
+***************************************************************
+***************************************************************
+*******    Powerchip Semiconductor Corp. SPICE Model     ******
+***************************************************************
+***************************************************************
+*                                                             *
+*   Process        : LOGIC 110nm 1.5V   spice model              *
+*   Registered date: Dec  26,2016                             *
+*   Version        : 0.51                                     *
+*   Creator        : tchsu, ML               *
+*   Notice         : 1.All of mos model is fitting to the  measurement data and then skewed to the target.    *              
+*                        2.The N/PMOS models were extracted by BSIMPro+ Ver.2009.4.1 or MBP  Ver.2010.3.0.1 and   *               
+*                           verified by HSPICE D-2010.03-SP2, respectively.   *
+*                       3.If AD,AS,PD,PS are not given,they will be calculate from DMCG,DMCI in Bsim4.      * 
+*  
+*******************************************************************************
+* 1.In  version(v0.50), spice model fully copy from 2110CI1-021  V1.01
+********************************************************************************* 
+* 1.In this version(v0.51), Skew 1.5V PMOS models ( lvp ) by WAT trend si data in L=Lmin sizes.
+********************************************************************************* 
+*******************************************************************************   
+*                                                                             *
+* Model Description                                                           *
+*                                                                             *
+*  1)Mosfet model name --- lvn,lvp                                  *
+*                                                                             *                                                                             
+*                                                                             *                                                                                                                                                               
+*     Device Description                                                      *                                                                          
+*                                                                             *                                                                                      
+*        device   description               model_name                              geometry                                             typical device      Vt     Ion   *                                
+*       LV NMOS : nmos for 1.5V      lvn           0.28um<= W <=200um, 0.13um<= L <=20um            W/L=10/0.13       0.57    5.2mA*
+*       LV PMOS : pmos for 1.5V       lvp          0.28um<= W <=200um, 0.13um<= L <=20um            W/L=10/0.13       -0.59    -2.2mA*                                                               
+*
+*  2)Diode model name ---nppw,ppnw                                 *
+*        device   description               model_name 
+*     Lib diode : N+/PW                  nppw                            *
+*                      P+/NW                   ppnw                          *
+*                                                                    *
+*                                                                    *
+*  3)Res model name --- rnpoly, rnaa,  rpaa,  rnp,  rpp   	                                        *
+*
+*      Model_name  	Description                          Bias range  				fitting size geometry		                *
+*      rnaa  	N+_AA     	            0<=Vf<=3.3V  -40C<=T<=125C	W/L= 0.28/50   	                         *
+*      rpaa  	P+_AA     	            0<=Vf<=3.3V  -40C<=T<=125C	W/L= 0.28/50   	                         *
+*      rnp  	                N+_AA-w/o CoSi               0<=Vf<=3.3V  -40C<=T<=125C	W/L= 0.28/50   	                         *
+*      rpp  	                P+_AA-w/o CoSi               0<=Vf<=3.3V  -40C<=T<=125C	W/L= 0.28/50   	                         *
+*
+*      rnpoly	N+_Poly     	                 0<=Vf<=3.3V  -40C<=T<=125C	W/L= 0.13/50 , 2/50   	                         *  
+*      rppoly200	P+_Poly(for W=2u only)        0<=Vf<=3.3V  -40C<=T<=125C	W/L= 2/50   	                         *  
+*      rppoly013	P+_Poly(for W=0.13u only)   0<=Vf<=3.3V  -40C<=T<=125C	W/L= 0.13/50   	                         *  
+*      rnpolync	N+_Poly-w/o CoSi	                 0<=Vf<=3.3V  -40C<=T<=125C	W/L= 2/50   	                         *  
+*      rppolync	P+_Poly-w/o CoSi	                 0<=Vf<=3.3V  -40C<=T<=125C	W/L= 2/50   	                         *  
+*
+*                                                                    *
+*
+*
+*  *) Temperature range :
+*      T=-40C ~ 125C
+*
+*  *)To use these models by using this command:                      *
+*     .lib 'lib_path/lib_name' model_name                            *
+*                                                                    *
+*     EX: .lib '/home/user/psc/logic11.lib' TT                         *
+*           for typical MOS model                                    *
+*     EX: .lib '/home/user/psc/logic11.lib' diode                         *
+*           for diode model                                    *
+*     EX: .lib '/home/user/psc/logic11.lib' RES_TT                         *
+*           for typical resistor model                                    *
+*******************************************************************************                                              
+*******************************************************************************
+**************** CORNER_LIB OF TYPICAL MODEL ******************
+* Typical  n-channel and p-channel 
+.LIB TT
+.param
+
++vth0_lvn=0.4907                  vth0_lvp=-0.55164
++tox_lvn=3.154E-9               tox_lvp=3.62e-009
++xl_lvn=0	             xl_lvp=0
++xw_lvn=0                          xw_lvp=0
+
+            
+ 	
+.lib 'logic11.lib' mos
+
+.ENDL TT
+
+**************** CORNER_LIB OF FNFP MODEL ********************************************
+* Fast n and p 
+.LIB FF
+.param
+
++vth0_lvn=0.4321                  vth0_lvp=-0.4732  
++tox_lvn=2.954E-9               tox_lvp=3.420e-009
++xl_lvn=-1.3e-8	             xl_lvp=-1.3e-8
++xw_lvn=2.8e-8                  xw_lvp=2.8e-8
+
+
+
+.lib 'logic11.lib' mos
+
+
+.ENDL FF
+
+**************** CORNER_LIB OF SNSP MODEL ******************************************************
+* Slow n and p 
+.LIB SS
+.param
+
++vth0_lvn=0.5511                 vth0_lvp=-0.6276   
++tox_lvn=3.354E-9             tox_lvp=3.82e-009
++xl_lvn=1.3e-8	             xl_lvp=1.3e-8
++xw_lvn=-2.8e-8                 xw_lvp=-2.8e-8
+
+
+
+.lib 'logic11.lib' mos
+
+
+
+.ENDL SS
+
+**************** CORNER_LIB OF FNSP MODEL *********************
+* Fast N Slow P   
+.LIB FS
+.param
+
++vth0_lvn=4.354E-1                vth0_lvp=-0.62485   
++tox_lvn=3.154E-9              tox_lvp=3.620e-009
++xl_lvn=-6.5e-9	              xl_lvp=6.5e-9
++xw_lvn=1.4e-8                   xw_lvp=-1.4e-8
+
+	
+
+.lib 'logic11.lib' mos
+
+
+.ENDL FS
+
+**************** CORNER_LIB OF SNFP MODEL *********************
+* Slow N Fast P    
+.LIB SF
+.param
+
++vth0_lvn=0.5472                 vth0_lvp=-0.4776   
++tox_lvn=3.154E-9              tox_lvp=3.620e-009
++xl_lvn=6.5e-9	             xl_lvp=-6.5e-9
++xw_lvn=-1.4e-8                 xw_lvp=1.4e-8
+
+
+
+.lib 'logic11.lib' mos
+
+.ENDL SF
+
+*******************************************************************************
+***************************************************************
+*                                                             *
+*   Mosfet SPICE Model Parameters                             *
+*                                                             *
+***************************************************************
+
+.lib mos
+
+****1.5V NMOS************
+.model  lvn  nmos  level = 54
+**************************************************************
+*               MODEL FLAG PARAMETERS 
+**************************************************************
++lmin    = 1.3e-007        lmax    = 2e-005          wmin    = 2.8e-007        wmax    = 2e-004         
++version = 4.3             binunit = 1               paramchk= 1               mobmod  = 0             
++capmod  = 1               igcmod  = 1               igbmod  = 1               geomod  = 0             
++diomod  = 1               rdsmod  = 0               rbodymod= 0               rgeomod = 1             
++rgatemod= 0               permod  = 1               acnqsmod= 0               trnqsmod= 0             
++tempmod = 0             
+**************************************************************
+*               GENERAL MODEL PARAMETERS 
+**************************************************************
++tnom    = 25              toxe    = tox_lvn      toxp    = tox_lvn      toxm    = tox_lvn    
++epsrox  = 3.9             wint    = 7.591773e-008   lint    = -7.5e-009       ll      = 0             
++wl      = 0               lln     = 1               wln     = 1               lw      = 6e-015        
++ww      = -1.29e-014      lwn     = 1               wwn     = 1               lwl     = -7.8e-022     
++wwl     = 0               llc     = 0               wlc     = 0               lwc     = 0             
++wwc     = 0               lwlc    = 0               wwlc    = 0               xl      = '-1.5e-8+xl_lvn'
++xw      = '9e-8+xw_lvn'          dlc     = 0               dwc     = 0               xpart   = 0             
++toxref  = tox_lvn      dlcig   = 0             
+**************************************************************
+*               DC PARAMETERS 
+**************************************************************
++vth0    = vth0_lvn          pvth0   = 0.00015         k1      = 0.467043        k2      = -0.0280611    
++pk2     = 0.0003525499    k3      = 0.07286         wk3     = -1.0085         k3b     = 0.33011       
++w0      = 1.0334e-007     dvt0    = 0.1702          dvt1    = 0.0522371       dvt2    = -0.033        
++dvt0w   = -0.495          dvt1w   = 506100          dvt2w   = -0.00025904     dsub    = 0.18826       
++minv    = -0.12           wminv   = -0.112202       voffl   = -1.396505e-009  dvtp0   = 0             
++dvtp1   = 0               lc      = 0               lambda  = 0               vtl     = 0             
++xn      = 3               lpe0    = 1.874871e-007   lpeb    = 2.700657e-008   vbm     = -3            
++xj      = 1.5e-007        ngate   = 0               ndep    = 1.7e+017        nsd     = 1e+020        
++phin    = 0.139108        cdsc    = 0.000252        cdscb   = 9.566446e-005   cdscd   = 0             
++cit     = 0               lcit    = -1.465324E-4   voff    = -0.159683       wvoff   = -0.0122713    
++pvoff   = 0.0008614013    nfactor = 1.199998        lnfactor= -0.1        eta0    = 0.009922      
++leta0   = -0.00083        peta0   = -0.0001         etab    = -0.0115724      u0      = 0.0441237     
++ua      = -2.161524e-015  lua     = -5.443561e-011  pua     = -1.75e-011      ub      = 1.819295e-018 
++lub     = 4.2e-021        uc      = 5.408755e-011   eu      = 1.67            vsat    = 108000        
++pvsat   = 2442.469        a0      = 1.2             ags     = 0.755906        a1      = 0             
++a2      = 1               b0      = 9.8449e-008     b1      = 9.7542e-008     keta    = -0.01         
++dwg     = 4.198e-010      dwb     = -1.4e-008       pclm    = 0.325           pdiblc1 = 0.39          
++pdiblc2 = 0.0086          pdiblcb = 0               drout   = 0.56            pvag    = 0             
++delta   = 0.01            pscbe1  = 4.24e+008       pscbe2  = 1e-005          fprout  = 0             
++pdits   = 0               pditsd  = 0               pditsl  = 0               rsh     = 10            
++rdsw    = 153.4           rsw     = 100             rdw     = 100             rdswmin = 0             
++rdwmin  = 0               rswmin  = 0               prwg    = 0               prwb    = 0             
++wr      = 1               alpha0  = 3.199009e-010   alpha1  = 0.001150671     beta0   = 5.966964      
++agidl   = 1.500858e-009   bgidl   = 1.799106e+009   cgidl   = 5.637206        egidl   = 0.32313       
++aigbacc = 0.43            bigbacc = 0.054           cigbacc = 0.075           nigbacc = 1             
++aigbinv = 0.35            bigbinv = 0.03            cigbinv = 0.006           eigbinv = 1.1           
++nigbinv = 3               aigc    = 0.54            bigc    = 0.054           cigc    = 0.075         
++aigsd   = 0.43            bigsd   = 0.054           cigsd   = 0.075           nigc    = 1             
++poxedge = 1               pigcd   = 1               ntox    = 1               xrcrg1  = 12            
++xrcrg2  = 1             
+**************************************************************
+*               CAPACITANCE PARAMETERS 
+**************************************************************
++cgso    = 2.8e-010        cgdo    = 2.8e-010        cgbo    = 0               cgdl    = 0             
++cgsl    = 0               clc     = 1e-007          cle     = 0.6             ckappas = 0.6           
++ckappad = 0.6             vfbcv   = -1              acde    = 1               moin    = 15            
++noff    = 1               voffcv  = 0             
+**************************************************************
+*               TEMPERATURE PARAMETERS 
+**************************************************************
++kt1     = -0.191201       wkt1    = 0.005           pkt1    = -0.002          kt1l    = -6.98192e-010 
++kt2     = -0.02725        ute     = -1.00406        lute    = 0.0536625       wute    = 0.051         
++ua1     = 3.768334e-009   ub1     = -3.508049e-018  lub1    = 5e-020          uc1     = 5.21984e-011  
++puc1    = -6.3e-012       prt     = 0               at      = 33000         
+**************************************************************
+*               NOISE PARAMETERS 
+**************************************************************
++fnoimod = 1               tnoimod = 0             
+**************************************************************
+*               DIODE PARAMETERS 
+**************************************************************
++jss     = 7.041e-008      jsws    = 8.1505e-012     jswgs   = 0               njs     = 1             
++ijthsfwd= 0.1             ijthsrev= 0.1             bvs     = 10              xjbvs   = 1             
++pbs     = 0.5935          cjs     = 0.0010521       mjs     = 0.22664         pbsws   = 0.90056       
++cjsws   = 8.92e-011       mjsws   = 0.0030901       pbswgs  = 0.8779          cjswgs  = 8.92e-011     
++mjswgs  = 0.38661         tpb     = 8.6831e-011     tcj     = 0.00019586      tpbsw   = -2.5699e-018  
++tcjsw   = 1.0727e-005     tpbswg  = 0.00255         tcjswg  = 0.0014309       xtis    = 3             
+**************************************************************
+*               LAYOUT RELATED PARAMETERS 
+**************************************************************
++dmcg    = 1.85e-007       dmci    = 1.85e-7        
+**************************************************************
+*               RF PARAMETERS 
+**************************************************************
+**************************************************************
+*               STRESS PARAMETERS 
+**************************************************************
+
+
+
+
+****1.5V PMOS************
+
+.model lvp pmos
+***** Flag Parameter ***
++level = 54                    version = 4.62                binunit = 1                   
++paramchk = 1                  mobmod = 1                    capmod = 1                    
++rdsmod = 0                    igcmod = 1                    igbmod = 1                    
++rbodymod = 0                  trnqsmod = 0                  acnqsmod = 0                  
++diomod = 1                    tempmod = 0                   permod = 1                    
++geomod = 0                    rgeomod = 1                   rgatemod = 0                  
+***** Geometry Range Parameter ***
++lmin = 1.3E-7                 lmax = 2E-5                   wmin = 2.8E-7                 
++wmax = 2E-4                   
+***** Process Parameter ***
++epsrox = 3.9                  toxe = tox_lvp                toxp = tox_lvp                
++toxm = tox_lvp                dtox = 0                      xj = 1.5E-7                   
++ndep = 1.7E17                 ngate = 0                     nsd = 1E20                    
++rsh = 12                      phin = 2.5713E-4              
+***** dW and dL Parameter ***
++wint = -5E-8                  wl = 0                        wln = 1                       
++ww = 0                        wwn = 1                       wwl = -3.186E-25              
++lint = 1.5823E-8              ll = 0                        lln = 1                       
++lw = 0                        lwn = 1                       lwl = -1.4317E-22             
++llc = 0                       lwc = 0                       lwlc = 0                      
++wlc = 0                       wwc = 0                       wwlc = 0                      
++dwg = 1.83675E-9              dwb = 2.8E-8                  xl = '-1.5E-8+xl_lvp'                  
++xw = '9E-8+xw_lvp'                     
+*****Layout-Dependent Parasitics Model Parameter ***
++dmcg = 1.85E-7                dmci = 1.85E-7                
+***** Vth Related  Parameter ***
++vth0 = vth0_lvp               lvth0 = 0.010464              wvth0 = 0.042269              
++pvth0 = -5.5E-3               k1 = 0.61898                  k2 = 0.024685                 
++pk2 = 1.4811E-3               k3 = 1E-3                     k3b = 58.65112                
++w0 = 4.4475E-6                lpe0 = 6.831776E-8            lpeb = -9.4514E-9             
++dvtp0 = 0                     dvtp1 = 0                     dvt0 = 3.2864E-6              
++dvt1 = 0.6307                 dvt2 = 0.032                  dvt0w = 0                     
++dvt1w = 5.3E6                 dvt2w = -0.032                
+***** Mobility Related Parameter ***
++u0 = 0.012733                 wu0 = -4.08009E-3             ua = 1.7524E-9                
++lua = -7.6431E-11             wua = -1.34155E-9             ub = -8.9295E-20              
++lub = 1.14246E-19             wub = 6.29893E-19             pub = -5.46E-21               
++uc = -0.110336                luc = 0.01196                 wuc = 9.94468E-2              
++puc = -0.024197               eu = 1.67                     vsat = 1E5                    
++pvsat = -900                  a0 = 1.0543                   pa0 = 0.1                     
++ags = 2.0608E-3               b0 = 7.782075E-8              b1 = 5.384E-10                
++keta = 0.10083                lketa = -0.0107               wketa = -0.03425              
++pketa = 2.7E-3                a1 = 0                        a2 = 1                        
++rdsw = 349.74                 rdswmin = 0                   prwb = 0                      
++prwg = 0                      wr = 1                        
+***** Subthreshold Related Parameter ***
++voff = -0.13838               wvoff = 8.375E-3              voffl = -4.7506E-9            
++minv = 0                      nfactor = 2.5234              eta0 = 6.834E-3               
++etab = -0.10106               dsub = 0.65695                cit = 0                       
++cdsc = 1.125E-6               cdscb = 0                     cdscd = 0                     
+***** Output Resistance Related Parameter ***
++pclm = 0.20491                pdiblc1 = 0.39                pdiblc2 = 8.6E-3              
++pdiblcb = 0                   drout = 0.98686               pscbe1 = 4.24E8               
++pscbe2 = 1E-5                 pvag = 0                      delta = 0.01                  
++fprout = 0                    pdits = 0.043743              pditsl = 8.186805E5           
++pditsd = 6.84439E-2           lambda = 0                    vtl = 0                       
++xn = 3                        alpha0 = 8.345E-14            alpha1 = 3.1843E-3            
++beta0 = 10.644                
+***** Gate Dielectric Tunneling Current ***
++aigbacc = 0.43                bigbacc = 0.054               cigbacc = 0.075               
++nigbacc = 1                   aigbinv = 0.35                bigbinv = 0.03                
++cigbinv = 6E-3                eigbinv = 1.1                 nigbinv = 3                   
++aigc = 0.43                   bigc = 0.054                  cigc = 0.075                  
++aigsd = 0.43                  bigsd = 0.054                 cigsd = 0.075                 
++dlcig = 0                     nigc = 1                      poxedge = 1                   
++pigcd = 1                     ntox = 1                      toxref = tox_lvp              
+***** GIDL Effect Parameters ***
++agidl = 1.1E-12               bgidl = 8.465E6               cgidl = 487.98                
++egidl = 0.8                   
+***** Capacitance Parameter ***
++xpart = 0                     cgso = 2.8E-10                cgdo = 2.8E-10                
++ckappas = 0.6                 ckappad = 0.6                 cf = 0                        
++clc = 1E-7                    cle = 0.6                     dlc = 1E-8                    
++dwc = 0                       vfbcv = -1                    noff = 1                      
++voffcv = 0                    acde = 1                      moin = 15                     
+***** Souce/Drain Junction Diode Model Parameter ***
++ijthsrev = 0.1                ijthsfwd = 0.1                xjbvs = 1                     
++bvs = 10.2                    jss = 5.2E-7                  jsws = 3.075E-12              
++jswgs = 0                     cjs = 2.4423E-3               mjs = 0.90405                 
++mjsws = 0.22                  cjsws = 9.5E-11               cjswgs = 9.5E-11              
++mjswgs = 0.47026              pbs = 1.1686                  pbsws = 0.2904                
++pbswgs = 0.24794              
+***** Temperature coefficient ***
++tnom = 25                     ute = -0.45917                wute = -8E-12                 
++kt1 = -0.27747                kt1l = -7.3085E-10            kt2 = -0.04587                
++ua1 = 6.3975E-9               wua1 = -2.2764E-9             ub1 = -7.8173E-18             
++wub1 = 2.5748E-18             pub1 = -9.6187E-22            uc1 = -0.26198                
++luc1 = -7.5E-3                wuc1 = 0.21234                puc1 = 3.1636E-3              
++at = 3.3E4                    prt = 0                       njs = 1                       
++xtis = 3                      tpb = 0                       tpbsw = 0                     
++tpbswg = 0                    tcj = 7.0919E-4               tcjsw = 0                     
++tcjswg = 1.68651E-4           
+
+
+
+.endl mos
+
+
+
+.lib diode
+
+***N+_PWell Junction
+
+.model  nppw  d  level = 3
+**************************************************************
+*               GENERAL PARAMETERS 
+**************************************************************
++dcap    = 1               area    = 1               pj      = 0               tref    = 25            
++xoi     = 7e-007          xom     = 1e-006        
+**************************************************************
+*               DC PARAMETERS 
+**************************************************************
++is      = 1.07439e-007    jsw     = 1.62812e-014    expli   = 1e+020          ik      = 400000        
++vb      = 11.2            ibv     = 278             ikr     = 647371          n       = 1.029418      
++rs      = 3.521044e-007   jtun    = 4e-009          ntun    = 30            
+**************************************************************
+*               CAPACITANCE PARAMETERS 
+**************************************************************
++cj      = 0.0010521       cjp     = 8.92e-011     pb      = 0.5935         php     = 0.90056           
++fcs     = 0.5             mj      = 0.22664         mjsw    = 0.0030901         fc      = 0.5           
++tt      = 0             
+**************************************************************
+*               NOISE PARAMETERS 
+**************************************************************
+**************************************************************
+*               TEMPERATURE PARAMETERS 
+**************************************************************
++tlev    = 1               tlevc   = 1               trs     = 0.004747656     tcv     = -0.000154596  
++xti     = 3               xtitun  = 3               cta     = 0.00019586    ctp     = 1.0727e-005    
++eg      = 1.17            tpb     = 8.6831e-011       tphp    = -2.5699e-018      gap1    = 0.000702      
++gap2    = 1108            ttt1    = 0               ttt2    = 0               tm1     = 0             
++tm2     = 0             
+*******************************************************************************************
+
+****P+_NW Junction
+
+.model  ppnw  d  level = 3
+**************************************************************
+*               GENERAL PARAMETERS 
+**************************************************************
++dcap    = 1               area    = 1               pj      = 0               tref    = 25            
++xoi     = 7e-007          xom     = 1e-006        
+**************************************************************
+*               DC PARAMETERS 
+**************************************************************
++is      = 3.41071e-007    jsw     = 6.20227e-014    expli   = 1e+020          ik      = 240000        
++vb      = 10.4            ibv     = 278             ikr     = 697.07          n       = 1.019777      
++rs      = 4.881614e-008   jtun    = 4e-009          ntun    = 30            
+**************************************************************
+*               CAPACITANCE PARAMETERS 
+**************************************************************
++cj      = 0.0024423      cjp     = 9.5e-011     pb      = 1.1686         php     = 0.2904       
++fcs     = 0.5             mj      = 0.90405         mjsw    = 0.22             fc      = 0.5           
++tt      = 0             
+**************************************************************
+*               NOISE PARAMETERS 
+**************************************************************
+**************************************************************
+*               TEMPERATURE PARAMETERS 
+**************************************************************
++tlev    = 1               tlevc   = 1               trs     = 0.002137794     tcv     = -0.0004934    
++xti     = 3               xtitun  = 3               cta     = 0.00070919      ctp     = 0   
++eg      = 1.17            tpb     = 0      tphp    = 0       gap1    = 0.000702      
++gap2    = 1108            ttt1    = 0               ttt2    = 0               tm1     = 0             
++tm2     = 0             
+*******************************************************************************************
+
+.endl diode
+
+
+
+
+***************************************************************
+*                                                             *
+*   Resistance SPICE Model Library                            *
+*                                                             *
+***************************************************************
+
+**************** CORNER_LIB OF TYPICAL MODEL ******************
+.lib RES_TT
+.param
++r_naa = 8.47
++r_paa = 9.47
++r_np = 84.91
++r_pp = 176.5342
++r_npoly = 10.24
++r_ppoly200 = 12.6749
++r_ppoly013=22.1472
++r_npolync= 78.0127
++r_ppolync =  434.7161
+
+.lib 'logic11.lib' RES
+.endl RES_TT 
+
+**************** CORNER_LIB OF FAST MODEL ******************
+.lib RES_FF
+.param
++r_naa = 4.47
++r_paa = 5.47
++r_np = 59.91
++r_pp =123.5342
++r_npoly = 5.86
++r_ppoly200 = 7.6749
++r_ppoly013=12.1472
++r_npolync= 63.0127
++r_ppolync = 374.7161
+
+.lib 'logic11.lib' RES
+.endl RES_FF
+
+**************** CORNER_LIB OF SLOW MODEL ******************
+.lib RES_SS
+.param
++r_naa = 12.47
++r_paa = 13.47
++r_np = 109.91
++r_pp = 229.5342
++r_npoly = 14.74
++r_ppoly200 = 17.6749
++r_ppoly013=42.6472
++r_npolync= 93.0127
++r_ppolync = 494.7161
+
+.lib 'logic11.lib' RES  
+.endl RES_SS
+
+*******************************************************************************
+
+***************************************************************
+*                                                             *
+*   Resistance SPICE Model Sub-Circuit                        *
+*                                                             *
+***************************************************************
+
+.lib RES
+
+**N+_AA
+.subckt rnaa n1 n2 l=length w=width mf=1
+.param rsh=r_naa ptc1=3.2e-3 ptc2=2.0e-6 pvc1=-4.82e-4 pvc2=1.69e-3 pt='temper'
+.param tfac='1.0+ptc1*(pt-25.0)+ptc2*(pt-25.0)*(pt-25.0)'
+r1 n1 n2 '1/mf*l/(w)*(rsh*(1+pvc1*abs(v(n2,n1))+pvc2*v(n2,n1)*v(n2,n1)))*tfac'
+.ends rnaa
+
+**P+_AA
+.subckt rpaa n1 n2 l=length w=width mf=1
+.param rsh=r_paa ptc1=3.0e-3 ptc2=1.0e-6 pvc1=9.63e-4 pvc2=8.41e-4 pt='temper'
+.param tfac='1.0+ptc1*(pt-25.0)+ptc2*(pt-25.0)*(pt-25.0)'
+r1 n1 n2 '1/mf*l/(w)*(rsh*(1+pvc1*abs(v(n2,n1))+pvc2*v(n2,n1)*v(n2,n1)))*tfac'
+.ends rpaa
+
+**N+_AA-w/o CoSi
+.subckt rnp n1 n2 l=length w=width mf=1
+.param rsh=r_np ptc1=1.4e-3 ptc2=4.0e-7 pvc1=4.83e-4 pvc2=1.47e-4 pt='temper'
+.param tfac='1.0+ptc1*(pt-25.0)+ptc2*(pt-25.0)*(pt-25.0)'
+r1 n1 n2 '1/mf*l/(w)*(rsh*(1+pvc1*abs(v(n2,n1))+pvc2*v(n2,n1)*v(n2,n1)))*tfac'
+.ends rnp
+
+**P+_AA-w/o CoSi
+.subckt rpp n1 n2 l=length w=width mf=1
+.param rsh=r_pp ptc1=1.4e-3 ptc2=4.0e-7 pvc1=2.69e-3 pvc2=-4.83e-4 pt='temper'
+.param tfac='1.0+ptc1*(pt-25.0)+ptc2*(pt-25.0)*(pt-25.0)'
+r1 n1 n2 '1/mf*l/(w)*(rsh*(1+pvc1*abs(v(n2,n1))+pvc2*v(n2,n1)*v(n2,n1)))*tfac'
+.ends rpp
+
+**N+_Poly
+.subckt rnpoly  n1 n2 l=length w=width mf=1
+.param rsh=r_npoly ptc1=2.5E-3 ptc2=7E-7 pvc1= 3.56E-3 pvc2=8.65E-3 pt='temper'
+.param tfac='1.0+ptc1*(pt-25.0)+ptc2*(pt-25.0)*(pt-25.0)'
+r1 n1 n2 '1/mf*l/(w)*(rsh*(1+pvc1*abs(v(n2,n1))+pvc2*v(n2,n1)*v(n2,n1)))*tfac'
+.ends rnpoly
+
+**P+_Poly(for W=2u only) 
+.subckt rppoly200 n1 n2 l=length w=width mf=1
+.param rsh=r_ppoly200 ptc1=2.4E-3 ptc2=9.0e-6 pvc1= 3.14E-3 pvc2= 9.31E-3 pt='temper'
+.param tfac='1.0+ptc1*(pt-25.0)+ptc2*(pt-25.0)*(pt-25.0)'
+r1 n1 n2 '1/mf*l/(w)*(rsh*(1+pvc1*abs(v(n2,n1))+pvc2*v(n2,n1)*v(n2,n1)))*tfac'
+.ends rppoly200
+
+**P+_Poly(for W=0.13u only)
+.subckt rppoly013 n1 n2 l=length w=width mf=1
+.param rsh=r_ppoly013 ptc1=2E-3 ptc2=6.0e-7 pvc1= -2.191E-2 pvc2= 1.56E-3 pt='temper'
+.param tfac='1.0+ptc1*(pt-25.0)+ptc2*(pt-25.0)*(pt-25.0)'
+r1 n1 n2 '1/mf*l/(w)*(rsh*(1+pvc1*abs(v(n2,n1))+pvc2*v(n2,n1)*v(n2,n1)))*tfac'
+.ends rppoly013 
+
+**N+_Poly-w/o CoSi
+.subckt rnpolync n1 n2 l=length w=width mf=1
+.param rsh=r_npolync ptc1=1E-4 ptc2=3E-7 pvc1= -5.25E-4 pvc2= 2.64E-4 pt='temper'
+.param tfac='1.0+ptc1*(pt-25.0)+ptc2*(pt-25.0)*(pt-25.0)'
+r1 n1 n2 '1/mf*l/(w)*(rsh*(1+pvc1*abs(v(n2,n1))+pvc2*v(n2,n1)*v(n2,n1)))*tfac'
+.ends rnpolync 
+
+**P+_Poly-w/o CoSi
+.subckt rppolync n1 n2 l=length w=width mf=1
+.param rsh=r_ppolync ptc1=-3E-04 ptc2=1E-06 pvc1= 9.41E-04 pvc2= -3.02E-4 pt='temper'
+.param tfac='1.0+ptc1*(pt-25.0)+ptc2*(pt-25.0)*(pt-25.0)'
+r1 n1 n2 '1/mf*l/(w)*(rsh*(1+pvc1*abs(v(n2,n1))+pvc2*v(n2,n1)*v(n2,n1)))*tfac'
+.ends rppolync 
+
+
+.endl RES
+*******************************************************************
+
+
+
+

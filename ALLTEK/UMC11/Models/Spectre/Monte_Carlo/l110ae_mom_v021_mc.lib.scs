@@ -1,0 +1,40 @@
+simulator lang=spectre insensitive=yes
+//*****************************************************************************************
+//**            MOM Capacitor subcircuit model 
+//**           (symmetric type, asymmetric type and Stripe type)
+//             UMC L110E mixed_mode/rf process    
+//             2010/07/25   by Eddie Chang         
+//   
+//              Case Definition: 
+//              tt: Typical case 
+//              ss: Maximum capacitance case 
+//              ff: Minimum capacitance case  
+//**           
+//**
+//**
+library mylib
+//*
+section tt
+parameters d_c1_vp_mml110ae=0
+parameters d_cox_vp_mml110ae=0
+include "l110ae_mom_v021_mc.mdl.scs"
+endsection tt
+//*
+section ff
+parameters d_c1_vp_mml110ae=-0.15
+parameters d_cox_vp_mml110ae=-0.15
+include "l110ae_mom_v021_mc.mdl.scs"
+endsection ff
+//*
+section ss
+parameters d_c1_vp_mml110ae=0.15
+parameters d_cox_vp_mml110ae=0.15
+include "l110ae_mom_v021_mc.mdl.scs"
+endsection ss
+//*
+endlibrary mylib
+
+ 
+
+
+ 

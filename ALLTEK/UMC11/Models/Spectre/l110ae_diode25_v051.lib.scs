@@ -1,0 +1,64 @@
+//*
+simulator lang=spectre insensitive=yes
+library mylib
+
+section tt
+parameters
+//* 
++dcj_dion_25_l110ae    = 0       
++dcjp_dion_25_l110ae   = 0       
++dn_dion_25_l110ae     = 0       
++djs_dion_25_l110ae    = 0       
++djsw_dion_25_l110ae   = 0       
++drs_dion_25_l110ae    = 0       
+//*
++dcj_diop_25_l110ae    = 0       
++dcjp_diop_25_l110ae   = 0       
++dn_diop_25_l110ae     = 0       
++djs_diop_25_l110ae    = 0       
++djsw_diop_25_l110ae   = 0       
++drs_diop_25_l110ae    = 0       
+include "l110ae_diode25_v051.mdl.scs"
+endsection tt
+
+section ff
+parameters
+//*
++dcj_dion_25_l110ae    = -0.1    
++dcjp_dion_25_l110ae   = -0.1    
++dn_dion_25_l110ae     = +0.003  
++djs_dion_25_l110ae    = +1      
++djsw_dion_25_l110ae   = +2      
++drs_dion_25_l110ae    = -0.25   
+//*
++dcj_diop_25_l110ae    = -0.1    
++dcjp_diop_25_l110ae   = -0.1    
++dn_diop_25_l110ae     = +0.003  
++djs_diop_25_l110ae    = +1      
++djsw_diop_25_l110ae   = +2      
++drs_diop_25_l110ae    = -0.25   
+
+include "l110ae_diode25_v051.mdl.scs"
+endsection ff
+
+section ss
+parameters
+//*   
++dcj_dion_25_l110ae    = +0.1    
++dcjp_dion_25_l110ae   = +0.1    
++dn_dion_25_l110ae     = -0.003  
++djs_dion_25_l110ae    = -0.5    
++djsw_dion_25_l110ae   = -0.67   
++drs_dion_25_l110ae    = +0.25   
+//*
++dcj_diop_25_l110ae    = +0.1    
++dcjp_diop_25_l110ae   = +0.1    
++dn_diop_25_l110ae     = -0.003  
++djs_diop_25_l110ae    = -0.5    
++djsw_diop_25_l110ae   = -0.67   
++drs_diop_25_l110ae    = +0.25
+include "l110ae_diode25_v051.mdl.scs"
+endsection ss
+
+endlibrary mylib
+

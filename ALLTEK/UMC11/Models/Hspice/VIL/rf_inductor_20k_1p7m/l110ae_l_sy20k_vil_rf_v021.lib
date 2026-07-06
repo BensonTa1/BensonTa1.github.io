@@ -1,0 +1,27 @@
+*
+.lib tt
+.include 'l110ae_l_sy20k_vil_rf_v021.mdl'
+.param sy_drs_1p7m0t1f1u=1
+.param sy_drs_sub_1p7m0t1f1u=1
+.param sy_dls_1p7m0t1f1u=1
+.endl tt
+*
+.lib ff
+.include 'l110ae_l_sy20k_vil_rf_v021.mdl'
+.param sy_drs_1p7m0t1f1u=1.15
+.param sy_drs_sub_1p7m0t1f1u=0.85
+.param sy_dls_1p7m0t1f1u=1.05
+.endl ff
+*
+.lib ss
+.include 'l110ae_l_sy20k_vil_rf_v021.mdl'
+.param sy_drs_1p7m0t1f1u=0.85
+.param sy_drs_sub_1p7m0t1f1u=1.15
+.param sy_dls_1p7m0t1f1u=0.95
+.endl ss
+
+
+
+
+
+

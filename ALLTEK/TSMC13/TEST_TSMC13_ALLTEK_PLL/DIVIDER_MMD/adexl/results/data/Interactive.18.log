@@ -1,0 +1,23 @@
+Starting Single Run, Sweeps and Corners...
+
+Current time: Wed Mar 11 18:39:58 2026 
+Best design point: 1
+Design specs: 
+	TEST_TSMC13_ALLTEK_PLL:DIVIDER_MMD:1	corner	C0_0 - 
+	(cross(vtime('tran "/FOUT") 0.6 4 "rising" nil nil nil) - cross(vtime('tran "/FOUT") 0.6 3 "rising" nil nil nil))		160n
+	TEST_TSMC13_ALLTEK_PLL:DIVIDER_MMD:1	corner	C0_1 - 
+	(cross(vtime('tran "/FOUT") 0.6 4 "rising" nil nil nil) - cross(vtime('tran "/FOUT") 0.6 3 "rising" nil nil nil))		160n
+	TEST_TSMC13_ALLTEK_PLL:DIVIDER_MMD:1	corner	C0_2 - 
+	(cross(vtime('tran "/FOUT") 0.6 4 "rising" nil nil nil) - cross(vtime('tran "/FOUT") 0.6 3 "rising" nil nil nil))		160n
+	TEST_TSMC13_ALLTEK_PLL:DIVIDER_MMD:1	corner	C0_3 - 
+	(cross(vtime('tran "/FOUT") 0.6 4 "rising" nil nil nil) - cross(vtime('tran "/FOUT") 0.6 3 "rising" nil nil nil))		160n
+	TEST_TSMC13_ALLTEK_PLL:DIVIDER_MMD:1	corner	C0_4 - 
+	(cross(vtime('tran "/FOUT") 0.6 4 "rising" nil nil nil) - cross(vtime('tran "/FOUT") 0.6 3 "rising" nil nil nil))		160n
+Design parameters: 
+	FS		200M
+	VS		1.08
+	temperature		-25
+
+Received stop signal from user. 
+Interactive.18 completed. 
+Current time: Wed Mar 11 18:40:39 2026 

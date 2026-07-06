@@ -1,0 +1,3 @@
+projectDir = '"~/simulation"
+designInfo = '("TEST_PSMC11_BIOUP_DAC" "8bit_DAC_V2_dynamic" "config" "spectre")
+descriptionText = "None"

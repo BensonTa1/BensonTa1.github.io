@@ -1,0 +1,16 @@
+library rfres_hri_cor 
+
+section ff_rfres_hri 
+include "cr013g_2d5_v1d4.scs" section = ff_rfres_hri 
+endsection ff_rfres_hri 
+
+section ss_rfres_hri 
+include "cr013g_2d5_v1d4.scs" section = ss_rfres_hri 
+endsection ss_rfres_hri 
+
+section tt_rfres_hri 
+include "cr013g_2d5_v1d4.scs" section = tt_rfres_hri 
+endsection tt_rfres_hri 
+
+
+endlibrary rfres_hri_cor 

@@ -1,0 +1,30 @@
+.lib typ
+.param
+*
++ ddw_rnppo_rf=0
++ drsh_rnppo_rf=0
++ dcox_rnppo_rf=0
+*
+.include './rnppo_rf_v2d3.mdl'
+*
+.endl typ
+*
+.lib min
+.param
+*
++ ddw_rnppo_rf=-0.1
++ drsh_rnppo_rf=-0.25
++ dcox_rnppo_rf=-0.12
+.include './rnppo_rf_v2d3.mdl'
+*
+.endl min
+*
+.lib max
+.param
+*
++ ddw_rnppo_rf=0.1
++ drsh_rnppo_rf=0.25
++ dcox_rnppo_rf=0.12
+.include './rnppo_rf_v2d3.mdl'
+* 
+.endl max

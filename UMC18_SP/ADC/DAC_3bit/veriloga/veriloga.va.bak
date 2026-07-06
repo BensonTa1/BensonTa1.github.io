@@ -1,0 +1,49 @@
+`include "constants.vams"
+`include "disciplines.vams"
+
+module DAC_3bit(B1, B2, B3, output_signal);
+    input B1, B2, B3;  // 3-bit digital inputs
+    electrical B1, B2, B3;  // Electrical declaration for inputs
+	integer D1, D2, D3;  
+    output output_signal;
+    electrical output_signal;  // Analog output signal
+
+    // Parameters
+    parameter real Vref = 1.8;  // Reference voltage
+    parameter real sampling_rate = 0.25e6;  // 10 MHz sampling rate
+
+    // Internal variables
+    real time_step;
+    real analog_output;
+
+    analog begin
+        // Determine time step for sampling
+        time_step = 1.0 / sampling_rate;
+
+        // Sample input and compute analog output at discrete time intervals
+        @(timer(3.5u, time_step)) begin
+			if (V(B1)>0.9) begin
+				D1 = 1;
+			end else begin
+				D1 = 0;
+			end
+			
+			if (V(B2)>0.9) begin
+				D2 = 1;
+			end else begin
+				D2 = 0;
+			end
+
+			if (V(B3)>0.9) begin
+				D3 = 1;
+			end else begin
+				D3 = 0;
+			end
+
+
+			analog_output = Vref * (D1 * 1 + V(B2) * 2 + V(B3) * 4 )/7;
+            
+        end
+		V(output_signal) <+ analog_output;
+    end
+endmodule

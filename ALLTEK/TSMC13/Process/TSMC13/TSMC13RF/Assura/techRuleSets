@@ -1,0 +1,24 @@
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Rule Set File generated/modified by Assura Code on Feb 25 14:54:29 2004
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+ruleSet( "CDL_CAP_1P0"
+     (DrcRules             "./drc/assura.drc" )
+     (DrcInclude           "./drc/DRC.rsf" )
+     (LvsExtractRules      "./lvs_rcx/extract.rul" )
+     (LvsCompareRules      "./lvs_rcx/compare.rul" )
+     (LvsBindingFile       "./lvs_rcx/bind.rul_cdl" )
+     (RcxSetupDir          "./lvs_rcx" )
+)
+
+ruleSet( "CAP_1P0"
+     (DrcRules             "./drc/assura.drc" )
+     (DrcInclude           "./drc/DRC.rsf" )
+     (LvsExtractRules      "./lvs_rcx/extract.rul" )
+     (LvsSwitchesFile      "./lvs_rcx/switches_LVSRCX_CAP1p0" )
+     (LvsCompareRules      "./lvs_rcx/compare.rul" )
+     (LvsBindingFile       "./lvs_rcx/bind.rul" )
+     (RcxSetupDir          "./lvs_rcx" )
+)
+

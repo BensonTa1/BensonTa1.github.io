@@ -1,0 +1,30 @@
+.lib typ
+.param
+*
++ ddw_rnhr_rf=0
++ drsh_rnhr_rf=0
++ dcox_rnhr_rf=0
+*
+.include './rnhr_rf_v2d3.mdl'
+* 
+.endl typ
+*
+.lib min
+.param
+*
++ ddw_rnhr_rf=-0.1
++ drsh_rnhr_rf=-0.25
++ dcox_rnhr_rf=-0.12
+.include './rnhr_rf_v2d3.mdl'
+*
+.endl min
+*
+.lib max
+.param
+*
++ ddw_rnhr_rf=0.1
++ drsh_rnhr_rf=0.25
++ dcox_rnhr_rf=0.12
+.include './rnhr_rf_v2d3.mdl'
+* 
+.endl max

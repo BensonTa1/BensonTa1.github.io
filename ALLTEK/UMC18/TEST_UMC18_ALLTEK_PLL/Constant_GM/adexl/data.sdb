@@ -1,0 +1,1627 @@
+<?xml version="1.0"?>
+<setupdb version="6">data
+	<active>Active Setup
+		<corners>
+			<corner enabled="0">_default</corner>
+			<corner enabled="1">C0
+				<models>
+					<model enabled="1">mm180_reg18_v124.lib.scs
+						<modeltest>All</modeltest>
+						<modelblock>Global</modelblock>
+						<modelfile>/home/IC/Desktop/virtuoso/Process/UMC18/Models/Spectre/mm180_reg18_v124.lib.scs</modelfile>
+						<modelsection>"tt" "ff" "ss" "snfp" "fnsp"</modelsection>
+					</model>
+					<model enabled="1">rnnpo_rf_v2d4.lib.scs
+						<modeltest>All</modeltest>
+						<modelblock>Global</modelblock>
+						<modelfile>/home/IC/Desktop/virtuoso/Process/UMC18/Models/Spectre/rnnpo_rf_v2d4.lib.scs</modelfile>
+						<modelsection>"typ" "min" "max"</modelsection>
+					</model>
+					<model enabled="0">mm180_res_v141.lib.scs
+						<modeltest>All</modeltest>
+						<modelblock>Global</modelblock>
+						<modelfile>/home/IC/Desktop/virtuoso/Process/UMC18/Models/Spectre/mm180_res_v141.lib.scs</modelfile>
+						<modelsection>"res_max" "res_typ" "res_min"</modelsection>
+					</model>
+					<model enabled="0">mm180_bjt_v121.lib.scs
+						<modeltest>All</modeltest>
+						<modelblock>Global</modelblock>
+						<modelfile>/home/IC/Desktop/virtuoso/Process/UMC18/Models/Spectre/mm180_bjt_v121.lib.scs</modelfile>
+						<modelsection></modelsection>
+					</model>
+				</models>
+			</corner>
+		</corners>
+		<extensions>
+			<extension>Parasitics
+				<callback>_parSetupDBExtensionCB</callback>
+				<iconvalue></iconvalue>
+				<icontype></icontype>
+			</extension>
+		</extensions>
+		<currentmode>Single Run, Sweeps and Corners</currentmode>
+		<overwritehistory>0</overwritehistory>
+		<tests>
+			<test enabled="1">TEST_UMC18_ALLTEK_PLL:DIVIDER_2_3:1
+				<tool>ADE</tool>
+				<tooloptions>
+					<option>cell
+						<value>Constant_GM</value>
+					</option>
+					<option>lib
+						<value>TEST_UMC18_ALLTEK_PLL</value>
+					</option>
+					<option>sim
+						<value>spectre</value>
+					</option>
+					<option>view
+						<value>config</value>
+					</option>
+					<option>path
+						<value>$AXL_SETUPDB_DIR/test_states</value>
+					</option>
+					<option>state
+						<value>TEST_UMC18_ALLTEK_PLL:DIVIDER_2_3:1_active</value>
+					</option>
+				</tooloptions>
+				<origoptions>
+					<option>cell
+						<value>DIVIDER_2_3</value>
+					</option>
+					<option>lib
+						<value>TEST_UMC18_ALLTEK_PLL</value>
+					</option>
+					<option>sim
+						<value>spectre</value>
+					</option>
+					<option>view
+						<value>schematic</value>
+					</option>
+					<option>path
+						<value>$AXL_SETUPDB_DIR/test_states</value>
+					</option>
+					<option>state
+						<value>tmpstate.306246424</value>
+					</option>
+				</origoptions>
+			</test>
+		</tests>
+		<vars>
+			<var>VS
+				<value>{Exclusion List}1.8{Exclusion List}{Center/Span%}Auto:1.8:3:20{Center/Span%}</value>
+				<dependentTests>
+					<dependentTest enabled="1">TEST_UMC18_ALLTEK_PLL:DIVIDER_2_3:1</dependentTest>
+				</dependentTests>
+			</var>
+			<var>temperature
+				<value>{Exclusion List}30{Exclusion List}{From/To}Auto:-25:5:125{From/To}</value>
+			</var>
+		</vars>
+		<overwritehistoryname>Interactive.0</overwritehistoryname>
+		<plottingoptions>
+			<plottingoption>plottingmode
+				<value>Replace</value>
+			</plottingoption>
+			<plottingoption>plottype
+				<value>None</value>
+			</plottingoption>
+			<plottingoption>usewaveformtemplate
+				<value>no</value>
+			</plottingoption>
+			<plottingoption>useMaestroPlottingTemplate
+				<value>yes</value>
+			</plottingoption>
+			<plottingoption>waveformtemplate
+				<value></value>
+			</plottingoption>
+			<plottingoption>allplottingtemplates
+				<value></value>
+			</plottingoption>
+			<plottingoption>defaultplottingtemplate
+				<value></value>
+			</plottingoption>
+		</plottingoptions>
+	</active>
+	<history>History
+		<historyentry assemblerOrExplorer="adexl" roOrView="view">Interactive.8
+			<checkpoint>
+				<corners>
+					<corner enabled="0">_default</corner>
+					<corner enabled="1">C0
+						<models>
+							<model enabled="1">mm180_reg18_v124.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/UMC18/Models/Spectre/mm180_reg18_v124.lib.scs</modelfile>
+								<modelsection>"tt" "ff" "ss" "snfp" "fnsp"</modelsection>
+							</model>
+							<model enabled="0">rnnpo_rf_v2d4.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/UMC18/Models/Spectre/rnnpo_rf_v2d4.lib.scs</modelfile>
+								<modelsection>"typ" "min" "max"</modelsection>
+							</model>
+							<model enabled="0">mm180_res_v141.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/UMC18/Models/Spectre/mm180_res_v141.lib.scs</modelfile>
+								<modelsection>"res_max" "res_typ" "res_min"</modelsection>
+							</model>
+							<model enabled="0">mm180_bjt_v121.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/UMC18/Models/Spectre/mm180_bjt_v121.lib.scs</modelfile>
+								<modelsection></modelsection>
+							</model>
+						</models>
+					</corner>
+				</corners>
+				<extensions>
+					<extension>Parasitics
+						<callback>_parSetupDBExtensionCB</callback>
+						<iconvalue></iconvalue>
+						<icontype></icontype>
+					</extension>
+				</extensions>
+				<currentmode>Single Run, Sweeps and Corners</currentmode>
+				<overwritehistory>0</overwritehistory>
+				<tests>
+					<test enabled="1">TEST_UMC18_ALLTEK_PLL:DIVIDER_2_3:1
+						<tool>ADE</tool>
+						<tooloptions>
+							<option>cell
+								<value>DIVIDER_2_3</value>
+							</option>
+							<option>lib
+								<value>TEST_UMC18_ALLTEK_PLL</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>schematic</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>TEST_UMC18_ALLTEK_PLL:DIVIDER_2_3:1_tmpstate.306246424_Interactive.8</value>
+							</option>
+						</tooloptions>
+						<origoptions>
+							<option>cell
+								<value>DIVIDER_2_3</value>
+							</option>
+							<option>lib
+								<value>TEST_UMC18_ALLTEK_PLL</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>schematic</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>tmpstate.306246424</value>
+							</option>
+						</origoptions>
+					</test>
+				</tests>
+				<vars>
+					<var>FIN
+						<value>2G</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_UMC18_ALLTEK_PLL:DIVIDER_2_3:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>VS
+						<value>{Exclusion List}1.8{Exclusion List}{Center/Span%}Auto:1.8:3:20{Center/Span%}</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_UMC18_ALLTEK_PLL:DIVIDER_2_3:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>temperature
+						<value>{Exclusion List}30{Exclusion List}{From/To}Auto:-25:5:125{From/To}</value>
+					</var>
+				</vars>
+				<overwritehistoryname>Interactive.0</overwritehistoryname>
+				<plottingoptions>
+					<plottingoption>plottingmode
+						<value>Replace</value>
+					</plottingoption>
+					<plottingoption>plottype
+						<value>None</value>
+					</plottingoption>
+					<plottingoption>usewaveformtemplate
+						<value>no</value>
+					</plottingoption>
+					<plottingoption>useMaestroPlottingTemplate
+						<value>yes</value>
+					</plottingoption>
+					<plottingoption>waveformtemplate
+						<value></value>
+					</plottingoption>
+					<plottingoption>allplottingtemplates
+						<value></value>
+					</plottingoption>
+					<plottingoption>defaultplottingtemplate
+						<value></value>
+					</plottingoption>
+				</plottingoptions>
+				<sortVariableValues>0</sortVariableValues>
+			</checkpoint>
+			<timestamp>Mar 25 22:42:10 2026</timestamp>
+			<resultsname></resultsname>
+			<simresults>$AXL_SETUPDB_DIR/results/data/Interactive.8.rdb</simresults>
+			<rawdatadelstrategy>SaveAll
+				<simdatasavemode>All</simdatasavemode>
+			</rawdatadelstrategy>
+			<netlistdelstrategy>SaveAll</netlistdelstrategy>
+			<uselocalpsfdir>false</uselocalpsfdir>
+			<localpsfdir>/tmp/IC_IC_224210692</localpsfdir>
+			<psfdir></psfdir>
+			<simdir></simdir>
+			<gendatasheetplotsonsimulation>1</gendatasheetplotsonsimulation>
+			<runlog></runlog>
+			<runlogfile>$AXL_SETUPDB_DIR/results/data/Interactive.8.log</runlogfile>
+			<schematicpoint>
+				<vars>
+					<var>VS
+						<value>1.8</value>
+					</var>
+				</vars>
+			</schematicpoint>
+			<test>all</test>
+		</historyentry>
+		<historyentry assemblerOrExplorer="adexl" roOrView="view">Interactive.9
+			<checkpoint>
+				<corners>
+					<corner enabled="0">_default</corner>
+					<corner enabled="1">C0
+						<models>
+							<model enabled="1">mm180_reg18_v124.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/UMC18/Models/Spectre/mm180_reg18_v124.lib.scs</modelfile>
+								<modelsection>"tt" "ff" "ss" "snfp" "fnsp"</modelsection>
+							</model>
+							<model enabled="0">rnnpo_rf_v2d4.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/UMC18/Models/Spectre/rnnpo_rf_v2d4.lib.scs</modelfile>
+								<modelsection>"typ" "min" "max"</modelsection>
+							</model>
+							<model enabled="0">mm180_res_v141.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/UMC18/Models/Spectre/mm180_res_v141.lib.scs</modelfile>
+								<modelsection>"res_max" "res_typ" "res_min"</modelsection>
+							</model>
+							<model enabled="0">mm180_bjt_v121.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/UMC18/Models/Spectre/mm180_bjt_v121.lib.scs</modelfile>
+								<modelsection></modelsection>
+							</model>
+						</models>
+					</corner>
+				</corners>
+				<extensions>
+					<extension>Parasitics
+						<callback>_parSetupDBExtensionCB</callback>
+						<iconvalue></iconvalue>
+						<icontype></icontype>
+					</extension>
+				</extensions>
+				<currentmode>Single Run, Sweeps and Corners</currentmode>
+				<overwritehistory>0</overwritehistory>
+				<tests>
+					<test enabled="1">TEST_UMC18_ALLTEK_PLL:DIVIDER_2_3:1
+						<tool>ADE</tool>
+						<tooloptions>
+							<option>cell
+								<value>DIVIDER_2_3</value>
+							</option>
+							<option>lib
+								<value>TEST_UMC18_ALLTEK_PLL</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>schematic</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>TEST_UMC18_ALLTEK_PLL:DIVIDER_2_3:1_tmpstate.306246424_Interactive.9</value>
+							</option>
+						</tooloptions>
+						<origoptions>
+							<option>cell
+								<value>DIVIDER_2_3</value>
+							</option>
+							<option>lib
+								<value>TEST_UMC18_ALLTEK_PLL</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>schematic</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>tmpstate.306246424</value>
+							</option>
+						</origoptions>
+					</test>
+				</tests>
+				<vars>
+					<var>FIN
+						<value>2G</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_UMC18_ALLTEK_PLL:DIVIDER_2_3:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>VS
+						<value>{Exclusion List}1.8{Exclusion List}{Center/Span%}Auto:1.8:3:20{Center/Span%}</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_UMC18_ALLTEK_PLL:DIVIDER_2_3:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>temperature
+						<value>{Exclusion List}30{Exclusion List}{From/To}Auto:-25:5:125{From/To}</value>
+					</var>
+				</vars>
+				<overwritehistoryname>Interactive.0</overwritehistoryname>
+				<plottingoptions>
+					<plottingoption>plottingmode
+						<value>Replace</value>
+					</plottingoption>
+					<plottingoption>plottype
+						<value>None</value>
+					</plottingoption>
+					<plottingoption>usewaveformtemplate
+						<value>no</value>
+					</plottingoption>
+					<plottingoption>useMaestroPlottingTemplate
+						<value>yes</value>
+					</plottingoption>
+					<plottingoption>waveformtemplate
+						<value></value>
+					</plottingoption>
+					<plottingoption>allplottingtemplates
+						<value></value>
+					</plottingoption>
+					<plottingoption>defaultplottingtemplate
+						<value></value>
+					</plottingoption>
+				</plottingoptions>
+				<sortVariableValues>0</sortVariableValues>
+			</checkpoint>
+			<timestamp>Mar 25 22:50:56 2026</timestamp>
+			<resultsname></resultsname>
+			<simresults>$AXL_SETUPDB_DIR/results/data/Interactive.9.rdb</simresults>
+			<rawdatadelstrategy>SaveAll
+				<simdatasavemode>All</simdatasavemode>
+			</rawdatadelstrategy>
+			<netlistdelstrategy>SaveAll</netlistdelstrategy>
+			<uselocalpsfdir>false</uselocalpsfdir>
+			<localpsfdir>/tmp/IC_IC_225056420</localpsfdir>
+			<psfdir></psfdir>
+			<simdir></simdir>
+			<gendatasheetplotsonsimulation>1</gendatasheetplotsonsimulation>
+			<runlog></runlog>
+			<runlogfile>$AXL_SETUPDB_DIR/results/data/Interactive.9.log</runlogfile>
+			<schematicpoint>
+				<vars>
+					<var>VS
+						<value>1.8</value>
+					</var>
+				</vars>
+			</schematicpoint>
+			<test>all</test>
+		</historyentry>
+		<historyentry assemblerOrExplorer="adexl" roOrView="view">Interactive.10
+			<checkpoint>
+				<corners>
+					<corner enabled="0">_default</corner>
+					<corner enabled="1">C0
+						<models>
+							<model enabled="1">mm180_reg18_v124.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/UMC18/Models/Spectre/mm180_reg18_v124.lib.scs</modelfile>
+								<modelsection>"tt" "ff" "ss" "snfp" "fnsp"</modelsection>
+							</model>
+							<model enabled="0">rnnpo_rf_v2d4.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/UMC18/Models/Spectre/rnnpo_rf_v2d4.lib.scs</modelfile>
+								<modelsection>"typ" "min" "max"</modelsection>
+							</model>
+							<model enabled="0">mm180_res_v141.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/UMC18/Models/Spectre/mm180_res_v141.lib.scs</modelfile>
+								<modelsection>"res_max" "res_typ" "res_min"</modelsection>
+							</model>
+							<model enabled="0">mm180_bjt_v121.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/UMC18/Models/Spectre/mm180_bjt_v121.lib.scs</modelfile>
+								<modelsection></modelsection>
+							</model>
+						</models>
+					</corner>
+				</corners>
+				<extensions>
+					<extension>Parasitics
+						<callback>_parSetupDBExtensionCB</callback>
+						<iconvalue></iconvalue>
+						<icontype></icontype>
+					</extension>
+				</extensions>
+				<currentmode>Single Run, Sweeps and Corners</currentmode>
+				<overwritehistory>0</overwritehistory>
+				<tests>
+					<test enabled="1">TEST_UMC18_ALLTEK_PLL:DIVIDER_2_3:1
+						<tool>ADE</tool>
+						<tooloptions>
+							<option>cell
+								<value>DIVIDER_2_3</value>
+							</option>
+							<option>lib
+								<value>TEST_UMC18_ALLTEK_PLL</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>schematic</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>TEST_UMC18_ALLTEK_PLL:DIVIDER_2_3:1_tmpstate.306246424_Interactive.10</value>
+							</option>
+						</tooloptions>
+						<origoptions>
+							<option>cell
+								<value>DIVIDER_2_3</value>
+							</option>
+							<option>lib
+								<value>TEST_UMC18_ALLTEK_PLL</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>schematic</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>tmpstate.306246424</value>
+							</option>
+						</origoptions>
+					</test>
+				</tests>
+				<vars>
+					<var>FIN
+						<value>2G</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_UMC18_ALLTEK_PLL:DIVIDER_2_3:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>VS
+						<value>{Exclusion List}1.8{Exclusion List}{Center/Span%}Auto:1.8:3:20{Center/Span%}</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_UMC18_ALLTEK_PLL:DIVIDER_2_3:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>temperature
+						<value>{Exclusion List}30{Exclusion List}{From/To}Auto:-25:5:125{From/To}</value>
+					</var>
+				</vars>
+				<overwritehistoryname>Interactive.0</overwritehistoryname>
+				<plottingoptions>
+					<plottingoption>plottingmode
+						<value>Replace</value>
+					</plottingoption>
+					<plottingoption>plottype
+						<value>None</value>
+					</plottingoption>
+					<plottingoption>usewaveformtemplate
+						<value>no</value>
+					</plottingoption>
+					<plottingoption>useMaestroPlottingTemplate
+						<value>yes</value>
+					</plottingoption>
+					<plottingoption>waveformtemplate
+						<value></value>
+					</plottingoption>
+					<plottingoption>allplottingtemplates
+						<value></value>
+					</plottingoption>
+					<plottingoption>defaultplottingtemplate
+						<value></value>
+					</plottingoption>
+				</plottingoptions>
+				<sortVariableValues>0</sortVariableValues>
+			</checkpoint>
+			<timestamp>Mar 25 23:39:37 2026</timestamp>
+			<resultsname></resultsname>
+			<simresults>$AXL_SETUPDB_DIR/results/data/Interactive.10.rdb</simresults>
+			<rawdatadelstrategy>SaveAll
+				<simdatasavemode>All</simdatasavemode>
+			</rawdatadelstrategy>
+			<netlistdelstrategy>SaveAll</netlistdelstrategy>
+			<uselocalpsfdir>false</uselocalpsfdir>
+			<localpsfdir>/tmp/IC_IC_233937275</localpsfdir>
+			<psfdir></psfdir>
+			<simdir></simdir>
+			<gendatasheetplotsonsimulation>1</gendatasheetplotsonsimulation>
+			<runlog></runlog>
+			<runlogfile>$AXL_SETUPDB_DIR/results/data/Interactive.10.log</runlogfile>
+			<schematicpoint>
+				<vars>
+					<var>VS
+						<value>1.8</value>
+					</var>
+				</vars>
+			</schematicpoint>
+			<test>all</test>
+		</historyentry>
+		<historyentry assemblerOrExplorer="adexl" roOrView="view">Interactive.11
+			<checkpoint>
+				<corners>
+					<corner enabled="0">_default</corner>
+					<corner enabled="1">C0
+						<models>
+							<model enabled="1">mm180_reg18_v124.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/UMC18/Models/Spectre/mm180_reg18_v124.lib.scs</modelfile>
+								<modelsection>"tt" "ff" "ss" "snfp" "fnsp"</modelsection>
+							</model>
+							<model enabled="0">rnnpo_rf_v2d4.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/UMC18/Models/Spectre/rnnpo_rf_v2d4.lib.scs</modelfile>
+								<modelsection>"typ" "min" "max"</modelsection>
+							</model>
+							<model enabled="0">mm180_res_v141.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/UMC18/Models/Spectre/mm180_res_v141.lib.scs</modelfile>
+								<modelsection>"res_max" "res_typ" "res_min"</modelsection>
+							</model>
+							<model enabled="0">mm180_bjt_v121.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/UMC18/Models/Spectre/mm180_bjt_v121.lib.scs</modelfile>
+								<modelsection></modelsection>
+							</model>
+						</models>
+					</corner>
+				</corners>
+				<extensions>
+					<extension>Parasitics
+						<callback>_parSetupDBExtensionCB</callback>
+						<iconvalue></iconvalue>
+						<icontype></icontype>
+					</extension>
+				</extensions>
+				<currentmode>Single Run, Sweeps and Corners</currentmode>
+				<overwritehistory>0</overwritehistory>
+				<tests>
+					<test enabled="1">TEST_UMC18_ALLTEK_PLL:DIVIDER_2_3:1
+						<tool>ADE</tool>
+						<tooloptions>
+							<option>cell
+								<value>DIVIDER_2_3</value>
+							</option>
+							<option>lib
+								<value>TEST_UMC18_ALLTEK_PLL</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>schematic</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>TEST_UMC18_ALLTEK_PLL:DIVIDER_2_3:1_tmpstate.306246424_Interactive.11</value>
+							</option>
+						</tooloptions>
+						<origoptions>
+							<option>cell
+								<value>DIVIDER_2_3</value>
+							</option>
+							<option>lib
+								<value>TEST_UMC18_ALLTEK_PLL</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>schematic</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>tmpstate.306246424</value>
+							</option>
+						</origoptions>
+					</test>
+				</tests>
+				<vars>
+					<var>FIN
+						<value>2G</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_UMC18_ALLTEK_PLL:DIVIDER_2_3:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>VS
+						<value>{Exclusion List}1.8{Exclusion List}{Center/Span%}Auto:1.8:3:20{Center/Span%}</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_UMC18_ALLTEK_PLL:DIVIDER_2_3:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>temperature
+						<value>{Exclusion List}30{Exclusion List}{From/To}Auto:-25:5:125{From/To}</value>
+					</var>
+				</vars>
+				<overwritehistoryname>Interactive.0</overwritehistoryname>
+				<plottingoptions>
+					<plottingoption>plottingmode
+						<value>Replace</value>
+					</plottingoption>
+					<plottingoption>plottype
+						<value>None</value>
+					</plottingoption>
+					<plottingoption>usewaveformtemplate
+						<value>no</value>
+					</plottingoption>
+					<plottingoption>useMaestroPlottingTemplate
+						<value>yes</value>
+					</plottingoption>
+					<plottingoption>waveformtemplate
+						<value></value>
+					</plottingoption>
+					<plottingoption>allplottingtemplates
+						<value></value>
+					</plottingoption>
+					<plottingoption>defaultplottingtemplate
+						<value></value>
+					</plottingoption>
+				</plottingoptions>
+				<sortVariableValues>0</sortVariableValues>
+			</checkpoint>
+			<timestamp>Mar 25 23:55:02 2026</timestamp>
+			<resultsname></resultsname>
+			<simresults>$AXL_SETUPDB_DIR/results/data/Interactive.11.rdb</simresults>
+			<rawdatadelstrategy>SaveAll
+				<simdatasavemode>All</simdatasavemode>
+			</rawdatadelstrategy>
+			<netlistdelstrategy>SaveAll</netlistdelstrategy>
+			<uselocalpsfdir>false</uselocalpsfdir>
+			<localpsfdir>/tmp/IC_IC_235502505</localpsfdir>
+			<psfdir></psfdir>
+			<simdir></simdir>
+			<gendatasheetplotsonsimulation>1</gendatasheetplotsonsimulation>
+			<runlog></runlog>
+			<runlogfile>$AXL_SETUPDB_DIR/results/data/Interactive.11.log</runlogfile>
+			<schematicpoint>
+				<vars>
+					<var>VS
+						<value>1.8</value>
+					</var>
+				</vars>
+			</schematicpoint>
+			<test>all</test>
+		</historyentry>
+		<historyentry assemblerOrExplorer="adexl" roOrView="view">Interactive.12
+			<checkpoint>
+				<corners>
+					<corner enabled="0">_default</corner>
+					<corner enabled="1">C0
+						<models>
+							<model enabled="1">mm180_reg18_v124.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/UMC18/Models/Spectre/mm180_reg18_v124.lib.scs</modelfile>
+								<modelsection>"tt" "ff" "ss" "snfp" "fnsp"</modelsection>
+							</model>
+							<model enabled="0">rnnpo_rf_v2d4.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/UMC18/Models/Spectre/rnnpo_rf_v2d4.lib.scs</modelfile>
+								<modelsection>"typ" "min" "max"</modelsection>
+							</model>
+							<model enabled="0">mm180_res_v141.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/UMC18/Models/Spectre/mm180_res_v141.lib.scs</modelfile>
+								<modelsection>"res_max" "res_typ" "res_min"</modelsection>
+							</model>
+							<model enabled="0">mm180_bjt_v121.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/UMC18/Models/Spectre/mm180_bjt_v121.lib.scs</modelfile>
+								<modelsection></modelsection>
+							</model>
+						</models>
+					</corner>
+				</corners>
+				<extensions>
+					<extension>Parasitics
+						<callback>_parSetupDBExtensionCB</callback>
+						<iconvalue></iconvalue>
+						<icontype></icontype>
+					</extension>
+				</extensions>
+				<currentmode>Single Run, Sweeps and Corners</currentmode>
+				<overwritehistory>0</overwritehistory>
+				<tests>
+					<test enabled="1">TEST_UMC18_ALLTEK_PLL:DIVIDER_2_3:1
+						<tool>ADE</tool>
+						<tooloptions>
+							<option>cell
+								<value>DIVIDER_2_3</value>
+							</option>
+							<option>lib
+								<value>TEST_UMC18_ALLTEK_PLL</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>schematic</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>TEST_UMC18_ALLTEK_PLL:DIVIDER_2_3:1_tmpstate.306246424_Interactive.12</value>
+							</option>
+						</tooloptions>
+						<origoptions>
+							<option>cell
+								<value>DIVIDER_2_3</value>
+							</option>
+							<option>lib
+								<value>TEST_UMC18_ALLTEK_PLL</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>schematic</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>tmpstate.306246424</value>
+							</option>
+						</origoptions>
+					</test>
+				</tests>
+				<vars>
+					<var>FIN
+						<value>4.2G</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_UMC18_ALLTEK_PLL:DIVIDER_2_3:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>VS
+						<value>{Exclusion List}1.8{Exclusion List}{Center/Span%}Auto:1.8:3:20{Center/Span%}</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_UMC18_ALLTEK_PLL:DIVIDER_2_3:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>temperature
+						<value>{Exclusion List}30{Exclusion List}{From/To}Auto:-25:5:125{From/To}</value>
+					</var>
+				</vars>
+				<overwritehistoryname>Interactive.0</overwritehistoryname>
+				<plottingoptions>
+					<plottingoption>plottingmode
+						<value>Replace</value>
+					</plottingoption>
+					<plottingoption>plottype
+						<value>None</value>
+					</plottingoption>
+					<plottingoption>usewaveformtemplate
+						<value>no</value>
+					</plottingoption>
+					<plottingoption>useMaestroPlottingTemplate
+						<value>yes</value>
+					</plottingoption>
+					<plottingoption>waveformtemplate
+						<value></value>
+					</plottingoption>
+					<plottingoption>allplottingtemplates
+						<value></value>
+					</plottingoption>
+					<plottingoption>defaultplottingtemplate
+						<value></value>
+					</plottingoption>
+				</plottingoptions>
+				<sortVariableValues>0</sortVariableValues>
+			</checkpoint>
+			<timestamp>Mar 25 23:56:00 2026</timestamp>
+			<resultsname></resultsname>
+			<simresults>$AXL_SETUPDB_DIR/results/data/Interactive.12.rdb</simresults>
+			<rawdatadelstrategy>SaveAll
+				<simdatasavemode>All</simdatasavemode>
+			</rawdatadelstrategy>
+			<netlistdelstrategy>SaveAll</netlistdelstrategy>
+			<uselocalpsfdir>false</uselocalpsfdir>
+			<localpsfdir>/tmp/IC_IC_235600214</localpsfdir>
+			<psfdir></psfdir>
+			<simdir></simdir>
+			<gendatasheetplotsonsimulation>1</gendatasheetplotsonsimulation>
+			<runlog></runlog>
+			<runlogfile>$AXL_SETUPDB_DIR/results/data/Interactive.12.log</runlogfile>
+			<schematicpoint>
+				<vars>
+					<var>VS
+						<value>1.8</value>
+					</var>
+				</vars>
+			</schematicpoint>
+			<test>all</test>
+		</historyentry>
+		<historyentry assemblerOrExplorer="adexl" roOrView="view">Interactive.13
+			<checkpoint>
+				<corners>
+					<corner enabled="0">_default</corner>
+					<corner enabled="1">C0
+						<models>
+							<model enabled="1">mm180_reg18_v124.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/UMC18/Models/Spectre/mm180_reg18_v124.lib.scs</modelfile>
+								<modelsection>"tt" "ff" "ss" "snfp" "fnsp"</modelsection>
+							</model>
+							<model enabled="1">rnnpo_rf_v2d4.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/UMC18/Models/Spectre/rnnpo_rf_v2d4.lib.scs</modelfile>
+								<modelsection>"typ" "min" "max"</modelsection>
+							</model>
+							<model enabled="0">mm180_res_v141.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/UMC18/Models/Spectre/mm180_res_v141.lib.scs</modelfile>
+								<modelsection>"res_max" "res_typ" "res_min"</modelsection>
+							</model>
+							<model enabled="0">mm180_bjt_v121.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/UMC18/Models/Spectre/mm180_bjt_v121.lib.scs</modelfile>
+								<modelsection></modelsection>
+							</model>
+						</models>
+					</corner>
+				</corners>
+				<extensions>
+					<extension>Parasitics
+						<callback>_parSetupDBExtensionCB</callback>
+						<iconvalue></iconvalue>
+						<icontype></icontype>
+					</extension>
+				</extensions>
+				<currentmode>Single Run, Sweeps and Corners</currentmode>
+				<overwritehistory>0</overwritehistory>
+				<tests>
+					<test enabled="1">TEST_UMC18_ALLTEK_PLL:DIVIDER_2_3:1
+						<tool>ADE</tool>
+						<tooloptions>
+							<option>cell
+								<value>Constant_GM</value>
+							</option>
+							<option>lib
+								<value>TEST_UMC18_ALLTEK_PLL</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>schematic</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>TEST_UMC18_ALLTEK_PLL:DIVIDER_2_3:1_tmpstate.306246424_Interactive.13</value>
+							</option>
+						</tooloptions>
+						<origoptions>
+							<option>cell
+								<value>DIVIDER_2_3</value>
+							</option>
+							<option>lib
+								<value>TEST_UMC18_ALLTEK_PLL</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>schematic</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>tmpstate.306246424</value>
+							</option>
+						</origoptions>
+					</test>
+				</tests>
+				<vars>
+					<var>VS
+						<value>{Exclusion List}1.8{Exclusion List}{Center/Span%}Auto:1.8:3:20{Center/Span%}</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_UMC18_ALLTEK_PLL:DIVIDER_2_3:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>temperature
+						<value>{Exclusion List}30{Exclusion List}{From/To}Auto:-25:5:125{From/To}</value>
+					</var>
+				</vars>
+				<overwritehistoryname>Interactive.0</overwritehistoryname>
+				<plottingoptions>
+					<plottingoption>plottingmode
+						<value>Replace</value>
+					</plottingoption>
+					<plottingoption>plottype
+						<value>None</value>
+					</plottingoption>
+					<plottingoption>usewaveformtemplate
+						<value>no</value>
+					</plottingoption>
+					<plottingoption>useMaestroPlottingTemplate
+						<value>yes</value>
+					</plottingoption>
+					<plottingoption>waveformtemplate
+						<value></value>
+					</plottingoption>
+					<plottingoption>allplottingtemplates
+						<value></value>
+					</plottingoption>
+					<plottingoption>defaultplottingtemplate
+						<value></value>
+					</plottingoption>
+				</plottingoptions>
+				<sortVariableValues>0</sortVariableValues>
+			</checkpoint>
+			<timestamp>Mar 26 01:08:12 2026</timestamp>
+			<resultsname>/home/IC/Desktop/virtuoso/TEST_UMC18_ALLTEK_PLL/Constant_GM/adexl/results/data/Interactive.13.rdb</resultsname>
+			<simresults>$AXL_SETUPDB_DIR/results/data/Interactive.13.rdb</simresults>
+			<rawdatadelstrategy>SaveAll
+				<simdatasavemode>All</simdatasavemode>
+			</rawdatadelstrategy>
+			<netlistdelstrategy>SaveAll</netlistdelstrategy>
+			<uselocalpsfdir>false</uselocalpsfdir>
+			<localpsfdir>/tmp/IC_IC_010812310</localpsfdir>
+			<psfdir>/home/IC/simulation/TEST_UMC18_ALLTEK_PLL/Constant_GM/adexl/results/data/Interactive.13</psfdir>
+			<simdir>$AXL_PROJECT_DIR/TEST_UMC18_ALLTEK_PLL/Constant_GM/adexl/results/data/Interactive.13</simdir>
+			<gendatasheetplotsonsimulation>1</gendatasheetplotsonsimulation>
+			<runlog>/home/IC/Desktop/virtuoso/TEST_UMC18_ALLTEK_PLL/Constant_GM/adexl/results/data/Interactive.13.log</runlog>
+			<runlogfile>$AXL_SETUPDB_DIR/results/data/Interactive.13.log</runlogfile>
+			<schematicpoint>
+				<vars>
+					<var>VS
+						<value>1.8</value>
+					</var>
+				</vars>
+			</schematicpoint>
+			<test>all</test>
+		</historyentry>
+		<historyentry assemblerOrExplorer="adexl" roOrView="view">Interactive.14
+			<checkpoint>
+				<corners>
+					<corner enabled="0">_default</corner>
+					<corner enabled="1">C0
+						<models>
+							<model enabled="1">mm180_reg18_v124.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/UMC18/Models/Spectre/mm180_reg18_v124.lib.scs</modelfile>
+								<modelsection>"tt" "ff" "ss" "snfp" "fnsp"</modelsection>
+							</model>
+							<model enabled="1">rnnpo_rf_v2d4.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/UMC18/Models/Spectre/rnnpo_rf_v2d4.lib.scs</modelfile>
+								<modelsection>"typ" "min" "max"</modelsection>
+							</model>
+							<model enabled="0">mm180_res_v141.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/UMC18/Models/Spectre/mm180_res_v141.lib.scs</modelfile>
+								<modelsection>"res_max" "res_typ" "res_min"</modelsection>
+							</model>
+							<model enabled="0">mm180_bjt_v121.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/UMC18/Models/Spectre/mm180_bjt_v121.lib.scs</modelfile>
+								<modelsection></modelsection>
+							</model>
+						</models>
+					</corner>
+				</corners>
+				<extensions>
+					<extension>Parasitics
+						<callback>_parSetupDBExtensionCB</callback>
+						<iconvalue></iconvalue>
+						<icontype></icontype>
+					</extension>
+				</extensions>
+				<currentmode>Single Run, Sweeps and Corners</currentmode>
+				<overwritehistory>0</overwritehistory>
+				<tests>
+					<test enabled="1">TEST_UMC18_ALLTEK_PLL:DIVIDER_2_3:1
+						<tool>ADE</tool>
+						<tooloptions>
+							<option>cell
+								<value>Constant_GM</value>
+							</option>
+							<option>lib
+								<value>TEST_UMC18_ALLTEK_PLL</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>schematic</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>TEST_UMC18_ALLTEK_PLL:DIVIDER_2_3:1_tmpstate.306246424_Interactive.14</value>
+							</option>
+						</tooloptions>
+						<origoptions>
+							<option>cell
+								<value>DIVIDER_2_3</value>
+							</option>
+							<option>lib
+								<value>TEST_UMC18_ALLTEK_PLL</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>schematic</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>tmpstate.306246424</value>
+							</option>
+						</origoptions>
+					</test>
+				</tests>
+				<vars>
+					<var>VS
+						<value>{Exclusion List}1.8{Exclusion List}{Center/Span%}Auto:1.8:3:20{Center/Span%}</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_UMC18_ALLTEK_PLL:DIVIDER_2_3:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>temperature
+						<value>{Exclusion List}30{Exclusion List}{From/To}Auto:-25:5:125{From/To}</value>
+					</var>
+				</vars>
+				<overwritehistoryname>Interactive.0</overwritehistoryname>
+				<plottingoptions>
+					<plottingoption>plottingmode
+						<value>Replace</value>
+					</plottingoption>
+					<plottingoption>plottype
+						<value>None</value>
+					</plottingoption>
+					<plottingoption>usewaveformtemplate
+						<value>no</value>
+					</plottingoption>
+					<plottingoption>useMaestroPlottingTemplate
+						<value>yes</value>
+					</plottingoption>
+					<plottingoption>waveformtemplate
+						<value></value>
+					</plottingoption>
+					<plottingoption>allplottingtemplates
+						<value></value>
+					</plottingoption>
+					<plottingoption>defaultplottingtemplate
+						<value></value>
+					</plottingoption>
+				</plottingoptions>
+				<sortVariableValues>0</sortVariableValues>
+			</checkpoint>
+			<timestamp>Mar 26 01:13:15 2026</timestamp>
+			<resultsname>/home/IC/Desktop/virtuoso/TEST_UMC18_ALLTEK_PLL/Constant_GM/adexl/results/data/Interactive.14.rdb</resultsname>
+			<simresults>$AXL_SETUPDB_DIR/results/data/Interactive.14.rdb</simresults>
+			<rawdatadelstrategy>SaveAll
+				<simdatasavemode>All</simdatasavemode>
+			</rawdatadelstrategy>
+			<netlistdelstrategy>SaveAll</netlistdelstrategy>
+			<uselocalpsfdir>false</uselocalpsfdir>
+			<localpsfdir>/tmp/IC_IC_011315603</localpsfdir>
+			<psfdir>/home/IC/simulation/TEST_UMC18_ALLTEK_PLL/Constant_GM/adexl/results/data/Interactive.14</psfdir>
+			<simdir>$AXL_PROJECT_DIR/TEST_UMC18_ALLTEK_PLL/Constant_GM/adexl/results/data/Interactive.14</simdir>
+			<gendatasheetplotsonsimulation>1</gendatasheetplotsonsimulation>
+			<runlog>/home/IC/Desktop/virtuoso/TEST_UMC18_ALLTEK_PLL/Constant_GM/adexl/results/data/Interactive.14.log</runlog>
+			<runlogfile>$AXL_SETUPDB_DIR/results/data/Interactive.14.log</runlogfile>
+			<schematicpoint>
+				<vars>
+					<var>VS
+						<value>1.8</value>
+					</var>
+				</vars>
+			</schematicpoint>
+			<test>all</test>
+		</historyentry>
+		<historyentry assemblerOrExplorer="adexl" roOrView="view">Interactive.15
+			<checkpoint>
+				<corners>
+					<corner enabled="0">_default</corner>
+					<corner enabled="1">C0
+						<models>
+							<model enabled="1">mm180_reg18_v124.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/UMC18/Models/Spectre/mm180_reg18_v124.lib.scs</modelfile>
+								<modelsection>"tt" "ff" "ss" "snfp" "fnsp"</modelsection>
+							</model>
+							<model enabled="1">rnnpo_rf_v2d4.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/UMC18/Models/Spectre/rnnpo_rf_v2d4.lib.scs</modelfile>
+								<modelsection>"typ" "min" "max"</modelsection>
+							</model>
+							<model enabled="0">mm180_res_v141.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/UMC18/Models/Spectre/mm180_res_v141.lib.scs</modelfile>
+								<modelsection>"res_max" "res_typ" "res_min"</modelsection>
+							</model>
+							<model enabled="0">mm180_bjt_v121.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/UMC18/Models/Spectre/mm180_bjt_v121.lib.scs</modelfile>
+								<modelsection></modelsection>
+							</model>
+						</models>
+					</corner>
+				</corners>
+				<extensions>
+					<extension>Parasitics
+						<callback>_parSetupDBExtensionCB</callback>
+						<iconvalue></iconvalue>
+						<icontype></icontype>
+					</extension>
+				</extensions>
+				<currentmode>Single Run, Sweeps and Corners</currentmode>
+				<overwritehistory>0</overwritehistory>
+				<tests>
+					<test enabled="1">TEST_UMC18_ALLTEK_PLL:DIVIDER_2_3:1
+						<tool>ADE</tool>
+						<tooloptions>
+							<option>cell
+								<value>Constant_GM</value>
+							</option>
+							<option>lib
+								<value>TEST_UMC18_ALLTEK_PLL</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>schematic</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>TEST_UMC18_ALLTEK_PLL:DIVIDER_2_3:1_tmpstate.306246424_Interactive.15</value>
+							</option>
+						</tooloptions>
+						<origoptions>
+							<option>cell
+								<value>DIVIDER_2_3</value>
+							</option>
+							<option>lib
+								<value>TEST_UMC18_ALLTEK_PLL</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>schematic</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>tmpstate.306246424</value>
+							</option>
+						</origoptions>
+					</test>
+				</tests>
+				<vars>
+					<var>VS
+						<value>{Exclusion List}1.8{Exclusion List}{Center/Span%}Auto:1.8:3:20{Center/Span%}</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_UMC18_ALLTEK_PLL:DIVIDER_2_3:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>temperature
+						<value>{Exclusion List}30{Exclusion List}{From/To}Auto:-25:5:125{From/To}</value>
+					</var>
+				</vars>
+				<overwritehistoryname>Interactive.0</overwritehistoryname>
+				<plottingoptions>
+					<plottingoption>plottingmode
+						<value>Replace</value>
+					</plottingoption>
+					<plottingoption>plottype
+						<value>None</value>
+					</plottingoption>
+					<plottingoption>usewaveformtemplate
+						<value>no</value>
+					</plottingoption>
+					<plottingoption>useMaestroPlottingTemplate
+						<value>yes</value>
+					</plottingoption>
+					<plottingoption>waveformtemplate
+						<value></value>
+					</plottingoption>
+					<plottingoption>allplottingtemplates
+						<value></value>
+					</plottingoption>
+					<plottingoption>defaultplottingtemplate
+						<value></value>
+					</plottingoption>
+				</plottingoptions>
+				<sortVariableValues>0</sortVariableValues>
+			</checkpoint>
+			<timestamp>Mar 26 01:21:38 2026</timestamp>
+			<resultsname>/home/IC/Desktop/virtuoso/TEST_UMC18_ALLTEK_PLL/Constant_GM/adexl/results/data/Interactive.15.rdb</resultsname>
+			<simresults>$AXL_SETUPDB_DIR/results/data/Interactive.15.rdb</simresults>
+			<rawdatadelstrategy>SaveAll
+				<simdatasavemode>All</simdatasavemode>
+			</rawdatadelstrategy>
+			<netlistdelstrategy>SaveAll</netlistdelstrategy>
+			<uselocalpsfdir>false</uselocalpsfdir>
+			<localpsfdir>/tmp/IC_IC_012138906</localpsfdir>
+			<psfdir>/home/IC/simulation/TEST_UMC18_ALLTEK_PLL/Constant_GM/adexl/results/data/Interactive.15</psfdir>
+			<simdir>$AXL_PROJECT_DIR/TEST_UMC18_ALLTEK_PLL/Constant_GM/adexl/results/data/Interactive.15</simdir>
+			<gendatasheetplotsonsimulation>1</gendatasheetplotsonsimulation>
+			<runlog>/home/IC/Desktop/virtuoso/TEST_UMC18_ALLTEK_PLL/Constant_GM/adexl/results/data/Interactive.15.log</runlog>
+			<runlogfile>$AXL_SETUPDB_DIR/results/data/Interactive.15.log</runlogfile>
+			<schematicpoint>
+				<vars>
+					<var>VS
+						<value>1.8</value>
+					</var>
+				</vars>
+			</schematicpoint>
+			<test>all</test>
+		</historyentry>
+		<historyentry assemblerOrExplorer="adexl" roOrView="view">Interactive.16
+			<checkpoint>
+				<corners>
+					<corner enabled="0">_default</corner>
+					<corner enabled="1">C0
+						<models>
+							<model enabled="1">mm180_reg18_v124.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/UMC18/Models/Spectre/mm180_reg18_v124.lib.scs</modelfile>
+								<modelsection>"tt" "ff" "ss" "snfp" "fnsp"</modelsection>
+							</model>
+							<model enabled="1">rnnpo_rf_v2d4.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/UMC18/Models/Spectre/rnnpo_rf_v2d4.lib.scs</modelfile>
+								<modelsection>"typ" "min" "max"</modelsection>
+							</model>
+							<model enabled="0">mm180_res_v141.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/UMC18/Models/Spectre/mm180_res_v141.lib.scs</modelfile>
+								<modelsection>"res_max" "res_typ" "res_min"</modelsection>
+							</model>
+							<model enabled="0">mm180_bjt_v121.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/UMC18/Models/Spectre/mm180_bjt_v121.lib.scs</modelfile>
+								<modelsection></modelsection>
+							</model>
+						</models>
+					</corner>
+				</corners>
+				<extensions>
+					<extension>Parasitics
+						<callback>_parSetupDBExtensionCB</callback>
+						<iconvalue></iconvalue>
+						<icontype></icontype>
+					</extension>
+				</extensions>
+				<currentmode>Single Run, Sweeps and Corners</currentmode>
+				<overwritehistory>0</overwritehistory>
+				<tests>
+					<test enabled="1">TEST_UMC18_ALLTEK_PLL:DIVIDER_2_3:1
+						<tool>ADE</tool>
+						<tooloptions>
+							<option>cell
+								<value>Constant_GM</value>
+							</option>
+							<option>lib
+								<value>TEST_UMC18_ALLTEK_PLL</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>schematic</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>TEST_UMC18_ALLTEK_PLL:DIVIDER_2_3:1_tmpstate.306246424_Interactive.16</value>
+							</option>
+						</tooloptions>
+						<origoptions>
+							<option>cell
+								<value>DIVIDER_2_3</value>
+							</option>
+							<option>lib
+								<value>TEST_UMC18_ALLTEK_PLL</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>schematic</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>tmpstate.306246424</value>
+							</option>
+						</origoptions>
+					</test>
+				</tests>
+				<vars>
+					<var>VS
+						<value>{Exclusion List}1.8{Exclusion List}{Center/Span%}Auto:1.8:3:20{Center/Span%}</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_UMC18_ALLTEK_PLL:DIVIDER_2_3:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>temperature
+						<value>{Exclusion List}30{Exclusion List}{From/To}Auto:-25:5:125{From/To}</value>
+					</var>
+				</vars>
+				<overwritehistoryname>Interactive.0</overwritehistoryname>
+				<plottingoptions>
+					<plottingoption>plottingmode
+						<value>Replace</value>
+					</plottingoption>
+					<plottingoption>plottype
+						<value>None</value>
+					</plottingoption>
+					<plottingoption>usewaveformtemplate
+						<value>no</value>
+					</plottingoption>
+					<plottingoption>useMaestroPlottingTemplate
+						<value>yes</value>
+					</plottingoption>
+					<plottingoption>waveformtemplate
+						<value></value>
+					</plottingoption>
+					<plottingoption>allplottingtemplates
+						<value></value>
+					</plottingoption>
+					<plottingoption>defaultplottingtemplate
+						<value></value>
+					</plottingoption>
+				</plottingoptions>
+				<sortVariableValues>0</sortVariableValues>
+			</checkpoint>
+			<timestamp>Mar 26 01:22:04 2026</timestamp>
+			<resultsname>/home/IC/Desktop/virtuoso/TEST_UMC18_ALLTEK_PLL/Constant_GM/adexl/results/data/Interactive.16.rdb</resultsname>
+			<simresults>$AXL_SETUPDB_DIR/results/data/Interactive.16.rdb</simresults>
+			<rawdatadelstrategy>SaveAll
+				<simdatasavemode>All</simdatasavemode>
+			</rawdatadelstrategy>
+			<netlistdelstrategy>SaveAll</netlistdelstrategy>
+			<uselocalpsfdir>false</uselocalpsfdir>
+			<localpsfdir>/tmp/IC_IC_012204171</localpsfdir>
+			<psfdir>/home/IC/simulation/TEST_UMC18_ALLTEK_PLL/Constant_GM/adexl/results/data/Interactive.16</psfdir>
+			<simdir>$AXL_PROJECT_DIR/TEST_UMC18_ALLTEK_PLL/Constant_GM/adexl/results/data/Interactive.16</simdir>
+			<gendatasheetplotsonsimulation>1</gendatasheetplotsonsimulation>
+			<runlog>/home/IC/Desktop/virtuoso/TEST_UMC18_ALLTEK_PLL/Constant_GM/adexl/results/data/Interactive.16.log</runlog>
+			<runlogfile>$AXL_SETUPDB_DIR/results/data/Interactive.16.log</runlogfile>
+			<schematicpoint>
+				<vars>
+					<var>VS
+						<value>1.8</value>
+					</var>
+				</vars>
+			</schematicpoint>
+			<test>all</test>
+		</historyentry>
+		<historyentry assemblerOrExplorer="adexl" roOrView="view">Interactive.17
+			<checkpoint>
+				<corners>
+					<corner enabled="0">_default</corner>
+					<corner enabled="1">C0
+						<models>
+							<model enabled="1">mm180_reg18_v124.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/UMC18/Models/Spectre/mm180_reg18_v124.lib.scs</modelfile>
+								<modelsection>"tt" "ff" "ss" "snfp" "fnsp"</modelsection>
+							</model>
+							<model enabled="1">rnnpo_rf_v2d4.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/UMC18/Models/Spectre/rnnpo_rf_v2d4.lib.scs</modelfile>
+								<modelsection>"typ" "min" "max"</modelsection>
+							</model>
+							<model enabled="0">mm180_res_v141.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/UMC18/Models/Spectre/mm180_res_v141.lib.scs</modelfile>
+								<modelsection>"res_max" "res_typ" "res_min"</modelsection>
+							</model>
+							<model enabled="0">mm180_bjt_v121.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/UMC18/Models/Spectre/mm180_bjt_v121.lib.scs</modelfile>
+								<modelsection></modelsection>
+							</model>
+						</models>
+					</corner>
+				</corners>
+				<extensions>
+					<extension>Parasitics
+						<callback>_parSetupDBExtensionCB</callback>
+						<iconvalue></iconvalue>
+						<icontype></icontype>
+					</extension>
+				</extensions>
+				<currentmode>Single Run, Sweeps and Corners</currentmode>
+				<overwritehistory>0</overwritehistory>
+				<tests>
+					<test enabled="1">TEST_UMC18_ALLTEK_PLL:DIVIDER_2_3:1
+						<tool>ADE</tool>
+						<tooloptions>
+							<option>cell
+								<value>Constant_GM</value>
+							</option>
+							<option>lib
+								<value>TEST_UMC18_ALLTEK_PLL</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>config</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>TEST_UMC18_ALLTEK_PLL:DIVIDER_2_3:1_tmpstate.306246424_Interactive.17</value>
+							</option>
+						</tooloptions>
+						<origoptions>
+							<option>cell
+								<value>DIVIDER_2_3</value>
+							</option>
+							<option>lib
+								<value>TEST_UMC18_ALLTEK_PLL</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>schematic</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>tmpstate.306246424</value>
+							</option>
+						</origoptions>
+					</test>
+				</tests>
+				<vars>
+					<var>VS
+						<value>{Exclusion List}1.8{Exclusion List}{Center/Span%}Auto:1.8:3:20{Center/Span%}</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_UMC18_ALLTEK_PLL:DIVIDER_2_3:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>temperature
+						<value>{Exclusion List}30{Exclusion List}{From/To}Auto:-25:5:125{From/To}</value>
+					</var>
+				</vars>
+				<overwritehistoryname>Interactive.0</overwritehistoryname>
+				<plottingoptions>
+					<plottingoption>plottingmode
+						<value>Replace</value>
+					</plottingoption>
+					<plottingoption>plottype
+						<value>None</value>
+					</plottingoption>
+					<plottingoption>usewaveformtemplate
+						<value>no</value>
+					</plottingoption>
+					<plottingoption>useMaestroPlottingTemplate
+						<value>yes</value>
+					</plottingoption>
+					<plottingoption>waveformtemplate
+						<value></value>
+					</plottingoption>
+					<plottingoption>allplottingtemplates
+						<value></value>
+					</plottingoption>
+					<plottingoption>defaultplottingtemplate
+						<value></value>
+					</plottingoption>
+				</plottingoptions>
+				<sortVariableValues>0</sortVariableValues>
+			</checkpoint>
+			<timestamp>Mar 30 23:01:11 2026</timestamp>
+			<resultsname>/home/IC/Desktop/virtuoso/TEST_UMC18_ALLTEK_PLL/Constant_GM/adexl/results/data/Interactive.17.rdb</resultsname>
+			<simresults>$AXL_SETUPDB_DIR/results/data/Interactive.17.rdb</simresults>
+			<rawdatadelstrategy>SaveAll
+				<simdatasavemode>All</simdatasavemode>
+			</rawdatadelstrategy>
+			<netlistdelstrategy>SaveAll</netlistdelstrategy>
+			<uselocalpsfdir>false</uselocalpsfdir>
+			<localpsfdir>/tmp/IC_IC_230111884</localpsfdir>
+			<psfdir>/home/IC/simulation/TEST_UMC18_ALLTEK_PLL/Constant_GM/adexl/results/data/Interactive.17</psfdir>
+			<simdir>$AXL_PROJECT_DIR/TEST_UMC18_ALLTEK_PLL/Constant_GM/adexl/results/data/Interactive.17</simdir>
+			<gendatasheetplotsonsimulation>1</gendatasheetplotsonsimulation>
+			<runlog>/home/IC/Desktop/virtuoso/TEST_UMC18_ALLTEK_PLL/Constant_GM/adexl/results/data/Interactive.17.log</runlog>
+			<runlogfile>$AXL_SETUPDB_DIR/results/data/Interactive.17.log</runlogfile>
+			<schematicpoint>
+				<vars>
+					<var>VS
+						<value>1.8</value>
+					</var>
+				</vars>
+			</schematicpoint>
+			<test>all</test>
+		</historyentry>
+	</history>
+</setupdb>

@@ -1,0 +1,486 @@
+********************************************************************************
+* Property of UMC
+* Unauthorized reproduction, modification and/or distribution are strictly
+* prohibited.
+* This product is protected under copyright law and trade secret law.
+* This model card may not be sent in any form outside of UMC without
+* the written consent of the UMC ATD Modeling Division.
+********************************************************************************
+* Process:      0.11um Logic and Mixed-Mode 1P8M Metal Metal Capacitor Al Advanced Enhancement Process
+* Device Type:  n-ch and p-ch MOSFET
+* Description:  2.5V
+* Model:        BSIM3 3.24 (HSPICE Level = 49)
+* Simulator:    HSPICE
+* Model features:
+*     Global model:  Yes
+*     Igate model:  No
+*     Flicker Noise: Yes
+*     LOD model: Yes
+*     RF model: No
+*     Well proximity effect: No
+********************************************************************************								
+* Revision history:																	
+* <Revision 1>																	
+* Version : 0.2 p1																	
+* Date    : 2011 / 03 / 07																	
+* Author  : YZ Wang   (NMOS)	
+*           Laney Fan (PMOS)																
+* Remark  : 1.Original released. 	
+*
+* <Revision 2>																	
+* Version : 0.3 p1																	
+* Date    : 2011 / 08 / 31																	
+* Author  : YZ Wang 	          																
+* Remark  : 1.Revised the wmin from 0.16um to 0.35um and target values.
+*
+* <Revision 3>																	
+* Version : 0.4_p1																	
+* Date    : 2012/05/14																	
+* Author  : Ho Cheng Hu
+* Remark  : Add bpw NMOS model card
+*
+*  <Revision 4>																	
+*  Version : 0.4_p2																	
+*  Date  : 2014/10/31																	
+*  Author  : YZ Wang
+*  Remark  : 1.Revised the target values of nominal dimension device in the document
+*              to align ones in EDR table.
+*
+*  <Revision 5>																	
+*  Version : 0.5_p1																	
+*  Date  : 2016/09/04																	
+*  Author  : YZ Wang
+*  Remark  : 1.Revised model to improve noise performance with low bias range.
+*            2.Modified IOFF corner window simulation issue.
+*            3.Added noise corner model.
+*            4.Fixed asymmetric issue for TAT parameters.
+********************************************************************************
+* Application ranges:
+* Geometry range(After 90% shrink):
+*
+* For Vcc = 2.5V n-ch and bpw n-ch MOSFET:
+*
+*    0.234um < =  LDES < =  45um
+*     0.35um < =  WDES < =  90um
+*
+* For Vcc = 2.5V p-ch MOSFET:
+*
+*    0.234um < =  LDES < =  45um
+*     0.35um < =  WDES < =  90um
+*
+* Adopt multi-finger structures if WDES > 9um.
+*    0.318um < =  SA,SB
+*
+* Note: SAREF  =  SBREF  =  2.2um is the reference dimension of the STI-stress (LOD) effect.
+*
+* Voltage range:
+*
+* For n-ch MOSFET:
+*    0V < =  VGS < =  2.5V(*1.1)
+*    0V < =  VDS < =  2.5V(*1.1)
+* -2.5V < =  VBS < =    0V
+*
+* For p-ch MOSFET:
+*    0V > =  VGS > = -2.5V(*1.1)
+*    0V > =  VDS > = -2.5V(*1.1)
+*  2.5V > =  VBS > =     0V
+* Temperature range:-50c ~ 125c ; nominal temperature   =   25c
+***************************** Start of Model Card ******************************
+.subckt n_25_l110ae d g s b  
+.param scale_m=0.9 mf=1
+.param w=10u l=10u
+.param dtemp=0
+.param nf=1
+.param sa='2.2e-006/scale_m'
+.param sb='2.2e-006/scale_m'
+.param sd=0
+.param nf_odd='nf-2*int(nf/2)' nf_even='1-nf_odd'
+.param a_unit='sd*w'      p_unit='2*(sd+w)'  
+.param a_sa_edge='sa*w'   p_sa_edge='2*(sa+w)'
+.param a_sb_edge='sb*w'   p_sb_edge='2*(sb+w)'
+.param ad='(nf_odd*(a_unit*((nf+1)/2-1)+a_sb_edge) + nf_even*(a_unit*nf/2))/nf'                        
+.param as='(nf_odd*(a_unit*((nf+1)/2-1)+a_sa_edge) + nf_even*(a_unit*(nf/2-1)+a_sa_edge+a_sb_edge))/nf'
+.param pd='(nf_odd*(p_unit*((nf+1)/2-1)+p_sb_edge) + nf_even*(p_unit*nf/2))/nf'                        
+.param ps='(nf_odd*(p_unit*((nf+1)/2-1)+p_sa_edge) + nf_even*(p_unit*(nf/2-1)+p_sa_edge+p_sb_edge))/nf'
+********************************************************************************
+m1 d g s b  n_25_l110ae_main w=w l=l ad=ad as=as pd=pd ps=ps dtemp=dtemp sa=sa sb=sb m=1
+***************noise corner*****************************************************
+.param noik0=5.500e+000
+.param noia00=5.000e+000
+.param noid0=1.100e+000
+.param noij0=1.200e+000
+.param noim='max(log(noia00),log(noik0)-noid0*log(pwr(w*mf*l*scale_m*scale_m*1e12,0.5)))'
+.param noid='noid0*dnoi_n_25_l110ae*noi_sigma_25_l110ae/3'
+.param noij='noij0'
+********************************************************************************
+.model   n_25_l110ae_main   nmos
+***** Flag Parameter ***
++level    = 49                                        version   = 3.24                                      binunit   = 2                                         
++mobmod   = 1                                         capmod    = 3                                         nqsmod    = 0                                         
++noimod   = 2                                         stimod    = 1                                         
+***** Geometry Range Parameter ***                     
++lmin     = 2.34e-7                                   lmax      = 4.5e-5                                    wmin      = 3.5e-7                                    
++wmax     = 9e-5                                      
+***** Process Parameter ***                            
++tox      = '5.4e-9+dtox_n_25_l110ae'                 xj        = 1.07e-7                                   nch       = 3.472875e17                               
+***** dW and dL Parameter ***                          
++wint     = 3.5765e-08                                wl        = -3.39718e-14                              wln       = 0.991221                                  
++ww       = -1.065215e-14                             wwn       = 0.918202                                  wwl       = '6.676405e-21+dwwl_n_25_l110ae'           
++lint     = 5.617647e-8                               ll        = -9.3e-15                                  lln       = 0.996075                                  
++lw       = -3e-14                                    lwn       = 0.836858                                  lwl       = -7.737104e-22                             
++llc      = -3.811294e-15                             lwc       = 8.815656e-14                              lwlc      = 7.8509e-21                                
++wlc      = -7.42099e-15                              wwc       = 9.101659e-17                              wwlc      = -1.03129e-20                              
++dwg      = -4.39044e-9                               dwb       = -6.38e-10                                 xl        = '1.3e-8+dxl_n_25_l110ae+1.2e-8'         
++xw       = '1e-9+dxw_n_25_l110ae'                    
+***** Vth Related  Parameter ***                       
++vth0     = '4.8900e-01+dvth0_n_25_l110ae'            pvth0     = '-8.02e-15+dpvth0_n_25_l110ae'            k1        = 0.549809                                  
++pk1      = -1.221696e-14                             k2        = -2.14972e-2                               lk2       = -8.51e-9                                  
++pk2      = 2.980466e-15                              k3        = '6.9318860e-02+dk3_n_25_l110ae'           k3b       = -0.3                                      
++wk3b     = 1.2e-7                                    w0        = 1e-9                                      nlx       = '9.7600e-008+dnlx_n_25_l110ae'            
++wnlx     = 0                                         pnlx      = 1.271476e-20                              dvt0      = 26.633549                                 
++dvt1     = 1.089                                     dvt2      = 0                                         dvt0w     = 0.900275                                  
++dvt1w    = 1.28983e6                                 dvt2w     = -6.25e-3                                  ngate     = 6.2e20                                    
++wk3      = -1.5e-7                                   
+***** Mobility Related Parameter ***                   
++u0       = '2.56861e-02+du0_n_25_l110ae'             pu0       = -1.805e-16                                ua        = -1.23e-9                                  
++lua      = -5.4612e-17                               wua       = 3.323752e-17                              pua       = -2.10862e-24                              
++ub       = 2.12e-18                                  lub       = 5.245644e-26                              wub       = -2.947308e-27                             
++pub      = -3.942225e-32                             uc        = 5.758717e-11                              luc       = -2.174618e-18                             
++puc      = -4.766636e-24                             vsat      = '8.8636490e+04+dvsat_n_25_l110ae'         lvsat     = -1.285915e-3                              
++pvsat    = '-1.5585e-09+dpvsat_n_25_l110ae'          a0        = 1.577212                                  la0       = -4.578093e-7                              
++pa0      = 5.55776e-14                               ags       = '3.82400e-01+dags_n_25_l110ae'            wags      = '-4.95e-9+dwags_n_25_l110ae'              
++pags     = 2.750618e-14                              b0        = '3.8910629e-07+db0_n_25_l110ae'           wb0       = '-7.653187e-14+dwb0_n_25_l110ae'          
++b1       = 1.485675e-6                               keta      = -0.033453                                 lketa     = 4.9248e-9                                 
++pketa    = 1.103949e-15                              a1        = -2.05875e-2                               a2        = 0.99                                      
++rdsw     = '5.994e+02+drdsw_n_25_l110ae'             lrdsw     = 2.447427e-5                               prwb      = -0.073793                                 
++lprwb    = 3.977211e-8                               pprwb     = -6.302685e-15                             prwg      = 1.45817e-2                                
++wr       = 1                                         lwr       = 1.193356e-8                               wvsat     = '0+dwvsat_n_25_l110ae'                    
++prdsw    = '0+dprdsw_n_25_l110ae'                    
+***** Subthreshold Related Parameter ***               
++voff     = -0.109789                                 pvoff     = 1.070443e-15                              nfactor   = 0.75                                      
++eta0     = '4.222e-02+deta0_n_25_l110ae'             peta0     = -6.00e-17                                 etab      = -0.0119                                   
++petab    = 3.9375e-16                                dsub      = 0.28                                      cit       = 0                                         
++cdsc     = 2e-4                                      cdscb     = 1.6e-4                                    cdscd     = 1e-4                                      
+***** Output Resistance Related Parameter ***          
++pclm     = 1.34064                                   pdiblc1   = 4.63145e-2                                ppdiblc1  = 1.389435e-14                              
++pdiblc2  = 6.530388e-4                               pdiblcb   = 0.1184                                    drout     = 0.56                                      
++pscbe1   = 5.883e8                                   pscbe2    = 1.35e-6                                   pvag      = 0                                         
++ppvag    = -4.003292e-15                             delta     = 1.0e-3                                    alpha0    = 6.38982e-8                                
++alpha1   = 0.178646                                  beta0     = 14.250298                                 
+***** Flicker Noise Model Parameter ***                
++noia     = '2.2387211e+20*exp(noid*noim)'            noib      = '1.8197009e+04*exp(noid*noim/noij)'       noic      = '3.6000000e-13*exp(noid*noim/noij/noij)'                              
++em       = 4.1000000e+07                             ef        = 0.91                                      
+***** Capacitance Parameter ***                        
++xpart    = 1                                         cgso      = '1.25e-11+dcgso_n_25_l110ae'              cgdo      = '1.25e-11+dcgdo_n_25_l110ae'              
++cgbo     = 0                                         ckappa    = 0.743242                                  clc       = 1e-7                                      
++cle      = 0.6                                       dlc       = 4.30281e-8                                dwc       = -4.202453e-9                              
++vfbcv    = -1                                        noff      = 1.643                                     lnoff     = 3.9e-7                                    
++ijth     = 0.1                                       voffcv    = -8.54318e-2                               lvoffcv   = -1.58655e-8                               
++pvoffcv  = 3.553426e-15                              acde      = 0.4                                       moin      = 5.67                                      
++cgsl     = '2.7e-10+dcgsl_n_25_l110ae'               cgdl      = '2.7e-10+dcgdl_n_25_l110ae'               
+***** Souce/Drain Junction Diode Model Parameter ***   
++tlev     = 1                                         tlevc     = 1                                         calcacm   = 1                                         
++acm      = 12                                        hdif      = 2.2e-7                                    rsh       = 8.5                                       
++cj       = '7.8122e-4+dcj_n_25_l110ae'               mj        = 0.27981                                   mjsw      = 0.1087                                    
++cjsw     = '1.1247e-10+dcjsw_n_25_l110ae'            cjswg     = '2.155e-10+dcjswg_n_25_l110ae'            mjswg     = 0.53071                                   
++js       = 1.198e-7                                  jsw       = 2.4256e-13                                pbsw      = 0.91068                                   
++pb       = 0.61343                                   pbswg     = 0.84049                                   
++jtsswd   = '1e-9+djtsswd_n_25_l110ae'                jtssws    = '1e-9+djtssws_n_25_l110ae'
++jtsswgd  = '1e-7+djtsswgd_n_25_l110ae'               jtsswgs   = '1e-7+djtsswgs_n_25_l110ae'
++njtssw   = 60                                        njtsswg   = 60                                        
++xtsswd   = 0.02                                      xtssws    = 0.02               
++xtsswgd  = 0.02                                      xtsswgs   = 0.02
+***** Temperature Coeffient ***                        
++tnom     = 25                                        ute       = -1.058606                                 wute      = 5.13e-8                                   
++kt1      = -0.29348                                  kt1l      = 1.2096e-8                                 kt2       = -0.04276                                  
++lkt2     = 4.2e-9                                    ua1       = 2.576422e-9                               lua1      = -3.640008e-17                             
++pua1     = -5.781491e-23                             ub1       = -2.790047e-18                             lub1      = 8.913486e-26                              
++wub1     = 8.009705e-26                              pub1      = 9.720049e-32                              uc1       = -1.300537e-11                             
++at       = 2.59545e4                                 prt       = 0.951562                                  nj        = 1.0338                                    
++xti      = 3                                         tpb       = 1.3743e-3                                 tpbsw     = 3.0712e-3                                 
++tpbswg   = 2.34e-3                                   tcj       = 8.6537e-4                                 tcjsw     = 6.6436e-4                                 
++tcjswg   = 1.3946e-3                                 
+***** Stress Effect Related Parameter ***              
++saref    = '2.2e-6/scale_m'                          sbref     = '2.2e-6/scale_m'                              wlod      = 0                                         
++ku0      = -1.1e-7                                   kvsat     = 0                                         kvth0     = 4.25e-9                                   
++tku0     = 0                                         llodku0   = 1.5                                       wlodku0   = 1                                         
++llodvth  = 1                                         wlodvth   = 1                                         lku0      = 1.05e-8                                   
++wku0     = 0                                         pku0      = 0                                         lkvth0    = -6e-8                                     
++wkvth0   = 0                                         pkvth0    = 0                                         stk2      = 0                                         
++lodk2    = 1                                         steta0    = -1e-9                                     lodeta0   = 1                                         
+.ends
+*
+*
+*
+.subckt p_25_l110ae d g s b 
+.param scale_m=0.9 mf=1
+.param w=10u l=10u
+.param dtemp=0
+.param nf=1
+.param sa='2.2e-006/scale_m'
+.param sb='2.2e-006/scale_m'
+.param sd=0
+.param nf_odd='nf-2*int(nf/2)' nf_even='1-nf_odd'
+.param a_unit='sd*w'      p_unit='2*(sd+w)'  
+.param a_sa_edge='sa*w'   p_sa_edge='2*(sa+w)'
+.param a_sb_edge='sb*w'   p_sb_edge='2*(sb+w)'
+.param ad='(nf_odd*(a_unit*((nf+1)/2-1)+a_sb_edge) + nf_even*(a_unit*nf/2))/nf'                        
+.param as='(nf_odd*(a_unit*((nf+1)/2-1)+a_sa_edge) + nf_even*(a_unit*(nf/2-1)+a_sa_edge+a_sb_edge))/nf'
+.param pd='(nf_odd*(p_unit*((nf+1)/2-1)+p_sb_edge) + nf_even*(p_unit*nf/2))/nf'                        
+.param ps='(nf_odd*(p_unit*((nf+1)/2-1)+p_sa_edge) + nf_even*(p_unit*(nf/2-1)+p_sa_edge+p_sb_edge))/nf'
+********************************************************************************
+m1 d g s b p_25_l110ae_main w=w l=l ad=ad as=as pd=pd ps=ps dtemp=dtemp sa=sa sb=sb m=1
+***************noise corner*****************************************************
+.param noik0=2.000
+.param noia00=5.000
+.param noid0=2.000
+.param noij0=1.200
+.param noim='max(log(noia00),log(noik0)-noid0*log(pwr(w*mf*l*scale_m*scale_m*1e12,0.5)))'
+.param noid='noid0*dnoi_p_25_l110ae*noi_sigma_25_l110ae/3'
+.param noij='noij0'
+********************************************************************************
+.model  p_25_l110ae_main  pmos
++level    = 49                                        
+**************************************************************
+*               MODEL FLAG PARAMETERS
+**************************************************************
++version  = 3.24                                      lmin      = 2.34e-007                                 lmax      = 4.5e-005                                  
++wmin     = 3.5e-7                                    wmax      = 9e-005                                    binunit   = 2                                         
++mobmod   = 1                                         capmod    = 3                                         nqsmod    = 0                                         
++stimod   = 1                                         binflag   = 0                                         
+**************************************************************
+*               GENERAL MODEL PARAMETERS
+**************************************************************
++tnom     = 25                                        tox       = '5.5e-009+dtox_p_25_l110ae'               toxm      = '5.5e-009+dtox_p_25_l110ae'               
++wint     = 2.0266487e-009                            lint      = 1.290888e-008                             dlc       = 4.24195e-008                              
++dwc      = 4.380143e-009                             hdif      = 2.2e-007                                  ldif      = 7.9e-008                                  
++wmlt     = 1                                         lmlt      = 1                                         xl        = '1.5e-008+dxl_p_25_l110ae+1.2e-8'       
++xw       = 4e-009                                    xj        = 1.17e-007                                 ngate     = 1.483009e+020                             
++ll       = 0                                         wl        = 0                                         lln       = 1                                         
++wln      = 1                                         lw        = 0                                         ww        = 0                                         
++lwn      = 1                                         wwn       = 1                                         lwl       = 0                                         
++wwl      = -7.9761e-022                              llc       = 0                                         wlc       = 0                                         
++lwc      = -7.8e-017                                 wwc       = -7.621503e-016                            lwlc      = 7.3602e-22                                
++wwlc     = -1.636e-021                               xpart     = 1                                         
+**************************************************************
+*               EXPERT PARAMETERS
+**************************************************************
++vth0     = '-4.8094890e-001+dvth0_p_25_l110ae'       lvth0     = '6.7403290e-008+dlvth0_p_25_l110ae'       pvth0     = '-2.0406954e-015+dpvth0_p_25_l110ae'      
++vfb      = -1.10158                                  k1        = 0.723564                                  k2        = 0.0039248                                 
++lk2      = 3.56305e-009                              pk2       = 2.449075e-016                             k3        = -4.2064759e-001                           
++lk3      = -7.56208e-007                             wk3       = -7e-008                                   pk3       = 9.3180351e-015                            
++k3b      = 1.606935                                  pk3b      = 1.08208e-013                              nlx       = 1.995701e-007                             
++w0       = 7.7449e-008                               dvt0      = 17.0859                                   dvt1      = 1.255131                                  
++ldvt1    = 1.424086e-008                             wdvt1     = -9.277795e-008                            pdvt1     = 3.710069e-014                             
++dvt2     = -0.0914011                                wdvt2     = 5.177068e-008                             pdvt2     = -1.335372e-014                            
++dvt0w    = 10                                        dvt1w     = 23237320                                  dvt2w     = -0.446927                                 
++nch      = 3.6e+017                                  voff      = -0.10658                                  nfactor   = 1.046                                     
++lnfactor = 2.45e-8                                   cdsc      = 0.00359                                   cdscb     = 0.00135                                   
++cdscd    = 1e-020                                    cit       = 0                                         alpha0    = 4.4626e-006                               
++alpha1   = 12.87                                     beta0     = 27.824                                    eta0      = 2.4257571e-002                            
++peta0    = -1.8457125e-015                           etab      = -0.05                                     wetab     = -1e-008                                   
++petab    = 9.540074e-016                             dsub      = 0.51001                                   u0        = '1.0060525e-002+du0_p_25_l110ae'          
++wu0      = '-2.02127e-010+dwu0_p_25_l110ae'          ua        = 5.835e-010                                pua       = 9.1026e-023                               
++ub       = 9.6420192e-019                            wub       = 1.8483035e-025                            pub       = -6.201709e-032                            
++uc       = -2.347e-011                               wuc       = 3.332815e-017                             puc       = -2.044913e-024                            
++prwg     = 0.0041                                    prwb      = -0.293116                                 pprwb     = 1.261907e-014                             
++wr       = 1                                         rdsw      = '9.3718822e+002+drdsw_p_25_l110ae'        lrdsw     = -1.0425875e-004                           
++wrdsw    = 0.0001828195                              prdsw     = '-9.8429110e-012+dprdsw_p_25_l110ae'      a0        = 1.3133512e+000                            
++ags      = '2.4172449e-001+dags_p_25_l110ae'         lags      = '7.3764814e-008+dlags_p_25_l110ae'        wags      = '-1.6289204e-008+dwags_p_25_l110ae'       
++pags     = '-4.1274634e-014+dpags_p_25_l110ae'       a1        = 0                                         a2        = 1                                         
++b0       = -2.561011e-008                            lb0       = 2.036849e-014                             wb0       = 3.2722551e-015                            
++pb0      = -1.601488e-021                            b1        = 1.3224e-007                               vsat      = 141415.6                                  
++lvsat    = -3.7968377e-003                           wvsat     = -0.009964635                              pvsat     = -1.6083579e-009                           
++keta     = 2.2e-3                                    lketa     = -1.36e-8                                  wketa     = -5.177198e-10                             
++pketa    = 2.817337e-15                              delta     = 0.00343882                                ldelta    = 8.12812e-009                              
++dwg      = -6.172406e-009                            ldwg      = -3.930075e-015                            wdwg      = -3.39696e-015                             
++pdwg     = -9.504335e-022                            dwb       = 1.268947e-008                             pclm      = 2.149898                                  
++lpclm    = -1.151631e-007                            ppclm     = 3.76476e-014                              pdiblc1   = 0.091304                                  
++pdiblc2  = 0                                         lpdiblc2  = 1.2e-009                                  pdiblcb   = 0                                         
++drout    = 0.7088                                    pvag      = 5.42e-007                                 pscbe1    = 6.4807e+008                               
++pscbe2   = 8.3017e-006                               elm       = 5                                         wvth0     = '0.0000000e+000+dwvth0_p_25_l110ae'       
++weta0    = 3.58e-009                                 pu0       = -3.5405473e-017                           
+**************************************************************
+*               CAPACITANCE PARAMETERS
+**************************************************************
++cf       = 6.7752e-011                               ckappa    = 1.0548                                    pckappa   = 1.067985e-012                             
++acde     = 0.450207                                  moin      = 5.519018                                  vfbcv     = -1                                        
++noff     = 2.21                                      voffcv    = -0.03762                                  cgbo      = 0                                         
++cgso     = '9.3e-011+dcgso_p_25_l110ae'              cgdo      = '9.3e-011+dcgdo_p_25_l110ae'              cgdl      = '2.171e-010+dcgdl_p_25_l110ae'            
++cgsl     = '2.171e-010+dcgsl_p_25_l110ae'            
+**************************************************************
+*               TEMPERATURE PARAMETERS
+**************************************************************
++kt1      = -0.3327                                   wkt1      = 3.8e-009                                  pkt1      = -7.309176e-016                            
++kt1l     = 0                                         kt2       = -0.0423                                   wkt2      = 2e-008                                    
++pkt2     = 2e-015                                    ute       = -0.73269                                  wute      = -3.849126e-008                            
++pute     = 3.03978e-014                              ua1       = 4.1624e-009                               lua1      = -4.63e-016                                
++wua1     = -1e-016                                   pua1      = 4.051832e-022                             ub1       = -5.76671e-018                             
++lub1     = 1.646815e-025                             wub1      = 1.7496e-025                               pub1      = -4.342165e-031                            
++uc1      = -1e-010                                   wuc1      = -9.6e-017                                 puc1      = -3.187545e-023                            
++prt      = 810                                       pprt      = 4.473709e-012                             at        = 74900                                     
++pat      = -2.765036e-009                            
+**************************************************************
+*               NOISE PARAMETERS
+**************************************************************
++noia     = '2.361113e+020*exp(noid*noim)'            noib      = '5530.384*exp(noid*noim/noij)'            noic      = '3.610864e-011*exp(noid*noim/noij/noij)'                             
++em       = 21981610                                  ef        = 1.2                                       noimod    = 2                                         
+**************************************************************
+*               DIODE PARAMETERS
+**************************************************************
++rsh      = 7.67                                      js        = 2.0349e-007                               jsw       = 9.9321e-013                               
++cj       = '0.00096321+dcj_p_25_l110ae'              mj        = 0.33                                      cjsw      = '1.0525e-010+dcjsw_p_25_l110ae'           
++mjsw     = 0.13                                      cjswg     = '3.3746e-010+dcjswg_p_25_l110ae'          mjswg     = 0.45                                      
++pb       = 0.79                                      pbsw      = 0.78                                      pbswg     = 0.7                                       
++rd       = 0                                         rdc       = 0                                         rs        = 0                                         
++rsc      = 0                                         xti       = 3                                         tpb       = 0.0015                                    
++tpbsw    = 0.0005                                    tpbswg    = 0.00258                                   tcj       = 0.00072                                   
++tcjsw    = 0.0001                                    tcjswg    = 0.001416                                  acm       = 12                                        
++calcacm  = 1                                         nj        = 1.1027                                    ijth      = 0.0011355                                 
++jtssws   = 0                                         jtsswd    = 0                                         
++jtsswgd   = '1.9e-8+djtsswgd_p_25_l110ae'            jtsswgs   = '1.9e-8+djtsswgs_p_25_l110ae'
++njtssw   = 50                                        njtsswg   = 50                                       
+**************************************************************
+*               STRESS PARAMETERS
+**************************************************************
++saref    = '2.2e-6/scale_m'                          sbref     = '2.2e-6/scale_m'                          wlod      = 0                                         
++kvth0    = -1.44e-009                                lkvth0    = 0                                         wkvth0    = 0                                         
++pkvth0   = 0                                         llodvth   = 1                                         wlodvth   = 1                                         
++stk2     = 1.129e-009                                lodk2     = 1                                         lodeta0   = 1                                         
++ku0      = 1.02e-007                                 lku0      = 3.1e-008                                  wku0      = 0                                         
++pku0     = 0                                         llodku0   = 1.22                                      wlodku0   = 1                                         
++kvsat    = 0                                         steta0    = 0                                         tku0      = 0                                         
+.ends
+*
+*
+*
+*
+.subckt n_bpw_25_l110ae d g s b
+.param scale_m=0.9 mf=1
+.param w=10u l=10u
+.param dtemp=0
+.param nf=1
+.param sa='2.2e-006/scale_m'
+.param sb='2.2e-006/scale_m'
+.param sd=0
+.param nf_odd='nf-2*int(nf/2)' nf_even='1-nf_odd'
+.param a_unit='sd*w'      p_unit='2*(sd+w)'  
+.param a_sa_edge='sa*w'   p_sa_edge='2*(sa+w)'
+.param a_sb_edge='sb*w'   p_sb_edge='2*(sb+w)'
+.param ad='(nf_odd*(a_unit*((nf+1)/2-1)+a_sb_edge) + nf_even*(a_unit*nf/2))/nf'                        
+.param as='(nf_odd*(a_unit*((nf+1)/2-1)+a_sa_edge) + nf_even*(a_unit*(nf/2-1)+a_sa_edge+a_sb_edge))/nf'
+.param pd='(nf_odd*(p_unit*((nf+1)/2-1)+p_sb_edge) + nf_even*(p_unit*nf/2))/nf'                        
+.param ps='(nf_odd*(p_unit*((nf+1)/2-1)+p_sa_edge) + nf_even*(p_unit*(nf/2-1)+p_sa_edge+p_sb_edge))/nf'
+********************************************************************************
+m1 d g s b n_bpw_25_l110ae_main w=w l=l ad=ad as=as pd=pd ps=ps dtemp=dtemp sa=sa sb=sb m=1
+***************noise corner*****************************************************
+.param noik0=5.500e+000
+.param noia00=5.000e+000
+.param noid0=1.100e+000
+.param noij0=1.200e+000
+.param noim='max(log(noia00),log(noik0)-noid0*log(pwr(w*mf*l*scale_m*scale_m*1e12,0.5)))'
+.param noid='noid0*dnoi_n_bpw_25_l110ae*noi_sigma_25_l110ae/3'
+.param noij='noij0'
+********************************************************************************
+.model n_bpw_25_l110ae_main nmos
+***** Flag Parameter ***
++level    = 49                                        version   = 3.24                                      binunit   = 2                                         
++mobmod   = 1                                         capmod    = 3                                         nqsmod    = 0                                         
++noimod   = 2                                         stimod    = 1                                         
+***** Geometry Range Parameter ***                                                                                    
++lmin     = 2.34e-7                                   lmax      = 4.5e-5                                    wmin      = 3.5e-7                                    
++wmax     = 9e-5                                      
+***** Process Parameter ***                                                                                           
++tox      = '5.4e-9+dtox_n_bpw_25_l110ae'             xj        = 1.2e-7                                    nch       = 3.472875e17                               
+***** dW and dL Parameter ***                                                                                         
++wint     = 4.3907293e-08                             wl        = -2.217744e-14                             wln       = 0.991221                                  
++ww       = -2.117169e-14                             wwn       = 0.918202                                  wwl       = -6.341742e-22                             
++lint     = 5.317647e-8                               ll        = -8.7e-15                                  lln       = 0.996075                                  
++lw       = -1.251e-13                                lwn       = 0.836858                                  lwl       = 3.290838e-20                              
++llc      = -3.811294e-15                             lwc       = 8.815656e-14                              lwlc      = 7.8509e-21                                
++wlc      = -7.42099e-15                              wwc       = 9.101659e-17                              wwlc      = -1.03129e-20                              
++dwg      = -4.39044e-9                               dwb       = -6.38e-10                                 xl        = '1.3e-8+dxl_n_bpw_25_l110ae+1.2e-8'     
++xw       = '1e-9+dxw_n_bpw_25_l110ae'                
+***** Vth Related  Parameter ***                                                                                      
++vth0     = '4.833e-01+dvth0_n_bpw_25_l110ae'         pvth0     = '-1.705e-14+dpvth0_n_bpw_25_l110ae'       k1        = 0.599809                                  
++pk1      = 3.5e-15                                   k2        = -2.36692e-2                               lk2       = -1.2663e-8                                
++k3       = '6.4618296e-02+dk3_n_bpw_25_l110ae'       wk3       = -1.9345149e-007                           pk3       = -3.671209e-13                             
++k3b      = 0.91476                                   wk3b      = 4.8e-9                                    pk3b      = 7.714739e-14                              
++w0       = 1e-9                                      nlx       = '1.017e-07+dnlx_n_bpw_25_l110ae'          pnlx      = 6.140752e-21                              
++dvt0     = 23.633549                                 dvt1      = 1.029                                     dvt2      = 2.63935e-2                                
++pdvt2    = 3.944305e-31                              dvt0w     = 0.900275                                  dvt1w     = 4.682083e6                                
++dvt2w    = -0.2525                                   ngate     = 6.2e20                                    
+***** Mobility Related Parameter ***                                                                                  
++u0       = '2.4957814e-02+du0_n_bpw_25_l110ae'       lu0       = '1.4416057e-010+dlu0_n_bpw_25_l110ae'     wu0       = '-3.3415990e-011+dwu0_n_bpw_25_l110ae'    
++pu0      = '-1.4319287e-16+dpu0_n_bpw_25_l110ae'     ua        = -1.23e-9                                  lua       = -5.4612e-17                               
++wua      = 2.623752e-17                              pua       = 5.082165e-23                              ub        = 2.12e-18                                  
++lub      = 5.245644e-26                              wub       = -2.947308e-27                             pub       = -1.61881e-31                              
++uc       = 5.758717e-11                              luc       = -2.174618e-18                             puc       = -6.67329e-24                              
++vsat     = '7.3857988e+04+dvsat_n_bpw_25_l110ae'     lvsat     = 1.800281e-3                               wvsat     = 0                                         
++pvsat    = '-1.4164081e-09+dpvsat_n_bpw_25_l110ae'   a0        = 1.783773                                  la0       = -4.578093e-7                              
++pa0      = 5.55776e-14                               ags       = '3.8086050e-01+dags_n_bpw_25_l110ae'      lags      = 1.522962e-7                               
++wags     = '-5.4435224e-010+dwags_n_bpw_25_l110ae'   pags      = 2.750618e-14                              b0        = 3.9070869e-07                             
++wb0      = -7.653187e-14                             b1        = 1.485675e-6                               keta      = -0.033453                                 
++lketa    = 4.9248e-9                                 pketa     = 2.097503e-15                              a1        = 0                                         
++a2       = 0.99                                      rdsw      = '5.9943615e+02+drdsw_n_bpw_25_l110ae'     lrdsw     = 2.447427e-5                               
++prdsw    = 0                                         prwb      = -0.073793                                 lprwb     = 3.977211e-8                               
++pprwb    = -6.302685e-15                             prwg      = 1.45817e-2                                wr        = 1                                         
++lwr      = 1.193356e-8                               
+***** Subthreshold Related Parameter ***                                                                              
++voff     = -0.109789                                 nfactor   = 7.4814209e-001                            pnfactor  = -1.1398435e-015                           
++eta0     = '1.584e-01+deta0_n_bpw_25_l110ae'         peta0     = '1.77e-15+dpeta0_n_bpw_25_l110ae'         etab      = -0.186912                                 
++letab    = 3.229142e-8                               dsub      = 0.56                                      cit       = 0                                         
++cdsc     = 2e-4                                      cdscb     = 1.6e-4                                    cdscd     = 1e-4                                      
+***** Output Resistance Related Parameter ***                                                                         
++pclm     = 1.34064                                   ppclm     = 1.35e-13                                  pdiblc1   = 0                                         
++ppdiblc1 = 0                                         pdiblc2   = 6.530388e-4                               pdiblcb   = 0.1184                                    
++drout    = 0.56                                      pscbe1    = 5.883e8                                   pscbe2    = 1.35e-6                                   
++pvag     = 0                                         delta     = 1e-003                                    alpha0    = 6.38982e-8                                
++alpha1   = 0.178646                                  beta0     = 14.250298                                 
+***** Flicker Noise Model Parameter ***                                                                               
++noia     = '2.238721e20*exp(noid*noim)'              noib      = '1.819701e4*exp(noid*noim/noij)'          noic      = '3.6e-13*exp(noid*noim/noij/noij)'                                   
++em       = 4.1e7                                     ef        = 0.91                                      
+***** Capacitance Parameter ***                                                                                       
++xpart    = 1                                         cgso      = '1.25e-11+dcgso_n_bpw_25_l110ae'          cgdo      = '1.25e-11+dcgdo_n_bpw_25_l110ae'          
++cgbo     = 0                                         ckappa    = 0.743242                                  clc       = 1e-7                                      
++cle      = 0.6                                       dlc       = 4.30281e-8                                dwc       = -4.202453e-9                              
++vfbcv    = -1                                        noff      = 1.643                                     lnoff     = 3.9e-7                                    
++ijth     = 0.1                                       voffcv    = -8.54318e-2                               lvoffcv   = -1.58655e-8                               
++pvoffcv  = 3.553426e-15                              acde      = 0.4                                       moin      = 5.67                                      
++cgsl     = '2.7e-10+dcgsl_n_bpw_25_l110ae'           cgdl      = '2.7e-10+dcgdl_n_bpw_25_l110ae'           
+***** Souce/Drain Junction Diode Model Parameter ***                                                                  
++tlev     = 1                                         tlevc     = 1                                         calcacm   = 1                                         
++acm      = 12                                        hdif      = 2.2e-7                                    rsh       = 8.3                                       
++cj       = '7.8122e-4+dcj_n_bpw_25_l110ae'           mj        = 0.27981                                   mjsw      = 0.1087                                    
++cjsw     = '1.1247e-10+dcjsw_n_bpw_25_l110ae'        cjswg     = '2.155e-10+dcjswg_n_bpw_25_l110ae'        mjswg     = 0.53071                                   
++js       = 1.198e-7                                  jsw       = 2.4256e-13                                pbsw      = 0.91068                                   
++pb       = 0.61343                                   pbswg     = 0.84049                                   
+***** Temperature Coeffient ***                                                                                       
++tnom     = 25                                        ute       = -1.058606                                 wute      = 5.13e-8                                   
++kt1      = -0.29348                                  kt1l      = 1.2096e-8                                 kt2       = -0.04276                                  
++lkt2     = 4.2e-9                                    ua1       = 2.576422e-9                               lua1      = -3.640008e-17                             
++pua1     = -5.781491e-23                             ub1       = -2.790047e-18                             lub1      = 8.913486e-26                              
++wub1     = 8.009705e-26                              pub1      = 9.720049e-32                              uc1       = -1.300537e-11                             
++at       = 2.59545e4                                 prt       = 0.951562                                  nj        = 1.0338                                    
++xti      = 3                                         tpb       = 1.3743e-3                                 tpbsw     = 3.0712e-3                                 
++tpbswg   = 2.34e-3                                   tcj       = 8.6537e-4                                 tcjsw     = 6.6436e-4                                 
++tcjswg   = 1.3946e-3                                 
+***** Stress Effect Related Parameter ***                                                                             
++saref    = '2.2e-6/scale_m'                          sbref     = '2.2e-6/scale_m'                          wlod      = 0                                         
++ku0      = -1.1e-7                                   kvsat     = 0                                         kvth0     = 4.25e-9                                   
++tku0     = 0                                         llodku0   = 1.5                                       wlodku0   = 1                                         
++llodvth  = 1                                         wlodvth   = 1                                         lku0      = 1.05e-8                                   
++wku0     = 0                                         pku0      = 0                                         lkvth0    = -6e-8                                     
++wkvth0   = 0                                         pkvth0    = 0                                         stk2      = 0                                         
++lodk2    = 1                                         steta0    = -1e-9                                     lodeta0   = 1                                         
+***** Unknown Parameters ***                                                                                          
++jtsswd   = '1e-10+djtsswd_n_bpw_25_l110ae'           jtssws    = '1e-10+djtssws_n_bpw_25_l110ae' 
++jtsswgd  = '1e-8+djtsswgd_n_bpw_25_l110ae'           jtsswgs   = '1e-8+djtsswgs_n_bpw_25_l110ae'
++njtssw   = 60                                        njtsswg   = 60                                        
++xtsswd   = 0.4                                       xtssws    = 0.4 
++xtsswgd  = 0.4                                       xtsswgs   = 0.4
++lk3      = -1.38402e-7                               lk3b      = 4.281077e-7                               wnlx      = 5.360896e-14                              
++pdvt0    = -5.8e-13                                
+.ends
+
+

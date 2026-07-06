@@ -1,0 +1,31 @@
+simulator lang=spectre insensitive=yes
+library l110ae_l_sqsknw_vil_rf_v021_lib
+//
+section tt
+include "l110ae_l_sqsknw_vil_rf_v021.mdl.scs"
+parameters sqsknw_drs_1p6m0t1f=1
+parameters sqsknw_drs_sub_1p6m0t1f=1
+parameters sqsknw_dls_1p6m0t1f=1
+endsection tt
+//
+section ff
+include "l110ae_l_sqsknw_vil_rf_v021.mdl.scs"
+parameters sqsknw_drs_1p6m0t1f=1.15
+parameters sqsknw_drs_sub_1p6m0t1f=0.85
+parameters sqsknw_dls_1p6m0t1f=1.05
+endsection ff
+//
+section ss
+include "l110ae_l_sqsknw_vil_rf_v021.mdl.scs"
+parameters sqsknw_drs_1p6m0t1f=0.85
+parameters sqsknw_drs_sub_1p6m0t1f=1.15
+parameters sqsknw_dls_1p6m0t1f=0.95
+endsection ss
+//
+endlibrary l110ae_l_sqsknw_vil_rf_v021_lib
+
+
+
+
+
+

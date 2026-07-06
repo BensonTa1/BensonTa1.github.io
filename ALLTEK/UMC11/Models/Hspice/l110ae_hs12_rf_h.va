@@ -1,0 +1,441 @@
+`include "discipline.h"
+`include "constants.h"
+
+module rde_n_12_hsrf (Plus, Minus, Drain, Gate, Source, Body);
+    
+    inout Plus, Minus, Drain, Gate, Source, Body;
+    
+    electrical Plus, Minus, Drain, Gate, Source, Body;
+    
+    real TemperatureK, Rde;
+    real RdeL1, RdeL1VD1, RdeL1VD2, RdeL1VD3;
+    real RdeL2, RdeL2VD1, RdeL2VD2, RdeL2VD3;
+    real RdeL3, RdeL3VD1, RdeL3VD2, RdeL3VD3;
+    real RdeL4, RdeL4VD1, RdeL4VD2, RdeL4VD3;
+    
+    
+    real VDS, VGS;
+
+    parameter real k_Boltz  = 1.38066e-23;
+//    parameter real (*integer inherited_mfactor;*) m = 1;
+    parameter real mf = 1;
+    parameter real wf       = 3.6u;
+    parameter real lf       = 0.12u;
+    parameter real nf       = 16;
+    parameter real r        = 1M;
+
+    analog begin
+
+      TemperatureK = $temperature;
+
+      VDS = V(Drain, Source);
+      VGS = V(Gate,  Source);
+
+// The model is verified for VGS to 1.2V and VDS to 1.2V
+      if (VGS < 0)
+//        VGS=0;
+
+          begin
+            VDS = V(Source, Drain);
+            VGS = V(Gate,   Drain);
+          end
+
+      if (VGS > 1.2)
+        VGS=1.2;
+
+//      if (VDS < 0)
+//        VDS=0;
+
+      if (VDS > 1.2)
+        VDS=1.2;
+
+      // Model VGS Dependence for different VDS.
+      if (VGS < 0.5)
+        begin
+          RdeL4VD1=(0.739708333577762)*pow(VGS,4)+(-2.83892916750438)*pow(VGS,3)+(4.07422416771109)*pow(VGS,2)+(-2.63315533389319)*VGS+(0.685474000108604);
+          RdeL4VD2=(0.699708333550652)*pow(VGS,4)+(-2.65901250074534)*pow(VGS,3)+(3.77889916759664)*pow(VGS,2)+(-2.41939200049891)*VGS+(0.620244000096857);
+          RdeL4VD3=(1.11864285731885)*pow(VGS,4)+(-4.16367219111023)*pow(VGS,3)+(4.73078610068428)*pow(VGS,2)+(-2.39374554507885)*VGS+(0.521651402915235);
+
+          RdeL3VD1=(0.575041666859693)*pow(VGS,4)+(-2.18433750066138)*pow(VGS,3)+(3.11492333415768)*pow(VGS,2)+(-2.01400150044176)*VGS+(0.529294000085671);
+          RdeL3VD2=(0.748511904902333)*pow(VGS,4)+(-2.4478404171078)*pow(VGS,3)+(3.13221025052989)*pow(VGS,2)+(-1.88401710742918)*VGS+(0.464905612914401);
+          RdeL3VD3=(0.715988095295399)*pow(VGS,4)+(-2.45633214305952)*pow(VGS,3)+(3.13386333359373)*pow(VGS,2)+(-1.80604542871552)*VGS+(0.424027142885945);
+
+          RdeL2VD1=(0.550931547732233)*pow(VGS,4)+(-1.96109579204911)*pow(VGS,3)+(2.42573430876915)*pow(VGS,2)+(-1.38691202759763)*VGS+(0.348460842898932);
+          RdeL2VD2=(0.718098214407814)*pow(VGS,4)+(-2.33257633966586)*pow(VGS,3)+(2.42905775037233)*pow(VGS,2)+(-1.26304208672334)*VGS+(0.305778420035555);
+          RdeL2VD3=(0.653335119128706)*pow(VGS,4)+(-2.31206684552055)*pow(VGS,3)+(2.42429813361997)*pow(VGS,2)+(-1.14670203000802)*VGS+(0.240196937165998);
+
+          RdeL1VD1=(0.232100595312141)*pow(VGS,4)+(-0.886064226444359)*pow(VGS,3)+(1.27098758365001)*pow(VGS,2)+(-0.81939739540793)*VGS+(0.208258542890103);
+          RdeL1VD2=(3.83142857500108E-02)*pow(VGS,4)+(-0.174298095359741)*pow(VGS,3)+(0.29568100015059)*pow(VGS,2)+(-0.225516719127745)*VGS+(7.04327285868591E-02);
+          RdeL1VD3=(5.46708333616421E-02)*pow(VGS,4)+(-0.224496250096669)*pow(VGS,3)+(0.339669416786712)*pow(VGS,2)+(-0.228090900064084)*VGS+(6.18058000123812E-02);
+
+
+    end
+  else
+    begin
+          RdeL4VD1=(-1.51099199493369E-02)*pow(1/VGS,4)+(0.106779959713939)*pow(1/VGS,3)+(-0.244893939413816)*pow(1/VGS,2)+(0.265366899484704)*1/VGS+(-8.48209998362182E-02);
+          RdeL4VD2=(-4.37423997656817E-03)*pow(1/VGS,4)+(4.36261198676888E-02)*pow(1/VGS,3)+(-0.112458513062191)*pow(1/VGS,2)+(0.143787299761632)*1/VGS+(-5.01336665908992E-02);
+          RdeL4VD3=(7.33179427082921E-02)*pow(1/VGS,4)+(-0.389170627731129)*pow(1/VGS,3)+(0.756641331611788)*pow(1/VGS,2)+(-0.602921741344114)*1/VGS+(0.177790094757298);
+
+          RdeL3VD1=(2.71968000195534E-03)*pow(1/VGS,4)+(-3.00264001105467E-03)*pow(1/VGS,3)+(-5.41550664398241E-03)*pow(1/VGS,2)+(0.03947179998003)*1/VGS+(-0.012853333326977);
+          RdeL3VD2=(5.10475884626894E-02)*pow(1/VGS,4)+(-0.274369165100408)*pow(1/VGS,3)+(0.542081518742289)*pow(1/VGS,2)+(-0.436824227466015)*1/VGS+(0.133712285363004);
+          RdeL3VD3=(6.68489466015211E-02)*pow(1/VGS,4)+(-0.377861131312126)*pow(1/VGS,3)+(0.779986984312137)*pow(1/VGS,2)+(-0.667510548969468)*1/VGS+(0.210476635083066);
+
+          RdeL2VD1=(3.61506376402543E-02)*pow(1/VGS,4)+(-0.195630472724909)*pow(1/VGS,3)+(0.38978611647702)*pow(1/VGS,2)+(-0.306204604961641)*1/VGS+(0.090098323570339);
+          RdeL2VD2=(3.72162376421719E-02)*pow(1/VGS,4)+(-0.192340072735759)*pow(1/VGS,3)+(0.365241716499303)*pow(1/VGS,2)+(-0.280304204981278)*1/VGS+(8.14173235765959E-02);
+          RdeL2VD3=(4.65946970707839E-02)*pow(1/VGS,4)+(-0.251823590881451)*pow(1/VGS,3)+(0.500104692777355)*pow(1/VGS,2)+(-0.416733435461263)*1/VGS+(0.12977231756541);
+
+          RdeL1VD1=(2.4105394224233E-03)*pow(1/VGS,4)+(-1.13303982510055E-02)*pow(1/VGS,3)+(0.028348425928889)*pow(1/VGS,2)+(-2.77206813660718E-02)*1/VGS+(1.41772142658532E-02);
+          RdeL1VD2=(-6.94292569949168E-03)*pow(1/VGS,4)+(3.93134570593278E-02)*pow(1/VGS,3)+(-7.73184864955076E-02)*pow(1/VGS,2)+(6.84939455638295E-02)*1/VGS+(-1.89327904283707E-02);
+          RdeL1VD3=(-8.55988797795919E-03)*pow(1/VGS,4)+(5.19071638755503E-02)*pow(1/VGS,3)+(-0.112519959078316)*pow(1/VGS,2)+(0.107081749775821)*1/VGS+(-3.43501665954132E-02);
+
+    end
+
+      // Model VDS Dependence. Linear relationship is used.
+      if ( VDS <= 0.4 )
+        begin
+          RdeL1=RdeL1VD1+(0.4-VDS)*abs(RdeL1VD1-RdeL1VD2)/(0.8-0.4);
+          RdeL2=RdeL2VD1+(0.4-VDS)*abs(RdeL2VD1-RdeL2VD2)/(0.8-0.4);
+          RdeL3=RdeL3VD1+(0.4-VDS)*abs(RdeL3VD1-RdeL3VD2)/(0.8-0.4);
+          RdeL4=RdeL4VD1+(0.4-VDS)*abs(RdeL4VD1-RdeL4VD2)/(0.8-0.4);
+       end
+      else if ( VDS <= 0.8 )
+        begin
+          RdeL1=RdeL1VD2+(0.8-VDS)*abs(RdeL1VD1-RdeL1VD2)/(0.8-0.4);
+          RdeL2=RdeL2VD2+(0.8-VDS)*abs(RdeL2VD1-RdeL2VD2)/(0.8-0.4);
+          RdeL3=RdeL3VD2+(0.8-VDS)*abs(RdeL3VD1-RdeL3VD2)/(0.8-0.4);
+          RdeL4=RdeL4VD2+(0.8-VDS)*abs(RdeL4VD1-RdeL4VD2)/(0.8-0.4);
+       end
+      else
+        begin
+          RdeL1=RdeL1VD3+(1.2-VDS)*abs(RdeL1VD2-RdeL1VD3)/(1.2-0.8);
+          RdeL2=RdeL2VD3+(1.2-VDS)*abs(RdeL2VD2-RdeL2VD3)/(1.2-0.8);
+          RdeL3=RdeL3VD3+(1.2-VDS)*abs(RdeL3VD2-RdeL3VD3)/(1.2-0.8);
+          RdeL4=RdeL4VD3+(1.2-VDS)*abs(RdeL4VD2-RdeL4VD3)/(1.2-0.8);
+       end
+
+      //
+      // Initial Value For Rde
+      Rde=1M;
+
+      // Model Channel Length Dependence
+          if (lf - 0.116u <= 1e-20)      Rde=RdeL1;
+          else if (lf - 0.116u <= 0.027u)  Rde=(abs(0.143u-lf)*RdeL1+abs(lf-0.116u)*RdeL2)/(0.143u-0.116u);
+          else if (lf - 0.143u <= 0.081u)  Rde=(abs(0.224u-lf)*RdeL2+abs(lf-0.143u)*RdeL3)/(0.224u-0.143u);
+          else if (lf - 0.224u <= 0.108u)  Rde=(abs(0.332u-lf)*RdeL3+abs(lf-0.224u)*RdeL4)/(0.332u-0.224u);
+          else Rde=RdeL4+(lf-0.332u)*abs(RdeL4-RdeL3)/(0.332u-0.224u);
+
+      // Model Geometry Dependence
+      Rde=Rde;
+      Rde=Rde/nf;
+      Rde=Rde/wf;
+
+      // User Specified Rde Value.
+      if ( abs(1M - r) > 1 ) Rde = r;
+
+      // Check if the device is off.
+      if ( VGS <= 0 )
+        Rde = 1M;
+
+      // Output Results
+      I(Plus,Minus) <+ white_noise(4*k_Boltz*TemperatureK/Rde)/mf;
+
+    end
+    endmodule
+    
+    module rde_p_12_hsrf (Plus, Minus, Drain, Gate, Source, Body);
+    
+    inout Plus, Minus, Drain, Gate, Source, Body;
+    
+    electrical Plus, Minus, Drain, Gate, Source, Body;
+    
+    real TemperatureK, Rde;
+    real RdeL1, RdeL1VD1, RdeL1VD2, RdeL1VD3;
+    real RdeL2, RdeL2VD1, RdeL2VD2, RdeL2VD3;
+    real RdeL3, RdeL3VD1, RdeL3VD2, RdeL3VD3;
+    real RdeL4, RdeL4VD1, RdeL4VD2, RdeL4VD3;
+    real RdeL5, RdeL5VD1, RdeL5VD2, RdeL5VD3;
+    
+    real VDS, VGS;
+
+    parameter real k_Boltz  = 1.38066e-23;
+//    parameter real (*integer inherited_mfactor;*) m = 1;
+    parameter real mf = 1;
+    parameter real wf       = 3.6u;
+    parameter real lf       = 0.12u;
+    parameter real nf       = 16;
+    parameter real r        = 1M;
+
+    analog begin
+
+      TemperatureK = $temperature;
+
+      VDS = -V(Drain, Source);
+      VGS = -V(Gate,  Source);
+
+    // The model is verified for VGS to -1.2V and VDS to -1.2V
+      if (VGS < 0)
+//        VGS=0;
+
+          begin
+            VDS = -V(Source, Drain);
+            VGS = -V(Gate,   Drain);
+          end
+
+      if (VGS > 1.2)
+        VGS=1.2;
+
+//      if (VDS < 0)
+//        VDS=0;
+
+      if (VDS >1.2)
+        VDS=1.2;
+
+      // Model VGS Dependence for different VDS.
+      if (VGS < 0.5)
+        begin
+          RdeL5VD1=(0.69880952436352)*pow(VGS,4)+(-2.50738095424866)*pow(VGS,3)+(3.36758333562013)*pow(VGS,2)+(-2.00550040592842)*VGS+(0.50425928592717);
+          RdeL5VD2=(0.69880952436352)*pow(VGS,4)+(-2.50738095424866)*pow(VGS,3)+(3.36758333562013)*pow(VGS,2)+(-2.10887671551236)*VGS+(0.569325000240353);
+          RdeL5VD3=(0.69880952436352)*pow(VGS,4)+(-2.55752857333363)*pow(VGS,3)+(3.40125916897633)*pow(VGS,2)+(-2.27427881084667)*VGS+(0.683190000288423);
+
+          RdeL4VD1=(0.551190476630202)*pow(VGS,4)+(-1.96761904910161)*pow(VGS,3)+(2.61741666848202)*pow(VGS,2)+(-1.59547381047855)*VGS+(0.424985714467457);
+          RdeL4VD2=(0.551190476630202)*pow(VGS,4)+(-1.96761904910161)*pow(VGS,3)+(2.61741666848202)*pow(VGS,2)+(-1.65929276289769)*VGS+(0.467484285914203);
+          RdeL4VD3=(0.551190476630202)*pow(VGS,4)+(-1.96761904910161)*pow(VGS,3)+(2.61741666848202)*pow(VGS,2)+(-1.75502119152641)*VGS+(0.535482000228996);
+
+          RdeL3VD1=(0.177678571563178)*pow(VGS,4)+(-0.641934524263237)*pow(VGS,3)+(0.861250000555395)*pow(VGS,2)+(-0.517868166952832)*VGS+(0.135881142910488);
+          RdeL3VD2=(0.177678571563178)*pow(VGS,4)+(-0.641934524263237)*pow(VGS,3)+(0.861250000555395)*pow(VGS,2)+(-0.53372127410445)*VGS+(0.148620000058347);
+          RdeL3VD3=(0.177678571563178)*pow(VGS,4)+(-0.641934524263237)*pow(VGS,3)+(0.861250000555395)*pow(VGS,2)+(-0.565427488407684)*VGS+(0.168436000066126);
+
+          RdeL2VD1=(0.126904762006251)*pow(VGS,4)+(-0.459773809865948)*pow(VGS,3)+(0.618191667085557)*pow(VGS,2)+(-0.37776976212504)*VGS+(9.94771428990694E-02);
+          RdeL2VD2=(0.126904762006251)*pow(VGS,4)+(-0.459773809865948)*pow(VGS,3)+(0.618191667085557)*pow(VGS,2)+(-0.389102854988791)*VGS+(0.108430085759986);
+          RdeL2VD3=(0.123097619146063)*pow(VGS,4)+(-0.450578333668629)*pow(VGS,3)+(0.618191667085557)*pow(VGS,2)+(-0.404213645473793)*VGS+(0.118377800049893);
+
+          RdeL1VD1=(3.25595238371649E-02)*pow(VGS,4)+(-0.123672619140802)*pow(VGS,3)+(0.179358333447418)*pow(VGS,2)+(-0.121999523869516)*VGS+(3.76542857257041E-02);
+          RdeL1VD2=(3.25595238371649E-02)*pow(VGS,4)+(-0.123672619140802)*pow(VGS,3)+(0.179358333447418)*pow(VGS,2)+(-0.126879504824296)*VGS+(4.14197142982745E-02);
+          RdeL1VD3=(3.25595238371649E-02)*pow(VGS,4)+(-0.123672619140802)*pow(VGS,3)+(0.179358333447418)*pow(VGS,2)+(-0.135419471495162)*VGS+(4.66913142998731E-02);
+
+
+    end
+  else
+    begin
+          RdeL5VD1=(5.36571429302477E-02)*pow(1/VGS,4)+(-0.290151428983817)*pow(1/VGS,3)+(0.569956667510824)*pow(1/VGS,2)+(-0.441134815034341)*1/VGS+(0.14111490500427);
+          RdeL5VD2=(0.146598857352911000)*pow(1/VGS,4)+(-0.804776572613498)*pow(1/VGS,3)+(1.609168669092200)*pow(1/VGS,2)+(-1.3388528592726)*1/VGS+(0.426161905438014);
+          RdeL5VD3=(0.161629714498162000)*pow(1/VGS,4)+(-0.852269144055630)*pow(1/VGS,3)+(1.642878002453430)*pow(1/VGS,2)+(-1.30869571644008)*1/VGS+(0.405957143541105);
+
+          RdeL4VD1=(3.64868571866771E-02)*pow(1/VGS,4)+(-0.188720571675782)*pow(1/VGS,3)+(0.343751333839416)*pow(1/VGS,2)+(-0.217912857587264)*1/VGS+(5.68952382363317E-02);
+          RdeL4VD2=(8.58034286929422E-02)*pow(1/VGS,4)+(-0.472510286399740)*pow(1/VGS,3)+(0.947714001403094)*pow(1/VGS,2)+(-0.777221429803396)*1/VGS+(0.251614286105378);
+          RdeL4VD3=(5.53097143558623E-02)*pow(1/VGS,4)+(-0.283169143252901)*pow(1/VGS,3)+(0.525401334143557)*pow(1/VGS,2)+(-0.363465714997239)*1/VGS+(0.111723809749724);
+
+          RdeL3VD1=(5.74902857381247E-03)*pow(1/VGS,4)+(-2.42550857277587E-02)*pow(1/VGS,3)+(2.88325333609695E-02)*pow(1/VGS,2)+(1.04525714042524E-02)*1/VGS+(-1.06790476113103E-02);
+          RdeL3VD2=(7.59908572103840E-03)*pow(1/VGS,4)+(-3.57212571809706E-02)*pow(1/VGS,3)+(0.057851600078066000)*pow(1/VGS,2)+(-2.05922857828767E-02)*1/VGS+(1.76285716464648E-03);
+          RdeL3VD3=(5.32114287635063E-04)*pow(1/VGS,4)+(-5.86834286798267E-03)*pow(1/VGS,3)+(2.01221333555327E-02)*pow(1/VGS,2)+(-7.56971430521611E-03)*1/VGS+(4.68380953000364E-03);
+
+          RdeL2VD1=(3.83657143083292E-03)*pow(1/VGS,4)+(-1.61357142984826E-02)*pow(1/VGS,3)+(1.96990000261614E-02)*pow(1/VGS,2)+(4.87442854843433E-03)*1/VGS+(-5.24428570697859E-03);
+          RdeL2VD2=(-9.1062857550728E-04)*pow(1/VGS,4)+(1.146788573727580E-02)*pow(1/VGS,3)+(-3.59797333803526E-02)*pow(1/VGS,2)+(5.24034286126754E-02)*1/VGS+(-1.92609523940341E-02);
+          RdeL2VD3=(5.64548571896089E-03)*pow(1/VGS,4)+(-2.51024571692376E-02)*pow(1/VGS,3)+(4.13220667206844E-02)*pow(1/VGS,2)+(-0.019701285761732)*1/VGS+(6.60619049125781E-03);
+
+          RdeL1VD1=(1.40914285956178E-03)*pow(1/VGS,4)+(-7.7734285850754E-03)*pow(1/VGS,3)+(1.612700002793850E-02)*pow(1/VGS,2)+(-1.09341428816778E-02)*1/VGS+(5.07142857921853E-03);
+          RdeL1VD2=(2.97051429038608E-03)*pow(1/VGS,4)+(-0.01690354288349400)*pow(1/VGS,3)+(3.594560005393420E-02)*pow(1/VGS,2)+(-2.93997143330655E-02)*1/VGS+(0.011907142872173);
+          RdeL1VD3=(7.64022858294528E-03)*pow(1/VGS,4)+(-4.25406857792524E-02)*pow(1/VGS,3)+(8.64876001329867E-02)*pow(1/VGS,2)+(-7.11014286881984E-02)*1/VGS+(2.44342857513555E-02);
+
+    end
+
+      // Model VDS Dependence. Linear relationship is used.
+      if ( VDS <= 0.4 )
+        begin
+          RdeL1=RdeL1VD1+(0.4-VDS)*abs(RdeL1VD1-RdeL1VD2)/(0.8-0.4);
+          RdeL2=RdeL2VD1+(0.4-VDS)*abs(RdeL2VD1-RdeL2VD2)/(0.8-0.4);
+          RdeL3=RdeL3VD1+(0.4-VDS)*abs(RdeL3VD1-RdeL3VD2)/(0.8-0.4);
+          RdeL4=RdeL4VD1+(0.4-VDS)*abs(RdeL4VD1-RdeL4VD2)/(0.8-0.4);
+          RdeL5=RdeL5VD1+(0.4-VDS)*abs(RdeL5VD1-RdeL5VD2)/(0.8-0.4);
+       end
+      else if ( VDS <= 0.8 )
+        begin
+          RdeL1=RdeL1VD2+(0.8-VDS)*abs(RdeL1VD1-RdeL1VD2)/(0.8-0.4);
+          RdeL2=RdeL2VD2+(0.8-VDS)*abs(RdeL2VD1-RdeL2VD2)/(0.8-0.4);
+          RdeL3=RdeL3VD2+(0.8-VDS)*abs(RdeL3VD1-RdeL3VD2)/(0.8-0.4);
+          RdeL4=RdeL4VD2+(0.8-VDS)*abs(RdeL4VD1-RdeL4VD2)/(0.8-0.4);
+          RdeL5=RdeL5VD2+(0.8-VDS)*abs(RdeL5VD1-RdeL5VD2)/(0.8-0.4);
+       end
+      else
+        begin
+          RdeL1=RdeL1VD3+(1.2-VDS)*abs(RdeL1VD2-RdeL1VD3)/(1.2-0.8);
+          RdeL2=RdeL2VD3+(1.2-VDS)*abs(RdeL2VD2-RdeL2VD3)/(1.2-0.8);
+          RdeL3=RdeL3VD3+(1.2-VDS)*abs(RdeL3VD2-RdeL3VD3)/(1.2-0.8);
+          RdeL4=RdeL4VD3+(1.2-VDS)*abs(RdeL4VD2-RdeL4VD3)/(1.2-0.8);
+          RdeL5=RdeL5VD3+(1.2-VDS)*abs(RdeL5VD2-RdeL5VD3)/(1.2-0.8);
+       end
+
+      //
+      // Initial Value For Rde
+      Rde=1M;
+
+      // Model Channel Length Dependence
+          if (lf - 0.116u <= 1e-20)      Rde=RdeL1;
+          else if (lf - 0.116u <= 0.027u)  Rde=(abs(0.143u-lf)*RdeL1+abs(lf-0.116u)*RdeL2)/(0.143u-0.116u);
+          else if (lf - 0.143u <= 0.027u)  Rde=(abs(0.170u-lf)*RdeL2+abs(lf-0.143u)*RdeL3)/(0.170u-0.143u);
+          else if (lf - 0.170u <= 0.054u)  Rde=(abs(0.224u-lf)*RdeL3+abs(lf-0.170u)*RdeL4)/(0.224u-0.170u);
+          else if (lf - 0.224u <= 0.108u)  Rde=(abs(0.332u-lf)*RdeL4+abs(lf-0.224u)*RdeL5)/(0.332u-0.224u);
+          else Rde=RdeL5+(lf-0.332u)*abs(RdeL5-RdeL4)/(0.332u-0.224u);
+
+      
+      
+      
+      // Model Geometry Dependence
+      Rde=Rde;
+      Rde=Rde/nf;
+      Rde=Rde/wf;
+
+      // User Specified Rde Value.
+      if ( abs(1M - r) > 1 ) Rde = r;
+
+      // Check if the device is off.
+      if ( VGS <= 0 )
+        Rde = 1M;
+
+      // Output Results
+      I(Plus,Minus) <+ white_noise(4*k_Boltz*TemperatureK/Rde)/mf;
+
+    end
+
+endmodule
+
+module rde_n_12bpw_hsrf (Plus, Minus, Drain, Gate, Source, Body);
+    
+    inout Plus, Minus, Drain, Gate, Source, Body;
+    
+    electrical Plus, Minus, Drain, Gate, Source, Body;
+    
+    real TemperatureK, Rde;
+    real RdeL1, RdeL1VD1, RdeL1VD2, RdeL1VD3;
+    real RdeL2, RdeL2VD1, RdeL2VD2, RdeL2VD3;
+    real RdeL3, RdeL3VD1, RdeL3VD2, RdeL3VD3;
+    real RdeL4, RdeL4VD1, RdeL4VD2, RdeL4VD3;
+    
+    
+    real VDS, VGS;
+
+    parameter real k_Boltz  = 1.38066e-23;
+//    parameter real (*integer inherited_mfactor;*) m = 1;
+    parameter real mf = 1;
+    parameter real wf       = 3.6u;
+    parameter real lf       = 0.12u;
+    parameter real nf       = 16;
+    parameter real r        = 1M;
+
+    analog begin
+
+      TemperatureK = $temperature;
+
+      VDS = V(Drain, Source);
+      VGS = V(Gate,  Source);
+
+// The model is verified for VGS to 1.2V and VDS to 1.2V
+      if (VGS < 0)
+//        VGS=0;
+
+          begin
+            VDS = V(Source, Drain);
+            VGS = V(Gate,   Drain);
+          end
+
+      if (VGS > 1.2)
+        VGS=1.2;
+
+//      if (VDS < 0)
+//        VDS=0;
+
+      if (VDS > 1.2)
+        VDS=1.2;
+
+      // Model VGS Dependence for different VDS.
+      if (VGS < 0.5)
+        begin
+          RdeL4VD1=(0.739708333577762)*pow(VGS,4)+(-2.83892916750438)*pow(VGS,3)+(4.07422416771109)*pow(VGS,2)+(-2.63315533389319)*VGS+(0.685474000108604);
+          RdeL4VD2=(0.699708333550652)*pow(VGS,4)+(-2.65901250074534)*pow(VGS,3)+(3.77889916759664)*pow(VGS,2)+(-2.41939200049891)*VGS+(0.620244000096857);
+          RdeL4VD3=(1.11864285731885)*pow(VGS,4)+(-4.16367219111023)*pow(VGS,3)+(4.73078610068428)*pow(VGS,2)+(-2.39374554507885)*VGS+(0.521651402915235);
+
+          RdeL3VD1=(0.575041666859693)*pow(VGS,4)+(-2.18433750066138)*pow(VGS,3)+(3.11492333415768)*pow(VGS,2)+(-2.01400150044176)*VGS+(0.529294000085671);
+          RdeL3VD2=(0.748511904902333)*pow(VGS,4)+(-2.4478404171078)*pow(VGS,3)+(3.13221025052989)*pow(VGS,2)+(-1.88401710742918)*VGS+(0.464905612914401);
+          RdeL3VD3=(0.715988095295399)*pow(VGS,4)+(-2.45633214305952)*pow(VGS,3)+(3.13386333359373)*pow(VGS,2)+(-1.80604542871552)*VGS+(0.424027142885945);
+
+          RdeL2VD1=(0.550931547732233)*pow(VGS,4)+(-1.96109579204911)*pow(VGS,3)+(2.42573430876915)*pow(VGS,2)+(-1.38691202759763)*VGS+(0.348460842898932);
+          RdeL2VD2=(0.718098214407814)*pow(VGS,4)+(-2.33257633966586)*pow(VGS,3)+(2.42905775037233)*pow(VGS,2)+(-1.26304208672334)*VGS+(0.305778420035555);
+          RdeL2VD3=(0.653335119128706)*pow(VGS,4)+(-2.31206684552055)*pow(VGS,3)+(2.42429813361997)*pow(VGS,2)+(-1.14670203000802)*VGS+(0.240196937165998);
+
+          RdeL1VD1=(0.232100595312141)*pow(VGS,4)+(-0.886064226444359)*pow(VGS,3)+(1.27098758365001)*pow(VGS,2)+(-0.81939739540793)*VGS+(0.208258542890103);
+          RdeL1VD2=(3.83142857500108E-02)*pow(VGS,4)+(-0.174298095359741)*pow(VGS,3)+(0.29568100015059)*pow(VGS,2)+(-0.225516719127745)*VGS+(7.04327285868591E-02);
+          RdeL1VD3=(5.46708333616421E-02)*pow(VGS,4)+(-0.224496250096669)*pow(VGS,3)+(0.339669416786712)*pow(VGS,2)+(-0.228090900064084)*VGS+(6.18058000123812E-02);
+
+
+    end
+  else
+    begin
+          RdeL4VD1=(-1.51099199493369E-02)*pow(1/VGS,4)+(0.106779959713939)*pow(1/VGS,3)+(-0.244893939413816)*pow(1/VGS,2)+(0.265366899484704)*1/VGS+(-8.48209998362182E-02);
+          RdeL4VD2=(-4.37423997656817E-03)*pow(1/VGS,4)+(4.36261198676888E-02)*pow(1/VGS,3)+(-0.112458513062191)*pow(1/VGS,2)+(0.143787299761632)*1/VGS+(-5.01336665908992E-02);
+          RdeL4VD3=(7.33179427082921E-02)*pow(1/VGS,4)+(-0.389170627731129)*pow(1/VGS,3)+(0.756641331611788)*pow(1/VGS,2)+(-0.602921741344114)*1/VGS+(0.177790094757298);
+
+          RdeL3VD1=(2.71968000195534E-03)*pow(1/VGS,4)+(-3.00264001105467E-03)*pow(1/VGS,3)+(-5.41550664398241E-03)*pow(1/VGS,2)+(0.03947179998003)*1/VGS+(-0.012853333326977);
+          RdeL3VD2=(5.10475884626894E-02)*pow(1/VGS,4)+(-0.274369165100408)*pow(1/VGS,3)+(0.542081518742289)*pow(1/VGS,2)+(-0.436824227466015)*1/VGS+(0.133712285363004);
+          RdeL3VD3=(6.68489466015211E-02)*pow(1/VGS,4)+(-0.377861131312126)*pow(1/VGS,3)+(0.779986984312137)*pow(1/VGS,2)+(-0.667510548969468)*1/VGS+(0.210476635083066);
+
+          RdeL2VD1=(3.61506376402543E-02)*pow(1/VGS,4)+(-0.195630472724909)*pow(1/VGS,3)+(0.38978611647702)*pow(1/VGS,2)+(-0.306204604961641)*1/VGS+(0.090098323570339);
+          RdeL2VD2=(3.72162376421719E-02)*pow(1/VGS,4)+(-0.192340072735759)*pow(1/VGS,3)+(0.365241716499303)*pow(1/VGS,2)+(-0.280304204981278)*1/VGS+(8.14173235765959E-02);
+          RdeL2VD3=(4.65946970707839E-02)*pow(1/VGS,4)+(-0.251823590881451)*pow(1/VGS,3)+(0.500104692777355)*pow(1/VGS,2)+(-0.416733435461263)*1/VGS+(0.12977231756541);
+
+          RdeL1VD1=(2.4105394224233E-03)*pow(1/VGS,4)+(-1.13303982510055E-02)*pow(1/VGS,3)+(0.028348425928889)*pow(1/VGS,2)+(-2.77206813660718E-02)*1/VGS+(1.41772142658532E-02);
+          RdeL1VD2=(-6.94292569949168E-03)*pow(1/VGS,4)+(3.93134570593278E-02)*pow(1/VGS,3)+(-7.73184864955076E-02)*pow(1/VGS,2)+(6.84939455638295E-02)*1/VGS+(-1.89327904283707E-02);
+          RdeL1VD3=(-8.55988797795919E-03)*pow(1/VGS,4)+(5.19071638755503E-02)*pow(1/VGS,3)+(-0.112519959078316)*pow(1/VGS,2)+(0.107081749775821)*1/VGS+(-3.43501665954132E-02);
+
+    end
+
+      // Model VDS Dependence. Linear relationship is used.
+      if ( VDS <= 0.4 )
+        begin
+          RdeL1=RdeL1VD1+(0.4-VDS)*abs(RdeL1VD1-RdeL1VD2)/(0.8-0.4);
+          RdeL2=RdeL2VD1+(0.4-VDS)*abs(RdeL2VD1-RdeL2VD2)/(0.8-0.4);
+          RdeL3=RdeL3VD1+(0.4-VDS)*abs(RdeL3VD1-RdeL3VD2)/(0.8-0.4);
+          RdeL4=RdeL4VD1+(0.4-VDS)*abs(RdeL4VD1-RdeL4VD2)/(0.8-0.4);
+       end
+      else if ( VDS <= 0.8 )
+        begin
+          RdeL1=RdeL1VD2+(0.8-VDS)*abs(RdeL1VD1-RdeL1VD2)/(0.8-0.4);
+          RdeL2=RdeL2VD2+(0.8-VDS)*abs(RdeL2VD1-RdeL2VD2)/(0.8-0.4);
+          RdeL3=RdeL3VD2+(0.8-VDS)*abs(RdeL3VD1-RdeL3VD2)/(0.8-0.4);
+          RdeL4=RdeL4VD2+(0.8-VDS)*abs(RdeL4VD1-RdeL4VD2)/(0.8-0.4);
+       end
+      else
+        begin
+          RdeL1=RdeL1VD3+(1.2-VDS)*abs(RdeL1VD2-RdeL1VD3)/(1.2-0.8);
+          RdeL2=RdeL2VD3+(1.2-VDS)*abs(RdeL2VD2-RdeL2VD3)/(1.2-0.8);
+          RdeL3=RdeL3VD3+(1.2-VDS)*abs(RdeL3VD2-RdeL3VD3)/(1.2-0.8);
+          RdeL4=RdeL4VD3+(1.2-VDS)*abs(RdeL4VD2-RdeL4VD3)/(1.2-0.8);
+       end
+
+      //
+      // Initial Value For Rde
+      Rde=1M;
+
+      // Model Channel Length Dependence
+          if (lf - 0.116u <= 1e-20)      Rde=RdeL1;
+          else if (lf - 0.116u <= 0.027u)  Rde=(abs(0.143u-lf)*RdeL1+abs(lf-0.116u)*RdeL2)/(0.143u-0.116u);
+          else if (lf - 0.143u <= 0.081u)  Rde=(abs(0.224u-lf)*RdeL2+abs(lf-0.143u)*RdeL3)/(0.224u-0.143u);
+          else if (lf - 0.224u <= 0.108u)  Rde=(abs(0.332u-lf)*RdeL3+abs(lf-0.224u)*RdeL4)/(0.332u-0.224u);
+          else Rde=RdeL4+(lf-0.332u)*abs(RdeL4-RdeL3)/(0.332u-0.224u);
+
+      // Model Geometry Dependence
+      Rde=Rde;
+      Rde=Rde/nf;
+      Rde=Rde/wf;
+
+      // User Specified Rde Value.
+      if ( abs(1M - r) > 1 ) Rde = r;
+
+      // Check if the device is off.
+      if ( VGS <= 0 )
+        Rde = 1M;
+
+      // Output Results
+      I(Plus,Minus) <+ white_noise(4*k_Boltz*TemperatureK/Rde)/mf;
+
+    end
+    endmodule

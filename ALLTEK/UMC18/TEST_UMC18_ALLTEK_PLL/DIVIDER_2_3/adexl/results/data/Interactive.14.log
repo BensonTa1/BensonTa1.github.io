@@ -1,0 +1,18 @@
+Starting Single Run, Sweeps and Corners...
+
+Current time: Fri Mar 27 20:06:03 2026 
+Best design point: 1
+Design specs: 
+	TEST_UMC18_ALLTEK_PLL:DIVIDER_2_3:1	corner	C0_0 - 
+	TEST_UMC18_ALLTEK_PLL:DIVIDER_2_3:1	corner	C0_1 - 
+	TEST_UMC18_ALLTEK_PLL:DIVIDER_2_3:1	corner	C0_2 - 
+	TEST_UMC18_ALLTEK_PLL:DIVIDER_2_3:1	corner	C0_3 - 
+	TEST_UMC18_ALLTEK_PLL:DIVIDER_2_3:1	corner	C0_4 - 
+Design parameters: 
+	FIN		3.5G
+	VS		1.62
+	temperature		-25
+
+Received stop signal from user. 
+Interactive.14 completed. 
+Current time: Fri Mar 27 20:06:12 2026 

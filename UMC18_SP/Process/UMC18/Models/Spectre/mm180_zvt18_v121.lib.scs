@@ -1,0 +1,82 @@
+simulator lang=spectre insensitive=yes
+library mylib
+
+section tt
+parameters dtox_n_zero_18_mm=0
+parameters dlint_n_zero_18_mm=0
+parameters dwint_n_zero_18_mm=0
+parameters dvth0_n_zero_18_mm=0
+parameters dcgdo_n_zero_18_mm=0
+parameters dcgso_n_zero_18_mm=0
+
+
+include "mm180_zvt18_v121.mdl.scs"
+ 
+endsection tt
+
+
+
+section ss
+parameters dtox_n_zero_18_mm=2.5e-10
+parameters dlint_n_zero_18_mm=-4.95e-8
+parameters dwint_n_zero_18_mm=1e-8
+parameters dvth0_n_zero_18_mm=0.1
+parameters dcgdo_n_zero_18_mm=-4.0e-11
+parameters dcgso_n_zero_18_mm=-4.0e-11
+
+include "mm180_zvt18_v121.mdl.scs"
+ 
+endsection ss
+
+
+
+
+section ff
+parameters dtox_n_zero_18_mm=-2.5e-10
+parameters dlint_n_zero_18_mm=4.09e-8
+parameters dwint_n_zero_18_mm=-8.6e-9
+parameters dvth0_n_zero_18_mm=-0.1
+parameters dcgdo_n_zero_18_mm=4.0e-11
+parameters dcgso_n_zero_18_mm=4.0e-11
+
+include "mm180_zvt18_v121.mdl.scs"
+ 
+endsection ff
+
+
+
+
+section snfp
+parameters dtox_n_zero_18_mm=0
+parameters dlint_n_zero_18_mm=-2.5e-8
+parameters dwint_n_zero_18_mm=5e-9
+parameters dvth0_n_zero_18_mm=0.05
+parameters dcgdo_n_zero_18_mm=0
+parameters dcgso_n_zero_18_mm=0
+
+include "mm180_zvt18_v121.mdl.scs"
+ 
+endsection snfp
+
+
+
+
+
+section fnsp
+parameters dtox_n_zero_18_mm=0
+parameters dlint_n_zero_18_mm=2.05e-8
+parameters dwint_n_zero_18_mm=-4.8e-9
+parameters dvth0_n_zero_18_mm=-0.05
+parameters dcgdo_n_zero_18_mm=0
+parameters dcgso_n_zero_18_mm=0
+ 
+
+
+include "mm180_zvt18_v121.mdl.scs"
+ 
+endsection fnsp
+
+endlibrary mylib
+
+
+

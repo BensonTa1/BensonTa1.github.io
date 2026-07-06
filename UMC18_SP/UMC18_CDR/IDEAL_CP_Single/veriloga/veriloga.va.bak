@@ -1,0 +1,37 @@
+// VerilogA for PLL_5G, CP_IDEAL, veriloga
+
+`include "constants.vams"
+`include "disciplines.vams"
+
+module IDEAL_CP_Single(IN,EN,IOUT);
+	electrical IN,EN,IOUT;
+	input IN,EN;
+	output IOUT;
+
+	real IO;
+
+	parameter real output_current = 1m;
+	parameter real VTH = 1.5;
+
+	analog begin
+
+		//if(V(IOUT)>=0&&V(IOUT)<=1.8)begin
+
+			if(V(IN)>VTH)//UP
+				IO= +output_current;
+			
+
+			if(V(IN)<VTH)//DN
+				IO= -output_current;
+			
+
+		//end 
+		if(V(EN)<VTH) begin
+			IO=0;
+		end
+		
+		I(IOUT)<+transition(IO,0,1p,1p);
+
+	end
+
+endmodule

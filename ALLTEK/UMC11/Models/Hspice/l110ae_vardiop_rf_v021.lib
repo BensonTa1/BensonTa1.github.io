@@ -1,0 +1,47 @@
+**********************************************************************
+*            P+/Nwell Junction Varactor RF subcircuit model Library
+*            UMC 0.11um RFCMOS process 
+*            Feb. 2010
+*
+*            Case Definition:
+*            typ: Typical case
+*            min: Mimimum capacitance case
+*            max: Maximum capacitance case 
+*           
+**********************************************************************
+* 
+.lib typ
+.param d_re_unit=0
++ d_rsh_nw=0
++ d_cf_m1=0
++ d_cjo_ppnw=0
++ d_cjsw_ppnw=0
++ d_cjo_nwpsub=0
++ d_cjsw_nwpsub=0
+.include 'l110ae_vardiop_rf_v021.mdl'
+.endl typ
+**
+**
+.lib min
+.param d_re_unit=0.2
++ d_rsh_nw=0.2
++ d_cf_m1=-0.2
++ d_cjo_ppnw=-0.1
++ d_cjsw_ppnw=-0.1
++ d_cjo_nwpsub=-0.1
++ d_cjsw_nwpsub=-0.1
+.include 'l110ae_vardiop_rf_v021.mdl'
+.endl min
+**
+.lib max
+.param d_re_unit=-0.2
++ d_rsh_nw=-0.2
++ d_cf_m1=0.2
++ d_cjo_ppnw=0.1
++ d_cjsw_ppnw=0.1
++ d_cjo_nwpsub=0.1
++ d_cjsw_nwpsub=0.1
+.include 'l110ae_vardiop_rf_v021.mdl'
+.endl max
+**
+**

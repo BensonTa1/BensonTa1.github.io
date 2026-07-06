@@ -1,0 +1,58 @@
+// VerilogA for Verilog_A, IDEAL_12bit_static_error, veriloga
+
+`include "constants.vams"
+`include "disciplines.vams"
+
+module IDEAL_12bit_static_error(CLKIN,DACIN,D0,D1,D2,D3,D4,D5,D6,D7,D8,D9,D10,D11,CODE_OUT,DNL,INL);
+	electrical CLKIN,DACIN,D0,D1,D2,D3,D4,D5,D6,D7,D8,D9,D10,D11,CODE_OUT,DNL,INL;
+	input CLKIN,DACIN,D0,D1,D2,D3,D4,D5,D6,D7,D8,D9,D10,D11;
+	output CODE_OUT,DNL,INL;
+
+	parameter real BIT=12;
+	parameter real VREF=2;
+	
+	real VLSB=VREF/(2**BIT);
+
+	parameter real VTH=1.65;
+
+	real DD0,DD1,DD2,DD3,DD4,DD5,DD6,DD7,DD8,DD9,DD10,DD11,DSUM;
+	real sample_n,sample_n1=VLSB;
+	real INL_int,DNL_int;		//internal variable
+	
+	
+	analog begin
+				
+		DD0 = (V(D0)>VTH) ? 1 : 0;
+		DD1 = (V(D1)>VTH) ? 1 : 0;
+		DD2 = (V(D2)>VTH) ? 1 : 0;
+		DD3 = (V(D3)>VTH) ? 1 : 0;
+		DD4 = (V(D4)>VTH) ? 1 : 0;
+		DD5 = (V(D5)>VTH) ? 1 : 0;
+		DD6 = (V(D6)>VTH) ? 1 : 0;
+		DD7 = (V(D7)>VTH) ? 1 : 0;
+		DD8 = (V(D8)>VTH) ? 1 : 0;
+		DD9 = (V(D9)>VTH) ? 1 : 0;
+		DD10 = (V(D10)>VTH) ? 1 : 0;
+		DD11 = (V(D11)>VTH) ? 1 : 0;
+		
+
+		@(cross(V(CLKIN)-VTH,0))begin
+			DSUM=DD0*1 + DD1*2 + DD2*4 + DD3*8 +DD4*16 + DD5*32 + DD6*64 + DD7*128 + DD8*256 + DD9*512 + DD10*1024 + DD11*2048 ;
+			//DNL
+			sample_n1=sample_n;
+			sample_n=V(DACIN);
+			DNL_int=((sample_n-sample_n1)/VLSB)-1;
+
+			//INL
+			INL_int=(sample_n-VLSB*DSUM)/VLSB;
+		end
+
+
+		V(INL)<+INL_int;
+		V(DNL)<+DNL_int;
+		V(CODE_OUT)<+DSUM;
+
+
+	end
+
+endmodule

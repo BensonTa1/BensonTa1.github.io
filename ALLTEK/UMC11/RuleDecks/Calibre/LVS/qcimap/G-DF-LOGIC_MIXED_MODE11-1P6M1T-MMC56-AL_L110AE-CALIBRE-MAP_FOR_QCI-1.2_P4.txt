@@ -1,0 +1,231 @@
+###### //// In this file, it include HS, SP, LL, HS_SP, HS_LL, SP_LL and HS_SP_LL process
+###### //// and metal option, use can us "***" to remark the devices for different options
+###### //// In this file, LVS use 1P6M1T , HS_SP_LL and M56_MMC options for example
+
+# Conductor layers
+pro_layer=DIFF_diel       ext_layer=TWEL,TWELL_D,TWELL,WEL,PSUB,PSUB_ALL
+pro_layer=PLY_C           ext_layer=PLY_C          
+pro_layer=PLY_C           ext_layer=PLY_I           sheet_res=0         
+pro_layer=PLY_C           ext_layer=TWPLY_I         sheet_res=0 
+pro_layer=PLY_C           ext_layer=PLY_MOSCAP              
+pro_layer=PLY_C           ext_layer=RBNGAT         
+pro_layer=PLY_C           ext_layer=RBPGAT         
+pro_layer=PLY_C           ext_layer=RBNGATTW       
+pro_layer=PLY_C           ext_layer=RBNGAT_IG      
+pro_layer=PLY_C           ext_layer=RBPGAT_IG      
+pro_layer=PLY_C           ext_layer=RBNGATTW_IG    
+pro_layer=PLY_C           ext_layer=RBNGAT_LL      
+pro_layer=PLY_C           ext_layer=RBPGAT_LL      
+pro_layer=PLY_C           ext_layer=RBNGATTW_LL    
+pro_layer=PLY_C           ext_layer=RBNGAT_LL_IG   
+pro_layer=PLY_C           ext_layer=RBPGAT_LL_IG   
+pro_layer=PLY_C           ext_layer=RBNGATTW_LL_IG 
+pro_layer=PLY_C           ext_layer=RBNGAT_SP      
+pro_layer=PLY_C           ext_layer=RBPGAT_SP      
+pro_layer=PLY_C           ext_layer=RBNGATTW_SP    
+pro_layer=PLY_C           ext_layer=RBNGAT_SP_IG   
+pro_layer=PLY_C           ext_layer=RBPGAT_SP_IG   
+pro_layer=PLY_C           ext_layer=RBNGATTW_SP_IG 
+pro_layer=PLY_C           ext_layer=RBNPG_LL_B6T141
+pro_layer=PLY_C           ext_layer=RBNPD_LL_B6T141
+pro_layer=PLY_C           ext_layer=RBPGAT_LL_B6T141
+pro_layer=PLY_C           ext_layer=RBNPG_LL_B6T185
+pro_layer=PLY_C           ext_layer=RBNPD_LL_B6T185
+pro_layer=PLY_C           ext_layer=RBPGAT_LL_B6T185
+pro_layer=PLY_C           ext_layer=RBNPG_LL_B8T339
+pro_layer=PLY_C           ext_layer=RBNPD_LL_B8T339
+pro_layer=PLY_C           ext_layer=RBPGAT_LL_B8T339
+pro_layer=PLY_C           ext_layer=RBNPG_HSSP_B6T141
+pro_layer=PLY_C           ext_layer=RBNPD_HSSP_B6T141
+pro_layer=PLY_C           ext_layer=RBPGAT_HSSP_B6T141
+pro_layer=PLY_C           ext_layer=RBNPG_HSSP_B6T185
+pro_layer=PLY_C           ext_layer=RBNPD_HSSP_B6T185
+pro_layer=PLY_C           ext_layer=RBPGAT_HSSP_B6T185
+pro_layer=PLY_C           ext_layer=RBNPG_HSSP_B8T339
+pro_layer=PLY_C           ext_layer=RBNPD_HSSP_B8T339
+pro_layer=PLY_C           ext_layer=RBPGAT_HSSP_B8T339
+pro_layer=PLY_C           ext_layer=TRBNGAT        
+pro_layer=PLY_C           ext_layer=TRBNGAT12      
+pro_layer=PLY_C           ext_layer=TRBNGAT18      
+pro_layer=PLY_C           ext_layer=TRBPGAT        
+pro_layer=PLY_C           ext_layer=TRBPGAT12      
+pro_layer=PLY_C           ext_layer=TRBPGAT18      
+pro_layer=PLY_C           ext_layer=TRBNGATTW      
+pro_layer=PLY_C           ext_layer=RBNGAT_NVT     
+pro_layer=PLY_C           ext_layer=TRBNGAT_NVT    
+pro_layer=PLY_C           ext_layer=TRBNGAT_NVTOD  
+pro_layer=PLY_C           ext_layer=TRBNGATOD      
+pro_layer=PLY_C           ext_layer=TRBPGATOD      
+pro_layer=PLY_C           ext_layer=TRBNGATTWOD    
+pro_layer=PLY_C           ext_layer=TRBNGATTWUD18  
+pro_layer=PLY_C           ext_layer=TRBNGATTWUD12  
+pro_layer=PLY_C           ext_layer=TRBNGAT50UD18  
+pro_layer=PLY_C           ext_layer=TRBPGAT50UD18  
+pro_layer=PLY_C           ext_layer=N_D50G33_G_LD_P
+pro_layer=PLY_C           ext_layer=P_D50G33_G_LD_D
+pro_layer=PLY_C           ext_layer=N_D85G33_G_LD_P
+pro_layer=PLY_C           ext_layer=P_D85G33_G_LD_D
+pro_layer=PLY_C           ext_layer=NCAPGATE_HV_1            
+pro_layer=PLY_C           ext_layer=NCAPGATE_12_1            
+pro_layer=PLY_C           ext_layer=PCAPGATE_12_TW_1          
+pro_layer=PLY_C           ext_layer=PCAPGATE_HV_TW_1          
+pro_layer=PLY_C           ext_layer=PCAPGATE_12_PW_1          
+pro_layer=PLY_C           ext_layer=PCAPGATE_HV_PW_1  
+pro_layer=ME1_C           ext_layer=ME1_C          
+pro_layer=ME2_C           ext_layer=ME2_C          
+pro_layer=ME3_C           ext_layer=ME3_C          
+pro_layer=ME4_C           ext_layer=ME4_C          
+pro_layer=ME5_C           ext_layer=ME5_C          
+pro_layer=ME6_C           ext_layer=ME6_C          
+#pro_layer=ME7_C           ext_layer=ME7_C          
+#pro_layer=ME8_C           ext_layer=ME8_C          
+pro_layer=MMCTP_C           ext_layer=MMCAL_C        
+pro_layer=MMCTP_C           ext_layer=MMCAL_I         sheet_res=0         
+pro_layer=ME1_C           ext_layer=ME1_I           sheet_res=0
+pro_layer=ME1_C           ext_layer=ME1_MOSCAP          
+pro_layer=ME2_C           ext_layer=ME2_I           sheet_res=0         
+pro_layer=ME3_C           ext_layer=ME3_I           sheet_res=0         
+pro_layer=ME4_C           ext_layer=ME4_I           sheet_res=0         
+pro_layer=ME5_C           ext_layer=ME5_I           sheet_res=0
+pro_layer=ME1_C           ext_layer=ME1_I_MOM       sheet_res=0         
+pro_layer=ME2_C           ext_layer=ME2_I_MOM       sheet_res=0         
+pro_layer=ME3_C           ext_layer=ME3_I_MOM       sheet_res=0         
+pro_layer=ME4_C           ext_layer=ME4_I_MOM       sheet_res=0         
+pro_layer=ME5_C           ext_layer=ME5_I_MOM       sheet_res=0        
+pro_layer=ME6_C           ext_layer=ME6_I           sheet_res=0         
+#pro_layer=ME7_C           ext_layer=ME7_I           sheet_res=0         
+#pro_layer=ME8_C           ext_layer=ME8_I           sheet_res=0         
+pro_layer=ME6_C           ext_layer=ME6_I_MOM       sheet_res=0         
+#pro_layer=ME7_C           ext_layer=ME7_I_MOM       sheet_res=0         
+#pro_layer=ME8_C           ext_layer=ME8_I_MOM       sheet_res=0
+#pro_layer=ME4_C           ext_layer=ME4_I_RFMIM     sheet_res=0
+pro_layer=ME5_C           ext_layer=ME5_I_RFMIM     sheet_res=0         
+pro_layer=ME6_C           ext_layer=ME6_I_RFMIM     sheet_res=0         
+#pro_layer=ME7_C           ext_layer=ME7_I_RFMIM     sheet_res=0         
+pro_layer=PSD_C           ext_layer=PSD_C          
+pro_layer=PSD_C           ext_layer=NSD_C          
+pro_layer=PSD_C           ext_layer=PSDLD_D_C      
+pro_layer=PSD_C           ext_layer=NSDLD_D_C   
+pro_layer=PSD_C           ext_layer=PSD_MOSCAP    
+pro_layer=PSD_C           ext_layer=PSD_I          
+pro_layer=PSD_C           ext_layer=PSD_I_S  
+pro_layer=PSD_C           ext_layer=NSD_MOSCAP       
+pro_layer=PSD_C           ext_layer=NSD_I          
+pro_layer=PSD_C           ext_layer=NSD_I_S        
+pro_layer=PSD_C           ext_layer=PNVAR          
+pro_layer=ME2_C           ext_layer=ME2_I_term_p    sheet_res=0         
+pro_layer=ME2_C           ext_layer=ME2_I_term_m    sheet_res=0         
+pro_layer=ME3_C           ext_layer=ME3_I_term_p    sheet_res=0         
+pro_layer=ME3_C           ext_layer=ME3_I_term_m    sheet_res=0         
+pro_layer=ME4_C           ext_layer=ME4_I_term_p    sheet_res=0         
+pro_layer=ME4_C           ext_layer=ME4_I_term_m    sheet_res=0         
+pro_layer=ME2_C           ext_layer=MOM2_MESH_SY_P1_term sheet_res=0         
+pro_layer=ME2_C           ext_layer=MOM2_MESH_SY_M1_term sheet_res=0         
+pro_layer=ME3_C           ext_layer=MOM3_MESH_SY_P2_term sheet_res=0         
+pro_layer=ME3_C           ext_layer=MOM3_MESH_SY_M2_term sheet_res=0         
+pro_layer=ME3_C           ext_layer=MOM3_MESH_SY_P1_term sheet_res=0         
+pro_layer=ME3_C           ext_layer=MOM3_MESH_SY_M1_term sheet_res=0         
+pro_layer=ME4_C           ext_layer=MOM4_MESH_SY_P2_term sheet_res=0         
+pro_layer=ME4_C           ext_layer=MOM4_MESH_SY_M2_term sheet_res=0         
+pro_layer=ME4_C           ext_layer=MOM4_MESH_SY_P1_term sheet_res=0         
+pro_layer=ME4_C           ext_layer=MOM4_MESH_SY_M1_term sheet_res=0         
+pro_layer=ME5_C           ext_layer=MOM5_MESH_SY_P2_term sheet_res=0         
+pro_layer=ME5_C           ext_layer=MOM5_MESH_SY_M2_term sheet_res=0         
+#pro_layer=ME5_C           ext_layer=MOM5_MESH_SY_P1_term sheet_res=0         
+#pro_layer=ME5_C           ext_layer=MOM5_MESH_SY_M1_term sheet_res=0         
+#pro_layer=ME6_C           ext_layer=MOM6_MESH_SY_P2_term sheet_res=0         
+#pro_layer=ME6_C           ext_layer=MOM6_MESH_SY_M2_term sheet_res=0         
+pro_layer=ME2_C           ext_layer=MOM2_MESH_ASY_P1_term sheet_res=0         
+pro_layer=ME2_C           ext_layer=MOM2_MESH_ASY_M1_term sheet_res=0         
+pro_layer=ME3_C           ext_layer=MOM3_MESH_ASY_P2_term sheet_res=0         
+pro_layer=ME3_C           ext_layer=MOM3_MESH_ASY_M2_term sheet_res=0         
+pro_layer=ME3_C           ext_layer=MOM3_MESH_ASY_P1_term sheet_res=0         
+pro_layer=ME3_C           ext_layer=MOM3_MESH_ASY_M1_term sheet_res=0         
+pro_layer=ME4_C           ext_layer=MOM4_MESH_ASY_P2_term sheet_res=0         
+pro_layer=ME4_C           ext_layer=MOM4_MESH_ASY_M2_term sheet_res=0         
+pro_layer=ME4_C           ext_layer=MOM4_MESH_ASY_P1_term sheet_res=0         
+pro_layer=ME4_C           ext_layer=MOM4_MESH_ASY_M1_term sheet_res=0         
+pro_layer=ME5_C           ext_layer=MOM5_MESH_ASY_P2_term sheet_res=0         
+pro_layer=ME5_C           ext_layer=MOM5_MESH_ASY_M2_term sheet_res=0         
+#pro_layer=ME5_C           ext_layer=MOM5_MESH_ASY_P1_term sheet_res=0         
+#pro_layer=ME5_C           ext_layer=MOM5_MESH_ASY_M1_term sheet_res=0         
+#pro_layer=ME6_C           ext_layer=MOM6_MESH_ASY_P2_term sheet_res=0         
+#pro_layer=ME6_C           ext_layer=MOM6_MESH_ASY_M2_term sheet_res=0         
+pro_layer=ME1_C           ext_layer=MOM1_MESH_SY_P1_A_term sheet_res=0         
+pro_layer=ME1_C           ext_layer=MOM1_MESH_SY_P2_A_term sheet_res=0         
+pro_layer=ME2_C           ext_layer=MOM2_MESH_SY_M1_A_term sheet_res=0         
+pro_layer=ME2_C           ext_layer=MOM2_MESH_SY_M2_A_term sheet_res=0         
+pro_layer=ME2_C           ext_layer=MOM2_MESH_SY_P1_A_term sheet_res=0         
+pro_layer=ME2_C           ext_layer=MOM2_MESH_SY_P2_A_term sheet_res=0         
+pro_layer=ME3_C           ext_layer=MOM3_MESH_SY_M1_A_term sheet_res=0         
+pro_layer=ME3_C           ext_layer=MOM3_MESH_SY_M2_A_term sheet_res=0         
+pro_layer=ME3_C           ext_layer=MOM3_MESH_SY_P1_A_term sheet_res=0         
+pro_layer=ME3_C           ext_layer=MOM3_MESH_SY_P2_A_term sheet_res=0         
+pro_layer=ME4_C           ext_layer=MOM4_MESH_SY_M1_A_term sheet_res=0         
+pro_layer=ME4_C           ext_layer=MOM4_MESH_SY_M2_A_term sheet_res=0         
+pro_layer=ME4_C           ext_layer=MOM4_MESH_SY_P1_A_term sheet_res=0         
+pro_layer=ME4_C           ext_layer=MOM4_MESH_SY_P2_A_term sheet_res=0         
+pro_layer=ME5_C           ext_layer=MOM5_MESH_SY_M1_A_term sheet_res=0         
+pro_layer=ME5_C           ext_layer=MOM5_MESH_SY_M2_A_term sheet_res=0         
+#pro_layer=ME5_C           ext_layer=MOM5_MESH_SY_P1_A_term sheet_res=0         
+#pro_layer=ME5_C           ext_layer=MOM5_MESH_SY_P2_A_term sheet_res=0         
+#pro_layer=ME6_C           ext_layer=MOM6_MESH_SY_M1_A_term sheet_res=0         
+#pro_layer=ME6_C           ext_layer=MOM6_MESH_SY_M2_A_term sheet_res=0         
+pro_layer=ME2_C           ext_layer=ME2_I_VP3_P   sheet_res=0  
+pro_layer=ME3_C           ext_layer=ME3_I_VP3_M   sheet_res=0  
+pro_layer=ME3_C           ext_layer=ME3_I_VP3_P   sheet_res=0  
+pro_layer=ME4_C           ext_layer=ME4_I_VP3_M   sheet_res=0  
+pro_layer=ME4_C           ext_layer=ME4_I_VP3_P   sheet_res=0  
+pro_layer=ME5_C           ext_layer=ME5_I_VP3_M   sheet_res=0  
+pro_layer=ME6_C           ext_layer=ME6_I_VP3_M   sheet_res=0  
+pro_layer=ME5_C           ext_layer=ME5_I_VP3_P    sheet_res=0 
+pro_layer=ME3_C           ext_layer=ME3_I_VP4_M    sheet_res=0 
+pro_layer=ME3_C           ext_layer=ME3_I_VP4_P    sheet_res=0 
+pro_layer=ME4_C           ext_layer=ME4_I_VP4_M    sheet_res=0 
+pro_layer=ME4_C           ext_layer=ME4_I_VP4_P    sheet_res=0 
+pro_layer=ME5_C           ext_layer=ME5_I_VP4_M    sheet_res=0 
+pro_layer=ME6_C           ext_layer=ME6_I_VP4_M    sheet_res=0 
+pro_layer=ME5_C           ext_layer=ME5_I_VP4_P    sheet_res=0 
+pro_layer=ME2_C           ext_layer=ME2_I_VP5_P    sheet_res=0 
+pro_layer=ME3_C           ext_layer=ME3_I_VP5_M    sheet_res=0 
+pro_layer=ME3_C           ext_layer=ME3_I_VP5_P    sheet_res=0 
+pro_layer=ME4_C           ext_layer=ME4_I_VP5_M    sheet_res=0 
+pro_layer=ME4_C           ext_layer=ME4_I_VP5_P    sheet_res=0 
+pro_layer=ME5_C           ext_layer=ME5_I_VP5_M    sheet_res=0 
+pro_layer=ME6_C           ext_layer=ME6_I_VP5_M    sheet_res=0 
+pro_layer=ME5_C           ext_layer=ME5_I_VP5_P    sheet_res=0 
+pro_layer=PLY_C           ext_layer=PLY_I_VP5_S    sheet_res=0 
+pro_layer=ME1_C           ext_layer=ME1_I_VP5_S    sheet_res=0 
+pro_layer=ME2_C           ext_layer=ME2_I_VP5_S    sheet_res=0 
+pro_layer=ME3_C           ext_layer=ME3_I_VP5_S    sheet_res=0 
+pro_layer=ME2_C           ext_layer=ME2_I_VP4_P    sheet_res=0 
+#ME8_IN_P1	METAL8
+#ME8_IN_P2	METAL8
+#ME8_OUT_S1	METAL8
+#ME8_OUT_S2	METAL8
+#ME8_CTS	METAL8
+#ME8_OTF_P1	METAL8
+#ME8_OTF_P2	METAL8
+#ME7_OTF_S1	METAL7
+#ME7_OTF_S2	METAL7
+#  VI4			Mvia4
+#  VI6			Mvia6
+#  VI7			Mvia7
+#  VIA_M56		Mvia5
+#  VIA_M67		Mvia6
+
+# Via layers
+pro_cont=DIFFCONT         ext_cont=PTAP            
+pro_cont=DIFFCONT         ext_cont=NTAP            
+pro_cont=DIFFCONT         ext_cont=TTAP            
+pro_cont=VIA1             ext_cont=VI1             
+pro_cont=VIA2             ext_cont=VI2             
+pro_cont=VIA3             ext_cont=VI3             
+#pro_cont=VIA5             ext_cont=VI5             
+pro_cont=VIA4             ext_cont=VI4             
+#pro_cont=VIA4             ext_cont=VIA_M45         
+pro_cont=VIA5             ext_cont=VIA_M56         
+#pro_cont=VIA6             ext_cont=VIA_M67         
+pro_cont=VIATP         ext_cont=VIA_MMC         
+pro_cont=PLYCONT          ext_cont=PO_CONT         
+pro_cont=DIFFCONT         ext_cont=DIF_CONT        

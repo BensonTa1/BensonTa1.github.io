@@ -1,0 +1,92 @@
+*******************************************************************************
+* Property of UMC.
+* Unauthorized reproduction, modification and/or distribution are strictly
+* prohibited.
+* This product is protected under copyright law and trade secret law.
+* This model card may not be sent in any form outside of UMC without
+* the written consent of the UMC ATD Modeling Division.
+********************************************************************************
+* Process:      0.11 um Logic and Mixed-Mode 1P8M Metal Metal Capacitor Al Advanced Enhancement Process 
+* Device Type:  Unsalicided HR Poly resistor RF subcircuit model  
+* Simulator:    HSPICE
+* Model Version:0.2 p1
+********************************************************************************
+* Revision history:
+* <Revision 1>
+* Version : 0.2_p1
+* Date    : 2010/07/22  
+* Owner   : Yealing Lin
+* Comment : Original release.
+****************************************************************************************
+*            Model coverage:
+*            1. Width (w): 0.5um ~ 2.0um
+*            2. Length (l): 5.0um ~ 20um
+*            3. Frequency range: 100MHz ~ 20.1GHz
+*            4. Temperature Range: -50C to 125C
+*            5: Biasing range:  < 0.5mA/(um width)
+*
+*            Node definition:
+*            1. port1 
+*            2. port2 
+*            3. sub:  psub
+*            4. nwell
+**********************************************************************
+.subckt rnhr1000_rf port1 port2 nwell psub
+.param  l=10u 
+.param  w=10u 
+.param  dx=1.68u 
+.param  dy=1.68u
+.param  le=0.46u
+.param  lend=0.18e-06
+.param  rend='202e-6+drend_rnhr1000_rf'
+.param  rs='984+drs_rnhr1000_rf'
+.param  tcr1=-4.96e-4
+.param  tcr2=1.25e-6
+.param  vcr1=0
+.param  vcr2=-0.107e-12
+.param  dw='-0.047e-06+ddw_rnhr1000_rf'
+.param  p_area='w*0.9*l*0.9*1e12'
+.param  temp='temper'
+.param  p_cox='((4e15*(2.89e-6*((l*0.9)**2)-1.17e-11*(l*0.9)+1.8e-16)*(1.32e-4*((w*0.9)**2)-1.11e-10*(w*0.9)+2.43e-16)))*(1+p_cox_rnhr1000_rf)'
+.param  p_rs=1000
+.param  p_r='((2*rend+rs*((l*0.9)-0.8e-6))/(w*0.9+dw)*(1.0+(tcr1*(temp-25))+tcr2*(temp-25)*(temp-25)))'
+.param  p_cs2='(1.7e15*(7.87e-06*((l*0.9)**2)-1.23e-10*(l*0.9)+1.05e-15)*(4.30e-10*(w*0.9)+1.95e-16))'
+.param  vc1='vcr1/(l*0.9)'
+.param  vc2='vcr2/(l*0.9)/(l*0.9)'
+.param  nw_area='(l+2*le+2*dx)*(w+dy+dx)'
+.param  nw_pj='2*(l+w+2*le+2*dx+dy+dx)'
+* ------ equivalent network ---------------
+r1 port1 _node12 'p_r*(1.0+vc1*abs(v(port1, _node12)/(l*0.9*1e6))+vc2*pow(abs(v(port1, _node12))/(l*0.9*1e6),2))/2'
+r2 _node12 port2 'p_r*(1.0+vc1*abs(v(_node12, port2)/(l*0.9*1e6))+vc2*pow(abs(v(_node12, port2))/(l*0.9*1e6),2))/2'
+cox1 port1 _node61 'p_cox'
+cox2 port2 _node62 'p_cox'
+cox3 _node12 _node63 'p_cox'
+rsub1 _node61 nwell 'p_rs'
+rsub2 _node62 nwell 'p_rs'
+rsub3 _node63 nwell 'p_rs'
+cs1 port1 _node12 'p_cs2'
+cs2 _node12 port2 'p_cs2'
+dnw psub nwell nwell_psub_dio area='nw_area' pj='nw_pj'
+.model nwell_psub_dio d
+*****diode parameters********************************************
+***** flag parameters ***
++level = 3                     
+***** dc model parameter ***
++ibv = 5.952                    ik = 17856               ikr = 595.2                       
++js = 2.05e-006              jsw = 5.34e-011            n = 1.0525                  
++rs = 3.0891e-007              vb = 9.662                                                 
+***** capacitance parameter ***
++cj = 8.28e-005              pb = 0.588                 
++mj = 0.474                 cjp = 9.92e-010            
++mjsw = 0.27               php = 0.62                
+***** temperature coefficient ***
++tlev = 1                      tlevc = 1                     tref = 25                     
++eg = 1.16                     xti = 5.4936                cta = 0.00332             
++ctp = 0.001             tcv = -0.000539             tpb = 0.0028             
++tphp = 0.001            trs = 0.00322         
+*********************************************************************************
+.ends rnhr1000_rf
+* 
+
+
+ 

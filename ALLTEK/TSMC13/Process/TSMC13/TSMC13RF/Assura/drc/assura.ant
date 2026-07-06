@@ -1,0 +1,1153 @@
+;***************************************************************************************************************
+;* Assura ANTENNA DRC COMMAND FILE -  UL013S_8M.ANT.23a (VER 2.3a, 05/17/2010)                                  *
+;* FOR TSMC 0.13UM/0.11UM CMOS LOGIC/MS/RF 1P8M PROCESS ANTENNA RULES (CL013G/LV/LP,CM013G,CL011G/LV+,CM011G)   *
+;* (DRC COMMAND FILE DOCUMENT: T-013-LO-DR-001-U1 VER 2.3a)                                                     *
+;* (DESIGN RULE DOCUMENT:      T-013-LO-DR-001    VER 2.3)                                                      *
+;****************************************************************************************************************
+;* TSMC developed this deck using Cadence Assura formats.
+;* The deck is to be used only in Assura tools.
+;*************************************************************************************
+;----------------------------------------------------------------------
+;  DISCLAIMER
+;
+;  The information contained herein is provided by TSMC on an "AS IS" basis
+;  without any warranty, and TSMC has no obligation to support or otherwise
+;  maintain the information.  TSMC disclaims any representation that the
+;  information does not infringe any intellectual property rights or proprietary
+;  rights of any third parties.  There are no other warranties given by TSMC,
+;  whether express, implied or statutory, including, without limitation, implied
+;  warranties of merchantability and fitness for a particular purpose.
+;
+;  STATEMENT OF USE
+;
+;  This information contains confidential and proprietary information of TSMC.
+;  No part of this information may be reproduced, transmitted, transcribed,
+;  stored in a retrieval system, or translated into any human or computer
+;  language, in any form or by any means, electronic, mechanical, magnetic,
+;  optical, chemical, manual, or otherwise, without the prior written permission
+;  of TSMC.  This information was prepared for informational purpose and is for
+;  use by TSMC's customers only.  TSMC reserves the right to make changes in the
+;  information at any time and without notice.
+;
+;-------------------------------------------------------------------------
+;
+;=======================
+;== ENVIRONMENT SETUP ==
+;=======================
+LargeNumber   = 1000000000
+PO_THICKNESS  = 0.18
+DIODE_AREA    = 0.16
+DIODE_AREA_AP = 0.06
+APn_THICKNESS = 1.45
+
+
+
+drcExtractRules(
+	
+layerDefs( "gds2"
+    CHIP    = cellBoundary(root)
+    DIFFi   = layer( 6 )
+    PDIFFi  = layer( 7 )
+    NDIFFi  = layer( 8 )
+    OD2i    = layer( 15 )
+    POLYGi  = layer( 17 )
+    CONTi   = layer( 30 )
+    M1i     = layer( 31 type(0 3:255) )
+    DUM1    = layer( 31 type(1) ) 
+    M1SLOTi = layer( 31 type(2) )
+    VIA1i   = layer( 51 )
+    M2i     = layer( 32 type(0 3:255) )
+    DUM2    = layer( 32 type(1) ) 
+    M2SLOTi = layer( 32 type(2) )
+    VIA2i   = layer( 52 )
+    M3i     = layer( 33 type(0 3:255) )
+    DUM3    = layer( 33 type(1) ) 
+    M3SLOTi = layer( 33 type(2) ) 
+    VIA3i   = layer( 53 )
+    M4i     = layer( 34 type(0 3:255) )
+    DUM4    = layer( 34 type(1) ) 
+    M4SLOTi = layer( 34 type(2) ) 
+    VIA4i   = layer( 54 )
+    M5i     = layer( 35 type(0 3:255) )
+    DUM5    = layer( 35 type(1) ) 
+    M5SLOTi = layer( 35 type(2) )
+    VIA5i   = layer( 55 )
+    M6i     = layer( 36 type(0 3:255) )
+    DUM6    = layer( 36 type(1) ) 
+    M6SLOTi = layer( 36 type(2) )
+    VIA6i   = layer( 56 )
+    M7i     = layer( 37 type(0 3:255) )
+    DUM7    = layer( 37 type(1) ) 
+    M7SLOTi = layer( 37 type(2) )
+    VIA7i   = layer( 57 )
+    M8i     = layer( 38 type(0 3:255) )
+    DUM8    = layer( 38 type(1) ) 
+    M8SLOTi = layer( 38 type(2) ) 
+    VIADi   = layer( 167 ) 
+    MDi     = layer( 168 type(0 3:255) )
+    DUMD    = layer( 168 type(1) ) 
+    MDSLOTi = layer( 168 type(2) )
+    CTMi    = layer( 77 )
+    CBMi    = layer( 88 )
+    APi     = layer( 42 )
+    RVi     = layer( 85 )
+    CBD     = layer( 169 )
+    CB      = layer( 43 )
+    CB2     = layer( 86 )
+    DOD     = layer( 6 type(1) )   ; DOD should be an individual CAD layer and different from real OD
+    DPO     = layer( 17 type(1) )  ; DPO should be an individual CAD layer and different from real POLGY
+    Cu_PPI  = layer( 42 type(10) )  ; Cu_PPI interconnection between Polymide1 and Polymide2 for WLCSP
+
+) ;end of layerdefs_GDS2
+
+layerDefs( "df2"
+    CHIP    = cellBoundary(root)
+    DIFFi   = layer( "OD"     type( "drawing" ) )
+    PDIFFi  = layer( "PDIFF"  type( "drawing" ) )
+    NDIFFi  = layer( "NDIFF"  type( "drawing" ) )
+    OD2i    = layer( "OD2"    type( "drawing" ) )
+    POLYGi  = layer( "POLYG"  type( "drawing" ) )
+    CONTi   = layer( "CONT"   type( "drawing" ) )
+    M1i     = layer( "METAL1" type( "drawing" ) )
+    DUM1    = layer( "METAL1" type( "dummy" ) ) 
+    M1SLOTi = layer( "METAL1" type( "slot" ) )
+    VIA1i   = layer( "VIA12"  type( "drawing" ) )
+    M2i     = layer( "METAL2" type( "drawing" ) )
+    DUM2    = layer( "METAL2" type( "dummy" ) ) 
+    M2SLOTi = layer( "METAL2" type( "slot" ) )
+    VIA2i   = layer( "VIA23"  type( "drawing" ) )
+    M3i     = layer( "METAL3" type( "drawing" ) )
+    DUM3    = layer( "METAL3" type( "dummy" ) ) 
+    M3SLOTi = layer( "METAL3" type( "slot" ) ) 
+    VIA3i   = layer( "VIA34"  type( "drawing" ) )
+    M4i     = layer( "METAL4" type( "drawing" ) )
+    DUM4    = layer( "METAL4" type( "dummy" ) ) 
+    M4SLOTi = layer( "METAL4" type( "slot" ) ) 
+    VIA4i   = layer( "VIA45"  type( "drawing" ) )
+    M5i     = layer( "METAL5" type( "drawing" ) )
+    DUM5    = layer( "METAL5" type( "dummy" ) ) 
+    M5SLOTi = layer( "METAL5" type( "slot" ) )
+    VIA5i   = layer( "VIA56"  type( "drawing" ) )
+    M6i     = layer( "METAL6" type( "drawing" ) )
+    DUM6    = layer( "METAL6" type( "dummy" ) ) 
+    M6SLOTi = layer( "METAL6" type( "slot" ) )
+    VIA6i   = layer( "VIA67"  type( "drawing" ) )
+    M7i     = layer( "METAL7" type( "drawing" ) )
+    DUM7    = layer( "METAL7" type( "dummy" ) ) 
+    M7SLOTi = layer( "METAL7" type( "slot" ) )
+    VIA7i   = layer( "VIA78"  type( "drawing" ) )
+    M8i     = layer( "METAL8" type( "drawing" ) )
+    DUM8    = layer( "METAL8" type( "dummy" ) ) 
+    M8SLOTi = layer( "METAL8" type( "slot" ) ) 
+    VIADi   = layer( "VIAD"   type( "drawing" ) ) 
+    MDi     = layer( "MD"     type( "drawing" ) )
+    DUMD    = layer( "MD"     type( "dummy" ) ) 
+    MDSLOTi = layer( "MD"     type( "slot" ) )
+    CTMi    = layer( "CTM"    type( "drawing" ) )
+    CBMi    = layer( "CBM"    type( "drawing" ) )
+    APi     = layer( "AP"     type( "drawing" ) )
+    RVi     = layer( "RV"     type( "drawing" ) )
+    CBD     = layer( "CBD"    type( "drawing" ) )
+    CB      = layer( "PAD"    type( "drawing" ) )
+    CB2     = layer( "CB2"    type( "drawing" ) )
+    DOD     = layer( "OD"     type( "dummy" ) )     ; DOD should be an individual CAD layer and different from real OD
+    DPO     = layer( "POLYG"  type( "dummy" ) )     ; DPO should be an individual CAD layer and different from real POLGY
+    Cu_PPI  = layer( "AP"     type( "drawing1" ) )  ; Cu_PPI interconnection between Polymide1 and Polymide2 for WLCSP
+) ;end of layerDefs_DFII
+
+
+
+ODi   = geomOr( DIFFi PDIFFi NDIFFi ) 
+OD    = geomButtOrOver( ODi geomOr( POLYGi CONTi ) )
+POLY  = geomButtOrOver( POLYGi geomOr( OD CONTi ) )
+VIAD  = geomCat( VIADi )
+
+/* Separate the via upon CTM region */
+VIAt  = geomAndNot( VIA7i geomButtOrOver( VIA7i CTMi ) )
+VIAc  = geomAnd( VIA7i CTMi )
+
+GATE  = geomAnd( OD POLY )
+SD    = geomButtOrOver( geomAndNot( OD POLY ) CONTi )
+CO_PO = geomButtOrOver( CONTi POLY )
+    
+/* metal in sillicon */
+M1x = geomAndNot( M1i M1SLOTi )
+M1  = geomButtOrOver( M1x geomOr( CONTi VIA1i ) ) 
+M2x = geomAndNot( M2i M2SLOTi )
+M2  = geomButtOrOver( M2x geomOr( VIA1i VIA2i ) )
+M3x = geomAndNot( M3i M3SLOTi )
+M3  = geomButtOrOver( M3x geomOr( VIA2i VIA3i ) )
+M4x = geomAndNot( M4i M4SLOTi )
+M4  = geomButtOrOver( M4x geomOr( VIA3i VIA4i ) )
+M5x = geomAndNot( M5i M5SLOTi )
+M5  = geomButtOrOver( M5x geomOr( VIA4i VIA5i ) )
+M6x = geomAndNot( M6i M6SLOTi )
+M6  = geomButtOrOver( M6x geomOr( VIA5i VIA6i ) )
+M7x = geomAndNot( M7i M7SLOTi )
+M7  = geomButtOrOver( M7x geomOr( VIA6i VIA7i ) )
+M8x = geomAndNot( M8i M8SLOTi )
+M8  = geomButtOrOver( M8x geomOr( VIA7i VIAD ) )
+MDx = geomAndNot( MDi MDSLOTi )
+MD  = geomButtOrOver( MDx VIAD )
+AP  = geomButtOrOver( APi RVi  )
+
+HV_GATE = geomAnd( GATE OD2i )
+
+
+;=================
+;== POLY CHECKS ==
+;=================
+
+geomConnect(
+	    buttOrOver( GATE POLY )
+	    buttOrOver( HV_GATE POLY )
+	   )
+
+processAntenna(
+	       gate(( GATE POLY ))
+	       antenna( POLY )
+	       ratio = plusp(GATE.area) * ( plusp(HV_GATE.area) * ( POLY.perimeter * PO_THICKNESS / GATE.area - 500 ) + zerop(HV_GATE.area) * ( POLY.perimeter * PO_THICKNESS / GATE.area - 1000) )
+	       ERR   = drcAntenna( POLY ( GATE ) ratio ( keep > 0 ) suppressErrorMessage ) 
+	)
+
+AR1POLY = geomOr( ERR_GATE )
+errorLayer( AR1POLY "A.R.1.POLY (Poly perim*thickness / gate area) > (500 in OD2, 1000 not in OD2)")
+
+
+;===============
+;== CO CHECKS ==
+;===============
+
+geomConnect(
+	    buttOrOver( GATE POLY )
+	    buttOrOver( HV_GATE POLY )
+	    buttOrOver( CO_PO POLY )
+	   )
+
+processAntenna(
+	       gate(( GATE POLY ))
+	       antenna( CO_PO )
+	       ratio = plusp(HV_GATE.area) * ( CO_PO.area / GATE.area - 10 ) + zerop(HV_GATE.area) * ( CO_PO.area / GATE.area - 50)
+	       ERR   = drcAntenna( CO_PO ( GATE ) ratio ( keep > 0 ) suppressErrorMessage ) 
+	)
+AR2CO = geomOr( ERR_GATE )
+errorLayer( AR2CO "A.R.2.CO (contact area / gate area) > (10 in OD2, 50 not in OD2)")
+
+
+;===============
+;== M1 CHECKS ==
+;===============
+geomConnect(
+	    buttOrOver( GATE POLY )
+	    buttOrOver( HV_GATE POLY )
+	    buttOrOver( CO_PO POLY )
+	           via( CONTi M1 POLY SD )
+	   )
+
+processAntenna(
+	       gate(( GATE POLY ))
+	       antenna( cumulative M1 )
+               M1_MIN_DIO = if( ( SD.area-DIODE_AREA ) >= 0  then 1 else 0  )
+               value  =  plusp(M1.area) * zerop(HV_GATE.area) * M1.area/GATE.area
+               ratio  = if( M1_MIN_DIO >= 1 then 0 else value  )
+               error  = if( M1_MIN_DIO >= 1 then LargeNumber  else 5500  )
+	       ERR1   = drcAntenna( M1 ( GATE ) ratio ( keep > error ) suppressErrorMessage ) 
+	      )
+
+AR4M1A = geomOr( ERR1_GATE )
+errorLayer( AR4M1A "A.R.4.M1.A (M1 top area / gate area) without protection OD > 5500 (without OD2)")
+
+processAntenna(
+	       gate(( HV_GATE POLY ))
+	       antenna( cumulative M1 )
+               M1_MIN_DIO = if( ( SD.area-DIODE_AREA ) >= 0  then 1 else 0  )
+               value  = plusp(M1.area) * plusp(HV_GATE.area) * M1.area/GATE.area
+               ratio  = if( M1_MIN_DIO >= 1 then 0 else value  )
+	       ERR2   = drcAntenna( M1 ( HV_GATE ) ratio ( keep > 600 ) suppressErrorMessage ) 
+	      )
+
+AR4M1B = geomOr( ERR2_HV_GATE )
+errorLayer( AR4M1B "A.R.4.M1.B (M1 top area / gate area) without protection OD > 600 (with OD2)")
+
+processAntenna(
+	       gate(( GATE POLY ))
+	       antenna( cumulative M1 )
+               M1_MIN_DIO = if( ( SD.area-DIODE_AREA ) >= 0  then 1 else 0  )
+               value1 = plusp(M1.area) * plusp(GATE.area) * M1.area/GATE.area
+               value2 = 43000 + SD.area * 456
+               ratio  = if( M1_MIN_DIO >= 1 then value1 else 0 )
+	       ERR3   = drcAntenna( M1 ( GATE ) ratio ( keep > value2 ) suppressErrorMessage ) 
+	      )
+
+AR6M1 = geomOr( ERR3_GATE )
+errorLayer( AR6M1 "A.R.6.M1 (M1 top area / gate area) with protection OD > (protection OD area)*456 + 43000 ")
+
+
+;===============
+;== M2 CHECKS ==
+;===============
+geomConnect(
+	    buttOrOver( GATE POLY )
+	    buttOrOver( HV_GATE POLY )
+	    buttOrOver( CO_PO POLY )
+	           via( CONTi M1 POLY SD )
+	           via( VIA1i M1 M2      )
+	   )
+
+processAntenna(
+	       gate(( GATE POLY ))
+               antenna( cumulative M2 )
+               M2_MIN_DIO = if( ( SD.area - DIODE_AREA ) >= 0 then 1 else 0  )
+               value  =  plusp(M2.area) * zerop(HV_GATE.area) * M2.area/GATE.area
+               ratio  = if( M2_MIN_DIO >= 1 then 0 else value  )
+               error  = if( M2_MIN_DIO >= 1 then LargeNumber  else 5500  )
+	       ERR1   = drcAntenna( M2 ( GATE ) ratio ( keep > error ) suppressErrorMessage ) 
+	      )
+
+AR4M2A = geomOr( ERR1_GATE )
+errorLayer( AR4M2A "A.R.4.M2.A (M2 top area / gate area) without protection OD > 5500 (without OD2)")
+
+processAntenna(
+	       gate(( HV_GATE POLY ))
+	       antenna( cumulative M2 )
+               M2_MIN_DIO = if( ( SD.area - DIODE_AREA ) >= 0 then 1 else 0  )
+               value  = plusp(M2.area) * plusp(HV_GATE.area) * M2.area/GATE.area
+               ratio  = if( M2_MIN_DIO >= 1 then 0 else value  )
+	       ERR2   = drcAntenna( M2 ( HV_GATE ) ratio ( keep > 600 ) suppressErrorMessage ) 
+	      )
+
+AR4M2B = geomOr( ERR2_HV_GATE )
+errorLayer( AR4M2B "A.R.4.M2.B (M2 top area / gate area) without protection OD > 600 (with OD2)")
+
+processAntenna(
+	       gate(( GATE POLY ))
+	       antenna( cumulative M2 )
+               M2_MIN_DIO = if( ( SD.area - DIODE_AREA ) >= 0 then 1 else 0  )
+               value1 = plusp(M2.area) * plusp(GATE.area) * M2.area/GATE.area 
+               value2 = 43000 + SD.area * 456
+               ratio  = if( M2_MIN_DIO >= 1 then value1 else 0 )
+	       ERR3   = drcAntenna( M2 ( GATE ) ratio ( keep > value2 ) suppressErrorMessage ) 
+	      )
+
+AR6M2 = geomOr( ERR3_GATE )
+errorLayer( AR6M2 "A.R.6.M2 (M2 top area / gate area) with protection OD > (protection OD area)*456 + 43000 ")
+
+;===============
+;== M3 CHECKS ==
+;===============
+geomConnect(
+	    buttOrOver( GATE POLY )
+	    buttOrOver( HV_GATE POLY )
+	    buttOrOver( CO_PO POLY )
+	           via( CONTi M1 POLY SD )
+	           via( VIA1i M1 M2      )
+	           via( VIA2i M2 M3      )
+	   )
+
+processAntenna(
+	       gate(( GATE POLY ))
+               antenna( cumulative M3 )
+               M3_MIN_DIO = if( ( SD.area - DIODE_AREA ) >= 0 then 1 else 0  )
+               value  =  plusp(M3.area) * zerop(HV_GATE.area) * M3.area/GATE.area
+               ratio  = if( M3_MIN_DIO >= 1 then 0 else value  )
+               error  = if( M3_MIN_DIO >= 1 then LargeNumber  else 5500  )
+	       ERR1   = drcAntenna( M3 ( GATE ) ratio ( keep > error ) suppressErrorMessage ) 
+	      )
+
+AR4M3A = geomOr( ERR1_GATE )
+errorLayer( AR4M3A "A.R.4.M3.A (M3 top area / gate area) without protection OD > 5500 (without OD2)")
+
+processAntenna(
+	       gate(( HV_GATE POLY ))
+	       antenna( cumulative M3 )
+               M3_MIN_DIO = if( ( SD.area - DIODE_AREA ) >= 0 then 1 else 0  )
+               value  = plusp(M3.area) * plusp(HV_GATE.area) * M3.area/GATE.area
+               ratio  = if( M3_MIN_DIO >= 1 then 0 else value  )
+	       ERR2   = drcAntenna( M3 ( HV_GATE ) ratio ( keep > 600 ) suppressErrorMessage ) 
+	      )
+
+AR4M3B = geomOr( ERR2_HV_GATE )
+errorLayer( AR4M3B "A.R.4.M3.B (M3 top area / gate area) without protection OD > 600 (with OD2)")
+
+processAntenna(
+	       gate(( GATE POLY ))
+	       antenna( cumulative M3 )
+               M3_MIN_DIO = if( ( SD.area - DIODE_AREA ) >= 0 then 1 else 0  )
+               value1 = plusp(M3.area) * plusp(GATE.area) * M3.area/GATE.area 
+               value2 = 43000 + SD.area * 456
+               ratio  = if( M3_MIN_DIO >= 1 then value1 else 0 )
+	       ERR3   = drcAntenna( M3 ( GATE ) ratio ( keep > value2 ) suppressErrorMessage ) 
+	      )
+
+AR6M3 = geomOr( ERR3_GATE )
+errorLayer( AR6M3 "A.R.6.M3 (M3 top area / gate area) with protection OD > (protection OD area)*456 + 43000 ")
+
+;===============
+;== M4 CHECKS ==
+;===============
+geomConnect(
+	    buttOrOver( GATE POLY )
+	    buttOrOver( HV_GATE POLY )
+	    buttOrOver( CO_PO POLY )
+	           via( CONTi M1 POLY SD )
+	           via( VIA1i M1 M2      )
+	           via( VIA2i M2 M3      )
+	           via( VIA3i M3 M4      )
+	   )
+
+processAntenna(
+	       gate(( GATE POLY ))
+               antenna( cumulative M4 )
+               M4_MIN_DIO = if( ( SD.area - DIODE_AREA ) >= 0 then 1 else 0  )
+               value  =  plusp(M4.area) * zerop(HV_GATE.area) * M4.area/GATE.area
+               ratio  = if( M4_MIN_DIO >= 1 then 0 else value  )
+               error  = if( M4_MIN_DIO >= 1 then LargeNumber  else 5500  )
+	       ERR1   = drcAntenna( M4 ( GATE ) ratio ( keep > error ) suppressErrorMessage ) 
+	      )
+
+AR4M4A = geomOr( ERR1_GATE )
+errorLayer( AR4M4A "A.R.4.M4.A (M4 top area / gate area) without protection OD > 5500 (without OD2)")
+
+processAntenna(
+	       gate(( HV_GATE POLY ))
+	       antenna( cumulative M4 )
+               M4_MIN_DIO = if( ( SD.area - DIODE_AREA ) >= 0 then 1 else 0  )
+               value  = plusp(M4.area) * plusp(HV_GATE.area) * M4.area/GATE.area
+               ratio  = if( M4_MIN_DIO >= 1 then 0 else value  )
+	       ERR2   = drcAntenna( M4 ( HV_GATE ) ratio ( keep > 600 ) suppressErrorMessage ) 
+	      )
+
+AR4M4B = geomOr( ERR2_HV_GATE )
+errorLayer( AR4M4B "A.R.4.M4.B (M4 top area / gate area) without protection OD > 600 (with OD2)")
+
+processAntenna(
+	       gate(( GATE POLY ))
+	       antenna( cumulative M4 )
+               M4_MIN_DIO = if( ( SD.area - DIODE_AREA ) >= 0 then 1 else 0  )
+               value1 = plusp(M4.area) * plusp(GATE.area) * M4.area/GATE.area 
+               value2 = 43000 + SD.area * 456
+               ratio  = if( M4_MIN_DIO >= 1 then value1 else 0 )
+	       ERR3   = drcAntenna( M4 ( GATE ) ratio ( keep > value2 ) suppressErrorMessage ) 
+	      )
+
+AR6M4 = geomOr( ERR3_GATE )
+errorLayer( AR6M4 "A.R.6.M4 (M4 top area / gate area) with protection OD > (protection OD area)*456 + 43000 ")
+
+;===============
+;== M5 CHECKS ==
+;===============
+geomConnect(
+	    buttOrOver( GATE POLY )
+	    buttOrOver( HV_GATE POLY )
+	    buttOrOver( CO_PO POLY )
+	           via( CONTi M1 POLY SD )
+	           via( VIA1i M1 M2      )
+	           via( VIA2i M2 M3      )
+	           via( VIA3i M3 M4      )
+	           via( VIA4i M4 M5      )
+	   )
+
+processAntenna(
+	       gate(( GATE POLY ))
+               antenna( cumulative M5 )
+               M5_MIN_DIO = if( ( SD.area - DIODE_AREA ) >= 0 then 1 else 0  )
+               value  =  plusp(M5.area) * zerop(HV_GATE.area) * M5.area/GATE.area
+               ratio  = if( M5_MIN_DIO >= 1 then 0 else value  )
+               error  = if( M5_MIN_DIO >= 1 then LargeNumber  else 5500  )
+	       ERR1   = drcAntenna( M5 ( GATE ) ratio ( keep > error ) suppressErrorMessage ) 
+	      )
+
+AR4M5A = geomOr( ERR1_GATE )
+errorLayer( AR4M5A "A.R.4.M5.A (M5 top area / gate area) without protection OD > 5500 (without OD2)")
+
+processAntenna(
+	       gate(( HV_GATE POLY ))
+	       antenna( cumulative M5 )
+               M5_MIN_DIO = if( ( SD.area - DIODE_AREA ) >= 0 then 1 else 0  )
+               value  = plusp(M5.area) * plusp(HV_GATE.area) * M5.area/GATE.area
+               ratio  = if( M5_MIN_DIO >= 1 then 0 else value  )
+	       ERR2   = drcAntenna( M5 ( HV_GATE ) ratio ( keep > 600 ) suppressErrorMessage ) 
+	      )
+
+AR4M5B = geomOr( ERR2_HV_GATE )
+errorLayer( AR4M5B "A.R.4.M5.B (M5 top area / gate area) without protection OD > 600 (with OD2)")
+
+processAntenna(
+	       gate(( GATE POLY ))
+	       antenna( cumulative M5 )
+               M5_MIN_DIO = if( ( SD.area - DIODE_AREA ) >= 0 then 1 else 0  )
+               value1 = plusp(M5.area) * plusp(GATE.area) * M5.area/GATE.area 
+               value2 = 43000 + SD.area * 456
+               ratio  = if( M5_MIN_DIO >= 1 then value1 else 0 )
+	       ERR3   = drcAntenna( M5 ( GATE ) ratio ( keep > value2 ) suppressErrorMessage ) 
+	      )
+
+AR6M5 = geomOr( ERR3_GATE )
+errorLayer( AR6M5 "A.R.6.M5 (M5 top area / gate area) with protection OD > (protection OD area)*456 + 43000 ")
+
+;===============
+;== M6 CHECKS ==
+;===============
+geomConnect(
+	    buttOrOver( GATE POLY )
+	    buttOrOver( HV_GATE POLY )
+	    buttOrOver( CO_PO POLY )
+	           via( CONTi M1 POLY SD )
+	           via( VIA1i M1 M2      )
+	           via( VIA2i M2 M3      )
+	           via( VIA3i M3 M4      )
+	           via( VIA4i M4 M5      )
+	           via( VIA5i M5 M6      )
+	   )
+
+processAntenna(
+	       gate(( GATE POLY ))
+               antenna( cumulative M6 )
+               M6_MIN_DIO = if( ( SD.area - DIODE_AREA ) >= 0 then 1 else 0  )
+               value  =  plusp(M6.area) * zerop(HV_GATE.area) * M6.area/GATE.area
+               ratio  = if( M6_MIN_DIO >= 1 then 0 else value  )
+               error  = if( M6_MIN_DIO >= 1 then LargeNumber  else 5500  )
+	       ERR1   = drcAntenna( M6 ( GATE ) ratio ( keep > error ) suppressErrorMessage ) 
+	      )
+
+AR4M6A = geomOr( ERR1_GATE )
+errorLayer( AR4M6A "A.R.4.M6.A (M6 top area / gate area) without protection OD > 5500 (without OD2)")
+
+processAntenna(
+	       gate(( HV_GATE POLY ))
+	       antenna( cumulative M6 )
+               M6_MIN_DIO = if( ( SD.area - DIODE_AREA ) >= 0 then 1 else 0  )
+               value  = plusp(M6.area) * plusp(HV_GATE.area) * M6.area/GATE.area
+               ratio  = if( M6_MIN_DIO >= 1 then 0 else value  )
+	       ERR2   = drcAntenna( M6 ( HV_GATE ) ratio ( keep > 600 ) suppressErrorMessage ) 
+	      )
+
+AR4M6B = geomOr( ERR2_HV_GATE )
+errorLayer( AR4M6B "A.R.4.M6.B (M6 top area / gate area) without protection OD > 600 (with OD2)")
+
+processAntenna(
+	       gate(( GATE POLY ))
+	       antenna( cumulative M6 )
+               M6_MIN_DIO = if( ( SD.area - DIODE_AREA ) >= 0 then 1 else 0  )
+               value1 = plusp(M6.area) * plusp(GATE.area) * M6.area/GATE.area 
+               value2 = 43000 + SD.area * 456
+               ratio  = if( M6_MIN_DIO >= 1 then value1 else 0 )
+	       ERR3   = drcAntenna( M6 ( GATE ) ratio ( keep > value2 ) suppressErrorMessage ) 
+	      )
+
+AR6M6 = geomOr( ERR3_GATE )
+errorLayer( AR6M6 "A.R.6.M6 (M6 top area / gate area) with protection OD > (protection OD area)*456 + 43000 ")
+
+;===============
+;== M7 CHECKS ==
+;===============
+geomConnect(
+	    buttOrOver( GATE POLY )
+	    buttOrOver( HV_GATE POLY )
+	    buttOrOver( CO_PO POLY )
+	           via( CONTi M1 POLY SD )
+	           via( VIA1i M1 M2      )
+	           via( VIA2i M2 M3      )
+	           via( VIA3i M3 M4      )
+	           via( VIA4i M4 M5      )
+	           via( VIA5i M5 M6      )
+	           via( VIA6i M6 M7      )
+	   )
+
+processAntenna(
+	       gate(( GATE POLY ))
+               antenna( cumulative M7 )
+               M7_MIN_DIO = if( ( SD.area - DIODE_AREA ) >= 0 then 1 else 0  )
+               value  =  plusp(M7.area) * zerop(HV_GATE.area) * M7.area/GATE.area
+               ratio  = if( M7_MIN_DIO >= 1 then 0 else value  )
+               error  = if( M7_MIN_DIO >= 1 then LargeNumber  else 5500  )
+	       ERR1   = drcAntenna( M7 ( GATE ) ratio ( keep > error ) suppressErrorMessage ) 
+	      )
+
+AR4M7A = geomOr( ERR1_GATE )
+errorLayer( AR4M7A "A.R.4.M7.A (M7 top area / gate area) without protection OD > 5500 (without OD2)")
+
+processAntenna(
+	       gate(( HV_GATE POLY ))
+	       antenna( cumulative M7 )
+               M7_MIN_DIO = if( ( SD.area - DIODE_AREA ) >= 0 then 1 else 0  )
+               value  = plusp(M7.area) * plusp(HV_GATE.area) * M7.area/GATE.area
+               ratio  = if( M7_MIN_DIO >= 1 then 0 else value  )
+	       ERR2   = drcAntenna( M7 ( HV_GATE ) ratio ( keep > 600 ) suppressErrorMessage ) 
+	      )
+
+AR4M7B = geomOr( ERR2_HV_GATE )
+errorLayer( AR4M7B "A.R.4.M7.B (M7 top area / gate area) without protection OD > 600 (with OD2)")
+
+processAntenna(
+	       gate(( GATE POLY ))
+	       antenna( cumulative M7 )
+               M7_MIN_DIO = if( ( SD.area - DIODE_AREA ) >= 0 then 1 else 0  )
+               value1 = plusp(M7.area) * plusp(GATE.area) * M7.area/GATE.area 
+               value2 = 43000 + SD.area * 456
+               ratio  = if( M7_MIN_DIO >= 1 then value1 else 0 )
+	       ERR3   = drcAntenna( M7 ( GATE ) ratio ( keep > value2 ) suppressErrorMessage ) 
+	      )
+
+AR6M7 = geomOr( ERR3_GATE )
+errorLayer( AR6M7 "A.R.6.M7 (M7 top area / gate area) with protection OD > (protection OD area)*456 + 43000 ")
+
+
+
+;===============
+;== M8 CHECKS ==
+;===============
+
+CHIP_MD  = geomButtOrOver( CHIP MD )
+M8_LAST  = geomAndNot( M8 geomButtOrOver( M8 CHIP_MD ) )  ; last metal is M8
+M8_NLAST = geomButtOrOver( M8 CHIP_MD ) 
+
+geomConnect(
+	    buttOrOver( GATE POLY )
+	    buttOrOver( HV_GATE POLY )
+	    buttOrOver( CO_PO POLY )
+	           via( CONTi M1 POLY SD )
+	           via( VIA1i M1 M2     )
+	           via( VIA2i M2 M3     )
+	           via( VIA3i M3 M4     )
+	           via( VIA4i M4 M5     )
+	           via( VIA5i M5 M6     )
+	           via( VIA6i M6 M7     )
+	           via( VIA7i M7 M8     )
+	    buttOrOver( CB    M8 )
+	    buttOrOver( CBD   M8 )
+	   )
+
+
+processAntenna(
+	       gate(( GATE POLY ))
+               antenna( cumulative M8 )
+               M8_MIN_DIO = if( ( SD.area - DIODE_AREA ) >= 0 then 1 else 0  )
+               value  =  plusp(M8.area) * zerop(HV_GATE.area) * M8.area/GATE.area
+               ratio  = if( M8_MIN_DIO >= 1 then 0 else value  )
+               error  = if( M8_MIN_DIO >= 1 then LargeNumber  else 5500  )
+	       ERR1   = drcAntenna( M8 ( GATE ) ratio ( keep > error ) suppressErrorMessage ) 
+	      )
+
+AR4M8A = geomOr( ERR1_GATE )
+errorLayer( AR4M8A "A.R.4.M8.A (M8 top area / gate area) without protection OD > 5500 (without OD2)")
+
+processAntenna(
+	       gate(( HV_GATE POLY ))
+	       antenna( cumulative M8 )
+               M8_MIN_DIO = if( ( SD.area - DIODE_AREA ) >= 0 then 1 else 0  )
+               value  = plusp(M8.area) * plusp(HV_GATE.area) * M8.area/GATE.area
+               ratio  = if( M8_MIN_DIO >= 1 then 0 else value  )
+	       ERR2   = drcAntenna( M8 ( HV_GATE ) ratio ( keep > 600 ) suppressErrorMessage ) 
+	      )
+
+AR4M8B = geomOr( ERR2_HV_GATE )
+errorLayer( AR4M8B "A.R.4.M8.B (M8 top area / gate area) without protection OD > 600 (with OD2)")
+
+;=================
+;== with Cu-RDL ==
+;=================
+processAntenna(
+	       gate(( GATE POLY ))
+	       antenna( cumulative M8_NLAST )
+               M8_MIN_DIO = if( ( SD.area - DIODE_AREA ) >= 0 then 1 else 0  )
+               value1 = plusp(M8_NLAST.area) * plusp(GATE.area) * M8_NLAST.area/GATE.area 
+               value2 = 43000 + SD.area * 456
+               ratio  = if( M8_MIN_DIO >= 1 then value1 else 0 )
+	       ERR3   = drcAntenna( M8_NLAST ( GATE ) ratio ( keep > value2 ) suppressErrorMessage ) 
+	      )
+
+AR6M8A = geomOr( ERR3_GATE )
+geomStamp( AR6M8A POLY )
+A_R_6_M8_A = geomNodeRelate( M8 AR6M8A conn )
+errorLayer( A_R_6_M8_A "A.R.6.M8.A (M8 top area / gate area) with protection OD > (protection OD area)*456 + 43000 ")
+
+;====================
+;== without Cu-RDL ==
+;====================
+; M8 is the last metal
+processAntenna(
+	       gate(( GATE POLY ))
+	       antenna( M8_LAST )
+               M8_MIN_DIO = if( ( SD.area - DIODE_AREA ) >= 0 then 1 else 0  )
+               value1 = plusp(M8_LAST.area) * plusp(GATE.area) * M8_LAST.area/GATE.area
+               value2 = 50000 + SD.area * 8000
+               ratio  = if( M8_MIN_DIO >= 1 then value1 else 0 )
+	       ERR4   = drcAntenna( M8_LAST ( GATE ) ratio ( keep > value2 ) suppressErrorMessage ) 
+	      )
+
+AR6M8B = geomOr( ERR4_GATE )
+geomStamp( AR6M8B POLY )
+A_R_6_M8_B = geomNodeRelate( M8 AR6M8B conn )
+errorLayer( A_R_6_M8_B "A.R.6.M8.B (M8 top area / gate area) with protection OD > (protection OD area)*8000 + 50000")
+
+
+;===============
+;== AP CHECKS ==
+;===============
+
+APn = geomAndNot( AP geomButtOrOver( AP MD ) )
+
+geomConnect(
+	    buttOrOver( GATE POLY )
+	    buttOrOver( HV_GATE POLY )
+	    buttOrOver( CO_PO POLY )
+	           via( CONTi M1 POLY SD )
+	           via( VIA1i M1 M2     )
+	           via( VIA2i M2 M3     )
+	           via( VIA3i M3 M4     )
+	           via( VIA4i M4 M5     )
+	           via( VIA5i M5 M6     )
+	           via( VIA6i M6 M7     )
+	           via( VIA7i M7 M8     )
+	           via( RVi APn M8       )
+	           via( CB  APn M8       )
+	           via( CBD APn M8       )
+	   )
+
+processAntenna(
+	       gate(( GATE POLY ))
+               antenna( APn )
+               APn_MIN_DIO = if( ( SD.area - DIODE_AREA_AP ) >= 0 then 1 else 0  )
+               value  =  plusp(APn.area) * zerop(HV_GATE.area) * APn.perimeter*APn_THICKNESS/GATE.area
+               ratio  = if( APn_MIN_DIO >= 1 then 0 else value  )
+               error  = if( APn_MIN_DIO >= 1 then LargeNumber else 2000  )
+	       ERR1   = drcAntenna( APn ( GATE ) ratio ( keep > error ) suppressErrorMessage )	       
+	      )
+
+AR11APA = geomOr( ERR1_GATE )
+geomStamp( AR11APA POLY )
+A_R_11_AP_A = geomNodeRelate( APn AR11APA conn )
+errorLayer( A_R_11_AP_A "A.R.11.AP.A (APn perimeter area / gate area) without effective diode > 2000 (without OD2)")
+
+processAntenna(
+	       gate(( HV_GATE POLY ))
+	       antenna( APn )
+               APn_MIN_DIO = if( ( SD.area - DIODE_AREA_AP ) >= 0 then 1 else 0  )
+               value  = plusp(APn.area) * plusp(HV_GATE.area) * APn.perimeter*APn_THICKNESS/GATE.area
+               ratio  = if( APn_MIN_DIO >= 1 then 0 else value  )
+	       ERR2   = drcAntenna( APn ( HV_GATE ) ratio ( keep > 1000 ) suppressErrorMessage ) 
+	      )
+
+AR11APB = geomOr( ERR2_HV_GATE )
+geomStamp( AR11APB POLY )
+A_R_11_APB = geomNodeRelate( APn AR11APB conn )
+errorLayer( A_R_11_APB "A.R.11.AP.B (APn perimeter area / gate area) without protection OD > 1000 (with OD2)")
+
+processAntenna(
+	       gate(( GATE POLY ))
+	       antenna( APn )
+               APn_MIN_DIO = if( ( SD.area - DIODE_AREA_AP ) >= 0 then 1 else 0  )
+               value1 = plusp(APn.area) * plusp(GATE.area) * APn.perimeter*APn_THICKNESS/GATE.area
+               value2 = 30000 + SD.area * 8000
+               ratio  = if( APn_MIN_DIO >= 1 then value1 else 0 )
+	       ERR3   = drcAntenna( APn ( GATE ) ratio ( keep > value2 ) suppressErrorMessage ) 
+	      )
+
+AR13AP = geomOr( ERR3_GATE )
+geomStamp( AR13AP POLY )
+A_R_13_AP = geomNodeRelate( APn AR13AP conn )
+errorLayer( A_R_13_AP "A.R.13.AP (APn perimeter area / gate area) with protection OD > (protection OD area) * 8000 + 30000")
+
+
+resetCumulative()
+
+;=================
+;== VIA1 CHECKS ==
+;=================
+
+geomConnect(
+	    buttOrOver( GATE POLY )
+	    buttOrOver( HV_GATE POLY )
+	    buttOrOver( CO_PO POLY )
+	           via( CONTi M1 POLY SD )
+	    buttOrOver( VIA1i M1    )
+	   )
+
+processAntenna(
+	       gate(( GATE POLY ))
+	       antenna( VIA1i M1 )
+               VIA1_MIN_DIO = if( ( SD.area-DIODE_AREA ) >= 0  then 1 else 0  )
+               value = plusp( M1.area) * plusp(GATE.area) * ( zerop(HV_GATE.area) * ( VIA1i.area / GATE.area - 50 ) + plusp(HV_GATE.area) * ( VIA1i.area / GATE.area - 20 ) )
+               ratio  = if( VIA1_MIN_DIO >= 1 then 0 else value )
+	       ERR1   = drcAntenna( M1 ( GATE ) ratio ( keep > 0 ) suppressErrorMessage ) 
+	      )
+
+AR3VIA1 = geomOr( ERR1_GATE )
+geomStamp( AR3VIA1 POLY )
+A_R_3_VIA1 = geomNodeRelate( M1 AR3VIA1 conn )
+errorLayer( A_R_3_VIA1 "A.R.3.VIA1 (VIA1 area / gate area) without protection OD should > 50 (without OD2) or  > 20 (with OD2)")
+
+
+processAntenna(
+	       gate(( GATE POLY ))
+	       antenna( VIA1i M1 )
+               VIA1_MIN_DIO = if( ( SD.area-DIODE_AREA ) >= 0  then 1 else 0  )
+               value = ( plusp(M1.area) * plusp(GATE.area)) * ( VIA1i.area / GATE.area - SD.area * 210 - 900 )
+               ratio  = if( VIA1_MIN_DIO >= 1 then value else 0 )
+	       ERR1   = drcAntenna( M1 ( GATE ) ratio ( keep > 0 ) suppressErrorMessage ) 
+	      )
+
+AR5VIA1 = geomOr( ERR1_GATE )
+geomStamp( AR5VIA1 POLY )
+A_R_5_VIA1 = geomNodeRelate( M1 AR5VIA1 conn )
+errorLayer( A_R_5_VIA1 "A.R.5.VIA1 (VIA1 area / gate area) with protection OD > (protection OD area)*210 + 900")
+;=================
+;== VIA2 CHECKS ==
+;=================
+
+geomConnect(
+	    buttOrOver( GATE POLY )
+	    buttOrOver( HV_GATE POLY )
+	    buttOrOver( CO_PO POLY )
+	           via( CONTi M1 POLY SD )
+                   via( VIA1i M2 M1 )
+	    buttOrOver( VIA2i M2    )
+	   )
+
+processAntenna(
+	       gate(( GATE POLY ))
+	       antenna( VIA2i M2 )
+               VIA2_MIN_DIO = if( ( SD.area-DIODE_AREA ) >= 0  then 1 else 0  )
+               value = plusp( M2.area) * plusp(GATE.area) * ( zerop(HV_GATE.area) * ( VIA2i.area / GATE.area - 50 ) + plusp(HV_GATE.area) * ( VIA2i.area / GATE.area - 20 ) )
+               ratio  = if( VIA2_MIN_DIO >= 1 then 0 else value )
+	       ERR1   = drcAntenna( M2 ( GATE ) ratio ( keep > 0 ) suppressErrorMessage ) 
+	      )
+
+AR3VIA2 = geomOr( ERR1_GATE )
+geomStamp( AR3VIA2 POLY )
+A_R_3_VIA2 = geomNodeRelate( M2 AR3VIA2 conn )
+errorLayer( A_R_3_VIA2 "A.R.3.VIA2 (VIA2 area / gate area) without protection OD should > 50 (without OD2) or  > 20 (with OD2)")
+
+
+processAntenna(
+	       gate(( GATE POLY ))
+	       antenna( VIA2i M2 )
+               VIA2_MIN_DIO = if( ( SD.area-DIODE_AREA ) >= 0  then 1 else 0  )
+               value = ( plusp(M2.area) * plusp(GATE.area)) * ( VIA2i.area / GATE.area - SD.area * 210 - 900 )
+               ratio  = if( VIA2_MIN_DIO >= 1 then value else 0 )
+	       ERR1   = drcAntenna( M2 ( GATE ) ratio ( keep > 0 ) suppressErrorMessage ) 
+	      )
+
+AR5VIA2 = geomOr( ERR1_GATE )
+geomStamp( AR5VIA2 POLY )
+A_R_5_VIA2 = geomNodeRelate( M2 AR5VIA2 conn )
+errorLayer( A_R_5_VIA2 "A.R.5.VIA2 (VIA2 area / gate area) with protection OD > (protection OD area)*210 + 900")
+;=================
+;== VIA3 CHECKS ==
+;=================
+
+geomConnect(
+	    buttOrOver( GATE POLY )
+	    buttOrOver( HV_GATE POLY )
+	    buttOrOver( CO_PO POLY )
+	           via( CONTi M1 POLY SD )
+                   via( VIA1i M2 M1 )
+                   via( VIA2i M3 M2 )
+	    buttOrOver( VIA3i M3    )
+	   )
+
+processAntenna(
+	       gate(( GATE POLY ))
+	       antenna( VIA3i M3 )
+               VIA3_MIN_DIO = if( ( SD.area-DIODE_AREA ) >= 0  then 1 else 0  )
+               value = plusp( M3.area) * plusp(GATE.area) * ( zerop(HV_GATE.area) * ( VIA3i.area / GATE.area - 50 ) + plusp(HV_GATE.area) * ( VIA3i.area / GATE.area - 20 ) )
+               ratio  = if( VIA3_MIN_DIO >= 1 then 0 else value )
+	       ERR1   = drcAntenna( M3 ( GATE ) ratio ( keep > 0 ) suppressErrorMessage ) 
+	      )
+
+AR3VIA3 = geomOr( ERR1_GATE )
+geomStamp( AR3VIA3 POLY )
+A_R_3_VIA3 = geomNodeRelate( M3 AR3VIA3 conn )
+errorLayer( A_R_3_VIA3 "A.R.3.VIA3 (VIA3 area / gate area) without protection OD should > 50 (without OD2) or  > 20 (with OD2)")
+
+
+processAntenna(
+	       gate(( GATE POLY ))
+	       antenna( VIA3i M3 )
+               VIA3_MIN_DIO = if( ( SD.area-DIODE_AREA ) >= 0  then 1 else 0  )
+               value = ( plusp(M3.area) * plusp(GATE.area)) * ( VIA3i.area / GATE.area - SD.area * 210 - 900 )
+               ratio  = if( VIA3_MIN_DIO >= 1 then value else 0 )
+	       ERR1   = drcAntenna( M3 ( GATE ) ratio ( keep > 0 ) suppressErrorMessage ) 
+	      )
+
+AR5VIA3 = geomOr( ERR1_GATE )
+geomStamp( AR5VIA3 POLY )
+A_R_5_VIA3 = geomNodeRelate( M3 AR5VIA3 conn )
+errorLayer( A_R_5_VIA3 "A.R.5.VIA3 (VIA3 area / gate area) with protection OD > (protection OD area)*210 + 900")
+;=================
+;== VIA4 CHECKS ==
+;=================
+
+geomConnect(
+	    buttOrOver( GATE POLY )
+	    buttOrOver( HV_GATE POLY )
+	    buttOrOver( CO_PO POLY )
+	           via( CONTi M1 POLY SD )
+                   via( VIA1i M2 M1 )
+                   via( VIA2i M3 M2 )
+                   via( VIA3i M4 M3 )
+	    buttOrOver( VIA4i M4    )
+	   )
+
+processAntenna(
+	       gate(( GATE POLY ))
+	       antenna( VIA4i M4 )
+               VIA4_MIN_DIO = if( ( SD.area-DIODE_AREA ) >= 0  then 1 else 0  )
+               value = plusp( M4.area) * plusp(GATE.area) * ( zerop(HV_GATE.area) * ( VIA4i.area / GATE.area - 50 ) + plusp(HV_GATE.area) * ( VIA4i.area / GATE.area - 20 ) )
+               ratio  = if( VIA4_MIN_DIO >= 1 then 0 else value )
+	       ERR1   = drcAntenna( M4 ( GATE ) ratio ( keep > 0 ) suppressErrorMessage ) 
+	      )
+
+AR3VIA4 = geomOr( ERR1_GATE )
+geomStamp( AR3VIA4 POLY )
+A_R_3_VIA4 = geomNodeRelate( M4 AR3VIA4 conn )
+errorLayer( A_R_3_VIA4 "A.R.3.VIA4 (VIA4 area / gate area) without protection OD should > 50 (without OD2) or  > 20 (with OD2)")
+
+
+processAntenna(
+	       gate(( GATE POLY ))
+	       antenna( VIA4i M4 )
+               VIA4_MIN_DIO = if( ( SD.area-DIODE_AREA ) >= 0  then 1 else 0  )
+               value = ( plusp(M4.area) * plusp(GATE.area)) * ( VIA4i.area / GATE.area - SD.area * 210 - 900 )
+               ratio  = if( VIA4_MIN_DIO >= 1 then value else 0 )
+	       ERR1   = drcAntenna( M4 ( GATE ) ratio ( keep > 0 ) suppressErrorMessage ) 
+	      )
+
+AR5VIA4 = geomOr( ERR1_GATE )
+geomStamp( AR5VIA4 POLY )
+A_R_5_VIA4 = geomNodeRelate( M4 AR5VIA4 conn )
+errorLayer( A_R_5_VIA4 "A.R.5.VIA4 (VIA4 area / gate area) with protection OD > (protection OD area)*210 + 900")
+;=================
+;== VIA5 CHECKS ==
+;=================
+
+geomConnect(
+	    buttOrOver( GATE POLY )
+	    buttOrOver( HV_GATE POLY )
+	    buttOrOver( CO_PO POLY )
+	           via( CONTi M1 POLY SD )
+                   via( VIA1i M2 M1 )
+                   via( VIA2i M3 M2 )
+                   via( VIA3i M4 M3 )
+                   via( VIA4i M5 M4 )
+	    buttOrOver( VIA5i M5    )
+	   )
+
+processAntenna(
+	       gate(( GATE POLY ))
+	       antenna( VIA5i M5 )
+               VIA5_MIN_DIO = if( ( SD.area-DIODE_AREA ) >= 0  then 1 else 0  )
+               value = plusp( M5.area) * plusp(GATE.area) * ( zerop(HV_GATE.area) * ( VIA5i.area / GATE.area - 50 ) + plusp(HV_GATE.area) * ( VIA5i.area / GATE.area - 20 ) )
+               ratio  = if( VIA5_MIN_DIO >= 1 then 0 else value )
+	       ERR1   = drcAntenna( M5 ( GATE ) ratio ( keep > 0 ) suppressErrorMessage ) 
+	      )
+
+AR3VIA5 = geomOr( ERR1_GATE )
+geomStamp( AR3VIA5 POLY )
+A_R_3_VIA5 = geomNodeRelate( M5 AR3VIA5 conn )
+errorLayer( A_R_3_VIA5 "A.R.3.VIA5 (VIA5 area / gate area) without protection OD should > 50 (without OD2) or  > 20 (with OD2)")
+
+
+processAntenna(
+	       gate(( GATE POLY ))
+	       antenna( VIA5i M5 )
+               VIA5_MIN_DIO = if( ( SD.area-DIODE_AREA ) >= 0  then 1 else 0  )
+               value = ( plusp(M5.area) * plusp(GATE.area)) * ( VIA5i.area / GATE.area - SD.area * 210 - 900 )
+               ratio  = if( VIA5_MIN_DIO >= 1 then value else 0 )
+	       ERR1   = drcAntenna( M5 ( GATE ) ratio ( keep > 0 ) suppressErrorMessage ) 
+	      )
+
+AR5VIA5 = geomOr( ERR1_GATE )
+geomStamp( AR5VIA5 POLY )
+A_R_5_VIA5 = geomNodeRelate( M5 AR5VIA5 conn )
+errorLayer( A_R_5_VIA5 "A.R.5.VIA5 (VIA5 area / gate area) with protection OD > (protection OD area)*210 + 900")
+;=================
+;== VIA6 CHECKS ==
+;=================
+
+geomConnect(
+	    buttOrOver( GATE POLY )
+	    buttOrOver( HV_GATE POLY )
+	    buttOrOver( CO_PO POLY )
+	           via( CONTi M1 POLY SD )
+                   via( VIA1i M2 M1 )
+                   via( VIA2i M3 M2 )
+                   via( VIA3i M4 M3 )
+                   via( VIA4i M5 M4 )
+                   via( VIA5i M6 M5 )
+	    buttOrOver( VIA6i M6    )
+	   )
+
+processAntenna(
+	       gate(( GATE POLY ))
+	       antenna( VIA6i M6 )
+               VIA6_MIN_DIO = if( ( SD.area-DIODE_AREA ) >= 0  then 1 else 0  )
+               value = plusp( M6.area) * plusp(GATE.area) * ( zerop(HV_GATE.area) * ( VIA6i.area / GATE.area - 50 ) + plusp(HV_GATE.area) * ( VIA6i.area / GATE.area - 20 ) )
+               ratio  = if( VIA6_MIN_DIO >= 1 then 0 else value )
+	       ERR1   = drcAntenna( M6 ( GATE ) ratio ( keep > 0 ) suppressErrorMessage ) 
+	      )
+
+AR3VIA6 = geomOr( ERR1_GATE )
+geomStamp( AR3VIA6 POLY )
+A_R_3_VIA6 = geomNodeRelate( M6 AR3VIA6 conn )
+errorLayer( A_R_3_VIA6 "A.R.3.VIA6 (VIA6 area / gate area) without protection OD should > 50 (without OD2) or  > 20 (with OD2)")
+
+
+processAntenna(
+	       gate(( GATE POLY ))
+	       antenna( VIA6i M6 )
+               VIA6_MIN_DIO = if( ( SD.area-DIODE_AREA ) >= 0  then 1 else 0  )
+               value = ( plusp(M6.area) * plusp(GATE.area)) * ( VIA6i.area / GATE.area - SD.area * 210 - 900 )
+               ratio  = if( VIA6_MIN_DIO >= 1 then value else 0 )
+	       ERR1   = drcAntenna( M6 ( GATE ) ratio ( keep > 0 ) suppressErrorMessage ) 
+	      )
+
+AR5VIA6 = geomOr( ERR1_GATE )
+geomStamp( AR5VIA6 POLY )
+A_R_5_VIA6 = geomNodeRelate( M6 AR5VIA6 conn )
+errorLayer( A_R_5_VIA6 "A.R.5.VIA6 (VIA6 area / gate area) with protection OD > (protection OD area)*210 + 900")
+;=================
+;== VIA7 CHECKS ==
+;=================
+
+geomConnect(
+	    buttOrOver( GATE POLY )
+	    buttOrOver( HV_GATE POLY )
+	    buttOrOver( CO_PO POLY )
+	           via( CONTi M1 POLY SD )
+                   via( VIA1i M2 M1 )
+                   via( VIA2i M3 M2 )
+                   via( VIA3i M4 M3 )
+                   via( VIA4i M5 M4 )
+                   via( VIA5i M6 M5 )
+                   via( VIA6i M7 M6 )
+	    buttOrOver( VIA7i M7    )
+	   )
+
+processAntenna(
+	       gate(( GATE POLY ))
+	       antenna( VIA7i M7 )
+               VIA7_MIN_DIO = if( ( SD.area-DIODE_AREA ) >= 0  then 1 else 0  )
+               value = plusp( M7.area) * plusp(GATE.area) * ( zerop(HV_GATE.area) * ( VIA7i.area / GATE.area - 50 ) + plusp(HV_GATE.area) * ( VIA7i.area / GATE.area - 20 ) )
+               ratio  = if( VIA7_MIN_DIO >= 1 then 0 else value )
+	       ERR1   = drcAntenna( M7 ( GATE ) ratio ( keep > 0 ) suppressErrorMessage ) 
+	      )
+
+AR3VIA7 = geomOr( ERR1_GATE )
+geomStamp( AR3VIA7 POLY )
+A_R_3_VIA7 = geomNodeRelate( M7 AR3VIA7 conn )
+errorLayer( A_R_3_VIA7 "A.R.3.VIA7 (VIA7 area / gate area) without protection OD should > 50 (without OD2) or  > 20 (with OD2)")
+
+
+processAntenna(
+	       gate(( GATE POLY ))
+	       antenna( VIA7i M7 )
+               VIA7_MIN_DIO = if( ( SD.area-DIODE_AREA ) >= 0  then 1 else 0  )
+               value = ( plusp(M7.area) * plusp(GATE.area)) * ( VIA7i.area / GATE.area - SD.area * 210 - 900 )
+               ratio  = if( VIA7_MIN_DIO >= 1 then value else 0 )
+	       ERR1   = drcAntenna( M7 ( GATE ) ratio ( keep > 0 ) suppressErrorMessage ) 
+	      )
+
+AR5VIA7 = geomOr( ERR1_GATE )
+geomStamp( AR5VIA7 POLY )
+A_R_5_VIA7 = geomNodeRelate( M7 AR5VIA7 conn )
+errorLayer( A_R_5_VIA7 "A.R.5.VIA7 (VIA7 area / gate area) with protection OD > (protection OD area)*210 + 900")
+
+;=================
+;== VIAD CHECKS ==
+;=================
+geomConnect(
+	    buttOrOver( GATE POLY )
+	    buttOrOver( HV_GATE POLY )
+	    buttOrOver( CO_PO POLY )
+	           via( CONTi M1 POLY SD )
+	           via( VIA1i M2 M1      )
+                   via( VIA2i M3 M2 )
+                   via( VIA3i M4 M3 )
+                   via( VIA4i M5 M4 )
+                   via( VIA5i M6 M5 )
+                   via( VIA6i M7 M6 )
+                   via( VIA7i M8 M7 )
+	    buttOrOver( VIAD  M8    )
+	   )
+
+processAntenna(
+	       gate(( GATE POLY ))
+	       antenna( VIAD M8 )
+               VIAD_MIN_DIO = if( ( SD.area-DIODE_AREA ) >= 0  then 1 else 0  )
+               value = plusp( M8.area) * plusp(GATE.area) * ( zerop(HV_GATE.area) * ( VIAD.area / GATE.area - 50 ) + plusp(HV_GATE.area) * ( VIAD.area / GATE.area - 20 ) )
+               ratio  = if( VIAD_MIN_DIO >= 1 then 0 else value )
+	       ERR1   = drcAntenna( M8 ( GATE ) ratio ( keep > 0 ) suppressErrorMessage ) 
+	      )
+
+AR3VIAD = geomOr( ERR1_GATE )
+geomStamp( AR3VIAD POLY )
+A_R_3_VIAD = geomNodeRelate( M8 AR3VIAD conn )
+errorLayer( A_R_3_VIAD "A.R.3.VIAD (VIAD area / gate area) without protection OD should > 50 (without OD2) or  > 20 (with OD2)")
+
+
+processAntenna(
+	       gate(( GATE POLY ))
+	       antenna( VIAD M8 )
+               VIAD_MIN_DIO = if( ( SD.area-DIODE_AREA ) >= 0  then 1 else 0  )
+               value = ( plusp(M8.area) * plusp(GATE.area)) * ( VIAD.area / GATE.area - SD.area * 210 - 900 )
+               ratio  = if( VIAD_MIN_DIO >= 1 then value else 0 )
+	       ERR1   = drcAntenna( M8 ( GATE ) ratio ( keep > 0 ) suppressErrorMessage ) 
+	      )
+
+AR5VIAD = geomOr( ERR1_GATE )
+geomStamp( AR5VIAD POLY )
+A_R_5_VIAD = geomNodeRelate( M8 AR5VIAD conn )
+errorLayer( A_R_5_VIAD "A.R.5.VIAD (VIAD area / gate area) with protection OD > (protection OD area)*210 + 900")
+
+
+;===============
+;== RV CHECKS ==
+;===============
+geomConnect(
+	    buttOrOver( GATE POLY )
+	    buttOrOver( HV_GATE POLY )
+	    buttOrOver( CO_PO POLY )
+	           via( CONTi M1 POLY SD )
+	           via( VIA1i M2 M1      )
+                   via( VIA2i M3 M2 )
+                   via( VIA3i M4 M3 )
+                   via( VIA4i M5 M4 )
+                   via( VIA5i M6 M5 )
+                   via( VIA6i M7 M6 )
+                   via( VIA7i M8 M7 )
+	    buttOrOver( RVi   M8    )
+	   )
+
+processAntenna(
+	       gate(( GATE POLY ))
+	       antenna( RVi  M8 )
+               RV_MIN_DIO = if( ( SD.area-DIODE_AREA ) >= 0  then 1 else 0  )
+               value = plusp( M8.area) * plusp(GATE.area) * ( zerop(HV_GATE.area) * ( RVi.area / GATE.area - 200 ) + plusp(HV_GATE.area) * ( RVi.area / GATE.area - 20 ) )
+               ratio  = if( RV_MIN_DIO >= 1 then 0 else value )
+	       ERR1   = drcAntenna( M8 ( GATE ) ratio ( keep > 0 ) suppressErrorMessage ) 
+	      )
+
+AR10RV = geomOr( ERR1_GATE )
+geomStamp( AR10RV POLY )
+A_R_10_RV = geomNodeRelate( M8 AR10RV conn )
+errorLayer( A_R_10_RV "A.R.10.RV (RV area / gate area) without protection OD should > 200 (without OD2) or  > 20 (with OD2)")
+
+
+processAntenna(
+	       gate(( GATE POLY ))
+	       antenna( RVi  M8 )
+               RV_MIN_DIO = if( ( SD.area-DIODE_AREA ) >= 0  then 1 else 0  )
+               value = ( plusp(M8.area) * plusp(GATE.area)) * ( RVi.area / GATE.area - SD.area * 83 - 400 )
+               ratio  = if( RV_MIN_DIO >= 1 then value else 0 )
+	       ERR1   = drcAntenna( M8 ( GATE ) ratio ( keep > 0 ) suppressErrorMessage ) 
+	      )
+
+AR12RV = geomOr( ERR1_GATE )
+geomStamp( AR12RV POLY )
+A_R_12_RV = geomNodeRelate( M8 AR12RV conn )
+errorLayer( A_R_12_RV "A.R.12.RV (RV area / gate area) with protection OD > (protection OD area)*83 + 400")
+
+
+) ;end of drcExtract

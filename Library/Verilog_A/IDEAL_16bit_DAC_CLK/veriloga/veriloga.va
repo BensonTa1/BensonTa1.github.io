@@ -1,0 +1,52 @@
+// VerilogA for Verilog_A, IDEAL_16bit_DAC, veriloga
+
+`include "constants.vams"
+`include "disciplines.vams"
+
+module IDEAL_16bit_DAC(VOUT,D0,D1,D2,D3,D4,D5,D6,D7,D8,D9,D10,D11,D12,D13,D14,D15,CLKIN);
+	electrical VOUT,D0,D1,D2,D3,D4,D5,D6,D7,D8,D9,D10,D11,D12,D13,D14,D15,CLKIN;
+	input D0,D1,D2,D3,D4,D5,D6,D7,D8,D9,D10,D11,D12,D13,D14,D15,CLKIN;
+	output VOUT;
+
+	parameter real VTH=0.5;
+	parameter real VREF=2;
+
+	real DSUM=0;
+	real VLSB=VREF/2**16;
+	
+	real DD0,DD1,DD2,DD3,DD4,DD5,DD6,DD7,DD8,DD9,DD10,DD11,DD12,DD13,DD14,DD15;	//16bit
+
+	real CD=0;
+
+	analog begin
+
+		CD=absdelay(V(CLKLIN),3u);
+
+		@(cross(CD-VTH,0))begin	
+
+				DD0 = (V(D0)>VTH) ? 1 : 0;
+				DD1 = (V(D1)>VTH) ? 1 : 0;
+				DD2 = (V(D2)>VTH) ? 1 : 0;
+				DD3 = (V(D3)>VTH) ? 1 : 0;
+				DD4 = (V(D4)>VTH) ? 1 : 0;
+				DD5 = (V(D5)>VTH) ? 1 : 0;
+				DD6 = (V(D6)>VTH) ? 1 : 0;
+				DD7 = (V(D7)>VTH) ? 1 : 0;
+				DD8 = (V(D8)>VTH) ? 1 : 0;
+				DD9 = (V(D9)>VTH) ? 1 : 0;
+				DD10 = (V(D10)>VTH) ? 1 : 0;
+				DD11 = (V(D11)>VTH) ? 1 : 0;
+				DD12 = (V(D12)>VTH) ? 1 : 0;
+				DD13 = (V(D13)>VTH) ? 1 : 0;
+				DD14 = (V(D14)>VTH) ? 1 : 0;
+				DD15 = (V(D15)>VTH) ? 1 : 0;
+				DSUM=(DD0*1 + DD1*2 + DD2*4 + DD3*8 +DD4*16 + DD5*32 + DD6*64 + DD7*128 + DD8*256 + DD9*512 + DD10*1024 + DD11*2048 + DD12*4096 + DD13*8192 + DD14*16384 + DD15*32768);
+					
+		end
+
+		V(VOUT)<+DSUM*VLSB;
+		
+	end
+
+
+endmodule

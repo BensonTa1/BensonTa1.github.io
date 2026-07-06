@@ -1,0 +1,5039 @@
+ 
+// xCalibre/calibre  RC/LVS command file based on the follow calibre command file//
+/////////////////////////////////////////////////////////////////////////////////
+//  @(#) TSMC 0.13UM CALIBRE LVS/RC COMMAND FILE 
+//  @(#) TSMC 0.13UM MIXED SIGNAL 1P8M SALICIDE 1.2V/2.5V RF SPICE MODEL (CR013G) 
+//  @(#) SPICE MODEL DOCUMENT: T-013-MM-SP-001 v1.4 
+//  @(#) COMMAND FILE DOCUMENT: T-013-MM-SP-001-C1 
+//  @(#) COMMAND FILE VERSION: v1.4a 
+//  @(#) COMMAND FILE METAL SCHEME: 1P8M 
+//  @(#) COMMAND FILE DATE: 12/05/2011 
+//  @(#) EDA TOOL VERSION: Calibre v2007.3_36.25   
+// 
+//   
+//  TSMC has developed this deck using Mentor Graphics proprietary SVRF and TVF formats. 
+//  The deck is to be used only in Calibre deck. 
+//////////////////////////////////////////////////////////////////////////////// 
+// 
+// DISCLAIMER   
+// 
+// This file usually contains the super set of device extraction rule at TSMC
+// processes. However, all of device in basic deck may not be offered at current
+// SPICE model. PLEASE ALWAYS REFER TO THE CORRESPONDING SPICE MODEL DOCUMENT
+// FOR ANY DEVICE YOU WOULD LIKE USE.
+// 
+// The information contained herein is provided by TSMC on an "AS IS" basis 
+// without any warranty, and TSMC has no obligation to support or otherwise 
+// maintain the information.  TSMC disclaims any representation that the 
+// information does not infringe any intellectual property rights or proprietary 
+// rights of any third parties.  There are no other warranties given by TSMC, 
+// whether express, implied or statutory, including, without limitation, implied 
+// warranties of merchantability and fitness for a particular purpose. 
+// 
+// STATEMENT OF USE 
+// 
+// This information contains confidential and proprietary information of TSMC. 
+// No part of this information may be reproduced, transmitted, transcribed, 
+// stored in a retrieval system, or translated into any human or computer 
+// language, in any form or by any means, electronic, mechanical, magnetic, 
+// optical, chemical, manual, or otherwise, without the prior written permission 
+// of TSMC.  This information was prepared for informational purpose and is for 
+// use by TSMC's customers only.  TSMC reserves the right to make changes in the 
+// information at any time and without notice. 
+// 
+//////////////////////////////////////////////////////////////////////////////// 
+//   Date     version   Who                      Description  
+// ---------- ------- --------- ------------------------------------------------- 
+// Version Change Notice:  
+// 04/26/2005   1.0a    K.M.Liu     1) New Created.  
+//                                  2) Separated two directories which one is for using UTM process  
+//                                     and another is for none UTM process.  
+//   
+// 02/16/2006   1.2a    K.M.Liu     1) Add New device pmos_rf_nw , pmos_rf33_nw, moscap_rf_nw, moscap_rf33_nw, 
+//                                     mincap_woum_1p0_sinrf, mincap_woum_1p5_sin_rf, spiral_sym_ct, xjvar_nw 
+//                                  2) Modify device mimcap_um to mimcap_um_1p0_sin_rf , ,mimcap_um_1p5_sin_rf 
+//                                     device MC to mimcap_1p0_sin, mimcap_1p5_sin 
+//                                  3) Included "T-013-CM-SP-008 Version 1.0 " devices.	   
+// 
+// 05/19/2006   1.2b    Y.J.Wang    1) Revised the top via formation for excluding vias interacting mimcap region. 
+//                                     ex: tv7 = ((via7 NOT CBM_via) NOT CTM_via ) 
+//                                  2) Revised the connection of via ex: CONNECT metal8 metal7 BY tv7 (not via7) 
+// 
+// 09/20/2006   1.2c    Y.J.Wang    1) Revised the crtmom formation, permit the top metal line (ex:metal6) to cross 
+//                                     over the crtmom, and it will not cause break open. 
+//                                     ex: the top metal line will not exclude MOMDMY. 
+//                                  2) Adding TRACE PROPERTY of crtmom for nv, nh, s, lay comparison. 
+// 
+// 02/23/2007   1.3cp1  Karena Lin  1) Revised the spice model name of IO devices.  
+// 
+// 06/20/2007   1.3c    Karena Lin  1) Support 1P4M LVS command file. 
+// 
+// 09/09/2008   1.3d    Karena Lin  1) Add filter switch "FILTER_DGS_TIED_MOS"(default filter MOS  
+//                                     with all pins tied) 
+//                                  2) Excluded the BJTDMY from the recognotion layer of pwdnw. 
+//                                  3) Revised the recognition layer of spiral_std for half-turn 
+//                                     inductor. 
+//                                  4) Exclued dummy POLY and OD layer from the recognition 
+//                                     layer of PO/OD resistors. 
+// 
+// 12/05/2011   v1.4a    R.H.Zhang  1) Update rsh value of rmu to follow model 
+//                                  2) Add device sbd_rf and sbd_rf_nw 
+//                                  3) Set RPO as must layer for LV BJT and revise spiral_std auxiliary layer for nr 
+//                                  4) Add power name "TVDD" "VDDESD" , ground name "TACVSS" "TVSS" "VSSESD" 
+//                                  5) Use switch extract_parasitic_diodes and compare_parasitic_diodes to replace switch extract_dnwdio. 
+//                                  6) Add LAYOUT BASE LAYER  and remove LAYOUT TOP LAYER 
+//                                  7) Divide ERC check into 5 switches: WELL_TO_PG_CHECK, GATE_TO_PG_CHECK, PATH_CHECK, DS_TO_PG_CHECK, FLOATING_WELL_CHECK 
+//                                  8) ERC floating well check enhancement for tool performance improvement 
+//                                  9) Revise dio_esd25 model name to low case 
+// 
+//				    
+//////////////////////////////////////////////////////////////////////////////// 
+// 
+//  **REMINDER** 
+//  PLEASE ALWAYS REFER TO THE CORRESPONDING SPICE MODEL DOCUMENT  
+//  FOR ANY DEVICE YOU WOULD LIKE USE. 
+//   
+//////////////////////////////////////////////////////////////////////////////// 
+// 
+//                             DEVICE FORMULA 
+//	 CORE == 1.0v or 1.2v  
+//	 I/O  == 2.5v or 3.3v 
+//   ---------------  -----------------------------  ---------------------------------- 
+//   NAME             DESCRIPTION                    DEVICE LAYER OPERATION 
+//   ---------------  -----------------------------  ---------------------------------- 
+//   M[N]             CORE Nominal VT NMOS           ((NGATE-OD2-NTN)-DNW) 
+//   M[N1]            CORE Nominal VT NMOS/DNW       ((NGATE-OD2-NTN)*DNW) 
+//   M[ND]            I/O Nominal VT NMOS            ((NGATE*OD2-NTN)-DNW) 
+//   M[N2]            I/O Nominal VT NMOS/DNW        ((NGATE*OD2-NTN)*DNW) 
+//   M[NL]            CORE native device             ((NGATE-OD2)*NTN) 
+//   M[NN]            I/O native device              ((NGATE*OD2)*NTN-CAP_IMP) 
+//   M[P]             CORE Nominal VT PMOS           (PGATE-OD2) 
+//   M[PD]            I/O Nominal VT PMOS            (PGATE*OD2) 
+//   M[nch_sram]      CORE SRAM NMOS/DNW             ((NGATE-OD2-NTN)*DMSRM-HVTSRM-LVT_LP_N-VTH_N-SRAMPSGT) 
+//   M[nch_sram_hvt]  CORE HVT_SRAM NMOS/DNW         ((NGATE-OD2-NTN)*DMSRM*HVTSRM-LVT_LP_N-VTH_N) 
+//   M[NLV]           CORE LOW-VT NMOS               (NGATE-OD2-NTN-DNW*LVT_LP_N) 
+//   M[N1LV]          CORE LOW-VT NMOS/DNW           ((NGATE-OD2-NTN)*DNW*LVT_LP_N) 
+//   M[NHV]           CORE High-VT NMOS              (NGATE-OD2-NTN-DNW*VTH_N) 
+//   M[N1HV]          CORE HIGH-VT NMOS/DNW          ((NGATE-OD2-NTN)*DNW*VTH_N) 
+//   M[N2LV]          I/O LOW-VT NMOS/DNW            ((NGATE*OD2-NTN)*DNW*LVT_LP_N) 
+//   M[NHL]           I/O LOW-VT NMOS	           (NGATE*OD2-NTN-DNW*LVT_LP_N) 
+//   M[PLV]           CORE LOW-VT PMOS               (PGATE-OD2*LVT_LP_P) 
+//   M[pch_sram]      CORE SRAM PMOS                 (PGATE-OD2*DMSRM-HVTSRM-LVT_LP_P-VTH_P) 
+//   M[pchpu_hvtsr_g] CORE HVT_SRAM PMOS             (PGATE-OD2*DMSRM*HVTSRM-LVT_LP_P-VTH_P) 
+//   M[PHV]           CORE High-VT PMOS              (PGATE-OD2*VTH_P) 
+//   M[PHL]           I/O LOW-VT PMOS                (PGATE*OD2*LVT_LP_P) 
+//   M[nch_uhvt]      CORE Ultra High Vt NMOS        (NGATE-OD2-NTN-HNVT-DNW-VTL_N-VTH_N*UHVT_N) 
+//   M[pch_uhvt]      CORE Ultra High Vt PMOS        (PGATE-OD2-VTL_P-VTH_P*UHVT_P) 
+//   R[WO]            N-Well resistor under OD       (NWDMYi*NWELL*(OD*RPO)) 
+//   R[WR]            N-Well resister under STI      (NWDMYi*NWELL-(OD*RPO)) 
+//   R[PR]            P+Poly resistor w/o Silicide   (RPDMYi*POLYG*PP*RPO*RHDMY) 
+//   R[NR]            N+Poly resistor w/o Silicide   (RPDMYi*POLYG*NP*RPO*RHDMY) 
+//   R[PS]            P+Poly resistor w/i Silicide   (RPDMYi*POLYG*PP-RPO) 
+//   R[NS]            N+Poly resistor w/i Silicide   (RPDMYi*POLYG*NP-RPO) 
+//   R[PD]            P+diff resistor w/o Silicide   (RPDMYi*OD*PP*RPO*RHDMY*NWELL) 
+//   R[ND]            N+diff resistor w/o Silicide   (RPDMYi*OD*NP*RPO*RHDMY-NWELL) 
+//   R[PI]            P+diff resistor w/i Silicide   (RPDMYi*OD*PP-RPO*NWELL) 
+//   R[NI]            N+diff resistor w/i Silicide   (RPDMYi*OD*NP-RPO-NWELL) 
+//   R[M1]            METAL1 resistor                (RMDMY1*METAL1) 
+//   R[M2]            METAL2 resistor                (RMDMY2*METAL2) 
+//   R[M3]            METAL3 resistor                (RMDMY3*METAL3) 
+//   R[M4]            METAL4 resistor                (RMDMY4*METAL4) 
+//   R[M5]            METAL5 resistor                (RMDMY5*METAL5) 
+//   R[M6]            METAL6 resistor                (RMDMY6*METAL6) 
+//   R[M7]            METAL7 resistor                (RMDMY7*METAL7) 
+//   R[ME]            METAL8 resistor                (RMDMY8*METAL8) 
+//   D[DP]            CORE diode P+/NW               (DIODMY*OD*PP-OD2*NWELL) 
+//   D[DN]            CORE diode N+/PW               (DIODMY*OD*NP-OD2*PSUB) 
+//   D[DW]            CORE diode NW/PW               (DIODMY*NWELL-OD2) 
+//   D[D1]            I/O diode P+/NW                (DIODMY*OD*PP*OD2*NWELL) 
+//   D[D2]            I/O diode N+/PW                (DIODMY*OD*NP*OD2*PSUB) 
+//   D[DPH]           CORE High-VT diode P+/NW       (DIODMY*OD*PP-OD2*NWELL*VTH_P) 
+//   D[DNH]           CORE High-VT diode N+/PW       (DIODMY*OD*NP-OD2*PSUB*VTH_N) 
+//   D[NDIO_uhvt]     CORE Ultra High Vt diode N+/PW (DIODMY*OD*NP-OD2*PSUB*UHVT_N-VTL_N-VTH_N-NTN) 
+//   D[PDIO_uhvt]     CORE Ultra High Vt diode P+/NW (DIODMY*OD*PP-OD2*NWELL*UHVT_P-VTL_P-VTH_P) 
+//   D[D3]               I/O diode NW/PW                (DIODMY*NWELL*OD2)  
+//    D[NDIO_lvt25]    I/O Low_VT diode N+/PW      (DIODMY*OD*NP*OD2*PSUB*LVT_LP_N) 
+//   D[PDIO_lvt25]    I/O Low_VT diode P+/NW      (DIODMY*OD*PP*OD2*NWELL*LVT_LP_P) 
+//   D[DB]            ESD diode                      (ESD3DMY*OD*NP*RPO-NWELL-PO) 		        
+//   D[DPL]           CORE Low-VT diode P+/NW        (DIODMY*OD*PP-OD2*NWELL*LVT_LP_P) 
+//   D[DNL]           CORE Low-VT diode N+/PW        (DIODMY*OD*NP-OD2*PSUB*LVT_LP_N) 
+//   D[D1N]           CORE native diode N+/PW        (DIODMY*OD*NP-OD2*PSUB*NTN) 
+//   D[D2N]           I/O native diode N+/PW         (DIODMY*OD*NP*OD2*PSUB*NTN) 
+//   D[dnwpsub]       DNW/PSUB DIODE                 (DNW*NWELL) 
+//   D[pwdnw]         PSUB(R-WELL)/DNW DIODE         (DNW-NWELL) 
+//   D[pnwdio]        NWELL/psub diode                  (NWELL-DIODMY-OD3) 
+//     
+//   Q[PV]            CORE PNP-BJT                   (BJTDMY*OD*PP-OD2*NWELL*RPO) 
+//   Q[NV]            CORE NPN-BJT                   (BJTDMY*OD*NP*PSUB*DNW*RPO) 
+//    PC1              PMOS Varactor core             (PVARGT-OD2) 
+//    PC2              PMOS Varactor I/O              (PVARGT*OD2) 
+//    NC1              NMOS Varactor core             (VARGT-OD2) 
+//    NC2              NMOS Varactor I/O              (VARGT*OD2) 
+//   rppolyhri        HRI High poly resistor         (RPDMYi*RPO*RHRIDMY*POLYG*HRI) 
+//   rnwsti_m         N-Well resistor under STI      (NWDMY1*NWELL-(OD*RPO))  
+//   rnwod_m          N-Well resistor under OD       (NWDMY1*NWELL*(OD*RPO)) 
+//   rpodwo_m         P+diff resistor w/o Silicide   (RPDMY1*OD*PP*RPO*RHDMY*NWELL)  
+//   rnodwo_m         N+diff resistor w/o Silicide   (RPDMY1*OD*NP*RPO*RHDMY-NWELL)  
+//   rpodl_m          P+diff resistor w/i Silicide   (RPDMY1*OD*PP-RPO*NWELL)  
+//   rnodl_m          N+diff resistor w/i Silicide   (RPDMY1*OD*NP-RPO-NWELL) 
+//   rpods_m          P+diff resistor w/i Silicide   (RPDMY1*OD*PP-RPO*NWELL) 
+//   rnods_m          N+diff resistor w/i Silicide   (RPDMY1*OD*NP-RPO-NWELL) 
+//   C[mimcap_1p0_sin]   1.0fF MIM capacitor                (CTM*CBM-RFDMY) 
+//   C[mimcap_1p5_sin]   1.5fF MIM capacitor                (CTM*CBM-RFDMY) 
+//   crtmom              MOM fringe capacitor ex:use M1-M6  (M1*M2*M3*M4*M5*M6*MOMDMY*POLYG)  
+//   nmos_rf                 CORE Nominal VT NMOS/DNW      ((RFNGATE-OD2-ESD3DMY-NTN)*DRAIN*DNW*RFDMY)  
+//   nmos_rf25            I/O Nominal VT NMOS/DNW       ((RFNGATE*OD2-ESD3DMY-NTN)*DRAIN*DNW*RFDMY) 
+//   pmos_rf                 CORE Nominal VT PMOS          (RFPGATE-OD2*DRAIN*DNW*RFDMY)   
+//   pmos_rf_nw              CORE Nominal VT PMOS          (RFPGATE-OD2*DRAIN-DNW*RFDMY) 
+//   pmos_rf25            I/O Nominal VT PMOS           (RFPGATE*OD2*DRAIN*DNW*RFDMY) 
+//   pmos_rf25_nw         I/O Nominal VT PMOS           (RFPGATE*OD2*DRAIN-DNW*RFDMY) 
+//   moscap_rf               Varactor on thin oxide        (VARGT-OD2*DNW*RFDMY)  
+//   moscap_rf25          Varactor on thin oxide        (VARGT*OD2*DNW*RFDMY) 
+//   moscap_rf_nw            Varactor on thin oxide        (VARGT-OD2-DNW*RFDMY)  
+//   moscap_rf25_nw       Varactor on thin oxide        (VARGT*OD2-DNW*RFDMY) 
+// 
+//   mimcap_um_1p5_sin_rf    RF CTM capacitor              (CTM*CBM*RFDMY-DNW) 
+//   mimcap_um_1p0_sin_rf    RF CTM capacitor              (CTM*CBM*RFDMY-DNW) 
+//   mimcap_woum_1p5_sin_rf  RF CTM capacitor              (CTM*CBM*RFDMY*DNW) 
+//   mimcap_woum_1p0_sin_rf  RF CTM capacitor              (CTM*CBM*RFDMY*DNW) 
+//   spiral_std       Standard Spiral Inductor             	(IND_STD*METAL8) 
+//   spiral_sym       Symmetric Spiral Inductor            	(IND_SYM*METAL8) 
+//   spiral_sym_ct    Symmetric(center-tapped) Spiral Inductor	(IND_CTi*METAL8) 
+// 
+//   xjvar            Junction Varactor             (JVARD*NP*PP*DNW*RFDMY)  
+//   xjvar_nw         Junction Varactor             (JVARD*NP*PP-DNW*RFDMY) 
+//   rppolywo_rf      P+Poly resistor w/o Silicide  (RPDMYi*POLYG*PP*RPO*RFDMY*RHDMY) 
+//   rppolyl_rf       P+Poly resistor w/i Silicide  (RPDMYi*POLYG*PP-RPO*RFDMY) 
+//   rppolys_rf       P+Poly resistor w/i Silicide  (RPDMYi*POLYG*PP-RPO*RFDMY) 
+//   rppolyhri_rf     HRI High poly resistor(RF)    (RPDMYi*RPO*RHRIDMY*POLYG*HRI*RFDMY) 
+//    sbd_rf           RF Schottky Barrier Diode w/i DNW (NWELL*SBDDMY*RFDMY-VARDMY*PP*NP*DNW) 
+//   sbd_rf_nw        RF Schottky Barrier Diode w/o DNW (NWELL*SBDDMY*RFDMY-VARDMY*PP*NP-DNW) 
+//   rnpolywo_dis     N+Poly resistor w/o Silicide(distributed)  (RPDMY1*POLYG*NP*RPO*RHDMY) 
+//   rppolywo_dis     P+Poly resistor w/o Silicide(distributed)  (RPDMY1*POLYG*PP*RPO*RHDMY) 
+//   rnpolys_dis      N+Poly resistor w/i Silicide(distributed w<2um)  (RPDMY1*POLYG*NP-RPO) 
+//   rppolys_dis      P+Poly resistor w/i Silicide(distributed w<2um)  (RPDMY1*POLYG*PP-RPO) 
+//   rnpolyl_dis      N+Poly resistor w/i Silicide(distributed w>=2um) (RPDMY1*POLYG*NP-RPO-RHDMY) 
+//   rppolyl_dis      P+Poly resistor w/i Silicide(distributed w>=2um) (RPDMY1*POLYG*PP-RPO-RHDMY) 
+//   rppolyhri_dis    HRI High poly resistor(distributed)        (RPDMY1*RPO*RHRIDMY*POLYG*HRI) 
+//     
+//   ---------------------------------------------------------------------------------- 
+//   * PSUB = BULK 
+//   * HVPW = PSUBi 
+//   * CTM  = CTMi 
+//   * CBM  = CBMi 
+//   * OD   = ODi 
+//   * POLYG = POLYGi 
+//   * NGATE = ODi * POLYGi * NP - NWELL 
+//   * PGATE = ODi * POLYGi * PP * NWELL 
+//   * VARGT = ODi * POLYGi * NP * NWELL * VARDMY 
+//   * PVARGT = ODi * POLYGi * PP - NWELL * VARDMY 
+//   * RFNGATE = ODi * POLYGi * NP - NWELL 
+//   * RFPGATE = ODi * POLYGi * PP * NWELL 
+//   * JVARD  = ODi - POLYGi * NWELL * VARDMY 
+//   * METAL1 = M1  
+//   * RMDMY1 = RMDMYi1 + RMDMY 
+//   * METAL2 = M2  
+//   * RMDMY2 = RMDMYi2 + RMDMY 
+//   * METAL3 = M3  
+//   * RMDMY3 = RMDMYi3 + RMDMY 
+//   * METAL4 = M4  
+//   * RMDMY4 = RMDMYi4 + RMDMY 
+//   * METAL5 = M5  
+//   * RMDMY5 = RMDMYi5 + RMDMY 
+//   * METAL6 = M6  
+//   * RMDMY6 = RMDMYi6 + RMDMY 
+//   * METAL7 = M7  
+//   * RMDMY7 = RMDMYi7 + RMDMY 
+//   * METAL8 = M8  
+//   * RMDMY8 = RMDMYi8 + RMDMY 
+//   * LVT_LP_N = VTL_N  
+//   * LVT_LP_P = VTL_P 
+//////////////////////////////////////////////////////////////////////////////// 
+//USER NOTES : 
+// 
+// 1) mnpg49 mppg49 are obtained in a DRC run, not in an LVS run.   
+//   
+// 2) For Calibre "EDTEXT" file, use .INCLUDE strings.txt.   
+//    LAYOUT TEXT  "text string" [x] [y]  (layer num) (cell name)   
+//   
+// 3) Input layer 'OD' is defined as thin oxide (OD) area which would    
+//    be drawn by one generic od mask or by seperated N+OD and P+OD.    
+//    Remove layers in the 'OD' entries you don't want to use at    
+//    layer definition block.   
+//  
+// 4) Default setting for property check is 0%. Users should check with   
+//    IP/Designe providers for proper tolerance.   
+//   
+// 5) It's recommended to run Calibre LVS by hierarchical mode since false   
+//    errors have been encountered by only flat mode option '-lvs'.   
+//   
+// 6) Default property resolution for ambiguity is set to 32. It could be   
+//    necessary to increase this setting to resolve serious ambiguity.   
+//    Uncomment statement 'LVS PROPERTY RESOLUTION MAXIMUM' in this deck   
+//    to reset the capability of property resolution.   
+//   
+// 7) This deck default not to extracts MOS AS/AD property. To turn on the   
+//    extraction of MOS AS/AD property, please uncomment the line   
+//    "#DEFINE extract_as_ad". It would cause SEED PROMOTION, and pose   
+//    much overhead on layout netlist extraction, erc checks, and lvs comparison. 
+// 
+// 8) For MOS capacitors, AS and AD values are calculated by combining the total   
+//    amount of source and drain area for the device and splitting up the result   
+//    evenly between AS and AD. PS and PD values are similarily calculated by evenly   
+//    splitting up the total amount of source and drain perimeter. This is valid   
+//    since simulation results for MOS capacitors should not depend on how AS/AD   
+//    and PS/PD are split up between source and drain.  
+//  
+// 9) This file usually contains the super set of device extraction rule at TSMC 
+//    processes. However, all of device in basic deck may not be offered at current 
+//    SPICE model. PLEASE ALWAYS REFER TO THE CORRESPONDING SPICE MODEL DOCUMENT 
+//    FOR ANY DEVICE YOU WOULD LIKE USE. 
+//     
+//10) Set LVS INJECT LOGIC as NO to align the default setting of Calibre version before 2008 for backward compatible 
+// 
+//11) This file usually reads all datatype (0-255) for each layer defined. 
+//    User customization datatype maybe already included in the layout mapping of this deck. 
+//    PLEASE ALWAYS REVIEW THE LAYER DEFINITION AND MODIFY IT FOR USERS' PARTICULAR LAYER USE. 
+// 
+//////////////////////////////////////////////////////////////////////////////// 
+//                      Introduction to each switch  
+//  
+//   -------------------------	-------------------------------------------------------  
+//   SWITCH NAME                  		DESCRIPTION                 
+//   -------------------------	-------------------------------------------------------  
+//   RC_DECK                      Turn-on this switch during extracting RCX spice netlist. 
+// 
+//   ACCURACY                     Resistance value variable setting.   
+//   
+//   extract_as_ad                Turn_on this switch if only AS/AD need to be extracted. 
+// 
+//   ZERO_NRS_NRD                 Set nrd=0 and nrs=0 when run RCX extraction flow. 
+// 
+//   LP/GENERIC                   PROCESS VARIABLE SETTING => LOW POWER or GENERIC 
+//    
+//   NW_RING                      If turn on this switch, the soft-connect check for nwell   
+//                                ring and psub(rwell) inside will be checked. 
+//				Don't recommend to turn on because from process's point 
+//				of view BULK cannot be fully separated by NW ring. 
+// 
+//   FILTER_DGS_TIED_MOS          Turn on this switch to filter MOS with D, G and S tied   
+//                                together(default filter MOS with all pins tied). 
+//				 
+//   WELL_TO_PG_CHECK             Check if nwell connects to ground or psub connects to power,  
+//                                default is turned on. 
+//    
+//   GATE_TO_PG_CHECK             Check if mos gate directly connects to power or ground,  
+//                                default is turned off. 
+// 
+//   DS_TO_PG_CHECK               Check if MOS connected to both power and ground, default 
+//                                turned on.					 
+// 
+//   PATH_CHECK                   ERC path check, default is turned off. 
+// 
+//////////////////////////////////////////////////////////////////////////////// 
+//lvs_gen.pl version: 
+//calibre.pl version: 
+
+// LVS/RC switch option
+// --------------------
+//#define RC_DECK    //uncomment this line when this deck would be used as a RC command file
+//#define ZERO_NRS_NRD    //uncomment this line when this deck would set NRS=0 and NRD=0 
+//#define FILTER_DGS_TIED_MOS // uncomment this line to filter MOS with D, G and S tied together (default filter MOS with all pins tied)
+#define WELL_TO_PG_CHECK 
+// Default is on. Turn on to highlight if nwell connects to ground or psub connects to power.
+//#define GATE_TO_PG_CHECK 
+// Default is off. Turn on to highlight if a mos gate directly connects to power or ground.
+//#define PATH_CHECK 
+// Default is off. Turn on to highlight if
+//(1) nodes have a path to power but no path to ground
+//(2) nodes have a path to ground but no path to power
+//(3) nodes have no path to power or ground
+//(4) nodes have no path to any label net
+#define DS_TO_PG_CHECK 
+// Default is on. Turn on to highlight if drain connects to power and source connects to ground.
+#define FLOATING_WELL_CHECK 
+// Default is on. Turn on to highlight if well does not connect to power or ground. 
+//The nwell of moscaps and nwell-resistor are excluded.
+
+VARIABLE PRESCALE 1.0
+
+//#define NW_RING	//uncomment this line to enable the NW ring to separate the node from BULK
+
+// POWER and GROUND name string variable setting
+VARIABLE POWER_NAME  "AHVDD"  "AHVDDB"  "AHVDDG"  "AHVDDR"  "AHVDDWELL"  "AVDD"  "AVDDB"  "AVDDBG"  "AVDDG"  "AVDDR"  "AVDWELL"  "DHVDD"  "DVDD"  "HVDDWELL"  "TAVD33"  "TAVD33PST"  "TAVDD"  "TAVDDPST"  "TVDD"  "VD33"  "VDD"  "VDD5V"  "VDDESD"  "VDDG"  "VDDPST"  "VDDSA"  "VDWELL" 
+
+VARIABLE GROUND_NAME  "AGND"  "AHVSS"  "AHVSSB"  "AHVSSG"  "AHVSSR"  "AHVSSUB"  "AVSS"  "AVSSB"  "AVSSBG"  "AVSSG"  "AVSSR"  "AVSSUB"  "DHVSS"  "DVSS"  "GND"  "HVSSUB"  "TACVSS"  "TAVSS"  "TAVSSPST"  "TVSS"  "VS33"  "VSS"  "VSSESD"  "VSSG"  "VSSPST"  "VSSUB" 
+
+//#########################################################################
+//# ENVIRONMENT SETTING                              
+//#########################################################################
+// LVS option
+// --------------------
+//#define extract_as_ad
+//
+
+//  RC_BLOCKING SETTING
+LAYOUT CELL LIST pcells "crtmom*" "mimcap_um*" "mimcap_um*" "mimcap_woum*" "mimcap_woum*" "mos_var*" "mos_var25*" "mos_var25_nw*" "mos_var_nw*" "rfnmos1v*" "rfnmos2v*" "rfpmos1v*" "rfpmos2v*" "rfpmos2v_nw*" "rfpmos1v_nw*" "rphripoly_rf*" "rplpoly_rf*" "rplpoly_rf*" "rphpoly_rf*" "sbd_rf*" "sbd_rf_nw*" "spiral_std*" "spiral_sym*" "spiral_sym_ct*" "jvar*" "jvar_nw*" 
+LAYOUT PRESERVE CELL LIST pcells
+
+
+// Sheet Resistance table
+VARIABLE  RVPSL  7.67	        //  P+Poly resistor w/i Silicide (Width>=2um)
+VARIABLE  RVPSS  7.67	        //  P+Poly resistor w/i Silicide (Width<2um)
+VARIABLE  RVNSL  7.31	        //  N+Poly resistor w/i Silicide (Width>=2um)
+VARIABLE  RVNSS  7.31	        //  N+Poly resistor w/i Silicide (Width<2um)
+VARIABLE  RVNIL  6.65	        //  N+Diff resistor w/i Silicide (Width>=2um)
+VARIABLE  RVNIS  6.65	        //  N+Diff resistor w/i Silicide (Width<2um)
+VARIABLE  RVND   72.75	        //  N+Diff resistor w/o Silicide
+VARIABLE  RVPIL  7.25	        //  P+Diff resistor w/i Silicide (Width>=2um)
+VARIABLE  RVPIS  7.25	        //  P+Diff resistor w/i Silicide (Width<2um)
+VARIABLE  RVPD   145.87	        //  P+Diff resistor w/o Silicide
+VARIABLE  RVWO   409	        //  NWell resistor under OD
+VARIABLE  RVWR   1090	        //  NWell resistor under STI
+VARIABLE  RVM1   0.090	        //  Metal-1  resistor
+VARIABLE  RVM2   0.057	        //  Metal-2  resistor
+VARIABLE  RVM3   0.057	        //  Metal-3  resistor
+VARIABLE  RVM4   0.057	        //  Metal-4  resistor
+VARIABLE  RVM5   0.057	        //  Metal-5  resistor
+VARIABLE  RVM6   0.057	        //  Metal-6  resistor
+VARIABLE  RVM7   0.057	        //  Metal-7  resistor
+VARIABLE  RVME   0.0225	        //  Top Metal resistor
+VARIABLE  RVMU   0.0054         //  Ultra-Thick Metal resistor
+VARIABLE  RVNR   260.09	        //  N+Poly resistor w/o Silicide
+VARIABLE  RVPR   319.55	        //  P+Poly resistor w/o Silicide
+VARIABLE  RVLR   950		//  HRI P+Poly resistor w/o Silicide (MS process)
+VARIABLE  DWPS  -0.035e-6       //  P+Poly resistor w/i Silicide Delta_W
+VARIABLE  DLPS   0      	//  P+Poly resistor w/i Silicide Delta_L
+VARIABLE  DWNS  -0.055e-6       //  N+Poly resistor w/i Silicide Delta_W
+VARIABLE  DLNS   0       	//  N+Poly resistor w/i Silicide Delta_L
+VARIABLE  DWNI  -0.057e-6       //  N+Diff resistor w/i Silicide Delta_W
+VARIABLE  DLNI   0       	//  N+Diff resistor w/i Silicide Delta_L
+VARIABLE  DWND   0.011e-6       //  N+Diff resistor w/o Silicide Delta_W
+VARIABLE  DLND   0 	        //  N+Diff resistor w/o Silicide Delta_L
+VARIABLE  DWPI  -0.070e-6       //  P+Diff resistor w/i Silicide Delta_W
+VARIABLE  DLPI   0       	//  P+Diff resistor w/i Silicide Delta_L
+VARIABLE  DWPD   0.068e-6       //  P+Diff resistor w/o Silicide Delta_W
+VARIABLE  DLPD   0       	//  P+Diff resistor w/o Silicide Delta_L
+VARIABLE  DWWO   0.224e-6       //  NWell resistor under OD Delta_W
+VARIABLE  DLWO   0       	//  NWell resistor under OD Delta_L
+VARIABLE  DWWR   0.451e-6       //  NWell resistor under STI Delta_W
+VARIABLE  DLWR   0       	//  NWell resistor under STI Delta_L
+VARIABLE  DWM1   0	   	//  Metal-1 resistor Delta_W    
+VARIABLE  DWM2   0	   	//  Metal-2 resistor Delta_W    
+VARIABLE  DWM3   0	   	//  Metal-3 resistor Delta_W    
+VARIABLE  DWM4   0	   	//  Metal-4 resistor Delta_W    
+VARIABLE  DWM5   0	   	//  Metal-5 resistor Delta_W    
+VARIABLE  DWM6   0	   	//  Metal-6 resistor Delta_W    
+VARIABLE  DWM7   0	   	//  Metal-7 resistor Delta_W    
+VARIABLE  DWME   0	   	//  Top Metal resistor Delta_W
+VARIABLE  DWMU   0	   	//  Ultra-Thick resistor Delta_W  
+VARIABLE  DLM1   0	   	//  Metal-1 resistor Delta_L    
+VARIABLE  DLM2   0	   	//  Metal-2 resistor Delta_L    
+VARIABLE  DLM3   0	   	//  Metal-3 resistor Delta_L    
+VARIABLE  DLM4   0	   	//  Metal-4 resistor Delta_L    
+VARIABLE  DLM5   0	   	//  Metal-5 resistor Delta_L    
+VARIABLE  DLM6   0	   	//  Metal-6 resistor Delta_L    
+VARIABLE  DLM7   0	   	//  Metal-7 resistor Delta_L    
+VARIABLE  DLME   0	   	//  Top Metal resistor Delta_L
+VARIABLE  DLMU   0	   	//  Ultra-Thick resistor Delta_L  
+VARIABLE  DWNR   0.07157e-6     //  N+Poly resistor w/o Silicide Delta_W
+VARIABLE  DLNR   0.02051e-6     //  N+Poly resistor w/o Silicide Delta_L
+VARIABLE  DDNR   3.91e-05       //  N+Poly resistor w/o Silicide Rend0
+VARIABLE  DWendNR 0.07157e-6    //  N+Poly resistor w/o Silicide endDW
+VARIABLE  DWPR   0.07953e-6     //  P+Poly resistor w/o Silicide Delta_W
+VARIABLE  DLPR   0.04698e-6     //  P+Poly resistor w/o Silicide Delta_L
+VARIABLE  DDPR   1.01e-04       //  P+Poly resistor w/o Silicide Rend0
+VARIABLE  DWendPR 0.07953e-6    //  P+Poly resistor w/o Silicide endDW
+VARIABLE  DWLR   0.093e-6	//  HRI P+Poly resistor w/o Silicide Delta_W (MS process)
+VARIABLE  DLLR   0.0     	//  HRI P+Poly resistor w/o Silicide Delta_L (MS process)
+VARIABLE  DDLR   5.32e-05       //  HRI P+Poly resistor w/o Silicide Rend0 (MS process)
+
+//MIMCAP Variable Table for MS013(1.2V/2.5V)
+VARIABLE  MIM_1P0_CA    1.0274e-3	// MIMCAP 1P0 CA (MS process)	
+VARIABLE  MIM_1P0_CF    0.1686e-9	// MIMCAP 1P0 CF (MS process)
+VARIABLE  MIM_1P0_DW    -0.108e-6	// MIMCAP 1P0 DW (MS process)
+
+VARIABLE  MIM_1P5_CA    1.547e-3	// MIMCAP 1P5 CA (MS process)	
+VARIABLE  MIM_1P5_CF    0.164e-9	// MIMCAP 1P5 CF (MS process)
+VARIABLE  MIM_1P5_DW    -0.092e-6	// MIMCAP 1P5 DW (MS process)
+
+// END VARIABLE SETTING
+
+//LVS HEAP DIRECTORY "/tmp"
+//comment the following line to disable the extraction of parasitic diodes, NW/PSUB, PW/DNW and DNW/PSUB
+//#DEFINE extract_parasitic_diodes
+//comment the following line to disable the comparison of parasitic diodes, PW/DNW and DNW/PSUB
+//#DEFINE compare_parasitic_diodes    
+//#DEFINE ACCURACY	// RESISTANCE VALUE VARIABLE SETTING
+    
+//#DEFINE LP		// PROCESS VARIABLE SETTING (GENERIC or LP)
+    
+//#DEFINE CAP_1P5 
+    
+#IFDEF RC_DECK
+ #DEFINE ACCURACY
+#ENDIF 
+
+VARIABLE PMOS_TOP_EXT    0
+VARIABLE MOS_LR_EXT      0
+VARIABLE NMOS_BOT_EXT    0
+    
+LAYOUT PRIMARY "ts_allcelllvs"
+LAYOUT PATH "ts_allcelllvs.gds"
+LAYOUT SYSTEM GDSII
+//LAYOUT PATH "layout.net"
+//LAYOUT SYSTEM SPICE
+
+SOURCE PRIMARY "ts_allcelllvs"
+SOURCE PATH "ts_allcelllvs.cdl"
+SOURCE SYSTEM SPICE
+
+DRC RESULTS DATABASE "calibre_drc.db" ASCII // ASCII or GDSII
+DRC SUMMARY REPORT "calibre_drc.sum"
+
+ERC RESULTS DATABASE "calibre_erc.db" ASCII
+ERC SUMMARY REPORT "calibre_erc.sum"
+
+LVS REPORT "lvs.rep"
+LVS REPORT MAXIMUM 1000 // ALL
+
+#IFDEF RC_DECK
+  //MASK RESULTS DATABASE NONE //"mask.db"
+#ELSE
+  MASK RESULTS DATABASE NONE //"mask.db"
+#ENDIF
+
+#IFDEF RC_DECK
+  //MASK SVDB DIRECTORY "svdb" QUERY
+#ELSE
+  MASK SVDB DIRECTORY "svdb" QUERY
+#ENDIF
+LVS ISOLATE SHORTS YES
+LVS REPORT OPTION S
+
+PRECISION 1000
+RESOLUTION 1
+UNIT LENGTH U
+
+#IFDEF RC_DECK
+  //UNIT CAPACITANCE FF
+#ELSE
+  UNIT CAPACITANCE FF
+#ENDIF
+
+TEXT DEPTH PRIMARY
+PORT DEPTH PRIMARY
+
+FLAG SKEW YES
+FLAG OFFGRID YES
+LVS INJECT LOGIC                 NO 
+LVS SPICE PREFER PINS	         YES
+LVS ABORT ON SUPPLY ERROR        NO
+LVS ALL CAPACITOR PINS SWAPPABLE YES
+LVS RECOGNIZE GATES              NONE
+LVS IGNORE PORTS                 NO
+LVS CHECK PORT NAMES             YES
+LVS REDUCE PARALLEL BIPOLAR      YES
+LVS REDUCE PARALLEL MOS          YES
+LVS REDUCE PARALLEL DIODES       YES
+LVS REDUCE PARALLEL CAPACITORS   YES
+LVS REDUCE PARALLEL RESISTORS    YES
+LVS REDUCE SERIES RESISTORS      YES      //Smashes series resistors
+LVS REDUCE SERIES CAPACITORS     YES      //Smashes series capacitors
+LVS REDUCE SPLIT GATES           NO       //Smashes MOS split-gates.
+//LVS FILTER UNUSED OPTION B D E O
+//Strongly recommand to comment FILTER_DGS_TIED_MOS switch
+//AG is to filter MOS with all pins tied together, AB is to filter MOS with D,G,S tied together
+#IFNDEF FILTER_DGS_TIED_MOS
+LVS FILTER UNUSED OPTION AG RC RE RG
+#ELSE
+LVS FILTER UNUSED OPTION AB RC RE RG
+#ENDIF
+LVS PROPERTY RESOLUTION MAXIMUM 65536 // ALL
+
+
+
+
+// should be modify
+LAYOUT BASE LAYER DNW NBL NWELL HVNWi OD2 OD3 HVOX POLYGi PP NP CONT
+
+VIRTUAL CONNECT COLON YES
+
+LVS POWER NAME POWER_NAME 
+LVS GROUND NAME GROUND_NAME 
+//#############################################
+//# MAPPING                                   #
+//#############################################
+LAYER CTMi            77  //  For MIM device
+LAYER CBMi            88  //  For MIM device
+#IFDEF LP
+LAYER LVID            73  //  FOR LOW_POWER Low_VT device
+ VTL_N = COPY LVID
+ VTL_P = COPY LVID
+#ENDIF
+LAYER HVTSRM          60  //  HVT SRAM
+LAYER DNW             1  //  DNW -- Deep N-Well
+LAYER NTN             11  //   Native Device Blocked Implant
+LAYER NWELL           3  //  NW -- N-Well
+LAYER ODi             6  7  8  //  OD -- Thin Oxide
+LAYER DOD            300 
+LAYER MAP 6 DATATYPE 1 300 //  Dummy OD
+LAYER OD2             15  //  OD2-- Thick Oxide
+LAYER OD3             16  //  OD3-- Thich Oxide, for Emb1TRAM process only
+LAYER PP              25  //  PP -- P+ S/D Implantation
+LAYER NP              26  //  NP -- N+ S/D Implantation
+LAYER POLYGi          17  //  PO -- Poly Si
+LAYER DPOLY          301 
+LAYER MAP 17 DATATYPE 1 301 //  Dummy Poly
+#IFNDEF LP
+LAYER VTL_N           12  //  CORE Low VT NMOS
+#ENDIF
+#IFNDEF LP
+LAYER VTL_P           13  //  CORE Low VT PMOS
+#ENDIF
+LAYER VTH_N           67  //  CORE High VT NMOS
+LAYER VTH_P           68  //  CORE High VT PMOS
+LAYER UHVT_N          93  //  CORE UHVT NMOS
+LAYER UHVT_P          94  //  CORE UHVT PMOS
+LAYER CONT            30  //  CO -- Contact Window
+LAYER M1              31  //  M1 -- Metal-1
+LAYER VIA1            51  //  Via1 Hole
+LAYER M2              32  //  M2 -- Metal-2
+LAYER VIA2            52  //  Via2 Hole
+LAYER M3              33  //  M3 -- Metal-3
+LAYER VIA3            53  //  Via3 Hole
+LAYER M4              34  //  M4 -- Metal-4
+LAYER VIA4            54  //  Via4 Hole
+LAYER M5              35  //  M5 -- Metal-5
+LAYER VIA5            55  //  Via5 Hole
+LAYER M6              36  //  M6 -- Metal-6
+LAYER VIA6i           56  //  Via6 Hole
+LAYER M7              37  //  M7 -- Metal-7
+LAYER VIA7            57  //  Via7 Hole
+LAYER M8              38  //  M8 -- Metal-8
+LAYER VIAD            167  //  Via hole above MetalTop to connect MetalTop to MD
+LAYER MD              168  //  MD above MetalTop for redistribution interconnection
+LAYER RV              85  //  Via hole above MetalTop to connect MetalTop to MD
+LAYER AP              42  //  MD above MetalTop for redistribution interconnection
+LAYER CB              43  //  Bounding PAD
+LAYER CBD             169  //  Pad window for Flip-chip
+LAYER RPO             29  //  RPO-- Resist Protection Oxide
+LAYER ESD3DMY         147  //  ESD3DMY
+LAYER PSUB2           111  //  dummy layer for subtrate isolation
+LAYER RODMY           49  //  dummy layer to remove OD
+LAYER BJTDMY          110  //  dummy layer to form BJT
+LAYER RHRIDMY         120  //  HRI high poly resistor dummy layer
+LAYER RHRIDMY_1Ki    302 
+LAYER MAP 120 DATATYPE 10 302 //  1K HRI high poly resistor dummy layer
+LAYER RHRIDMY_2Ki    303 
+LAYER MAP 120 DATATYPE 20 303 //  2K HRI high poly resistor dummy layer
+LAYER HRI             70  //  HRI high poly resistor implantation
+LAYER DIODMY          119  //  dummy layer to form diode
+LAYER NWDMYi         304 
+LAYER MAP 114 DATATYPE 0 304 //  dummy layer to form N-Well resistor
+LAYER NWDMY1         305 
+LAYER MAP 114 DATATYPE 1 305 //  dummy layer to form N-Well three terminals resistor
+LAYER RPDMYi         306 
+LAYER MAP 115 DATATYPE 0 306 //  dummy layer to form OD/POLY resistor
+LAYER RPDMY1         307 
+LAYER MAP 115 DATATYPE 1 307 //  dummy layer to form OD/POLY three terminals resistor
+LAYER RMDMY          308 
+LAYER MAP 116 DATATYPE 0 308 //  dummy layer to form METAL resistor
+LAYER RMDMYi1        309 
+LAYER MAP 116 DATATYPE 1 309 //  dummy layer to form METAL1 resistor
+LAYER RMDMYi2        310 
+LAYER MAP 116 DATATYPE 2 310 //  dummy layer to form METAL2 resistor
+LAYER RMDMYi3        311 
+LAYER MAP 116 DATATYPE 3 311 //  dummy layer to form METAL3 resistor
+LAYER RMDMYi4        312 
+LAYER MAP 116 DATATYPE 4 312 //  dummy layer to form METAL4 resistor
+LAYER RMDMYi5        313 
+LAYER MAP 116 DATATYPE 5 313 //  dummy layer to form METAL5 resistor
+LAYER RMDMYi6        314 
+LAYER MAP 116 DATATYPE 6 314 //  dummy layer to form METAL6 resistor
+LAYER RMDMYi7        315 
+LAYER MAP 116 DATATYPE 7 315 //  dummy layer to form METAL7 resistor
+LAYER RMDMYi8        316 
+LAYER MAP 116 DATATYPE 8 316 //  dummy layer to form METAL8 resistor
+LAYER VARDMY          143  //  dummy layer to form Varactor
+LAYER SBDDMY         317 
+LAYER MAP 113 DATATYPE 0 317 //  Dummy layer for schottky barrier diode RF device
+LAYER RHDMY           117  //  dummy layer to form diffusion and poly resistor
+LAYER DMSRM           50  //  dummy layer to form SRAM mos
+LAYER DUM1           318 
+LAYER MAP 31 DATATYPE 1 318 //  dummy metal M1
+LAYER M1SLOT         319 
+LAYER MAP 31 DATATYPE 2 319 //  M1 slot
+LAYER DUM2           320 
+LAYER MAP 32 DATATYPE 1 320 //  dummy metal M2
+LAYER M2SLOT         321 
+LAYER MAP 32 DATATYPE 2 321 //  M2 slot
+LAYER DUM3           322 
+LAYER MAP 33 DATATYPE 1 322 //  dummy metal M3
+LAYER M3SLOT         323 
+LAYER MAP 33 DATATYPE 2 323 //  M3 slot
+LAYER DUM4           324 
+LAYER MAP 34 DATATYPE 1 324 //  dummy metal M4
+LAYER M4SLOT         325 
+LAYER MAP 34 DATATYPE 2 325 //  M4 slot
+LAYER DUM5           326 
+LAYER MAP 35 DATATYPE 1 326 //  dummy metal M5
+LAYER M5SLOT         327 
+LAYER MAP 35 DATATYPE 2 327 //  M5 slot
+LAYER DUM6           328 
+LAYER MAP 36 DATATYPE 1 328 //  dummy metal M6
+LAYER M6SLOT         329 
+LAYER MAP 36 DATATYPE 2 329 //  M6 slot
+LAYER DUM7           330 
+LAYER MAP 37 DATATYPE 1 330 //  dummy metal M7
+LAYER M7SLOT         331 
+LAYER MAP 37 DATATYPE 2 331 //  M7 slot
+LAYER DUM8           332 
+LAYER MAP 38 DATATYPE 1 332 //  dummy metal M8
+LAYER M8SLOT         333 
+LAYER MAP 38 DATATYPE 2 333 //  M8 slot
+LAYER DRAIN          334 
+LAYER MAP 6 DATATYPE 3 334 //  For RF MOS drain side using only
+LAYER RFDMY           161  //  For RF Device using only ( some layout using datatype 1 )
+LAYER IND_STD        335 
+LAYER MAP 144 DATATYPE 0 335 //  For RF Inductor device standard
+LAYER IND_SYM        336 
+LAYER MAP 144 DATATYPE 1 336 //  For RF Inductor device symmetric
+LAYER IND_CTi        337 
+LAYER MAP 144 DATATYPE 2 337 //  For RF Inductor device center-tap
+LAYER IND_RAD        338 
+LAYER MAP 144 DATATYPE 30 338 //  For RF Inductor devices radious
+LAYER MOMDMY         339 
+LAYER MAP 155 DATATYPE 0 339 //  dummy layer for RTMOM devices
+LAYER MOMDMY1        340 
+LAYER MAP 155 DATATYPE 1 340 //  dummy layer for RTMOM devices
+LAYER MOMDMY2        341 
+LAYER MAP 155 DATATYPE 2 341 //  dummy layer for RTMOM devices
+LAYER MOMDMY3        342 
+LAYER MAP 155 DATATYPE 3 342 //  dummy layer for RTMOM devices
+LAYER MOMDMY4        343 
+LAYER MAP 155 DATATYPE 4 343 //  dummy layer for RTMOM devices
+LAYER MOMDMY5        344 
+LAYER MAP 155 DATATYPE 5 344 //  dummy layer for RTMOM devices
+LAYER MOMDMY6        345 
+LAYER MAP 155 DATATYPE 6 345 //  dummy layer for RTMOM devices
+LAYER MOMDMY7        346 
+LAYER MAP 155 DATATYPE 7 346 //  dummy layer for RTMOM devices
+LAYER MOMDMY8        347 
+LAYER MAP 155 DATATYPE 8 347 //  dummy layer for RTMOM devices
+LAYER MOMDMY9        348 
+LAYER MAP 155 DATATYPE 9 348 //  dummy layer for RTMOM devices
+LAYER UBM             170  //  Under bump metal
+LAYER SRAMPSGT       349 
+LAYER MAP 186 DATATYPE 1 349 //  For SRAM pass gate
+LAYER PWELLX          2  //  for all cis devices
+LAYER CELLMV         350 
+LAYER MAP 74 DATATYPE 0 350 //  for all cis devices
+LAYER CIRPO          351 
+LAYER MAP 74 DATATYPE 11 351 //  for all cis devices
+LAYER CELL_TX        352 
+LAYER MAP 74 DATATYPE 23 352 //  for nch_tg3  
+LAYER CELL_RS        353 
+LAYER MAP 74 DATATYPE 24 353 //  for nch_rt3
+LAYER CAP_IMP        354 
+LAYER MAP 74 DATATYPE 25 354 //  for npoluycap_33 
+LAYER CELL_SL        355 
+LAYER MAP 74 DATATYPE 30 355 //  for nch_rs3
+LAYER ISOPW           82  // 
+LAYER NBL            356 
+LAYER MAP 141 DATATYPE 1 356 //  for HV process (HV N+ buried layer)
+LAYER HVOX           357 
+LAYER MAP 141 DATATYPE 2 357 //  for HV process (HV Oxide)
+LAYER HVNWi          358 
+LAYER MAP 154 DATATYPE 5 358 //  HV PMOS (HV NWELL)
+LAYER PSUBi          359 
+LAYER MAP 154 DATATYPE 13 359 //  for flash HV NMOS and ZMOS (HV PWELL)
+LAYER HNVT           360 
+LAYER MAP 154 DATATYPE 14 360 //  for flash HV NMOS and ZMOS (HV NTN)
+LAYER IOPW           361 
+LAYER MAP 141 DATATYPE 13 361 // 
+LAYER IONW           362 
+LAYER MAP 141 DATATYPE 12 362 // 
+LAYER Pbody          363 
+LAYER MAP 141 DATATYPE 10 363 // 
+LAYER DPW            364 
+LAYER MAP 141 DATATYPE 14 364 // 
+LAYER HVDMY          365 
+LAYER MAP 141 DATATYPE 15 365 // 
+LAYER SH_N           366 
+LAYER MAP 141 DATATYPE 16 366 // 
+LAYER SH_P           367 
+LAYER MAP 141 DATATYPE 17 367 // 
+LAYER HV10DMY        368 
+LAYER MAP 141 DATATYPE 20 368 // 
+LAYER HV20DMY        369 
+LAYER MAP 141 DATATYPE 21 369 // 
+LAYER HV28DMY        370 
+LAYER MAP 141 DATATYPE 22 370 // 
+LAYER HV36DMY        371 
+LAYER MAP 141 DATATYPE 23 371 // 
+LAYER HVPWi          372 
+LAYER MAP 154 DATATYPE 6 372 //  Layer HVPWi for HV and embFlash process
+LAYER UDCDMY         373 
+LAYER MAP 148 DATATYPE 101 373 // 
+LAYER CUSDMY         374 
+LAYER MAP 74 DATATYPE 58 374 // 
+TEXT LAYER 131 ATTACH 131 metal1
+PORT LAYER TEXT 131
+TEXT LAYER 132 ATTACH 132 metal2
+PORT LAYER TEXT 132
+TEXT LAYER 133 ATTACH 133 metal3
+PORT LAYER TEXT 133
+TEXT LAYER 134 ATTACH 134 metal4
+PORT LAYER TEXT 134
+TEXT LAYER 135 ATTACH 135 metal5
+PORT LAYER TEXT 135
+TEXT LAYER 136 ATTACH 136 metal6
+PORT LAYER TEXT 136
+TEXT LAYER 137 ATTACH 137 metal7
+PORT LAYER TEXT 137
+TEXT LAYER 138 ATTACH 138 metal8
+PORT LAYER TEXT 138
+TEXT LAYER 159 ATTACH 159 metal9
+PORT LAYER TEXT 159
+#IFDEF RC_DECK
+TEXT LAYER 149 ATTACH 149 poly
+PORT LAYER TEXT 149
+#ENDIF
+
+#IFNDEF RC_DECK
+LAYER MAP 149 TEXTTYPE 1 375
+TEXT LAYER 375 ATTACH 375 poly
+PORT LAYER TEXT 375
+#ENDIF
+//#############################################
+//# LOGIC OPERATION POOL                      #
+//#############################################
+
+//Form BULK layer
+DRC:1 = EXTENT
+BULK  = SIZE DRC:1 BY 0.005
+
+//* Define device -- nmos N
+POLYG = POLYGi OR DPOLY 
+p1hr1 = POLYG AND RPO 
+RPDMY = RPDMYi OR RPDMY1 
+OD = ODi OR DOD 
+diff = OD NOT RODMY 
+rp1 = RPDMY NOT INTERACT diff 
+p1rdum = rp1 INTERACT POLYG  //  poly1 resistor dummy
+rpop1 = p1hr1 INTERACT p1rdum 
+hripo1 = rpop1 AND HRI 
+rpop = rpop1 NOT INTERACT hripo1 
+rpolywo1 = rpop AND RHDMY 
+rpolywo2 = rpolywo1 AND RPO 
+rpolywo = rpolywo2 INTERACT p1rdum 
+poly1 = POLYG NOT rpolywo 
+rpoly1 = POLYG AND p1rdum 
+rpoly = rpoly1 NOT INTERACT RPO 
+poly12 = poly1 NOT rpoly  //   POLY interconnect
+hripo2 = hripo1 AND RHRIDMY 
+hripo3 = hripo2 NOT NP 
+hripo41 = hripo3 NOT PP 
+polytmp = poly12 NOT hripo41 
+poly = polytmp NOT MOMDMY  //  POLY interconnect
+dupo1 = poly INSIDE diff 
+dupo2 = dupo1 NOT INTERACT CONT 
+realpo = poly NOT dupo2 
+rodwo1 = diff AND RHDMY 
+rodwo2 = rodwo1 AND RPO 
+drdum = RPDMY INTERACT diff  //  diff resistor dummy
+rodwo = rodwo2 INTERACT drdum 
+mdiff1 = diff NOT rodwo 
+rod1 = diff AND drdum 
+rod = rod1 NOT INTERACT RPO 
+mdiff = mdiff1 NOT rod 
+gate1 = realpo AND mdiff 
+gate_a = gate1 NOT DMSRM 
+gate = gate_a NOT RFDMY 
+iso_hvnw = HVNWi NOT HVOX  //  isolation HVNW
+anwel1 = iso_hvnw OR NWELL  //  LV OR HV NWELL
+anwel = anwel1 OR IONW 
+NWDMY = NWDMYi OR NWDMY1 
+nxwell = anwel NOT NWDMY 
+gatennw = gate NOT nxwell  //  gate not inside nwell
+tngate1 = gatennw AND NP 
+tngate1a = tngate1 NOT PSUBi 
+tngate2 = tngate1a NOT OD2 
+tngate3a = tngate2 NOT NTN 
+tngate3 = tngate3a NOT HNVT 
+tngate4 = tngate3 NOT DNW 
+nlvgate = tngate4 AND VTL_N  //  CORE LOW_VT NMOS
+ngate1 = tngate4 NOT nlvgate 
+nhvgate = tngate4 AND VTH_N  //  CORE HIGH_VT NMOS
+ngate2 = ngate1 NOT nhvgate 
+ngate = ngate2 NOT UHVT_N  //  CORE NMOS
+
+//***** Define connectivity/via layer -- tndiff ****
+nthin1 = mdiff AND NP  //  define N+ thin oxide
+ydio_a = ESD3DMY AND OD 
+ydio_c = SIZE ydio_a BY -0.2 
+ydio_d = ydio_c AND NP 
+ydio_e = ydio_d AND RPO 
+ydio_f = ydio_e NOT anwel 
+ydio_g = ESD3DMY AND POLYG 
+ydio_h = SIZE ydio_g BY 0.2 
+ydio_i = ydio_f NOT ydio_h 
+ydio_j = SIZE ydio_i BY -0.7 
+ydio = SIZE ydio_j BY 0.5 
+nthin = nthin1 NOT ydio 
+tndiff = nthin NOT gate1  //  define N+ diffusion region
+
+//***** Define connectivity/via layer -- psub ****
+ppsub = BULK NOT anwel  //  define total p_sub region
+psub2s = SIZE PSUB2 BY 0.01 
+psubband = psub2s NOT PSUB2  //  psub separator band (doughnut).
+psub = ppsub NOT psubband 
+
+//* Define device -- nmos ND
+bngate1 = tngate1a AND OD2 
+bngate2a = bngate1 NOT NTN 
+bngate2b = bngate2a NOT CAP_IMP 
+bngate2c = bngate2b NOT CELLMV 
+bngate2 = bngate2c NOT HNVT 
+bngate3 = bngate2 NOT DNW 
+bngate = bngate3 NOT VTL_N  //  I/O NMOS (original)
+
+//* Define device -- nmos NHL
+bnlvgate = bngate3 AND VTL_N  //  I/O LOW_VT NMOS
+
+//* Define device -- nmos N1
+tdgate1 = tngate3 AND DNW 
+n1lvgate = tdgate1 AND VTL_N  //  CORE LOW_VT NMOS on DNW
+nrgate1 = tdgate1 NOT n1lvgate 
+n1hvgate = tdgate1 AND VTH_N  //  CORE HIGH_VT NMOS on DNW
+nrgate = nrgate1 NOT n1hvgate  //  CORE NMOS on DNW
+
+//* Define device -- nmos N2
+bndgate = bngate2 AND DNW 
+bnrgate = bndgate NOT VTL_N  //  I/O NMOS on DNW
+
+//* Define device -- nmos N2LV
+bndlvgate = bndgate AND VTL_N  //  I/O LOW_VT NMOS on DNW
+
+//* Define device -- nmos NL
+nlgate1 = tngate2 AND NTN 
+nlgate1a = nlgate1 NOT HNVT 
+nlgate2 = nlgate1a NOT VTL_N 
+nlgate3 = nlgate2 NOT VTH_N 
+nlgate4 = nlgate3 NOT DNW  //  CORE Native Devies
+nlgate = nlgate4 NOT OD3  //  CORE Native Devies
+
+//* Define device -- nmos NN
+bnngate1 = bngate1 AND NTN 
+bnngate2 = bnngate1 NOT VTL_N 
+bnngate3 = bnngate2 NOT HNVT 
+bnngate4 = bnngate3 NOT DNW 
+bnngate = bnngate4 NOT CAP_IMP  //  I/O Native Devices
+
+//* Define device -- nmos nch_uhvt
+ngate_uhvt = ngate2 AND UHVT_N  //  CORE UHVT NMOS
+
+//* Define device -- nmos nch_sram
+gate_s1 = gate1 AND DMSRM 
+gatennw_s = gate_s1 NOT nxwell  //  gate not inside nwell
+ngate_s1 = gatennw_s AND NP 
+ngate_s2 = ngate_s1 NOT OD2 
+ngate_s3 = ngate_s2 NOT VTH_N 
+ngate_s4 = ngate_s3 NOT VTL_N 
+ngate_s5 = ngate_s4 NOT HVTSRM 
+ngate_s = COPY ngate_s5  //  SRAM NMOS
+
+//* Define device -- nmos nch_sram_hvt
+ngate_s_hvt = ngate_s4 AND HVTSRM  //  HVT SRAM NMOS
+
+//* Define device -- pmos P
+gatenw = gate AND nxwell  //  gate inside nwell
+tpgate1 = gatenw AND PP 
+tpgate2 = tpgate1 NOT OD2 
+tpgate3 = tpgate2 NOT HVNWi 
+plvgate = tpgate3 AND VTL_P  //  CORE LOW_VT PMOS
+pgate1 = tpgate3 NOT plvgate 
+phvgate = tpgate3 AND VTH_P  //  CORE HIGH_VT PMOS
+pgate2 = pgate1 NOT phvgate 
+pgate = pgate2 NOT UHVT_P  //  CORE PMOS
+
+//***** Define connectivity/via layer -- tpdiff ****
+pthin = mdiff AND PP  //  define P+ thin oxide
+tpdiff = pthin NOT gate1  //  define P+ diffusion region
+
+//* Define device -- pmos PD
+bpgate1 = tpgate1 AND OD2 
+bpgate2 = bpgate1 NOT HVNWi 
+bpgate = bpgate2 NOT VTL_P  //  I/O PMOS
+
+//* Define device -- pmos pch_sram
+gatenw_s = gate_s1 AND nxwell  //  gate inside nwell
+pgate_s1 = gatenw_s AND PP 
+pgate_s2 = pgate_s1 NOT OD2 
+pgate_s3 = pgate_s2 NOT VTH_P 
+pgate_s4 = pgate_s3 NOT VTL_P 
+pgate_s = pgate_s4 NOT HVTSRM  //  SRAM PMOS
+
+//* Define device -- pmos pchpu_hvtsr_g
+pgate_s_hvt = pgate_s4 AND HVTSRM  //  HVT SRAM PMOS
+
+//* Define device -- pmos PHL
+bplvgate = bpgate2 AND VTL_P  //  I/O LOW_VT PMOS
+
+//* Define device -- pmos pch_uhvt
+pgate_uhvt = pgate2 AND UHVT_P  //  CORE UHVT PMOS
+
+//* Define device -- diode DP
+pdio1 = tpdiff AND DIODMY 
+pdio2a = pdio1 AND nxwell 
+npdiff = tpdiff AND tndiff  //  overlap region of PP diff with NP diff
+zenarng = npdiff AND RPO 
+zenpdif1 = pdio2a INTERACT zenarng 
+pdio2 = pdio2a NOT zenpdif1 
+pdio3 = pdio2 NOT OD2 
+cpdio1 = pdio3 NOT VTH_P 
+cpdio2 = cpdio1 NOT VTL_P 
+cpdio3 = cpdio2 NOT INTERACT HVNWi 
+cpdio = cpdio3 NOT UHVT_P  //  CORE P+/NW DIODE
+
+//* Define device -- diode DN
+ndio1 = tndiff AND DIODMY 
+ndio2a = ndio1 AND psub 
+ndio2b = ndio2a NOT HVOX 
+ndio2 = ndio2b NOT PSUBi  //  Exclude ndio from ndio_hv(Add by pywangi on 09/08/04)
+ndio3 = ndio2 NOT OD2 
+ndio4 = ndio3 NOT NTN 
+cndio1 = ndio4 NOT VTH_N 
+cndio2 = cndio1 NOT VTL_N 
+cndio = cndio2 NOT UHVT_N  //  CORE N+/PW DIODE
+
+//* Define device -- diode DW
+DIONW = DIODMY OUTSIDE tpdiff 
+nwdio1a = nxwell AND DIONW 
+nwdio1 = nwdio1a NOT HVNWi 
+cnwdio = nwdio1 NOT OD2  //  CORE NW/PW diode
+
+//* Define device -- diode D1
+ipdioa = pdio2 AND OD2 
+ipdio = ipdioa NOT VTL_P  //  I/O  P+/NW DIODE		
+
+//* Define device -- diode D2
+indio1 = ndio2 AND OD2 
+indioa = indio1 NOT NTN 
+indioa2 = indioa NOT VTL_N  //  I/O N+/PW DIODE
+indio = indioa2 NOT CELLMV 
+
+//* Define device -- diode DPL
+pdiol = pdio3 AND VTL_P  //  CORE P+/NW Low_VT DIODE
+
+//* Define device -- diode DNL
+ndiol = ndio4 AND VTL_N  //  CORE N+/PW Low_VT DIODE
+
+//* Define device -- diode D1N
+nndio1 = ndio3 AND NTN 
+ndion2 = nndio1 NOT VTH_N 
+ndion3 = ndion2 NOT VTL_N  //  CORE N+/PW Native DIODE
+cndion = ndion3 NOT OD3  //  CORE N+/PW Native DIODE
+
+//* Define device -- diode D2N
+indion = indio1 AND NTN  //  I/O N+/PW Native DIODE
+
+//* Define device -- diode DPH
+pdioh = pdio3 AND VTH_P  //  CORE P+/NW HIGH_VT DIODE
+
+//* Define device -- diode DNH
+ndioh = ndio4 AND VTH_N  //  CORE N+/PW HIGH_VT DIODE
+
+//* Define device -- diode D3
+inwdio = nwdio1 AND OD2  //  I/O NW/PW diode
+
+//* Define device -- diode NDIO_lvt25
+indio_lvt = indio1 AND VTL_N  //  I/O N+/PW Low_VT DIODE
+
+//* Define device -- diode PDIO_lvt25
+ipdio_lvt = ipdioa AND VTL_P  //  I/O  P+/NW Low_VT DIODE
+
+//* Define device -- diode ndio_uhvt
+cndio_uhvt = cndio2 AND UHVT_N  //  UHVT CORE N+/PW DIODE
+
+//* Define device -- diode pdio_uhvt
+cpdio_uhvt = cpdio3 AND UHVT_P  //  UHVT CORE P+/NW DIODE
+
+//***** Define connectivity/via layer -- ydio_hole ****
+ydio_hole = HOLES ydio 
+
+//* Define device -- bjt pnp2
+ttdiff = tpdiff AND BJTDMY 
+nbase1a = nxwell NOT INTERACT DNW 
+nbase1b = nbase1a NOT HVNWi 
+nbase1c = nbase1b AND BJTDMY 
+cemit1b = ttdiff AND nbase1c  //  define BJT[PV] emitter
+cemit1c = cemit1b NOT NBL 
+cemit1d = cemit1c INTERACT RPO 
+cemit1e = cemit1d NOT OD2 
+cemit1 = cemit1e NOT OD3 
+cemit2 = AREA cemit1  > 3.999  < 4.001 
+
+//***** Define connectivity/via layer -- coll1 ****
+collsur = psub TOUCH nbase1c 
+coll1a = collsur OR nbase1c  //  define BJT[PV] collector
+collsura = collsur TOUCH cemit1b 
+coll1b = coll1a NOT collsura 
+coll1c = coll1b NOT cemit1  //  define pnp collector
+coll1 = coll1c NOT NBL 
+
+//***** Define connectivity/via layer -- nbase1 ****
+nbase1 = nbase1c NOT NBL 
+
+//* Define device -- bjt pnp5
+cemit5 = AREA cemit1  > 24.999  < 25.001 
+
+//* Define device -- bjt pnp10
+cemit10 = AREA cemit1  > 99.999  < 100.001 
+
+//* Define device -- bjt npn2
+npnrg = DNW AND BJTDMY  //  define NPN region
+nndiff = tndiff AND npnrg 
+pbase1 = psub AND npnrg  //  define BJT[NV] base terminal
+cnemit2 = nndiff AND pbase1  //  define BJT[NV] emitter
+cnemit2a = cnemit2 INTERACT RPO  //  define BJT[NV] emitter
+cnemit2b = cnemit2a NOT OD2  //  define BJT[NV] emitter
+cnemit1 = cnemit2b NOT OD3  //  define BJT[NV] emitter
+nemit2 = AREA cnemit1  > 3.999  < 4.001 
+
+//***** Define connectivity/via layer -- ncoll1 ****
+ncollrg1 = nxwell AND npnrg 
+ncollrg = ncollrg1 NOT HVNWi 
+ncolls = ncollrg TOUCH pbase1 
+ncoll1 = ncolls OR pbase1  //  define BJT[NV] collector
+
+//* Define device -- bjt npn5
+nemit5 = AREA cnemit1  > 24.999  < 25.001 
+
+//* Define device -- bjt npn10
+nemit10 = AREA cnemit1  > 99.999  < 100.001 
+
+//* Define device -- xdev M1
+M1X = M1 OR DUM1 
+M1Y = M1X NOT M1SLOT 
+mt1res_RM = RMDMY OR RMDMYi1 
+M1Z = M1Y AND mt1res_RM 
+mt1res = M1Z INTERACT M1  //  metal1 resistor
+
+//***** Define connectivity/via layer -- metal1 ****
+metal1 = M1Y NOT mt1res 
+
+//* Define device -- xdev M2
+M2X = M2 OR DUM2 
+M2Y = M2X NOT M2SLOT 
+mt2res_RM = RMDMY OR RMDMYi2 
+M2Z = M2Y AND mt2res_RM 
+mt2res = M2Z INTERACT M2  //  metal2 resistor
+
+//***** Define connectivity/via layer -- metal2 ****
+metal2 = M2Y NOT mt2res 
+
+//* Define device -- xdev M3
+M3X = M3 OR DUM3 
+M3Y = M3X NOT M3SLOT 
+mt3res_RM = RMDMY OR RMDMYi3 
+M3Z = M3Y AND mt3res_RM 
+mt3res = M3Z INTERACT M3  //  metal3 resistor
+
+//***** Define connectivity/via layer -- metal3 ****
+metal3 = M3Y NOT mt3res 
+
+//* Define device -- xdev M4
+M4X = M4 OR DUM4 
+M4Y = M4X NOT M4SLOT 
+mt4res_RM = RMDMY OR RMDMYi4 
+M4Z = M4Y AND mt4res_RM 
+mt4res = M4Z INTERACT M4  //  metal4 resistor
+
+//***** Define connectivity/via layer -- metal4 ****
+metal4 = M4Y NOT mt4res 
+
+//* Define device -- xdev M5
+M5X = M5 OR DUM5 
+M5Y = M5X NOT M5SLOT 
+inddmy1 = IND_STD OR IND_SYM 
+IND_CT = SIZE IND_CTi BY -0.005 
+INDDMY = inddmy1 OR IND_CT 
+M5Z = M5Y NOT INDDMY 
+mt5res_RM = RMDMY OR RMDMYi5 
+mt5res1 = M5Z AND mt5res_RM  //  metal5 resistor
+mt5res = mt5res1 INTERACT M5 
+
+//***** Define connectivity/via layer -- metal5 ****
+metal5 = M5Z NOT mt5res 
+
+//* Define device -- xdev M6
+M6X = M6 OR DUM6 
+M6Y = M6X NOT M6SLOT 
+M6Z = M6Y NOT INDDMY 
+mt6res_RM = RMDMY OR RMDMYi6 
+mt6res1 = M6Z AND mt6res_RM  //  metal6 resistor
+mt6res = mt6res1 INTERACT M6 
+
+//***** Define connectivity/via layer -- metal6 ****
+metal6 = M6Z NOT mt6res 
+
+//* Define device -- xdev M7
+M7X = M7 OR DUM7 
+M7Y = M7X NOT M7SLOT 
+M7Z = M7Y NOT INDDMY 
+mt7res_RM = RMDMY OR RMDMYi7 
+mt7res1 = M7Z AND mt7res_RM  //  metal7 resistor
+mt7res = mt7res1 INTERACT M7 
+
+//***** Define connectivity/via layer -- metal7 ****
+metal7 = M7Z NOT mt7res 
+
+//* Define device -- xdev ME
+M8X = M8 OR DUM8 
+M8Y = M8X NOT M8SLOT 
+M8Z = M8Y NOT INDDMY 
+mt8res_RM = RMDMY OR RMDMYi8 
+mt8res1 = M8Z AND mt8res_RM  //  metal8 resistor
+mt8res = mt8res1 INTERACT M8 
+
+//***** Define connectivity/via layer -- metal8 ****
+metal8 = M8Z NOT mt8res 
+
+//* Define device -- xdev PR
+rppolywo_r1 = rpolywo AND PP 
+rppolywo_r2 = rppolywo_r1 INTERACT RPDMYi 
+rppolywo_r3 = rppolywo_r2 NOT RFDMY 
+rppolywo_r = rppolywo_r3 INTERACT POLYGi  //  P+POLY resistor w/o silicide
+
+//* Define device -- xdev NR
+rnpolywo_r1 = rpolywo AND NP 
+rnpolywo_r2 = rnpolywo_r1 INTERACT RPDMYi 
+rnpolywo_r = rnpolywo_r2 INTERACT POLYGi  //  N+POLY resistor w/o silicide
+
+//* Define device -- xdev PD
+rpodwo1 = rodwo AND PP 
+rpodwo_r1 = rpodwo1 AND NWELL 
+rpodwo_r2 = rpodwo_r1 INTERACT RPDMYi 
+rpodwo_r = rpodwo_r2 INTERACT ODi  //  P+OD resistor w/o silicide
+
+//* Define device -- xdev ND
+rnodwo1 = rodwo AND NP 
+rnodwo_r1 = rnodwo1 NOT NWELL 
+rnodwo_r2 = rnodwo_r1 INTERACT RPDMYi 
+rnodwo_r = rnodwo_r2 INTERACT ODi  //  N+OD resistor w/o silicide
+
+//* Define device -- xdev WR
+trwell = NWDMY AND NWELL  //  N-well resistor layer
+drpo1 = diff AND RPO 
+drpo = drpo1 INTERACT ODi 
+nwsti_r1 = trwell NOT drpo  //  NWDMY*NWELL-RPO-diff --> nwsti
+nwsti_r = nwsti_r1 INTERACT NWDMYi  //  NWDMY*NWELL-RPO-diff --> nwsti
+
+//* Define device -- xdev WO
+nwod_r1 = trwell AND drpo 
+nwod_r = nwod_r1 INTERACT NWDMYi  //  NWDMY*NWELL*RPO*diff --> nwod
+
+//* Define device -- xdev PS1
+rppoly_r1 = rpoly AND PP 
+rppoly_r1_eg = rppoly_r1 INSIDE EDGE POLYG 
+l_rppoly_r1_eg = LENGTH rppoly_r1_eg  >= 2  < 99999999 
+l_rppoly_r1 = rppoly_r1 WITH EDGE l_rppoly_r1_eg 
+rf_lrppoly = l_rppoly_r1 AND RFDMY 
+lrppoly_rf1 = rf_lrppoly INTERACT RPDMYi 
+lrppoly_rf = lrppoly_rf1 INTERACT POLYGi  //  P+POLY resistor w/i silicide (3-terminal rf w >=  2um)
+lrppoly_ra = l_rppoly_r1 NOT lrppoly_rf 
+lrppoly_d1 = l_rppoly_r1 INTERACT RPDMY1 
+lrppoly_d = lrppoly_d1 INTERACT POLYGi  //  P+POLY resistor w/i silicide (3-terminal dis w >=  2um)
+lrppoly_rb = lrppoly_ra NOT lrppoly_d 
+s_rppoly_r1 = rppoly_r1 NOT l_rppoly_r1 
+rf_srppoly = s_rppoly_r1 AND RFDMY 
+srppoly_rf1 = rf_srppoly INTERACT RPDMYi 
+srppoly_rf = srppoly_rf1 INTERACT POLYGi  //  P+POLY resistor w/i silicide (3-terminal rf w < 2um)
+srppoly_ra = s_rppoly_r1 NOT srppoly_rf 
+srppoly_d1 = s_rppoly_r1 INTERACT RPDMY1 
+srppoly_d = srppoly_d1 INTERACT POLYGi  //  P+POLY resistor w/i silicide (3-terminal dis w < 2um)
+srppoly_rb = srppoly_ra NOT srppoly_d 
+rppoly_rx = lrppoly_rb OR srppoly_rb 
+rppoly_ry = rppoly_rx INTERACT RPDMYi 
+rppoly_r = rppoly_ry INTERACT POLYGi  //  P+POLY resistor w/i silicide
+rppoly_edge = rppoly_r INSIDE EDGE POLYG 
+l_rppoly = LENGTH rppoly_edge  >= 2  < 99999999 
+rppolyl_r = rppoly_r WITH EDGE l_rppoly  //   P+POLY resistor w/i silicide >=  2
+
+//* Define device -- xdev PS2
+rppolys_r = rppoly_r NOT rppolyl_r  //   P+POLY resistor w/i silicide < 2
+
+//* Define device -- xdev NS1
+rnpoly_r1 = rpoly AND NP 
+rnpoly_r2 = rnpoly_r1 INTERACT RPDMYi 
+rnpoly_r = rnpoly_r2 INTERACT POLYGi  //  N+POLY resistor w/i silicide
+rnpoly_edge = rnpoly_r INSIDE EDGE POLYG 
+l_rnpoly = LENGTH rnpoly_edge  >= 2  < 99999999 
+rnpolyl_r = rnpoly_r WITH EDGE l_rnpoly  //   N+POLY resistor w/i silicide >=  2
+
+//* Define device -- xdev NS2
+rnpolys_r = rnpoly_r NOT rnpolyl_r  //   N+POLY resistor w/i silicide < 2
+
+//* Define device -- xdev PI1
+rpod1 = rod AND PP 
+rpod_r1 = rpod1 AND NWELL 
+rpod_r2 = rpod_r1 INTERACT RPDMYi 
+rpod_r = rpod_r2 INTERACT ODi  //  P+OD resistor w/i silicide
+rpod_edge = rpod_r INSIDE EDGE diff 
+l_rpod = LENGTH rpod_edge  >= 2  < 99999999 
+rpodl_r = rpod_r WITH EDGE l_rpod  //   P+OD resistor w/i silicide >=  2
+
+//* Define device -- xdev PI2
+rpods_r = rpod_r NOT rpodl_r  //   P+OD resistor w/i silicide < 2
+
+//* Define device -- xdev NI1
+rnod1 = rod AND NP 
+rnod_r1 = rnod1 NOT NWELL 
+rnod_r2 = rnod_r1 INTERACT RPDMYi 
+rnod_r = rnod_r2 INTERACT ODi  //  N+OD resistor w/i silicide
+rnod_edge = rnod_r INSIDE EDGE diff 
+l_rnod = LENGTH rnod_edge  >= 2  < 99999999 
+rnodl_r = rnod_r WITH EDGE l_rnod  //   N+OD resistor w/i silicide >=  2
+
+//* Define device -- xdev NI2
+rnods_r = rnod_r NOT rnodl_r  //   N+OD resistor w/i silicide < 2
+
+//***** Define connectivity/via layer -- pplug ****
+pplug1 = tpdiff AND psub  //  define p_sub contact
+pplug3 = pplug1 INTERACT CONT 
+tndiffco = tndiff INTERACT CONT 
+pplug2 = pplug1 INTERACT tndiffco 
+pplug = pplug3 OR pplug2  //  define p_sub contact
+
+//* Define device -- xdev rpodwo_m
+rpodwo_mr1 = rpodwo_r1 INTERACT RPDMY1 
+rpodwo_mr = rpodwo_mr1 INTERACT ODi  //  P+OD resistor w/o silicide (3-terminals)
+
+//* Define device -- xdev rnodwo_m
+rnodwo_mr1 = rnodwo_r1 INTERACT RPDMY1 
+rnodwo_mr = rnodwo_mr1 INTERACT ODi  //  N+OD resistor w/o silicide (3-terminals)
+
+//* Define device -- xdev rnwod_m
+nwod_mr = nwod_r1 INTERACT NWDMY1  //  NWDMY*NWELL*RPO*diff --> nwod (3-terminals)
+
+//* Define device -- xdev rpodl_m
+rpod_mr1a = rpod_r1 INTERACT RPDMY1 
+rpod_mr1 = rpod_mr1a INTERACT ODi 
+rpod_mr1_edge = rpod_mr1 INSIDE EDGE diff 
+l_rpod_mr1 = LENGTH rpod_mr1_edge  >= 2  < 99999999 
+rpodl_mr = rpod_mr1 WITH EDGE l_rpod_mr1  //  P+OD resistor w/i silicide (3-terminals)
+
+//* Define device -- xdev rnodl_m
+rnod_mr1a = rnod_r1 INTERACT RPDMY1 
+rnod_mr1 = rnod_mr1a INTERACT ODi 
+rnod_mr1_edge = rnod_mr1 INSIDE EDGE diff 
+l_rnod_mr1 = LENGTH rnod_mr1_edge  >= 2  < 99999999 
+rnodl_mr = rnod_mr1 WITH EDGE l_rnod_mr1  //  N+OD resistor w/i silicide (3-terminals)
+
+//* Define device -- xdev rpods_m
+rpods_mr = rpod_mr1 NOT rpodl_mr  //  P+OD resistor w/i silicide (3-terminals)
+
+//* Define device -- xdev rnods_m
+rnods_mr = rnod_mr1 NOT rnodl_mr  //  N+OD resistor w/i silicide (3-terminals)
+
+//* Define device -- xdev rnwsti_m
+nwsti_mr = nwsti_r1 INTERACT NWDMY1  //  NWDMY*NWELL-RPO-diff --> nwsti (3-terminals)
+
+//* Define device -- xdev pwdnw
+rwdio_a = DNW NOT nxwell 
+rwdio = rwdio_a NOT BJTDMY 
+
+//* Define device -- xdev dnwpsub
+dnwdio_b = nxwell INTERACT DNW 
+dnwdio_c = dnwdio_b NOT HVNWi 
+dnwdio_a = nxwell INSIDE DNW 
+dnwdio_k = dnwdio_c NOT dnwdio_a 
+dnwdio = DNW INTERACT dnwdio_k 
+
+//***** Define connectivity/via layer -- psub_term ****
+psub_term_a = psub2s NOT PSUB2 
+psub_term_b = BULK NOT psub_term_a 
+psub_term_c = BULK AND DNW 
+psub_term_d = BULK NOT psub_term_c 
+psub_term_e = psub_term_b AND psub_term_d 
+psub_term_f = psub_term_e NOT PSUBi 
+psub_term_g = psub_term_f INTERACT DNW 
+psub_term = psub_term_g NOT HVOX 
+
+//* Define device -- xdev pnwdio
+bjtdmy_nbase_all = BJTDMY INTERACT nbase1  //  BJTDMY in pnp devices
+pnwdio0 = nxwell NOT bjtdmy_nbase_all 
+pnwdio1 = pnwdio0 NOT INTERACT NWDMY1 
+pnwdio2 = pnwdio1 OUTSIDE nwdio1a 
+pnwdio4 = pnwdio2 NOT DNW 
+pnwdio = pnwdio4 TOUCH psub == 1
+
+//* Define device -- xdev rppolyhri_dis
+hripo_d1 = hripo41 INTERACT RPDMY1 
+hripo_d2 = hripo_d1 INTERACT POLYGi  //  HRI high poly resistor (3-terminals dis)
+RHRIDMY_2K = COPY RHRIDMY_2Ki 
+RHRIDMY_2Ka = BULK INTERACT RHRIDMY_2K 
+hripo_d = hripo_d2 NOT INTERACT RHRIDMY_2Ka 
+
+//***** Define connectivity/via layer -- poly_term ****
+poly_term11 = POLYG AND RPDMY1 
+hripo42 = hripo41 INTERACT RPDMYi 
+rf_hripo1 = hripo42 AND RFDMY 
+rf_hripo = rf_hripo1 INTERACT POLYGi  //  HRI high poly resistor (3-terminals rf)
+poly_term1 = poly_term11 OR rf_hripo 
+poly_term2 = SIZE poly_term1 BY 0.005 
+poly_term = poly_term2 NOT poly_term1 
+
+//* Define device -- xdev rnpolywo_dis
+rnpolywo_d1 = rnpolywo_r1 INTERACT RPDMY1 
+rnpolywo_d = rnpolywo_d1 INTERACT POLYGi  //  N+POLY resistor w/o silicide (3-terminals dis)
+
+//* Define device -- xdev rppolywo_dis
+rppolywo_d1 = rppolywo_r1 INTERACT RPDMY1 
+rppolywo_d = rppolywo_d1 INTERACT POLYGi  //  P+POLY resistor w/o silicide (3-terminals dis)
+
+//* Define device -- xdev rnpolyl_dis
+rnpoly_m = rnpoly_r1 INTERACT RPDMY1 
+rnpoly_eg = rnpoly_m INSIDE EDGE POLYG 
+l_rnpoly_eg = LENGTH rnpoly_eg  >= 2  < 99999999 
+lrnpoly_d1 = rnpoly_m WITH EDGE l_rnpoly_eg 
+lrnpoly_d = lrnpoly_d1 INTERACT POLYGi  //  N+POLY resistor w/i silicide (3-terminal dis w >=  2um)
+
+//* Define device -- xdev rnpolys_dis
+srnpoly_d1 = rnpoly_m NOT lrnpoly_d 
+srnpoly_d = srnpoly_d1 INTERACT POLYGi  //   N+POLY resistor w/i silicide (3-terminal dis w < 2um)
+
+//* Define device -- xdev nc1
+gatenw1 = gatenw NOT HVNWi 
+vargt1 = gatenw1 AND NP 
+vargt2 = vargt1 AND VARDMY 
+vargt3 = vargt2 NOT OD2 
+vargt4 = vargt3 NOT RFDMY  //  Varactor on thin oxide
+vargt = vargt4 NOT OD3  //  Varactor on thin oxide
+
+//* Define device -- xdev nc2
+bvargt1 = vargt2 AND OD2 
+bvargt = bvargt1 NOT RFDMY  //  Varactor on thick oxide
+
+//* Define device -- xdev pc1
+pvargt1 = gatennw AND PP 
+pvargt2 = pvargt1 AND VARDMY 
+pvargt = pvargt2 NOT OD2  //  Varactor on thin oxide
+
+//* Define device -- xdev pc2
+pbvargt = pvargt2 AND OD2  //  Varactor on thick oxide
+
+//* Define device -- xdev rppolyhri
+hripo43 = hripo42 NOT RFDMY 
+hripo44 = hripo43 NOT INTERACT RHRIDMY_2Ka 
+hripo4 = hripo44 INTERACT POLYGi  //  HRIp high poly resistor (2-terminals)
+
+//* Define device -- xdev mimcap_1p0_sin
+ctm = COPY CTMi 
+cbm = COPY CBMi 
+mim_block = ctm AND cbm 
+mim_top = mim_block INTERACT M7 
+RCTM = mim_top INTERACT VIA6i 
+RCTM_R = RCTM NOT RFDMY 
+
+//* Define device -- xdev sbd_rf
+SBD_RF1 = SBDDMY AND RFDMY 
+SBD_RF = SBD_RF1 NOT VARDMY 
+sbd_nw = nxwell AND SBD_RF 
+schottky_n = nthin1 AND sbd_nw 
+sbd_rfnw_org1 = sbd_nw INTERACT schottky_n 
+pthin1 = mdiff CUT PP 
+schottky_p = pthin1 AND sbd_nw 
+sbd_rfnw_org = sbd_rfnw_org1 INTERACT schottky_p 
+sbd_rfdnw = sbd_rfnw_org INTERACT DNW 
+
+//* Define device -- xdev sbd_rf_nw
+sbd_rfnw = sbd_rfnw_org NOT INTERACT DNW 
+
+//* Define device -- xdev nmos_rf
+gate_rfa = gate_a AND RFDMY 
+poly_rf1 = poly INTERACT CONT 
+poly_rf = poly_rf1 INTERACT DRAIN 
+gate_rfb = gate_rfa AND poly_rf 
+gate_rf = gate_rfb NOT VARDMY 
+ngate_rf1 = gate_rf AND NP 
+ngate_rf2 = ngate_rf1 NOT VTH_N 
+ngate_rf3 = ngate_rf2 NOT VTL_N 
+ngate_rf4 = ngate_rf3 NOT NTN 
+ngate_rf5 = ngate_rf4 INSIDE DNW 
+ngate_rf = ngate_rf5 NOT OD2 
+ngate_nthin = nthin INTERACT ngate_rf 
+
+//***** Define connectivity/via layer -- d_tndiff ****
+d_tndiff = tndiff AND DRAIN 
+
+//***** Define connectivity/via layer -- s_tndiff ****
+s_tndiff1 = tndiff NOT DRAIN 
+s_tndiff = s_tndiff1 INTERACT gate_rf 
+
+//* Define device -- xdev nmos_rf25
+ngate_rf_io = ngate_rf5 AND OD2 
+ngate_nthin_io = nthin INTERACT ngate_rf_io 
+
+//* Define device -- xdev pmos_rf
+pgate_rf1 = gate_rf AND PP 
+pgate_rf2 = pgate_rf1 NOT VTH_P 
+pgate_rf3 = pgate_rf2 NOT VTL_P 
+pgate_rf = pgate_rf3 NOT OD2 
+pgate_pthin1 = pthin INTERACT pgate_rf 
+pgate_pthin = pgate_pthin1 INSIDE DNW 
+
+//***** Define connectivity/via layer -- d_tpdiff ****
+d_tpdiff = tpdiff AND DRAIN 
+
+//***** Define connectivity/via layer -- s_tpdiff ****
+s_tpdiff1 = tpdiff NOT DRAIN 
+s_tpdiff = s_tpdiff1 INTERACT gate_rf 
+
+//* Define device -- xdev pmos_rf25
+pgate_rf_io = pgate_rf3 AND OD2 
+pgate_pthin_io1 = pthin INTERACT pgate_rf_io 
+pgate_pthin_io = pgate_pthin_io1 INSIDE DNW 
+
+//* Define device -- xdev pmos_rf_nw
+pgate_rfnw = pgate_pthin1 OUTSIDE DNW 
+
+//* Define device -- xdev pmos_rf25_nw
+pgate_rf33nw = pgate_pthin_io1 OUTSIDE DNW 
+
+//* Define device -- xdev spiral_std
+IND_STD_a = IND_STD AND NTN 
+IND_STD_all = IND_STD_a AND RFDMY 
+std_ind1 = M8Y AND IND_STD_all 
+std_ind2 = M7Y AND IND_STD_all 
+std_ind = std_ind1 OR std_ind2 
+std_ind_m = std_ind1 AND std_ind2 
+
+//* Define device -- xdev spiral_sym
+IND_SYM_a = IND_SYM AND NTN 
+IND_SYM_all = IND_SYM_a AND RFDMY 
+sym_ind1 = M8Y AND IND_SYM_all 
+sym_ind2 = M7Y AND IND_SYM_all 
+sym_ind = sym_ind1 OR sym_ind2 
+sym_ind_m = sym_ind1 AND sym_ind2 
+ind_btm1 = sym_ind2 AND sym_ind1 
+ind_btm2 = ind_btm1 INTERACT VIA7 
+ind_btm = ind_btm2 OR IND_RAD 
+
+//* Define device -- xdev spiral_sym_ct
+IND_CT_a = IND_CT AND NTN 
+IND_CT_all = IND_CT_a AND RFDMY 
+sym_ct_ind1 = M8Y AND IND_CT_all 
+sym_ct_ind2 = M7Y AND IND_CT_all 
+sym_ct_ind5 = sym_ct_ind1 OR sym_ct_ind2 
+sym_ct_ind3 = M6Y AND IND_CT_all 
+sym_ct_ind = sym_ct_ind5 OR sym_ct_ind3 
+sym_ct_ind_m = sym_ct_ind1 AND sym_ct_ind2 
+ind_ct_btm1 = sym_ct_ind2 AND sym_ct_ind1 
+ind_ct_btm2 = ind_ct_btm1 INTERACT VIA7 
+ind_ct_btm = ind_ct_btm2 OR IND_RAD 
+sym_ct_ind_m1 = sym_ct_ind2 AND sym_ct_ind3 
+
+//* Define device -- xdev rppolyl_rf
+lrppoly_rf_b = RFDMY INTERACT lrppoly_rf 
+
+//* Define device -- xdev rppolys_rf
+srppoly_rf_b = RFDMY INTERACT srppoly_rf 
+
+//* Define device -- xdev rppolywo_rf
+rf_rppolywo1 = rppolywo_r2 AND RFDMY 
+rf_rppolywo = rf_rppolywo1 INTERACT POLYGi  //  P+POLY resistor w/o silicide (3-terminals rf)
+rf_rppolywo_b = RFDMY INTERACT rf_rppolywo 
+
+//* Define device -- xdev rppolyhri_rf
+rf_hripo_b = RFDMY INTERACT rf_hripo 
+
+//* Define device -- xdev mimcap_um_1p0_sin_rf
+RCTM_RF1 = RCTM AND RFDMY 
+RCTM_RF = RCTM_RF1 OUTSIDE DNW 
+RCTM_WOUM = RCTM_RF1 INSIDE DNW 
+
+//***** Define connectivity/via layer -- shield ****
+shield1 = metal5 OR metal4 
+shield2 = shield1 AND ctm 
+shield = shield2 AND RFDMY 
+L_EG1 = ctm INSIDE EDGE metal7 
+
+//* Define device -- xdev xjvar
+VAR_RF1 = VARDMY AND RFDMY 
+VAR_RF2 = VAR_RF1 NOT SBDDMY 
+VAR_RF = VAR_RF2 INTERACT gate_a 
+XJ_RF = VAR_RF2 NOT VAR_RF 
+jvar1_rf = nxwell AND XJ_RF 
+jvar2_rf = jvar1_rf INTERACT tpdiff 
+jvar_rf = jvar2_rf INTERACT tndiff 
+jvar_rf1 = jvar_rf AND DNW 
+
+//* Define device -- xdev xjvar_nw
+jvar3_rf = jvar_rf AND tpdiff 
+jvar_rfnw = jvar_rf NOT DNW 
+
+//* Define device -- xdev moscap_rf
+varnw_rf1 = nxwell AND VAR_RF 
+varnw_rf2 = varnw_rf1 INTERACT NP 
+varnw_rf = varnw_rf2 NOT HVNWi 
+varnwc_rf1 = varnw_rf NOT OD2 
+varnwc_rf = varnwc_rf1 AND DNW 
+
+//* Define device -- xdev moscap_rf_nw
+vargt_rf = gate_a AND VAR_RF 
+vargtc_rf = vargt_rf NOT OD2 
+
+//* Define device -- xdev moscap_rf25
+varnwi_rf1 = varnw_rf AND OD2 
+varnwi_rf = varnwi_rf1 AND DNW 
+
+//* Define device -- xdev moscap_rf25_nw
+vargti_rf = vargt_rf AND OD2 
+varnwc_rfnw = varnwc_rf1 NOT DNW 
+varnwi_rfnw = varnwi_rf1 NOT DNW 
+
+//* Define device -- xdev crtmom
+MOM_field1 = MOMDMY AND M1 
+MOM_field2 = MOMDMY AND M2 
+MOM_node2 = MOM_field2 AND MOM_field1 
+MOM_term_12 = MOM_node2 INTERACT VIA1 
+MOM_finger_1 = MOM_field1 NOT MOM_term_12 
+MOM_finger_1a = MOM_finger_1 INTERACT MOM_term_12 
+MOM_reg3a = SIZE MOM_finger_1a BY 0.4 
+MOM_field3 = MOMDMY AND M3 
+MOM_node3 = MOM_field3 AND MOM_node2 
+MOM_field6 = MOMDMY AND M6 
+MOM_field5 = MOMDMY AND M5 
+MOM_field4 = MOMDMY AND M4 
+MOM_node4 = MOM_field4 AND MOM_node3 
+MOM_node5 = MOM_field5 AND MOM_node4 
+MOM_node6 = MOM_field6 AND MOM_node5 
+MOM6_term1 = MOM_node6 INTERACT VIA5 
+MOM_term_23 = MOM_node3 INTERACT VIA1 
+MOM_finger_2 = MOM_field2 NOT MOM_term_23 
+MOM6_term2 = MOM6_term1 TOUCH MOM_finger_2 
+MOM_finger_3 = MOM_field3 NOT MOM_term_23 
+MOM6_term3 = MOM6_term2 TOUCH MOM_finger_3 
+MOM_finger_6 = MOM_field6 NOT MOM_node6 
+MOM6_key = MOM_finger_2 AND MOM_finger_6 
+MOM6_term = MOM6_term3 TOUCH MOM6_key 
+MOM3_terma = MOM_node3 OUTSIDE MOM6_term 
+MOM5_terma = MOM_node5 OUTSIDE MOM6_term 
+MOM5_term1 = MOM5_terma INTERACT VIA4 
+MOM5_term2 = MOM5_term1 TOUCH MOM_finger_2 
+MOM5_term3 = MOM5_term2 TOUCH MOM_finger_3 
+MOM_finger_5 = MOM_field5 NOT MOM_node5 
+MOM5_key = MOM_finger_3 AND MOM_finger_5 
+MOM5_term = MOM5_term3 TOUCH MOM5_key 
+MOM3_termc = MOM3_terma OUTSIDE MOM5_term 
+MOM4_terma = MOM_node4 OUTSIDE MOM6_term 
+MOM4_termc = MOM4_terma OUTSIDE MOM5_term 
+MOM4_term1 = MOM4_termc INTERACT VIA3 
+MOM4_term2 = MOM4_term1 TOUCH MOM_finger_2 
+MOM4_term3 = MOM4_term2 TOUCH MOM_finger_3 
+MOM_finger_4 = MOM_field4 NOT MOM_node4 
+MOM4_key = MOM_finger_2 AND MOM_finger_4 
+MOM4_term = MOM4_term3 TOUCH MOM4_key 
+MOM3_termd = MOM3_termc OUTSIDE MOM4_term 
+MOM3_term1 = MOM3_termd INTERACT VIA2 
+MOM3_term2 = MOM3_term1 TOUCH MOM_finger_1 
+MOM3_term3 = MOM3_term2 TOUCH MOM_finger_2 
+MOM3_key = MOM_finger_3 AND MOM_finger_1 
+MOM3_term = MOM3_term3 TOUCH MOM3_key 
+MOM_reg3 = MOM_reg3a INTERACT MOM3_term 
+
+//***** Define connectivity/via layer -- MOM_plant ****
+MOM_plant = poly12 INTERACT MOMDMY 
+
+//* Define device -- xdev crtmom4
+MOM_finger_2a = MOM_finger_2 INTERACT MOM_term_23 
+MOM_rega = SIZE MOM_finger_2a BY 0.4 
+MOM_reg4 = MOM_rega INTERACT MOM4_term 
+
+//* Define device -- xdev crtmom5
+MOM_reg5 = MOM_rega INTERACT MOM5_term 
+
+//* Define device -- xdev crtmom6
+MOM_reg6 = MOM_rega INTERACT MOM6_term 
+
+//***** Define connectivity/via layer -- ydio_ass ****
+ydio_ass = SIZE ydio_j BY 0.5 
+
+//***** Define connectivity/via layer -- polyCont ****
+polyCont = CONT AND POLYG 
+
+//***** Define connectivity/via layer -- dnwc ****
+dnwc = DNW AND nxwell 
+
+//***** Define connectivity/via layer -- tiod ****
+tioda = diff NOT tpdiff 
+tiodb = tioda NOT tndiff 
+tiod1 = tiodb NOT POLYG 
+tiod2 = tiod1 NOT RPO 
+tiod3 = tiod2 NOT RPDMY 
+tiod = tiod3 NOT NWDMY  //  RPO, RPDMY, NWDMY cut ti-od
+
+//***** Define connectivity/via layer -- n_psub ****
+n_ppsuba = BULK NOT psubband 
+hnw_nbl1 = iso_hvnw INTERACT NBL 
+iso_hvrw = ppsub INSIDE NBL 
+hnw_nbl = hnw_nbl1 INTERACT iso_hvrw 
+n_ppsubb = n_ppsuba NOT hnw_nbl 
+HVPW = HVOX NOT HVNWi 
+n_ppsubc = n_ppsubb NOT HVPW 
+n_psub1 = n_ppsubc NOT psub2s 
+n_psub2 = n_ppsubc AND PSUB2 
+n_psub = n_psub1 OR n_psub2 
+
+//***** Define connectivity/via layer -- cbm_via ****
+RCBM = cbm INTERACT RCTM 
+OCBM = RCBM NOT RCTM 
+cbm_via = OCBM AND VIA6i 
+
+//***** Define connectivity/via layer -- nxwell_npn ****
+ncollsa = ncolls TOUCH cnemit1 
+nxwell_npn = ncolls NOT ncollsa 
+
+//***** Define connectivity/via layer -- MOM_edge_mt ****
+MOM_edge_mt = M1 AND MOM_plant 
+
+//***** Define connectivity/via layer -- odCont ****
+odCont = CONT NOT POLYG 
+
+//***** Define connectivity/via layer -- HVNW ****
+HVNW = HVNWi AND HVOX 
+
+//***** Define connectivity/via layer -- VIA8 ****
+VIA8 = COPY VIAD 
+
+//***** Define connectivity/via layer -- nplug ****
+nplug1 = tndiff AND nxwell  //  define N_well contact
+nplug3 = nplug1 INTERACT CONT 
+tpdiffco = tpdiff INTERACT CONT 
+nplug2 = nplug1 INTERACT tpdiffco 
+nplug = nplug3 OR nplug2  //   define N_well contact
+
+//* Define ERC or other layers
+erc_pmos_gates = tpgate1 NOT VARDMY  //  Exclude RF, SRAM, VAR
+
+//***** Define connectivity/via layer -- ntap ****
+ntapx = tndiff AND nxwell 
+ntap1 = ntapx NOT BJTDMY 
+ntap2 = ntap1 INTERACT CONT 
+ntap3 = ntap1 INTERACT tpdiffco 
+ntap = ntap2 OR ntap3 
+
+//***** Define connectivity/via layer -- poly_nw_via ****
+poly_nw_via = poly_term AND nxwell 
+
+//***** Define connectivity/via layer -- ctm_via ****
+ctm_via = RCTM AND VIA6i 
+
+//***** Define connectivity/via layer -- VIA6 ****
+VIA6a = VIA6i NOT ctm_via 
+VIA6 = VIA6a NOT cbm_via 
+
+//***** Define connectivity/via layer -- n_pplug ****
+n_pplug1 = mdiff INTERACT CONT 
+n_pplug2 = n_pplug1 AND PP 
+n_pplug3 = n_pplug2 NOT nxwell 
+rw = ppsub INSIDE DNW 
+n_pplug4 = n_pplug3 NOT rw 
+n_pplug5 = n_pplug4 AND n_psub 
+n_pplug = n_pplug5 NOT gate1 
+
+//***** Define connectivity/via layer -- poly_psub_via ****
+poly_psub_via = poly_term AND psub 
+nxwell_float1 = nxwell NOT INTERACT VARDMY 
+nxwell_float2 = nxwell_float1 NOT INTERACT BJTDMY 
+nxwell_float = nxwell_float2 NOT INTERACT trwell 
+
+//***** Define connectivity/via layer -- ptap ****
+ptap1 = tpdiff AND psub 
+ptap2 = ptap1 INTERACT CONT 
+ptap3 = ptap1 INTERACT tndiffco 
+ptap = ptap2 OR ptap3 
+
+//***** Define connectivity/via layer -- hvdnwc ****
+hvdnwc1 = NBL AND HVNW 
+hvdnwc2 = hvdnwc1 NOT DPW 
+hvdnwc3 = NBL AND iso_hvnw 
+hvdnwc = hvdnwc2 OR hvdnwc3 
+
+//***** Define connectivity/via layer -- metal9 ****
+metal9 = COPY MD 
+erc_nmos_gates = tngate1 NOT VARDMY  //  Exclude RF, SRAM, VAR
+//#############################################
+//# CONNECTION                                #
+//#############################################
+CONNECT MOM_edge_mt MOM_plant BY polyCont
+CONNECT MOM_field1 MOM_field2 BY VIA1
+CONNECT MOM_field2 MOM_field3 BY VIA2
+CONNECT MOM_field3 MOM3_term
+CONNECT MOM_field3 MOM_field4 BY VIA3
+CONNECT MOM_field4 MOM4_term
+CONNECT MOM_field4 MOM_field5 BY VIA4
+CONNECT MOM_field5 MOM5_term
+CONNECT MOM_field5 MOM_field6 BY VIA5
+CONNECT MOM_field6 MOM6_term
+CONNECT MOM_plant poly
+CONNECT cbm metal7 BY cbm_via
+CONNECT cemit1 tpdiff
+CONNECT cnemit1 tndiff
+CONNECT ctm metal7 BY ctm_via
+CONNECT gate1 poly
+CONNECT metal1 MOM_edge_mt
+CONNECT metal1 MOM_field1
+CONNECT metal1 d_tndiff BY odCont
+CONNECT metal1 d_tpdiff BY odCont
+CONNECT metal1 poly BY polyCont
+CONNECT metal1 poly_rf BY polyCont
+CONNECT metal1 s_tndiff BY odCont
+CONNECT metal1 s_tpdiff BY odCont
+CONNECT metal1 schottky_n BY odCont
+CONNECT metal1 schottky_p BY odCont
+CONNECT metal1 tndiff BY odCont
+CONNECT metal1 tpdiff BY odCont
+CONNECT metal2 MOM_field2
+CONNECT metal2 metal1 BY VIA1
+CONNECT metal3 MOM_field3
+CONNECT metal3 metal2 BY VIA2
+CONNECT metal4 MOM_field4
+CONNECT metal4 metal3 BY VIA3
+CONNECT metal5 MOM_field5
+CONNECT metal5 metal4 BY VIA4
+CONNECT metal6 MOM_field6
+CONNECT metal6 metal5 BY VIA5
+CONNECT metal7 metal6 BY VIA6
+CONNECT metal8 metal7 BY VIA7
+CONNECT metal9 metal8 BY VIA8
+CONNECT mim_block ctm
+CONNECT n_pplug tpdiff
+CONNECT nbase1 tndiff BY nplug
+CONNECT ncoll1 nxwell_npn
+CONNECT nplug tndiff
+CONNECT ntap tndiff
+CONNECT pbase1 tpdiff BY pplug
+CONNECT poly_rf poly
+CONNECT pplug tpdiff
+CONNECT ptap tpdiff
+CONNECT shield metal4
+CONNECT tiod tndiff
+CONNECT tiod tpdiff
+CONNECT tndiff nxwell_npn BY nplug
+CONNECT tndiff tpdiff
+CONNECT tndiff ydio
+CONNECT tndiff ydio_ass
+CONNECT tndiff ydio_hole
+
+#IFDEF RC_DECK
+CONNECT  poly gate
+CONNECT  nxwell poly_term BY poly_nw_via
+CONNECT  nxwell DNW BY dnwc
+CONNECT  psub poly_term BY poly_psub_via
+CONNECT  iso_hvnw NBL BY hvdnwc
+CONNECT  tpdiff psub_term BY pplug
+CONNECT  tpdiff psub BY pplug
+CONNECT  tpdiff HVPW BY pplug
+CONNECT  tpdiff coll1 BY pplug
+CONNECT  HVNW NBL BY hvdnwc
+CONNECT  tndiff nxwell BY nplug
+CONNECT  tndiff iso_hvnw BY nplug
+CONNECT  tndiff HVNW BY nplug
+#ELSE
+SCONNECT nxwell poly_term BY poly_nw_via
+SCONNECT nxwell DNW BY dnwc
+SCONNECT psub poly_term BY poly_psub_via
+SCONNECT iso_hvnw NBL BY hvdnwc
+#IFNDEF NW_RING
+  SCONNECT tpdiff n_psub BY n_pplug
+#ENDIF
+SCONNECT tpdiff psub_term BY pplug
+SCONNECT tpdiff psub BY pplug
+SCONNECT tpdiff HVPW BY pplug
+SCONNECT tpdiff coll1 BY pplug
+SCONNECT HVNW NBL BY hvdnwc
+SCONNECT tndiff nxwell BY nplug
+SCONNECT tndiff iso_hvnw BY nplug
+SCONNECT tndiff HVNW BY nplug
+#ENDIF
+//#############################################
+//# FORM DEVICE                               #
+//#############################################
+
+#IFDEF RC_DECK
+DEVICE MN(N) ngate poly(G) tndiff(S) tndiff(D) psub(B) <nthin> <OD> netlist model nch [
+  property sa,sb,W,L,AS,AD,PD,PS,NRD,NRS
+   SCALE = PRESCALE
+   W = (perimeter_coincide(ngate, tndiff ) + perimeter_inside(ngate, tndiff)) / 2
+   L = area(ngate) / W
+   s = enclosure_vector( OD, 60 )
+   sa = W/sum(s::W/(s::a + 0.5 *L)) - 0.5*L
+   sb = W/sum(s::W/(s::b + 0.5 *L)) - 0.5*L
+   PI_S_OD = perimeter_inside(S,nthin)
+   PI_D_OD = perimeter_inside(D,nthin)
+   IF(PI_S_OD == 0) {
+    AD = area(D) * W / PI_D_OD
+    AS = AD
+    PD = perimeter(D) * W /PI_D_OD
+    PS = PD } 
+   ELSE IF(PI_D_OD == 0) {
+    AS = area(S) * W / PI_S_OD
+    AD = AS
+    PS = perimeter(S) * W /PI_S_OD
+    PD = PS } 
+   ELSE {
+    AS = area(S) * W / PI_S_OD
+    AD = area(D) * W / PI_D_OD
+    PS = perimeter(S) * W /PI_S_OD
+    PD = perimeter(D) * W /PI_D_OD }
+ #IFDEF ZERO_NRS_NRD 
+   NRS = 0
+   NRD = 0
+ #ELSE 
+   NRS = AS / W / W
+   NRD = AD / W / W
+ #ENDIF 
+]
+
+DEVICE MN(N1) nrgate poly(G) tndiff(S) tndiff(D) psub(B) <nthin> <OD> netlist model nch [
+  property sa,sb,W,L,AS,AD,PD,PS,NRD,NRS
+   SCALE = PRESCALE
+   W = (perimeter_coincide(nrgate, tndiff ) + perimeter_inside(nrgate, tndiff)) / 2
+   L = area(nrgate) / W
+   s = enclosure_vector( OD, 60 )
+   sa = W/sum(s::W/(s::a + 0.5 *L)) - 0.5*L
+   sb = W/sum(s::W/(s::b + 0.5 *L)) - 0.5*L
+   PI_S_OD = perimeter_inside(S,nthin)
+   PI_D_OD = perimeter_inside(D,nthin)
+   IF(PI_S_OD == 0) {
+    AD = area(D) * W / PI_D_OD
+    AS = AD
+    PD = perimeter(D) * W /PI_D_OD
+    PS = PD } 
+   ELSE IF(PI_D_OD == 0) {
+    AS = area(S) * W / PI_S_OD
+    AD = AS
+    PS = perimeter(S) * W /PI_S_OD
+    PD = PS } 
+   ELSE {
+    AS = area(S) * W / PI_S_OD
+    AD = area(D) * W / PI_D_OD
+    PS = perimeter(S) * W /PI_S_OD
+    PD = perimeter(D) * W /PI_D_OD }
+ #IFDEF ZERO_NRS_NRD 
+   NRS = 0
+   NRD = 0
+ #ELSE 
+   NRS = AS / W / W
+   NRD = AD / W / W
+ #ENDIF 
+]
+
+DEVICE MN(N1HV) n1hvgate poly(G) tndiff(S) tndiff(D) psub(B) <nthin> <OD> netlist model nch_hvt [
+  property sa,sb,W,L,AS,AD,PD,PS,NRD,NRS
+   SCALE = PRESCALE
+   W = (perimeter_coincide(n1hvgate, tndiff ) + perimeter_inside(n1hvgate, tndiff)) / 2
+   L = area(n1hvgate) / W
+   s = enclosure_vector( OD, 60 )
+   sa = W/sum(s::W/(s::a + 0.5 *L)) - 0.5*L
+   sb = W/sum(s::W/(s::b + 0.5 *L)) - 0.5*L
+   PI_S_OD = perimeter_inside(S,nthin)
+   PI_D_OD = perimeter_inside(D,nthin)
+   IF(PI_S_OD == 0) {
+    AD = area(D) * W / PI_D_OD
+    AS = AD
+    PD = perimeter(D) * W /PI_D_OD
+    PS = PD } 
+   ELSE IF(PI_D_OD == 0) {
+    AS = area(S) * W / PI_S_OD
+    AD = AS
+    PS = perimeter(S) * W /PI_S_OD
+    PD = PS } 
+   ELSE {
+    AS = area(S) * W / PI_S_OD
+    AD = area(D) * W / PI_D_OD
+    PS = perimeter(S) * W /PI_S_OD
+    PD = perimeter(D) * W /PI_D_OD }
+ #IFDEF ZERO_NRS_NRD 
+   NRS = 0
+   NRD = 0
+ #ELSE 
+   NRS = AS / W / W
+   NRD = AD / W / W
+ #ENDIF 
+]
+
+DEVICE MN(N1LV) n1lvgate poly(G) tndiff(S) tndiff(D) psub(B) <nthin> <OD> netlist model nch_lvt [
+  property sa,sb,W,L,AS,AD,PD,PS,NRD,NRS
+   SCALE = PRESCALE
+   W = (perimeter_coincide(n1lvgate, tndiff ) + perimeter_inside(n1lvgate, tndiff)) / 2
+   L = area(n1lvgate) / W
+   s = enclosure_vector( OD, 60 )
+   sa = W/sum(s::W/(s::a + 0.5 *L)) - 0.5*L
+   sb = W/sum(s::W/(s::b + 0.5 *L)) - 0.5*L
+   PI_S_OD = perimeter_inside(S,nthin)
+   PI_D_OD = perimeter_inside(D,nthin)
+   IF(PI_S_OD == 0) {
+    AD = area(D) * W / PI_D_OD
+    AS = AD
+    PD = perimeter(D) * W /PI_D_OD
+    PS = PD } 
+   ELSE IF(PI_D_OD == 0) {
+    AS = area(S) * W / PI_S_OD
+    AD = AS
+    PS = perimeter(S) * W /PI_S_OD
+    PD = PS } 
+   ELSE {
+    AS = area(S) * W / PI_S_OD
+    AD = area(D) * W / PI_D_OD
+    PS = perimeter(S) * W /PI_S_OD
+    PD = perimeter(D) * W /PI_D_OD }
+ #IFDEF ZERO_NRS_NRD 
+   NRS = 0
+   NRD = 0
+ #ELSE 
+   NRS = AS / W / W
+   NRD = AD / W / W
+ #ENDIF 
+]
+
+DEVICE MN(N2) bnrgate poly(G) tndiff(S) tndiff(D) psub(B) <nthin> <OD> netlist model nch_25 [
+  property sa,sb,W,L,AS,AD,PD,PS,NRD,NRS
+   SCALE = PRESCALE
+   W = (perimeter_coincide(bnrgate, tndiff ) + perimeter_inside(bnrgate, tndiff)) / 2
+   L = area(bnrgate) / W
+   s = enclosure_vector( OD, 60 )
+   sa = W/sum(s::W/(s::a + 0.5 *L)) - 0.5*L
+   sb = W/sum(s::W/(s::b + 0.5 *L)) - 0.5*L
+   PI_S_OD = perimeter_inside(S,nthin)
+   PI_D_OD = perimeter_inside(D,nthin)
+   IF(PI_S_OD == 0) {
+    AD = area(D) * W / PI_D_OD
+    AS = AD
+    PD = perimeter(D) * W /PI_D_OD
+    PS = PD } 
+   ELSE IF(PI_D_OD == 0) {
+    AS = area(S) * W / PI_S_OD
+    AD = AS
+    PS = perimeter(S) * W /PI_S_OD
+    PD = PS } 
+   ELSE {
+    AS = area(S) * W / PI_S_OD
+    AD = area(D) * W / PI_D_OD
+    PS = perimeter(S) * W /PI_S_OD
+    PD = perimeter(D) * W /PI_D_OD }
+ #IFDEF ZERO_NRS_NRD 
+   NRS = 0
+   NRD = 0
+ #ELSE 
+   NRS = AS / W / W
+   NRD = AD / W / W
+ #ENDIF 
+]
+
+DEVICE MN(N2LV) bndlvgate poly(G) tndiff(S) tndiff(D) psub(B) <nthin> <OD> netlist model nch_lvt25 [
+  property sa,sb,W,L,AS,AD,PD,PS,NRD,NRS
+   SCALE = PRESCALE
+   W = (perimeter_coincide(bndlvgate, tndiff ) + perimeter_inside(bndlvgate, tndiff)) / 2
+   L = area(bndlvgate) / W
+   s = enclosure_vector( OD, 60 )
+   sa = W/sum(s::W/(s::a + 0.5 *L)) - 0.5*L
+   sb = W/sum(s::W/(s::b + 0.5 *L)) - 0.5*L
+   PI_S_OD = perimeter_inside(S,nthin)
+   PI_D_OD = perimeter_inside(D,nthin)
+   IF(PI_S_OD == 0) {
+    AD = area(D) * W / PI_D_OD
+    AS = AD
+    PD = perimeter(D) * W /PI_D_OD
+    PS = PD } 
+   ELSE IF(PI_D_OD == 0) {
+    AS = area(S) * W / PI_S_OD
+    AD = AS
+    PS = perimeter(S) * W /PI_S_OD
+    PD = PS } 
+   ELSE {
+    AS = area(S) * W / PI_S_OD
+    AD = area(D) * W / PI_D_OD
+    PS = perimeter(S) * W /PI_S_OD
+    PD = perimeter(D) * W /PI_D_OD }
+ #IFDEF ZERO_NRS_NRD 
+   NRS = 0
+   NRD = 0
+ #ELSE 
+   NRS = AS / W / W
+   NRD = AD / W / W
+ #ENDIF 
+]
+
+DEVICE MN(ND) bngate poly(G) tndiff(S) tndiff(D) psub(B) <nthin> <OD> netlist model nch_25 [
+  property sa,sb,W,L,AS,AD,PD,PS,NRD,NRS
+   SCALE = PRESCALE
+   W = (perimeter_coincide(bngate, tndiff ) + perimeter_inside(bngate, tndiff)) / 2
+   L = area(bngate) / W
+   s = enclosure_vector( OD, 60 )
+   sa = W/sum(s::W/(s::a + 0.5 *L)) - 0.5*L
+   sb = W/sum(s::W/(s::b + 0.5 *L)) - 0.5*L
+   PI_S_OD = perimeter_inside(S,nthin)
+   PI_D_OD = perimeter_inside(D,nthin)
+   IF(PI_S_OD == 0) {
+    AD = area(D) * W / PI_D_OD
+    AS = AD
+    PD = perimeter(D) * W /PI_D_OD
+    PS = PD } 
+   ELSE IF(PI_D_OD == 0) {
+    AS = area(S) * W / PI_S_OD
+    AD = AS
+    PS = perimeter(S) * W /PI_S_OD
+    PD = PS } 
+   ELSE {
+    AS = area(S) * W / PI_S_OD
+    AD = area(D) * W / PI_D_OD
+    PS = perimeter(S) * W /PI_S_OD
+    PD = perimeter(D) * W /PI_D_OD }
+ #IFDEF ZERO_NRS_NRD 
+   NRS = 0
+   NRD = 0
+ #ELSE 
+   NRS = AS / W / W
+   NRD = AD / W / W
+ #ENDIF 
+]
+
+DEVICE MN(NHL) bnlvgate poly(G) tndiff(S) tndiff(D) psub(B) <nthin> <OD> netlist model nch_lvt25 [
+  property sa,sb,W,L,AS,AD,PD,PS,NRD,NRS
+   SCALE = PRESCALE
+   W = (perimeter_coincide(bnlvgate, tndiff ) + perimeter_inside(bnlvgate, tndiff)) / 2
+   L = area(bnlvgate) / W
+   s = enclosure_vector( OD, 60 )
+   sa = W/sum(s::W/(s::a + 0.5 *L)) - 0.5*L
+   sb = W/sum(s::W/(s::b + 0.5 *L)) - 0.5*L
+   PI_S_OD = perimeter_inside(S,nthin)
+   PI_D_OD = perimeter_inside(D,nthin)
+   IF(PI_S_OD == 0) {
+    AD = area(D) * W / PI_D_OD
+    AS = AD
+    PD = perimeter(D) * W /PI_D_OD
+    PS = PD } 
+   ELSE IF(PI_D_OD == 0) {
+    AS = area(S) * W / PI_S_OD
+    AD = AS
+    PS = perimeter(S) * W /PI_S_OD
+    PD = PS } 
+   ELSE {
+    AS = area(S) * W / PI_S_OD
+    AD = area(D) * W / PI_D_OD
+    PS = perimeter(S) * W /PI_S_OD
+    PD = perimeter(D) * W /PI_D_OD }
+ #IFDEF ZERO_NRS_NRD 
+   NRS = 0
+   NRD = 0
+ #ELSE 
+   NRS = AS / W / W
+   NRD = AD / W / W
+ #ENDIF 
+]
+
+DEVICE MN(NHV) nhvgate poly(G) tndiff(S) tndiff(D) psub(B) <nthin> <OD> netlist model nch_hvt [
+  property sa,sb,W,L,AS,AD,PD,PS,NRD,NRS
+   SCALE = PRESCALE
+   W = (perimeter_coincide(nhvgate, tndiff ) + perimeter_inside(nhvgate, tndiff)) / 2
+   L = area(nhvgate) / W
+   s = enclosure_vector( OD, 60 )
+   sa = W/sum(s::W/(s::a + 0.5 *L)) - 0.5*L
+   sb = W/sum(s::W/(s::b + 0.5 *L)) - 0.5*L
+   PI_S_OD = perimeter_inside(S,nthin)
+   PI_D_OD = perimeter_inside(D,nthin)
+   IF(PI_S_OD == 0) {
+    AD = area(D) * W / PI_D_OD
+    AS = AD
+    PD = perimeter(D) * W /PI_D_OD
+    PS = PD } 
+   ELSE IF(PI_D_OD == 0) {
+    AS = area(S) * W / PI_S_OD
+    AD = AS
+    PS = perimeter(S) * W /PI_S_OD
+    PD = PS } 
+   ELSE {
+    AS = area(S) * W / PI_S_OD
+    AD = area(D) * W / PI_D_OD
+    PS = perimeter(S) * W /PI_S_OD
+    PD = perimeter(D) * W /PI_D_OD }
+ #IFDEF ZERO_NRS_NRD 
+   NRS = 0
+   NRD = 0
+ #ELSE 
+   NRS = AS / W / W
+   NRD = AD / W / W
+ #ENDIF 
+]
+
+DEVICE MN(NL) nlgate poly(G) tndiff(S) tndiff(D) psub(B) <nthin> <OD> netlist model nch_na [
+  property sa,sb,W,L,AS,AD,PD,PS,NRD,NRS
+   SCALE = PRESCALE
+   W = (perimeter_coincide(nlgate, tndiff ) + perimeter_inside(nlgate, tndiff)) / 2
+   L = area(nlgate) / W
+   s = enclosure_vector( OD, 60 )
+   sa = W/sum(s::W/(s::a + 0.5 *L)) - 0.5*L
+   sb = W/sum(s::W/(s::b + 0.5 *L)) - 0.5*L
+   PI_S_OD = perimeter_inside(S,nthin)
+   PI_D_OD = perimeter_inside(D,nthin)
+   IF(PI_S_OD == 0) {
+    AD = area(D) * W / PI_D_OD
+    AS = AD
+    PD = perimeter(D) * W /PI_D_OD
+    PS = PD } 
+   ELSE IF(PI_D_OD == 0) {
+    AS = area(S) * W / PI_S_OD
+    AD = AS
+    PS = perimeter(S) * W /PI_S_OD
+    PD = PS } 
+   ELSE {
+    AS = area(S) * W / PI_S_OD
+    AD = area(D) * W / PI_D_OD
+    PS = perimeter(S) * W /PI_S_OD
+    PD = perimeter(D) * W /PI_D_OD }
+ #IFDEF ZERO_NRS_NRD 
+   NRS = 0
+   NRD = 0
+ #ELSE 
+   NRS = AS / W / W
+   NRD = AD / W / W
+ #ENDIF 
+]
+
+DEVICE MN(NLV) nlvgate poly(G) tndiff(S) tndiff(D) psub(B) <nthin> <OD> netlist model nch_lvt [
+  property sa,sb,W,L,AS,AD,PD,PS,NRD,NRS
+   SCALE = PRESCALE
+   W = (perimeter_coincide(nlvgate, tndiff ) + perimeter_inside(nlvgate, tndiff)) / 2
+   L = area(nlvgate) / W
+   s = enclosure_vector( OD, 60 )
+   sa = W/sum(s::W/(s::a + 0.5 *L)) - 0.5*L
+   sb = W/sum(s::W/(s::b + 0.5 *L)) - 0.5*L
+   PI_S_OD = perimeter_inside(S,nthin)
+   PI_D_OD = perimeter_inside(D,nthin)
+   IF(PI_S_OD == 0) {
+    AD = area(D) * W / PI_D_OD
+    AS = AD
+    PD = perimeter(D) * W /PI_D_OD
+    PS = PD } 
+   ELSE IF(PI_D_OD == 0) {
+    AS = area(S) * W / PI_S_OD
+    AD = AS
+    PS = perimeter(S) * W /PI_S_OD
+    PD = PS } 
+   ELSE {
+    AS = area(S) * W / PI_S_OD
+    AD = area(D) * W / PI_D_OD
+    PS = perimeter(S) * W /PI_S_OD
+    PD = perimeter(D) * W /PI_D_OD }
+ #IFDEF ZERO_NRS_NRD 
+   NRS = 0
+   NRD = 0
+ #ELSE 
+   NRS = AS / W / W
+   NRD = AD / W / W
+ #ENDIF 
+]
+
+DEVICE MN(NN) bnngate poly(G) tndiff(S) tndiff(D) psub(B) <nthin> <OD> netlist model nch_na25 [
+  property sa,sb,W,L,AS,AD,PD,PS,NRD,NRS
+   SCALE = PRESCALE
+   W = (perimeter_coincide(bnngate, tndiff ) + perimeter_inside(bnngate, tndiff)) / 2
+   L = area(bnngate) / W
+   s = enclosure_vector( OD, 60 )
+   sa = W/sum(s::W/(s::a + 0.5 *L)) - 0.5*L
+   sb = W/sum(s::W/(s::b + 0.5 *L)) - 0.5*L
+   PI_S_OD = perimeter_inside(S,nthin)
+   PI_D_OD = perimeter_inside(D,nthin)
+   IF(PI_S_OD == 0) {
+    AD = area(D) * W / PI_D_OD
+    AS = AD
+    PD = perimeter(D) * W /PI_D_OD
+    PS = PD } 
+   ELSE IF(PI_D_OD == 0) {
+    AS = area(S) * W / PI_S_OD
+    AD = AS
+    PS = perimeter(S) * W /PI_S_OD
+    PD = PS } 
+   ELSE {
+    AS = area(S) * W / PI_S_OD
+    AD = area(D) * W / PI_D_OD
+    PS = perimeter(S) * W /PI_S_OD
+    PD = perimeter(D) * W /PI_D_OD }
+ #IFDEF ZERO_NRS_NRD 
+   NRS = 0
+   NRD = 0
+ #ELSE 
+   NRS = AS / W / W
+   NRD = AD / W / W
+ #ENDIF 
+]
+
+DEVICE MN(nch_sram) ngate_s poly(G) tndiff(S) tndiff(D) psub(B) <nthin> <OD> netlist model nchpd_sr [
+  property sa,sb,W,L,AS,AD,PD,PS,NRD,NRS
+   SCALE = PRESCALE
+   W = (perimeter_coincide(ngate_s, tndiff ) + perimeter_inside(ngate_s, tndiff)) / 2
+   L = area(ngate_s) / W
+   s = enclosure_vector( OD, 60 )
+   sa = W/sum(s::W/(s::a + 0.5 *L)) - 0.5*L
+   sb = W/sum(s::W/(s::b + 0.5 *L)) - 0.5*L
+   PI_S_OD = perimeter_inside(S,nthin)
+   PI_D_OD = perimeter_inside(D,nthin)
+   IF(PI_S_OD == 0) {
+    AD = area(D) * W / PI_D_OD
+    AS = AD
+    PD = perimeter(D) * W /PI_D_OD
+    PS = PD } 
+   ELSE IF(PI_D_OD == 0) {
+    AS = area(S) * W / PI_S_OD
+    AD = AS
+    PS = perimeter(S) * W /PI_S_OD
+    PD = PS } 
+   ELSE {
+    AS = area(S) * W / PI_S_OD
+    AD = area(D) * W / PI_D_OD
+    PS = perimeter(S) * W /PI_S_OD
+    PD = perimeter(D) * W /PI_D_OD }
+ #IFDEF ZERO_NRS_NRD 
+   NRS = 0
+   NRD = 0
+ #ELSE 
+   NRS = AS / W / W
+   NRD = AD / W / W
+ #ENDIF 
+]
+
+DEVICE MN(nch_sram_hvt) ngate_s_hvt poly(G) tndiff(S) tndiff(D) psub(B) <nthin> <OD> netlist model nchpd_hvtsr [
+  property sa,sb,W,L,AS,AD,PD,PS,NRD,NRS
+   SCALE = PRESCALE
+   W = (perimeter_coincide(ngate_s_hvt, tndiff ) + perimeter_inside(ngate_s_hvt, tndiff)) / 2
+   L = area(ngate_s_hvt) / W
+   s = enclosure_vector( OD, 60 )
+   sa = W/sum(s::W/(s::a + 0.5 *L)) - 0.5*L
+   sb = W/sum(s::W/(s::b + 0.5 *L)) - 0.5*L
+   PI_S_OD = perimeter_inside(S,nthin)
+   PI_D_OD = perimeter_inside(D,nthin)
+   IF(PI_S_OD == 0) {
+    AD = area(D) * W / PI_D_OD
+    AS = AD
+    PD = perimeter(D) * W /PI_D_OD
+    PS = PD } 
+   ELSE IF(PI_D_OD == 0) {
+    AS = area(S) * W / PI_S_OD
+    AD = AS
+    PS = perimeter(S) * W /PI_S_OD
+    PD = PS } 
+   ELSE {
+    AS = area(S) * W / PI_S_OD
+    AD = area(D) * W / PI_D_OD
+    PS = perimeter(S) * W /PI_S_OD
+    PD = perimeter(D) * W /PI_D_OD }
+ #IFDEF ZERO_NRS_NRD 
+   NRS = 0
+   NRD = 0
+ #ELSE 
+   NRS = AS / W / W
+   NRD = AD / W / W
+ #ENDIF 
+]
+
+DEVICE MN(nch_uhvt) ngate_uhvt poly(G) tndiff(S) tndiff(D) psub(B) <nthin> <OD> netlist model nch_uhvt [
+  property sa,sb,W,L,AS,AD,PD,PS,NRD,NRS
+   SCALE = PRESCALE
+   W = (perimeter_coincide(ngate_uhvt, tndiff ) + perimeter_inside(ngate_uhvt, tndiff)) / 2
+   L = area(ngate_uhvt) / W
+   s = enclosure_vector( OD, 60 )
+   sa = W/sum(s::W/(s::a + 0.5 *L)) - 0.5*L
+   sb = W/sum(s::W/(s::b + 0.5 *L)) - 0.5*L
+   PI_S_OD = perimeter_inside(S,nthin)
+   PI_D_OD = perimeter_inside(D,nthin)
+   IF(PI_S_OD == 0) {
+    AD = area(D) * W / PI_D_OD
+    AS = AD
+    PD = perimeter(D) * W /PI_D_OD
+    PS = PD } 
+   ELSE IF(PI_D_OD == 0) {
+    AS = area(S) * W / PI_S_OD
+    AD = AS
+    PS = perimeter(S) * W /PI_S_OD
+    PD = PS } 
+   ELSE {
+    AS = area(S) * W / PI_S_OD
+    AD = area(D) * W / PI_D_OD
+    PS = perimeter(S) * W /PI_S_OD
+    PD = perimeter(D) * W /PI_D_OD }
+ #IFDEF ZERO_NRS_NRD 
+   NRS = 0
+   NRD = 0
+ #ELSE 
+   NRS = AS / W / W
+   NRD = AD / W / W
+ #ENDIF 
+]
+
+DEVICE MP(P) pgate poly(G) tpdiff(S) tpdiff(D) nxwell(B) <pthin> <OD> netlist model pch [
+  property sa,sb,W,L,AS,AD,PD,PS,NRD,NRS
+   SCALE = PRESCALE
+   W = (perimeter_coincide(pgate, tpdiff ) + perimeter_inside(pgate, tpdiff)) / 2
+   L = area(pgate) / W
+   s = enclosure_vector( OD, 60 )
+   sa = W/sum(s::W/(s::a + 0.5 *L)) - 0.5*L
+   sb = W/sum(s::W/(s::b + 0.5 *L)) - 0.5*L
+   PI_S_OD = perimeter_inside(S,pthin)
+   PI_D_OD = perimeter_inside(D,pthin)
+   IF(PI_S_OD == 0) {
+    AD = area(D) * W / PI_D_OD
+    AS = AD
+    PD = perimeter(D) * W /PI_D_OD
+    PS = PD } 
+   ELSE IF(PI_D_OD == 0) {
+    AS = area(S) * W / PI_S_OD
+    AD = AS
+    PS = perimeter(S) * W /PI_S_OD
+    PD = PS } 
+   ELSE {
+    AS = area(S) * W / PI_S_OD
+    AD = area(D) * W / PI_D_OD
+    PS = perimeter(S) * W /PI_S_OD
+    PD = perimeter(D) * W /PI_D_OD }
+ #IFDEF ZERO_NRS_NRD 
+   NRS = 0
+   NRD = 0
+ #ELSE 
+   NRS = AS / W / W
+   NRD = AD / W / W
+ #ENDIF 
+]
+
+DEVICE MP(PD) bpgate poly(G) tpdiff(S) tpdiff(D) nxwell(B) <pthin> <OD> netlist model pch_25 [
+  property sa,sb,W,L,AS,AD,PD,PS,NRD,NRS
+   SCALE = PRESCALE
+   W = (perimeter_coincide(bpgate, tpdiff ) + perimeter_inside(bpgate, tpdiff)) / 2
+   L = area(bpgate) / W
+   s = enclosure_vector( OD, 60 )
+   sa = W/sum(s::W/(s::a + 0.5 *L)) - 0.5*L
+   sb = W/sum(s::W/(s::b + 0.5 *L)) - 0.5*L
+   PI_S_OD = perimeter_inside(S,pthin)
+   PI_D_OD = perimeter_inside(D,pthin)
+   IF(PI_S_OD == 0) {
+    AD = area(D) * W / PI_D_OD
+    AS = AD
+    PD = perimeter(D) * W /PI_D_OD
+    PS = PD } 
+   ELSE IF(PI_D_OD == 0) {
+    AS = area(S) * W / PI_S_OD
+    AD = AS
+    PS = perimeter(S) * W /PI_S_OD
+    PD = PS } 
+   ELSE {
+    AS = area(S) * W / PI_S_OD
+    AD = area(D) * W / PI_D_OD
+    PS = perimeter(S) * W /PI_S_OD
+    PD = perimeter(D) * W /PI_D_OD }
+ #IFDEF ZERO_NRS_NRD 
+   NRS = 0
+   NRD = 0
+ #ELSE 
+   NRS = AS / W / W
+   NRD = AD / W / W
+ #ENDIF 
+]
+
+DEVICE MP(PHL) bplvgate poly(G) tpdiff(S) tpdiff(D) nxwell(B) <pthin> <OD> netlist model pch_lvt25 [
+  property sa,sb,W,L,AS,AD,PD,PS,NRD,NRS
+   SCALE = PRESCALE
+   W = (perimeter_coincide(bplvgate, tpdiff ) + perimeter_inside(bplvgate, tpdiff)) / 2
+   L = area(bplvgate) / W
+   s = enclosure_vector( OD, 60 )
+   sa = W/sum(s::W/(s::a + 0.5 *L)) - 0.5*L
+   sb = W/sum(s::W/(s::b + 0.5 *L)) - 0.5*L
+   PI_S_OD = perimeter_inside(S,pthin)
+   PI_D_OD = perimeter_inside(D,pthin)
+   IF(PI_S_OD == 0) {
+    AD = area(D) * W / PI_D_OD
+    AS = AD
+    PD = perimeter(D) * W /PI_D_OD
+    PS = PD } 
+   ELSE IF(PI_D_OD == 0) {
+    AS = area(S) * W / PI_S_OD
+    AD = AS
+    PS = perimeter(S) * W /PI_S_OD
+    PD = PS } 
+   ELSE {
+    AS = area(S) * W / PI_S_OD
+    AD = area(D) * W / PI_D_OD
+    PS = perimeter(S) * W /PI_S_OD
+    PD = perimeter(D) * W /PI_D_OD }
+ #IFDEF ZERO_NRS_NRD 
+   NRS = 0
+   NRD = 0
+ #ELSE 
+   NRS = AS / W / W
+   NRD = AD / W / W
+ #ENDIF 
+]
+
+DEVICE MP(PHV) phvgate poly(G) tpdiff(S) tpdiff(D) nxwell(B) <pthin> <OD> netlist model pch_hvt [
+  property sa,sb,W,L,AS,AD,PD,PS,NRD,NRS
+   SCALE = PRESCALE
+   W = (perimeter_coincide(phvgate, tpdiff ) + perimeter_inside(phvgate, tpdiff)) / 2
+   L = area(phvgate) / W
+   s = enclosure_vector( OD, 60 )
+   sa = W/sum(s::W/(s::a + 0.5 *L)) - 0.5*L
+   sb = W/sum(s::W/(s::b + 0.5 *L)) - 0.5*L
+   PI_S_OD = perimeter_inside(S,pthin)
+   PI_D_OD = perimeter_inside(D,pthin)
+   IF(PI_S_OD == 0) {
+    AD = area(D) * W / PI_D_OD
+    AS = AD
+    PD = perimeter(D) * W /PI_D_OD
+    PS = PD } 
+   ELSE IF(PI_D_OD == 0) {
+    AS = area(S) * W / PI_S_OD
+    AD = AS
+    PS = perimeter(S) * W /PI_S_OD
+    PD = PS } 
+   ELSE {
+    AS = area(S) * W / PI_S_OD
+    AD = area(D) * W / PI_D_OD
+    PS = perimeter(S) * W /PI_S_OD
+    PD = perimeter(D) * W /PI_D_OD }
+ #IFDEF ZERO_NRS_NRD 
+   NRS = 0
+   NRD = 0
+ #ELSE 
+   NRS = AS / W / W
+   NRD = AD / W / W
+ #ENDIF 
+]
+
+DEVICE MP(PLV) plvgate poly(G) tpdiff(S) tpdiff(D) nxwell(B) <pthin> <OD> netlist model pch_lvt [
+  property sa,sb,W,L,AS,AD,PD,PS,NRD,NRS
+   SCALE = PRESCALE
+   W = (perimeter_coincide(plvgate, tpdiff ) + perimeter_inside(plvgate, tpdiff)) / 2
+   L = area(plvgate) / W
+   s = enclosure_vector( OD, 60 )
+   sa = W/sum(s::W/(s::a + 0.5 *L)) - 0.5*L
+   sb = W/sum(s::W/(s::b + 0.5 *L)) - 0.5*L
+   PI_S_OD = perimeter_inside(S,pthin)
+   PI_D_OD = perimeter_inside(D,pthin)
+   IF(PI_S_OD == 0) {
+    AD = area(D) * W / PI_D_OD
+    AS = AD
+    PD = perimeter(D) * W /PI_D_OD
+    PS = PD } 
+   ELSE IF(PI_D_OD == 0) {
+    AS = area(S) * W / PI_S_OD
+    AD = AS
+    PS = perimeter(S) * W /PI_S_OD
+    PD = PS } 
+   ELSE {
+    AS = area(S) * W / PI_S_OD
+    AD = area(D) * W / PI_D_OD
+    PS = perimeter(S) * W /PI_S_OD
+    PD = perimeter(D) * W /PI_D_OD }
+ #IFDEF ZERO_NRS_NRD 
+   NRS = 0
+   NRD = 0
+ #ELSE 
+   NRS = AS / W / W
+   NRD = AD / W / W
+ #ENDIF 
+]
+
+DEVICE MP(pch_sram) pgate_s poly(G) tpdiff(S) tpdiff(D) nxwell(B) <pthin> <OD> netlist model pchpu_sr [
+  property sa,sb,W,L,AS,AD,PD,PS,NRD,NRS
+   SCALE = PRESCALE
+   W = (perimeter_coincide(pgate_s, tpdiff ) + perimeter_inside(pgate_s, tpdiff)) / 2
+   L = area(pgate_s) / W
+   s = enclosure_vector( OD, 60 )
+   sa = W/sum(s::W/(s::a + 0.5 *L)) - 0.5*L
+   sb = W/sum(s::W/(s::b + 0.5 *L)) - 0.5*L
+   PI_S_OD = perimeter_inside(S,pthin)
+   PI_D_OD = perimeter_inside(D,pthin)
+   IF(PI_S_OD == 0) {
+    AD = area(D) * W / PI_D_OD
+    AS = AD
+    PD = perimeter(D) * W /PI_D_OD
+    PS = PD } 
+   ELSE IF(PI_D_OD == 0) {
+    AS = area(S) * W / PI_S_OD
+    AD = AS
+    PS = perimeter(S) * W /PI_S_OD
+    PD = PS } 
+   ELSE {
+    AS = area(S) * W / PI_S_OD
+    AD = area(D) * W / PI_D_OD
+    PS = perimeter(S) * W /PI_S_OD
+    PD = perimeter(D) * W /PI_D_OD }
+ #IFDEF ZERO_NRS_NRD 
+   NRS = 0
+   NRD = 0
+ #ELSE 
+   NRS = AS / W / W
+   NRD = AD / W / W
+ #ENDIF 
+]
+
+DEVICE MP(pch_uhvt) pgate_uhvt poly(G) tpdiff(S) tpdiff(D) nxwell(B) <pthin> <OD> netlist model pch_uhvt [
+  property sa,sb,W,L,AS,AD,PD,PS,NRD,NRS
+   SCALE = PRESCALE
+   W = (perimeter_coincide(pgate_uhvt, tpdiff ) + perimeter_inside(pgate_uhvt, tpdiff)) / 2
+   L = area(pgate_uhvt) / W
+   s = enclosure_vector( OD, 60 )
+   sa = W/sum(s::W/(s::a + 0.5 *L)) - 0.5*L
+   sb = W/sum(s::W/(s::b + 0.5 *L)) - 0.5*L
+   PI_S_OD = perimeter_inside(S,pthin)
+   PI_D_OD = perimeter_inside(D,pthin)
+   IF(PI_S_OD == 0) {
+    AD = area(D) * W / PI_D_OD
+    AS = AD
+    PD = perimeter(D) * W /PI_D_OD
+    PS = PD } 
+   ELSE IF(PI_D_OD == 0) {
+    AS = area(S) * W / PI_S_OD
+    AD = AS
+    PS = perimeter(S) * W /PI_S_OD
+    PD = PS } 
+   ELSE {
+    AS = area(S) * W / PI_S_OD
+    AD = area(D) * W / PI_D_OD
+    PS = perimeter(S) * W /PI_S_OD
+    PD = perimeter(D) * W /PI_D_OD }
+ #IFDEF ZERO_NRS_NRD 
+   NRS = 0
+   NRD = 0
+ #ELSE 
+   NRS = AS / W / W
+   NRD = AD / W / W
+ #ENDIF 
+]
+
+DEVICE MP(pchpu_hvtsr_g) pgate_s_hvt poly(G) tpdiff(S) tpdiff(D) nxwell(B) <pthin> <OD> netlist model pchpu_hvtsr [
+  property sa,sb,W,L,AS,AD,PD,PS,NRD,NRS
+   SCALE = PRESCALE
+   W = (perimeter_coincide(pgate_s_hvt, tpdiff ) + perimeter_inside(pgate_s_hvt, tpdiff)) / 2
+   L = area(pgate_s_hvt) / W
+   s = enclosure_vector( OD, 60 )
+   sa = W/sum(s::W/(s::a + 0.5 *L)) - 0.5*L
+   sb = W/sum(s::W/(s::b + 0.5 *L)) - 0.5*L
+   PI_S_OD = perimeter_inside(S,pthin)
+   PI_D_OD = perimeter_inside(D,pthin)
+   IF(PI_S_OD == 0) {
+    AD = area(D) * W / PI_D_OD
+    AS = AD
+    PD = perimeter(D) * W /PI_D_OD
+    PS = PD } 
+   ELSE IF(PI_D_OD == 0) {
+    AS = area(S) * W / PI_S_OD
+    AD = AS
+    PS = perimeter(S) * W /PI_S_OD
+    PD = PS } 
+   ELSE {
+    AS = area(S) * W / PI_S_OD
+    AD = area(D) * W / PI_D_OD
+    PS = perimeter(S) * W /PI_S_OD
+    PD = perimeter(D) * W /PI_D_OD }
+ #IFDEF ZERO_NRS_NRD 
+   NRS = 0
+   NRD = 0
+ #ELSE 
+   NRS = AS / W / W
+   NRD = AD / W / W
+ #ENDIF 
+]
+
+#ELSE
+
+#IFDEF extract_as_ad
+DEVICE MN(N) ngate poly(G) tndiff(S) tndiff(D) psub(B) <nthin> [
+  property W,L,AS,AD
+   W=(perimeter_coincide(ngate, tndiff ) + perimeter_inside(ngate, tndiff)) / 2
+   L=area(ngate) / W
+  PI_S_OD = perimeter_inside(S,nthin)
+  PI_D_OD = perimeter_inside(D,nthin)
+  IF(PI_S_OD ==0) {
+    AD = area(D) * W /PI_D_OD
+    AS = AD
+  }
+  ELSE IF(PI_D_OD==0) {
+    AS = area(S) * W /PI_S_OD
+    AD = AS  }
+  ELSE {
+  AS = area(S) * W /perimeter_inside(S,nthin)
+  AD = area(D) * W /perimeter_inside(D,nthin)
+  }
+  ]
+DEVICE MN(N1) nrgate poly(G) tndiff(S) tndiff(D) psub(B) <nthin> [
+  property W,L,AS,AD
+   W=(perimeter_coincide(nrgate, tndiff ) + perimeter_inside(nrgate, tndiff)) / 2
+   L=area(nrgate) / W
+  PI_S_OD = perimeter_inside(S,nthin)
+  PI_D_OD = perimeter_inside(D,nthin)
+  IF(PI_S_OD ==0) {
+    AD = area(D) * W /PI_D_OD
+    AS = AD
+  }
+  ELSE IF(PI_D_OD==0) {
+    AS = area(S) * W /PI_S_OD
+    AD = AS  }
+  ELSE {
+  AS = area(S) * W /perimeter_inside(S,nthin)
+  AD = area(D) * W /perimeter_inside(D,nthin)
+  }
+  ]
+DEVICE MN(N1HV) n1hvgate poly(G) tndiff(S) tndiff(D) psub(B) <nthin> [
+  property W,L,AS,AD
+   W=(perimeter_coincide(n1hvgate, tndiff ) + perimeter_inside(n1hvgate, tndiff)) / 2
+   L=area(n1hvgate) / W
+  PI_S_OD = perimeter_inside(S,nthin)
+  PI_D_OD = perimeter_inside(D,nthin)
+  IF(PI_S_OD ==0) {
+    AD = area(D) * W /PI_D_OD
+    AS = AD
+  }
+  ELSE IF(PI_D_OD==0) {
+    AS = area(S) * W /PI_S_OD
+    AD = AS  }
+  ELSE {
+  AS = area(S) * W /perimeter_inside(S,nthin)
+  AD = area(D) * W /perimeter_inside(D,nthin)
+  }
+  ]
+DEVICE MN(N1LV) n1lvgate poly(G) tndiff(S) tndiff(D) psub(B) <nthin> [
+  property W,L,AS,AD
+   W=(perimeter_coincide(n1lvgate, tndiff ) + perimeter_inside(n1lvgate, tndiff)) / 2
+   L=area(n1lvgate) / W
+  PI_S_OD = perimeter_inside(S,nthin)
+  PI_D_OD = perimeter_inside(D,nthin)
+  IF(PI_S_OD ==0) {
+    AD = area(D) * W /PI_D_OD
+    AS = AD
+  }
+  ELSE IF(PI_D_OD==0) {
+    AS = area(S) * W /PI_S_OD
+    AD = AS  }
+  ELSE {
+  AS = area(S) * W /perimeter_inside(S,nthin)
+  AD = area(D) * W /perimeter_inside(D,nthin)
+  }
+  ]
+DEVICE MN(N2) bnrgate poly(G) tndiff(S) tndiff(D) psub(B) <nthin> [
+  property W,L,AS,AD
+   W=(perimeter_coincide(bnrgate, tndiff ) + perimeter_inside(bnrgate, tndiff)) / 2
+   L=area(bnrgate) / W
+  PI_S_OD = perimeter_inside(S,nthin)
+  PI_D_OD = perimeter_inside(D,nthin)
+  IF(PI_S_OD ==0) {
+    AD = area(D) * W /PI_D_OD
+    AS = AD
+  }
+  ELSE IF(PI_D_OD==0) {
+    AS = area(S) * W /PI_S_OD
+    AD = AS  }
+  ELSE {
+  AS = area(S) * W /perimeter_inside(S,nthin)
+  AD = area(D) * W /perimeter_inside(D,nthin)
+  }
+  ]
+DEVICE MN(N2LV) bndlvgate poly(G) tndiff(S) tndiff(D) psub(B) <nthin> [
+  property W,L,AS,AD
+   W=(perimeter_coincide(bndlvgate, tndiff ) + perimeter_inside(bndlvgate, tndiff)) / 2
+   L=area(bndlvgate) / W
+  PI_S_OD = perimeter_inside(S,nthin)
+  PI_D_OD = perimeter_inside(D,nthin)
+  IF(PI_S_OD ==0) {
+    AD = area(D) * W /PI_D_OD
+    AS = AD
+  }
+  ELSE IF(PI_D_OD==0) {
+    AS = area(S) * W /PI_S_OD
+    AD = AS  }
+  ELSE {
+  AS = area(S) * W /perimeter_inside(S,nthin)
+  AD = area(D) * W /perimeter_inside(D,nthin)
+  }
+  ]
+DEVICE MN(ND) bngate poly(G) tndiff(S) tndiff(D) psub(B) <nthin> [
+  property W,L,AS,AD
+   W=(perimeter_coincide(bngate, tndiff ) + perimeter_inside(bngate, tndiff)) / 2
+   L=area(bngate) / W
+  PI_S_OD = perimeter_inside(S,nthin)
+  PI_D_OD = perimeter_inside(D,nthin)
+  IF(PI_S_OD ==0) {
+    AD = area(D) * W /PI_D_OD
+    AS = AD
+  }
+  ELSE IF(PI_D_OD==0) {
+    AS = area(S) * W /PI_S_OD
+    AD = AS  }
+  ELSE {
+  AS = area(S) * W /perimeter_inside(S,nthin)
+  AD = area(D) * W /perimeter_inside(D,nthin)
+  }
+  ]
+DEVICE MN(NHL) bnlvgate poly(G) tndiff(S) tndiff(D) psub(B) <nthin> [
+  property W,L,AS,AD
+   W=(perimeter_coincide(bnlvgate, tndiff ) + perimeter_inside(bnlvgate, tndiff)) / 2
+   L=area(bnlvgate) / W
+  PI_S_OD = perimeter_inside(S,nthin)
+  PI_D_OD = perimeter_inside(D,nthin)
+  IF(PI_S_OD ==0) {
+    AD = area(D) * W /PI_D_OD
+    AS = AD
+  }
+  ELSE IF(PI_D_OD==0) {
+    AS = area(S) * W /PI_S_OD
+    AD = AS  }
+  ELSE {
+  AS = area(S) * W /perimeter_inside(S,nthin)
+  AD = area(D) * W /perimeter_inside(D,nthin)
+  }
+  ]
+DEVICE MN(NHV) nhvgate poly(G) tndiff(S) tndiff(D) psub(B) <nthin> [
+  property W,L,AS,AD
+   W=(perimeter_coincide(nhvgate, tndiff ) + perimeter_inside(nhvgate, tndiff)) / 2
+   L=area(nhvgate) / W
+  PI_S_OD = perimeter_inside(S,nthin)
+  PI_D_OD = perimeter_inside(D,nthin)
+  IF(PI_S_OD ==0) {
+    AD = area(D) * W /PI_D_OD
+    AS = AD
+  }
+  ELSE IF(PI_D_OD==0) {
+    AS = area(S) * W /PI_S_OD
+    AD = AS  }
+  ELSE {
+  AS = area(S) * W /perimeter_inside(S,nthin)
+  AD = area(D) * W /perimeter_inside(D,nthin)
+  }
+  ]
+DEVICE MN(NL) nlgate poly(G) tndiff(S) tndiff(D) psub(B) <nthin> [
+  property W,L,AS,AD
+   W=(perimeter_coincide(nlgate, tndiff ) + perimeter_inside(nlgate, tndiff)) / 2
+   L=area(nlgate) / W
+  PI_S_OD = perimeter_inside(S,nthin)
+  PI_D_OD = perimeter_inside(D,nthin)
+  IF(PI_S_OD ==0) {
+    AD = area(D) * W /PI_D_OD
+    AS = AD
+  }
+  ELSE IF(PI_D_OD==0) {
+    AS = area(S) * W /PI_S_OD
+    AD = AS  }
+  ELSE {
+  AS = area(S) * W /perimeter_inside(S,nthin)
+  AD = area(D) * W /perimeter_inside(D,nthin)
+  }
+  ]
+DEVICE MN(NLV) nlvgate poly(G) tndiff(S) tndiff(D) psub(B) <nthin> [
+  property W,L,AS,AD
+   W=(perimeter_coincide(nlvgate, tndiff ) + perimeter_inside(nlvgate, tndiff)) / 2
+   L=area(nlvgate) / W
+  PI_S_OD = perimeter_inside(S,nthin)
+  PI_D_OD = perimeter_inside(D,nthin)
+  IF(PI_S_OD ==0) {
+    AD = area(D) * W /PI_D_OD
+    AS = AD
+  }
+  ELSE IF(PI_D_OD==0) {
+    AS = area(S) * W /PI_S_OD
+    AD = AS  }
+  ELSE {
+  AS = area(S) * W /perimeter_inside(S,nthin)
+  AD = area(D) * W /perimeter_inside(D,nthin)
+  }
+  ]
+DEVICE MN(NN) bnngate poly(G) tndiff(S) tndiff(D) psub(B) <nthin> [
+  property W,L,AS,AD
+   W=(perimeter_coincide(bnngate, tndiff ) + perimeter_inside(bnngate, tndiff)) / 2
+   L=area(bnngate) / W
+  PI_S_OD = perimeter_inside(S,nthin)
+  PI_D_OD = perimeter_inside(D,nthin)
+  IF(PI_S_OD ==0) {
+    AD = area(D) * W /PI_D_OD
+    AS = AD
+  }
+  ELSE IF(PI_D_OD==0) {
+    AS = area(S) * W /PI_S_OD
+    AD = AS  }
+  ELSE {
+  AS = area(S) * W /perimeter_inside(S,nthin)
+  AD = area(D) * W /perimeter_inside(D,nthin)
+  }
+  ]
+DEVICE MN(nch_sram) ngate_s poly(G) tndiff(S) tndiff(D) psub(B) <nthin> [
+  property W,L,AS,AD
+   W=(perimeter_coincide(ngate_s, tndiff ) + perimeter_inside(ngate_s, tndiff)) / 2
+   L=area(ngate_s) / W
+  PI_S_OD = perimeter_inside(S,nthin)
+  PI_D_OD = perimeter_inside(D,nthin)
+  IF(PI_S_OD ==0) {
+    AD = area(D) * W /PI_D_OD
+    AS = AD
+  }
+  ELSE IF(PI_D_OD==0) {
+    AS = area(S) * W /PI_S_OD
+    AD = AS  }
+  ELSE {
+  AS = area(S) * W /perimeter_inside(S,nthin)
+  AD = area(D) * W /perimeter_inside(D,nthin)
+  }
+  ]
+DEVICE MN(nch_sram_hvt) ngate_s_hvt poly(G) tndiff(S) tndiff(D) psub(B) <nthin> [
+  property W,L,AS,AD
+   W=(perimeter_coincide(ngate_s_hvt, tndiff ) + perimeter_inside(ngate_s_hvt, tndiff)) / 2
+   L=area(ngate_s_hvt) / W
+  PI_S_OD = perimeter_inside(S,nthin)
+  PI_D_OD = perimeter_inside(D,nthin)
+  IF(PI_S_OD ==0) {
+    AD = area(D) * W /PI_D_OD
+    AS = AD
+  }
+  ELSE IF(PI_D_OD==0) {
+    AS = area(S) * W /PI_S_OD
+    AD = AS  }
+  ELSE {
+  AS = area(S) * W /perimeter_inside(S,nthin)
+  AD = area(D) * W /perimeter_inside(D,nthin)
+  }
+  ]
+DEVICE MN(nch_uhvt) ngate_uhvt poly(G) tndiff(S) tndiff(D) psub(B) <nthin> [
+  property W,L,AS,AD
+   W=(perimeter_coincide(ngate_uhvt, tndiff ) + perimeter_inside(ngate_uhvt, tndiff)) / 2
+   L=area(ngate_uhvt) / W
+  PI_S_OD = perimeter_inside(S,nthin)
+  PI_D_OD = perimeter_inside(D,nthin)
+  IF(PI_S_OD ==0) {
+    AD = area(D) * W /PI_D_OD
+    AS = AD
+  }
+  ELSE IF(PI_D_OD==0) {
+    AS = area(S) * W /PI_S_OD
+    AD = AS  }
+  ELSE {
+  AS = area(S) * W /perimeter_inside(S,nthin)
+  AD = area(D) * W /perimeter_inside(D,nthin)
+  }
+  ]
+DEVICE MP(P) pgate poly(G) tpdiff(S) tpdiff(D) nxwell(B) <pthin> [
+  property W,L,AS,AD
+   W=(perimeter_coincide(pgate, tpdiff ) + perimeter_inside(pgate, tpdiff)) / 2 
+   L=area(pgate) / W
+  PI_S_OD = perimeter_inside(S,pthin)
+  PI_D_OD = perimeter_inside(D,pthin)
+  IF(PI_S_OD ==0) {
+    AD = area(D) * W /PI_D_OD
+    AS = AD
+    }
+  ELSE IF(PI_D_OD==0) {
+    AS = area(S) * W /PI_S_OD
+    AD = AS
+    }
+  ELSE {
+  AS = area(S) * W /perimeter_inside(S,pthin)
+  AD = area(D) * W /perimeter_inside(D,pthin)
+  }
+  ]
+DEVICE MP(PD) bpgate poly(G) tpdiff(S) tpdiff(D) nxwell(B) <pthin> [
+  property W,L,AS,AD
+   W=(perimeter_coincide(bpgate, tpdiff ) + perimeter_inside(bpgate, tpdiff)) / 2 
+   L=area(bpgate) / W
+  PI_S_OD = perimeter_inside(S,pthin)
+  PI_D_OD = perimeter_inside(D,pthin)
+  IF(PI_S_OD ==0) {
+    AD = area(D) * W /PI_D_OD
+    AS = AD
+    }
+  ELSE IF(PI_D_OD==0) {
+    AS = area(S) * W /PI_S_OD
+    AD = AS
+    }
+  ELSE {
+  AS = area(S) * W /perimeter_inside(S,pthin)
+  AD = area(D) * W /perimeter_inside(D,pthin)
+  }
+  ]
+DEVICE MP(PHL) bplvgate poly(G) tpdiff(S) tpdiff(D) nxwell(B) <pthin> [
+  property W,L,AS,AD
+   W=(perimeter_coincide(bplvgate, tpdiff ) + perimeter_inside(bplvgate, tpdiff)) / 2 
+   L=area(bplvgate) / W
+  PI_S_OD = perimeter_inside(S,pthin)
+  PI_D_OD = perimeter_inside(D,pthin)
+  IF(PI_S_OD ==0) {
+    AD = area(D) * W /PI_D_OD
+    AS = AD
+    }
+  ELSE IF(PI_D_OD==0) {
+    AS = area(S) * W /PI_S_OD
+    AD = AS
+    }
+  ELSE {
+  AS = area(S) * W /perimeter_inside(S,pthin)
+  AD = area(D) * W /perimeter_inside(D,pthin)
+  }
+  ]
+DEVICE MP(PHV) phvgate poly(G) tpdiff(S) tpdiff(D) nxwell(B) <pthin> [
+  property W,L,AS,AD
+   W=(perimeter_coincide(phvgate, tpdiff ) + perimeter_inside(phvgate, tpdiff)) / 2 
+   L=area(phvgate) / W
+  PI_S_OD = perimeter_inside(S,pthin)
+  PI_D_OD = perimeter_inside(D,pthin)
+  IF(PI_S_OD ==0) {
+    AD = area(D) * W /PI_D_OD
+    AS = AD
+    }
+  ELSE IF(PI_D_OD==0) {
+    AS = area(S) * W /PI_S_OD
+    AD = AS
+    }
+  ELSE {
+  AS = area(S) * W /perimeter_inside(S,pthin)
+  AD = area(D) * W /perimeter_inside(D,pthin)
+  }
+  ]
+DEVICE MP(PLV) plvgate poly(G) tpdiff(S) tpdiff(D) nxwell(B) <pthin> [
+  property W,L,AS,AD
+   W=(perimeter_coincide(plvgate, tpdiff ) + perimeter_inside(plvgate, tpdiff)) / 2 
+   L=area(plvgate) / W
+  PI_S_OD = perimeter_inside(S,pthin)
+  PI_D_OD = perimeter_inside(D,pthin)
+  IF(PI_S_OD ==0) {
+    AD = area(D) * W /PI_D_OD
+    AS = AD
+    }
+  ELSE IF(PI_D_OD==0) {
+    AS = area(S) * W /PI_S_OD
+    AD = AS
+    }
+  ELSE {
+  AS = area(S) * W /perimeter_inside(S,pthin)
+  AD = area(D) * W /perimeter_inside(D,pthin)
+  }
+  ]
+DEVICE MP(pch_sram) pgate_s poly(G) tpdiff(S) tpdiff(D) nxwell(B) <pthin> [
+  property W,L,AS,AD
+   W=(perimeter_coincide(pgate_s, tpdiff ) + perimeter_inside(pgate_s, tpdiff)) / 2 
+   L=area(pgate_s) / W
+  PI_S_OD = perimeter_inside(S,pthin)
+  PI_D_OD = perimeter_inside(D,pthin)
+  IF(PI_S_OD ==0) {
+    AD = area(D) * W /PI_D_OD
+    AS = AD
+    }
+  ELSE IF(PI_D_OD==0) {
+    AS = area(S) * W /PI_S_OD
+    AD = AS
+    }
+  ELSE {
+  AS = area(S) * W /perimeter_inside(S,pthin)
+  AD = area(D) * W /perimeter_inside(D,pthin)
+  }
+  ]
+DEVICE MP(pch_uhvt) pgate_uhvt poly(G) tpdiff(S) tpdiff(D) nxwell(B) <pthin> [
+  property W,L,AS,AD
+   W=(perimeter_coincide(pgate_uhvt, tpdiff ) + perimeter_inside(pgate_uhvt, tpdiff)) / 2 
+   L=area(pgate_uhvt) / W
+  PI_S_OD = perimeter_inside(S,pthin)
+  PI_D_OD = perimeter_inside(D,pthin)
+  IF(PI_S_OD ==0) {
+    AD = area(D) * W /PI_D_OD
+    AS = AD
+    }
+  ELSE IF(PI_D_OD==0) {
+    AS = area(S) * W /PI_S_OD
+    AD = AS
+    }
+  ELSE {
+  AS = area(S) * W /perimeter_inside(S,pthin)
+  AD = area(D) * W /perimeter_inside(D,pthin)
+  }
+  ]
+DEVICE MP(pchpu_hvtsr_g) pgate_s_hvt poly(G) tpdiff(S) tpdiff(D) nxwell(B) <pthin> [
+  property W,L,AS,AD
+   W=(perimeter_coincide(pgate_s_hvt, tpdiff ) + perimeter_inside(pgate_s_hvt, tpdiff)) / 2 
+   L=area(pgate_s_hvt) / W
+  PI_S_OD = perimeter_inside(S,pthin)
+  PI_D_OD = perimeter_inside(D,pthin)
+  IF(PI_S_OD ==0) {
+    AD = area(D) * W /PI_D_OD
+    AS = AD
+    }
+  ELSE IF(PI_D_OD==0) {
+    AS = area(S) * W /PI_S_OD
+    AD = AS
+    }
+  ELSE {
+  AS = area(S) * W /perimeter_inside(S,pthin)
+  AD = area(D) * W /perimeter_inside(D,pthin)
+  }
+  ]
+
+
+#ELSE
+DEVICE MN(N) ngate poly(G) tndiff(S) tndiff(D) psub(B) [
+   property W,L
+   W=(perimeter_coincide(ngate, tndiff ) + perimeter_inside(ngate, tndiff)) / 2 
+   L=area(ngate) / W
+]
+DEVICE MN(N1) nrgate poly(G) tndiff(S) tndiff(D) psub(B) [
+   property W,L
+   W=(perimeter_coincide(nrgate, tndiff ) + perimeter_inside(nrgate, tndiff)) / 2 
+   L=area(nrgate) / W
+]
+DEVICE MN(N1HV) n1hvgate poly(G) tndiff(S) tndiff(D) psub(B) [
+   property W,L
+   W=(perimeter_coincide(n1hvgate, tndiff ) + perimeter_inside(n1hvgate, tndiff)) / 2 
+   L=area(n1hvgate) / W
+]
+DEVICE MN(N1LV) n1lvgate poly(G) tndiff(S) tndiff(D) psub(B) [
+   property W,L
+   W=(perimeter_coincide(n1lvgate, tndiff ) + perimeter_inside(n1lvgate, tndiff)) / 2 
+   L=area(n1lvgate) / W
+]
+DEVICE MN(N2) bnrgate poly(G) tndiff(S) tndiff(D) psub(B) [
+   property W,L
+   W=(perimeter_coincide(bnrgate, tndiff ) + perimeter_inside(bnrgate, tndiff)) / 2 
+   L=area(bnrgate) / W
+]
+DEVICE MN(N2LV) bndlvgate poly(G) tndiff(S) tndiff(D) psub(B) [
+   property W,L
+   W=(perimeter_coincide(bndlvgate, tndiff ) + perimeter_inside(bndlvgate, tndiff)) / 2 
+   L=area(bndlvgate) / W
+]
+DEVICE MN(ND) bngate poly(G) tndiff(S) tndiff(D) psub(B) [
+   property W,L
+   W=(perimeter_coincide(bngate, tndiff ) + perimeter_inside(bngate, tndiff)) / 2 
+   L=area(bngate) / W
+]
+DEVICE MN(NHL) bnlvgate poly(G) tndiff(S) tndiff(D) psub(B) [
+   property W,L
+   W=(perimeter_coincide(bnlvgate, tndiff ) + perimeter_inside(bnlvgate, tndiff)) / 2 
+   L=area(bnlvgate) / W
+]
+DEVICE MN(NHV) nhvgate poly(G) tndiff(S) tndiff(D) psub(B) [
+   property W,L
+   W=(perimeter_coincide(nhvgate, tndiff ) + perimeter_inside(nhvgate, tndiff)) / 2 
+   L=area(nhvgate) / W
+]
+DEVICE MN(NL) nlgate poly(G) tndiff(S) tndiff(D) psub(B) [
+   property W,L
+   W=(perimeter_coincide(nlgate, tndiff ) + perimeter_inside(nlgate, tndiff)) / 2 
+   L=area(nlgate) / W
+]
+DEVICE MN(NLV) nlvgate poly(G) tndiff(S) tndiff(D) psub(B) [
+   property W,L
+   W=(perimeter_coincide(nlvgate, tndiff ) + perimeter_inside(nlvgate, tndiff)) / 2 
+   L=area(nlvgate) / W
+]
+DEVICE MN(NN) bnngate poly(G) tndiff(S) tndiff(D) psub(B) [
+   property W,L
+   W=(perimeter_coincide(bnngate, tndiff ) + perimeter_inside(bnngate, tndiff)) / 2 
+   L=area(bnngate) / W
+]
+DEVICE MN(nch_sram) ngate_s poly(G) tndiff(S) tndiff(D) psub(B) [
+   property W,L
+   W=(perimeter_coincide(ngate_s, tndiff ) + perimeter_inside(ngate_s, tndiff)) / 2 
+   L=area(ngate_s) / W
+]
+DEVICE MN(nch_sram_hvt) ngate_s_hvt poly(G) tndiff(S) tndiff(D) psub(B) [
+   property W,L
+   W=(perimeter_coincide(ngate_s_hvt, tndiff ) + perimeter_inside(ngate_s_hvt, tndiff)) / 2 
+   L=area(ngate_s_hvt) / W
+]
+DEVICE MN(nch_uhvt) ngate_uhvt poly(G) tndiff(S) tndiff(D) psub(B) [
+   property W,L
+   W=(perimeter_coincide(ngate_uhvt, tndiff ) + perimeter_inside(ngate_uhvt, tndiff)) / 2 
+   L=area(ngate_uhvt) / W
+]
+DEVICE MP(P) pgate poly(G) tpdiff(S) tpdiff(D) nxwell(B) [
+   property W,L
+   W=(perimeter_coincide(pgate, tpdiff ) + perimeter_inside(pgate, tpdiff)) / 2 
+   L=area(pgate) / W
+]
+DEVICE MP(PD) bpgate poly(G) tpdiff(S) tpdiff(D) nxwell(B) [
+   property W,L
+   W=(perimeter_coincide(bpgate, tpdiff ) + perimeter_inside(bpgate, tpdiff)) / 2 
+   L=area(bpgate) / W
+]
+DEVICE MP(PHL) bplvgate poly(G) tpdiff(S) tpdiff(D) nxwell(B) [
+   property W,L
+   W=(perimeter_coincide(bplvgate, tpdiff ) + perimeter_inside(bplvgate, tpdiff)) / 2 
+   L=area(bplvgate) / W
+]
+DEVICE MP(PHV) phvgate poly(G) tpdiff(S) tpdiff(D) nxwell(B) [
+   property W,L
+   W=(perimeter_coincide(phvgate, tpdiff ) + perimeter_inside(phvgate, tpdiff)) / 2 
+   L=area(phvgate) / W
+]
+DEVICE MP(PLV) plvgate poly(G) tpdiff(S) tpdiff(D) nxwell(B) [
+   property W,L
+   W=(perimeter_coincide(plvgate, tpdiff ) + perimeter_inside(plvgate, tpdiff)) / 2 
+   L=area(plvgate) / W
+]
+DEVICE MP(pch_sram) pgate_s poly(G) tpdiff(S) tpdiff(D) nxwell(B) [
+   property W,L
+   W=(perimeter_coincide(pgate_s, tpdiff ) + perimeter_inside(pgate_s, tpdiff)) / 2 
+   L=area(pgate_s) / W
+]
+DEVICE MP(pch_uhvt) pgate_uhvt poly(G) tpdiff(S) tpdiff(D) nxwell(B) [
+   property W,L
+   W=(perimeter_coincide(pgate_uhvt, tpdiff ) + perimeter_inside(pgate_uhvt, tpdiff)) / 2 
+   L=area(pgate_uhvt) / W
+]
+DEVICE MP(pchpu_hvtsr_g) pgate_s_hvt poly(G) tpdiff(S) tpdiff(D) nxwell(B) [
+   property W,L
+   W=(perimeter_coincide(pgate_s_hvt, tpdiff ) + perimeter_inside(pgate_s_hvt, tpdiff)) / 2 
+   L=area(pgate_s_hvt) / W
+]
+
+
+#ENDIF
+
+#ENDIF
+
+
+#IFNDEF RC_DECK
+TRACE PROPERTY MN(N) L L 0
+TRACE PROPERTY MN(N) W W 0
+TRACE PROPERTY MN(N1) L L 0
+TRACE PROPERTY MN(N1) W W 0
+TRACE PROPERTY MN(N1HV) L L 0
+TRACE PROPERTY MN(N1HV) W W 0
+TRACE PROPERTY MN(N1LV) L L 0
+TRACE PROPERTY MN(N1LV) W W 0
+TRACE PROPERTY MN(N2) L L 0
+TRACE PROPERTY MN(N2) W W 0
+TRACE PROPERTY MN(N2LV) L L 0
+TRACE PROPERTY MN(N2LV) W W 0
+TRACE PROPERTY MN(ND) L L 0
+TRACE PROPERTY MN(ND) W W 0
+TRACE PROPERTY MN(NHL) L L 0
+TRACE PROPERTY MN(NHL) W W 0
+TRACE PROPERTY MN(NHV) L L 0
+TRACE PROPERTY MN(NHV) W W 0
+TRACE PROPERTY MN(NL) L L 0
+TRACE PROPERTY MN(NL) W W 0
+TRACE PROPERTY MN(NLV) L L 0
+TRACE PROPERTY MN(NLV) W W 0
+TRACE PROPERTY MN(NN) L L 0
+TRACE PROPERTY MN(NN) W W 0
+TRACE PROPERTY MN(nch_sram) L L 0
+TRACE PROPERTY MN(nch_sram) W W 0
+TRACE PROPERTY MN(nch_sram_hvt) L L 0
+TRACE PROPERTY MN(nch_sram_hvt) W W 0
+TRACE PROPERTY MN(nch_uhvt) L L 0
+TRACE PROPERTY MN(nch_uhvt) W W 0
+TRACE PROPERTY MP(P) L L 0
+TRACE PROPERTY MP(P) W W 0
+TRACE PROPERTY MP(PD) L L 0
+TRACE PROPERTY MP(PD) W W 0
+TRACE PROPERTY MP(PHL) L L 0
+TRACE PROPERTY MP(PHL) W W 0
+TRACE PROPERTY MP(PHV) L L 0
+TRACE PROPERTY MP(PHV) W W 0
+TRACE PROPERTY MP(PLV) L L 0
+TRACE PROPERTY MP(PLV) W W 0
+TRACE PROPERTY MP(pch_sram) L L 0
+TRACE PROPERTY MP(pch_sram) W W 0
+TRACE PROPERTY MP(pch_uhvt) L L 0
+TRACE PROPERTY MP(pch_uhvt) W W 0
+TRACE PROPERTY MP(pchpu_hvtsr_g) L L 0
+TRACE PROPERTY MP(pchpu_hvtsr_g) W W 0
+#ENDIF
+
+#IFDEF RC_DECK
+DEVICE Q(NV) nemit10 ncoll1 pbase1 cnemit1 netlist model npn10
+#ELSE
+  DEVICE Q(NV) nemit10 ncoll1 pbase1 cnemit1 [
+		property A
+		A = area(cnemit1)
+  ]
+#ENDIF
+
+#IFNDEF RC_DECK
+  TRACE PROPERTY Q(NV) A A 0
+#ENDIF
+
+#IFDEF RC_DECK
+DEVICE Q(NV) nemit2 ncoll1 pbase1 cnemit1 netlist model npn2
+#ELSE
+  DEVICE Q(NV) nemit2 ncoll1 pbase1 cnemit1 [
+		property A
+		A = area(cnemit1)
+  ]
+#ENDIF
+#IFDEF RC_DECK
+DEVICE Q(NV) nemit5 ncoll1 pbase1 cnemit1 netlist model npn5
+#ELSE
+  DEVICE Q(NV) nemit5 ncoll1 pbase1 cnemit1 [
+		property A
+		A = area(cnemit1)
+  ]
+#ENDIF
+#IFDEF RC_DECK
+DEVICE Q(PV) cemit10 coll1 nbase1 cemit1 netlist model pnp10
+#ELSE
+  DEVICE Q(PV) cemit10 coll1 nbase1 cemit1 [
+		property A
+		A = area(cemit1)
+  ]
+#ENDIF
+
+#IFNDEF RC_DECK
+  TRACE PROPERTY Q(PV) A A 0
+#ENDIF
+
+#IFDEF RC_DECK
+DEVICE Q(PV) cemit2 coll1 nbase1 cemit1 netlist model pnp2
+#ELSE
+  DEVICE Q(PV) cemit2 coll1 nbase1 cemit1 [
+		property A
+		A = area(cemit1)
+  ]
+#ENDIF
+#IFDEF RC_DECK
+DEVICE Q(PV) cemit5 coll1 nbase1 cemit1 netlist model pnp5
+#ELSE
+  DEVICE Q(PV) cemit5 coll1 nbase1 cemit1 [
+		property A
+		A = area(cemit1)
+  ]
+#ENDIF
+DEVICE D(D1) ipdio tpdiff nxwell netlist model pdio_25
+  TRACE PROPERTY D(D1) A A 0
+DEVICE D(D1N) cndion psub tndiff netlist model ndio_na
+  TRACE PROPERTY D(D1N) A A 0
+DEVICE D(D2) indio psub tndiff netlist model ndio_25
+  TRACE PROPERTY D(D2) A A 0
+DEVICE D(D2N) indion psub tndiff netlist model ndio_na25
+  TRACE PROPERTY D(D2N) A A 0
+DEVICE D(D3) inwdio psub nxwell netlist model nwdio
+  TRACE PROPERTY D(D3) A A 0
+DEVICE D(DB) ydio psub tndiff netlist model dio_esd25
+  TRACE PROPERTY D(DB) A A 0
+DEVICE D(DN) cndio psub tndiff netlist model ndio
+  TRACE PROPERTY D(DN) A A 0
+DEVICE D(DNH) ndioh psub tndiff netlist model ndio_hvt
+  TRACE PROPERTY D(DNH) A A 0
+DEVICE D(DNL) ndiol psub tndiff netlist model ndio_lvt
+  TRACE PROPERTY D(DNL) A A 0
+DEVICE D(DP) cpdio tpdiff nxwell netlist model pdio
+  TRACE PROPERTY D(DP) A A 0
+DEVICE D(DPH) pdioh tpdiff nxwell netlist model pdio_hvt
+  TRACE PROPERTY D(DPH) A A 0
+DEVICE D(DPL) pdiol tpdiff nxwell netlist model pdio_lvt
+  TRACE PROPERTY D(DPL) A A 0
+DEVICE D(DW) cnwdio psub nxwell netlist model nwdio
+  TRACE PROPERTY D(DW) A A 0
+DEVICE D(NDIO_lvt25) indio_lvt psub tndiff netlist model ndio_lvt25
+  TRACE PROPERTY D(NDIO_lvt25) A A 0
+DEVICE D(PDIO_lvt25) ipdio_lvt tpdiff nxwell netlist model pdio_lvt25
+  TRACE PROPERTY D(PDIO_lvt25) A A 0
+DEVICE D(ndio_uhvt) cndio_uhvt psub tndiff netlist model ndio_uhvt
+  TRACE PROPERTY D(ndio_uhvt) A A 0
+DEVICE D(pdio_uhvt) cpdio_uhvt tpdiff nxwell netlist model pdio_uhvt
+  TRACE PROPERTY D(pdio_uhvt) A A 0
+
+// User define devices 
+#IFDEF ACCURACY
+  #IFDEF RC_DECK
+    DEVICE R(M1) mt1res metal1 metal1 NETLIST MODEL rm1s NETLIST ELEMENT "X" [
+	property l,w,r
+	w = perimeter_coincide(mt1res,metal1)/2
+	l = area(mt1res)/w
+	r = RVM1*(l-DLM1)/(w-DWM1)
+  ]
+
+//  TRACE PROPERTY R(M1) w w 0
+//  TRACE PROPERTY R(M1) l l 0
+  TRACE PROPERTY R(M1) r r 0.1
+ #ELSE
+  DEVICE R(M1) mt1res metal1 metal1 [
+	property r
+	w = perimeter_coincide(mt1res,metal1)/2
+	l = area(mt1res)/w
+	r = RVM1*(l-DLM1)/(w-DWM1)
+  ]
+  TRACE PROPERTY R(M1) r r 0.1
+ #ENDIF
+#ELSE
+  DEVICE R(M1) mt1res metal1 metal1 [RVM1]
+  TRACE PROPERTY R(M1) r r 0.1
+#ENDIF
+
+#IFDEF ACCURACY
+  #IFDEF RC_DECK
+    DEVICE R(M2) mt2res metal2 metal2 NETLIST MODEL rm2_7s NETLIST ELEMENT "X" [
+	property l,w,r
+	w = perimeter_coincide(mt2res,metal2)/2
+	l = area(mt2res)/w
+	r = RVM2*(l-DLM2)/(w-DWM2)
+  ]
+
+//  TRACE PROPERTY R(M2) w w 0
+//  TRACE PROPERTY R(M2) l l 0
+  TRACE PROPERTY R(M2) r r 0.1
+ #ELSE
+  DEVICE R(M2) mt2res metal2 metal2 [
+	property r
+	w = perimeter_coincide(mt2res,metal2)/2
+	l = area(mt2res)/w
+	r = RVM2*(l-DLM2)/(w-DWM2)
+  ]
+  TRACE PROPERTY R(M2) r r 0.1
+ #ENDIF
+#ELSE
+  DEVICE R(M2) mt2res metal2 metal2 [RVM2]
+  TRACE PROPERTY R(M2) r r 0.1
+#ENDIF
+
+#IFDEF ACCURACY
+  #IFDEF RC_DECK
+    DEVICE R(M3) mt3res metal3 metal3 NETLIST MODEL rm2_7s NETLIST ELEMENT "X" [
+	property l,w,r
+	w = perimeter_coincide(mt3res,metal3)/2
+	l = area(mt3res)/w
+	r = RVM3*(l-DLM3)/(w-DWM3)
+  ]
+
+//  TRACE PROPERTY R(M3) w w 0
+//  TRACE PROPERTY R(M3) l l 0
+  TRACE PROPERTY R(M3) r r 0.1
+ #ELSE
+  DEVICE R(M3) mt3res metal3 metal3 [
+	property r
+	w = perimeter_coincide(mt3res,metal3)/2
+	l = area(mt3res)/w
+	r = RVM3*(l-DLM3)/(w-DWM3)
+  ]
+  TRACE PROPERTY R(M3) r r 0.1
+ #ENDIF
+#ELSE
+  DEVICE R(M3) mt3res metal3 metal3 [RVM3]
+  TRACE PROPERTY R(M3) r r 0.1
+#ENDIF
+
+#IFDEF ACCURACY
+  #IFDEF RC_DECK
+    DEVICE R(M4) mt4res metal4 metal4 NETLIST MODEL rm2_7s NETLIST ELEMENT "X" [
+	property l,w,r
+	w = perimeter_coincide(mt4res,metal4)/2
+	l = area(mt4res)/w
+	r = RVM4*(l-DLM4)/(w-DWM4)
+  ]
+
+//  TRACE PROPERTY R(M4) w w 0
+//  TRACE PROPERTY R(M4) l l 0
+  TRACE PROPERTY R(M4) r r 0.1
+ #ELSE
+  DEVICE R(M4) mt4res metal4 metal4 [
+	property r
+	w = perimeter_coincide(mt4res,metal4)/2
+	l = area(mt4res)/w
+	r = RVM4*(l-DLM4)/(w-DWM4)
+  ]
+  TRACE PROPERTY R(M4) r r 0.1
+ #ENDIF
+#ELSE
+  DEVICE R(M4) mt4res metal4 metal4 [RVM4]
+  TRACE PROPERTY R(M4) r r 0.1
+#ENDIF
+
+#IFDEF ACCURACY
+  #IFDEF RC_DECK
+    DEVICE R(M5) mt5res metal5 metal5 NETLIST MODEL rm2_7s NETLIST ELEMENT "X" [
+	property l,w,r
+	w = perimeter_coincide(mt5res,metal5)/2
+	l = area(mt5res)/w
+	r = RVM5*(l-DLM5)/(w-DWM5)
+  ]
+
+//  TRACE PROPERTY R(M5) w w 0
+//  TRACE PROPERTY R(M5) l l 0
+  TRACE PROPERTY R(M5) r r 0.1
+ #ELSE
+  DEVICE R(M5) mt5res metal5 metal5 [
+	property r
+	w = perimeter_coincide(mt5res,metal5)/2
+	l = area(mt5res)/w
+	r = RVM5*(l-DLM5)/(w-DWM5)
+  ]
+  TRACE PROPERTY R(M5) r r 0.1
+ #ENDIF
+#ELSE
+  DEVICE R(M5) mt5res metal5 metal5 [RVM5]
+  TRACE PROPERTY R(M5) r r 0.1
+#ENDIF
+
+#IFDEF ACCURACY
+  #IFDEF RC_DECK
+    DEVICE R(M6) mt6res metal6 metal6 NETLIST MODEL rm2_7s NETLIST ELEMENT "X" [
+	property l,w,r
+	w = perimeter_coincide(mt6res,metal6)/2
+	l = area(mt6res)/w
+	r = RVM6*(l-DLM6)/(w-DWM6)
+  ]
+
+//  TRACE PROPERTY R(M6) w w 0
+//  TRACE PROPERTY R(M6) l l 0
+  TRACE PROPERTY R(M6) r r 0.1
+ #ELSE
+  DEVICE R(M6) mt6res metal6 metal6 [
+	property r
+	w = perimeter_coincide(mt6res,metal6)/2
+	l = area(mt6res)/w
+	r = RVM6*(l-DLM6)/(w-DWM6)
+  ]
+  TRACE PROPERTY R(M6) r r 0.1
+ #ENDIF
+#ELSE
+  DEVICE R(M6) mt6res metal6 metal6 [RVM6]
+  TRACE PROPERTY R(M6) r r 0.1
+#ENDIF
+
+#IFDEF ACCURACY
+  #IFDEF RC_DECK
+    DEVICE R(M7) mt7res metal7 metal7 NETLIST MODEL rm8s NETLIST ELEMENT "X" [
+	property l,w,r
+	w = perimeter_coincide(mt7res,metal7)/2
+	l = area(mt7res)/w
+	r = RVME*(l-DLME)/(w-DWME)
+  ]
+
+//  TRACE PROPERTY R(M7) w w 0
+//  TRACE PROPERTY R(M7) l l 0
+  TRACE PROPERTY R(M7) r r 0.1
+ #ELSE
+  DEVICE R(M7) mt7res metal7 metal7 [
+	property r
+	w = perimeter_coincide(mt7res,metal7)/2
+	l = area(mt7res)/w
+	r = RVME*(l-DLME)/(w-DWME)
+  ]
+  TRACE PROPERTY R(M7) r r 0.1
+ #ENDIF
+#ELSE
+  DEVICE R(M7) mt7res metal7 metal7 [RVME]
+  TRACE PROPERTY R(M7) r r 0.1
+#ENDIF
+
+#IFDEF ACCURACY
+  #IFDEF RC_DECK
+    DEVICE R(ME) mt8res metal8 metal8 NETLIST MODEL rmu NETLIST ELEMENT "X" [
+	property l,w,r
+	w = perimeter_coincide(mt8res,metal8)/2
+	l = area(mt8res)/w
+	r = RVMU*(l-DLMU)/(w-DWMU)
+  ]
+
+//  TRACE PROPERTY R(ME) w w 0
+//  TRACE PROPERTY R(ME) l l 0
+  TRACE PROPERTY R(ME) r r 0.1
+ #ELSE
+  DEVICE R(ME) mt8res metal8 metal8 [
+	property r
+	w = perimeter_coincide(mt8res,metal8)/2
+	l = area(mt8res)/w
+	r = RVMU*(l-DLMU)/(w-DWMU)
+  ]
+  TRACE PROPERTY R(ME) r r 0.1
+ #ENDIF
+#ELSE
+  DEVICE R(ME) mt8res metal8 metal8 [RVMU]
+  TRACE PROPERTY R(ME) r r 0.1
+#ENDIF
+
+#IFDEF ACCURACY
+  #IFDEF RC_DECK
+    DEVICE R(ND) rnodwo_r tndiff tndiff NETLIST MODEL rnodwo NETLIST ELEMENT "X" [
+	property l,w,r
+	w = perimeter_coincide(rnodwo_r,tndiff)/2
+	l = area(rnodwo_r)/w
+	r = RVND*(l-DLND)/(w-DWND)
+  ]
+
+//  TRACE PROPERTY R(ND) w w 0
+//  TRACE PROPERTY R(ND) l l 0
+  TRACE PROPERTY R(ND) r r 0.1
+ #ELSE
+  DEVICE R(ND) rnodwo_r tndiff tndiff [
+	property r
+	w = perimeter_coincide(rnodwo_r,tndiff)/2
+	l = area(rnodwo_r)/w
+	r = RVND*(l-DLND)/(w-DWND)
+  ]
+  TRACE PROPERTY R(ND) r r 0.1
+ #ENDIF
+#ELSE
+  DEVICE R(ND) rnodwo_r tndiff tndiff [RVND]
+  TRACE PROPERTY R(ND) r r 0.1
+#ENDIF
+
+#IFDEF ACCURACY
+  #IFDEF RC_DECK
+    DEVICE R(NI) rnodl_r tndiff tndiff NETLIST MODEL rnodl NETLIST ELEMENT "X" [
+	property l,w,r
+	w = perimeter_coincide(rnodl_r,tndiff)/2
+	l = area(rnodl_r)/w
+	r = RVNIL*(l-DLNI)/(w-DWNI)
+  ]
+
+  //TRACE PROPERTY R(NI) w w 0
+  //TRACE PROPERTY R(NI) l l 0
+  //TRACE PROPERTY R(NI) r r 0.1
+ #ELSE
+  DEVICE R(NI) rnodl_r tndiff tndiff [
+	property r
+	w = perimeter_coincide(rnodl_r,tndiff)/2
+	l = area(rnodl_r)/w
+	r = RVNIL*(l-DLNI)/(w-DWNI)
+  ]
+  //TRACE PROPERTY R(NI) r r 0.1
+ #ENDIF
+#ELSE
+  DEVICE R(NI) rnodl_r tndiff tndiff [RVNIL]
+  //TRACE PROPERTY R(NI) r r 0.1
+#ENDIF
+
+#IFDEF ACCURACY
+  #IFDEF RC_DECK
+    DEVICE R(NI) rnods_r tndiff tndiff NETLIST MODEL rnods NETLIST ELEMENT "X" [
+	property l,w,r
+	w = perimeter_coincide(rnods_r,tndiff)/2
+	l = area(rnods_r)/w
+	r = RVNIS*(l-DLNI)/(w-DWNI)
+  ]
+
+//  TRACE PROPERTY R(NI) w w 0
+//  TRACE PROPERTY R(NI) l l 0
+  TRACE PROPERTY R(NI) r r 0.1
+ #ELSE
+  DEVICE R(NI) rnods_r tndiff tndiff [
+	property r
+	w = perimeter_coincide(rnods_r,tndiff)/2
+	l = area(rnods_r)/w
+	r = RVNIS*(l-DLNI)/(w-DWNI)
+  ]
+  TRACE PROPERTY R(NI) r r 0.1
+ #ENDIF
+#ELSE
+  DEVICE R(NI) rnods_r tndiff tndiff [RVNIS]
+  TRACE PROPERTY R(NI) r r 0.1
+#ENDIF
+
+#IFDEF ACCURACY
+ #IFDEF RC_DECK
+  DEVICE R(NR) rnpolywo_r poly poly NETLIST MODEL rnpolywo NETLIST ELEMENT "X" [
+	property l,w,r
+	w = perimeter_coincide(rnpolywo_r,poly)/2
+	l = area(rnpolywo_r)/w
+	Rend = DDNR/(w*PRESCALE - DWendNR)
+	Rpure = (RVNR *(l*PRESCALE-DLNR ))/(w*PRESCALE-DWNR )
+	r = 2*Rend+Rpure	
+  ]
+//  TRACE PROPERTY R(NR) w w 0
+//  TRACE PROPERTY R(NR) l l 0
+  TRACE PROPERTY R(NR) r r 0.1
+ #ELSE
+  DEVICE R(NR) rnpolywo_r poly poly [
+	property r
+	w = perimeter_coincide(rnpolywo_r,poly)/2
+	l = area(rnpolywo_r)/w
+	Rend = DDNR/(w*PRESCALE - DWendNR)
+	Rpure = (RVNR *(l*PRESCALE-DLNR ))/(w*PRESCALE-DWNR )
+	r = 2*Rend+Rpure		
+  ]
+  TRACE PROPERTY R(NR) r r 0.1
+ #ENDIF
+#ELSE
+  DEVICE R(NR) rnpolywo_r poly poly [RVNR]
+  TRACE PROPERTY R(NR) r r 0.1
+#ENDIF
+
+#IFDEF ACCURACY
+  #IFDEF RC_DECK
+    DEVICE R(NS) rnpolyl_r poly poly NETLIST MODEL rnpolyl NETLIST ELEMENT "X" [
+	property l,w,r
+	w = perimeter_coincide(rnpolyl_r,poly)/2
+	l = area(rnpolyl_r)/w
+	r = RVNSL*(l-DLNS)/(w-DWNS)
+  ]
+
+  //TRACE PROPERTY R(NS) w w 0
+  //TRACE PROPERTY R(NS) l l 0
+  //TRACE PROPERTY R(NS) r r 0.1
+ #ELSE
+  DEVICE R(NS) rnpolyl_r poly poly [
+	property r
+	w = perimeter_coincide(rnpolyl_r,poly)/2
+	l = area(rnpolyl_r)/w
+	r = RVNSL*(l-DLNS)/(w-DWNS)
+  ]
+  //TRACE PROPERTY R(NS) r r 0.1
+ #ENDIF
+#ELSE
+  DEVICE R(NS) rnpolyl_r poly poly [RVNSL]
+  //TRACE PROPERTY R(NS) r r 0.1
+#ENDIF
+
+#IFDEF ACCURACY
+  #IFDEF RC_DECK
+    DEVICE R(NS) rnpolys_r poly poly NETLIST MODEL rnpolys NETLIST ELEMENT "X" [
+	property l,w,r
+	w = perimeter_coincide(rnpolys_r,poly)/2
+	l = area(rnpolys_r)/w
+	r = RVNSS*(l-DLNS)/(w-DWNS)
+  ]
+
+//  TRACE PROPERTY R(NS) w w 0
+//  TRACE PROPERTY R(NS) l l 0
+  TRACE PROPERTY R(NS) r r 0.1
+ #ELSE
+  DEVICE R(NS) rnpolys_r poly poly [
+	property r
+	w = perimeter_coincide(rnpolys_r,poly)/2
+	l = area(rnpolys_r)/w
+	r = RVNSS*(l-DLNS)/(w-DWNS)
+  ]
+  TRACE PROPERTY R(NS) r r 0.1
+ #ENDIF
+#ELSE
+  DEVICE R(NS) rnpolys_r poly poly [RVNSS]
+  TRACE PROPERTY R(NS) r r 0.1
+#ENDIF
+
+#IFDEF ACCURACY
+  #IFDEF RC_DECK
+    DEVICE R(PD) rpodwo_r tpdiff tpdiff NETLIST MODEL rpodwo NETLIST ELEMENT "X" [
+	property l,w,r
+	w = perimeter_coincide(rpodwo_r,tpdiff)/2
+	l = area(rpodwo_r)/w
+	r = RVPD*(l-DLPD)/(w-DWPD)
+  ]
+
+//  TRACE PROPERTY R(PD) w w 0
+//  TRACE PROPERTY R(PD) l l 0
+  TRACE PROPERTY R(PD) r r 0.1
+ #ELSE
+  DEVICE R(PD) rpodwo_r tpdiff tpdiff [
+	property r
+	w = perimeter_coincide(rpodwo_r,tpdiff)/2
+	l = area(rpodwo_r)/w
+	r = RVPD*(l-DLPD)/(w-DWPD)
+  ]
+  TRACE PROPERTY R(PD) r r 0.1
+ #ENDIF
+#ELSE
+  DEVICE R(PD) rpodwo_r tpdiff tpdiff [RVPD]
+  TRACE PROPERTY R(PD) r r 0.1
+#ENDIF
+
+#IFDEF ACCURACY
+  #IFDEF RC_DECK
+    DEVICE R(PI) rpodl_r tpdiff tpdiff NETLIST MODEL rpodl NETLIST ELEMENT "X" [
+	property l,w,r
+	w = perimeter_coincide(rpodl_r,tpdiff)/2
+	l = area(rpodl_r)/w
+	r = RVPIL*(l-DLPI)/(w-DWPI)
+  ]
+
+  //TRACE PROPERTY R(PI) w w 0
+  //TRACE PROPERTY R(PI) l l 0
+  //TRACE PROPERTY R(PI) r r 0.1
+ #ELSE
+  DEVICE R(PI) rpodl_r tpdiff tpdiff [
+	property r
+	w = perimeter_coincide(rpodl_r,tpdiff)/2
+	l = area(rpodl_r)/w
+	r = RVPIL*(l-DLPI)/(w-DWPI)
+  ]
+  //TRACE PROPERTY R(PI) r r 0.1
+ #ENDIF
+#ELSE
+  DEVICE R(PI) rpodl_r tpdiff tpdiff [RVPIL]
+  //TRACE PROPERTY R(PI) r r 0.1
+#ENDIF
+
+#IFDEF ACCURACY
+  #IFDEF RC_DECK
+    DEVICE R(PI) rpods_r tpdiff tpdiff NETLIST MODEL rpods NETLIST ELEMENT "X" [
+	property l,w,r
+	w = perimeter_coincide(rpods_r,tpdiff)/2
+	l = area(rpods_r)/w
+	r = RVPIS*(l-DLPI)/(w-DWPI)
+  ]
+
+//  TRACE PROPERTY R(PI) w w 0
+//  TRACE PROPERTY R(PI) l l 0
+  TRACE PROPERTY R(PI) r r 0.1
+ #ELSE
+  DEVICE R(PI) rpods_r tpdiff tpdiff [
+	property r
+	w = perimeter_coincide(rpods_r,tpdiff)/2
+	l = area(rpods_r)/w
+	r = RVPIS*(l-DLPI)/(w-DWPI)
+  ]
+  TRACE PROPERTY R(PI) r r 0.1
+ #ENDIF
+#ELSE
+  DEVICE R(PI) rpods_r tpdiff tpdiff [RVPIS]
+  TRACE PROPERTY R(PI) r r 0.1
+#ENDIF
+
+#IFDEF ACCURACY
+ #IFDEF RC_DECK
+  DEVICE R(PR) rppolywo_r poly poly NETLIST MODEL rppolywo NETLIST ELEMENT "X" [
+	property l,w,r
+	w = perimeter_coincide(rppolywo_r,poly)/2
+	l = area(rppolywo_r)/w
+	Rend = DDPR/(w*PRESCALE - DWendPR)
+	Rpure = (RVPR *(l*PRESCALE-DLPR ))/(w*PRESCALE-DWPR )
+	r = 2*Rend+Rpure	
+  ]
+//  TRACE PROPERTY R(PR) w w 0
+//  TRACE PROPERTY R(PR) l l 0
+  TRACE PROPERTY R(PR) r r 0.1
+ #ELSE
+  DEVICE R(PR) rppolywo_r poly poly [
+	property r
+	w = perimeter_coincide(rppolywo_r,poly)/2
+	l = area(rppolywo_r)/w
+	Rend = DDPR/(w*PRESCALE - DWendPR)
+	Rpure = (RVPR *(l*PRESCALE-DLPR ))/(w*PRESCALE-DWPR )
+	r = 2*Rend+Rpure		
+  ]
+  TRACE PROPERTY R(PR) r r 0.1
+ #ENDIF
+#ELSE
+  DEVICE R(PR) rppolywo_r poly poly [RVPR]
+  TRACE PROPERTY R(PR) r r 0.1
+#ENDIF
+
+#IFDEF ACCURACY
+  #IFDEF RC_DECK
+    DEVICE R(PS) rppolyl_r poly poly NETLIST MODEL rppolyl NETLIST ELEMENT "X" [
+	property l,w,r
+	w = perimeter_coincide(rppolyl_r,poly)/2
+	l = area(rppolyl_r)/w
+	r = RVPSL*(l-DLPS)/(w-DWPS)
+  ]
+
+  //TRACE PROPERTY R(PS) w w 0
+  //TRACE PROPERTY R(PS) l l 0
+  //TRACE PROPERTY R(PS) r r 0.1
+ #ELSE
+  DEVICE R(PS) rppolyl_r poly poly [
+	property r
+	w = perimeter_coincide(rppolyl_r,poly)/2
+	l = area(rppolyl_r)/w
+	r = RVPSL*(l-DLPS)/(w-DWPS)
+  ]
+  //TRACE PROPERTY R(PS) r r 0.1
+ #ENDIF
+#ELSE
+  DEVICE R(PS) rppolyl_r poly poly [RVPSL]
+  //TRACE PROPERTY R(PS) r r 0.1
+#ENDIF
+
+#IFDEF ACCURACY
+  #IFDEF RC_DECK
+    DEVICE R(PS) rppolys_r poly poly NETLIST MODEL rppolys NETLIST ELEMENT "X" [
+	property l,w,r
+	w = perimeter_coincide(rppolys_r,poly)/2
+	l = area(rppolys_r)/w
+	r = RVPSS*(l-DLPS)/(w-DWPS)
+  ]
+
+//  TRACE PROPERTY R(PS) w w 0
+//  TRACE PROPERTY R(PS) l l 0
+  TRACE PROPERTY R(PS) r r 0.1
+ #ELSE
+  DEVICE R(PS) rppolys_r poly poly [
+	property r
+	w = perimeter_coincide(rppolys_r,poly)/2
+	l = area(rppolys_r)/w
+	r = RVPSS*(l-DLPS)/(w-DWPS)
+  ]
+  TRACE PROPERTY R(PS) r r 0.1
+ #ENDIF
+#ELSE
+  DEVICE R(PS) rppolys_r poly poly [RVPSS]
+  TRACE PROPERTY R(PS) r r 0.1
+#ENDIF
+
+#IFDEF ACCURACY
+  #IFDEF RC_DECK
+    DEVICE R(WO) nwod_r nxwell nxwell NETLIST MODEL rnwod NETLIST ELEMENT "X" [
+	property l,w,r
+	w = perimeter_coincide(nwod_r,nxwell)/2
+	l = area(nwod_r)/w
+	r = RVWO*(l-DLWO)/(w-DWWO)
+  ]
+
+//  TRACE PROPERTY R(WO) w w 0
+//  TRACE PROPERTY R(WO) l l 0
+  TRACE PROPERTY R(WO) r r 0.1
+ #ELSE
+  DEVICE R(WO) nwod_r nxwell nxwell [
+	property r
+	w = perimeter_coincide(nwod_r,nxwell)/2
+	l = area(nwod_r)/w
+	r = RVWO*(l-DLWO)/(w-DWWO)
+  ]
+  TRACE PROPERTY R(WO) r r 0.1
+ #ENDIF
+#ELSE
+  DEVICE R(WO) nwod_r nxwell nxwell [RVWO]
+  TRACE PROPERTY R(WO) r r 0.1
+#ENDIF
+
+#IFDEF ACCURACY
+  #IFDEF RC_DECK
+    DEVICE R(WR) nwsti_r nxwell nxwell NETLIST MODEL rnwsti NETLIST ELEMENT "X" [
+	property l,w,r
+	w = perimeter_coincide(nwsti_r,nxwell)/2
+	l = area(nwsti_r)/w
+	r = RVWR*(l-DLWR)/(w-DWWR)
+  ]
+
+//  TRACE PROPERTY R(WR) w w 0
+//  TRACE PROPERTY R(WR) l l 0
+  TRACE PROPERTY R(WR) r r 0.1
+ #ELSE
+  DEVICE R(WR) nwsti_r nxwell nxwell [
+	property r
+	w = perimeter_coincide(nwsti_r,nxwell)/2
+	l = area(nwsti_r)/w
+	r = RVWR*(l-DLWR)/(w-DWWR)
+  ]
+  TRACE PROPERTY R(WR) r r 0.1
+ #ENDIF
+#ELSE
+  DEVICE R(WR) nwsti_r nxwell nxwell [RVWR]
+  TRACE PROPERTY R(WR) r r 0.1
+#ENDIF
+
+F_reg = EXT MOM_finger_2 <0.41 OPPOSITE REGION
+F_reg1 = EXT MOM_finger_3 <0.41 OPPOSITE REGION
+MOMDMY_s     = SIZE MOMDMY BY -0.2
+MOM_finger_nv = MOM_finger_3 INSIDE MOMDMY_s
+MOM_finger_hv = MOM_finger_2 INSIDE MOMDMY_s
+DEVICE crtmom MOM_reg3 MOM3_term(PLUS) MOM3_term(MINUS) MOM_plant(BULK) <MOM_finger_nv> <MOM_finger_hv> <F_reg> (PLUS MINUS) [
+    property w,s,nv,nh,lay
+    nv = count(MOM_finger_nv)
+    nh = count(MOM_finger_hv)
+    w = ((perimeter_coincide(F_reg,MOM_finger_hv)/2)/(nh-1))
+    s = ((area(F_reg)/(nh-1))/w)
+    lay = 3
+]
+
+TRACE PROPERTY crtmom nv nv 0
+TRACE PROPERTY crtmom nh nh 0
+TRACE PROPERTY crtmom s s 0
+TRACE PROPERTY crtmom lay lay 0
+
+DEVICE crtmom MOM_reg4 MOM4_term(PLUS) MOM4_term(MINUS) MOM_plant(BULK) <MOM_finger_nv> <MOM_finger_hv> <F_reg1> (PLUS MINUS) [
+    property w,s,nv,nh,lay
+    nv = count(MOM_finger_nv)
+    nh = count(MOM_finger_hv)
+    w = ((perimeter_coincide(F_reg1,MOM_finger_nv)/2)/(nv-1))
+    s = ((area(F_reg1)/(nv-1))/w)
+    lay = 4
+]
+
+DEVICE crtmom MOM_reg5 MOM5_term(PLUS) MOM5_term(MINUS) MOM_plant(BULK) <MOM_finger_nv> <MOM_finger_hv> <F_reg1> (PLUS MINUS) [
+    property w,s,nv,nh,lay
+    nv = count(MOM_finger_nv)
+    nh = count(MOM_finger_hv)
+    w = ((perimeter_coincide(F_reg1,MOM_finger_nv)/2)/(nv-1))
+    s = ((area(F_reg1)/(nv-1))/w)
+    lay = 5
+]
+
+DEVICE crtmom MOM_reg6 MOM6_term(PLUS) MOM6_term(MINUS) MOM_plant(BULK) <MOM_finger_nv> <MOM_finger_hv> <F_reg1> (PLUS MINUS) [
+    property w,s,nv,nh,lay
+    nv = count(MOM_finger_nv)
+    nh = count(MOM_finger_hv)
+    w = ((perimeter_coincide(F_reg1,MOM_finger_nv)/2)/(nv-1))
+    s = ((area(F_reg1)/(nv-1))/w)
+    lay = 6
+]
+
+#IFDEF extract_parasitic_diodes
+DEVICE D(dnwpsub) dnwdio psub_term DNW [
+    PROPERTY A,PJ
+    A = area(DNW)
+    PJ = perimeter(DNW)
+]
+  #IFDEF compare_parasitic_diodes
+   TRACE PROPERTY D(dnwpsub) A A 0
+  #ELSE 
+   LVS FILTER D(dnwpsub) LAYOUT OPEN 
+  #ENDIF
+#ENDIF
+
+//
+L_EG_RG1 = EXPAND EDGE L_EG1 OUTSIDE BY 0.005
+L_EG     = RCTM TOUCH EDGE L_EG_RG1
+L_EG_RG = EXPAND EDGE L_EG OUTSIDE BY 0.005
+
+tpdiff_jvar = tpdiff AND jvar_rf
+tndiff_jvar = tndiff AND jvar_rf
+w_fac = EXT tpdiff_jvar tndiff_jvar < 0.29 OPPOSITE REGION
+
+
+#IFDEF CAP_1P5
+#IFDEF RC_DECK
+DEVICE C(mimcap_1p5_sin) RCTM_R ctm cbm netlist model mimcap_1p5_sin netlist element "X" [
+  property wt, lt
+  A_CAP = area(RCTM_R)
+  P_CAP = perimeter(RCTM_R)
+  P_2_CAP = P_CAP * P_CAP
+  AC4 = A_CAP * 16
+  KKK = P_2_CAP-AC4
+  IF(KKK<0) {
+  KKK=0
+  }
+  SQ = sqrt(KKK)
+  lt = (P_CAP+SQ)/4
+  wt = (P_CAP-SQ)/4
+]
+#ELSE
+DEVICE C(mimcap_1p5_sin)  RCTM_R ctm cbm [
+    property C
+  A_CAP = area(RCTM_R)
+  P_CAP = perimeter(RCTM_R)
+  P_2_CAP = P_CAP * P_CAP
+  AC4 = A_CAP * 16
+  KKK = P_2_CAP-AC4
+  IF(KKK<0) {
+  KKK=0
+  }
+  SQ = sqrt(KKK)
+  lt = (P_CAP+SQ)/4 * PRESCALE + MIM_1P5_DW
+  wt = (P_CAP-SQ)/4 * PRESCALE + MIM_1P5_DW
+  A_CAP1 = lt * wt
+  P_CAP1 = 2*(lt + wt)
+  C_CAP1 = A_CAP1 * MIM_1P5_CA
+  C_CAP2 = P_CAP1 * MIM_1P5_CF
+  C = C_CAP1 + C_CAP2
+]
+
+TRACE PROPERTY C(mimcap_1p5_sin) C C 0
+#ENDIF
+#ELSE
+#IFDEF RC_DECK
+DEVICE C(mimcap_1p0_sin) RCTM_R ctm cbm netlist model mimcap_1p0_sin netlist element "X" [
+  property wt, lt
+  A_CAP = area(RCTM_R)
+  P_CAP = perimeter(RCTM_R)
+  P_2_CAP = P_CAP * P_CAP
+  AC4 = A_CAP * 16
+  KKK = P_2_CAP-AC4
+  IF(KKK<0) {
+  KKK=0
+  }
+  SQ = sqrt(KKK)
+  lt = (P_CAP+SQ)/4
+  wt = (P_CAP-SQ)/4
+]
+#ELSE
+DEVICE C(mimcap_1p0_sin) RCTM_R ctm cbm [
+  property C
+  A_CAP = area(RCTM_R)
+  P_CAP = perimeter(RCTM_R)
+  P_2_CAP = P_CAP * P_CAP
+  AC4 = A_CAP * 16
+  KKK = P_2_CAP-AC4
+  IF(KKK<0) {
+  KKK=0
+  }
+  SQ = sqrt(KKK)
+  lt = (P_CAP+SQ)/4 * PRESCALE + MIM_1P0_DW
+  wt = (P_CAP-SQ)/4 * PRESCALE + MIM_1P0_DW
+  A_CAP1 = lt * wt
+  P_CAP1 = 2*(lt + wt)
+  C_CAP1 = A_CAP1 * MIM_1P0_CA
+  C_CAP2 = P_CAP1 * MIM_1P0_CF
+  C = C_CAP1 + C_CAP2
+]
+TRACE PROPERTY C(mimcap_1p0_sin) C C 0
+
+#ENDIF
+#ENDIF
+
+// defined in xdev_mimcap_1p0
+
+
+#IFDEF CAP_1P5
+DEVICE mimcap_um_1p5_sin_rf RCTM_RF ctm(PLUS) cbm(MINUS) shield(BULK) <L_EG_RG> [
+  property lt,wt
+  lt = perimeter_coincide(RCTM_RF,L_EG_RG)/2
+  wt = area(RCTM_RF)/lt
+] 
+TRACE PROPERTY mimcap_um_1p5_sin_rf lt lt 0
+TRACE PROPERTY mimcap_um_1p5_sin_rf wt wt 0
+
+DEVICE mimcap_woum_1p5_sin_rf RCTM_WOUM ctm(PLUS) cbm(MINUS) DNW(BULK) <L_EG_RG> [
+
+   property lt,wt,lay
+   lt = perimeter_coincide(RCTM_WOUM,L_EG_RG)/2
+   wt = area(RCTM_WOUM)/lt
+   lay = 8
+]
+TRACE PROPERTY mimcap_woum_1p5_sin_rf lt lt 0
+TRACE PROPERTY mimcap_woum_1p5_sin_rf wt wt 0
+
+#ELSE
+DEVICE mimcap_um_1p0_sin_rf RCTM_RF ctm(PLUS) cbm(MINUS) shield(BULK) <L_EG_RG> [
+  property lt,wt
+  lt = perimeter_coincide(RCTM_RF,L_EG_RG)/2
+  wt = area(RCTM_RF)/lt
+]
+TRACE PROPERTY mimcap_um_1p0_sin_rf lt lt 0
+TRACE PROPERTY mimcap_um_1p0_sin_rf wt wt 0
+DEVICE mimcap_woum_1p0_sin_rf RCTM_WOUM ctm(PLUS) cbm(MINUS) DNW(BULK) <L_EG_RG> [
+  property lt,wt,lay
+  lt = perimeter_coincide(RCTM_WOUM,L_EG_RG)/2
+  wt = area(RCTM_WOUM)/lt
+   lay = 8
+]
+TRACE PROPERTY mimcap_woum_1p0_sin_rf lt lt 0
+TRACE PROPERTY mimcap_woum_1p0_sin_rf wt wt 0
+#ENDIF
+
+
+// defined in xdev_mimcap_um_1p0_sin_rf
+
+// defined in xdev_mimcap_um_1p0_sin_rf
+
+// defined in xdev_mimcap_um_1p0_sin_rf
+
+DEVICE moscap_rf varnwc_rf poly(PLUS) tndiff(MINUS) psub(BULK) <vargtc_rf> <nthin> [
+  property lr,wr,br,gr
+  br1 = count(vargtc_rf)
+  gr  = count(nthin)
+  br  = br1/gr
+  wr = (perimeter_coincide(vargtc_rf,poly)/2)/br1
+  lr = (area(vargtc_rf)/wr)/br1
+]
+TRACE PROPERTY moscap_rf lr lr 0
+TRACE PROPERTY moscap_rf wr wr 0
+TRACE PROPERTY moscap_rf br br 0
+TRACE PROPERTY moscap_rf gr gr 0
+
+DEVICE moscap_rf25 varnwi_rf poly(PLUS) tndiff(MINUS) psub(BULK) <vargti_rf> <nthin> [
+  property lr,wr,br,gr
+  br1 = count(vargti_rf)
+  gr  = count(nthin)
+  br  = br1/gr
+  wr = (perimeter_coincide(vargti_rf,poly)/2)/br1
+  lr = (area(vargti_rf)/wr)/br1
+]
+TRACE PROPERTY moscap_rf25 lr lr 0
+TRACE PROPERTY moscap_rf25 wr wr 0
+TRACE PROPERTY moscap_rf25 br br 0
+TRACE PROPERTY moscap_rf25 gr gr 0
+
+DEVICE moscap_rf25_nw varnwi_rfnw poly(PLUS) tndiff(MINUS) psub(BULK) <vargti_rf> <nthin> [
+  property lr,wr,br,gr
+  br1 = count(vargti_rf)
+  gr  = count(nthin)
+  br  = br1/gr
+  wr = (perimeter_coincide(vargti_rf,poly)/2)/br1
+  lr = (area(vargti_rf)/wr)/br1
+]
+TRACE PROPERTY moscap_rf25_nw lr lr 0
+TRACE PROPERTY moscap_rf25_nw wr wr 0
+TRACE PROPERTY moscap_rf25_nw br br 0
+TRACE PROPERTY moscap_rf25_nw gr gr 0
+
+DEVICE moscap_rf_nw varnwc_rfnw poly(PLUS) tndiff(MINUS) psub(BULK) <vargtc_rf> <nthin> [
+  property lr,wr,br,gr
+  br1 = count(vargtc_rf)
+  gr  = count(nthin)
+  br  = br1/gr
+  wr = (perimeter_coincide(vargtc_rf,poly)/2)/br1
+  lr = (area(vargtc_rf)/wr)/br1
+]
+TRACE PROPERTY moscap_rf_nw lr lr 0
+TRACE PROPERTY moscap_rf_nw wr wr 0
+TRACE PROPERTY moscap_rf_nw br br 0
+TRACE PROPERTY moscap_rf_nw gr gr 0
+
+DEVICE nc1 vargt poly(PLUS) tndiff(MINUS) <nthin> NETLIST MODEL nmoscap  [
+       property lr,wr
+   nr = count(vargt)
+   sw = count(tndiff)
+   if(sw < 2) {
+   lr = perimeter_coincide(vargt,nthin)/nr
+   a  = area(vargt)/nr
+   wr = a/lr
+   }else {
+   wr = perimeter_inside(vargt,nthin)/2/nr
+   lr = area(vargt)/wr/nr
+   }       
+]
+TRACE PROPERTY nc1 wr wr 0
+TRACE PROPERTY nc1 lr lr 0
+
+DEVICE nc2 bvargt poly(PLUS) tndiff(MINUS) <nthin> NETLIST MODEL nmoscap_25  [
+       property lr,wr
+   nr = count(bvargt)
+   sw = count(tndiff)
+   if(sw < 2) {
+   lr = perimeter_coincide(bvargt,nthin)/nr
+   a  = area(bvargt)/nr
+   wr = a/lr
+   }else {
+   wr = perimeter_inside(bvargt,nthin)/2/nr
+   lr = area(bvargt)/wr/nr
+   }       
+]
+TRACE PROPERTY nc2 wr wr 0
+TRACE PROPERTY nc2 lr lr 0
+
+DEVICE nmos_rf ngate_nthin d_tndiff(D) poly_rf(G) s_tndiff(S) psub(B) <ngate_rf> [
+  property wr,lr,nr
+  nr = count(ngate_rf)
+  wr = ((perimeter_coincide(ngate_rf,s_tndiff)+ perimeter_coincide(ngate_rf,d_tndiff))/2)/nr
+  lr = (area(ngate_rf)/wr)/nr
+]
+TRACE PROPERTY nmos_rf wr wr 0
+TRACE PROPERTY nmos_rf lr lr 0
+TRACE PROPERTY nmos_rf nr nr 0
+
+DEVICE nmos_rf25 ngate_nthin_io d_tndiff(D) poly_rf(G) s_tndiff(S) psub(B) <ngate_rf_io> [
+  property wr,lr,nr
+  nr = count(ngate_rf_io)
+  wr = ((perimeter_coincide(ngate_rf_io,s_tndiff)+ perimeter_coincide(ngate_rf_io,d_tndiff))/2)/nr
+  lr = (area(ngate_rf_io)/wr)/nr
+]
+TRACE PROPERTY nmos_rf25 wr wr 0
+TRACE PROPERTY nmos_rf25 lr lr 0
+TRACE PROPERTY nmos_rf25 nr nr 0
+
+DEVICE pc1 pvargt poly(PLUS) tpdiff(MINUS) <pthin> NETLIST MODEL pmoscap  [
+       property lr,wr
+   nr = count(pvargt)
+   sw = count(tpdiff)
+   if(sw < 2) {
+   lr = perimeter_coincide(pvargt,pthin)/nr
+   a  = area(pvargt)/nr
+   wr = a/lr
+   }else {
+   wr = perimeter_inside(pvargt,pthin)/2/nr
+   lr = area(pvargt)/wr/nr
+   }       
+]
+TRACE PROPERTY pc1 wr wr 0
+TRACE PROPERTY pc1 lr lr 0
+
+DEVICE pc2 pbvargt poly(PLUS) tpdiff(MINUS) <pthin> NETLIST MODEL pmoscap_25  [
+       property lr,wr
+   nr = count(pbvargt)
+   sw = count(tpdiff)
+   if(sw < 2) {
+   lr = perimeter_coincide(pbvargt,pthin)/nr
+   a  = area(pbvargt)/nr
+   wr = a/lr
+   }else {
+   wr = perimeter_inside(pbvargt,pthin)/2/nr
+   lr = area(pbvargt)/wr/nr
+   }       
+]
+TRACE PROPERTY pc2 wr wr 0
+TRACE PROPERTY pc2 lr lr 0
+
+DEVICE pmos_rf pgate_pthin d_tpdiff(D) poly_rf(G) s_tpdiff(S) nxwell(B) <pgate_rf> [
+  property wr,lr,nr
+  nr = count(pgate_rf)
+  wr = ((perimeter_coincide(pgate_rf,s_tpdiff)+ perimeter_coincide(pgate_rf,d_tpdiff))/2)/nr
+  lr = (area(pgate_rf)/wr)/nr
+]
+TRACE PROPERTY pmos_rf wr wr 0
+TRACE PROPERTY pmos_rf lr lr 0
+TRACE PROPERTY pmos_rf nr nr 0
+
+DEVICE pmos_rf25 pgate_pthin_io d_tpdiff(D) poly_rf(G) s_tpdiff(S) nxwell(B) <pgate_rf_io> [
+  property wr,lr,nr
+  nr = count(pgate_rf_io)
+  wr = ((perimeter_coincide(pgate_rf_io,s_tpdiff)+ perimeter_coincide(pgate_rf_io,d_tpdiff))/2)/nr
+  lr = (area(pgate_rf_io)/wr)/nr
+]
+TRACE PROPERTY pmos_rf25 wr wr 0
+TRACE PROPERTY pmos_rf25 lr lr 0
+TRACE PROPERTY pmos_rf25 nr nr 0
+
+DEVICE pmos_rf25_nw pgate_rf33nw d_tpdiff(D) poly_rf(G) s_tpdiff(S) nxwell(B) <pgate_rf_io> [
+  property wr,lr,nr
+  nr = count(pgate_rf_io)
+  wr = ((perimeter_coincide(pgate_rf_io,s_tpdiff)+ perimeter_coincide(pgate_rf_io,d_tpdiff))/2)/nr
+  lr = (area(pgate_rf_io)/wr)/nr
+]
+TRACE PROPERTY pmos_rf25_nw wr wr 0
+TRACE PROPERTY pmos_rf25_nw lr lr 0
+TRACE PROPERTY pmos_rf25_nw nr nr 0
+
+DEVICE pmos_rf_nw pgate_rfnw d_tpdiff(D) poly_rf(G) s_tpdiff(S) nxwell(B) <pgate_rf> [
+  property wr,lr,nr
+  nr = count(pgate_rf)
+  wr = ((perimeter_coincide(pgate_rf,s_tpdiff)+ perimeter_coincide(pgate_rf,d_tpdiff))/2)/nr
+  lr = (area(pgate_rf)/wr)/nr
+]
+TRACE PROPERTY pmos_rf_nw wr wr 0
+TRACE PROPERTY pmos_rf_nw lr lr 0
+TRACE PROPERTY pmos_rf_nw nr nr 0
+
+#IFDEF extract_parasitic_diodes
+DEVICE D(pnwdio) pnwdio psub nxwell netlist model nwdio
+#ENDIF
+LVS FILTER D(pnwdio) LAYOUT OPEN
+
+#IFDEF extract_parasitic_diodes
+DEVICE D(pwdnw) rwdio psub DNW
+  #IFDEF compare_parasitic_diodes
+   TRACE PROPERTY D(pwdnw) A A 0
+  #ELSE 
+   LVS FILTER D(pwdnw) LAYOUT OPEN    
+  #ENDIF
+#ENDIF  
+
+DEVICE rnodl_m rnodl_mr tndiff(PLUS) tndiff(MINUS) psub(B) (PLUS MINUS) [
+   property w,l
+   w = perimeter_coincide(rnodl_mr,tndiff)/2
+   l = area(rnodl_mr)/w
+]
+TRACE PROPERTY rnodl_m w w 0
+TRACE PROPERTY rnodl_m l l 0
+
+LVS REDUCE rnodl_m PARALLEL YES 
+[  TOLERANCE l 0  
+   EFFECTIVE w,l
+   l = SUM(l)/COUNT()
+   w = SUM(w)
+]
+
+LVS REDUCE rnodl_m SERIES PLUS MINUS YES
+[ TOLERANCE w 0
+  EFFECTIVE w,l
+  w = SUM(w)/COUNT()
+  l = SUM(l)
+]
+
+DEVICE rnods_m rnods_mr tndiff(PLUS) tndiff(MINUS) psub(B) (PLUS MINUS) [
+   property w,l
+   w = perimeter_coincide(rnods_mr,tndiff)/2
+   l = area(rnods_mr)/w
+]
+TRACE PROPERTY rnods_m w w 0
+TRACE PROPERTY rnods_m l l 0
+
+LVS REDUCE rnods_m PARALLEL YES 
+[  TOLERANCE l 0  
+   EFFECTIVE w,l
+   l = SUM(l)/COUNT()
+   w = SUM(w)
+]
+
+LVS REDUCE rnods_m SERIES PLUS MINUS YES
+[ TOLERANCE w 0
+  EFFECTIVE w,l
+  w = SUM(w)/COUNT()
+  l = SUM(l)
+]
+
+DEVICE rnodwo_m rnodwo_mr tndiff(PLUS) tndiff(MINUS) psub(B) (PLUS MINUS) [
+   property w,l
+   w = perimeter_coincide(rnodwo_mr,tndiff)/2
+   l = area(rnodwo_mr)/w
+]
+TRACE PROPERTY rnodwo_m w w 0
+TRACE PROPERTY rnodwo_m l l 0
+
+LVS REDUCE rnodwo_m PARALLEL YES 
+[  TOLERANCE l 0  
+   EFFECTIVE w,l
+   l = SUM(l)/COUNT()
+   w = SUM(w)
+]
+
+LVS REDUCE rnodwo_m SERIES PLUS MINUS YES
+[ TOLERANCE w 0
+  EFFECTIVE w,l
+  w = SUM(w)/COUNT()
+  l = SUM(l)
+]
+
+DEVICE rnpolyl_dis lrnpoly_d poly(PLUS) poly(MINUS) poly_term(BULK) (PLUS MINUS) [
+  property l,w
+  w = perimeter_coincide(lrnpoly_d,poly)/2
+  l = area(lrnpoly_d)/w
+]
+TRACE PROPERTY rnpolyl_dis w w 0
+TRACE PROPERTY rnpolyl_dis l l 0
+
+LVS REDUCE rnpolyl_dis PARALLEL YES 
+[  TOLERANCE l 0  
+   EFFECTIVE w,l
+   l = SUM(l)/COUNT()
+   w = SUM(w)
+]
+
+LVS REDUCE rnpolyl_dis SERIES PLUS MINUS YES
+[ TOLERANCE w 0
+  EFFECTIVE w,l
+  w = SUM(w)/COUNT()
+  l = SUM(l)
+]
+
+DEVICE rnpolys_dis srnpoly_d poly(PLUS) poly(MINUS) poly_term(BULK) (PLUS MINUS) [
+  property l,w
+  w = perimeter_coincide(srnpoly_d,poly)/2
+  l = area(srnpoly_d)/w
+]
+TRACE PROPERTY rnpolys_dis w w 0
+TRACE PROPERTY rnpolys_dis l l 0
+
+LVS REDUCE rnpolys_dis PARALLEL YES 
+[  TOLERANCE l 0  
+   EFFECTIVE w,l
+   l = SUM(l)/COUNT()
+   w = SUM(w)
+]
+
+LVS REDUCE rnpolys_dis SERIES PLUS MINUS YES
+[ TOLERANCE w 0
+  EFFECTIVE w,l
+  w = SUM(w)/COUNT()
+  l = SUM(l)
+]
+
+DEVICE rnpolywo_dis rnpolywo_d poly(PLUS) poly(MINUS) poly_term(BULK) (PLUS MINUS) [
+  property l,w
+  w = perimeter_coincide(rnpolywo_d,poly)/2
+  l = area(rnpolywo_d)/w
+]
+TRACE PROPERTY rnpolywo_dis w w 0
+TRACE PROPERTY rnpolywo_dis l l 0
+
+LVS REDUCE rnpolywo_dis PARALLEL YES 
+[  TOLERANCE l 0  
+   EFFECTIVE w,l
+   l = SUM(l)/COUNT()
+   w = SUM(w)
+]
+
+LVS REDUCE rnpolywo_dis SERIES PLUS MINUS YES
+[ TOLERANCE w 0
+  EFFECTIVE w,l
+  w = SUM(w)/COUNT()
+  l = SUM(l)
+]
+
+DEVICE rnwod_m nwod_mr nxwell(PLUS) nxwell(MINUS) psub(B) (PLUS MINUS) [
+   property w,l
+   w = perimeter_coincide(nwod_mr,nxwell)/2
+   l = area(nwod_mr)/w
+]
+TRACE PROPERTY rnwod_m w w 0
+TRACE PROPERTY rnwod_m l l 0
+
+LVS REDUCE rnwod_m PARALLEL YES 
+[  TOLERANCE l 0  
+   EFFECTIVE w,l
+   l = SUM(l)/COUNT()
+   w = SUM(w)
+]
+
+LVS REDUCE rnwod_m SERIES PLUS MINUS YES
+[ TOLERANCE w 0
+  EFFECTIVE w,l
+  w = SUM(w)/COUNT()
+  l = SUM(l)
+]
+
+DEVICE rnwsti_m nwsti_mr nxwell(PLUS) nxwell(MINUS) psub(B) (PLUS MINUS) [
+   property w,l
+   w = perimeter_coincide(nwsti_mr,nxwell)/2
+   l = area(nwsti_mr)/w
+]
+TRACE PROPERTY rnwsti_m w w 0
+TRACE PROPERTY rnwsti_m l l 0
+
+LVS REDUCE rnwsti_m PARALLEL YES 
+[  TOLERANCE l 0  
+   EFFECTIVE w,l
+   l = SUM(l)/COUNT()
+   w = SUM(w)
+]
+
+LVS REDUCE rnwsti_m SERIES PLUS MINUS YES
+[ TOLERANCE w 0
+  EFFECTIVE w,l
+  w = SUM(w)/COUNT()
+  l = SUM(l)
+]
+
+DEVICE rpodl_m rpodl_mr tpdiff(PLUS) tpdiff(MINUS) nxwell(B) (PLUS MINUS) [
+   property w,l
+   w = perimeter_coincide(rpodl_mr,tpdiff)/2
+   l = area(rpodl_mr)/w
+]
+TRACE PROPERTY rpodl_m w w 0
+TRACE PROPERTY rpodl_m l l 0
+
+LVS REDUCE rpodl_m PARALLEL YES 
+[  TOLERANCE l 0  
+   EFFECTIVE w,l
+   l = SUM(l)/COUNT()
+   w = SUM(w)
+]
+
+LVS REDUCE rpodl_m SERIES PLUS MINUS YES
+[ TOLERANCE w 0
+  EFFECTIVE w,l
+  w = SUM(w)/COUNT()
+  l = SUM(l)
+]
+
+DEVICE rpods_m rpods_mr tpdiff(PLUS) tpdiff(MINUS) nxwell(B) (PLUS MINUS) [
+   property w,l
+   w = perimeter_coincide(rpods_mr,tpdiff)/2
+   l = area(rpods_mr)/w
+]
+TRACE PROPERTY rpods_m w w 0
+TRACE PROPERTY rpods_m l l 0
+
+LVS REDUCE rpods_m PARALLEL YES 
+[  TOLERANCE l 0  
+   EFFECTIVE w,l
+   l = SUM(l)/COUNT()
+   w = SUM(w)
+]
+
+LVS REDUCE rpods_m SERIES PLUS MINUS YES
+[ TOLERANCE w 0
+  EFFECTIVE w,l
+  w = SUM(w)/COUNT()
+  l = SUM(l)
+]
+
+DEVICE rpodwo_m rpodwo_mr tpdiff(PLUS) tpdiff(MINUS) nxwell(B) (PLUS MINUS) [
+   property w,l
+   w = perimeter_coincide(rpodwo_mr,tpdiff)/2
+   l = area(rpodwo_mr)/w
+]
+TRACE PROPERTY rpodwo_m w w 0
+TRACE PROPERTY rpodwo_m l l 0
+
+LVS REDUCE rpodwo_m PARALLEL YES 
+[  TOLERANCE l 0  
+   EFFECTIVE w,l
+   l = SUM(l)/COUNT()
+   w = SUM(w)
+]
+
+LVS REDUCE rpodwo_m SERIES PLUS MINUS YES
+[ TOLERANCE w 0
+  EFFECTIVE w,l
+  w = SUM(w)/COUNT()
+  l = SUM(l)
+]
+
+DEVICE rppolyhri hripo4 poly(PLUS) poly(MINUS) (PLUS MINUS) [
+   property w,l
+   w = perimeter_coincide(hripo4,poly)/2
+   l = area(hripo4)/w
+]
+TRACE PROPERTY rppolyhri w w 0
+TRACE PROPERTY rppolyhri l l 0
+
+LVS REDUCE rppolyhri PARALLEL YES 
+[  TOLERANCE l 0  
+   EFFECTIVE w,l
+   l = SUM(l)/COUNT()
+   w = SUM(w)
+]
+
+LVS REDUCE rppolyhri SERIES PLUS MINUS YES
+[ TOLERANCE w 0
+  EFFECTIVE w,l
+  w = SUM(w)/COUNT()
+  l = SUM(l)
+]
+
+DEVICE rppolyhri_dis hripo_d poly(PLUS) poly(MINUS) poly_term(BULK) (PLUS MINUS) [
+  property l,w
+  w = perimeter_coincide(hripo_d,poly)/2
+  l = area(hripo_d)/w
+]
+TRACE PROPERTY rppolyhri_dis w w 0
+TRACE PROPERTY rppolyhri_dis l l 0
+
+LVS REDUCE rppolyhri_dis PARALLEL YES 
+[  TOLERANCE l 0  
+   EFFECTIVE w,l
+   l = SUM(l)/COUNT()
+   w = SUM(w)
+]
+
+LVS REDUCE rppolyhri_dis SERIES PLUS MINUS YES
+[ TOLERANCE w 0
+  EFFECTIVE w,l
+  w = SUM(w)/COUNT()
+  l = SUM(l)
+]
+
+DEVICE rppolyhri_rf rf_hripo poly(PLUS) poly(MINUS) poly_term(BULK) (PLUS MINUS) [
+  property l,w
+  w = perimeter_coincide(rf_hripo,poly)/2
+  l = area(rf_hripo)/w
+]
+TRACE PROPERTY rppolyhri_rf w w 0
+TRACE PROPERTY rppolyhri_rf l l 0
+
+DEVICE rppolyl_dis lrppoly_d poly(PLUS) poly(MINUS) poly_term(BULK) (PLUS MINUS) [
+  property l,w
+  w = perimeter_coincide(lrppoly_d,poly)/2
+  l = area(lrppoly_d)/w
+]
+TRACE PROPERTY rppolyl_dis w w 0
+TRACE PROPERTY rppolyl_dis l l 0
+
+LVS REDUCE rppolyl_dis PARALLEL YES 
+[  TOLERANCE l 0  
+   EFFECTIVE w,l
+   l = SUM(l)/COUNT()
+   w = SUM(w)
+]
+
+LVS REDUCE rppolyl_dis SERIES PLUS MINUS YES
+[ TOLERANCE w 0
+  EFFECTIVE w,l
+  w = SUM(w)/COUNT()
+  l = SUM(l)
+]
+
+DEVICE rppolyl_rf lrppoly_rf poly(PLUS) poly(MINUS) nxwell(BULK) (PLUS MINUS) [
+  property l,w
+  w = perimeter_coincide(lrppoly_rf,poly)/2
+  l = area(lrppoly_rf)/w
+]
+TRACE PROPERTY rppolyl_rf w w 0
+TRACE PROPERTY rppolyl_rf l l 0
+
+DEVICE rppolys_dis srppoly_d poly(PLUS) poly(MINUS) poly_term(BULK) (PLUS MINUS) [
+  property l,w
+  w = perimeter_coincide(srppoly_d,poly)/2
+  l = area(srppoly_d)/w
+]
+TRACE PROPERTY rppolys_dis w w 0
+TRACE PROPERTY rppolys_dis l l 0
+
+LVS REDUCE rppolys_dis PARALLEL YES 
+[  TOLERANCE l 0  
+   EFFECTIVE w,l
+   l = SUM(l)/COUNT()
+   w = SUM(w)
+]
+
+LVS REDUCE rppolys_dis SERIES PLUS MINUS YES
+[ TOLERANCE w 0
+  EFFECTIVE w,l
+  w = SUM(w)/COUNT()
+  l = SUM(l)
+]
+
+DEVICE rppolys_rf srppoly_rf poly(PLUS) poly(MINUS) nxwell(BULK) (PLUS MINUS) [
+  property l,w
+  w = perimeter_coincide(srppoly_rf,poly)/2
+  l = area(srppoly_rf)/w
+]
+TRACE PROPERTY rppolys_rf w w 0
+TRACE PROPERTY rppolys_rf l l 0
+
+DEVICE rppolywo_dis rppolywo_d poly(PLUS) poly(MINUS) poly_term(BULK) (PLUS MINUS) [
+  property l,w
+  w = perimeter_coincide(rppolywo_d,poly)/2
+  l = area(rppolywo_d)/w
+]
+TRACE PROPERTY rppolywo_dis w w 0
+TRACE PROPERTY rppolywo_dis l l 0
+
+LVS REDUCE rppolywo_dis PARALLEL YES 
+[  TOLERANCE l 0  
+   EFFECTIVE w,l
+   l = SUM(l)/COUNT()
+   w = SUM(w)
+]
+
+LVS REDUCE rppolywo_dis SERIES PLUS MINUS YES
+[ TOLERANCE w 0
+  EFFECTIVE w,l
+  w = SUM(w)/COUNT()
+  l = SUM(l)
+]
+
+DEVICE rppolywo_rf rf_rppolywo poly(PLUS) poly(MINUS) nxwell(BULK) (PLUS MINUS) [
+  property l,w
+  w = perimeter_coincide(rf_rppolywo,poly)/2
+  l = area(rf_rppolywo)/w
+]
+TRACE PROPERTY rppolywo_rf w w 0
+TRACE PROPERTY rppolywo_rf l l 0
+
+sbd_w = EXT schottky_p schottky_n < 0.365 OPPOSITE REGION
+DEVICE sbd_rf sbd_rfdnw schottky_p(PLUS) schottky_n(MINUS) psub(BULK) <sbd_w> [
+   property l,w,nf
+   nf = count(schottky_p)
+   w = perimeter_coincide(schottky_p,sbd_w)/2/nf
+   l = area(schottky_p)/w/nf
+
+]
+TRACE PROPERTY sbd_rf nf nf 0
+TRACE PROPERTY sbd_rf w w 0
+TRACE PROPERTY sbd_rf l l 0
+
+DEVICE sbd_rf_nw sbd_rfnw schottky_p(PLUS) schottky_n(MINUS) psub(BULK) <sbd_w> [
+   property l,w,nf
+   nf = count(schottky_p)
+   w = perimeter_coincide(schottky_p,sbd_w)/2/nf
+   l = area(schottky_p)/w/nf
+
+]
+TRACE PROPERTY sbd_rf_nw nf nf 0
+TRACE PROPERTY sbd_rf_nw w w 0
+TRACE PROPERTY sbd_rf_nw l l 0
+
+std_w1 = INT std_ind < 31 OPPOSITE REGION PARALLEL ONLY EXCLUDE SHIELDED // "31" is a trade number from spice model
+std_w1a = std_w1 INTERACT metal8
+std_minus_no_crossa = std_ind NOT std_w1
+std_minus_no_cross = std_w1a INTERACT (std_minus_no_crossa INTERACT IND_RAD)
+//std_minus_no_cross  = metal6 INTERACT std_minus_no_crossb
+    
+std_w  = RECTANGLE std_w1 ORTHOGONAL ONLY
+sz_ind_std = SIZE IND_STD BY -50
+std_nr0 = std_ind1 INTERACT IND_RAD
+std_nr1 = INT std_nr0 < 31 OPPOSITE REGION PARALLEL ONLY EXCLUDE SHIELDED
+std_nr2 =  RECTANGLE std_nr1 ORTHOGONAL ONLY
+std_nr3 = std_nr2 INSIDE sz_ind_std
+std_nr4 = std_nr2 NOT std_nr3
+std_nr5 = std_nr2 NOT std_nr4
+std_nr6 = SIZE std_nr4 BY 0.001
+std_nr7 = std_nr6 INTERACT std_nr5
+std_nr = std_nr2 NOT std_nr7
+
+std_nr_new1 = VERTEX std_ind1 > 13
+std_nr_new2 = ANGLE std_nr_new1 > 40 <50
+std_nr_new = EXPAND EDGE std_nr_new2 BY 0.005
+
+std_w_m1 = SIZE IND_STD BY 0.005
+std_w_m2 = std_w_m1 AND M8Y
+std_w_m3 = std_w_m1 AND M7Y
+std_w_m4 = std_w_m3 OR std_w_m2
+std_w_m5 = std_w_m4 OUTSIDE IND_STD
+std_w_m = std_w_m4 NOT std_w_m5
+
+// identify the minus term (w/i underneath metal)
+std_corns = std_w_m NOT std_w
+find_corn = std_corns INTERACT IND_RAD
+std_arm_under1 = std_ind2 OR find_corn	//underneath + find_corn
+std_arm_under = std_arm_under1 INTERACT find_corn
+std_arms = std_w INTERACT metal8
+//std_minus = std_arms INTERACT std_arm_under
+std_minus = VERTEX std_ind1 == 4
+std_ind_r1 = std_ind NOT std_minus
+
+std_ind_r2  = std_ind_r1 INTERACT IND_RAD
+std_ind_r   = std_ind_r2 INTERACT std_minus
+
+std_ind_no_crossa = std_ind_r2 NOT INTERACT std_minus
+std_ind_no_cross  = std_ind_no_crossa NOT std_minus_no_cross
+
+CONNECT metal8 std_minus
+CONNECT metal8 std_minus_no_cross
+
+DEVICE spiral_std std_ind_no_cross metal8(PLUS) std_minus_no_cross(MINUS) psub(BULK) <IND_RAD> <std_w_m> <std_nr_new> <PP> <std_ind> [
+   PROPERTY w,nr,rad,lay
+   lay = 8
+   rad = (perimeter(IND_RAD) - (perimeter_coincide(IND_RAD,std_ind_no_cross)*2))/2
+   w =  perimeter_inside(PP,std_ind)/4
+   nr = count(std_nr_new)/8
+]
+
+DEVICE spiral_std std_ind_r metal8(PLUS) std_minus(MINUS) psub(BULK) <IND_RAD> <std_w_m> <std_nr_new> <PP> <std_ind> [
+   PROPERTY w,nr,rad,lay
+   lay = 8
+   rad = (perimeter(IND_RAD) - (perimeter_coincide(IND_RAD,std_ind_r)*2))/2
+   w =  perimeter_inside(PP,std_ind)/4
+   nr = count(std_nr_new)/8
+]
+  TRACE PROPERTY spiral_std lay lay 0
+  TRACE PROPERTY spiral_std w w 0
+  TRACE PROPERTY spiral_std nr nr 0
+  TRACE PROPERTY spiral_std rad rad 0.02
+
+STD_IND_CHECK { @ VIA7 is needed for connection of M8 and M7 in Std. inductor.
+  A = std_ind1 NOT INTERACT IND_RAD
+  B = A AND std_ind2
+  B NOT INTERACT VIA7
+  C = std_ind_m INTERACT IND_RAD
+  C NOT INTERACT VIA7
+}
+
+sym_w1 = INT sym_ind < 31 OPPOSITE REGION PARALLEL ONLY EXCLUDE SHIELDED // "31" is a trade number from spice model
+sym_w  = RECTANGLE sym_w1 ORTHOGONAL ONLY
+DEVICE spiral_sym sym_ind metal8(PLUS) metal8(MINUS) psub(BULK) <IND_RAD> <ind_btm> <PP> [
+   PROPERTY w,nr,rad,lay
+   lay = 8
+   nr = ((count(ind_btm)-1)/2)+1
+   rad = (perimeter(IND_RAD) - (perimeter_coincide(IND_RAD,sym_ind)*2))/2
+   w =  perimeter_inside(PP,sym_ind)/4
+]
+  TRACE PROPERTY spiral_sym lay lay 0
+  TRACE PROPERTY spiral_sym w w 0
+  TRACE PROPERTY spiral_sym nr nr 0
+  TRACE PROPERTY spiral_sym rad rad 0.02
+
+SYM_IND_CHECK { @ VIA7 is needed for connection of M8 and M7 in Sym. inductor.
+  A = RECTANGLE sym_ind_m ORTHOGONAL ONLY
+  A NOT INTERACT VIA7
+}
+
+sym_ct_w1 = INT sym_ct_ind5 < 31 OPPOSITE REGION PARALLEL ONLY EXCLUDE SHIELDED // "31" is a trade number from spice model
+sym_ct_w  = RECTANGLE sym_ct_w1 ORTHOGONAL ONLY
+DEVICE spiral_sym_ct sym_ct_ind metal8(PLUS) metal8(MINUS) psub(BULK) metal6(CTAP) <IND_RAD> <ind_ct_btm> <PP> <sym_ct_ind1> [
+   PROPERTY w,nr,rad,lay
+   lay = 8
+   nr = ((count(ind_ct_btm)-1)/2)+1
+   rad = (perimeter(IND_RAD) - (perimeter_coincide(IND_RAD,sym_ct_ind1)*2))/2
+   w =  perimeter_inside(PP,sym_ct_ind1)/4
+]
+  TRACE PROPERTY spiral_sym_ct lay lay 0
+  TRACE PROPERTY spiral_sym_ct w w 0
+  TRACE PROPERTY spiral_sym_ct nr nr 0
+  TRACE PROPERTY spiral_sym_ct rad rad 0.02
+
+SYM_CT_IND_CHECK { @ VIA7 is needed for connection of M8 and M7 in Sym. inductor.
+  A = RECTANGLE sym_ct_ind_m ORTHOGONAL ONLY
+  A NOT INTERACT VIA7
+  B = RECTANGLE sym_ct_ind_m1 ORTHOGONAL ONLY
+  B NOT INTERACT VIA6
+}
+
+DEVICE xjvar jvar_rf1 tpdiff(PLUS) tndiff(MINUS) psub(BULK) <w_fac> <jvar3_rf> [
+  property l,w,nr
+  nr = count(jvar3_rf)
+  w  = (perimeter_coincide(jvar3_rf,w_fac)/nr)/2
+  l  = (area(jvar3_rf)/w)/nr
+]
+TRACE PROPERTY xjvar l l 0
+TRACE PROPERTY xjvar w w 0
+TRACE PROPERTY xjvar nr nr 0
+
+DEVICE xjvar_nw jvar_rfnw tpdiff(PLUS) tndiff(MINUS) psub(BULK) <w_fac> <jvar3_rf> [
+  property l,w,nr
+  nr = count(jvar3_rf)
+  w  = (perimeter_coincide(jvar3_rf,w_fac)/nr)/2
+  l  = (area(jvar3_rf)/w)/nr
+]
+TRACE PROPERTY xjvar_nw l l 0
+TRACE PROPERTY xjvar_nw w w 0
+TRACE PROPERTY xjvar_nw nr nr 0
+
+// Serve X-resistor as an built-in resistor (for PATHCHK)
+LVS DEVICE TYPE RESISTOR rnodl_m rnods_m rnodwo_m rnpolyl_dis rnpolys_dis rnpolywo_dis rnwod_m rnwsti_m rpodl_m rpods_m rpodwo_m rppolyhri rppolyhri_dis rppolyhri_rf rppolyl_dis rppolyl_rf rppolys_dis rppolys_rf rppolywo_dis rppolywo_rf [POS=PLUS NEG=MINUS]
+LVS REDUCE rppolyhri_rf PARALLEL NO
+LVS REDUCE rppolyhri_rf SERIES PLUS MINUS NO
+LVS REDUCE rppolyl_rf PARALLEL NO
+LVS REDUCE rppolyl_rf SERIES PLUS MINUS NO
+LVS REDUCE rppolys_rf PARALLEL NO
+LVS REDUCE rppolys_rf SERIES PLUS MINUS NO
+LVS REDUCE rppolywo_rf PARALLEL NO
+LVS REDUCE rppolywo_rf SERIES PLUS MINUS NO
+
+#IFDEF RC_DECK
+//=============================
+//======= Setup for PEX =======
+//=============================
+MASK SVDB DIRECTORY "svdb" XRC
+//PEX MAGNIFY 1.0
+//PEX DELAY                      none   //PENFIELD 0.7 MASK DIRECT
+PEX EXCLUDE DISTRIBUTED        "VDD" "AVDD" "VD33" "VDDSA" "VDDPST" "VDD5V" MASK DIRECT
+PEX EXCLUDE LUMPED             "VDD" "AVDD" "VD33" "VDDSA" "VDDPST" "VDD5V" MASK DIRECT
+PEX NETLIST DISTRIBUTED        "net.dist" HSPICE LAYOUT GROUND VSS MASK DIRECT LOCATION RCNAMED
+PEX NETLIST LUMPED             "temp.spi" HSPICE LAYOUT GROUND VSS MASK DIRECT LOCATION RCNAMED
+PEX NETLIST SIMPLE             "net.simple" HSPICE LAYOUT MASK DIRECT LOCATION RCNAMED
+//Back-annotation xcalibre flow
+//PEX NETLIST DISTRIBUTED        "net.dist" HSPICE SOURCE GROUND VSS MASK DIRECT LOCATION RCNAMED
+//PEX NETLIST LUMPED             "temp.spi" HSPICE SOURCE GROUND VSS MASK DIRECT LOCATION RCNAMED
+//PEX NETLIST SIMPLE             "net.simple" HSPICE SOURCE MASK DIRECT LOCATION RCNAMED
+
+PEX REPORT DISTRIBUTED         none  //"report.dist" ASCII LAYOUT MASK DIRECT
+PEX REPORT LUMPED              none  //"report.lump" LAYOUT MASK DIRECT
+//PEX RESISTANCE LUMPED          YES MASK DIRECT
+//PEX REDUCE LUMPED C            < 10000000
+PEX IDEAL XCELL                YES
+
+// xcalibre capacitance and resistance file 
+UNIT CAPACITANCE ff
+UNIT RESISTANCE OHM
+include ./rules
+
+
+#ELSE
+
+//#############################################
+//# ERC CHECK                                 #
+//#############################################
+// Reports regions on a NBL layer that connect to more than one node.
+LVS SOFTCHK NBL CONTACT
+// Reports regions on a NBL layer that connect to more than one node.
+LVS SOFTCHK NBL CONTACT
+// Reports regions on a DNW layer that connect to more than one node.
+LVS SOFTCHK DNW CONTACT
+// Reports regions on a poly_term layer that connect to more than one node.
+LVS SOFTCHK poly_term CONTACT
+// Reports regions on a poly_term layer that connect to more than one node.
+LVS SOFTCHK poly_term CONTACT
+// Reports regions on a HVNW layer that connect to more than one node.
+LVS SOFTCHK HVNW CONTACT
+// Reports regions on a iso_hvnw layer that connect to more than one node.
+LVS SOFTCHK iso_hvnw CONTACT
+// Reports regions on a nxwell layer that connect to more than one node.
+LVS SOFTCHK nxwell CONTACT
+// Reports regions on a HVPW layer that connect to more than one node.
+LVS SOFTCHK HVPW CONTACT
+// Reports regions on a coll1 layer that connect to more than one node.
+LVS SOFTCHK coll1 CONTACT
+// Reports regions on a n_psub layer that connect to more than one node.
+#IFNDEF NW_RING
+	LVS SOFTCHK n_psub CONTACT
+#ENDIF
+// Reports regions on a psub layer that connect to more than one node.
+LVS SOFTCHK psub CONTACT
+// Reports regions on a psub_term layer that connect to more than one node.
+LVS SOFTCHK psub_term CONTACT
+
+#IFDEF WELL_TO_PG_CHECK
+GROUP ERC_WELL_TO_PG_CHECK  npvss49 ppvdd49
+ERC SELECT CHECK ERC_WELL_TO_PG_CHECK
+#ENDIF
+
+#IFDEF GATE_TO_PG_CHECK
+GROUP ERC_GATE_TO_PG_CHECK  npvss150 ppvdd150
+ERC SELECT CHECK ERC_GATE_TO_PG_CHECK
+#ENDIF
+
+#IFDEF DS_TO_PG_CHECK
+GROUP ERC_DS_TO_PG_CHECK  mnpg mppg
+ERC SELECT CHECK ERC_DS_TO_PG_CHECK
+#ENDIF
+
+#IFDEF FLOATING_WELL_CHECK
+GROUP ERC_FLOATING_WELL_CHECK  floating.nxwell_float floating.psub
+ERC SELECT CHECK ERC_FLOATING_WELL_CHECK
+#ENDIF
+
+//MOS erc_nmos_gates S/D connect to POWER&GROUND --mnpg*/
+N1tndiff = NET tndiff POWER_NAME
+T1tndiff = erc_nmos_gates TOUCH N1tndiff
+N2tndiff = NET tndiff GROUND_NAME
+T2tndiff = erc_nmos_gates TOUCH N2tndiff
+
+#IFDEF DS_TO_PG_CHECK
+mnpg { @ MOS connected to both power and ground
+  T1tndiff AND T2tndiff
+}
+#ENDIF
+
+//MOS erc_pmos_gates S/D connect to POWER&GROUND --mppg*/
+N1tpdiff = NET tpdiff POWER_NAME
+T1tpdiff = erc_pmos_gates TOUCH N1tpdiff
+N2tpdiff = NET tpdiff GROUND_NAME
+T2tpdiff = erc_pmos_gates TOUCH N2tpdiff
+
+#IFDEF DS_TO_PG_CHECK
+mppg { @ MOS connected to both power and ground
+  T1tpdiff AND T2tpdiff
+}
+#ENDIF
+
+#IFDEF FLOATING_WELL_CHECK
+SCONNECT tndiff nxwell_float by ntap
+floating.nxwell_float { @ nxwell_float is not connected to POWER
+  no_power_path = PATHCHK !POWER nxwell_float PORTS ALSO
+  direct_connect_ground = NET nxwell_float GROUND_NAME
+  no_power_path or direct_connect_ground
+}
+#ENDIF
+
+#IFDEF FLOATING_WELL_CHECK
+floating.psub { @ psub is not connected to GROUND
+  no_ground_path = PATHCHK !GROUND psub PORTS ALSO
+  direct_connect_power = NET psub POWER_NAME
+  no_ground_path or direct_connect_power
+}
+#ENDIF
+gate1_GND = NET gate1_not_IO1 GROUND_NAME
+
+#IFDEF GATE_TO_PG_CHECK
+// gate1 connect to ground 
+npvss150 { @ gate1 connected to GROUND
+  gate1_GND1 = gate1_GND INTERACT N2tndiff == 2
+  gate1_GND NOT gate1_GND1
+}
+#ENDIF
+
+#IFDEF WELL_TO_PG_CHECK
+// ntap connect to ground 
+npvss49 { @ ntap connected to GROUND
+  ntap_not_var = ntap NOT VARDMY
+  NET ntap_not_var GROUND_NAME
+}
+#ENDIF
+
+#IFDEF PATH_CHECK
+// Nodes with a path to ground but not power 
+ERC PATHCHK GROUND && !POWER
+#ENDIF
+
+#IFDEF PATH_CHECK
+// Nodes with a path to power but not ground 
+ERC PATHCHK POWER && !GROUND
+#ENDIF
+
+#IFDEF PATH_CHECK
+// Nodes without a path to power and ground 
+ERC PATHCHK !POWER && !GROUND NOFLOAT
+#ENDIF
+
+#IFDEF PATH_CHECK
+ERC PATHCHK !LABELED NOFLOAT
+#ENDIF
+gate1_not_IO1 = gate1 NOT OD2
+CONNECT gate1_not_IO1 poly
+gate1_PWR = NET gate1_not_IO1 POWER_NAME
+
+#IFDEF GATE_TO_PG_CHECK
+// gate1 connect to power 
+ppvdd150 { @ gate1 connected to POWER
+  gate1_PWR1 = gate1_PWR INTERACT N1tpdiff == 2
+  gate1_PWR NOT gate1_PWR1
+}
+#ENDIF
+
+#IFDEF WELL_TO_PG_CHECK
+// ptap connect to power 
+ppvdd49 { @ ptap connected to POWER
+  NET ptap POWER_NAME
+}
+#ENDIF
+
+#ENDIF

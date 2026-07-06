@@ -1,0 +1,29 @@
+*
+.lib tt
+.include 'l110ae_l_cr8k_vil_rf_v011.mdl'
+.param slcr_drs_1p5m1t=1
+.param slcr_drs_sub_1p5m1t=1
+.param slcr_dls_1p5m1t=1
+.endl tt
+*
+.lib ff
+.include 'l110ae_l_cr8k_vil_rf_v011.mdl'
+.param slcr_drs_1p5m1t=1.15
+.param slcr_drs_sub_1p5m1t=0.85
+.param slcr_dls_1p5m1t=1.05
+.endl ff
+*
+.lib ss
+.include 'l110ae_l_cr8k_vil_rf_v011.mdl'
+.param slcr_drs_1p5m1t=0.85
+.param slcr_drs_sub_1p5m1t=1.15
+.param slcr_dls_1p5m1t=0.95
+.endl ss
+
+
+
+
+
+
+
+

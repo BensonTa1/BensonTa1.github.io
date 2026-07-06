@@ -1,0 +1,18 @@
+Starting Single Run, Sweeps and Corners...
+
+Current time: Thu Apr 24 18:56:39 2025 
+Best design point: 1
+Design specs: 
+	TEST_Adaptive_CTLE:Rectifier_LP_DIF:1	corner	Nominal - 
+	DIF_OS		0
+	Single_OS		-7.883f
+Design parameters: 
+	sigma		3
+	VDM		0
+	VCM		900m
+
+Interactive.4
+Number of points completed: 1
+Number of simulation errors: 0
+Interactive.4 completed. 
+Current time: Thu Apr 24 18:56:43 2025 

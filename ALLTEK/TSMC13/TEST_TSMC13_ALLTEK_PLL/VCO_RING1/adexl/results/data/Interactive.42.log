@@ -1,0 +1,31 @@
+Starting Single Run, Sweeps and Corners...
+
+Current time: Tue Apr 14 17:43:48 2026 
+Best design point: 1
+Design specs: 
+	TEST_TSMC13_ALLTEK_PLL:VCO_RING:1	corner	C0_0 - 
+	TEST_TSMC13_ALLTEK_PLL:VCO_RING:1	corner	C0_1 - 
+	TEST_TSMC13_ALLTEK_PLL:VCO_RING:1	corner	C0_2 - 
+	TEST_TSMC13_ALLTEK_PLL:VCO_RING:1	corner	C0_3 - 
+	TEST_TSMC13_ALLTEK_PLL:VCO_RING:1	corner	C0_4 - 
+	TEST_TSMC13_ALLTEK_PLL:VCO_RING:1	corner	C0_5 - 
+	TEST_TSMC13_ALLTEK_PLL:VCO_RING:1	corner	C0_6 - 
+	TEST_TSMC13_ALLTEK_PLL:VCO_RING:1	corner	C0_7 - 
+	TEST_TSMC13_ALLTEK_PLL:VCO_RING:1	corner	C0_8 - 
+	TEST_TSMC13_ALLTEK_PLL:VCO_RING:1	corner	C0_9 - 
+	TEST_TSMC13_ALLTEK_PLL:VCO_RING:1	corner	C0_10 - 
+	TEST_TSMC13_ALLTEK_PLL:VCO_RING:1	corner	C0_11 - 
+	TEST_TSMC13_ALLTEK_PLL:VCO_RING:1	corner	C0_12 - 
+	TEST_TSMC13_ALLTEK_PLL:VCO_RING:1	corner	C0_13 - 
+	TEST_TSMC13_ALLTEK_PLL:VCO_RING:1	corner	C0_14 - 
+Design parameters: 
+	D0		1.2
+	CAP_D0		0
+	CAP_D1		1.2
+	CAP_DALL		1.2
+
+Interactive.42
+Number of points completed: 1
+Number of simulation errors: 15
+Interactive.42 completed. 
+Current time: Tue Apr 14 17:45:49 2026 

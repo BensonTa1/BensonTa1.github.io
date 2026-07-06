@@ -1,0 +1,16 @@
+Starting Single Run, Sweeps and Corners...
+
+Current time: Thu Apr 23 01:05:07 2026 
+Best design point: 1
+Design specs: 
+	TEST_PSMC11_BIOUP_DAC:OPA_Class_AB_INT_BUFFER:1	corner	C0 - 
+	Phase Margin		106.5
+Design parameters: 
+	VIN		1.65
+	VS		3.3
+
+Interactive.0
+Number of points completed: 1
+Number of simulation errors: 0
+Interactive.0 completed. 
+Current time: Thu Apr 23 01:05:25 2026 

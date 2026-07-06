@@ -1,0 +1,24 @@
+library rfmos25_cor 
+
+section ff_rfmos25 
+include "cr013g_2d5_v1d4.scs" section = ff_rfmos25 
+endsection ff_rfmos25 
+
+section fs_rfmos25 
+include "cr013g_2d5_v1d4.scs" section = fs_rfmos25 
+endsection fs_rfmos25 
+
+section sf_rfmos25 
+include "cr013g_2d5_v1d4.scs" section = sf_rfmos25 
+endsection sf_rfmos25 
+
+section ss_rfmos25 
+include "cr013g_2d5_v1d4.scs" section = ss_rfmos25 
+endsection ss_rfmos25 
+
+section tt_rfmos25 
+include "cr013g_2d5_v1d4.scs" section = tt_rfmos25 
+endsection tt_rfmos25 
+
+
+endlibrary rfmos25_cor 

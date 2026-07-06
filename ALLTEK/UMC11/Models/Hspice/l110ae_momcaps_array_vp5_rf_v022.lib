@@ -1,0 +1,27 @@
+* Model: l110ae_momcaps_array_vp5_rf
+* UMC RF vp5 array MOM capacitor
+* Model coverage:
+* nf: 10 - 40 (Even integer only)
+* lf: (10 - 40) * 1e-06
+* bm: 1 - 4
+* ns: 3 - 6
+* array: 1 - 4
+* Frequency range: 1 MHz - 0.8 * resonance (maximum 16.0 GHz)
+*
+.lib tt 
+.include './l110ae_momcaps_array_vp5_rf_v022.mdl'
+.param
++d_cs5=1
+.endl tt
+*
+.lib ff
+.include './l110ae_momcaps_array_vp5_rf_v022.mdl'
+.param
++d_cs5=0.85
+.endl ff
+*
+.lib ss
+.include './l110ae_momcaps_array_vp5_rf_v022.mdl'
+.param
++d_cs5=1.15
+.endl ss

@@ -1,0 +1,25 @@
+simulator lang=spectre insensitive=yes
+library mylib
+
+section mc
+include "mm180_res_v141_mc_statistical_p.mdl.scs"
+include "mm180_res_v141_mc_statistical_m.mdl.scs"
+include "mm180_res_v141_mc.mdl.scs"
+endsection mc
+
+section tt
+include "mm180_res_v141_mc_statistical_m.mdl.scs"
+include "mm180_res_v141_mc.lib.scs" section=tt
+endsection tt
+
+section ss
+include "mm180_res_v141_mc_statistical_m.mdl.scs"
+include "mm180_res_v141_mc.lib.scs" section=ss
+endsection ss
+
+section ff
+include "mm180_res_v141_mc_statistical_m.mdl.scs"
+include "mm180_res_v141_mc.lib.scs" section=ff
+endsection ff
+
+endlibrary mylib

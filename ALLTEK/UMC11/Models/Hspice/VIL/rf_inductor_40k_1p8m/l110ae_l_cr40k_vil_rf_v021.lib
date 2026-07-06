@@ -1,0 +1,23 @@
+*
+.lib tt
+.include 'l110ae_l_cr40k_vil_rf_v021.mdl'
+.param slcr_drs=1
+.param slcr_drs_sub=1
+.param slcr_dls=1
+.endl tt
+*
+.lib ff
+.include 'l110ae_l_cr40k_vil_rf_v021.mdl'
+.param slcr_drs=1.15
+.param slcr_drs_sub=0.85
+.param slcr_dls=1.05
+.endl ff
+*
+.lib ss
+.include 'l110ae_l_cr40k_vil_rf_v021.mdl'
+.param slcr_drs=0.85
+.param slcr_drs_sub=1.15
+.param slcr_dls=0.95
+.endl ss
+
+

@@ -1,0 +1,29 @@
+Starting Single Run, Sweeps and Corners...
+
+Current time: Tue Mar 24 23:19:02 2026 
+Best design point: 1
+Design specs: 
+	TEST_UMC18_ALLTEK_PLL:Ring_OSC:1	corner	C0_0 - 
+	TEST_UMC18_ALLTEK_PLL:Ring_OSC:1	corner	C0_1 - 
+	TEST_UMC18_ALLTEK_PLL:Ring_OSC:1	corner	C0_2 - 
+	TEST_UMC18_ALLTEK_PLL:Ring_OSC:1	corner	C0_3 - 
+	TEST_UMC18_ALLTEK_PLL:Ring_OSC:1	corner	C0_4 - 
+	TEST_UMC18_ALLTEK_PLL:Ring_OSC:1	corner	C0_5 - 
+	TEST_UMC18_ALLTEK_PLL:Ring_OSC:1	corner	C0_6 - 
+	TEST_UMC18_ALLTEK_PLL:Ring_OSC:1	corner	C0_7 - 
+	TEST_UMC18_ALLTEK_PLL:Ring_OSC:1	corner	C0_8 - 
+	TEST_UMC18_ALLTEK_PLL:Ring_OSC:1	corner	C0_9 - 
+	TEST_UMC18_ALLTEK_PLL:Ring_OSC:1	corner	C0_10 - 
+	TEST_UMC18_ALLTEK_PLL:Ring_OSC:1	corner	C0_11 - 
+	TEST_UMC18_ALLTEK_PLL:Ring_OSC:1	corner	C0_12 - 
+	TEST_UMC18_ALLTEK_PLL:Ring_OSC:1	corner	C0_13 - 
+	TEST_UMC18_ALLTEK_PLL:Ring_OSC:1	corner	C0_14 - 
+Design parameters: 
+	VCTRL		600m
+	VC		0
+
+Interactive.4
+Number of points completed: 1
+Number of simulation errors: 15
+Interactive.4 completed. 
+Current time: Tue Mar 24 23:19:59 2026 

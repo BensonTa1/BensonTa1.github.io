@@ -1,0 +1,16 @@
+Starting Single Run, Sweeps and Corners...
+
+Current time: Fri Apr  4 16:32:35 2025 
+Best design point: 1
+Design specs: 
+	TEST_ADC:Comparator_Offset_TB:1	corner	Nominal - 
+	(average(clip(vtime('tran "/VINT") 0.0002 0.0004)) - 0.9)		-969.1u
+Design parameters: 
+	VOS		1m
+	Ts		100n
+
+Interactive.0
+Number of points completed: 1
+Number of simulation errors: 0
+Interactive.0 completed. 
+Current time: Fri Apr  4 16:32:55 2025 

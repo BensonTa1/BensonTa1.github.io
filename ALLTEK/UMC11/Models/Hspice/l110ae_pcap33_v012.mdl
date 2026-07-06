@@ -1,0 +1,57 @@
+**************************************************************************************** 
+*            P+/Pwell 3.3V PCAP subcircuit model 
+*           UMC 0.35 um/0.30 um Mixed-Mode 3.3 V/5.0 V 2P5M Salicide Process
+* 
+*                 2010/11/01  by Po Shun Chang    
+* 
+*            Model coverage: 
+*            1. Gate finger width (w): 2.5um to 10um 
+*            2. Gate finger length (l): 0.35um to 2um 
+*            3. Gate finger number (nf): 2 to 8
+*            4. Temperature Range: -50C to 125C  
+* 
+***************************************************************************************** 
+.subckt pcap_33 port1 port2 wf=5u lf=2u nf=2
+
+
+.param tpvb=0 
+.param tpvc=0 
+.param toxc='7.6e-09+dtoxe_pcap_33'       
+.param pva=0.029859208
+.param pvb='-0.85625022+tpvb*(temp-25)'
+.param pvc='-0.042627623+tpvc*(temp-25)'
+.param pvd=1.1559932 
+.param pve=0.038568924
+.param pvf=-0.35904286
+.param pvg=-0.014319145
+.param pvh=0.054222574
+.param pvi=0.002701046
+.param pvj=-0.011664801
+.param pvk=-0.000301685
+.param temp='temper'
+
+	                       
+.param dcw='-0.04995+1e6*dxw_pcap_33' 
+.param cww=0.2924 
+.param cwl=-0.2093 
+.param cwwl=0.2269 
+.param dcl='-0.028+1e6*dxl_pcap_33' 
+.param cll=2.02e-02 
+.param clw=0.1074 
+.param clwl=-0.042
+.param w='wf*1e6*0.9'
+.param l='lf*1e6*0.9+0.012'
+
+     
+.param weff='w+dcw+cww/w+cwl/l+cwwl/w/l'
+.param leff='l+dcl+clw/w+cll/l+clwl/w/l'
+
+.param cl3=-6.3e-5 cl2=4.4e-5
+.param cl1=4.76e-09 cl0=2.8e-4
+.param cw0=1.05e-04 cwl0=1.44e-04
+.param ccom='(((cl3*pow(l,3)+cl2*pow(l,2)+cl1*l+cl0)*(w+dcw)+cw0/w)*(1+cwl0/(w*l)))'
+
+c1 port1 port2 '(((pva+pvc*pow(v(port1, port2),1)+pve*pow(v(port1, port2),2)+pvg*pow(v(port1, port2),3)+pvi*pow(v(port1, port2),4)+pvk*pow(v(port1, port2),5))/(1+pvb*pow(v(port1, port2),1)+pvd*pow(v(port1, port2),2)+pvf*pow(v(port1, port2),3)+pvh*pow(v(port1, port2),4)+pvj*pow(v(port1, port2),5))*weff*leff/(4.5*1.812))+ccom)*nf/1*1e-12*7.6e-09/toxc*(1+dcmin_pcap_33*(-0.002509516-0.0030699122*pow(v(port1, port2),1)-0.0022166621*pow(v(port1, port2),2)-0.00082589561*pow(v(port1, port2),3)-0.00011116364*pow(v(port1, port2),4))/(1-0.78087072*pow(v(port1, port2),1)+1.1349338*pow(v(port1, port2),2)-0.21623282*pow(v(port1, port2),3)+0.067862884*pow(v(port1, port2),4)-0.0029446329*pow(v(port1, port2),5)))'
+
+
+.ends pcap_33                                                                                                                                                                                                                                                                                                                                                                             

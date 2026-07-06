@@ -1,0 +1,19 @@
+Starting Single Run, Sweeps and Corners...
+
+Current time: Tue Mar 24 19:27:03 2026 
+Best design point: 1
+Design specs: 
+	TEST_TSMC13_ALLTEK_PLL:VCO_RING:1	corner	C1_0 - 
+	output noise: (PM, SSB, dBc/Hz)		Error	No
+	TEST_TSMC13_ALLTEK_PLL:VCO_RING:1	corner	C1_1 - 
+	output noise: (PM, SSB, dBc/Hz)		Error	No
+	TEST_TSMC13_ALLTEK_PLL:VCO_RING:1	corner	C1_2 - 
+	output noise: (PM, SSB, dBc/Hz)		Error	No
+Design parameters: 
+	D0		1.2
+
+Interactive.38
+Number of points completed: 1
+Number of simulation errors: 3
+Interactive.38 completed. 
+Current time: Tue Mar 24 19:27:37 2026 

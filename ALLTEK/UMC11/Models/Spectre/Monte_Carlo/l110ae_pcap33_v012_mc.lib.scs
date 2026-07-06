@@ -1,0 +1,29 @@
+//     
+simulator lang=spectre insensitive=yes 
+  
+library mylib 
+ 
+section typ 
+parameters dtoxe_pcap_33=0.0000e+00 
+parameters dxl_pcap_33=0.0000e+00 
+parameters dxw_pcap_33=0.0000e+00 
+parameters dcmin_pcap_33=0 
+include "l110ae_pcap33_v012_mc.mdl.scs" 
+endsection typ 
+  
+section min 
+parameters dtoxe_pcap_33=1.52e-10 
+parameters dxl_pcap_33=-1.906e-8 
+parameters dxw_pcap_33=-3.813977e-7 
+parameters dcmin_pcap_33=24.6 
+include "l110ae_pcap33_v012_mc.mdl.scs" 
+endsection min 
+  
+section max 
+parameters dtoxe_pcap_33=-1.52e-10 
+parameters dxl_pcap_33=1.408e-8 
+parameters dxw_pcap_33=4.37472e-7 
+parameters dcmin_pcap_33=-19.57 
+include "l110ae_pcap33_v012_mc.mdl.scs" 
+endsection max 
+endlibrary mylib 

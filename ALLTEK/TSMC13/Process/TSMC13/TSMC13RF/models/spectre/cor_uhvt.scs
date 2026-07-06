@@ -1,0 +1,24 @@
+library uhvt_cor 
+
+section ff_uhvt 
+include "cr013g_2d5_v1d4.scs" section = ff_uhvt 
+endsection ff_uhvt 
+
+section fs_uhvt 
+include "cr013g_2d5_v1d4.scs" section = fs_uhvt 
+endsection fs_uhvt 
+
+section sf_uhvt 
+include "cr013g_2d5_v1d4.scs" section = sf_uhvt 
+endsection sf_uhvt 
+
+section ss_uhvt 
+include "cr013g_2d5_v1d4.scs" section = ss_uhvt 
+endsection ss_uhvt 
+
+section tt_uhvt 
+include "cr013g_2d5_v1d4.scs" section = tt_uhvt 
+endsection tt_uhvt 
+
+
+endlibrary uhvt_cor 

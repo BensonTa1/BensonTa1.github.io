@@ -1,0 +1,23 @@
+*
+.lib tt
+.include 'l110ae_l_sy40kct_vil_rf_v021.mdl'
+.param syct_drs=1
+.param syct_drs_sub=1
+.param syct_dls=1
+.endl tt
+*
+.lib ff
+.include 'l110ae_l_sy40kct_vil_rf_v021.mdl'
+.param syct_drs=1.15
+.param syct_drs_sub=0.85
+.param syct_dls=1.05
+.endl ff
+*
+.lib ss
+.include 'l110ae_l_sy40kct_vil_rf_v021.mdl'
+.param syct_drs=0.85
+.param syct_drs_sub=1.15
+.param syct_dls=0.95
+.endl ss
+
+

@@ -1,0 +1,76 @@
+Starting Single Run, Sweeps and Corners...
+
+Current time: Tue Apr 14 18:27:53 2026 
+Best design point: 1
+Design specs: 
+	TEST_TSMC13_ALLTEK_PLL:VCO_RING:1	corner	C0_0 - 
+	output noise: (PM, SSB, dBc/Hz)		Error	No
+	v /I94/VOUT1; tstab (V)		Error	No
+	v /VCO_OUT1; tran (V)		Error	No
+	TEST_TSMC13_ALLTEK_PLL:VCO_RING:1	corner	C0_1 - 
+	output noise: (PM, SSB, dBc/Hz)		Error	No
+	v /I94/VOUT1; tstab (V)		Error	No
+	v /VCO_OUT1; tran (V)		Error	No
+	TEST_TSMC13_ALLTEK_PLL:VCO_RING:1	corner	C0_2 - 
+	output noise: (PM, SSB, dBc/Hz)		Error	No
+	v /I94/VOUT1; tstab (V)		Error	No
+	v /VCO_OUT1; tran (V)		Error	No
+	TEST_TSMC13_ALLTEK_PLL:VCO_RING:1	corner	C0_3 - 
+	output noise: (PM, SSB, dBc/Hz)		Error	No
+	v /I94/VOUT1; tstab (V)		Error	No
+	v /VCO_OUT1; tran (V)		Error	No
+	TEST_TSMC13_ALLTEK_PLL:VCO_RING:1	corner	C0_4 - 
+	output noise: (PM, SSB, dBc/Hz)		Error	No
+	v /I94/VOUT1; tstab (V)		Error	No
+	v /VCO_OUT1; tran (V)		Error	No
+	TEST_TSMC13_ALLTEK_PLL:VCO_RING:1	corner	C0_5 - 
+	output noise: (PM, SSB, dBc/Hz)		Error	No
+	v /I94/VOUT1; tstab (V)		Error	No
+	v /VCO_OUT1; tran (V)		Error	No
+	TEST_TSMC13_ALLTEK_PLL:VCO_RING:1	corner	C0_6 - 
+	output noise: (PM, SSB, dBc/Hz)		Error	No
+	v /I94/VOUT1; tstab (V)		Error	No
+	v /VCO_OUT1; tran (V)		Error	No
+	TEST_TSMC13_ALLTEK_PLL:VCO_RING:1	corner	C0_7 - 
+	output noise: (PM, SSB, dBc/Hz)		Error	No
+	v /I94/VOUT1; tstab (V)		Error	No
+	v /VCO_OUT1; tran (V)		Error	No
+	TEST_TSMC13_ALLTEK_PLL:VCO_RING:1	corner	C0_8 - 
+	output noise: (PM, SSB, dBc/Hz)		Error	No
+	v /I94/VOUT1; tstab (V)		Error	No
+	v /VCO_OUT1; tran (V)		Error	No
+	TEST_TSMC13_ALLTEK_PLL:VCO_RING:1	corner	C0_9 - 
+	output noise: (PM, SSB, dBc/Hz)		Error	No
+	v /I94/VOUT1; tstab (V)		Error	No
+	v /VCO_OUT1; tran (V)		Error	No
+	TEST_TSMC13_ALLTEK_PLL:VCO_RING:1	corner	C0_10 - 
+	output noise: (PM, SSB, dBc/Hz)		Error	No
+	v /I94/VOUT1; tstab (V)		Error	No
+	v /VCO_OUT1; tran (V)		Error	No
+	TEST_TSMC13_ALLTEK_PLL:VCO_RING:1	corner	C0_11 - 
+	output noise: (PM, SSB, dBc/Hz)		Error	No
+	v /I94/VOUT1; tstab (V)		Error	No
+	v /VCO_OUT1; tran (V)		Error	No
+	TEST_TSMC13_ALLTEK_PLL:VCO_RING:1	corner	C0_12 - 
+	output noise: (PM, SSB, dBc/Hz)		Error	No
+	v /I94/VOUT1; tstab (V)		Error	No
+	v /VCO_OUT1; tran (V)		Error	No
+	TEST_TSMC13_ALLTEK_PLL:VCO_RING:1	corner	C0_13 - 
+	output noise: (PM, SSB, dBc/Hz)		Error	No
+	v /I94/VOUT1; tstab (V)		Error	No
+	v /VCO_OUT1; tran (V)		Error	No
+	TEST_TSMC13_ALLTEK_PLL:VCO_RING:1	corner	C0_14 - 
+	output noise: (PM, SSB, dBc/Hz)		Error	No
+	v /I94/VOUT1; tstab (V)		Error	No
+	v /VCO_OUT1; tran (V)		Error	No
+Design parameters: 
+	D0		1.2
+	CAP_D0		0
+	CAP_D1		1.2
+	CAP_DALL		1.2
+
+Interactive.47
+Number of points completed: 1
+Number of simulation errors: 45
+Interactive.47 completed. 
+Current time: Tue Apr 14 21:15:39 2026 

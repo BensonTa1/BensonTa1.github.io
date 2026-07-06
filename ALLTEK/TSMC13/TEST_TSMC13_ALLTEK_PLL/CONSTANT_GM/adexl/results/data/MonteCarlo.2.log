@@ -1,0 +1,28 @@
+Starting Monte Carlo Sampling...
+
+Current time: Tue Apr  7 22:02:57 2026 
+MonteCarlo.2
+Number of points completed: 200
+Number of simulation errors: 200
+MonteCarlo.2 completed. 
+Current time: Tue Apr  7 22:02:59 2026 
+Monte Carlo Sampling yield summary:
+Number of spec values are in this yield data: 4
+TEST_TSMC13_ALLTEK_PLL:CONSTANT_GM:1	C1 - 
+	IDC("/I0/M4/D"):	Yield	0%
+		Min 0	Max 0	Mean 0	Number of errors 200
+TEST_TSMC13_ALLTEK_PLL:CONSTANT_GM:1	C1 - 
+	IDC("/IPRB0/PLUS"):	Yield	0%
+		Min 0	Max 0	Mean 0	Number of errors 200
+TEST_TSMC13_ALLTEK_PLL:CONSTANT_GM:1	C1 - 
+	i /IPRB0/PLUS; tran (I):	Yield	0%
+		Min 0	Max 0	Mean 0	Number of errors 200
+TEST_TSMC13_ALLTEK_PLL:CONSTANT_GM:1	C1 - 
+	v /I0/net023; tran (V):	Yield	0%
+		Min 0	Max 0	Mean 0	Number of errors 200
+
+TEST_TSMC13_ALLTEK_PLL:CONSTANT_GM:1
+	Overall Yield	0%	Number of points passed	0	Total number of points	200
+
+Estimated yield = 0% (0/200), 200 errors
+Estimated yield (No opregions) = 0% (0/200)

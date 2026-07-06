@@ -1,0 +1,25 @@
+.lib typ
+.param
+*
++ dc_pad_rf=0
+*
+.include './pad_rf_v2d3.mdl'
+* 
+.endl typ
+*
+.lib min
+.param
+*
++ dc_pad_rf=-0.15
+*
+.include './pad_rf_v2d3.mdl'
+.endl min
+*
+.lib max
+.param
+*
++ dc_pad_rf=0.15
+*
+.include './pad_rf_v2d3.mdl'
+* 
+.endl max

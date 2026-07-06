@@ -1,0 +1,26 @@
+.lib typ                                       
+.param                                        
++  dtoxe_ncap_33       =   0.0000e+00         
++  dxw_ncap_33         =   0.0000e+00         
++  dxl_ncap_33         =   0.0000e+00         
++  dcmina_ncap_33      =   0.0000e+00         
+.include 'l110ae_ncap33_v031.mdl'              
+.endl typ                                      
+                                              
+.lib min                                       
+.param                                        
++  dtoxe_ncap_33       =    1.5000e-10        
++  dxw_ncap_33         =   -2.9050e-07        
++  dxl_ncap_33         =   -3.0700e-08        
++  dcmina_ncap_33      =    8.0000e-02         
+.include 'l110ae_ncap33_v031.mdl'              
+.endl min                                      
+                                              
+.lib max                                       
+.param                                        
++  dtoxe_ncap_33       =  -1.5000e-10         
++  dxw_ncap_33         =   2.8650e-07         
++  dxl_ncap_33         =   2.7050e-08        
++  dcmina_ncap_33      =  -6.7200e-02         
+.include 'l110ae_ncap33_v031.mdl'              
+.endl max                                      

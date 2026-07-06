@@ -1,0 +1,31 @@
+simulator lang=spectre insensitive=yes
+//      #########################################
+//      #                                       #
+//      #  0.18um RFCMOS mim_sh SPECTRE MODEL   #
+//      #                                       #  
+//      #########################################
+//
+ahdl_include "./mim.va" 
+
+subckt mimcapm_rf ( 1 2 999 ) 
+parameters nx=1 ny=1 l=60e-6 w=60e-6 dt=temp-25 leb=ny * (l + 1.7e-6) + 4.3e-6 
++ wb=nx * (w + 1.7e-6) + 4.3e-6  cn=0.001*(1+dcn_mim_rf)  cox=5.4478e-6 n_s1=nx 
++ * ny cs=n_s1 * (l * w * cn + 1.5e-10 * (l + w)) * (1 + 3e-5 * dt + 1e-8 * dt 
++ * dt) cox1=(leb * wb * cox + 3.382e-11 * (leb + wb)) / 2 cox2=cox1 rs=2.0667e-2 
++ * leb / wb k=wb / (wb + 2 * (1e-4 - wb / 2 - 3.25e-5)) k1=sqrt(1 - k * k) f=1 
++ / (log(2 * (1 + sqrt(k1)) / (1 - sqrt(k1)))) ls=1e-7 * leb / f * (0.0074 * (leb 
++ / wb) + 0.2399 + 0.7363 / (leb / wb)) 
+ 
+//  ********************************************
+ 
+
+ 
+//  --------- Equivalent network -------------------
+// 
+c ( 1 11 ) mim_va nx=nx ny=ny l=l w=w cn=0.001*(1+dcn_mim_rf) rtc1=3e-5 rtc2=1e-8 rvc1=0.0002 rvc2=3e-5 temper=temp
+l ( 11 12 ) inductor l=ls
+r ( 12 2 ) resistor r=rs* (1+dr_mim_rf)
+c1 ( 11 999 ) capacitor c=cox1* (1+dcox1_mim_rf)
+c2 ( 2 999 ) capacitor c=cox2*(1+dcox2_mim_rf)
+// 
+ends mimcapm_rf

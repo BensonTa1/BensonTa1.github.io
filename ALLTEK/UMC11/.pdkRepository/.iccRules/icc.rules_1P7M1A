@@ -1,0 +1,195 @@
+iccRevision = "2.0"
+iccTechnologyFile = "umc110ae"
+
+iccLayers =
+    list(
+	list( '("PO1" "drawing") "metal" "orthogonal" 0.12 0.2 nil t)
+	list( '("CONT" "drawing") "cut" "off" 0.16 0.2 nil t)
+	list( '("ME1" "drawing") "metal" "orthogonal" 0.16 0.16 nil t)
+	list( '("VI1" "drawing") "cut" "off" 0.2 0.24 nil t)
+	list( '("ME2" "drawing") "metal" "orthogonal" 0.2 0.2 nil t)
+	list( '("VI2" "drawing") "cut" "off" 0.2 0.24 nil t)
+	list( '("ME3" "drawing") "metal" "orthogonal" 0.2 0.2 nil t)
+	list( '("VI3" "drawing") "cut" "off" 0.2 0.24 nil t)
+	list( '("ME4" "drawing") "metal" "orthogonal" 0.2 0.2 nil t)
+	list( '("VI4" "drawing") "cut" "off" 0.2 0.24 nil t)
+	list( '("ME5" "drawing") "metal" "orthogonal" 0.2 0.2 nil t)
+	list( '("VI5" "drawing") "cut" "off" 0.2 0.24 nil t)
+	list( '("ME6" "drawing") "metal" "orthogonal" 0.2 0.2 nil t)
+	list( '("VI6" "drawing") "cut" "off" 0.4 0.45 nil t)
+	list( '("ME7" "drawing") "metal" "orthogonal" 2.22 2.22 nil t)
+    )
+
+iccVias =
+    list(
+	list( '("umc110ae" "M1_POLY" "layout") t)
+	list( '("umc110ae" "M2_M1" "layout") t)
+	list( '("umc110ae" "M3_M2" "layout") t)
+	list( '("umc110ae" "M4_M3" "layout") t)
+	list( '("umc110ae" "M5_M4" "layout") t)
+	list( '("umc110ae" "M6_M5" "layout") t)
+	list( '("umc110ae" "M7_M6" "layout") t)
+    )
+
+iccEquivalentLayers =
+    list(
+	list(
+	    '("PO1" "drawing")
+	    '("PO1" "boundary")
+	    '("PO1" "pin")
+	)
+	list(
+	    '("CONT" "drawing")
+	    '("CONT" "boundary")
+	)
+	list(
+	    '("ME1" "drawing")
+	    '("ME1" "boundary")
+	    '("ME1" "pin")
+	)
+	list(
+	    '("VI1" "drawing")
+	    '("VI1" "boundary")
+	)
+	list(
+	    '("ME2" "drawing")
+	    '("ME2" "boundary")
+	    '("ME2" "pin")
+	)
+	list(
+	    '("VI2" "drawing")
+	    '("VI2" "boundary")
+	)
+	list(
+	    '("ME3" "drawing")
+	    '("ME3" "boundary")
+	    '("ME3" "pin")
+	)
+	list(
+	    '("VI3" "drawing")
+	    '("VI3" "boundary")
+	)
+	list(
+	    '("ME4" "drawing")
+	    '("ME4" "boundary")
+	    '("ME4" "pin")
+	)
+	list(
+	    '("VI4" "drawing")
+	    '("VI4" "boundary")
+	)
+	list(
+	    '("ME5" "drawing")
+	    '("ME5" "boundary")
+	    '("ME5" "pin")
+	)
+	list(
+	    '("VI5" "drawing")
+	    '("VI5" "boundary")
+	)
+	list(
+	    '("ME6" "drawing")
+	    '("ME6" "boundary")
+	    '("ME6" "pin")
+	)
+	list(
+	    '("VI6" "drawing")
+	    '("VI6" "boundary")
+	)
+	list(
+	    '("ME7" "drawing")
+	    '("ME7" "boundary")
+	    '("ME7" "pin")
+	)
+    )
+
+iccBoundaryLayers =
+    list(
+	list( '("DIFF" "drawing") '("prBoundary" "drawing") 0.0)
+	list( '("PO1" "drawing") '("prBoundary" "drawing") 0.0)
+	list( '("CONT" "drawing") '("prBoundary" "drawing") 0.0)
+	list( '("ME1" "drawing") '("prBoundary" "drawing") 0.0)
+	list( '("VI1" "drawing") '("prBoundary" "drawing") 0.0)
+	list( '("ME2" "drawing") '("prBoundary" "drawing") 0.0)
+	list( '("VI2" "drawing") '("prBoundary" "drawing") 0.0)
+	list( '("ME3" "drawing") '("prBoundary" "drawing") 0.0)
+	list( '("VI3" "drawing") '("prBoundary" "drawing") 0.0)
+	list( '("ME4" "drawing") '("prBoundary" "drawing") 0.0)
+	list( '("VI4" "drawing") '("prBoundary" "drawing") 0.0)
+	list( '("ME5" "drawing") '("prBoundary" "drawing") 0.0)
+	list( '("VI5" "drawing") '("prBoundary" "drawing") 0.0)
+	list( '("ME6" "drawing") '("prBoundary" "drawing") 0.0)
+	list( '("VI6" "drawing") '("prBoundary" "drawing") 0.0)
+	list( '("ME7" "drawing") '("prBoundary" "drawing") 0.0)
+    )
+
+iccScopes = list(
+)
+
+iccKeepouts = list(
+    list( nil list(
+	list(
+	    "or" list('("DIFF" "drawing") '("DIFF" "drawing"))
+	    '("PO1" "drawing") "routing" t
+	)
+	list(
+	    "c-not" list('("ME1" "drawing") '("M1_CAD" "Resistor_Mark"))
+	    '("ME1" "drawing") "routing" t
+	)
+	list(
+	    "c-not" list('("ME2" "drawing") '("M2_CAD" "Resistor_Mark"))
+	    '("ME2" "drawing") "routing" t
+	)
+	list(
+	    "c-not" list('("ME3" "drawing") '("M3_CAD" "Resistor_Mark"))
+	    '("ME3" "drawing") "routing" t
+	)
+	list(
+	    "c-not" list('("ME4" "drawing") '("M4_CAD" "Resistor_Mark"))
+	    '("ME4" "drawing") "routing" t
+	)
+	list(
+	    "c-not" list('("ME5" "drawing") '("M5_CAD" "Resistor_Mark"))
+	    '("ME5" "drawing") "routing" t
+	)
+	list(
+	    "c-not" list('("ME6" "drawing") '("M6_CAD" "Resistor_Mark"))
+	    '("ME6" "drawing") "routing" t
+	)
+	list(
+	    "c-not" list('("ME7" "drawing") '("M7_CAD" "Resistor_Mark"))
+	    '("ME7" "drawing") "routing" t
+	)
+	list(
+	    "size" list('("M1_CAD" "Resistor_Mark") 0.10)
+	    '("ME1" "drawing") "routing" t
+	)
+	list(
+	    "size" list('("M2_CAD" "Resistor_Mark") 0.10)
+	    '("ME2" "drawing") "routing" t
+	)
+	list(
+	    "size" list('("M3_CAD" "Resistor_Mark") 0.10)
+	    '("ME3" "drawing") "routing" t
+	)
+	list(
+	    "size" list('("M4_CAD" "Resistor_Mark") 0.10)
+	    '("ME4" "drawing") "routing" t
+	)
+	list(
+	    "size" list('("M5_CAD" "Resistor_Mark") 0.10)
+	    '("ME5" "drawing") "routing" t
+	)
+	list(
+	    "size" list('("M6_CAD" "Resistor_Mark") 0.10)
+	    '("ME6" "drawing") "routing" t
+	)
+	list(
+	    "size" list('("M7_CAD" "Resistor_Mark") 0.10)
+	    '("ME7" "drawing") "routing" t
+	)
+    )   32)
+)
+
+iccConductors = list(
+)

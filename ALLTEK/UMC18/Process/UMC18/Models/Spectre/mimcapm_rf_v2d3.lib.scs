@@ -1,0 +1,37 @@
+simulator lang=spectre insensitive=yes
+library mim_rf
+
+section typ
+
+parameters dr_mim_rf=0
+parameters dcox1_mim_rf=0
+parameters dcox2_mim_rf=0.0000e+00
+parameters dcn_mim_rf=0.0000e+00
+
+include "./mimcapm_rf_v2d3.mdl.scs"
+ 
+endsection typ
+
+section min
+parameters dr_mim_rf=0.5
+parameters dcox1_mim_rf=0.15
+parameters dcox2_mim_rf=0.15
+parameters dcn_mim_rf=-0.15
+
+include "./mimcapm_rf_v2d3.mdl.scs"
+endsection min
+
+section max
+parameters dr_mim_rf=-0.5
+parameters dcox1_mim_rf=-0.15
+parameters dcox2_mim_rf=-0.15
+parameters dcn_mim_rf=0.15
+
+include "./mimcapm_rf_v2d3.mdl.scs"
+
+ 
+endsection max
+
+
+endlibrary mim_rf
+

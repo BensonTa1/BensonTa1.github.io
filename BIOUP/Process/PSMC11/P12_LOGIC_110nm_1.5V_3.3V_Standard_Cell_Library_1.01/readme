@@ -1,0 +1,16 @@
+1.Please use 2010 above Synopsys Design Compiler and IC Compiler.
+
+2.Please export Version 1.0 sdf in design compiler, primetime, ic compiler
+  dc_shell> write_sdf  -version 1.0  your_design.sdf
+
+3.Cell FILLER1 FILLER2 FILLER3 FILLER4 FILLER8 FILLER12 FILLER16 FILLER32 FILLERC8 FILLERC16 FILLERC32 are fillers.
+
+4-1.Cell TAP are tap cell.  Maximum space between two TAP cell 40u must insert TAP cell to avoid latch up.
+4-2.Insert TAP cell method for ICC command : add_tap_cell_array -master_cell_name {TAP} -distance 40 -left_boundary_extra_tap must_insert -right_boundary_extra_tap must_insert  -connect_power_name {VDD} -connect_ground_name {GND}
+4-3.TAP cell use method for Astro command : axgArrayTapCell
+
+5.Cell FILLERC8 / FILLER16 / FILLER32 / TIE01 / TIE0 / TIE1(8 cell) have ERC error can be waive.
+
+6.Please use milkyway_gdsOutLayer.map file for milkyway stream out. (/back_end/tf/milkyway_gdsOutLayer.map)
+
+

@@ -1,0 +1,8 @@
+Corner,C0
+Enable,t
+Temperature,
+Modelfile::/home/IC/Desktop/virtuoso/Process/UMC18/Models/Spectre/mm180_reg18_v124.lib.scs,t tt ff ss snfp fnsp
+Modelfile::/home/IC/Desktop/virtuoso/Process/UMC18/Models/Spectre/rnnpo_rf_v2d4.lib.scs,t typ min max
+Modelfile::/home/IC/Desktop/virtuoso/Process/UMC18/Models/Spectre/mm180_res_v141.lib.scs,t res_max res_typ res_min
+Modelfile::/home/IC/Desktop/virtuoso/Process/UMC18/Models/Spectre/mm180_bjt_v121.lib.scs,t 
+t Test::TEST_UMC18_ALLTEK_PLL:Ring_OSC:1,t

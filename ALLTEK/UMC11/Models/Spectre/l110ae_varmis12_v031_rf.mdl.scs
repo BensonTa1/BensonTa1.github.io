@@ -1,0 +1,120 @@
+// 
+// *******************************************************************************
+// * Property of UMC.
+// * Unauthorized reproduction, modification and/or distribution are strictly
+// * prohibited.
+// * This product is protected under copyright law and trade secret law.
+// * This model card may not be sent in any form outside of UMC without
+// * the written consent of the UMC ATD Modeling Division.
+// ********************************************************************************
+// * Process:      0.11 um Logic and Mixed-Mode 1P8M Metal Metal Capacitor FSG with Mask Reduction Process
+// * Device Type:  NCAP 1.2V RF 
+// * Simulator:    Spectre
+// * Model Version:0.3_p1
+// ********************************************************************************
+// * Revision history:
+// * <Revision 1>
+// * Version : 0.1_p1
+// * Date    : 2010/01/21
+// * Owner   : Jian Zhi Hiang
+// * Comment : Original release
+// * <Revision 2>
+// * Version : 0.1_p2
+// * Date    : 2010/04/12
+// * Owner   : Nancy Lee, Shih-Hsin Yeh
+// * Comment : Revise W, L definition to meet the shrink methodology.
+// * <Revision 3>
+// * Version : 0.2_p1
+// * Date    : 2010/06/15
+// * Owner   : Jian Zhi
+// * Comment : Modify RF model based on new silicon data. Baseband model was copied from L110AE_NCAP12_V021.
+// * <Revision 4>
+// * Version : 0.3_p1
+// * Date    : 2010/10/18
+// * Owner   : Laney Fan
+// * Comment : 1.Remove all descriptions about m and ms_1 in the model card based on l110ae_ncap12_v031.
+// *           2.Revise the igate formula and parameters in the model(base on baseband model). 
+// *             Baseband model was copied from l110ae_ncap12_v031.
+// **************************************************************************************** 
+// *
+// *            Model coverage:
+// *            1. Gate finger width (Before shrink)   (wf): 2.5um to 10um
+// *            2. Gate finger length (Before shrink)  (lf): 0.15um to 2um
+// *            3. Gate finger number (nf): 2 to 8
+// *            4. Temperature Range: -50C to 125C 
+// *
+// *            Node definition:
+// *            1. gate:  gate
+// *            2. nwell:  nwell
+// *            3. psub:  999
+// *****************************************************************************************
+//
+simulator lang=spectre insensitive=yes
+subckt varmis_12_rf ( gate nwell 999 ) 
+parameters lf=0.5u wf=5u nf=4 spc=0.12u sce=0.06u sdn=0.3u cnt=0.16u rsh=7.6 hdif=1.25e-07 tpvb=0.0002 tpvc=-5.279e-05
++ l_diff=nf * (lf * 0.9 + 1.2e-8) + (nf - 1) * (spc + spc + cnt) + 2 * (sdn + sce 
++ + cnt) w_diff=wf * 0.9 l_nw=l_diff + 2 * sdn w_nw=w_diff + 2 * sdn  nrd=hdif 
++ / (wf * 0.9) nrs=hdif / (wf * 0.9) ad=2 * hdif * wf * 0.9 as=2 * hdif * wf * 0.9 
++ pd=2 * (2 * hdif + wf * 0.9) ps=2 * (2 * hdif + wf * 0.9) dtemp=0 sa=2u sb=2u 
++ toxc=2.83e-09 + dtoxe_varmis_12_rf pva=0.24471966 pvb=0.72116211 + tpvb * (temp 
++ - 25) pvc=0.66326301 + tpvc * (temp - 25) pvd=4.9124924 pve=1.2121193 pvf=-1.2402805 
++ pvg=0.099855236 pvh=-0.84471911 pvi=-0.49592303 pvj=-0.65302372 pvk=-0.25419574 
++ dcw= - 0.01618 + 1e6 * dxw_varmis_12_rf cww=0.1 cwl=-0.004271 
++ cwwl=0.01599 dcl= - 0.02211 + 1e6 * dxl_varmis_12_rf cll=-0.002303 clw=0.05 clwl=-0.003822 
++ weff=(wf * 0.9 * 1e6) + dcw + cww / (wf * 0.9 * 1e6) + cwl / (lf * 0.9 * 1e6 + 
++ 0.012) + cwwl / (wf * 0.9 * 1e6) / (lf * 0.9 * 1e6 + 0.012) leff=(lf * 0.9 * 1e6 
++ + 0.012) + dcl + cll / (lf * 0.9 * 1e6 + 0.012) + clw / (wf * 0.9 * 1e6) + clwl 
++ / (wf * 0.9 * 1e6) / (lf * 0.9 * 1e6 + 0.012) cl3=9.594e-05 cl2=-0.0004231 cl1=-0.000206 
++ cl0=0.001223 cw0=0 cwl0=0 ccom=(((cl3 * pow((lf * 0.9 * 1e6 + 0.012),3) + cl2 
++ * pow((lf * 0.9 * 1e6 + 0.012),2) + cl1 * (lf * 0.9 * 1e6 + 0.012) + cl0) * ((wf 
++ * 0.9 * 1e6) + dcw) + cw0 / (wf * 0.9 * 1e6)) * (1 + cwl0 / ((wf * 0.9 * 1e6) 
++ * (lf * 0.9 * 1e6 + 0.012)))) cmina=0 + dcmina_varmis_12_rf cminb=-1.409080588 
++ cminc=-0.040071884 cmind=0.18900929 tcig=1 + 2.25e-3 * (temp + dtemp - 25) area=wf 
++ * 0.9 * (lf * 0.9 + 1.2e-8) * 1e4 * tcig toxg=(2.83e-09 + dtoxe_varmis_12_rf) 
++ * 1e2 vdf0=2.8 vdfl=-1e-008 vdfw=1.7e-007 vaf0=0.6 vafl=5e-009 vafw=1e-008 vdr0=5.2 
++ vdrl=4e-008 vdrw=-1.7e-007 var0=0.2 varl=-0e-008 varw=8e-008 vdf=(vdf0 + vdfl / 
++ (lf * 0.9 + 1.2e-8) + vdfw / (wf * 0.9)) * 2.6e7 * toxg vaf=(vaf0 + vafl / (lf 
++ * 0.9 + 1.2e-8) + vafw / (wf * 0.9)) * 2.6e7 * toxg vdr=(vdr0 + vdrl / (lf * 0.9 
++ + 1.2e-8) + vdrw / (wf * 0.9)) * 2.6e7 * toxg var=(var0 + varl / (lf * 0.9 + 1.2e-8) 
++ + varw / (wf * 0.9)) * 2.6e7 * toxg igf=2.1e-7 * area * exp( - vdf) * pow(1 / 
++ toxg,2.0) igr=2.1e-7 * area / (lf * 0.9 + 1.2e-8) * exp( - vdr) * pow(1 / toxg,2.0) 
+//  ** subcircuit parameters ****** 
+l_body ( nwell 201 ) inductor l=(1e-25) / (nf * (lf * 0.9 + 1.2e-8) * wf * 0.9)
+l_gate ( 202 gate ) inductor l=(1e-25) / (nf * (lf * 0.9 + 1.2e-8) * wf * 0.9)
+ 
+r_gate ( 20 202 ) resistor r=6e-10 / pow(nf,3) / (lf * 0.9 + 1.2e-8) / (wf * 0.9) 
++ + 22.431 - pow(nf,3) * 0.014 + pow(wf * 0.9,2) * 4.5e+10 + 1.8e-6 / (lf * 0.9 
++ + 1.2e-8) * (1 + dr_gate_varmis_12_rf)
+r_ch ( 40 201 ) resistor r=4e-15 / pow(wf * 0.9,4) * (lf * 0.9 + 1.2e-8) / nf + 
++ 1.1059 noise=0
+ 
+r_body ( 40 41 ) resistor r=(90.3 * 1e-12) / (l_diff * wf * 0.9)
+dsub ( 42 41 ) nw_psub area=l_nw * w_nw pj=2 * (l_nw + w_nw)
+r_sub ( 42 999 ) resistor r=0.00073375 / (l_diff)
+ 
+c1 ( 20 40 ) bsource c=((pva + pvc * pow(v(20,40),1) + pve * pow(v(20,40),2) + pvg 
++ * pow(v(20,40),3) + pvi * pow(v(20,40),4) + pvk * pow(v(20,40),5)) / (1 + pvb 
++ * pow(v(20,40),1) + pvd * pow(v(20,40),2) + pvf * pow(v(20,40),3) + pvh * pow(v(20,40),4) 
++ + pvj * pow(v(20,40),5)) * 2.83e-09 * weff * leff / toxc / 4.5 / 1.812 / 4 + ccom 
++ * 2.83e-09 / toxc / 4) * nf * 1e-12 * (1 + cmina * (cminb + atan((v(20,40) - cminc) 
++ / cmind)))
+ 
+// Igate simulation 
+gigcd ( 20 40 ) bsource i =  igf * pow((abs(v(40,20)) - v(40,20)) / 2,vaf) - igr 
++ * pow((abs(v(40,20)) + v(40,20)) / 2,var)
+gigcs ( 20 40 ) bsource i =  igf * pow((abs(v(40,20)) - v(40,20)) / 2,vaf) - igr 
++ * pow((abs(v(40,20)) + v(40,20)) / 2,var)
+//  **** n-well / p-substrate diode parameters ****** 
+model nw_psub diode 
++ hcomp=1.0000e+00          imax=1.00e+14             level=3
++ is=2.05e-06               isw=5.34e-11              n=1.0525
++ rs=0                      ik=517.6627               ikp=595.2
++ bv=9.662                  ibv=5.952                 trs=3.22e-03
++ eg=1.16                   tbv1=-5.39e-04            tnom=25.0
++ xti=5.4936                tlev=1                    tlevc=1
++ cjo=0.0000828 * (1 + dcj_varmis_12_rf)              mj=0.474
++ vj=0.588                  cjsw=9.92e-10 * (1 + dcjsw_varmis_12_rf)
++ mjsw=0.27                 vjsw=0.62                 pta=0.0028
++ ptp=0.001                 cta=0.00332               ctp=0.001
+ 
+ends varmis_12_rf

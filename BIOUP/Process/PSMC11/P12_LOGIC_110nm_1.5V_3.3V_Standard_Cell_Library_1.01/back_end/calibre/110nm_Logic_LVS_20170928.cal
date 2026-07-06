@@ -1,0 +1,2549 @@
+//====================================================================
+//
+//    Calibre LVS check rules for 110nm Logic Product Design Rule
+//
+// Confidential Information.
+// << POWERCHIP CONFIDENTIAL >>
+//         Copyright (C) POWERCHIP Technology Corporation 2015
+//         Document No.: 
+//         Creation date: 2017.01.12
+//         Version: v0.54                         by Ken
+//====================================================================
+
+//====================================================================
+//  Changed history
+//====================================================================
+/*
+           <Changed History>
+                                                                                                               
+ 2015.12.27 -- Version : 0.50 ( 110nm_Logic_LVS_20151227.cal )
+               @New Created
+ 2016.03.07 -- Version : 0.51A ( 110nm_Logic_LVS_20160307.cal )
+               @Revise NCHC* , PCHC* device connection and NCHC*_A , PCHC*_A definition
+ 2016.03.08 -- Version : 0.51B ( 110nm_Logic_LVS_20160308.cal )
+               @Revise PMVP , NMVN 3EL13 setup definition 
+               @Revise cmim NEG node definition 
+               @Revise SUBSTRATE sconnect issue 
+               @Add SRAM 
+ 2016.03.14 -- Version : 0.51C( 110nm_Logic_LVS_20160314.cal )
+               @Update cmim connection
+ 2016.03.15 -- Version : 0.51D( 110nm_Logic_LVS_20160315.cal )
+               @Update cmim W,L property 
+ 2016.03.24 -- Version : 0.51 ( 110nm_Logic_LVS_20160324.cal )
+               @Add PSUB2(L237) to split subtract2 ground
+               @Add 8T-SRAM(L241) 
+ 2016.06.20 -- Version : 0.52 ( 110nm_Logic_LVS_20160620.cal )
+               @Update Rs-AA node issue 
+               @Update PSUB2 PW-SUBSTRACT softconnect issue 
+ 2016.09.12 -- Version : 0.52 ( 110nm_Logic_LVS_20160912.cal )
+               @Add 1P4M , 1P5M option
+ 2016.10.19 -- Version : 0.53 ( 110nm_Logic_LVS_20161019.cal )
+               @Update SRAM 6T nm.w ; nm.l ; ng.w ; ng.l
+               @Update SRAM 8T pm.w ; pm.l ; nm.w ; nm.l ; ng.w ; ng.l
+ 2016.11.14 -- Version : 0.53 ( 110nm_Logic_LVS_20161114.cal )
+               @Update 6N operation 
+ 2016.12.06 -- Version : 0.54 ( 110nm_Logic_LVS_20161206.cal )
+               @Add PTC SRAM and turn on SRAM_PTC 
+ 2017.01.12 -- Version : 0.54 ( 110nm_Logic_LVS_20170112.cal )
+               @update TV_MIM
+ 2017.04.05 -- Version : 0.54 ( 110nm_Logic_LVS_20170405.cal )
+               @update 6N operation 
+ 2017.08.16 -- Version : 0.54 ( 110nm_Logic_LVS_20170816.cal )
+               @update ppnw33  
+ 2017.09.28 -- Version : 0.54 ( 110nm_Logic_LVS_20170928.cal )
+               @update sram device name 
+
+*/
+//
+//====================================================================
+                                                                                                               
+/*============================================*/
+/*        SPECIFICATION STATEMENTS            */
+/*============================================*/
+
+//#define rc_deck            //user select
+//#DEFINE ZERO_NRS_NRD
+#DEFINE 1P4M               //user select => 1P5M , 1P4M 
+#DEFINE SRAM_PTC ON        //user select => turn on SRAM of PTC style 
+
+
+layout system gdsii
+source system  spice
+
+layout path "change_top_cell.gds"
+layout primary "change_top_cell"
+source path    "source.spi"
+source primary "TOP"
+
+
+
+lvs write layout netlist netlist.spi
+lvs report "lvs.rep"
+erc results database "chip_erc.results"
+erc summary report "chip_erc.summary" replace hier
+drc results database "chip_drc.results" ascii
+drc summary report "chip_drc.summary" replace hier
+                                                                                                               
+  layout error on input no
+  flag skew      yes
+  flag offgrid   yes
+  flag acute     yes
+  flag nonsimple yes
+                                                                                                               
+  unit length U              //(U= 1E-6)
+  precision   1000           //(unit / 1000   = 0.001um)
+  resolution  1              //(precision * 1 = 0.001um)
+
+#ifdef rc_deck
+  //UNIT CAPACITANCE                   FF //FF
+#else
+  UNIT CAPACITANCE                   FF //FF
+#endif
+                                                                                                               
+#ifdef rc_deck
+  //UNIT RESISTANCE                    OHM
+#else
+  UNIT RESISTANCE                    OHM
+#endif
+
+  lvs expand unbalanced cells no
+  lvs ignore ports            no
+  lvs check port names        yes
+  lvs recognize gates         none
+                                                                                                               
+  //lvs power name  VDD VDDI VDDQ VDDP VDDR VDDL VDDSA VPP VARY VPLT VDDS VPERI VPERD VPERA?
+  //                VPPSVT VNW VNWI VNWQ VOD? VBLPE VBLPO VDLP VDRV
+                                                                                                               
+  //lvs ground name VSS VSSI VSSQ VSSP VSSR VSSDL VSSSA VBB VKK VBBSVT VPW VPWI VPWQ VBBSA
+                                                                                                               
+  lvs abort on softchk no
+  lvs abort on supply error no
+                                                                                                               
+  virtual connect colon yes  //rc
+                                                                                                               
+  virtual connect name ?
+                                                                                                               
+  lvs execute erc yes
+  erc maximum results ALL
+  erc maximum vertex  4096
+  lvs report maximum ALL
+  lvs show seed promotions yes
+  lvs push devices         no
+  virtual connect report yes
+                                                                                                               
+#ifdef rc_deck
+    //mask results database none
+#else
+    mask results database none
+#endif
+#ifdef rc_deck
+    //mask svdb directory "svdb" query
+#else
+    mask svdb directory "svdb" query
+#endif
+                                                                                                               
+                                                                                                               
+  lvs report option s v //a b c d g n s v
+                                                                                                               
+  lvs isolate shorts yes by layer cell primary && name "?"
+  lvs inject logic no
+                                                                                                               
+  lvs reduce split    gates yes           //yes same order WITHIN TOLERANCE [tolerance l 0.0]
+  lvs reduce series   mos             yes
+  lvs reduce parallel mos             yes
+  lvs reduce semi series mos          no
+  lvs reduce parallel bipolar         yes
+  lvs reduce parallel diodes          yes
+  lvs reduce series   capacitors      yes
+  lvs reduce parallel capacitors      yes
+  lvs reduce series   resistors       yes
+  lvs reduce parallel resistors       yes
+  lvs all capacitor pins swappable    no
+  lvs spice prefer pins yes
+                                                                                                               
+  LVS FILTER UNUSED MOS               NO
+  LVS FILTER UNUSED BIPOLAR           NO
+  LVS FILTER UNUSED CAPACITORS        NO
+  LVS FILTER UNUSED DIODES            NO
+  LVS FILTER UNUSED RESISTORS         NO
+  LVS FILTER UNUSED OPTION            AB AC AD AE RC RE RG
+
+  lvs reduce C(c3s)  series POS NEG   no
+  lvs reduce C(c3s)  parallel  yes 
+      [
+      effective w,l
+      w = sum(w)
+      l = sqrt( sum(l*w) / sum(w/l) )
+      ]
+
+  lvs reduce C(c3si) series POS NEG   no
+  lvs reduce C(c3si) parallel  yes
+      [
+      effective w,l
+      w = sum(w)
+      l = sqrt( sum(l*w) / sum(w/l) )
+      ]
+
+  lvs reduce C(c15_npw) series POS NEG   no
+  lvs reduce C(c15_npw) parallel  yes
+      [
+      effective w,l
+      w = sum(w)
+      l = sqrt( sum(l*w) / sum(w/l) )
+      ]
+
+  lvs reduce C(c33_npw) series POS NEG   no
+  lvs reduce C(c33_npw) parallel  yes
+      [
+      effective w,l
+      w = sum(w)
+      l = sqrt( sum(l*w) / sum(w/l) )
+      ]
+
+  lvs reduce C(c15_nnw) series POS NEG   no
+  lvs reduce C(c15_nnw) parallel  yes
+      [
+      effective w,l
+      w = sum(w)
+      l = sqrt( sum(l*w) / sum(w/l) )
+      ]
+
+  lvs reduce C(c33_nnw) series POS NEG   no
+  lvs reduce C(c33_nnw) parallel  yes
+      [
+      effective w,l
+      w = sum(w)
+      l = sqrt( sum(l*w) / sum(w/l) )
+      ]
+ 
+  lvs reduce C(c15_pnw) series POS NEG   no
+  lvs reduce C(c15_pnw) parallel  yes
+      [
+      effective w,l
+      w = sum(w)
+      l = sqrt( sum(l*w) / sum(w/l) )
+      ]
+
+  lvs reduce C(c33_pnw) series POS NEG   no
+  lvs reduce C(c33_pnw) parallel  yes 
+      [
+      effective w,l
+      w = sum(w)
+      l = sqrt( sum(l*w) / sum(w/l) )
+      ]
+
+#ifdef 1P5M
+  lvs reduce C(cmim_3K) series POS NEG   no
+  lvs reduce C(cmim_3K) parallel  yes
+      [
+      effective W,L
+      W = sum(W)
+      L = sqrt( sum(L*W) / sum(W/L) )
+      ]
+
+  lvs reduce C(cmim_4K) series POS NEG   no
+  lvs reduce C(cmim_4K) parallel  yes
+      [
+      effective W,L
+      W = sum(W)
+      L = sqrt( sum(L*W) / sum(W/L) )
+      ]
+
+  lvs reduce C(cmim_3K_sh) series POS NEG   no
+  lvs reduce C(cmim_3K_sh) parallel  yes
+      [
+      effective W,L
+      W = sum(W)
+      L = sqrt( sum(L*W) / sum(W/L) )
+      ]
+
+  lvs reduce C(cmim_4K_sh) series POS NEG   no
+  lvs reduce C(cmim_4K_sh) parallel  yes
+      [
+      effective W,L
+      W = sum(W)
+      L = sqrt( sum(L*W) / sum(W/L) )
+      ]
+
+#else
+
+#ifdef 1P4M
+  lvs reduce C(cmim_3K) series POS NEG   no
+  lvs reduce C(cmim_3K) parallel  yes
+      [
+      effective W,L
+      W = sum(W)
+      L = sqrt( sum(L*W) / sum(W/L) )
+      ]
+#endif
+#endif
+
+
+  lvs reduce R(rnaa) 		parallel  yes
+  lvs reduce R(rpaa) 		parallel  yes
+  lvs reduce R(rnpoly) 		parallel  yes
+  lvs reduce R(rppoly200) 	parallel  yes
+  lvs reduce R(rnp) 		parallel  yes
+  lvs reduce R(rpp) 		parallel  yes
+  lvs reduce R(rnpolync) 	parallel  yes
+  lvs reduce R(rppolync) 	parallel  yes
+  lvs reduce R(R1M) 		parallel  yes
+  lvs reduce R(R2M) 		parallel  yes
+
+#ifdef 1P5M
+  lvs reduce R(R3M) 		parallel  yes
+  lvs reduce R(R4M) 		parallel  yes
+
+#else
+
+#ifdef 1P4M
+  lvs reduce R(R3M)             parallel  yes
+#endif
+#endif
+
+
+
+/*======================================================*/
+/*              INPUT LAYER STATEMENTS                  */
+/*======================================================*/
+
+LAYER   T1FL31       31
+LAYER   T1FL90       90
+LAYER   T5IL45       45  
+LAYER   T4IL44       44 
+LAYER   T1IL69       69
+LAYER   T2IL27       27
+LAYER   3I_LDMOS     28
+LAYER   LD_BLK       30
+//LAYER   T1DL25       25
+//LAYER   T2DL10       10
+LAYER   T3SL62       62
+LAYER   T2EL41       41
+LAYER   T1GL33       33
+LAYER   T1GL93       93
+LAYER   T3PL15       15
+LAYER   T3NL16       16
+LAYER   T2NL18       18
+LAYER   T2PL17       17
+LAYER   T3EL13       13
+LAYER   T1CL35       35
+LAYER   T1ML36       36
+LAYER   T1ML94       94
+LAYER   T1TL55       55
+LAYER   T2ML32       32
+LAYER   T2ML95       95
+LAYER   T2TL56       56
+LAYER   T3KL103      103 
+LAYER   T3ML58       58
+LAYER   T3ML96       96
+LAYER   T3TL57       57
+LAYER   T4KL104      104 
+LAYER   T4ML59       59
+LAYER   T4ML97       97
+LAYER   TTVL124      124
+LAYER   TTML115      115
+LAYER   TTML98       98
+LAYER   TTML40       40
+LAYER   TPVL7        7
+                   
+layer   NATIVE       101
+layer   MOS_CAP      230
+layer   RMDMY_1F     223
+layer   RMDMY_1G     224
+layer   RMDMY_1M     227
+layer   RMDMY_2M     228
+layer   RMDMY_3M     234
+layer   RMDMY_4M     239
+layer   BJTL236      236
+layer   DIODE        238
+layer   PSUB2        237   //subtract2 ground
+layer   SRAM_8T      241   //8T SRAM defined area
+layer   SRAM         247   //6T,8T SRAM defined
+layer   Shield_3K    83
+layer   Shield_4K    84
+layer   DLERR        200
+layer   LVSERR       60 100
+                   
+layer   1G_text      210
+layer   1M_text      211
+layer   2M_text      212
+layer   3M_text      213
+layer   4M_text      214
+layer   TM_text      215
+
+//Text layer definition
+  text layer      210 211 212 213 213 214 215
+  port layer text 210 211 212 213 213 214 215
+
+  ATTACH  210   1GL33
+  ATTACH  211   1ML36
+  ATTACH  212   2ML32
+  ATTACH  213   3ML58
+
+#ifdef 1P5M
+  ATTACH  214   4ML59
+  ATTACH  215   TML115
+
+#else
+
+#ifdef 1P4M
+  ATTACH  215   TML115
+#endif
+#endif
+
+
+///////////////////////////////////
+// CAD LAYER DEFINITION 
+///////////////////////////////////
+
+NOCHECK = DLERR or LVSERR 
+
+1FL31   = T1FL31   NOT (NOCHECK or RMDMY_1F)
+1FL90   = T1FL90   NOT NOCHECK 
+4IL44   = T4IL44   NOT NOCHECK 
+5IL45   = T5IL45   NOT NOCHECK 
+1IL69   = T1IL69   NOT NOCHECK 
+2IL27   = T2IL27   NOT NOCHECK 
+3IL24   = T2IL27   OR  (NATIVE OR (LD_BLK not 3I_LDMOS)) 
+1DL25   = size ( size ( size ((T2PL17 and T2IL27) not T2EL41) by 0.225) by -0.45) by 0.225
+2DL10   = size ( size ( size (((T2NL18 not T2IL27) not T2EL41) not NATIVE) by 0.225) by -0.45) by 0.225
+1NL106  = size ( size ( size ((T2NL18 not T2IL27) not T2EL41) by 0.225) by -0.45) by 0.225
+3SL62   = T3SL62   NOT NOCHECK 
+2EL41   = T2EL41   NOT NOCHECK 
+6NL19   = (size T2PL17 by 0.12)   NOT NOCHECK    //Dark tone 
+1GL33   = T1GL33   NOT (NOCHECK or RMDMY_1G) 
+1GL93   = T1GL93   NOT NOCHECK 
+3PL15   = T3PL15   NOT NOCHECK
+3NL16   = T3NL16   NOT NOCHECK
+2NL18   = T2NL18   NOT NOCHECK 
+2PL17   = T2PL17   NOT NOCHECK 
+3EL13   = T3EL13   NOT NOCHECK   //Dark tone 
+1CL35   = T1CL35   NOT NOCHECK 
+1ML36   = T1ML36   NOT (NOCHECK or RMDMY_1M)
+1ML94   = T1ML94   NOT NOCHECK 
+1TL55   = T1TL55   NOT NOCHECK 
+2ML32   = T2ML32   NOT (NOCHECK or RMDMY_2M)
+2ML95   = T2ML95   NOT NOCHECK 
+2TL56   = T2TL56   NOT NOCHECK 
+3ML58   = T3ML58   NOT (NOCHECK or RMDMY_3M)
+3ML96   = T3ML96   NOT NOCHECK 
+3T_MIM  = (T3TL57   AND 3KL103) not NOCHECK    //4M-3T-3K-3M
+3TL57   = T3TL57   NOT (NOCHECK or 3T_MIM)
+3KL103  = T3KL103  NOT NOCHECK 
+4KL104  = T4KL104  NOT NOCHECK 
+4ML59   = T4ML59   NOT (NOCHECK or RMDMY_4M)
+4ML97   = T4ML97   NOT NOCHECK 
+#ifdef 1P5M
+TV_MIM  = (TTVL124  AND 4KL104) not NOCHECK    //TM-TV-4K-4M
+#else
+#ifdef 1P4M
+TV_MIM  = (TTVL124  AND 3KL103) not NOCHECK    //TM-TV-3K-3M
+#endif
+#endif
+TVL124  = TTVL124  NOT (NOCHECK or TV_MIM)
+TML115  = TTML115  NOT NOCHECK
+TML98   = TTML98   NOT NOCHECK
+TML40   = TTML40   NOT NOCHECK
+PVL7    = TPVL7    NOT NOCHECK 
+
+
+out_3IL24 { copy 3IL24 }
+out_1DL25 { copy 1DL25 }
+out_2DL10 { copy 2DL10 }
+out_PWELCNT { copy PWELCNT }
+out_NWELCNT { copy NWELCNT }
+out_4ICNT { copy 4ICNT }
+out_5ICNT { copy 5ICNT }
+out_PW    { copy PW }
+out_NW    { copy NW }
+
+
+///////////////////////////////////
+// FIELD DEFINITION 
+///////////////////////////////////
+
+SUBSTRATE_tmp = EXTENT
+SUBSTRATE = SUBSTRATE_tmp NOT PSUB2_wall
+PSUB2_wall =  (SIZE PSUB2 BY 0.005) NOT PSUB2  //split PW,PSUB2
+PW  = SUBSTRATE NOT (3IL24 or PSUB2_wall)
+NW  = copy 2IL27 
+DNW = copy 1IL69
+
+
+NFIELD = ((1FL31 AND 2NL18) NOT 2PL17) AND PW
+PFIELD = ((1FL31 AND 2PL17) NOT 2NL18) AND NW
+NFIELD_NATIVE = ((1FL31 AND 2NL18) NOT 2PL17) AND NATIVE
+PWELCNT = (1FL31 AND 2PL17) AND PW
+NWELCNT = (1FL31 AND 2NL18) AND NW
+4ICNT = ((1FL31 AND 2NL18) AND 4IL44) ENCLOSE 1CL35 
+5ICNT = ((1FL31 AND 2PL17) AND 5IL45) ENCLOSE 1CL35 
+PWELCNT_noDNW = ((1FL31 AND 2PL17) AND PW) NOT DNW
+
+TR   =  1GL33 AND 1FL31
+
+3.3_NFIELD = NFIELD AND 3NL16
+3.3_PFIELD = PFIELD AND 3PL15
+3.3_NFIELD_NATIVE = NFIELD_NATIVE AND 3NL16
+
+1.5_NFIELD = NFIELD AND 2DL10
+1.5_PFIELD = PFIELD AND 1DL25
+1.5_NFIELD_NATIVE = NFIELD_NATIVE AND 2DL10
+
+3.3_NTR = TR AND 3.3_NFIELD 
+3.3_PTR = TR AND 3.3_PFIELD 
+1.5_NTR = TR AND 1.5_NFIELD 
+1.5_PTR = TR AND 1.5_PFIELD 
+3.3_NTR_NATIVE = TR AND 3.3_NFIELD_NATIVE
+1.5_NTR_NATIVE = TR AND 1.5_NFIELD_NATIVE
+
+
+3.3_NSD = 3.3_NFIELD NOT TR
+3.3_PSD = 3.3_PFIELD NOT TR
+1.5_NSD = 1.5_NFIELD NOT TR
+1.5_PSD = 1.5_PFIELD NOT TR
+NSD = 3.3_NSD  OR  1.5_NSD
+PSD = 3.3_PSD  OR  1.5_PSD
+3.3_NSD_NATIVE = 3.3_NFIELD_NATIVE NOT TR
+1.5_NSD_NATIVE = 1.5_NFIELD_NATIVE NOT TR
+NSD_NATIVE = 3.3_NSD_NATIVE  OR  1.5_NSD_NATIVE
+
+
+CT_DN  =  1CL35 and (NFIELD or NFIELD_NATIVE)
+CT_DP  =  1CL35 and PFIELD
+CT_G   =  1CL35 and 1GL33
+
+///////////////////////////////////
+// Metal Dummy Resistor definition
+///////////////////////////////////
+
+R1G = T1GL33  AND RMDMY_1G
+R1M = T1ML36  AND RMDMY_1M
+R2M = T2ML32  AND RMDMY_2M
+R3M = T3ML58  AND RMDMY_3M
+R4M = T4ML59  AND RMDMY_4M
+                                                                                                                      
+R1_T = (SIZE R1M BY 0.01) AND 1ML36
+R2_T = (SIZE R2M BY 0.01) AND 2ML32
+R3_T = (SIZE R3M BY 0.01) AND 3ML58
+R4_T = (SIZE R4M BY 0.01) AND 3ML58
+
+
+//////////////////////////////////////
+// Device definition - 1
+/////////////////////////////////////
+
+//////// DIFF ///////////////
+
+mei.#1IL69  = T1FL31 and 1IL69
+ an.#1IL69  = T1FL31 not 1IL69
+mei.#2IL27  = T1FL31 and 2IL27
+ an.#2IL27  = T1FL31 not 2IL27
+mei.#PW     = T1FL31 and PW
+ an.#PW     = T1FL31 not PW
+mei.#4IL44  = T1FL31 and 4IL44
+ an.#4IL44  = T1FL31 not 4IL44
+mei.#5IL45  = T1FL31 and 5IL45
+ an.#5IL45  = T1FL31 not 5IL45
+mei.#1DL25  = T1FL31 and 1DL25
+ an.#1DL25  = T1FL31 not 1DL25
+mei.#2DL10  = T1FL31 and 2DL10
+ an.#2DL10  = T1FL31 not 2DL10
+mei.#3SL62  = T1FL31 and 3SL62
+ an.#3SL62  = T1FL31 not 3SL62
+mei.#2EL41  = T1FL31 and 2EL41
+ an.#2EL41  = T1FL31 not 2EL41
+
+mei.#6NL19  = T1FL31 not 6NL19   //dark
+ an.#6NL19  = T1FL31 and 6NL19   //dark
+
+mei.#3PL15  = T1FL31 and 3PL15
+ an.#3PL15  = T1FL31 not 3PL15
+mei.#3NL16  = T1FL31 and 3NL16
+ an.#3NL16  = T1FL31 not 3NL16
+mei.#2NL18  = T1FL31 and 2NL18
+ an.#2NL18  = T1FL31 not 2NL18
+mei.#2PL17  = T1FL31 and 2PL17
+ an.#2PL17  = T1FL31 not 2PL17
+
+mei.#3EL13  = T1FL31 and 3EL13  //dark - follow imp_table,drawing area no CoSi
+ an.#3EL13  = T1FL31 not 3EL13  //dark - follow imp_table,no drawing area have CoSi
+
+mei.#RMDMY_1F = T1FL31 and RMDMY_1F
+ an.#RMDMY_1F = T1FL31 not RMDMY_1F
+mei.#DIO      = T1FL31 and DIODE
+ an.#DIO      = T1FL31 not DIODE
+mei.#BJT      = T1FL31 and BJTL236
+ an.#BJT      = T1FL31 not BJTL236
+mei.#NATIVE   = T1FL31 and NATIVE
+ an.#NATIVE   = T1FL31 not NATIVE
+mei.#MOS_CAP  = T1FL31 and MOS_CAP
+ an.#MOS_CAP  = T1FL31 not MOS_CAP
+
+
+
+//////// POLY ///////////////
+
+meiPy.#1IL69  = T1GL33 and 1IL69
+ anPy.#1IL69  = T1GL33 not 1IL69
+meiPy.#2IL27  = T1GL33 and 2IL27
+ anPy.#2IL27  = T1GL33 not 2IL27
+meiPy.#PW     = T1GL33 and PW
+ anPy.#PW     = T1GL33 not PW
+meiPy.#4IL44  = T1GL33 and 4IL44
+ anPy.#4IL44  = T1GL33 not 4IL44
+meiPy.#5IL45  = T1GL33 and 5IL45
+ anPy.#5IL45  = T1GL33 not 5IL45
+meiPy.#1DL25  = T1GL33 and 1DL25
+ anPy.#1DL25  = T1GL33 not 1DL25
+meiPy.#2DL10  = T1GL33 and 2DL10
+ anPy.#2DL10  = T1GL33 not 2DL10
+meiPy.#3SL62  = T1GL33 and 3SL62
+ anPy.#3SL62  = T1GL33 not 3SL62
+meiPy.#2EL41  = T1GL33 and 2EL41
+ anPy.#2EL41  = T1GL33 not 2EL41
+
+meiPy.#6NL19  = T1GL33 not 6NL19   //dark
+ anPy.#6NL19  = T1GL33 and 6NL19   //dark
+
+meiPy.#3PL15  = T1GL33 and 3PL15
+ anPy.#3PL15  = T1GL33 not 3PL15
+meiPy.#3NL16  = T1GL33 and 3NL16
+ anPy.#3NL16  = T1GL33 not 3NL16
+meiPy.#2NL18  = T1GL33 and 2NL18
+ anPy.#2NL18  = T1GL33 not 2NL18
+meiPy.#2PL17  = T1GL33 and 2PL17
+ anPy.#2PL17  = T1GL33 not 2PL17
+
+meiPy.#3EL13  = T1GL33 and 3EL13  //dark
+ anPy.#3EL13  = T1GL33 not 3EL13  //dark
+
+meiPy.#RMDMY_1G = T1GL33 and RMDMY_1G
+ anPy.#RMDMY_1G = T1GL33 not RMDMY_1G
+
+
+
+//////////////////////////////////////
+// Device definition - 2
+/////////////////////////////////////
+
+  // +----------------------------------
+  // NLVN  1.5V-NMOS
+  // +----------------------------------
+  dif_NLVN =                 an.#1IL69        and (  an.#2IL27        and ( mei.#PW
+                      and (  an.#4IL44        and (  an.#5IL45
+                      and (  an.#1DL25        and ( mei.#2DL10        
+                      and (  an.#3SL62        and (  an.#2EL41
+                      and ( mei.#6NL19        
+                      and (  an.#3PL15        and (  an.#3NL16
+                      and ( mei.#2NL18        and (  an.#2PL17
+                      and (  an.#3EL13        and (  an.#RMDMY_1F     and (  an.#MOS_CAP 
+                      and (  an.#DIO          and (  an.#BJT          and    an.#NATIVE      ))))))))))))))))))
+
+  // +----------------------------------
+  // PLVP  1.5V-PMOS
+  // +----------------------------------
+  dif_PLVP =                                        mei.#2IL27        and (  an.#PW
+                      and (  an.#4IL44        and (  an.#5IL45
+                      and ( mei.#1DL25        and (  an.#2DL10
+                      and (  an.#3SL62        and (  an.#2EL41
+                      and (  an.#6NL19
+                      and (  an.#3PL15        and (  an.#3NL16
+                      and (  an.#2NL18        and ( mei.#2PL17
+                      and (  an.#3EL13        and (  an.#RMDMY_1F     and (  an.#MOS_CAP 
+                      and (  an.#DIO          and (  an.#BJT          and    an.#NATIVE      )))))))))))))))))
+
+  // +----------------------------------
+  // NMVN  3.3V-NMOS
+  // +----------------------------------
+  dif_NMVN1 =                an.#1IL69        and (  an.#2IL27        and ( mei.#PW
+                      and (  an.#4IL44        and (  an.#5IL45
+                      and (  an.#1DL25        and (  an.#2DL10
+                      and (  an.#3SL62        and ( mei.#2EL41
+                      and ( mei.#6NL19
+                      and (  an.#3PL15        and ( mei.#3NL16
+                      and ( mei.#2NL18        and (  an.#2PL17
+                      and (  an.#3EL13        and (  an.#RMDMY_1F     and (  an.#MOS_CAP 
+                      and (  an.#DIO          and (  an.#BJT          and    an.#NATIVE      ))))))))))))))))))
+
+dif_NMVN = dif_NMVN1 not interact (1GL33 interact 4IL44)
+
+  // +----------------------------------
+  // PMVP  3.3V-PMOS
+  // +----------------------------------
+  dif_PMVP1 =                                       mei.#2IL27        and (  an.#PW
+                      and (  an.#4IL44        and (  an.#5IL45
+                      and (  an.#1DL25        and (  an.#2DL10
+                      and (  an.#3SL62        and ( mei.#2EL41
+                      and (  an.#6NL19
+                      and ( mei.#3PL15        and (  an.#3NL16
+                      and (  an.#2NL18        and ( mei.#2PL17
+                      and (  an.#3EL13        and (  an.#RMDMY_1F     and (  an.#MOS_CAP 
+                      and (  an.#DIO          and (  an.#BJT          and    an.#NATIVE      )))))))))))))))))
+
+dif_PMVP = dif_PMVP1 not interact (1GL33 interact 5IL45)
+
+  // +----------------------------------
+  // NLVNI  1.5V-NMOS (in DNW)
+  // +----------------------------------
+  dif_NLVNI =               mei.#1IL69        and (  an.#2IL27        and ( mei.#PW
+                      and (  an.#4IL44        and (  an.#5IL45
+                      and (  an.#1DL25        and ( mei.#2DL10
+                      and (  an.#3SL62        and (  an.#2EL41
+                      and ( mei.#6NL19
+                      and (  an.#3PL15        and (  an.#3NL16
+                      and ( mei.#2NL18        and (  an.#2PL17
+                      and (  an.#3EL13        and (  an.#RMDMY_1F     and (  an.#MOS_CAP 
+                      and (  an.#DIO          and (  an.#BJT          and    an.#NATIVE      ))))))))))))))))))
+
+
+  // +----------------------------------
+  // NMVNI  3.3V-NMOS (in DNW)
+  // +----------------------------------
+  dif_NMVNI1 =              mei.#1IL69        and (  an.#2IL27        and ( mei.#PW
+                      and (  an.#4IL44        and (  an.#5IL45
+                      and (  an.#1DL25        and (  an.#2DL10
+                      and (  an.#3SL62        and ( mei.#2EL41
+                      and ( mei.#6NL19
+                      and (  an.#3PL15        and ( mei.#3NL16
+                      and ( mei.#2NL18        and (  an.#2PL17
+             not interact (      3EL13        and (  an.#RMDMY_1F     and (  an.#MOS_CAP
+                      and (  an.#DIO          and (  an.#BJT          and    an.#NATIVE      ))))))))))))))))))
+
+dif_NMVNI = dif_NMVNI1 not interact (1GL33 interact 4IL44)
+
+  // +----------------------------------
+  // NMVNI_ESD  3.3V-NMOS ESD
+  // +----------------------------------
+  dif_NMVN_ESD =             an.#1IL69        and (  an.#2IL27        and ( mei.#PW
+                      and (  an.#4IL44        and (  an.#5IL45
+                      and (  an.#1DL25        and (  an.#2DL10
+                      and (  an.#3SL62        and ( mei.#2EL41
+                      and ( mei.#6NL19
+                      and (  an.#3PL15        and ( mei.#3NL16
+                      and ( mei.#2NL18        and (  an.#2PL17
+                 interact (      3EL13        and (  an.#RMDMY_1F     and (  an.#MOS_CAP
+                      and (  an.#DIO          and (  an.#BJT          and    an.#NATIVE      ))))))))))))))))))
+
+  // +----------------------------------
+  // NMVNI_ESD  3.3V-NMOS ESD (in DNW)
+  // +----------------------------------
+  dif_NMVNI_ESD =           mei.#1IL69        and (  an.#2IL27        and ( mei.#PW
+                      and (  an.#4IL44        and (  an.#5IL45
+                      and (  an.#1DL25        and (  an.#2DL10
+                      and (  an.#3SL62        and ( mei.#2EL41
+                      and ( mei.#6NL19
+                      and (  an.#3PL15        and ( mei.#3NL16
+                      and ( mei.#2NL18        and (  an.#2PL17
+                 interact (      3EL13        and (  an.#RMDMY_1F     and (  an.#MOS_CAP
+                      and (  an.#DIO          and (  an.#BJT          and    an.#NATIVE      ))))))))))))))))))
+
+  // +----------------------------------
+  // PMVP_ESD  3.3V-PMOS ESD
+  // +----------------------------------
+  dif_PMVP_ESD =                                    mei.#2IL27        and (  an.#PW
+                      and (  an.#4IL44        and (  an.#5IL45
+                      and (  an.#1DL25        and (  an.#2DL10
+                      and (  an.#3SL62        and ( mei.#2EL41
+                      and (  an.#6NL19
+                      and ( mei.#3PL15        and (  an.#3NL16
+                      and (  an.#2NL18        and ( mei.#2PL17
+                 interact (      3EL13        and (  an.#RMDMY_1F     and (  an.#MOS_CAP
+                      and (  an.#DIO          and (  an.#BJT          and    an.#NATIVE      )))))))))))))))))
+
+  // +----------------------------------
+  // NLVZ  1.5V-NMOS Native
+  // +----------------------------------
+  dif_NLVZ =                 an.#1IL69        and (  an.#2IL27        and (  an.#PW
+                      and (  an.#4IL44        and (  an.#5IL45
+                      and (  an.#1DL25        and (  an.#2DL10
+                      and (  an.#3SL62        and (  an.#2EL41
+                      and ( mei.#6NL19
+                      and (  an.#3PL15        and (  an.#3NL16
+                      and ( mei.#2NL18        and (  an.#2PL17
+                      and (  an.#3EL13        and (  an.#RMDMY_1F     and (  an.#MOS_CAP 
+                      and (  an.#DIO          and (  an.#BJT          and   mei.#NATIVE      ))))))))))))))))))
+
+  // +----------------------------------
+  // NMVZ  3.3V-NMOS Native
+  // +----------------------------------
+  dif_NMVZ =                 an.#1IL69        and (  an.#2IL27        and (  an.#PW
+                      and (  an.#4IL44        and (  an.#5IL45
+                      and (  an.#1DL25        and (  an.#2DL10
+                      and (  an.#3SL62        and (  an.#2EL41
+                      and ( mei.#6NL19
+                      and (  an.#3PL15        and ( mei.#3NL16
+                      and ( mei.#2NL18        and (  an.#2PL17
+                      and (  an.#3EL13        and (  an.#RMDMY_1F     and (  an.#MOS_CAP 
+                      and (  an.#DIO          and (  an.#BJT          and   mei.#NATIVE      ))))))))))))))))))
+
+  // +----------------------------------
+  // NCHC  3.3V-Depleted NMOS Capacitance
+  // +----------------------------------
+  dif_NCHC =                 an.#1IL69        and (  an.#2IL27        and ( mei.#PW
+                      and (  an.#4IL44        and (  an.#5IL45
+                      and (  an.#1DL25        and (  an.#2DL10
+                      and ( mei.#3SL62        and ( mei.#2EL41
+                      and ( mei.#6NL19
+                      and (  an.#3PL15        and ( mei.#3NL16
+                      and ( mei.#2NL18        and (  an.#2PL17
+                      and (  an.#3EL13        and (  an.#RMDMY_1F     and ( mei.#MOS_CAP 
+                      and (  an.#DIO          and (  an.#BJT          and    an.#NATIVE      ))))))))))))))))))
+
+  // +----------------------------------
+  // NCHCI  3.3V-Depleted NMOS Capacitance in DNW
+  // +----------------------------------
+  dif_NCHCI =               mei.#1IL69        and (  an.#2IL27        and ( mei.#PW
+                      and (  an.#4IL44        and (  an.#5IL45
+                      and (  an.#1DL25        and (  an.#2DL10
+                      and ( mei.#3SL62        and ( mei.#2EL41
+                      and ( mei.#6NL19
+                      and (  an.#3PL15        and ( mei.#3NL16
+                      and ( mei.#2NL18        and (  an.#2PL17
+                      and (  an.#3EL13        and (  an.#RMDMY_1F     and ( mei.#MOS_CAP 
+                      and (  an.#DIO          and (  an.#BJT          and    an.#NATIVE      ))))))))))))))))))
+
+  // +----------------------------------
+  // NCHCP 1.5V PWell-Depleted NMOS Capacitance
+  // +----------------------------------
+  dif_NCHCP15 =              an.#1IL69        and (  an.#2IL27        and ( mei.#PW
+                      and (  an.#4IL44        and (  an.#5IL45
+                      and (  an.#1DL25        and ( mei.#2DL10
+                      and (  an.#3SL62        and (  an.#2EL41
+                      and ( mei.#6NL19
+                      and (  an.#3PL15        and (  an.#3NL16
+                      and ( mei.#2NL18        and (  an.#2PL17
+                      and (  an.#3EL13        and (  an.#RMDMY_1F     and ( mei.#MOS_CAP
+                      and (  an.#DIO          and (  an.#BJT          and    an.#NATIVE      ))))))))))))))))))
+
+  // +----------------------------------
+  // NCHCP 3.3V PWell-Depleted NMOS Capacitance
+  // +----------------------------------
+  dif_NCHCP33 =              an.#1IL69        and (  an.#2IL27        and ( mei.#PW
+                      and (  an.#4IL44        and (  an.#5IL45
+                      and (  an.#1DL25        and (  an.#2DL10
+                      and (  an.#3SL62        and ( mei.#2EL41
+                      and ( mei.#6NL19
+                      and (  an.#3PL15        and ( mei.#3NL16
+                      and ( mei.#2NL18        and (  an.#2PL17
+                      and (  an.#3EL13        and (  an.#RMDMY_1F     and ( mei.#MOS_CAP
+                      and (  an.#DIO          and (  an.#BJT          and    an.#NATIVE      ))))))))))))))))))
+
+  // +----------------------------------
+  // NCHC  1.5V NWell-Depleted NMOS Capacitance
+  // +----------------------------------
+  dif_NCHC15 =                                      mei.#2IL27        and (  an.#PW
+                      and (  an.#4IL44        and (  an.#5IL45
+                      and (  an.#1DL25        and (  an.#2DL10
+                      and (  an.#3SL62        and (  an.#2EL41
+                      and ( mei.#6NL19
+                      and (  an.#3PL15        and (  an.#3NL16
+                      and ( mei.#2NL18        and (  an.#2PL17
+                      and (  an.#3EL13        and (  an.#RMDMY_1F     and ( mei.#MOS_CAP 
+                      and (  an.#DIO          and (  an.#BJT          and    an.#NATIVE      )))))))))))))))))
+
+  // +----------------------------------
+  // NCHC  3.3V NWell-Depleted NMOS Capacitance
+  // +----------------------------------
+  dif_NCHC33 =                                      mei.#2IL27        and (  an.#PW
+                      and (  an.#4IL44        and (  an.#5IL45
+                      and (  an.#1DL25        and (  an.#2DL10
+                      and (  an.#3SL62        and ( mei.#2EL41
+                      and ( mei.#6NL19
+                      and (  an.#3PL15        and ( mei.#3NL16
+                      and ( mei.#2NL18        and (  an.#2PL17
+                      and (  an.#3EL13        and (  an.#RMDMY_1F     and ( mei.#MOS_CAP 
+                      and (  an.#DIO          and (  an.#BJT          and    an.#NATIVE      )))))))))))))))))
+
+  // +----------------------------------
+  // PCHC  1.5V NWell-Depleted PMOS Capacitance
+  // +----------------------------------
+  dif_PCHC15 =                                      mei.#2IL27        and (  an.#PW
+                      and (  an.#4IL44        and (  an.#5IL45
+                      and ( mei.#1DL25        and (  an.#2DL10
+                      and (  an.#3SL62        and (  an.#2EL41
+                      and (  an.#6NL19
+                      and (  an.#3PL15        and (  an.#3NL16
+                      and (  an.#2NL18        and ( mei.#2PL17
+                      and (  an.#3EL13        and (  an.#RMDMY_1F     and ( mei.#MOS_CAP
+                      and (  an.#DIO          and (  an.#BJT          and    an.#NATIVE      )))))))))))))))))
+
+  // +----------------------------------
+  // PCHC  3.3V NWell-Depleted PMOS Capacitance
+  // +----------------------------------
+  dif_PCHC33 =                                      mei.#2IL27        and (  an.#PW
+                      and (  an.#4IL44        and (  an.#5IL45
+                      and (  an.#1DL25        and (  an.#2DL10
+                      and (  an.#3SL62        and ( mei.#2EL41
+                      and (  an.#6NL19
+                      and ( mei.#3PL15        and (  an.#3NL16
+                      and (  an.#2NL18        and ( mei.#2PL17
+                      and (  an.#3EL13        and (  an.#RMDMY_1F     and ( mei.#MOS_CAP
+                      and (  an.#DIO          and (  an.#BJT          and    an.#NATIVE      )))))))))))))))))
+
+  // +----------------------------------
+  // RES_N+AA with salicide 
+  // +----------------------------------
+  RES_N_AA =                                         an.#2IL27        and ( mei.#PW
+                      and (  an.#4IL44        and (  an.#5IL45
+                      and (  an.#1DL25        and ( mei.#2DL10
+                      and (  an.#3SL62        and (  an.#2EL41
+                      and ( mei.#6NL19
+                      and (  an.#3PL15        and (  an.#3NL16
+                      and ( mei.#2NL18        and (  an.#2PL17
+                      and (  an.#3EL13        and ( mei.#RMDMY_1F     and (  an.#MOS_CAP
+                      and (  an.#DIO          and (  an.#BJT          and    an.#NATIVE      )))))))))))))))))
+
+  // +----------------------------------
+  // RES_P+AA with salicide
+  // +----------------------------------
+  RES_P_AA =                                        mei.#2IL27        and (  an.#PW
+                      and (  an.#4IL44        and (  an.#5IL45
+                      and ( mei.#1DL25        and (  an.#2DL10
+                      and (  an.#3SL62        and (  an.#2EL41
+                      and (  an.#6NL19
+                      and (  an.#3PL15        and (  an.#3NL16
+                      and (  an.#2NL18        and ( mei.#2PL17
+                      and (  an.#3EL13        and ( mei.#RMDMY_1F     and (  an.#MOS_CAP
+                      and (  an.#DIO          and (  an.#BJT          and    an.#NATIVE      )))))))))))))))))
+
+  // +----------------------------------
+  // RES_N+POLY with salicide
+  // +----------------------------------
+  RES_N_Poly =                                         anPy.#2IL27        and ( meiPy.#PW
+                      and (  anPy.#4IL44        and (  anPy.#5IL45
+                      and (  anPy.#1DL25        and ( meiPy.#2DL10
+                      and (  anPy.#3SL62        and (  anPy.#2EL41
+                      and ( meiPy.#6NL19        
+                      and (  anPy.#3PL15        and (  anPy.#3NL16
+                      and ( meiPy.#2NL18        and (  anPy.#2PL17
+                      and (  anPy.#3EL13        and   meiPy.#RMDMY_1G   ))))))))))))) 
+
+  // +----------------------------------
+  // RES_P+POLY with salicide
+  // +----------------------------------
+  RES_P_Poly =                                        meiPy.#2IL27        and (  anPy.#PW
+                      and (  anPy.#4IL44        and (  anPy.#5IL45
+                      and ( meiPy.#1DL25        and (  anPy.#2DL10
+                      and (  anPy.#3SL62        and (  anPy.#2EL41
+                      and (  anPy.#6NL19
+                      and (  anPy.#3PL15        and (  anPy.#3NL16
+                      and (  anPy.#2NL18        and ( meiPy.#2PL17
+                      and (  anPy.#3EL13        and   meiPy.#RMDMY_1G   )))))))))))))
+
+  // +----------------------------------
+  // RES_N+AA without salicide
+  // +----------------------------------
+  RES_N_AA_wo_salicide =                             an.#2IL27        and ( mei.#PW
+                      and (  an.#4IL44        and (  an.#5IL45
+                      and (  an.#1DL25        and ( mei.#2DL10
+                      and (  an.#3SL62        and (  an.#2EL41
+                      and ( mei.#6NL19
+                      and (  an.#3PL15        and (  an.#3NL16
+                      and ( mei.#2NL18        and (  an.#2PL17
+                      and ( mei.#3EL13        and ( mei.#RMDMY_1F     and (  an.#MOS_CAP
+                      and (  an.#DIO          and (  an.#BJT          and    an.#NATIVE      )))))))))))))))))
+
+  RES_N_AA_NSDR =                                    an.#2IL27        and ( mei.#PW
+                      and (  an.#4IL44        and (  an.#5IL45
+                      and (  an.#1DL25        and ( mei.#2DL10
+                      and (  an.#3SL62        and (  an.#2EL41
+                      and ( mei.#6NL19
+                      and (  an.#3PL15        and (  an.#3NL16
+                      and ( mei.#2NL18        and (  an.#2PL17
+                                                                      and (  an.#MOS_CAP
+                      and (  an.#DIO          and (  an.#BJT          and    an.#NATIVE      )))))))))))))))
+  NSDR = (RES_N_AA_NSDR NOT T1GL33) not RMDMY_1F
+
+  // +----------------------------------
+  // RES_P+AA without salicide
+  // +----------------------------------
+  RES_P_AA_wo_salicide =                            mei.#2IL27        and (  an.#PW
+                      and (  an.#4IL44        and (  an.#5IL45
+                      and ( mei.#1DL25        and (  an.#2DL10
+                      and (  an.#3SL62        and (  an.#2EL41
+                      and (  an.#6NL19
+                      and (  an.#3PL15        and (  an.#3NL16
+                      and (  an.#2NL18        and ( mei.#2PL17
+                      and ( mei.#3EL13        and ( mei.#RMDMY_1F     and (  an.#MOS_CAP
+                      and (  an.#DIO          and (  an.#BJT          and    an.#NATIVE      )))))))))))))))))
+
+  RES_P_AA_PSDR =                                   mei.#2IL27        and (  an.#PW
+                      and (  an.#4IL44        and (  an.#5IL45
+                      and ( mei.#1DL25        and (  an.#2DL10
+                      and (  an.#3SL62        and (  an.#2EL41
+                      and (  an.#6NL19
+                      and (  an.#3PL15        and (  an.#3NL16
+                      and (  an.#2NL18        and ( mei.#2PL17
+                                                                      and (  an.#MOS_CAP
+                      and (  an.#DIO          and (  an.#BJT          and    an.#NATIVE      )))))))))))))))
+
+  PSDR = (RES_P_AA_PSDR NOT T1GL33) not RMDMY_1F
+
+  // +----------------------------------
+  // RES_N+POLY without salicide
+  // +----------------------------------
+  RES_N_Poly_wo_salicide =                             anPy.#2IL27        and ( meiPy.#PW
+                      and (  anPy.#4IL44        and (  anPy.#5IL45
+                      and (  anPy.#1DL25        and ( meiPy.#2DL10
+                      and (  anPy.#3SL62        and (  anPy.#2EL41
+                      and ( meiPy.#6NL19
+                      and (  anPy.#3PL15        and (  anPy.#3NL16
+                      and ( meiPy.#2NL18        and (  anPy.#2PL17
+                      and ( meiPy.#3EL13        and   meiPy.#RMDMY_1G   )))))))))))))
+
+  // +----------------------------------
+  // RES_P+POLY without salicide
+  // +----------------------------------
+  RES_P_Poly_wo_salicide =                            meiPy.#2IL27        and (  anPy.#PW
+                      and (  anPy.#4IL44        and (  anPy.#5IL45
+                      and ( meiPy.#1DL25        and (  anPy.#2DL10
+                      and (  anPy.#3SL62        and (  anPy.#2EL41
+                      and (  anPy.#6NL19
+                      and (  anPy.#3PL15        and (  anPy.#3NL16
+                      and (  anPy.#2NL18        and ( meiPy.#2PL17
+                      and ( meiPy.#3EL13        and   meiPy.#RMDMY_1G   )))))))))))))
+
+  // +----------------------------------
+  // NPN BJT 3.3v
+  // +----------------------------------
+  dif_NPN =                 mei.#1IL69        and (  an.#2IL27        and ( mei.#PW
+                      and (  an.#4IL44        and (  an.#5IL45
+                      and (  an.#1DL25        and (  an.#2DL10
+                      and (  an.#3SL62        and ( mei.#2EL41
+                      and ( mei.#6NL19
+                      and (  an.#3PL15        and ( mei.#3NL16
+                      and ( mei.#2NL18        and (  an.#2PL17
+                      and (  an.#3EL13        and (  an.#RMDMY_1F     and (  an.#MOS_CAP
+                      and (  an.#DIO          and ( mei.#BJT          and    an.#NATIVE      ))))))))))))))))))
+
+  // +----------------------------------
+  // PNP BJT 3.3v
+  // +----------------------------------
+  dif_PNP =                  an.#1IL69        and ( mei.#2IL27        and (  an.#PW
+                      and (  an.#4IL44        and (  an.#5IL45
+                      and (  an.#1DL25        and (  an.#2DL10
+                      and (  an.#3SL62        and ( mei.#2EL41
+                      and (  an.#6NL19
+                      and ( mei.#3PL15        and (  an.#3NL16
+                      and (  an.#2NL18        and ( mei.#2PL17
+                      and (  an.#3EL13        and (  an.#RMDMY_1F     and (  an.#MOS_CAP
+                      and (  an.#DIO          and ( mei.#BJT          and    an.#NATIVE      ))))))))))))))))))
+
+  // +----------------------------------
+  // NPN BJT 1.5v
+  // +----------------------------------
+  dif_NPN15 =               mei.#1IL69        and (  an.#2IL27        and ( mei.#PW
+                      and (  an.#4IL44        and (  an.#5IL45
+                      and (  an.#1DL25        and ( mei.#2DL10
+                      and (  an.#3SL62        and (  an.#2EL41
+                      and ( mei.#6NL19
+                      and (  an.#3PL15        and (  an.#3NL16
+                      and ( mei.#2NL18        and (  an.#2PL17
+                      and (  an.#3EL13        and (  an.#RMDMY_1F     and (  an.#MOS_CAP
+                      and (  an.#DIO          and ( mei.#BJT          and    an.#NATIVE      ))))))))))))))))))
+
+  // +----------------------------------
+  // PNP BJT 1.5v
+  // +----------------------------------
+ dif_PNP15 =                 an.#1IL69        and ( mei.#2IL27        and (  an.#PW
+                      and (  an.#4IL44        and (  an.#5IL45
+                      and ( mei.#1DL25        and (  an.#2DL10
+                      and (  an.#3SL62        and (  an.#2EL41
+                      and (  an.#6NL19
+                      and (  an.#3PL15        and (  an.#3NL16
+                      and (  an.#2NL18        and ( mei.#2PL17
+                      and (  an.#3EL13        and (  an.#RMDMY_1F     and (  an.#MOS_CAP
+                      and (  an.#DIO          and ( mei.#BJT          and    an.#NATIVE      ))))))))))))))))))
+
+  // +----------------------------------
+  // Diode N+_PW  1.5v 
+  // +----------------------------------
+  dif_PD_N_PW =              an.#1IL69        and (  an.#2IL27        and ( mei.#PW
+                      and (  an.#4IL44        and (  an.#5IL45
+                      and (  an.#1DL25        and ( mei.#2DL10
+                      and (  an.#3SL62        and (  an.#2EL41
+                      and ( mei.#6NL19
+                      and (  an.#3PL15        and (  an.#3NL16
+                      and ( mei.#2NL18        and (  an.#2PL17
+                      and (  an.#3EL13        and (  an.#RMDMY_1F     and (  an.#MOS_CAP
+                      and ( mei.#DIO          and (  an.#BJT          and    an.#NATIVE      ))))))))))))))))))
+
+  // +----------------------------------
+  // Diode N+_PW  1.5v in DNW
+  // +----------------------------------
+  dif_PD_N_PW_DNW =         mei.#1IL69        and (  an.#2IL27        and ( mei.#PW
+                      and (  an.#4IL44        and (  an.#5IL45
+                      and (  an.#1DL25        and ( mei.#2DL10
+                      and (  an.#3SL62        and (  an.#2EL41
+                      and ( mei.#6NL19
+                      and (  an.#3PL15        and (  an.#3NL16
+                      and ( mei.#2NL18        and (  an.#2PL17
+                      and (  an.#3EL13        and (  an.#RMDMY_1F     and (  an.#MOS_CAP
+                      and ( mei.#DIO          and (  an.#BJT          and    an.#NATIVE      ))))))))))))))))))
+
+  // +----------------------------------
+  // Diode P+_NW  1.5v
+  // +----------------------------------
+  dif_PD_P_NW =                                     mei.#2IL27        and (  an.#PW
+                      and (  an.#4IL44        and (  an.#5IL45
+                      and ( mei.#1DL25        and (  an.#2DL10
+                      and (  an.#3SL62        and (  an.#2EL41
+                      and (  an.#6NL19
+                      and (  an.#3PL15        and (  an.#3NL16
+                      and (  an.#2NL18        and ( mei.#2PL17
+                      and (  an.#3EL13        and (  an.#RMDMY_1F     and (  an.#MOS_CAP
+                      and ( mei.#DIO          and (  an.#BJT          and    an.#NATIVE      )))))))))))))))))
+
+
+  // +----------------------------------
+  // Diode N+_PW  3.3v
+  // +----------------------------------
+  dif_PD_N_PW33 =            an.#1IL69        and (  an.#2IL27        and ( mei.#PW
+                      and (  an.#4IL44        and (  an.#5IL45
+                      and (  an.#1DL25        and (  an.#2DL10
+                      and (  an.#3SL62        and ( mei.#2EL41
+                      and ( mei.#6NL19
+                      and (  an.#3PL15        and ( mei.#3NL16
+                      and ( mei.#2NL18        and (  an.#2PL17
+                      and ( an.#3EL13         and (  an.#RMDMY_1F     and (  an.#MOS_CAP
+                      and ( mei.#DIO          and (  an.#BJT          and    an.#NATIVE      ))))))))))))))))))
+
+  // +----------------------------------
+  // Diode N+_PW  3.3v in DNW
+  // +----------------------------------
+  dif_PD_N_PW_DNW33 =       mei.#1IL69        and (  an.#2IL27        and ( mei.#PW
+                      and (  an.#4IL44        and (  an.#5IL45
+                      and (  an.#1DL25        and (  an.#2DL10
+                      and (  an.#3SL62        and ( mei.#2EL41
+                      and ( mei.#6NL19
+                      and (  an.#3PL15        and ( mei.#3NL16
+                      and ( mei.#2NL18        and (  an.#2PL17
+                      and ( an.#3EL13         and (  an.#RMDMY_1F     and (  an.#MOS_CAP
+                      and ( mei.#DIO          and (  an.#BJT          and    an.#NATIVE      ))))))))))))))))))
+
+  // +----------------------------------
+  // Diode P+_NW  3.3v
+  // +----------------------------------
+  dif_PD_P_NW33 =                                   mei.#2IL27        and (  an.#PW
+                      and (  an.#4IL44        and (  an.#5IL45
+                      and (  an.#1DL25        and (  an.#2DL10
+                      and (  an.#3SL62        and ( mei.#2EL41
+                      and (  an.#6NL19
+                      and ( mei.#3PL15        and (  an.#3NL16
+                      and (  an.#2NL18        and ( mei.#2PL17
+                      and (  an.#3EL13        and (  an.#RMDMY_1F     and (  an.#MOS_CAP
+                      and ( mei.#DIO          and (  an.#BJT          and    an.#NATIVE      )))))))))))))))))
+
+  // +----------------------------------
+  // LDN LD-NMOS 
+  // +----------------------------------
+  //Drain Node
+  dif_LDN_Drain = (((((((((((((((((((1FL31
+        NOT     1GL33    ) ENCLOSE 1CL35   )
+        OUTSIDE 1IL69    ) OUTSIDE 2IL27   ) OUTSIDE PW)
+        INSIDE  4IL44    ) OUTSIDE 5IL45   )
+        OUTSIDE 1DL25    ) OUTSIDE 2DL10   )
+        OUTSIDE 3SL62    ) INSIDE  2EL41   ) 
+        OUTSIDE 3PL15    ) INSIDE  3NL16   ) 
+        INSIDE  2NL18    ) OUTSIDE 2PL17   ) 
+        OUTSIDE 3EL13    ) OUTSIDE RMDMY_1F)
+        OUTSIDE DIODE    ) OUTSIDE BJTL236 )
+        OUTSIDE NATIVE
+
+  //Source Node
+  dif_LDN_Source_NON_BUTTED = (((((((((((((((((((1FL31
+        NOT     1GL33    ) ENCLOSE 1CL35   )
+        OUTSIDE 1IL69    ) OUTSIDE 2IL27   ) INSIDE PW)
+        OUTSIDE 4IL44    ) OUTSIDE 5IL45   )
+        OUTSIDE 1DL25    ) OUTSIDE 2DL10   )
+        OUTSIDE 3SL62    ) INSIDE  2EL41   )
+        OUTSIDE 3PL15    ) INSIDE  3NL16   )
+        INSIDE  2NL18    ) OUTSIDE 2PL17   )
+        OUTSIDE 3EL13    ) OUTSIDE RMDMY_1F)
+        OUTSIDE DIODE    ) OUTSIDE BJTL236 )
+        OUTSIDE NATIVE
+
+  // +----------------------------------
+  // LDNI LD-NMOS in DNW
+  // +----------------------------------
+  //Drain Node
+  dif_LDNI_Drain = (((((((((((((((((((1FL31
+        NOT     1GL33    ) ENCLOSE 1CL35   )
+        INSIDE  1IL69    ) OUTSIDE 2IL27   ) OUTSIDE PW)
+        INSIDE  4IL44    ) OUTSIDE 5IL45   )
+        OUTSIDE 1DL25    ) OUTSIDE 2DL10   )
+        OUTSIDE 3SL62    ) INSIDE  2EL41   )
+        OUTSIDE 3PL15    ) INSIDE  3NL16   )
+        INSIDE  2NL18    ) OUTSIDE 2PL17   )
+        OUTSIDE 3EL13    ) OUTSIDE RMDMY_1F)
+        OUTSIDE DIODE    ) OUTSIDE BJTL236 )
+        OUTSIDE NATIVE
+
+  //Source Node
+  dif_LDNI_Source_NON_BUTTED = (((((((((((((((((((1FL31
+        NOT     1GL33    ) ENCLOSE 1CL35   )
+        INSIDE  1IL69    ) OUTSIDE 2IL27   ) INSIDE PW)
+        OUTSIDE 4IL44    ) OUTSIDE 5IL45   )
+        OUTSIDE 1DL25    ) OUTSIDE 2DL10   )
+        OUTSIDE 3SL62    ) INSIDE  2EL41   )
+        OUTSIDE 3PL15    ) INSIDE  3NL16   )
+        INSIDE  2NL18    ) OUTSIDE 2PL17   )
+        OUTSIDE 3EL13    ) OUTSIDE RMDMY_1F)
+        OUTSIDE DIODE    ) OUTSIDE BJTL236 )
+        OUTSIDE NATIVE
+
+
+  // +----------------------------------
+  // LDP LD-PMOS
+  // +----------------------------------
+  //Drain Node
+  dif_LDP_Drain = ((((((((((((((((((((1FL31
+        NOT     1GL33    ) ENCLOSE 1CL35   )
+        INSIDE  1IL69    ) OUTSIDE 2IL27   ) OUTSIDE PW)
+        OUTSIDE 4IL44    ) INSIDE 5IL45    )
+        OUTSIDE 1DL25    ) OUTSIDE 2DL10   )
+        OUTSIDE 3SL62    ) INSIDE  2EL41   )
+        INSIDE  6NL19    )
+        INSIDE  3PL15    ) OUTSIDE 3NL16   )
+        OUTSIDE 2NL18    ) INSIDE  2PL17   ) 
+        OUTSIDE 3EL13    ) OUTSIDE RMDMY_1F)
+        OUTSIDE DIODE    ) OUTSIDE BJTL236 )
+        OUTSIDE NATIVE
+
+  //Source Node
+  dif_LDP_Source_NON_BUTTED = ((((((((((((((((((((1FL31
+        NOT     1GL33    ) ENCLOSE 1CL35   )
+        INSIDE  1IL69    ) INSIDE  2IL27   ) OUTSIDE PW)
+        OUTSIDE 4IL44    ) OUTSIDE 5IL45   )
+        OUTSIDE 1DL25    ) OUTSIDE 2DL10   )
+        OUTSIDE 3SL62    ) INSIDE  2EL41   )
+        INSIDE  6NL19    )
+        INSIDE  3PL15    ) OUTSIDE 3NL16   )
+        OUTSIDE 2NL18    ) INSIDE  2PL17   )
+        OUTSIDE 3EL13    ) OUTSIDE RMDMY_1F)
+        OUTSIDE DIODE    ) OUTSIDE BJTL236 )
+        OUTSIDE NATIVE
+
+
+
+
+out_dif_NLVN      { copy dif_NLVN }
+out_dif_PLVP      { copy dif_PLVP }
+out_dif_NMVN      { copy dif_NMVN }
+out_dif_PMVP      { copy dif_PMVP }
+out_dif_NLVNI     { copy dif_NLVNI }
+out_dif_NMVNI     { copy dif_NMVNI }
+out_dif_NMVN_ESD  { copy dif_NMVN_ESD }
+out_dif_NMVNI_ESD { copy dif_NMVNI_ESD }
+out_dif_PMVP_ESD  { copy dif_PMVP_ESD }
+out_dif_NLVZ      { copy dif_NLVZ }
+out_dif_NMVZ      { copy dif_NMVZ }
+out_dif_NCHC      { copy dif_NCHC }
+out_dif_NCHCI     { copy dif_NCHCI }
+out_dif_NCHCP15   { copy dif_NCHCP15 }
+out_dif_NCHCP33   { copy dif_NCHCP33 }
+out_dif_NCHC15    { copy dif_NCHC15 }
+out_dif_NCHC33    { copy dif_NCHC33 }
+out_dif_PCHC15    { copy dif_PCHC15 }
+out_dif_PCHC33    { copy dif_PCHC33 }
+out_RES_N_AA      { copy RES_N_AA }
+out_RES_P_AA      { copy RES_P_AA }
+out_RES_N_Poly    { copy RES_N_Poly }
+out_RES_P_Poly    { copy RES_P_Poly }
+out_RES_N_AA_wo_salicide      { copy RES_N_AA_wo_salicide }
+out_RES_P_AA_wo_salicide      { copy RES_P_AA_wo_salicide }
+out_RES_N_Poly_wo_salicide    { copy RES_N_Poly_wo_salicide }
+out_RES_P_Poly_wo_salicide    { copy RES_P_Poly_wo_salicide }
+out_dif_NPN                   { copy dif_NPN }
+out_dif_PNP                   { copy dif_PNP }
+out_dif_NPN15                 { copy dif_NPN15 }
+out_dif_PNP15                 { copy dif_PNP15 }
+out_dif_PD_N_PW               { copy dif_PD_N_PW }
+out_dif_PD_N_PW_DNW           { copy dif_PD_N_PW_DNW }
+out_dif_PD_P_NW               { copy dif_PD_P_NW }
+out_dif_PD_N_PW33             { copy dif_PD_N_PW33 }
+out_dif_PD_N_PW_DNW33         { copy dif_PD_N_PW_DNW33 }
+out_dif_PD_P_NW33             { copy dif_PD_P_NW33 }
+out_dif_LDN_Drain             { copy dif_LDN_Drain }
+out_dif_LDN_Source_NON_BUTTED { copy dif_LDN_Source_NON_BUTTED }
+out_dif_LDNI_Drain             { copy dif_LDNI_Drain }
+out_dif_LDNI_Source_NON_BUTTED { copy dif_LDNI_Source_NON_BUTTED }
+out_dif_LDP_Drain             { copy dif_LDP_Drain }
+out_dif_LDP_Source_NON_BUTTED { copy dif_LDP_Source_NON_BUTTED }
+//out_ { copy  }
+//out_ { copy  }
+//out_ { copy  }
+
+
+//////////////////////////////////////////
+// Transistor Definition
+/////////////////////////////////////////
+                                                                                                                
+  NLVN       = 1.5_NTR and dif_NLVN
+  NLVNI      = (1.5_NTR and dif_NLVNI) not SRAM
+  PLVP       = (1.5_PTR and dif_PLVP) not SRAM
+  NMVN       = 3.3_NTR and dif_NMVN
+  NMVNI      = 3.3_NTR and dif_NMVNI
+  PMVP       = 3.3_PTR and dif_PMVP
+  NCHC       = (3.3_NTR and dif_NCHC)  and 3SL62
+  NCHCI      = (3.3_NTR and dif_NCHCI) and 3SL62
+
+  NCHCP15    = (1.5_NTR and dif_NCHCP15)  not 3SL62
+  NCHCP33    = (3.3_NTR and dif_NCHCP33)  not 3SL62
+  NCHC15     = (TR and dif_NCHC15)  not 3SL62
+  NCHC33     = (TR and dif_NCHC33)  not 3SL62
+  PCHC15     = (1.5_PTR and dif_PCHC15)  not 3SL62
+  PCHC33     = (3.3_PTR and dif_PCHC33)  not 3SL62
+  NMVNESD    = 3.3_NTR and dif_NMVN_ESD
+  NMVNIESD   = 3.3_NTR and dif_NMVNI_ESD
+  PMVPESD    = 3.3_PTR and dif_PMVP_ESD
+  NLVZ       = 1.5_NTR_NATIVE and dif_NLVZ
+  NMVZ       = 3.3_NTR_NATIVE and dif_NMVZ
+  
+  NCHC_A     = (dif_NCHC and 3SL62) not NCHC
+  NCHC_G     = 1GL33 and NCHC 
+  NCHCI_A    = (dif_NCHCI and 3SL62) not NCHCI 
+  NCHCI_G    = 1GL33 and NCHCI 
+  NCHCP15_A  = (dif_NCHCP15 not 3SL62) not NCHCP15 
+  NCHCP15_G  = 1GL33 and NCHCP15
+  NCHCP33_A  = (dif_NCHCP33 not 3SL62) not NCHCP33 
+  NCHCP33_G  = 1GL33 and NCHCP33
+  NCHC15_A   = (dif_NCHC15 not 3SL62) not NCHC15 
+  NCHC15_G   = 1GL33 and NCHC15 
+  NCHC33_A   = (dif_NCHC33 not 3SL62) not NCHC33 
+  NCHC33_G   = 1GL33 and NCHC33 
+  PCHC15_A   = (dif_PCHC15 not 3SL62) not PCHC15 
+  PCHC15_G   = 1GL33 and PCHC15 
+  PCHC33_A   = (dif_PCHC33 not 3SL62) not PCHC33 
+  PCHC33_G   = 1GL33 and PCHC33 
+
+  NLDN  = (((1FL31 AND 1GL33)
+                                      TOUCH    dif_LDN_Source_NON_BUTTED  == 1)
+        INTERACT 2NL18          == 1) INTERACT 4IL44                      == 1
+ 
+  NLDNI = (((1FL31 AND 1GL33)
+                                      TOUCH    dif_LDNI_Source_NON_BUTTED == 1)
+        INTERACT 2NL18          == 1) INTERACT 4IL44                      == 1
+
+  PLDP  = (((1FL31 AND 1GL33)
+                                      TOUCH    dif_LDP_Source_NON_BUTTED  == 1)
+        INTERACT 2PL17          == 1) INTERACT 5IL45                      == 1
+
+
+out_NLDN  { copy NLDN  }
+out_NLDNI { copy NLDNI }
+out_PLDP  { copy PLDP  }
+out_NCHC15    { copy NCHC15  }
+out_NCHC15_A  { copy NCHC15_A  }
+out_NCHC15_G  { copy NCHC15_G  }
+out_NCHC33    { copy NCHC33  }
+out_NCHC33_A  { copy NCHC33_A  }
+out_NCHC33_G  { copy NCHC33_G  }
+
+
+////////////////////////////////////////
+// Connection
+///////////////////////////////////////
+
+GATE = ((((((((((((NLVN or PLVP) or NMVN) or PMVP) or NLVNI) or NMVNI) or NMVNESD) or NMVNIESD) or PMVPESD) or NLVZ) or NMVZ
+       ) or NLDN) or NLDNI) or PLDP   
+
+XRC_NSD = (((((NSD or NSDR) or NSD_NATIVE) or dif_LDN_Drain) or dif_LDN_Source_NON_BUTTED) or dif_LDNI_Drain) or dif_LDNI_Source_NON_BUTTED
+
+XRC_PSD = ((PSD or PSDR) or dif_LDP_Drain) or dif_LDP_Source_NON_BUTTED
+
+sconnect  1GL33    NLVN
+sconnect  1GL33    NLVNI
+sconnect  1GL33    PLVP
+sconnect  1GL33    NMVN
+sconnect  1GL33    NMVNI
+sconnect  1GL33    PMVP
+sconnect  1GL33    NMVNESD
+sconnect  1GL33    NMVNIESD
+sconnect  1GL33    PMVPESD
+sconnect  1GL33    NLVZ
+sconnect  1GL33    NMVZ
+sconnect  1GL33    NLDN
+sconnect  1GL33    NLDNI
+sconnect  1GL33    PLDP
+
+sconnect  XRC_NSD  NSD
+sconnect  XRC_NSD  NSDR
+sconnect  XRC_NSD  NSD_NATIVE
+sconnect  4IL44 dif_LDN_Drain by 4ICNT 
+sconnect  XRC_NSD  dif_LDN_Drain
+sconnect  XRC_NSD  dif_LDN_Source_NON_BUTTED
+sconnect  4IL44 dif_LDNI_Drain by 4ICNT 
+sconnect  XRC_NSD  dif_LDNI_Drain
+sconnect  XRC_NSD  dif_LDNI_Source_NON_BUTTED
+sconnect  XRC_PSD  PSD
+sconnect  XRC_PSD  PSDR
+sconnect  5IL45 dif_LDP_Drain by 5ICNT 
+sconnect  XRC_PSD  dif_LDP_Drain
+sconnect  XRC_PSD  dif_LDP_Source_NON_BUTTED
+
+sconnect  1GL33    NTRMG
+sconnect  1GL33    PTRM
+sconnect  1GL33    NTRM
+sconnect  1GL33    NTRMG.8T
+sconnect  1GL33    PTRM.8T
+sconnect  1GL33    NTRM.8T
+
+#ifdef 1P5M
+connect  3KL103    4ML59      by  3T_MIM
+connect  4KL104    TML115     by  TV_MIM
+
+connect  GATE      1GL33
+connect  4ML59     TML115     by  TVL124
+connect  3ML58     4ML59      by  3TL57
+connect  2ML32     3ML58      by  2TL56
+connect  1ML36     2ML32      by  1TL55
+connect  1ML36     1GL33      by  CT_G
+connect  1ML36     XRC_NSD    by  CT_DN
+connect  1ML36     XRC_PSD    by  CT_DP
+connect  1ML36     NWELCNT    by  1CL35
+connect  1ML36     PWELCNT    by  1CL35
+connect  1ML36     4ICNT      by  1CL35
+connect  1ML36     5ICNT      by  1CL35
+connect  XRC_NSD   XRC_PSD
+
+#else
+
+#ifdef 1P4M 
+connect  3KL103    TML115     by  TV_MIM
+
+connect  GATE      1GL33
+connect  3ML58     TML115     by  TVL124
+connect  2ML32     3ML58      by  2TL56
+connect  1ML36     2ML32      by  1TL55
+connect  1ML36     1GL33      by  CT_G
+connect  1ML36     XRC_NSD    by  CT_DN
+connect  1ML36     XRC_PSD    by  CT_DP
+connect  1ML36     NWELCNT    by  1CL35
+connect  1ML36     PWELCNT    by  1CL35
+connect  1ML36     4ICNT      by  1CL35
+connect  1ML36     5ICNT      by  1CL35
+connect  XRC_NSD   XRC_PSD
+#endif
+#endif
+
+
+PW_DNW = PW NOT DNW
+
+connect  NWELCNT    NW
+connect  PWELCNT    PW
+connect  PWELCNT    PW_DNW
+connect  4ICNT      4IL44
+connect  5ICNT      5IL45 
+sconnect  NW         DNW
+sconnect  PW_DNW     SUBSTRATE
+
+
+
+
+#ifdef 1P5M
+SCONNECT        4ML59              R4_T
+SCONNECT        3ML58              R3_T
+SCONNECT        2ML32              R2_T
+SCONNECT        1ML36              R1_T
+
+#else
+
+#ifdef 1P4M
+SCONNECT        3ML58              R3_T
+SCONNECT        2ML32              R2_T
+SCONNECT        1ML36              R1_T
+#endif
+#endif
+
+//LVS SOFTCHK   NW          UPPER //ALL
+//LVS SOFTCHK   PW          UPPER //ALL
+LVS SOFTCHK   DNW         UPPER //ALL
+LVS SOFTCHK   SUBSTRATE   UPPER //ALL
+
+
+
+
+  sconnect  1GL33  NCHC_G
+  connect   1ML36  NCHC_A    by  1CL35
+  sconnect  1GL33  NCHCI_G
+  connect   1ML36  NCHCI_A   by  1CL35
+  sconnect  1GL33  NCHCP15_G
+  connect   1ML36  NCHCP15_A by  1CL35
+  sconnect  1GL33  NCHCP33_G
+  connect   1ML36  NCHCP33_A by  1CL35
+  sconnect  1GL33  NCHC15_G
+  connect   1ML36  NCHC15_A  by  1CL35
+  sconnect  1GL33  NCHC33_G
+  connect   1ML36  NCHC33_A  by  1CL35
+  sconnect  1GL33  PCHC15_G
+  connect   1ML36  PCHC15_A  by  1CL35
+  sconnect  1GL33  PCHC33_G
+  connect   1ML36  PCHC33_A  by  1CL35
+
+
+// ============================================================================================== 
+//-- SRAM transistor ---
+//6T SRAM Transistor W/L Setting
+
+#ifdef SRAM_PTC ON 
+
+variable pm.w   0.20                    //Pull Load W
+variable pm.l   0.19                    //Pull Load L
+variable nm.w   0.30                    //Pull Down W
+variable nm.l   0.19                    //Pull Down L
+variable ng.w   0.20                    //Pass Gate W
+variable ng.l   0.195                   //Pass Gate L
+
+#else
+
+variable pm.w   0.16                    //Pull Load W
+variable pm.l   0.15                    //Pull Load L
+variable nm.w   0.22                    //Pull Down W
+variable nm.l   0.13                    //Pull Down L
+variable ng.w   0.15                    //Pass Gate W
+variable ng.l   0.175                   //Pass Gate L
+
+#endif
+
+SHARE_TR = ((dif_NLVNI OR dif_PLVP) AND 1GL33) INTERACT 1CL35
+NTRMG_W = INT (dif_NLVNI   INSIDE EDGE 1GL33)  == ng.w ABUT<90 OPPOSITE REGION
+NTRMG_L = INT (1GL33 INSIDE EDGE dif_NLVNI  )  == ng.l ABUT<90 OPPOSITE REGION
+NTRMG_A = NTRMG_W AND NTRMG_L
+PTRM_W = INT (dif_PLVP   INSIDE EDGE 1GL33)  == pm.w ABUT<90 OPPOSITE REGION
+PTRM_L = INT (1GL33 INSIDE EDGE dif_PLVP  )  == pm.l ABUT<90 OPPOSITE REGION
+PTRM_A = PTRM_W AND PTRM_L
+NTRM_W = INT (dif_NLVNI   INSIDE EDGE 1GL33)  == nm.w ABUT<90 OPPOSITE REGION
+NTRM_L = INT (1GL33 INSIDE EDGE dif_NLVNI  )  == nm.l ABUT<90 OPPOSITE REGION
+NTRM_A = NTRM_W AND NTRM_L
+NTRMG =(((dif_NLVNI INSIDE  (SRAM not SRAM_8T)) AND 1GL33) NOT SHARE_TR) ENCLOSE NTRMG_A         //6T SRAM NMOS (PG)
+PTRM = (((dif_PLVP  INSIDE  (SRAM not SRAM_8T)) AND 1GL33) NOT SHARE_TR) ENCLOSE PTRM_A          //6T SRAM PMOS (PL)
+NTRM = (((dif_NLVNI INSIDE  (SRAM not SRAM_8T)) AND 1GL33) NOT SHARE_TR) ENCLOSE NTRM_A          //6T SRAM NMOS (PD)
+
+out_NTRMG { copy NTRMG } 
+out_PTRM  { copy PTRM }  
+out_NTRM  { copy NTRM }  
+
+
+//8T SRAM Transistor W/L Setting
+variable pm.w.8T   0.15                    //Pull Load W
+variable pm.l.8T   0.135                   //Pull Load L
+variable nm.w.8T   0.60                    //Pull Down W - 8T different
+variable nm.l.8T   0.13                    //Pull Down L
+variable ng.w.8T   0.15                    //Pass Gate W
+variable ng.l.8T   0.15                    //Pass Gate L
+
+//SHARE_TR = ((dif_NLVNI OR dif_PLVP) AND 1GL33) INTERACT 1CL35
+NTRMG_W.8T = INT (dif_NLVNI   INSIDE EDGE 1GL33)  == ng.w.8T ABUT<90 OPPOSITE REGION
+NTRMG_L.8T = INT (1GL33 INSIDE EDGE dif_NLVNI  )  == ng.l.8T ABUT<90 OPPOSITE REGION
+NTRMG_A.8T = NTRMG_W.8T AND NTRMG_L.8T
+PTRM_W.8T = INT (dif_PLVP   INSIDE EDGE 1GL33)  == pm.w.8T ABUT<90 OPPOSITE REGION
+PTRM_L.8T = INT (1GL33 INSIDE EDGE dif_PLVP  )  == pm.l.8T ABUT<90 OPPOSITE REGION
+PTRM_A.8T = PTRM_W.8T AND PTRM_L.8T
+NTRM_W.8T = INT (dif_NLVNI   INSIDE EDGE 1GL33)  == nm.w.8T ABUT<90 OPPOSITE REGION
+NTRM_L.8T = INT (1GL33 INSIDE EDGE dif_NLVNI  )  == nm.l.8T ABUT<90 OPPOSITE REGION
+NTRM_A.8T = NTRM_W.8T AND NTRM_L.8T
+NTRMG.8T =(((dif_NLVNI INSIDE  (SRAM AND SRAM_8T)) AND 1GL33) NOT SHARE_TR) ENCLOSE NTRMG_A.8T      //8T SRAM NMOS (PG)
+PTRM.8T = (((dif_PLVP  INSIDE  (SRAM AND SRAM_8T)) AND 1GL33) NOT SHARE_TR) ENCLOSE PTRM_A.8T       //8T SRAM PMOS (PL)
+NTRM.8T = (((dif_NLVNI INSIDE  (SRAM AND SRAM_8T)) AND 1GL33) NOT SHARE_TR) ENCLOSE NTRM_A.8T       //8T SRAM NMOS (PD)
+
+out_NTRMG.8T { copy NTRMG.8T }
+out_PTRM.8T  { copy PTRM.8T }
+out_NTRM.8T  { copy NTRM.8T }
+
+//-- SRAM transistor END ---
+// ============================================================================================== 
+
+
+//////////////////////////////////////////
+// MIM capacitor
+//////////////////////////////////////////
+//Defining on CAD LAYER DEFINITION
+//3T_MIM     = 3TL57  AND 3KL103    //4M-3T-3K-3M
+//TV_MIM     = TVL124 AND 4KL104    //TM-TV-4K-4M
+
+#ifdef 1P5M 
+CM3K           = (3KL103    INSIDE 4ML59 ) NOT Shield_3K
+CM3K_shield    = (3KL103    INSIDE 4ML59 ) AND (3ML58 AND Shield_3K)
+CM4K           = (4KL104    INSIDE TML115) NOT Shield_4K
+CM4K_shield    = (4KL104    INSIDE TML115) AND (4ML59 AND Shield_4K)
+
+out_CM3K        { copy CM3K }
+out_CM3K_shield { copy CM3K_shield }
+out_CM4K        { copy CM4K }
+out_CM4K_shield { copy CM4K_shield }
+
+#else
+
+#ifdef 1P4M
+CM3K           = 3KL103    INSIDE TML115
+
+out_CM3K        { copy CM3K }
+#endif
+#endif
+
+//////////////////////////////////////////
+// Device Extraction
+//////////////////////////////////////////
+                                                                                                                
+// +-------------------------------------------------------------------------
+// |          schema        layout     (g)  (s)  (d)  (b)
+// +-------------------------------------------------------------------------
+   //--- MOS ---------------------------------------
+lvs netlist allow inconsistent model yes
+
+1F_REF = ( 1FL31 NOT NWELCNT ) NOT PWELCNT  
+1G_REF = ((NLDN AND PW) OR (NLDNI AND PW)) OR(PLDP AND NW) 
+
+#IFDEF rc_deck
+dmacro	mosprop	devlay {
+[       property        W,L,AS,AD,PD,PS,NRD,NRS
+W       =       (perimeter_coincide(devlay,S)+perimeter_coincide(devlay,D))/2
+L       =       area(devlay)/W
+     
+     PI_S_OD = perimeter_inside(S,1F_REF)
+     PI_D_OD = perimeter_inside(D,1F_REF)
+     IF(PI_S_OD == 0) {                     // Shorted S/D - assign half to each side.
+       AD = area(D) * W / PI_D_OD / 2
+       AS = AD
+       PD = perimeter(D) * W / PI_D_OD / 2
+       PS = PD
+     }
+     ELSE IF(PI_D_OD == 0) {                // Shorted S/D - assign half to each side.
+       AS = area(S) * W / PI_S_OD / 2
+       AD = AS
+       PS = perimeter(S) * W / PI_S_OD / 2
+       PD = PS
+     }
+     ELSE {                                 // Regular case.
+      AS = area(S) * W / PI_S_OD
+      AD = area(D) * W / PI_D_OD
+      PS = perimeter(S) * W / PI_S_OD
+      PD = perimeter(D) * W / PI_D_OD
+     }
+   #IFDEF ZERO_NRS_NRD
+     NRS = 0
+     NRD = 0
+   #ELSE
+     NRS = AS / W / W
+     NRD = AD / W / W
+   #ENDIF
+] 
+}
+
+dmacro  ldmosprop devlay {
+[       property        W,L,AS,AD,PD,PS,NRD,NRS
+W       =       perimeter_coincide(1G_REF,S)
+L       =       area(1G_REF)/W
+
+     PI_S_OD = perimeter_inside(S,1F_REF)
+     PI_D_OD = perimeter_inside(D,1F_REF)
+     IF(PI_S_OD == 0) {                     // Shorted S/D - assign half to each side.
+       AD = area(D) * W / PI_D_OD / 2
+       AS = AD
+       PD = perimeter(D) * W / PI_D_OD / 2
+       PS = PD
+     }
+     ELSE IF(PI_D_OD == 0) {                // Shorted S/D - assign half to each side.
+       AS = area(S) * W / PI_S_OD / 2
+       AD = AS
+       PS = perimeter(S) * W / PI_S_OD / 2
+       PD = PS
+     }
+     ELSE {                                 // Regular case.
+      AS = area(S) * W / PI_S_OD
+      AD = area(D) * W / PI_D_OD
+      PS = perimeter(S) * W / PI_S_OD
+      PD = perimeter(D) * W / PI_D_OD
+     }
+   #IFDEF ZERO_NRS_NRD
+     NRS = 0
+     NRD = 0
+   #ELSE
+     NRS = AS / W / W
+     NRD = AD / W / W
+   #ENDIF
+]
+}
+
+
+#ELSE
+dmacro  mosprop devlay {
+[       property        W,L
+W       =       (perimeter_coincide(s,devlay)+perimeter_coincide(d,devlay))/2
+L       =       area(devlay)/W ]
+}
+
+dmacro  ldmosprop devlay {
+[       property        W,L
+W       =       perimeter_coincide(1G_REF,S)
+L       =       area(1G_REF)/W ]
+}
+
+#ENDIF
+
+#IFDEF rc_deck
+   device m ( lvn       )  NLVN   NLVN(g)    NSD(s)  NSD(d)  PW(b)  <1F_REF>  netlist model lvn  //
+   cmacro mosprop          NLVN		
+   device m ( lvni      )  NLVNI  NLVNI(g)   NSD(s)  NSD(d)  PW(b)  <1F_REF>  netlist model lvn //
+   cmacro mosprop          NLVNI		
+   device m ( lvp       )  PLVP   PLVP(g)    PSD(s)  PSD(d)  NW(b)  <1F_REF>  netlist model lvp //
+   cmacro mosprop          PLVP		
+   device m ( hvn       )  NMVN   NMVN(g)    NSD(s)  NSD(d)  PW(b)  <1F_REF>  netlist model hvn //
+   cmacro mosprop          NMVN		
+   device m ( hvni      )  NMVNI  NMVNI(g)   NSD(s)  NSD(d)  PW(b)  <1F_REF>  netlist model hvn //
+   cmacro mosprop          NMVNI		
+   device m ( hvp       )  PMVP   PMVP(g)    PSD(s)  PSD(d)  NW(b)  <1F_REF>  netlist model hvp //
+   cmacro mosprop          PMVP		
+   device m ( hvnesd    )  NMVNESD   NMVNESD(g)    NSD(s)  NSD(d)  PW(b)  <1F_REF>  netlist model hvnesd //
+   cmacro mosprop          NMVNESD
+   device m ( hvniesd   )  NMVNIESD  NMVNIESD(g)   NSD(s)  NSD(d)  PW(b)  <1F_REF>  netlist model hvnesd //
+   cmacro mosprop          NMVNIESD
+   device m ( hvpesd    )  PMVPESD   PMVPESD(g)    PSD(s)  PSD(d)  NW(b)  <1F_REF>  netlist model hvpesd //
+   cmacro mosprop          PMVPESD
+   device m ( lvz       )  NLVZ   NLVZ(g)    NSD_NATIVE(s)  NSD_NATIVE(d)  SUBSTRATE(b)  <1F_REF>  netlist model lvz //
+   cmacro mosprop          NLVZ
+   device m ( hvz       )  NMVZ   NMVZ(g)    NSD_NATIVE(s)  NSD_NATIVE(d)  SUBSTRATE(b)  <1F_REF>  netlist model hvz //
+   cmacro mosprop          NMVZ
+   device m ( ldn       )  NLDN     1GL33(g)   dif_LDN_Source_NON_BUTTED(s)   4IL44(d)  PW(b) <1F_REF> <1G_REF> netlist model ldn //
+   cmacro ldmosprop        NLDN
+   device m ( ldni      )  NLDNI    1GL33(g)   dif_LDNI_Source_NON_BUTTED(s)  4IL44(d)  PW(b) <1F_REF> <1G_REF> netlist model ldn //
+   cmacro ldmosprop        NLDNI
+   device m ( ldp       )  PLDP     1GL33(g)   dif_LDP_Source_NON_BUTTED(s)   5IL45(d)  NW(b) <1F_REF> <1G_REF> netlist model ldp //
+   cmacro ldmosprop        PLDP 
+
+
+//-- SRAM transistor ---
+//-- 6T SRAM ---
+   device m ( lvpgn       )  NTRMG  NTRMG(g)    NSD(s)  NSD(d)  PW(b)  <1F_REF>  netlist model pgn  //
+   cmacro mosprop          NTRMG
+   device m ( lvplp       )  PTRM   PTRM(g)     PSD(s)  PSD(d)  NW(b)  <1F_REF>  netlist model plp  //
+   cmacro mosprop          PTRM
+   device m ( lvpdn       )  NTRM   NTRM(g)     NSD(s)  NSD(d)  PW(b)  <1F_REF>  netlist model pdn  // 
+   cmacro mosprop          NTRM
+
+//-- 8T SRAM ---
+   device m ( lvpgn       )  NTRMG.8T  NTRMG.8T(g)    NSD(s)  NSD(d)  PW(b)  <1F_REF>  netlist model pgn  //
+   cmacro mosprop          NTRMG.8T
+   device m ( lvplp       )  PTRM.8T   PTRM.8T(g)     PSD(s)  PSD(d)  NW(b)  <1F_REF>  netlist model plp  //
+   cmacro mosprop          PTRM.8T
+   device m ( lvpdn       )  NTRM.8T   NTRM.8T(g)     NSD(s)  NSD(d)  PW(b)  <1F_REF>  netlist model pdn  //
+   cmacro mosprop          NTRM.8T
+//-- SRAM transistor END ---
+
+#ELSE
+   device m ( lvn       )  NLVN     1GL33(g)   NSD(s)  NSD(d)  PW(b)  //
+   cmacro mosprop       NLVN
+   device m ( lvni      )  NLVNI    1GL33(g)   NSD(s)  NSD(d)  PW(b)  //
+   cmacro mosprop       NLVNI
+   device m ( lvp       )  PLVP     1GL33(g)   PSD(s)  PSD(d)  NW(b)  //
+   cmacro mosprop       PLVP
+   device m ( hvn       )  NMVN     1GL33(g)   NSD(s)  NSD(d)  PW(b)  //
+   cmacro mosprop       NMVN
+   device m ( hvni      )  NMVNI    1GL33(g)   NSD(s)  NSD(d)  PW(b)  //
+   cmacro mosprop       NMVNI
+   device m ( hvp       )  PMVP     1GL33(g)   PSD(s)  PSD(d)  NW(b)  //
+   cmacro mosprop       PMVP
+   device m ( hvnesd    )  NMVNESD  1GL33(g)   NSD(s)  NSD(d)  PW(b)  //
+   cmacro mosprop       NMVNESD
+   device m ( hvniesd   )  NMVNIESD 1GL33(g)   NSD(s)  NSD(d)  PW(b)  //
+   cmacro mosprop       NMVNIESD
+   device m ( hvpesd    )  PMVPESD  1GL33(g)   PSD(s)  PSD(d)  NW(b)  //
+   cmacro mosprop       PMVPESD
+   device m ( lvz       )  NLVZ     1GL33(g)   NSD_NATIVE(s)  NSD_NATIVE(d)  SUBSTRATE(b)  //
+   cmacro mosprop       NLVZ
+   device m ( hvz       )  NMVZ     1GL33(g)   NSD_NATIVE(s)  NSD_NATIVE(d)  SUBSTRATE(b)  //
+   cmacro mosprop       NMVZ
+   device m ( ldn       )  NLDN     1GL33(g)   dif_LDN_Source_NON_BUTTED(s)   4IL44(d)  PW(b) <1G_REF> //
+   cmacro ldmosprop     NLDN
+   device m ( ldni      )  NLDNI    1GL33(g)   dif_LDNI_Source_NON_BUTTED(s)  4IL44(d)  PW(b) <1G_REF> // 
+   cmacro ldmosprop     NLDNI
+   device m ( ldp       )  PLDP     1GL33(g)   dif_LDP_Source_NON_BUTTED(s)   5IL45(d)  NW(b) <1G_REF> // 
+   cmacro ldmosprop     PLDP 
+
+
+//-- SRAM transistor ---
+//-- 6T SRAM ---
+   device m ( lvpgn       )  NTRMG   NTRMG(g)   NSD(s)  NSD(d)  PW(b)  //
+   cmacro mosprop  NTRMG
+   device m ( lvplp       )  PTRM   PTRM(g)     PSD(s)  PSD(d)  NW(b)  //
+   cmacro mosprop  PTRM
+   device m ( lvpdn       )  NTRM   NTRM(g)     NSD(s)  NSD(d)  PW(b)  //
+   cmacro mosprop  NTRM
+
+//-- 8T SRAM ---
+   device m ( lvpgn       )  NTRMG.8T   NTRMG.8T(g)   NSD(s)  NSD(d)  PW(b)  //
+   cmacro mosprop  NTRMG.8T
+   device m ( lvplp       )  PTRM.8T   PTRM.8T(g)     PSD(s)  PSD(d)  NW(b)  //
+   cmacro mosprop  PTRM.8T
+   device m ( lvpdn       )  NTRM.8T   NTRM.8T(g)     NSD(s)  NSD(d)  PW(b)  //
+   cmacro mosprop  NTRM.8T
+//-- SRAM transistor END ---
+
+#ENDIF
+
+//Typical Sheet Resistance Setting
+//variable typ_Rs_1M              xxx
+//variable typ_Rs_2M              xxx
+//variable typ_Rs_3M              xxx
+//variable typ_Rs_4M              xxx    
+//variable typ_Rs_N_AA            xxx
+//variable typ_Rs_P_AA            xxx
+//variable typ_Rs_N_Poly          xxx
+//variable typ_Rs_P_Poly          xxx
+//variable typ_Rs_N_AA_wo_s       xxx
+//variable typ_Rs_P_AA_wo_s       xxx
+//variable typ_Rs_N_Poly_wo_s     xxx
+//variable typ_Rs_P_Poly_wo_s     xxx 
+
+
+// +-------------------------------------------------------------------------
+// |          schema       layout   (pos) (neg)
+// +-------------------------------------------------------------------------
+//--- Resistance --------------------------------
+
+#IFDEF rc_deck
+DEVICE R(rnaa)  RES_N_AA  NSDR  NSDR netlist model rnaa  netlist element "X" [
+        PROPERTY W,L
+        W=PERIMETER_COINCIDE(RES_N_AA,NSDR)/2
+        L=AREA(RES_N_AA)/W
+       ]
+
+DEVICE R(rpaa)  RES_P_AA  PSDR  PSDR  netlist model rpaa  netlist element "X" [
+        PROPERTY W,L
+        W=PERIMETER_COINCIDE(RES_P_AA,PSDR)/2
+        L=AREA(RES_P_AA)/W
+       ]
+
+DEVICE R(rnpoly)  RES_N_Poly  1GL33  1GL33 netlist model rnpoly  netlist element "X" [
+        PROPERTY W,L
+        W=PERIMETER_COINCIDE(RES_N_Poly,1GL33)/2
+        L=AREA(RES_N_Poly)/W
+       ]
+
+DEVICE R(rppoly200)  RES_P_Poly  1GL33  1GL33 netlist model rppoly200  netlist element "X" [
+        PROPERTY W,L
+        W=PERIMETER_COINCIDE(RES_P_Poly,1GL33)/2
+        L=AREA(RES_P_Poly)/W
+       ]
+
+DEVICE R(rnp)  RES_N_AA_wo_salicide  NSDR  NSDR  netlist model rnp  netlist element "X" [
+        PROPERTY W,L
+        W=PERIMETER_COINCIDE(RES_N_AA_wo_salicide,NSDR)/2
+        L=AREA(RES_N_AA_wo_salicide)/W
+        ]
+
+DEVICE R(rpp)  RES_P_AA_wo_salicide  PSDR  PSDR   netlist model rpp netlist element "X" [
+        PROPERTY W,L
+        W=PERIMETER_COINCIDE(RES_P_AA_wo_salicide,PSDR)/2
+        L=AREA(RES_P_AA_wo_salicide)/W
+        ]
+
+DEVICE R(rnpolync)  RES_N_Poly_wo_salicide  1GL33  1GL33   netlist model rnpolync  netlist element "X" [
+        PROPERTY W,L
+        W=PERIMETER_COINCIDE(RES_N_Poly_wo_salicide,1GL33)/2
+        L=AREA(RES_N_Poly_wo_salicide)/W
+       ]
+
+DEVICE R(rppolync)  RES_P_Poly_wo_salicide  1GL33  1GL33 netlist model rppolync  netlist element "X" [
+        PROPERTY W,L
+        W=PERIMETER_COINCIDE(RES_P_Poly_wo_salicide,1GL33)/2
+        L=AREA(RES_P_Poly_wo_salicide)/W
+       ]
+
+DEVICE R(R1M)  R1M  R1_T  R1_T  netlist model R1M netlist element "X" [
+        PROPERTY W,L
+        W=PERIMETER_COINCIDE(R1M, R1_T)/2
+        L=AREA(R1M)/W
+      ]
+
+DEVICE R(R2M)  R2M  R2_T  R2_T  netlist model R2M netlist element "X" [
+        PROPERTY W,L
+        W=PERIMETER_COINCIDE(R2M, R2_T)/2
+        L=AREA(R2M)/W
+      ]
+
+#ifdef 1P5M
+DEVICE R(R3M)  R3M  R3_T  R3_T  netlist model R3M  netlist element "X" [
+        PROPERTY W,L
+        W=PERIMETER_COINCIDE(R3M, R3_T)/2
+        L=AREA(R3M)/W
+       ]
+
+DEVICE R(R4M)  R4M  R4_T  R4_T   netlist model R4M  netlist element "X" [
+        PROPERTY W,L
+        W=PERIMETER_COINCIDE(R4M, R4_T)/2
+        L=AREA(R4M)/W
+       ]
+
+#else
+
+#ifdef 1P4M
+DEVICE R(R3M)  R3M  R3_T  R3_T  netlist model R3M  netlist element "X" [
+        PROPERTY W,L
+        W=PERIMETER_COINCIDE(R3M, R3_T)/2
+        L=AREA(R3M)/W
+       ]
+#endif
+#endif
+
+
+#ELSE
+
+DEVICE R(rnaa)  RES_N_AA  NSDR  NSDR [
+        PROPERTY W,L
+        W=PERIMETER_COINCIDE(RES_N_AA,NSDR)/2
+        L=AREA(RES_N_AA)/W
+]
+
+DEVICE R(rpaa)  RES_P_AA  PSDR  PSDR [
+        PROPERTY W,L
+        W=PERIMETER_COINCIDE(RES_P_AA,PSDR)/2
+        L=AREA(RES_P_AA)/W
+]
+
+DEVICE R(rnpoly)  RES_N_Poly  1GL33  1GL33 [
+        PROPERTY W,L
+        W=PERIMETER_COINCIDE(RES_N_Poly,1GL33)/2
+        L=AREA(RES_N_Poly)/W
+]
+
+DEVICE R(rppoly200)  RES_P_Poly  1GL33  1GL33 [
+        PROPERTY W,L
+        W=PERIMETER_COINCIDE(RES_P_Poly,1GL33)/2
+        L=AREA(RES_P_Poly)/W
+]
+
+DEVICE R(rnp)  RES_N_AA_wo_salicide  NSDR  NSDR [
+        PROPERTY W,L
+        W=PERIMETER_COINCIDE(RES_N_AA_wo_salicide,NSDR)/2
+        L=AREA(RES_N_AA_wo_salicide)/W
+]
+
+DEVICE R(rpp)  RES_P_AA_wo_salicide  PSDR  PSDR [
+        PROPERTY W,L
+        W=PERIMETER_COINCIDE(RES_P_AA_wo_salicide,PSDR)/2
+        L=AREA(RES_P_AA_wo_salicide)/W
+]
+
+DEVICE R(rnpolync)  RES_N_Poly_wo_salicide  1GL33  1GL33 [
+        PROPERTY W,L
+        W=PERIMETER_COINCIDE(RES_N_Poly_wo_salicide,1GL33)/2
+        L=AREA(RES_N_Poly_wo_salicide)/W
+]
+
+DEVICE R(rppolync)  RES_P_Poly_wo_salicide  1GL33  1GL33 [
+        PROPERTY W,L
+        W=PERIMETER_COINCIDE(RES_P_Poly_wo_salicide,1GL33)/2
+        L=AREA(RES_P_Poly_wo_salicide)/W
+]
+
+DEVICE R(R1M)  R1M  R1_T  R1_T [
+        PROPERTY W,L
+        W=PERIMETER_COINCIDE(R1M, R1_T)/2
+        L=AREA(R1M)/W
+]
+
+DEVICE R(R2M)  R2M  R2_T  R2_T [
+        PROPERTY W,L
+        W=PERIMETER_COINCIDE(R2M, R2_T)/2
+        L=AREA(R2M)/W
+]
+
+#ifdef 1P5M
+DEVICE R(R3M)  R3M  R3_T  R3_T [
+        PROPERTY W,L
+        W=PERIMETER_COINCIDE(R3M, R3_T)/2
+        L=AREA(R3M)/W
+]
+
+DEVICE R(R4M)  R4M  R4_T  R4_T [
+        PROPERTY W,L
+        W=PERIMETER_COINCIDE(R4M, R4_T)/2
+        L=AREA(R4M)/W
+]
+
+#else
+
+#ifdef 1P4M
+DEVICE R(R3M)  R3M  R3_T  R3_T [
+        PROPERTY W,L
+        W=PERIMETER_COINCIDE(R3M, R3_T)/2
+        L=AREA(R3M)/W
+]
+#endif
+#endif
+
+#ENDIF
+
+
+// +-------------------------------------------------------------------------
+// |          schema        layout     (c)  (b)  (e)
+// +-------------------------------------------------------------------------
+   //--- BJT ---------------------------------------
+#IFDEF rc_deck
+   device q  ( pnp )    dif_PNP    SUBSTRATE NW  PSD  netlist model pnp   [ PROPERTY A A=AREA(dif_PNP) ]
+   device q  ( npn )    dif_NPN    DNW       PW  NSD  netlist model npn   [ PROPERTY A A=AREA(dif_NPN) ]
+   device q  ( pnp15 )  dif_PNP15  SUBSTRATE NW  PSD  netlist model pnp15 [ PROPERTY A A=AREA(dif_PNP15) ]
+   device q  ( npn15 )  dif_NPN15  DNW       PW  NSD  netlist model npn15 [ PROPERTY A A=AREA(dif_NPN15) ]
+#ELSE
+   device q  ( pnp )    dif_PNP    SUBSTRATE NW  PSD  [ PROPERTY A A=AREA(dif_PNP) ]
+   device q  ( npn )    dif_NPN    DNW       PW  NSD  [ PROPERTY A A=AREA(dif_NPN) ]
+   device q  ( pnp15 )  dif_PNP15  SUBSTRATE NW  PSD  [ PROPERTY A A=AREA(dif_PNP15) ]
+   device q  ( npn15 )  dif_NPN15  DNW       PW  NSD  [ PROPERTY A A=AREA(dif_NPN15) ]
+#ENDIF
+
+
+// +-------------------------------------------------------------------------
+// |          schema            layout         (p)    (n)
+// +-------------------------------------------------------------------------
+//--- Diode --------------------------------
+
+#IFDEF rc_deck
+device d  ( nppw    )  dif_PD_N_PW       PW      NSD     netlist model nppw
+device d  ( nppwi   )  dif_PD_N_PW_DNW   PW      NSD     netlist model nppwi
+device d  ( ppnw    )  dif_PD_P_NW       PSD     NW      netlist model ppnw
+device d  ( nppw33  )  dif_PD_N_PW33     PW      NSD     netlist model nppw33
+device d  ( nppwi33 )  dif_PD_N_PW_DNW33 PW      NSD     netlist model nppwi33
+device d  ( ppnw33  )  dif_PD_P_NW33     PSD     NW      netlist model ppnw33
+#ELSE
+device d  ( nppw    )  dif_PD_N_PW       PW      NSD
+device d  ( nppwi   )  dif_PD_N_PW_DNW   PW      NSD
+device d  ( ppnw    )  dif_PD_P_NW       PSD     NW
+device d  ( nppw33  )  dif_PD_N_PW33     PW      NSD
+device d  ( nppwi33 )  dif_PD_N_PW_DNW33 PW      NSD
+device d  ( ppnw33  )  dif_PD_P_NW33     PSD     NW
+#ENDIF
+
+
+// +-------------------------------------------------------------------------
+// |          schema            layout         (pos)    (neg)
+// +-------------------------------------------------------------------------
+//--- C --------------------------------
+
+#IFDEF rc_deck
+device c  ( c3s ) NCHC     NCHC_G(POS)     NCHC_A(NEG)   netlist model c3s netlist element "X" [
+       property W,L
+        NUM = COUNT(NCHC_A)
+        IF (NUM == 1) {
+          W = PERIMETER_COINCIDE(NCHC_A,NCHC_G)
+        } ELSE {
+          W = PERIMETER_COINCIDE(NCHC_A,NCHC_G)/2
+        }
+          L = AREA(NCHC_G)/W
+        ]
+
+device c  ( c3si ) NCHCI     NCHCI_G(POS)     NCHCI_A(NEG)   netlist model c3si netlist element "X" [
+       property W,L
+        NUM = COUNT(NCHCI_A)
+        IF (NUM == 1) {
+          W = PERIMETER_COINCIDE(NCHCI_A,NCHCI_G)
+        } ELSE {
+          W = PERIMETER_COINCIDE(NCHCI_A,NCHCI_G)/2
+        }
+          L = AREA(NCHCI_G)/W
+        ]
+
+device c  ( c15_npw ) NCHCP15     NCHCP15_G(POS)     NCHCP15_A(NEG)   netlist model c15_npw netlist element "X" [
+       property W,L
+        NUM = COUNT(NCHCP15_A)
+        IF (NUM == 1) {
+          W = PERIMETER_COINCIDE(NCHCP15_A,NCHCP15_G)
+        } ELSE {
+          W = PERIMETER_COINCIDE(NCHCP15_A,NCHCP15_G)/2
+        }
+          L = AREA(NCHCP15_G)/W
+        ]
+
+device c  ( c33_npw ) NCHCP33     NCHCP33_G(POS)     NCHCP33_A(NEG)   netlist model c33_npw netlist element "X" [
+       property W,L
+        NUM = COUNT(NCHCP33_A)
+        IF (NUM == 1) {
+          W = PERIMETER_COINCIDE(NCHCP33_A,NCHCP33_G)
+        } ELSE {
+          W = PERIMETER_COINCIDE(NCHCP33_A,NCHCP33_G)/2
+        } 
+          L = AREA(NCHCP33_G)/W
+        ]
+
+device c  ( c15_nnw ) NCHC15     NCHC15_G(POS)     NCHC15_A(NEG)   netlist model c15_nnw netlist element "X" [
+       property W,L
+        NUM = COUNT(NCHC15_A)
+        IF (NUM == 1) {
+          W = PERIMETER_COINCIDE(NCHC15_A,NCHC15_G)
+        } ELSE {
+          W = PERIMETER_COINCIDE(NCHC15_A,NCHC15_G)/2
+        } 
+          L = AREA(NCHC15_G)/W
+        ]
+
+device c  ( c33_nnw ) NCHC33     NCHC33_G(POS)     NCHC33_A(NEG)   netlist model c33_nnw netlist element "X" [
+       property W,L
+        NUM = COUNT(NCHC33_A)
+        IF (NUM == 1) {
+          W = PERIMETER_COINCIDE(NCHC33_A,NCHC33_G)
+        } ELSE {
+          W = PERIMETER_COINCIDE(NCHC33_A,NCHC33_G)/2
+        } 
+          L = AREA(NCHC33_G)/W
+        ]
+
+device c  ( c15_pnw ) PCHC15     PCHC15_G(POS)     PCHC15_A(NEG)   netlist model c15_pnw netlist element "X" [
+       property W,L
+        NUM = COUNT(PCHC15_A)
+        IF (NUM == 1) {
+          W = PERIMETER_COINCIDE(PCHC15_A,PCHC15_G)
+        } ELSE {
+          W = PERIMETER_COINCIDE(PCHC15_A,PCHC15_G)/2
+        }
+          L = AREA(PCHC15_G)/W
+        ]
+
+device c  ( c33_pnw ) PCHC33     PCHC33_G(POS)     PCHC33_A(NEG)   netlist model c33_pnw netlist element "X" [
+       property W,L
+        NUM = COUNT(PCHC33_A)
+        IF (NUM == 1) {
+          W = PERIMETER_COINCIDE(PCHC33_A,PCHC33_G)
+        } ELSE {
+          W = PERIMETER_COINCIDE(PCHC33_A,PCHC33_G)/2
+        } 
+          L = AREA(PCHC33_G)/W
+        ]
+
+#ifdef 1P5M
+device c  ( cmim_3K ) CM3K     3KL103(POS)     3ML58(NEG)   netlist model cmim_3K netlist element "X" [
+  property W,L 
+  a_cap = area(CM3K)
+  p_cap = perimeter(CM3K)
+  p_2_cap = p_cap * p_cap
+  ac4 = a_cap * 16
+  kkk = p_2_cap-ac4
+  if(kkk<0) {
+  kkk=0
+  }
+  sq = sqrt(kkk)
+  L = (p_cap+sq)/4
+  W = (p_cap-sq)/4
+        ]
+
+device c  ( cmim_3K_sh ) CM3K_shield     3KL103(POS)     3ML58(NEG)   netlist model cmim_3K_sh netlist element "X" [
+  property W,L
+  a_cap = area(CM3K_shield)
+  p_cap = perimeter(CM3K_shield)
+  p_2_cap = p_cap * p_cap
+  ac4 = a_cap * 16
+  kkk = p_2_cap-ac4
+  if(kkk<0) {
+  kkk=0
+  }
+  sq = sqrt(kkk)
+  L = (p_cap+sq)/4
+  W = (p_cap-sq)/4
+        ]
+
+device c  ( cmim_4K ) CM4K     4KL104(POS)     4ML59(NEG)   netlist model cmim_4K netlist element "X" [
+  property W,L
+  a_cap = area(CM4K)
+  p_cap = perimeter(CM4K)
+  p_2_cap = p_cap * p_cap
+  ac4 = a_cap * 16
+  kkk = p_2_cap-ac4
+  if(kkk<0) {
+  kkk=0
+  }
+  sq = sqrt(kkk)
+  L = (p_cap+sq)/4
+  W = (p_cap-sq)/4
+        ]
+
+device c  ( cmim_4K_sh ) CM4K_shield     4KL104(POS)     4ML59(NEG)   netlist model cmim_4K_sh netlist element "X" [
+  property W,L
+  a_cap = area(CM4K_shield)
+  p_cap = perimeter(CM4K_shield)
+  p_2_cap = p_cap * p_cap
+  ac4 = a_cap * 16
+  kkk = p_2_cap-ac4
+  if(kkk<0) {
+  kkk=0
+  }
+  sq = sqrt(kkk)
+  L = (p_cap+sq)/4
+  W = (p_cap-sq)/4
+        ]
+
+#else
+
+#ifdef 1P4M
+device c  ( cmim_3K ) CM3K     3KL103(POS)     3ML58(NEG)   netlist model cmim_3K netlist element "X" [
+  property W,L
+  a_cap = area(CM3K)
+  p_cap = perimeter(CM3K)
+  p_2_cap = p_cap * p_cap
+  ac4 = a_cap * 16
+  kkk = p_2_cap-ac4
+  if(kkk<0) {
+  kkk=0
+  }
+  sq = sqrt(kkk)
+  L = (p_cap+sq)/4
+  W = (p_cap-sq)/4
+        ]
+
+#endif
+#endif
+
+#ELSE
+device c  ( c3s ) NCHC   NCHC_G(POS)     NCHC_A(NEG)    [
+       property W,L
+        NUM = COUNT(NCHC_A)
+        IF (NUM == 1) {
+          W = PERIMETER_COINCIDE(NCHC_A,NCHC_G)
+        } ELSE {
+          W = PERIMETER_COINCIDE(NCHC_A,NCHC_G)/2
+        }
+          L = AREA(NCHC_G)/W
+ ]
+
+device c  ( c3si ) NCHCI   NCHCI_G(POS)     NCHCI_A(NEG)    [
+       property W,L
+        NUM = COUNT(NCHCI_A)
+        IF (NUM == 1) {
+          W = PERIMETER_COINCIDE(NCHCI_A,NCHCI_G)
+        } ELSE {
+          W = PERIMETER_COINCIDE(NCHCI_A,NCHCI_G)/2
+        }
+          L = AREA(NCHCI_G)/W
+ ]
+
+device c  ( c15_npw ) NCHCP15   NCHCP15_G(POS)     NCHCP15_A(NEG)    [
+       property W,L
+        NUM = COUNT(NCHCP15_A)
+        IF (NUM == 1) {
+          W = PERIMETER_COINCIDE(NCHCP15_A,NCHCP15_G)
+        } ELSE {
+          W = PERIMETER_COINCIDE(NCHCP15_A,NCHCP15_G)/2
+        }
+          L = AREA(NCHCP15_G)/W
+ ]
+
+device c  ( c33_npw ) NCHCP33   NCHCP33_G(POS)     NCHCP33_A(NEG)    [
+       property W,L
+        NUM = COUNT(NCHCP33_A)
+        IF (NUM == 1) {
+          W = PERIMETER_COINCIDE(NCHCP33_A,NCHCP33_G)
+        } ELSE {
+          W = PERIMETER_COINCIDE(NCHCP33_A,NCHCP33_G)/2
+        }
+          L = AREA(NCHCP33_G)/W
+ ]
+
+device c  ( c15_nnw ) NCHC15   NCHC15_G(POS)     NCHC15_A(NEG)    [
+       property W,L
+        NUM = COUNT(NCHC15_A)
+        IF (NUM == 1) {
+          W = PERIMETER_COINCIDE(NCHC15_A,NCHC15_G)
+        } ELSE {
+          W = PERIMETER_COINCIDE(NCHC15_A,NCHC15_G)/2
+        }
+          L = AREA(NCHC15_G)/W
+ ]
+
+device c  ( c33_nnw ) NCHC33   NCHC33_G(POS)     NCHC33_A(NEG)    [
+       property W,L
+        NUM = COUNT(NCHC33_A)
+        IF (NUM == 1) {
+          W = PERIMETER_COINCIDE(NCHC33_A,NCHC33_G)
+        } ELSE {
+          W = PERIMETER_COINCIDE(NCHC33_A,NCHC33_G)/2
+        }
+          L = AREA(NCHC33_G)/W
+ ]
+
+device c  ( c15_pnw ) PCHC15   PCHC15_G(POS)     PCHC15_A(NEG)    [
+       property W,L
+        NUM = COUNT(PCHC15_A)
+        IF (NUM == 1) {
+          W = PERIMETER_COINCIDE(PCHC15_A,PCHC15_G)
+        } ELSE {
+          W = PERIMETER_COINCIDE(PCHC15_A,PCHC15_G)/2
+        }
+          L = AREA(PCHC15_G)/W
+ ]
+
+device c  ( c33_pnw ) PCHC33   PCHC33_G(POS)     PCHC33_A(NEG)    [
+       property W,L
+        NUM = COUNT(PCHC33_A)
+        IF (NUM == 1) {
+          W = PERIMETER_COINCIDE(PCHC33_A,PCHC33_G)
+        } ELSE {
+          W = PERIMETER_COINCIDE(PCHC33_A,PCHC33_G)/2
+        }
+          L = AREA(PCHC33_G)/W
+ ] 
+
+#ifdef 1P5M
+device c  ( cmim_3K ) CM3K     3KL103(POS)     3ML58(NEG)    [
+  property W,L
+  a_cap = area(CM3K)
+  p_cap = perimeter(CM3K)
+  p_2_cap = p_cap * p_cap
+  ac4 = a_cap * 16
+  kkk = p_2_cap-ac4
+  if(kkk<0) {
+  kkk=0
+  }
+  sq = sqrt(kkk)
+  L = (p_cap+sq)/4
+  W = (p_cap-sq)/4
+        ]
+
+device c  ( cmim_3K_sh ) CM3K_shield     3KL103(POS)     3ML58(NEG)    [
+  property W,L
+  a_cap = area(CM3K_shield)
+  p_cap = perimeter(CM3K_shield)
+  p_2_cap = p_cap * p_cap
+  ac4 = a_cap * 16
+  kkk = p_2_cap-ac4
+  if(kkk<0) {
+  kkk=0
+  }
+  sq = sqrt(kkk)
+  L = (p_cap+sq)/4
+  W = (p_cap-sq)/4
+        ]
+   
+device c  ( cmim_4K ) CM4K     4KL104(POS)     4ML59(NEG)    [
+  property W,L
+  a_cap = area(CM4K)
+  p_cap = perimeter(CM4K)
+  p_2_cap = p_cap * p_cap
+  ac4 = a_cap * 16
+  kkk = p_2_cap-ac4
+  if(kkk<0) {
+  kkk=0
+  }
+  sq = sqrt(kkk)
+  L = (p_cap+sq)/4
+  W = (p_cap-sq)/4
+        ]
+
+device c  ( cmim_4K_sh ) CM4K_shield     4KL104(POS)     4ML59(NEG)    [
+  property W,L
+  a_cap = area(CM4K_shield)
+  p_cap = perimeter(CM4K_shield)
+  p_2_cap = p_cap * p_cap
+  ac4 = a_cap * 16
+  kkk = p_2_cap-ac4
+  if(kkk<0) {
+  kkk=0
+  }
+  sq = sqrt(kkk)
+  L = (p_cap+sq)/4
+  W = (p_cap-sq)/4
+        ]
+
+#else
+
+#ifdef 1P4M
+device c  ( cmim_3K ) CM3K     3KL103(POS)     3ML58(NEG)    [
+  property W,L
+  a_cap = area(CM3K)
+  p_cap = perimeter(CM3K)
+  p_2_cap = p_cap * p_cap
+  ac4 = a_cap * 16
+  kkk = p_2_cap-ac4
+  if(kkk<0) {
+  kkk=0
+  }
+  sq = sqrt(kkk)
+  L = (p_cap+sq)/4
+  W = (p_cap-sq)/4
+        ]
+
+#endif
+#endif
+
+#ENDIF
+
+
+   //--- MOS --------------------------------------
+   trace property m ( lvn       )    w w 0.0        //
+   trace property m ( lvn       )    l l 0.0        //
+   trace property m ( lvni      )    w w 0.0        //
+   trace property m ( lvni      )    l l 0.0        //
+   trace property m ( lvp       )    w w 0.0        //
+   trace property m ( lvp       )    l l 0.0        //
+   trace property m ( hvn       )    w w 0.0        //
+   trace property m ( hvn       )    l l 0.0        //
+   trace property m ( hvni      )    w w 0.0        //
+   trace property m ( hvni      )    l l 0.0        //
+   trace property m ( hvp       )    w w 0.0        //
+   trace property m ( hvp       )    l l 0.0        //
+   trace property m ( hvnesd    )    w w 0.0        //
+   trace property m ( hvnesd    )    l l 0.0        //
+   trace property m ( hvniesd   )    w w 0.0        //
+   trace property m ( hvniesd   )    l l 0.0        //
+   trace property m ( hvpesd    )    w w 0.0        //
+   trace property m ( hvpesd    )    l l 0.0        //
+   trace property m ( lvz       )    w w 0.0        //
+   trace property m ( lvz       )    l l 0.0        //
+   trace property m ( hvz       )    w w 0.0        //
+   trace property m ( hvz       )    l l 0.0        //
+
+    //--- RES --------------------------------------
+/*
+   trace property R  ( rnaa      )    R R 0
+   trace property R  ( rpaa      )    R R 0
+   trace property R  ( rnpoly    )    R R 0
+   trace property R  ( rppoly200 )    R R 0
+   trace property R  ( rnp       )    R R 0
+   trace property R  ( rpp       )    R R 0
+   trace property R  ( rnpolync  )    R R 0
+   trace property R  ( rppolync  )    R R 0
+   trace property R  ( R1M       )    R R 0
+   trace property R  ( R2M       )    R R 0
+   trace property R  ( R3M       )    R R 0
+   trace property R  ( R4M       )    R R 0
+ */
+  trace property R ( rnaa       )    w w 0.0        //
+  trace property R ( rnaa       )    l l 0.0        //
+  trace property R ( rpaa       )    w w 0.0        //
+  trace property R ( rpaa       )    l l 0.0        //
+  trace property R ( rnpoly     )    w w 0.0        //
+  trace property R ( rnpoly     )    l l 0.0        //
+  trace property R ( rppoly200  )    w w 0.0        //
+  trace property R ( rppoly200  )    l l 0.0        //
+  trace property R ( rnp        )    w w 0.0        //
+  trace property R ( rnp        )    l l 0.0        //
+  trace property R ( rpp        )    w w 0.0        //
+  trace property R ( rpp        )    l l 0.0        //
+  trace property R ( rnpolync   )    w w 0.0        //
+  trace property R ( rnpolync   )    l l 0.0        //
+  trace property R ( rppolync   )    w w 0.0        //
+  trace property R ( rppolync   )    l l 0.0        //
+  trace property R ( R1M        )    w w 0.0        //
+  trace property R ( R1M        )    l l 0.0        //
+  trace property R ( R2M        )    w w 0.0        //
+  trace property R ( R2M        )    l l 0.0        //
+
+#ifdef 1P5M
+  trace property R ( R3M        )    w w 0.0        //
+  trace property R ( R3M        )    l l 0.0        //
+  trace property R ( R4M        )    w w 0.0        //
+  trace property R ( R4M        )    l l 0.0        //
+
+#else
+
+#ifdef 1P4M
+  trace property R ( R3M        )    w w 0.0        //
+  trace property R ( R3M        )    l l 0.0        //
+#endif
+#endif
+                                                                                                      
+   //--- BJT -----------------------------------------------
+   trace property q  ( pnp ) A A 0
+   trace property q  ( npn ) A A 0
+   trace property q  ( pnp15 ) A A 0
+   trace property q  ( npn15 ) A A 0
+
+   //--- Diode ---------------------------------------------
+   trace property d  ( nppw     )     a a 0.0
+   trace property d  ( nppw     )     p p 0.0
+   trace property d  ( nppwi    )     a a 0.0
+   trace property d  ( nppwi    )     p p 0.0
+   trace property d  ( ppnw     )     a a 0.0
+   trace property d  ( ppnw     )     p p 0.0
+   trace property d  ( nppw33   )     a a 0.0
+   trace property d  ( nppw33   )     p p 0.0
+   trace property d  ( nppwi33  )     a a 0.0
+   trace property d  ( nppwi33  )     p p 0.0
+   trace property d  ( ppnw33   )     a a 0.0
+   trace property d  ( ppnw33   )     p p 0.0
+
+ //--- CAP --------------------------------------
+  trace property c ( c3s       )    w w 0.0        //
+  trace property c ( c3s       )    l l 0.0        //
+  trace property c ( c3si      )    w w 0.0        //
+  trace property c ( c3si      )    l l 0.0        //
+  trace property c ( c15_npw   )    w w 0.0        //
+  trace property c ( c15_npw   )    l l 0.0        //
+  trace property c ( c33_npw   )    w w 0.0        //
+  trace property c ( c33_npw   )    l l 0.0        //
+  trace property c ( c15_nnw   )    w w 0.0        //
+  trace property c ( c15_nnw   )    l l 0.0        //
+  trace property c ( c33_nnw   )    w w 0.0        //
+  trace property c ( c33_nnw   )    l l 0.0        //
+  trace property c ( c15_pnw   )    w w 0.0        //
+  trace property c ( c15_pnw   )    l l 0.0        //
+  trace property c ( c33_pnw   )    w w 0.0        //
+  trace property c ( c33_pnw   )    l l 0.0        //
+#ifdef 1P5M
+  trace property c ( cmim_3K   )    w w 0.0        //
+  trace property c ( cmim_3K   )    l l 0.0        //
+  trace property c ( cmim_4K   )    w w 0.0        //
+  trace property c ( cmim_4K   )    l l 0.0        //
+  trace property c ( cmim_3K_sh)    w w 0.0        //
+  trace property c ( cmim_3K_sh)    l l 0.0        //
+  trace property c ( cmim_4K_sh)    w w 0.0        //
+  trace property c ( cmim_4K_sh)    l l 0.0        //
+#else
+#ifdef 1P4M
+  trace property c ( cmim_3K   )    w w 0.0        //
+  trace property c ( cmim_3K   )    l l 0.0        //
+#endif
+#endif
+   
+
+#ifdef rc_deck
+//=============================
+//======= Setup for PEX =======
+//=============================
+MASK SVDB DIRECTORY "svdb" XRC
+PEX MAGNIFY 1.0
+//PEX DELAY                      none   //PENFIELD 0.7 MASK DIRECT
+PEX EXCLUDE DISTRIBUTED        "VDD" "VDDSA" MASK DIRECT
+PEX EXCLUDE LUMPED             "VDD" "VDDSA" MASK DIRECT
+                                                                                                               
+//PEX NETLIST DISTRIBUTED        "net.dist" HSPICE LAYOUT GROUND VSS MASK DIRECT LOCATION RCNAMED
+//PEX NETLIST LUMPED             "net.lump" HSPICE LAYOUT GROUND VSS MASK DIRECT LOCATION RCNAMED
+PEX NETLIST DISTRIBUTED        "net.dist" HSPICE LAYOUT  MASK DIRECT LOCATION RCNAMED
+PEX NETLIST LUMPED             "net.lump" HSPICE LAYOUT  MASK DIRECT LOCATION RCNAMED
+
+PEX NETLIST SIMPLE             "net.simple" HSPICE LAYOUT MASK DIRECT LOCATION RCNAMED
+                                                                                                               
+PEX REPORT DISTRIBUTED         none  //"report.dist" ASCII LAYOUT MASK DIRECT
+PEX REPORT LUMPED              none  //"report.lump" LAYOUT MASK DIRECT
+//PEX RESISTANCE LUMPED          YES MASK DIRECT
+//PEX REDUCE LUMPED C            < 10000000
+PEX IDEAL XCELL                YES
+                                                                                                               
+// xcalibre capacitance and resistance file
+UNIT CAPACITANCE ff
+UNIT RESISTANCE OHM
+//include ./rules.C
+//include ./rules.R
+/*  include ./110nm_RC_extraction_1P5M.rules
+
+                                                                                                               
+CAPACITANCE INTRINSIC FRINGE 1GL33 INSIDE OF GATE [ PROPERTY C C = 0 ]
+CAPACITANCE CROSSOVER PLATE  1GL33 GATE [ PROPERTY C C = 0 ]
+CAPACITANCE CROSSOVER FRINGE 1GL33 PSD  [ PROPERTY C C = 0 ]
+CAPACITANCE CROSSOVER FRINGE 1GL33 NSD  [ PROPERTY C C = 0 ]
+CAPACITANCE ORDER NSD PSD GATE 1GL33 1ML36 2ML32 3ML58 4ML59 TML115
+                                                                                                               
+RESISTANCE SHEET NSD [res.typ_rs_NAA 0]
+RESISTANCE SHEET PSD [res.typ_rs_PAA 0]
+RESISTANCE SHEET 1GL33 [res.typ_rs_POLY 0]
+RESISTANCE SHEET 1ML36  [res.typ_rs_1M 0]
+RESISTANCE SHEET 2ML32  [res.typ_rs_2M 0]
+RESISTANCE SHEET 3ML58  [res.typ_rs_3M 0]
+RESISTANCE SHEET 4ML59  [res.typ_rs_4M 0]
+RESISTANCE CONNECTION 1ML36 NSD [res.typ_rc_NAA 0]
+RESISTANCE CONNECTION 1ML36 PSD [res.typ_rc_PAA 0]
+RESISTANCE CONNECTION 1ML36 1GL33 [res.typ_rc_POLY 0]
+RESISTANCE CONNECTION 2ML32 1ML36  [res.typ_rc_1T 0]
+RESISTANCE CONNECTION 3ML58 2ML32  [res.typ_rc_2T 0]
+RESISTANCE CONNECTION 4ML59 3ML58  [res.typ_rc_3T 0]
+                                                                                                               
+*/                                                                                                             
+#endif

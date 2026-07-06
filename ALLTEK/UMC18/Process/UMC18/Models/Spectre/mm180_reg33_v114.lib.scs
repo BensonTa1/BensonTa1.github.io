@@ -1,0 +1,108 @@
+simulator lang=spectre insensitive=yes
+library mylib
+
+section tt
+parameters dtox_n_33_mm=0
+parameters dlint_n_33_mm=0
+parameters dwint_n_33_mm=0
+parameters dvth0_n_33_mm=0
+parameters dcgdo_n_33_mm=0
+parameters dcgso_n_33_mm=0
+parameters dtox_p_33_mm=0
+parameters dlint_p_33_mm=0
+parameters dwint_p_33_mm=0
+parameters dvth0_p_33_mm=0
+parameters dcgdo_p_33_mm=0
+parameters dcgso_p_33_mm=0
+
+
+include "mm180_reg33_v114.mdl.scs"
+ 
+endsection tt
+
+
+
+section ss
+parameters dtox_n_33_mm=5e-10
+parameters dlint_n_33_mm=-1.23e-8
+parameters dwint_n_33_mm=8e-9
+parameters dvth0_n_33_mm=0.05
+parameters dcgdo_n_33_mm=-2.7e-11
+parameters dcgso_n_33_mm=-2.7e-11
+parameters dtox_p_33_mm=5e-10
+parameters dlint_p_33_mm=-1.3396e-8
+parameters dwint_p_33_mm=2e-8
+parameters dvth0_p_33_mm=-0.05
+parameters dcgdo_p_33_mm=-2.6e-11
+parameters dcgso_p_33_mm=-2.6e-11
+
+include "mm180_reg33_v114.mdl.scs"
+ 
+endsection ss
+
+
+
+
+section ff
+parameters dtox_n_33_mm=-5e-10
+parameters dlint_n_33_mm=9.4e-9
+parameters dwint_n_33_mm=-3e-9
+parameters dvth0_n_33_mm=-0.05
+parameters dcgdo_n_33_mm=2.7e-11
+parameters dcgso_n_33_mm=2.7e-11
+parameters dtox_p_33_mm=-5e-10
+parameters dlint_p_33_mm=1.01e-8
+parameters dwint_p_33_mm=-1e-8
+parameters dvth0_p_33_mm=0.05
+parameters dcgdo_p_33_mm=2.6e-11
+parameters dcgso_p_33_mm=2.6e-11
+
+include "mm180_reg33_v114.mdl.scs"
+ 
+endsection ff
+
+
+
+
+section snfp
+parameters dtox_n_33_mm=0
+parameters dlint_n_33_mm=-7.8e-9
+parameters dwint_n_33_mm=7e-9
+parameters dvth0_n_33_mm=0.040663
+parameters dcgdo_n_33_mm=0
+parameters dcgso_n_33_mm=0
+parameters dtox_p_33_mm=0
+parameters dlint_p_33_mm=7.43e-9
+parameters dwint_p_33_mm=-5e-9
+parameters dvth0_p_33_mm=0.02
+parameters dcgdo_p_33_mm=0
+parameters dcgso_p_33_mm=0
+
+include "mm180_reg33_v114.mdl.scs"
+ 
+endsection snfp
+
+
+
+
+
+section fnsp
+parameters dtox_n_33_mm=0
+parameters dlint_n_33_mm=9.2e-9
+parameters dwint_n_33_mm=-2e-9
+parameters dvth0_n_33_mm=-0.03
+parameters dcgdo_n_33_mm=0
+parameters dcgso_n_33_mm=0
+parameters dtox_p_33_mm=0
+parameters dlint_p_33_mm=-8.44e-9
+parameters dwint_p_33_mm=1e-8
+parameters dvth0_p_33_mm=-0.02
+parameters dcgdo_p_33_mm=0
+parameters dcgso_p_33_mm=0
+
+
+include "mm180_reg33_v114.mdl.scs"
+ 
+endsection fnsp
+
+endlibrary mylib

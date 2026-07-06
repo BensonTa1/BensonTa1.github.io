@@ -1,0 +1,39 @@
+`include "constants.vams"
+`include "disciplines.vams"
+
+module IDEAL_SR_LATCH (S, R, Q, Qn);
+
+input S, R;
+output Q, Qn;
+electrical S, R, Q, Qn;
+
+parameter real VTH  = 1.0;   // threshold
+parameter real VOUT = 5.0;   // logic high
+parameter real VLOW = 0.0;   // logic low
+parameter real td = 1p;      // delay (avoid algebraic loop)
+
+real q_state;
+
+analog begin
+
+    // initialize
+    @(initial_step) begin
+        q_state = 0;
+    end
+
+    // SR latch behavior sampled continuously
+    if (V(S) > VTH && V(R) <= VTH) begin
+        q_state = 1;   // SET
+    end
+    else if (V(R) > VTH && V(S) <= VTH) begin
+        q_state = 0;   // RESET
+    end
+    // else hold state (SR latch memory)
+
+    // outputs
+    V(Q)  <+ transition(q_state ? VOUT : VLOW, 0, td);
+    V(Qn) <+ transition((!q_state) ? VOUT : VLOW, 0, td);
+
+end
+
+endmodule

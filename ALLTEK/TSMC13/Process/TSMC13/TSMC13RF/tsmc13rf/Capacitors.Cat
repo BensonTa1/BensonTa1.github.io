@@ -1,0 +1,8 @@
+TDMCHECKPOINT="1.0"
+tsmc13rf/mimcap type="cell"
+tsmc13rf/mimcap_mis type="cell"
+tsmc13rf/mimcap_um type="cell"
+tsmc13rf/mimcap_um_mis type="cell"
+tsmc13rf/mimcap_woum type="cell"
+tsmc13rf/mimcap_woum_mis type="cell"
+tsmc13rf/crtmom type="cell"

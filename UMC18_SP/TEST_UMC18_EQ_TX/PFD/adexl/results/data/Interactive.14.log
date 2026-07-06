@@ -1,0 +1,15 @@
+Starting Single Run, Sweeps and Corners...
+
+Current time: Sat Nov 23 16:10:07 2024 
+Best design point: 1
+Design specs: 
+	TEST:PFD:1	corner	Nominal - 
+Design parameters: 
+	TD		80n
+	VDD		1.71
+
+Interactive.14
+Number of points completed: 3
+Number of simulation errors: 0
+Interactive.14 completed. 
+Current time: Sat Nov 23 16:10:17 2024 

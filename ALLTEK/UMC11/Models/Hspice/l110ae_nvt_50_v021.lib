@@ -1,0 +1,163 @@
+********************************************************************************
+* TT:   Typical n-ch MOSFET and Typical p-ch MOSFET
+* FF:   Fast n-ch MOSFET and Fast p-ch MOSFET
+* SS:   Slow n-ch MOSFET and Slow p-ch MOSFET
+* FNSP: Fast n-ch MOSFET and Slow p-ch MOSFET
+* SNFP: Slow n-ch MOSFET and Fast p-ch MOSFET
+********************************************************************************
+* 
+.lib tt
+.param
+* 
+* Device1
++dtox_n_nvt_50_l110ae   =  0.0000000e+000  
++dxl_n_nvt_50_l110ae    =  0.0000000e+000  
++dxw_n_nvt_50_l110ae    =  0.0000000e+000  
++dvth0_n_nvt_50_l110ae  =  0.0000000e+000  
++dk3_n_nvt_50_l110ae    =  0.0000000e+000  
++dlvth0_n_nvt_50_l110ae =  0.0000000e+000  
++dpvth0_n_nvt_50_l110ae =  0.0000000e+000    
++du0_n_nvt_50_l110ae    =  0.0000000e+000  
++drdsw_n_nvt_50_l110ae  =  0.0000000e+000  
++dpu0_n_nvt_50_l110ae   =  0.0000000e+000  
++dags_n_nvt_50_l110ae   =  0.0000000e+000  
++dvsat_n_nvt_50_l110ae  =  0.0000000e+000  
++db0_n_nvt_50_l110ae    =  0.0000000e+000  
++dpvsat_n_nvt_50_l110ae =  0.0000000e+000  
++dwu0_n_nvt_50_l110ae   =  0.0000000e+000  
++dcj_n_nvt_50_l110ae    =  0.0000000e+000  
++dcjsw_n_nvt_50_l110ae  =  0.0000000e+000  
++dcjswg_n_nvt_50_l110ae =  0.0000000e+000  
++dcgdo_n_nvt_50_l110ae  =  0.0000000e+000  
++dcgso_n_nvt_50_l110ae  =  0.0000000e+000  
++dcgdl_n_nvt_50_l110ae  =  0.0000000e+000  
++dcgsl_n_nvt_50_l110ae  =  0.0000000e+000  
+* 
+.include 'l110ae_nvt_50_v021.mdl'
+* 
+.endl tt
+* 
+.lib ff
+.param
+* 
+* Device1
++dtox_n_nvt_50_l110ae   = -3.5647500e-010  
++dxl_n_nvt_50_l110ae    = -6.0000000e-008  
++dxw_n_nvt_50_l110ae    =  3.0000000e-008  
++dvth0_n_nvt_50_l110ae  = -5.1801306e-002  
++dk3_n_nvt_50_l110ae    = -4.0954697e-001  
++dlvth0_n_nvt_50_l110ae = -1.6753001e-008  
++dpvth0_n_nvt_50_l110ae = -3.2392533e-016   
++du0_n_nvt_50_l110ae    =  3.8918852e-003  
++drdsw_n_nvt_50_l110ae  = -1.7564478e+002  
++dpu0_n_nvt_50_l110ae   = -1.1299151e-016  
++dags_n_nvt_50_l110ae   =  7.6658425e-002  
++dvsat_n_nvt_50_l110ae  =  1.8475975e+004  
++db0_n_nvt_50_l110ae    =  2.9719969e-007  
++dpvsat_n_nvt_50_l110ae =  4.2468065e-008  
++dwu0_n_nvt_50_l110ae   =  1.2397990e-009  
++dcj_n_nvt_50_l110ae    = -1.0000000e-001  
++dcjsw_n_nvt_50_l110ae  = -1.0000000e-001  
++dcjswg_n_nvt_50_l110ae = -1.0000000e-001  
++dcgdo_n_nvt_50_l110ae  =  1.0000000e-001  
++dcgso_n_nvt_50_l110ae  =  1.0000000e-001  
++dcgdl_n_nvt_50_l110ae  =  1.0000000e-001  
++dcgsl_n_nvt_50_l110ae  =  1.0000000e-001  
+* 
+.include 'l110ae_nvt_50_v021.mdl'
+* 
+.endl ff
+* 
+.lib ss
+.param
+* 
+* Device1
++dtox_n_nvt_50_l110ae   =  3.5647500e-010  
++dxl_n_nvt_50_l110ae    =  6.0000000e-008  
++dxw_n_nvt_50_l110ae    = -3.0000000e-008  
++dvth0_n_nvt_50_l110ae  =  5.1167081e-002  
++dk3_n_nvt_50_l110ae    =  1.2456544e-001  
++dlvth0_n_nvt_50_l110ae =  1.8051284e-008  
++dpvth0_n_nvt_50_l110ae = -1.1862024e-015    
++du0_n_nvt_50_l110ae    = -4.0959256e-003  
++drdsw_n_nvt_50_l110ae  =  3.6491085e+002  
++dpu0_n_nvt_50_l110ae   = -1.1887570e-015  
++dags_n_nvt_50_l110ae   = -1.2092263e-001  
++dvsat_n_nvt_50_l110ae  = -2.0802620e+004  
++db0_n_nvt_50_l110ae    = -2.5996514e-007  
++dpvsat_n_nvt_50_l110ae = -4.1390645e-008  
++dwu0_n_nvt_50_l110ae   = -1.6720226e-009  
++dcj_n_nvt_50_l110ae    =  1.0000000e-001  
++dcjsw_n_nvt_50_l110ae  =  1.0000000e-001  
++dcjswg_n_nvt_50_l110ae =  1.0000000e-001  
++dcgdo_n_nvt_50_l110ae  = -1.0000000e-001  
++dcgso_n_nvt_50_l110ae  = -1.0000000e-001  
++dcgdl_n_nvt_50_l110ae  = -1.0000000e-001  
++dcgsl_n_nvt_50_l110ae  = -1.0000000e-001  
+* 
+.include 'l110ae_nvt_50_v021.mdl'
+* 
+.endl ss
+* 
+.lib fnsp
+.param
+* 
+* Device1
++dtox_n_nvt_50_l110ae   =  0.0000000e+000  
++dxl_n_nvt_50_l110ae    = -3.0000000e-008  
++dxw_n_nvt_50_l110ae    =  1.5000000e-008  
++dvth0_n_nvt_50_l110ae  = -2.6055124e-002  
++dk3_n_nvt_50_l110ae    = -3.9342792e-001  
++dlvth0_n_nvt_50_l110ae = -8.1666695e-009  
++dpvth0_n_nvt_50_l110ae =  3.7697872e-018    
++du0_n_nvt_50_l110ae    =  2.4195674e-003  
++drdsw_n_nvt_50_l110ae  = -1.0380823e+002  
++dpu0_n_nvt_50_l110ae   =  3.0036330e-019  
++dags_n_nvt_50_l110ae   =  4.4930575e-002  
++dvsat_n_nvt_50_l110ae  =  1.0844861e+004  
++db0_n_nvt_50_l110ae    =  1.4903906e-007  
++dpvsat_n_nvt_50_l110ae =  2.4472764e-008  
++dwu0_n_nvt_50_l110ae   =  6.7673025e-010  
++dcj_n_nvt_50_l110ae    = -1.0000000e-001  
++dcjsw_n_nvt_50_l110ae  = -1.0000000e-001  
++dcjswg_n_nvt_50_l110ae = -1.0000000e-001  
++dcgdo_n_nvt_50_l110ae  =  0.0000000e+000  
++dcgso_n_nvt_50_l110ae  =  0.0000000e+000  
++dcgdl_n_nvt_50_l110ae  =  0.0000000e+000  
++dcgsl_n_nvt_50_l110ae  =  0.0000000e+000  
+* 
+.include 'l110ae_nvt_50_v021.mdl'
+* 
+.endl fnsp
+* 
+.lib snfp
+.param
+* 
+* Device1
++dtox_n_nvt_50_l110ae   =  0.0000000e+000  
++dxl_n_nvt_50_l110ae    =  3.0000000e-008  
++dxw_n_nvt_50_l110ae    = -1.5000000e-008  
++dvth0_n_nvt_50_l110ae  =  2.5974810e-002  
++dk3_n_nvt_50_l110ae    =  3.2592726e-001  
++dlvth0_n_nvt_50_l110ae =  7.7134212e-009  
++dpvth0_n_nvt_50_l110ae =  1.9180043e-016    
++du0_n_nvt_50_l110ae    = -2.4294994e-003  
++drdsw_n_nvt_50_l110ae  =  1.4957476e+002  
++dpu0_n_nvt_50_l110ae   = -3.3787422e-016  
++dags_n_nvt_50_l110ae   = -5.6136089e-002  
++dvsat_n_nvt_50_l110ae  = -1.1261603e+004  
++db0_n_nvt_50_l110ae    = -1.3820314e-007  
++dpvsat_n_nvt_50_l110ae = -2.2860752e-008  
++dwu0_n_nvt_50_l110ae   = -7.7001732e-010  
++dcj_n_nvt_50_l110ae    =  1.0000000e-001  
++dcjsw_n_nvt_50_l110ae  =  1.0000000e-001  
++dcjswg_n_nvt_50_l110ae =  1.0000000e-001  
++dcgdo_n_nvt_50_l110ae  =  0.0000000e+000  
++dcgso_n_nvt_50_l110ae  =  0.0000000e+000  
++dcgdl_n_nvt_50_l110ae  =  0.0000000e+000  
++dcgsl_n_nvt_50_l110ae  =  0.0000000e+000  
+* 
+.include 'l110ae_nvt_50_v021.mdl'
+* 
+.endl snfp
+* 

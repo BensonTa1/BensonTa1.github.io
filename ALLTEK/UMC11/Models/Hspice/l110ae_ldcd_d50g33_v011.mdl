@@ -1,0 +1,410 @@
+********************************************************************************
+* Property of UMC 
+* Unauthorized reproduction, modification and/or distribution are strictly
+* prohibited.
+* This product is protected under copyright law and trade secret law.
+* This model card may not be sent in any form outside of UMC without
+* the written consent of the UMC ATD Modeling Division.
+********************************************************************************
+* Process:      0.11 um Logic and Mixed-Mode Al Advanced Enhancement Process (L110AE)
+* Device Type:  Common-Drain Type LDNMOSFET and LDPMOSFET
+* Description:  D50G33 LDMOS Transistors
+* Model:        BSIM3 3.24 (HSPICE Level=49)
+* Simulator:    HSPICE 2009.3
+* Model features:
+*     Global model:  Yes
+*     Igate model:  N/A
+*     GIDL model: Yes
+*     Substrate Current model: Yes
+*     Flicker Noise: N/A
+*     LOD model: N/A
+*     RF model: N/A
+*     Well proximity effect: N/A
+********************************************************************************
+* Revision history:
+* <Version 1>
+* Version : 0.1_p1
+* Date    : 2012/06/25
+* Author  : Ho Cheng Hu
+* Remark  : 1. Original release
+*           2. AC parameters are copied from l110ae_ldcd_d85g33_v012.
+********************************************************************************
+* Application ranges:
+*
+* Geometry range(After 90% shrink):
+* For LD n-ch MOSFET:
+*              LDES  = 0.9um
+*      18um <= WDES <= 180um
+* For LD p-ch MOSFET:
+*              LDES  = 0.72um
+*      18um <= WDES <= 180um
+*
+* Voltage range:
+* For LD n-ch MOSFET:
+*        0V <= VGS <= 3.3V (*1.1)
+*        0V <= VDS <= 5.0V
+*              VBS  = 0V
+* For LD p-ch MOSFET:
+*        0V >= VGS >= -3.3V (*1.1)
+*        0V >= VDS >= -5.0V
+*              VBS  =  0V
+*
+* Temperature range: -40C ~ 125C ; nominal temperature=25C.
+***************************** Start of Model Card ******************************
+*
+.subckt n_ldcd_d50g33_l110ae n1 n2 n3 n4 w=1.8e-5 l=9e-7
+*
+m1 n1 n2 n3 n4 nmos w=w l=l ad='((w/2)+1.8u)*1.584u' pd='w+6.768u' as='w*0.498u' ps='w+1.992u'
+*
+.model nmos. nmos
+***** Flag Parameter ***
++level      = 49                                            version    = 3.24                                          binunit    = 2                                             
++binflag    = 0                                             mobmod     = 1                                             capmod     = 3                                             
++nqsmod     = 0                                             
+***** Geometry Range Parameter ***
++lmin       = 9e-7                                          lmax       = 9.01e-7                                       wmin       = 1.8e-5                                        
++wmax       = 1.81e-4                                       
+***** Process Parameter ***
++tox        = '7.49e-9+dtox_n_ldcd_d50g33_l110ae'           xj         = 1.2e-7                                        nch        = 3e17                                          
+***** dW and dL Parameter ***
++wint       = 1.031977e-6                                   wl         = 0                                             wln        = 1                                             
++ww         = 3.31863e-12                                   wwn        = 1                                             wwl        = 0                                             
++lint       = -1.72e-9                                      ll         = 0                                             lln        = 1                                             
++lw         = 0                                             lwn        = 1                                             lwl        = 0                                             
++llc        = 0                                             wwc        = 0                                             dwg        = -2.263368e-6                                  
++wdwg       = 7.036286e-12                                  dwb        = 1.2e-7                                        wmlt       = 1                                             
++lmlt       = 1                                             xl         = '-5.43e-7+dxl_n_ldcd_d50g33_l110ae'           xw         = '1e-9+dxw_n_ldcd_d50g33_l110ae'               
+***** Vth Related  Parameter ***
++vth0       = '7.0509050e-001+dvth0_n_ldcd_d50g33_l110ae'   k1         = 0.8755                                        k2         = -0.13878                                      
++k3         = 94.1766                                       wk3        = -7.3292e-4                                    k3b        = 0                                             
++w0         = 2.5e-6                                        nlx        = 8.8279e-10                                    dvt0       = 2.2                                           
++dvt1       = 0.53                                          dvt2       = -0.032                                        dvt0w      = 0                                             
++dvt1w      = 5.3e6                                         dvt2w      = -0.032                                        ngate      = 1.037023e20                                   
+***** Mobility Related Parameter ***
++u0         = '3.1755363e-002+du0_n_ldcd_d50g33_l110ae'     wu0        = 3.05824e-8                                    ua         = 8.335948e-10                                  
++ub         = 1.09972e-18                                   wub        = 6.055109e-24                                  uc         = -3.1e-12                                      
++vsat       = '9.7246468e+004+dvsat_n_ldcd_d50g33_l110ae'   wvsat      = -9.05663e-2                                   a0         = -0.443921                                     
++wa0        = 3.095045e-6                                   ags        = -2.151388                                     wags       = 2.520034e-6                                   
++b0         = -1.797489e-6                                  wb0        = -5.285142e-12                                 b1         = -8.6e-6                                       
++keta       = -0.033                                        a1         = -0.07796                                      wa1        = -3.438457e-7                                  
++a2         = 0.687401                                      rdsw       = '1.235108e3+drdsw_n_ldcd_d50g33_l110ae'       prwb       = 0                                             
++prwg       = 4.58896e-2                                    wr         = 1                                             
+***** Subthreshold Related Parameter ***
++voff       = -0.128                                        nfactor    = 0.98                                          wnfactor   = -1.83e-6                                      
++eta0       = 1e-5                                          etab       = -0.035                                        dsub       = 0.56                                          
++cit        = 0                                             cdsc       = 2.4e-4                                        cdscb      = 0                                             
++cdscd      = 0                                             
+***** Output Resistance Related Parameter ***
++pclm       = 0.1                                           pdiblc1    = 3.9e-7                                        pdiblc2    = 5.428742e-4                                   
++wpdiblc2   = -6.51449e-9                                   pdiblcb    = 0                                             drout      = 0.56                                          
++pscbe1     = 4.24e10                                       pscbe2     = 1e-6                                          pvag       = 0                                             
++delta      = 0.02546                                       alpha0     = 0                                             alpha1     = 25                                            
++beta0      = 71.5                                          
+***** Capacitance Parameter ***
++xpart      = 1                                             cgso       = '5e-11+dcgso_n_ldcd_d50g33_l110ae'            cgdo       = '5e-11+dcgdo_n_ldcd_d50g33_l110ae'            
++cgbo       = 0                                             ckappa     = 0.3                                           wckappa    = 1.2e-6                                        
++cf         = '6.83e-11+dcf_n_ldcd_d50g33_l110ae'           dlc        = -2.8e-8                                       dwc        = -1.53e-7                                      
++noff       = 2.9038                                        lnoff      = 1.2e-7                                        voffcv     = -0.088241                                     
++lvoffcv    = 2e-8                                          acde       = 0.46654                                       moin       = 22.546                                        
++cgsl       = '1.8e-10+dcgsl_n_ldcd_d50g33_l110ae'          cgdl       = '2.48e-9+dcgdl_n_ldcd_d50g33_l110ae'          
+***** Souce/Drain Junction Diode Model Parameter ***
++calcacm    = 1                                             acm        = 12                                            ldif       = 7.9e-8                                        
++hdif       = 1.34e-7                                       rsh        = 8.3                                           rd         = 0                                             
++rs         = 0                                             rsc        = 0                                             rdc        = 0                                             
++cj         = '1.0976e-4+dcj_n_ldcd_d50g33_l110ae'          mj         = 0.22334                                       mjsw       = 0.29006                                       
++cjsw       = '9.362e-10+dcjsw_n_ldcd_d50g33_l110ae'        cjswg      = '1.6786e-9+dcjswg_n_ldcd_d50g33_l110ae'       mjswg      = 0.4                                           
++js         = 4.35e-6                                       jsw        = 8.16e-12                                      pbsw       = 0.57848                                       
++pb         = 0.28243                                       pbswg      = 0.671                                         
+***** Temperature Coeffient ***
++tnom       = 25                                            ute        = -1.476                                        wute       = 6.078758e-6                                   
++kt1        = -0.336                                        wkt1       = 3.574437e-8                                   kt1l       = 0                                             
++kt2        = -0.036                                        ua1        = 2.26e-9                                       wua1       = 1.8984e-14                                    
++ub1        = -1.84e-20                                     wub1       = 5.807096e-23                                  uc1        = 2.02e-10                                      
++at         = 5.52656e4                                     wat        = -0.17045                                      prt        = -200                                          
++wprt       = 1.874534e-3                                   nj         = 1.046                                         xti        = 3.8                                           
++tpb        = 8.3424e-4                                     tpbsw      = 1.4605e-3                                     tpbswg     = 2.5e-3                                        
++tcj        = 2.12e-3                                       tcjsw      = 1.1458e-3                                     tcjswg     = 8e-4                                          
+***** GIDL Current Parameters ***
++agidl      = '1.9e-006+dagidl_n_ldcd_d50g33_l110ae'        bgidl      = 4.32083e+09                                   cgidl      = 0.5                                           
++egidl      = 0.8                                           
+*
+.ends
+*
+*
+.subckt p_ldcd_d50g33_l110ae n1 n2 n3 n4 w=1.8e-5 l=7.2e-7
+*
+m1 n1 n2 n3 n4 pmos w=w l=l ad='((w/2)+1.8u)*1.224u' pd='w+6.048u' as='w*0.498u' ps='w+1.992u'
+*
+.model pmos. pmos
+***** Flag Parameter ***
++level      = 49                                            version    = 3.24                                          binunit    = 2                                             
++binflag    = 0                                             mobmod     = 1                                             capmod     = 3                                             
++nqsmod     = 0                                             
+***** Geometry Range Parameter ***
++lmin       = 7.2e-7                                        lmax       = 7.21e-7                                       wmin       = 1.8e-5                                        
++wmax       = 1.81e-4                                       
+***** Process Parameter ***
++tox        = '7.68e-9+dtox_p_ldcd_d50g33_l110ae'           xj         = 1.9e-7                                        nch        = 3.6e17                                        
+***** dW and dL Parameter ***
++wint       = 4.759163e-7                                   wl         = 0                                             wln        = 1                                             
++ww         = 7.525924e-15                                  wwn        = 1                                             wwl        = 0                                             
++lint       = -8.037e-8                                     ll         = 0                                             lln        = 1                                             
++lw         = 0                                             lwn        = 1                                             lwl        = 0                                             
++llc        = 0                                             wwc        = 0                                             dwg        = -1.830993e-6                                  
++wdwg       = -9.447776e-12                                 dwb        = 0                                             wmlt       = 1                                             
++lmlt       = 1                                             xl         = '-3.63e-7+dxl_p_ldcd_d50g33_l110ae'           xw         = '4e-9+dxw_p_ldcd_d50g33_l110ae'               
+***** Vth Related  Parameter ***
++vth0       = '-6.5978167e-001+dvth0_p_ldcd_d50g33_l110ae'  k1         = 1.155                                         k2         = -0.0753                                       
++k3         = -114.821176                                   wk3        = 1.00614e-3                                    k3b        = 0                                             
++w0         = 1.253686e-6                                   nlx        = 6.4205e-9                                     dvt0       = 2.2                                           
++dvt1       = 0.53                                          dvt2       = -0.032                                        dvt0w      = 0                                             
++dvt1w      = 5.3e6                                         dvt2w      = -0.032                                        ngate      = 1.5194e20                                     
+***** Mobility Related Parameter ***
++u0         = '1.0810022e-002+du0_p_ldcd_d50g33_l110ae'     ua         = 6.908375e-10                                  ub         = 4.720318e-19                                  
++wub        = 3.205328e-23                                  uc         = -7.56e-11                                     vsat       = '9.2183116e+004+dvsat_p_ldcd_d50g33_l110ae'   
++wvsat      = -4.32527e-3                                   a0         = 0.38                                          ags        = 3.011                                         
++wags       = 0                                             b0         = 1.430417e-6                                   b1         = 1.322485e-5                                   
++keta       = -0.105                                        a1         = -0.0294                                       wa1        = 0                                             
++a2         = 0.2885                                        wa2        = -1.364253e-6                                  rdsw       = '1.609753e3+drdsw_p_ldcd_d50g33_l110ae'       
++wrdsw      = 1.80361e-2                                    prwb       = 0                                             prwg       = 0                                             
++wr         = 0.9                                           
+***** Subthreshold Related Parameter ***
++voff       = -0.14                                         nfactor    = 1.34                                          wnfactor   = -2e-6                                         
++eta0       = 0.011                                         etab       = -0.07                                         dsub       = 0.56                                          
++cit        = 0                                             cdsc       = 2.4e-4                                        cdscb      = 0                                             
++cdscd      = 0                                             
+***** Output Resistance Related Parameter ***
++pclm       = 0.1                                           pdiblc1    = 5e-3                                          pdiblc2    = 4.3e-6                                        
++pdiblcb    = 0.2                                           drout      = 0.56                                          pscbe1     = 7.329223e8                                    
++pscbe2     = 4.466044e-7                                   pvag       = 0                                             delta      = 0.025                                         
++alpha0     = 0                                             alpha1     = 0                                             beta0      = 30                                            
+***** Capacitance Parameter ***
++xpart      = 1                                             cgso       = '9.112e-11+dcgso_p_ldcd_d50g33_l110ae'        cgdo       = '1.5e-11+dcgdo_p_ldcd_d50g33_l110ae'          
++cgbo       = 0                                             ckappa     = 0.53                                          wckappa    = 1.2e-6                                        
++cf         = '6.7752e-11+dcf_p_ldcd_d50g33_l110ae'         dlc        = -2e-8                                         dwc        = -1.8e-7                                       
++noff       = 2.21                                          lnoff      = 6.25e-7                                       voffcv     = -0.03762                                      
++lvoffcv    = -3.25e-8                                      acde       = 1.0487                                        moin       = 5.671                                         
++cgsl       = '2.0171e-10+dcgsl_p_ldcd_d50g33_l110ae'       cgdl       = '1.56e-9+dcgdl_p_ldcd_d50g33_l110ae'          
+***** Souce/Drain Junction Diode Model Parameter ***
++calcacm    = 1                                             acm        = 12                                            ldif       = 7.9e-8                                        
++hdif       = 1.34e-7                                       rsh        = 7.2                                           rd         = 0                                             
++rs         = 0                                             rsc        = 0                                             rdc        = 0                                             
++cj         = '1.1838e-3+dcj_p_ldcd_d50g33_l110ae'          mj         = 0.35751                                       mjsw       = 0.37272                                       
++cjsw       = '3.3266e-10+dcjsw_p_ldcd_d50g33_l110ae'       cjswg      = '3.612e-10+dcjswg_p_ldcd_d50g33_l110ae'       mjswg      = 0.77                                          
++js         = 2.65e-7                                       jsw        = 1.12e-13                                      pbsw       = 0.73878                                       
++pb         = 0.77907                                       pbswg      = 0.845                                         
+***** Temperature Coeffient ***
++tnom       = 25                                            ute        = -1.06                                         kt1        = -0.39742                                      
++kt1l       = 0                                             kt2        = -0.0596                                       ua1        = 1.37e-9                                       
++wua1       = 7.8912e-15                                    ub1        = -1.48e-18                                     wub1       = 9.3e-24                                       
++uc1        = 2.4e-11                                       wuc1       = 1.008e-15                                     at         = 5.334e4                                       
++prt        = 0                                             nj         = 1.038                                         xti        = 3.5                                           
++tpb        = 1.7214e-3                                     tpbsw      = 1.9785e-3                                     tpbswg     = 2.58e-3                                       
++tcj        = 1.031e-3                                      tcjsw      = 1.1946e-3                                     tcjswg     = 1.416e-3                                      
+***** GIDL Current Parameters ***
++agidl      = '6e-6+dagidl_p_ldcd_d50g33_l110ae'            bgidl      = 4.26825e9                                     cgidl      = 20                                            
++egidl      = 0.56                                          
+*
+.ends
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

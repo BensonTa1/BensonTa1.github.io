@@ -1,0 +1,73 @@
+simulator lang=spectre insensitive=yes
+library mylib
+section mc
+include "l110ae_nvt_33_v021_mc_statistical_p.mdl.scs"
+include "l110ae_nvt_33_v021_mc_statistical_m.mdl.scs"
+include "l110ae_nvt_33_v021_mc.mdl.scs"
+include "l110ae_nvt_33_v021_mc.lib.scs" section=tt
+parameters total_flag_n_nvt_33_l110e  = 0
+parameters global_flag_n_nvt_33_l110e = 1
+parameters local_flag_n_nvt_33_l110e  = 1
+endsection mc
+
+section tt
+include "l110ae_nvt_33_v021_mc_statistical_m.mdl.scs"
+include "l110ae_nvt_33_v021_mc.mdl.scs"
+include "l110ae_nvt_33_v021_mc.lib.scs" section=tt
+include "l110ae_nvt_33_v021_mc.lib.scs" section=tt_g
+parameters total_flag_n_nvt_33_l110e  = 1
+parameters global_flag_n_nvt_33_l110e = 0
+parameters local_flag_n_nvt_33_l110e  = 0
+endsection tt
+
+section ss
+include "l110ae_nvt_33_v021_mc_statistical_m.mdl.scs"
+include "l110ae_nvt_33_v021_mc.mdl.scs"
+include "l110ae_nvt_33_v021_mc.lib.scs" section=ss
+include "l110ae_nvt_33_v021_mc.lib.scs" section=ss_g
+parameters total_flag_n_nvt_33_l110e  = 1
+parameters global_flag_n_nvt_33_l110e = 0
+parameters local_flag_n_nvt_33_l110e  = 0
+endsection ss
+
+section ff
+include "l110ae_nvt_33_v021_mc_statistical_m.mdl.scs"
+include "l110ae_nvt_33_v021_mc.mdl.scs"
+include "l110ae_nvt_33_v021_mc.lib.scs" section=ff
+include "l110ae_nvt_33_v021_mc.lib.scs" section=ff_g
+parameters total_flag_n_nvt_33_l110e  = 1
+parameters global_flag_n_nvt_33_l110e = 0
+parameters local_flag_n_nvt_33_l110e  = 0
+endsection ff
+
+section tt_g
+include "l110ae_nvt_33_v021_mc_statistical_m.mdl.scs"
+include "l110ae_nvt_33_v021_mc.mdl.scs"
+include "l110ae_nvt_33_v021_mc.lib.scs" section=tt
+include "l110ae_nvt_33_v021_mc.lib.scs" section=tt_g
+parameters total_flag_n_nvt_33_l110e  = 0
+parameters global_flag_n_nvt_33_l110e = 1
+parameters local_flag_n_nvt_33_l110e  = 1
+endsection tt_g
+
+section ss_g
+include "l110ae_nvt_33_v021_mc_statistical_m.mdl.scs"
+include "l110ae_nvt_33_v021_mc.mdl.scs"
+include "l110ae_nvt_33_v021_mc.lib.scs" section=ss
+include "l110ae_nvt_33_v021_mc.lib.scs" section=ss_g
+parameters total_flag_n_nvt_33_l110e  = 0
+parameters global_flag_n_nvt_33_l110e = 1
+parameters local_flag_n_nvt_33_l110e  = 1
+endsection ss_g
+
+section ff_g
+include "l110ae_nvt_33_v021_mc_statistical_m.mdl.scs"
+include "l110ae_nvt_33_v021_mc.mdl.scs"
+include "l110ae_nvt_33_v021_mc.lib.scs" section=ff
+include "l110ae_nvt_33_v021_mc.lib.scs" section=ff_g
+parameters total_flag_n_nvt_33_l110e  = 0
+parameters global_flag_n_nvt_33_l110e = 1
+parameters local_flag_n_nvt_33_l110e  = 1
+endsection ff_g
+
+endlibrary mylib

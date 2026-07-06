@@ -1,0 +1,16 @@
+library rfmim_cor 
+
+section ff_rfmim 
+include "cr013g_2d5_v1d4.scs" section = ff_rfmim 
+endsection ff_rfmim 
+
+section ss_rfmim 
+include "cr013g_2d5_v1d4.scs" section = ss_rfmim 
+endsection ss_rfmim 
+
+section tt_rfmim 
+include "cr013g_2d5_v1d4.scs" section = tt_rfmim 
+endsection tt_rfmim 
+
+
+endlibrary rfmim_cor 

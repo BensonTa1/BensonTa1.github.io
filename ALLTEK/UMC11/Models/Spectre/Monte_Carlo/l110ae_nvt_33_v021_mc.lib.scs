@@ -1,0 +1,114 @@
+//  ** corner parameters
+simulator lang=spectre insensitive=yes
+library mylib
+
+section tt
+parameters dtox_n_nvt_33_l110e_t=0
+parameters dxl_n_nvt_33_l110e_t=0
+parameters dvth0_n_nvt_33_l110e_t=0
+parameters du0_n_nvt_33_l110e_t=0
+parameters drdsw_n_nvt_33_l110e_t=0
+parameters dlvth0_n_nvt_33_l110e_t=0
+parameters dk3_n_nvt_33_l110e_t=0
+parameters dxw_n_nvt_33_l110e_t=0
+parameters dwwl_n_nvt_33_l110e_t=0
+parameters dcj_n_nvt_33_l110e_t=0
+parameters dcjsw_n_nvt_33_l110e_t=0
+parameters dcjswg_n_nvt_33_l110e_t=0
+parameters dcgdo_n_nvt_33_l110e_t=0
+parameters dcgso_n_nvt_33_l110e_t=0
+
+endsection tt
+
+section ff
+parameters dtox_n_nvt_33_l110e_t=-1.5e-10
+parameters dxl_n_nvt_33_l110e_t=-1.e-08
+parameters dvth0_n_nvt_33_l110e_t=-0.05153
+parameters du0_n_nvt_33_l110e_t=1.9747e-03
+parameters drdsw_n_nvt_33_l110e_t=-306.75
+parameters dlvth0_n_nvt_33_l110e_t=-2.096e-08
+parameters dk3_n_nvt_33_l110e_t=-2.213
+parameters dxw_n_nvt_33_l110e_t=6.771e-09
+parameters dwwl_n_nvt_33_l110e_t=-5.53e-21
+parameters dcj_n_nvt_33_l110e_t=-1.2064e-05
+parameters dcjsw_n_nvt_33_l110e_t=-3.4543e-11
+parameters dcjswg_n_nvt_33_l110e_t=-1.126e-11
+parameters dcgdo_n_nvt_33_l110e_t=2.162e-11
+parameters dcgso_n_nvt_33_l110e_t=2.162e-11
+
+endsection ff
+
+section ss
+parameters dtox_n_nvt_33_l110e_t=1.5e-10
+parameters dxl_n_nvt_33_l110e_t=1.e-08
+parameters dvth0_n_nvt_33_l110e_t=0.05216
+parameters du0_n_nvt_33_l110e_t=-2.22e-03
+parameters drdsw_n_nvt_33_l110e_t=447.3
+parameters dlvth0_n_nvt_33_l110e_t=1.83e-08
+parameters dk3_n_nvt_33_l110e_t=1.615
+parameters dxw_n_nvt_33_l110e_t=-1.119e-08
+parameters dwwl_n_nvt_33_l110e_t=8.02e-21
+parameters dcj_n_nvt_33_l110e_t=1.2064e-05
+parameters dcjsw_n_nvt_33_l110e_t=3.4543e-11
+parameters dcjswg_n_nvt_33_l110e_t=1.126e-11
+parameters dcgdo_n_nvt_33_l110e_t=-2.162e-11
+parameters dcgso_n_nvt_33_l110e_t=-2.162e-11
+
+endsection ss
+
+//  ** corner parameters for global
+section tt_g
+parameters dtox_n_nvt_33_l110e_g=0
+parameters dxl_n_nvt_33_l110e_g=0
+parameters dvth0_n_nvt_33_l110e_g=0
+parameters du0_n_nvt_33_l110e_g=0
+parameters drdsw_n_nvt_33_l110e_g=0
+parameters dlvth0_n_nvt_33_l110e_g=0
+parameters dk3_n_nvt_33_l110e_g=0
+parameters dxw_n_nvt_33_l110e_g=0
+parameters dwwl_n_nvt_33_l110e_g=0
+parameters dcj_n_nvt_33_l110e_g=0
+parameters dcjsw_n_nvt_33_l110e_g=0
+parameters dcjswg_n_nvt_33_l110e_g=0
+parameters dcgdo_n_nvt_33_l110e_g=0
+parameters dcgso_n_nvt_33_l110e_g=0
+
+endsection tt_g
+
+section ff_g
+parameters dtox_n_nvt_33_l110e_g=-1.5e-10
+parameters dxl_n_nvt_33_l110e_g=-1.0e-08
+parameters dvth0_n_nvt_33_l110e_g=-0.05153
+parameters du0_n_nvt_33_l110e_g=1.9747e-03
+parameters drdsw_n_nvt_33_l110e_g=-306.75
+parameters dlvth0_n_nvt_33_l110e_g=-2.096e-08
+parameters dk3_n_nvt_33_l110e_g=-2.213
+parameters dxw_n_nvt_33_l110e_g=6.771e-09
+parameters dwwl_n_nvt_33_l110e_g=-5.5e-21
+parameters dcj_n_nvt_33_l110e_g=-1.2064e-05
+parameters dcjsw_n_nvt_33_l110e_g=-3.4543e-11
+parameters dcjswg_n_nvt_33_l110e_g=-1.126e-11
+parameters dcgdo_n_nvt_33_l110e_g=2.162e-11
+parameters dcgso_n_nvt_33_l110e_g=2.162e-11
+
+endsection ff_g
+
+section ss_g
+parameters dtox_n_nvt_33_l110e_g=1.5e-10
+parameters dxl_n_nvt_33_l110e_g=1.0e-08
+parameters dvth0_n_nvt_33_l110e_g=0.05216
+parameters du0_n_nvt_33_l110e_g=-2.22e-03
+parameters drdsw_n_nvt_33_l110e_g=447.3
+parameters dlvth0_n_nvt_33_l110e_g=1.83e-08
+parameters dk3_n_nvt_33_l110e_g=1.615
+parameters dxw_n_nvt_33_l110e_g=-1.119e-08
+parameters dwwl_n_nvt_33_l110e_g=7.90e-21
+parameters dcj_n_nvt_33_l110e_g=1.2064e-05
+parameters dcjsw_n_nvt_33_l110e_g=3.4543e-11
+parameters dcjswg_n_nvt_33_l110e_g=1.126e-11
+parameters dcgdo_n_nvt_33_l110e_g=-2.162e-11
+parameters dcgso_n_nvt_33_l110e_g=-2.162e-11
+
+endsection ss_g
+
+endlibrary mylib

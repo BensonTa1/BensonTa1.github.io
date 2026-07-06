@@ -1,0 +1,47 @@
+*     ############################################
+*     #                                          #
+*     #  018RFCMOS CIRCULAR INDUCTOR HSPICE MODEL#
+*     #                                          #  
+*     ############################################
+*
+* //////PORT 1 connects to top metal (M6)//////////////
+* //////PORT 2 connects to underpasss metal (M5)///////
+* //////The node 999 connects to ground////////////////
+*
+.subckt l_slcr20k_rf 1 2 999 d=148u n=5.5 w=6u
+*
+*
+.param d_um='(d/2)*1e6'
+.param w_um='w*1e6+ dw_l_rf'
+.param s_um='2- dw_l_rf'
+.param t_um='2* (1+dt_l_rf)'
+*
+*
+*
+.param l_spiral='0.5*(n*3.14159*(2*(2*d_um+w_um)+(2*n-1)*(w_um+s_um)))+(n+0.5)*(w_um+s_um)'
+.param d_plus='(w_um+s_um)*(3*n-2*(n-0.5)-1)*(n+0.5)/(3*(2*n-n-0.5))'
+.param p_lsef='log(2*l_spiral/(w_um+t_um))-0.2'
+.param p_m_neg='0.4418*n'
+.param p_m_d1='log(sqrt(1+(l_spiral/(4*n*d_plus))*(l_spiral/(4*n*d_plus)))+l_spiral/(4*n*d_plus))'
+.param p_m_d2='sqrt(1+(4*n*d_plus/l_spiral)*(4*n*d_plus/l_spiral))-4*n*d_plus/l_spiral'
+.param p_ls='(2*l_spiral*(p_lsef-p_m_neg+0.97*(n-1)*(p_m_d1-p_m_d2))+2923-3700*n+507*n*n)*1e-13'
+.param p_rs='1+0.02*(l_spiral/w_um)+n*(0.34-0.0002273*l_spiral)'
+.param p_cp='(0.0402*(n-0.5)*w_um*w_um)*1e-15'
+.param p_cox='(0.0019725*(2*l_spiral*w_um+3.14159*w_um*w_um))*1e-15'
+.param p_csub1='((0.24+0.098*n)*d_um)*1e-15'
+.param p_csub2='((0.2205+0.055*n)*d_um)*1e-15'
+.param p_rsub1='530+49153/(d_um*n)'
+.param p_rsub2='680+55465/(d_um*n)'
+*
+* --------- Equivalent network -------------------
+*
+rs 1 777 'p_rs*(1+drs_l_rf)'
+ls 2 777 'p_ls*(1+dls_l_rf)'
+cp 1 2 'p_cp*(1+dcp_l_rf) * ( 2/s_um)'
+cox1 1 771 'p_cox*(1+dcox_l_rf)'
+cox2 2 881 'p_cox*(1+dcox_l_rf)'
+rsub1 771 999 p_rsub1
+rsub2 881 999 p_rsub2
+csub1 771 999 p_csub1
+csub2 881 999 p_csub2 
+.ends

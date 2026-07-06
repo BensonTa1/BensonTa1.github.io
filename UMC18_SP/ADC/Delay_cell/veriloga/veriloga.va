@@ -1,0 +1,28 @@
+// VerilogA for ADC, Delay_cell, veriloga
+
+`include "constants.vams"
+`include "disciplines.vams"
+
+module Delay_cell(VIN,VOUT);
+	electrical VIN,VOUT;
+	input VIN;
+	output VOUT;
+
+	parameter real VTH = 0.9; // 
+	parameter real delay_time = 1n; // 
+
+	real F;
+  
+	analog begin
+		@(cross(V(VIN) - VTH, 1)) //  VTH
+			F=1.8;
+
+		@(cross(V(VIN) - VTH, -1)) //  VTH
+			F=0;
+			
+			 
+	V(VOUT) <+ transition(F, delay_time ,10p, 10p);   
+	end
+
+
+endmodule

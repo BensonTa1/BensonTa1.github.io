@@ -1,0 +1,729 @@
+<?xml version="1.0"?>
+<setupdb version="6">data
+	<active>Active Setup
+		<corners>
+			<corner enabled="1">_default</corner>
+			<corner enabled="1">C1
+				<models>
+					<model enabled="1">varmis_18_rf_v2d3.lib.scs
+						<modeltest>All</modeltest>
+						<modelblock>Global</modelblock>
+						<modelfile>/home/m10912086/UM180FDKMFC0000OA_A02_EQ/Models/Spectre/varmis_18_rf_v2d3.lib.scs</modelfile>
+						<modelsection>"typ"</modelsection>
+					</model>
+					<model enabled="1">vardiop_rf_v2d3.lib.scs
+						<modeltest>All</modeltest>
+						<modelblock>Global</modelblock>
+						<modelfile>/home/m10912086/UM180FDKMFC0000OA_A02_EQ/Models/Spectre/vardiop_rf_v2d3.lib.scs</modelfile>
+						<modelsection>"typ"</modelsection>
+					</model>
+					<model enabled="1">rnppo_rf_v2d4.lib.scs
+						<modeltest>All</modeltest>
+						<modelblock>Global</modelblock>
+						<modelfile>/home/m10912086/UM180FDKMFC0000OA_A02_EQ/Models/Spectre/rnppo_rf_v2d4.lib.scs</modelfile>
+						<modelsection>"typ"</modelsection>
+					</model>
+					<model enabled="1">rnnpo_rf_v2d4.lib.scs
+						<modeltest>All</modeltest>
+						<modelblock>Global</modelblock>
+						<modelfile>/home/m10912086/UM180FDKMFC0000OA_A02_EQ/Models/Spectre/rnnpo_rf_v2d4.lib.scs</modelfile>
+						<modelsection>"typ" "max" "min"</modelsection>
+					</model>
+					<model enabled="1">rnhr_rf_v2d4.lib.scs
+						<modeltest>All</modeltest>
+						<modelblock>Global</modelblock>
+						<modelfile>/home/m10912086/UM180FDKMFC0000OA_A02_EQ/Models/Spectre/rnhr_rf_v2d4.lib.scs</modelfile>
+						<modelsection>"typ"</modelsection>
+					</model>
+					<model enabled="1">pad_rf_v2d3.lib.scs
+						<modeltest>All</modeltest>
+						<modelblock>Global</modelblock>
+						<modelfile>/home/m10912086/UM180FDKMFC0000OA_A02_EQ/Models/Spectre/pad_rf_v2d3.lib.scs</modelfile>
+						<modelsection>"typ"</modelsection>
+					</model>
+					<model enabled="1">mm180_zvt33_v113.lib.scs
+						<modeltest>All</modeltest>
+						<modelblock>Global</modelblock>
+						<modelfile>/home/m10912086/UM180FDKMFC0000OA_A02_EQ/Models/Spectre/mm180_zvt33_v113.lib.scs</modelfile>
+						<modelsection>"tt"</modelsection>
+					</model>
+					<model enabled="1">mm180_zvt18_v121.lib.scs
+						<modeltest>All</modeltest>
+						<modelblock>Global</modelblock>
+						<modelfile>/home/m10912086/UM180FDKMFC0000OA_A02_EQ/Models/Spectre/mm180_zvt18_v121.lib.scs</modelfile>
+						<modelsection>"tt"</modelsection>
+					</model>
+					<model enabled="1">mm180_res_v141.lib.scs
+						<modeltest>All</modeltest>
+						<modelblock>Global</modelblock>
+						<modelfile>/home/m10912086/UM180FDKMFC0000OA_A02_EQ/Models/Spectre/mm180_res_v141.lib.scs</modelfile>
+						<modelsection>"res_typ"</modelsection>
+					</model>
+					<model enabled="1">mm180_reg33_v114.lib.scs
+						<modeltest>All</modeltest>
+						<modelblock>Global</modelblock>
+						<modelfile>/home/m10912086/UM180FDKMFC0000OA_A02_EQ/Models/Spectre/mm180_reg33_v114.lib.scs</modelfile>
+						<modelsection>"tt"</modelsection>
+					</model>
+					<model enabled="1">mm180_reg33bpw_v123.lib.scs
+						<modeltest>All</modeltest>
+						<modelblock>Global</modelblock>
+						<modelfile>/home/m10912086/UM180FDKMFC0000OA_A02_EQ/Models/Spectre/mm180_reg33bpw_v123.lib.scs</modelfile>
+						<modelsection>"tt"</modelsection>
+					</model>
+					<model enabled="1">mm180_reg18_v124.lib.scs
+						<modeltest>All</modeltest>
+						<modelblock>Global</modelblock>
+						<modelfile>/home/m10912086/UM180FDKMFC0000OA_A02_EQ/Models/Spectre/mm180_reg18_v124.lib.scs</modelfile>
+						<modelsection>"tt" "ff" "ss" "snfp" "fnsp"</modelsection>
+					</model>
+					<model enabled="1">mm180_reg18bpw_v123.lib.scs
+						<modeltest>All</modeltest>
+						<modelblock>Global</modelblock>
+						<modelfile>/home/m10912086/UM180FDKMFC0000OA_A02_EQ/Models/Spectre/mm180_reg18bpw_v123.lib.scs</modelfile>
+						<modelsection>"tt"</modelsection>
+					</model>
+					<model enabled="1">mm180_mimcap_v101.lib.scs
+						<modeltest>All</modeltest>
+						<modelblock>Global</modelblock>
+						<modelfile>/home/m10912086/UM180FDKMFC0000OA_A02_EQ/Models/Spectre/mm180_mimcap_v101.lib.scs</modelfile>
+						<modelsection>"mimcaps_typ"</modelsection>
+					</model>
+					<model enabled="1">mm180_lvt33_v113.lib.scs
+						<modeltest>All</modeltest>
+						<modelblock>Global</modelblock>
+						<modelfile>/home/m10912086/UM180FDKMFC0000OA_A02_EQ/Models/Spectre/mm180_lvt33_v113.lib.scs</modelfile>
+						<modelsection>"tt"</modelsection>
+					</model>
+					<model enabled="1">mm180_lvt18_v113.lib.scs
+						<modeltest>All</modeltest>
+						<modelblock>Global</modelblock>
+						<modelfile>/home/m10912086/UM180FDKMFC0000OA_A02_EQ/Models/Spectre/mm180_lvt18_v113.lib.scs</modelfile>
+						<modelsection>"tt"</modelsection>
+					</model>
+					<model enabled="1">mm180_bjt_v121.lib.scs
+						<modeltest>All</modeltest>
+						<modelblock>Global</modelblock>
+						<modelfile>/home/m10912086/UM180FDKMFC0000OA_A02_EQ/Models/Spectre/mm180_bjt_v121.lib.scs</modelfile>
+						<modelsection>"tt_bip"</modelsection>
+					</model>
+					<model enabled="1">mimcapm_rf_v2d3.lib.scs
+						<modeltest>All</modeltest>
+						<modelblock>Global</modelblock>
+						<modelfile>/home/m10912086/UM180FDKMFC0000OA_A02_EQ/Models/Spectre/mimcapm_rf_v2d3.lib.scs</modelfile>
+						<modelsection>"typ"</modelsection>
+					</model>
+					<model enabled="1">l_slcr20k_rf_v2d3.lib.scs
+						<modeltest>All</modeltest>
+						<modelblock>Global</modelblock>
+						<modelfile>/home/m10912086/UM180FDKMFC0000OA_A02_EQ/Models/Spectre/l_slcr20k_rf_v2d3.lib.scs</modelfile>
+						<modelsection>"typ"</modelsection>
+					</model>
+					<model enabled="1">io_rf_v2d3.lib.scs
+						<modeltest>All</modeltest>
+						<modelblock>Global</modelblock>
+						<modelfile>/home/m10912086/UM180FDKMFC0000OA_A02_EQ/Models/Spectre/io_rf_v2d3.lib.scs</modelfile>
+						<modelsection>"tt"</modelsection>
+					</model>
+					<model enabled="1">core_rf_v2d4.lib.scs
+						<modeltest>All</modeltest>
+						<modelblock>Global</modelblock>
+						<modelfile>/home/m10912086/UM180FDKMFC0000OA_A02_EQ/Models/Spectre/core_rf_v2d4.lib.scs</modelfile>
+						<modelsection>"tt"</modelsection>
+					</model>
+				</models>
+			</corner>
+		</corners>
+		<extensions>
+			<extension>Parasitics
+				<callback>_parSetupDBExtensionCB</callback>
+				<iconvalue></iconvalue>
+				<icontype></icontype>
+			</extension>
+		</extensions>
+		<currentmode>Single Run, Sweeps and Corners</currentmode>
+		<overwritehistory>0</overwritehistory>
+		<tests>
+			<test>TEST:VCO_Output_Buffer:1
+				<tool>ADE</tool>
+				<tooloptions>
+					<option>cell
+						<value>VCO_Output_Buffer</value>
+					</option>
+					<option>lib
+						<value>TEST</value>
+					</option>
+					<option>sim
+						<value>spectre</value>
+					</option>
+					<option>view
+						<value>schematic</value>
+					</option>
+					<option>path
+						<value>$AXL_SETUPDB_DIR/test_states</value>
+					</option>
+					<option>state
+						<value>TEST:VCO_Output_Buffer:1_active</value>
+					</option>
+				</tooloptions>
+				<origoptions>
+					<option>cell
+						<value>VCO_Output_Buffer</value>
+					</option>
+					<option>lib
+						<value>TEST</value>
+					</option>
+					<option>sim
+						<value>spectre</value>
+					</option>
+					<option>view
+						<value>schematic</value>
+					</option>
+					<option>path
+						<value>$AXL_SETUPDB_DIR/test_states</value>
+					</option>
+					<option>state
+						<value>state1</value>
+					</option>
+				</origoptions>
+			</test>
+		</tests>
+		<vars>
+			<var>VDD
+				<value>{Exclusion List}1.8{Exclusion List}{Center/Span%}Auto:1.8:3:10{Center/Span%}</value>
+				<dependentTests>
+					<dependentTest omitted="0">TEST:VCO_Output_Buffer:1</dependentTest>
+				</dependentTests>
+			</var>
+			<var>temperature
+				<value>{Exclusion List}30{Exclusion List}{From/To}Auto:-100:6:200{From/To}</value>
+			</var>
+		</vars>
+		<overwritehistoryname>Interactive.0</overwritehistoryname>
+		<plottingoptions>
+			<plottingoption>plottingmode
+				<value>Replace</value>
+			</plottingoption>
+			<plottingoption>plottype
+				<value>None</value>
+			</plottingoption>
+			<plottingoption>usewaveformtemplate
+				<value>no</value>
+			</plottingoption>
+			<plottingoption>useMaestroPlottingTemplate
+				<value>yes</value>
+			</plottingoption>
+			<plottingoption>waveformtemplate
+				<value></value>
+			</plottingoption>
+			<plottingoption>allplottingtemplates
+				<value></value>
+			</plottingoption>
+			<plottingoption>defaultplottingtemplate
+				<value></value>
+			</plottingoption>
+		</plottingoptions>
+	</active>
+	<history>History
+		<historyentry assemblerOrExplorer="adexl" roOrView="view">Interactive.0
+			<checkpoint>
+				<corners>
+					<corner enabled="1">_default</corner>
+					<corner enabled="1">C1
+						<models>
+							<model enabled="1">varmis_18_rf_v2d3.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/m10912086/UM180FDKMFC0000OA_A02_EQ/Models/Spectre/varmis_18_rf_v2d3.lib.scs</modelfile>
+								<modelsection>"typ"</modelsection>
+							</model>
+							<model enabled="1">vardiop_rf_v2d3.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/m10912086/UM180FDKMFC0000OA_A02_EQ/Models/Spectre/vardiop_rf_v2d3.lib.scs</modelfile>
+								<modelsection>"typ"</modelsection>
+							</model>
+							<model enabled="1">rnppo_rf_v2d4.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/m10912086/UM180FDKMFC0000OA_A02_EQ/Models/Spectre/rnppo_rf_v2d4.lib.scs</modelfile>
+								<modelsection>"typ"</modelsection>
+							</model>
+							<model enabled="1">rnnpo_rf_v2d4.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/m10912086/UM180FDKMFC0000OA_A02_EQ/Models/Spectre/rnnpo_rf_v2d4.lib.scs</modelfile>
+								<modelsection>"typ"</modelsection>
+							</model>
+							<model enabled="1">rnhr_rf_v2d4.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/m10912086/UM180FDKMFC0000OA_A02_EQ/Models/Spectre/rnhr_rf_v2d4.lib.scs</modelfile>
+								<modelsection>"typ"</modelsection>
+							</model>
+							<model enabled="1">pad_rf_v2d3.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/m10912086/UM180FDKMFC0000OA_A02_EQ/Models/Spectre/pad_rf_v2d3.lib.scs</modelfile>
+								<modelsection>"typ"</modelsection>
+							</model>
+							<model enabled="1">mm180_zvt33_v113.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/m10912086/UM180FDKMFC0000OA_A02_EQ/Models/Spectre/mm180_zvt33_v113.lib.scs</modelfile>
+								<modelsection>"tt"</modelsection>
+							</model>
+							<model enabled="1">mm180_zvt18_v121.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/m10912086/UM180FDKMFC0000OA_A02_EQ/Models/Spectre/mm180_zvt18_v121.lib.scs</modelfile>
+								<modelsection>"tt"</modelsection>
+							</model>
+							<model enabled="1">mm180_res_v141.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/m10912086/UM180FDKMFC0000OA_A02_EQ/Models/Spectre/mm180_res_v141.lib.scs</modelfile>
+								<modelsection>"res_typ"</modelsection>
+							</model>
+							<model enabled="1">mm180_reg33_v114.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/m10912086/UM180FDKMFC0000OA_A02_EQ/Models/Spectre/mm180_reg33_v114.lib.scs</modelfile>
+								<modelsection>"tt"</modelsection>
+							</model>
+							<model enabled="1">mm180_reg33bpw_v123.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/m10912086/UM180FDKMFC0000OA_A02_EQ/Models/Spectre/mm180_reg33bpw_v123.lib.scs</modelfile>
+								<modelsection>"tt"</modelsection>
+							</model>
+							<model enabled="1">mm180_reg18_v124.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/m10912086/UM180FDKMFC0000OA_A02_EQ/Models/Spectre/mm180_reg18_v124.lib.scs</modelfile>
+								<modelsection>"tt" "ff" "ss" "snfp" "fnsp"</modelsection>
+							</model>
+							<model enabled="1">mm180_reg18bpw_v123.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/m10912086/UM180FDKMFC0000OA_A02_EQ/Models/Spectre/mm180_reg18bpw_v123.lib.scs</modelfile>
+								<modelsection>"tt"</modelsection>
+							</model>
+							<model enabled="1">mm180_mimcap_v101.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/m10912086/UM180FDKMFC0000OA_A02_EQ/Models/Spectre/mm180_mimcap_v101.lib.scs</modelfile>
+								<modelsection>"mimcaps_typ"</modelsection>
+							</model>
+							<model enabled="1">mm180_lvt33_v113.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/m10912086/UM180FDKMFC0000OA_A02_EQ/Models/Spectre/mm180_lvt33_v113.lib.scs</modelfile>
+								<modelsection>"tt"</modelsection>
+							</model>
+							<model enabled="1">mm180_lvt18_v113.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/m10912086/UM180FDKMFC0000OA_A02_EQ/Models/Spectre/mm180_lvt18_v113.lib.scs</modelfile>
+								<modelsection>"tt"</modelsection>
+							</model>
+							<model enabled="1">mm180_bjt_v121.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/m10912086/UM180FDKMFC0000OA_A02_EQ/Models/Spectre/mm180_bjt_v121.lib.scs</modelfile>
+								<modelsection>"tt_bip"</modelsection>
+							</model>
+							<model enabled="1">mimcapm_rf_v2d3.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/m10912086/UM180FDKMFC0000OA_A02_EQ/Models/Spectre/mimcapm_rf_v2d3.lib.scs</modelfile>
+								<modelsection>"typ"</modelsection>
+							</model>
+							<model enabled="1">l_slcr20k_rf_v2d3.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/m10912086/UM180FDKMFC0000OA_A02_EQ/Models/Spectre/l_slcr20k_rf_v2d3.lib.scs</modelfile>
+								<modelsection>"typ"</modelsection>
+							</model>
+							<model enabled="1">io_rf_v2d3.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/m10912086/UM180FDKMFC0000OA_A02_EQ/Models/Spectre/io_rf_v2d3.lib.scs</modelfile>
+								<modelsection>"tt"</modelsection>
+							</model>
+							<model enabled="1">core_rf_v2d4.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/m10912086/UM180FDKMFC0000OA_A02_EQ/Models/Spectre/core_rf_v2d4.lib.scs</modelfile>
+								<modelsection>"tt"</modelsection>
+							</model>
+						</models>
+					</corner>
+				</corners>
+				<extensions>
+					<extension>Parasitics
+						<callback>_parSetupDBExtensionCB</callback>
+						<iconvalue></iconvalue>
+						<icontype></icontype>
+					</extension>
+				</extensions>
+				<currentmode>Single Run, Sweeps and Corners</currentmode>
+				<overwritehistory>0</overwritehistory>
+				<tests>
+					<test enabled="1">TEST:VCO_Output_Buffer:1
+						<tool>ADE</tool>
+						<tooloptions>
+							<option>cell
+								<value>VCO_Output_Buffer</value>
+							</option>
+							<option>lib
+								<value>TEST</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>schematic</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>TEST:VCO_Output_Buffer:1_state1_Interactive.0</value>
+							</option>
+						</tooloptions>
+						<origoptions>
+							<option>cell
+								<value>VCO_Output_Buffer</value>
+							</option>
+							<option>lib
+								<value>TEST</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>schematic</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>state1</value>
+							</option>
+						</origoptions>
+					</test>
+				</tests>
+				<vars>
+					<var>VDD
+						<value>{Exclusion List}1.8{Exclusion List}{Center/Span%}Auto:1.8:3:10{Center/Span%}</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST:VCO_Output_Buffer:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>temperature
+						<value>{Exclusion List}30{Exclusion List}{From/To}Auto:-100:6:200{From/To}</value>
+					</var>
+				</vars>
+				<overwritehistoryname>Interactive.0</overwritehistoryname>
+				<plottingoptions>
+					<plottingoption>plottingmode
+						<value>Replace</value>
+					</plottingoption>
+					<plottingoption>plottype
+						<value>None</value>
+					</plottingoption>
+					<plottingoption>usewaveformtemplate
+						<value>no</value>
+					</plottingoption>
+					<plottingoption>useMaestroPlottingTemplate
+						<value>yes</value>
+					</plottingoption>
+					<plottingoption>waveformtemplate
+						<value></value>
+					</plottingoption>
+					<plottingoption>allplottingtemplates
+						<value></value>
+					</plottingoption>
+					<plottingoption>defaultplottingtemplate
+						<value></value>
+					</plottingoption>
+				</plottingoptions>
+				<sortVariableValues>0</sortVariableValues>
+			</checkpoint>
+			<timestamp>Nov 29 10:55:10 2024</timestamp>
+			<uuid>{2ae6cd49-f296-442f-9169-43b4c6bb3f22}</uuid>
+			<resultsname>/home/m10912086/UM180FDKMFC0000OA_A02_EQ/TEST/VCO_Output_Buffer/adexl/results/data/Interactive.0.rdb</resultsname>
+			<simresults>$AXL_SETUPDB_DIR/results/data/Interactive.0.rdb</simresults>
+			<rawdatadelstrategy>SaveAll
+				<simdatasavemode>All</simdatasavemode>
+			</rawdatadelstrategy>
+			<netlistdelstrategy>SaveAll</netlistdelstrategy>
+			<uselocalpsfdir>false</uselocalpsfdir>
+			<localpsfdir>/tmp/m10912086_m10912086_105510741</localpsfdir>
+			<psfdir>/home/m10912086/simulation/TEST/VCO_Output_Buffer/adexl/results/data/Interactive.0</psfdir>
+			<simdir>$AXL_PROJECT_DIR/TEST/VCO_Output_Buffer/adexl/results/data/Interactive.0</simdir>
+			<gendatasheetplotsonsimulation>1</gendatasheetplotsonsimulation>
+			<runlog>/home/m10912086/UM180FDKMFC0000OA_A02_EQ/TEST/VCO_Output_Buffer/adexl/results/data/Interactive.0.log</runlog>
+			<runlogfile>$AXL_SETUPDB_DIR/results/data/Interactive.0.log</runlogfile>
+			<schematicpoint>
+				<vars>
+					<var>VDD
+						<value>1.8</value>
+					</var>
+				</vars>
+			</schematicpoint>
+			<test>all</test>
+		</historyentry>
+		<historyentry assemblerOrExplorer="adexl" roOrView="view">Interactive.1
+			<checkpoint>
+				<corners>
+					<corner enabled="1">_default</corner>
+					<corner enabled="1">C1
+						<models>
+							<model enabled="1">varmis_18_rf_v2d3.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/m10912086/UM180FDKMFC0000OA_A02_EQ/Models/Spectre/varmis_18_rf_v2d3.lib.scs</modelfile>
+								<modelsection>"typ"</modelsection>
+							</model>
+							<model enabled="1">vardiop_rf_v2d3.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/m10912086/UM180FDKMFC0000OA_A02_EQ/Models/Spectre/vardiop_rf_v2d3.lib.scs</modelfile>
+								<modelsection>"typ"</modelsection>
+							</model>
+							<model enabled="1">rnppo_rf_v2d4.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/m10912086/UM180FDKMFC0000OA_A02_EQ/Models/Spectre/rnppo_rf_v2d4.lib.scs</modelfile>
+								<modelsection>"typ"</modelsection>
+							</model>
+							<model enabled="1">rnnpo_rf_v2d4.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/m10912086/UM180FDKMFC0000OA_A02_EQ/Models/Spectre/rnnpo_rf_v2d4.lib.scs</modelfile>
+								<modelsection>"typ" "max" "min"</modelsection>
+							</model>
+							<model enabled="1">rnhr_rf_v2d4.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/m10912086/UM180FDKMFC0000OA_A02_EQ/Models/Spectre/rnhr_rf_v2d4.lib.scs</modelfile>
+								<modelsection>"typ"</modelsection>
+							</model>
+							<model enabled="1">pad_rf_v2d3.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/m10912086/UM180FDKMFC0000OA_A02_EQ/Models/Spectre/pad_rf_v2d3.lib.scs</modelfile>
+								<modelsection>"typ"</modelsection>
+							</model>
+							<model enabled="1">mm180_zvt33_v113.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/m10912086/UM180FDKMFC0000OA_A02_EQ/Models/Spectre/mm180_zvt33_v113.lib.scs</modelfile>
+								<modelsection>"tt"</modelsection>
+							</model>
+							<model enabled="1">mm180_zvt18_v121.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/m10912086/UM180FDKMFC0000OA_A02_EQ/Models/Spectre/mm180_zvt18_v121.lib.scs</modelfile>
+								<modelsection>"tt"</modelsection>
+							</model>
+							<model enabled="1">mm180_res_v141.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/m10912086/UM180FDKMFC0000OA_A02_EQ/Models/Spectre/mm180_res_v141.lib.scs</modelfile>
+								<modelsection>"res_typ"</modelsection>
+							</model>
+							<model enabled="1">mm180_reg33_v114.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/m10912086/UM180FDKMFC0000OA_A02_EQ/Models/Spectre/mm180_reg33_v114.lib.scs</modelfile>
+								<modelsection>"tt"</modelsection>
+							</model>
+							<model enabled="1">mm180_reg33bpw_v123.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/m10912086/UM180FDKMFC0000OA_A02_EQ/Models/Spectre/mm180_reg33bpw_v123.lib.scs</modelfile>
+								<modelsection>"tt"</modelsection>
+							</model>
+							<model enabled="1">mm180_reg18_v124.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/m10912086/UM180FDKMFC0000OA_A02_EQ/Models/Spectre/mm180_reg18_v124.lib.scs</modelfile>
+								<modelsection>"tt" "ff" "ss" "snfp" "fnsp"</modelsection>
+							</model>
+							<model enabled="1">mm180_reg18bpw_v123.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/m10912086/UM180FDKMFC0000OA_A02_EQ/Models/Spectre/mm180_reg18bpw_v123.lib.scs</modelfile>
+								<modelsection>"tt"</modelsection>
+							</model>
+							<model enabled="1">mm180_mimcap_v101.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/m10912086/UM180FDKMFC0000OA_A02_EQ/Models/Spectre/mm180_mimcap_v101.lib.scs</modelfile>
+								<modelsection>"mimcaps_typ"</modelsection>
+							</model>
+							<model enabled="1">mm180_lvt33_v113.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/m10912086/UM180FDKMFC0000OA_A02_EQ/Models/Spectre/mm180_lvt33_v113.lib.scs</modelfile>
+								<modelsection>"tt"</modelsection>
+							</model>
+							<model enabled="1">mm180_lvt18_v113.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/m10912086/UM180FDKMFC0000OA_A02_EQ/Models/Spectre/mm180_lvt18_v113.lib.scs</modelfile>
+								<modelsection>"tt"</modelsection>
+							</model>
+							<model enabled="1">mm180_bjt_v121.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/m10912086/UM180FDKMFC0000OA_A02_EQ/Models/Spectre/mm180_bjt_v121.lib.scs</modelfile>
+								<modelsection>"tt_bip"</modelsection>
+							</model>
+							<model enabled="1">mimcapm_rf_v2d3.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/m10912086/UM180FDKMFC0000OA_A02_EQ/Models/Spectre/mimcapm_rf_v2d3.lib.scs</modelfile>
+								<modelsection>"typ"</modelsection>
+							</model>
+							<model enabled="1">l_slcr20k_rf_v2d3.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/m10912086/UM180FDKMFC0000OA_A02_EQ/Models/Spectre/l_slcr20k_rf_v2d3.lib.scs</modelfile>
+								<modelsection>"typ"</modelsection>
+							</model>
+							<model enabled="1">io_rf_v2d3.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/m10912086/UM180FDKMFC0000OA_A02_EQ/Models/Spectre/io_rf_v2d3.lib.scs</modelfile>
+								<modelsection>"tt"</modelsection>
+							</model>
+							<model enabled="1">core_rf_v2d4.lib.scs
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/m10912086/UM180FDKMFC0000OA_A02_EQ/Models/Spectre/core_rf_v2d4.lib.scs</modelfile>
+								<modelsection>"tt"</modelsection>
+							</model>
+						</models>
+					</corner>
+				</corners>
+				<extensions>
+					<extension>Parasitics
+						<callback>_parSetupDBExtensionCB</callback>
+						<iconvalue></iconvalue>
+						<icontype></icontype>
+					</extension>
+				</extensions>
+				<currentmode>Single Run, Sweeps and Corners</currentmode>
+				<overwritehistory>0</overwritehistory>
+				<tests>
+					<test>TEST:VCO_Output_Buffer:1
+						<tool>ADE</tool>
+						<tooloptions>
+							<option>cell
+								<value>VCO_Output_Buffer</value>
+							</option>
+							<option>lib
+								<value>TEST</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>schematic</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>TEST:VCO_Output_Buffer:1_state1_Interactive.1</value>
+							</option>
+						</tooloptions>
+						<origoptions>
+							<option>cell
+								<value>VCO_Output_Buffer</value>
+							</option>
+							<option>lib
+								<value>TEST</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>schematic</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>state1</value>
+							</option>
+						</origoptions>
+					</test>
+				</tests>
+				<vars>
+					<var>VDD
+						<value>{Exclusion List}1.8{Exclusion List}{Center/Span%}Auto:1.8:3:10{Center/Span%}</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST:VCO_Output_Buffer:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>temperature
+						<value>{Exclusion List}30{Exclusion List}{From/To}Auto:-100:6:200{From/To}</value>
+					</var>
+				</vars>
+				<overwritehistoryname>Interactive.0</overwritehistoryname>
+				<plottingoptions>
+					<plottingoption>plottingmode
+						<value>Replace</value>
+					</plottingoption>
+					<plottingoption>plottype
+						<value>None</value>
+					</plottingoption>
+					<plottingoption>usewaveformtemplate
+						<value>no</value>
+					</plottingoption>
+					<plottingoption>useMaestroPlottingTemplate
+						<value>yes</value>
+					</plottingoption>
+					<plottingoption>waveformtemplate
+						<value></value>
+					</plottingoption>
+					<plottingoption>allplottingtemplates
+						<value></value>
+					</plottingoption>
+					<plottingoption>defaultplottingtemplate
+						<value></value>
+					</plottingoption>
+				</plottingoptions>
+				<sortVariableValues>0</sortVariableValues>
+			</checkpoint>
+			<timestamp>Nov 29 12:38:12 2024</timestamp>
+			<uuid>{1eb2c350-d1d3-4e15-af3c-0564074d2c6d}</uuid>
+			<resultsname>/home/m10912086/UM180FDKMFC0000OA_A02_EQ/TEST/VCO_Output_Buffer/adexl/results/data/Interactive.1.rdb</resultsname>
+			<simresults>$AXL_SETUPDB_DIR/results/data/Interactive.1.rdb</simresults>
+			<rawdatadelstrategy>SaveAll
+				<simdatasavemode>All</simdatasavemode>
+			</rawdatadelstrategy>
+			<netlistdelstrategy>SaveAll</netlistdelstrategy>
+			<uselocalpsfdir>false</uselocalpsfdir>
+			<localpsfdir>/tmp/m10912086_m10912086_123812081</localpsfdir>
+			<psfdir>/home/m10912086/simulation/TEST/VCO_Output_Buffer/adexl/results/data/Interactive.1</psfdir>
+			<simdir>$AXL_PROJECT_DIR/TEST/VCO_Output_Buffer/adexl/results/data/Interactive.1</simdir>
+			<gendatasheetplotsonsimulation>1</gendatasheetplotsonsimulation>
+			<runlog>/home/m10912086/UM180FDKMFC0000OA_A02_EQ/TEST/VCO_Output_Buffer/adexl/results/data/Interactive.1.log</runlog>
+			<runlogfile>$AXL_SETUPDB_DIR/results/data/Interactive.1.log</runlogfile>
+			<schematicpoint>
+				<vars>
+					<var>VDD
+						<value>1.8</value>
+					</var>
+				</vars>
+			</schematicpoint>
+			<test>all</test>
+		</historyentry>
+	</history>
+</setupdb>

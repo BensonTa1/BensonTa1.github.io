@@ -1,0 +1,32 @@
+//    
+simulator lang=spectre insensitive=yes 
+library mylib 
+ 
+section tt 
+parameters drend_rnhr1000_rf=0 
+parameters drs_rnhr1000_rf=0 
+parameters ddw_rnhr1000_rf=0 
+parameters p_cox_rnhr1000_rf=0 
+  
+include "l110ae_rnhr_rf_v021.mdl.scs" 
+endsection tt 
+  
+section ss 
+parameters drend_rnhr1000_rf=5.4740e-005 
+parameters drs_rnhr1000_rf=1.4800e+002 
+parameters ddw_rnhr1000_rf=-1.3000e-008 
+parameters p_cox_rnhr1000_rf=0.1 
+  
+include "l110ae_rnhr_rf_v021.mdl.scs" 
+endsection ss 
+  
+section ff 
+parameters drend_rnhr1000_rf=-5.3310e-005 
+parameters drs_rnhr1000_rf=-1.4800e+002 
+parameters ddw_rnhr1000_rf=1.3000e-008 
+parameters p_cox_rnhr1000_rf=-0.1 
+  
+include "l110ae_rnhr_rf_v021.mdl.scs" 
+endsection ff 
+  
+endlibrary mylib 

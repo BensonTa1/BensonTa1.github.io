@@ -1,0 +1,27 @@
+Starting Monte Carlo Sampling...
+
+Current time: Tue Apr  8 19:19:13 2025 
+
+Variation: Process
+Sampling Method: Low-Discrepancy Sequence
+Seed: 1
+
+MonteCarlo.14
+Number of points completed: 200
+Number of simulation errors: 0
+MonteCarlo.14 completed. 
+Current time: Tue Apr  8 19:19:32 2025 
+Monte Carlo Sampling yield summary:
+Number of spec values are in this yield data: 2
+TEST:MC:1	C0 - 
+	(IDC("/IPRB0/PLUS") - IDC("/IPRB1/PLUS")):	Yield	100%
+		Min -4.06576e-19	Max 5.69206e-19	Mean -1.21973e-21	Number of errors 0
+TEST:MC:1	C0 - 
+	IDC("/IPRB1/PLUS"):	Yield	100%
+		Min 7.6994e-06	Max 2.84569e-05	Mean 1.49862e-05	Number of errors 0
+
+TEST:MC:1
+	Overall Yield	100%	Number of points passed	200	Total number of points	200
+
+Estimated yield = 100% (200/200), 0 errors
+Estimated yield (No opregions) = 100% (200/200)

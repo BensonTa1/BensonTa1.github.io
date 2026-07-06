@@ -1,0 +1,31 @@
+
+LVS:
+1. After cdl out, customer need to run chg_netlist.pl program.
+path:      /perl/chg_netlist.pl
+command:  ./chg_netlist.pl <your_netlist_file.cdl>
+
+2. Use new netlist_lvs to run calibre LVS.
+
+3. When customer use serial resistance on schematic, customer need to modify calibre LVS command rule file option for serial resistance LVS.
+
+LVS REDUCE SERIES RESISTORS ""YES"
+
+DRC:
+Depend on different top metal thickness, customer need to add dummy layer on chip.
+
+
+Symbol label display issue:
+  When you change the property value in Virtuoso replace,
+  the value of symbol label is not changed.
+
+1. Load the code via the CIW:
+   load("./perl/CCSinvokeCdfCallbacks.il")
+
+2. Open the schematic.
+
+3. Type this command via the CIW:
+   CCSinvokeCdfCallbacks(geGetEditCellView() ?callInitProc t ?useInstCDF t)
+
+
+
+

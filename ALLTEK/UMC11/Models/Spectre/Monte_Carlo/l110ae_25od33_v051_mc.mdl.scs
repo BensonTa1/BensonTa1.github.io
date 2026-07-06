@@ -1,0 +1,683 @@
+simulator lang=spectre insensitive=yes
+inline subckt n_25od33_l110ae ( d g s b )
+parameters w=0u l=0u
++ dtemp=0 nf=1 mf=1 mis_flag=1
++ nf_odd=nf-2*int(nf/2) nf_even=1-nf_odd
++ sa=0 sb=0 sd=0
++ a_unit=sd*w   p_unit=2*(sd+w)  a_sa_edge=sa*w   p_sa_edge=2*(sa+w)
++ a_sb_edge=sb*w   p_sb_edge=2*(sb+w)
++ ad=(nf_odd*(a_unit*((nf+1)/2-1)+a_sb_edge) + nf_even*(a_unit*nf/2))/nf
++ as=(nf_odd*(a_unit*((nf+1)/2-1)+a_sa_edge) + nf_even*(a_unit*(nf/2-1)+a_sa_edge+a_sb_edge))/nf
++ pd=(nf_odd*(p_unit*((nf+1)/2-1)+p_sb_edge) + nf_even*(p_unit*nf/2))/nf
++ ps=(nf_odd*(p_unit*((nf+1)/2-1)+p_sa_edge) + nf_even*(p_unit*(nf/2-1)+p_sa_edge+p_sb_edge))/nf
+//******************
+//**** MISMATCH ****
+//******************
+//******************
+parameters  beta  = 1.2
+parameters  beta1  = 1.2
+parameters compl1	= 6.13537479203154
+parameters compl2	= 3.16449558573009
+parameters compl3	= 2.04207623679017
+parameters compl4	= 0.416015014555578
+parameters compl5	= 4.8949228914575e-13
+parameters l_factor_n=1/sqrt(2*w*0.9*(l*0.9+12e-9)*mf*1e+12)
+parameters b1_np_25od33_l110ae = b1_n_25od33_l110ae_xx
+parameters b2_np_25od33_l110ae = b2_n_25od33_l110ae_xx
+parameters b3_np_25od33_l110ae = b3_n_25od33_l110ae_xx
+parameters b4_np_25od33_l110ae = b4_n_25od33_l110ae_xx
+parameters b5_np_25od33_l110ae = b5_n_25od33_l110ae_xx
+
+parameters  dtox_n_25od33_l110ae_l = beta*(0*b1_np_25od33_l110ae*compl1+0*b2_np_25od33_l110ae*compl2+0*b3_np_25od33_l110ae*compl3+0*b4_np_25od33_l110ae*compl4+0*b5_np_25od33_l110ae*compl5)*mis_flag*l_factor_n
+parameters  dxl_n_25od33_l110ae_l = beta*(0*b1_np_25od33_l110ae*compl1+0*b2_np_25od33_l110ae*compl2+0*b3_np_25od33_l110ae*compl3+0*b4_np_25od33_l110ae*compl4+0*b5_np_25od33_l110ae*compl5)*mis_flag*l_factor_n
+parameters  du0_n_25od33_l110ae_l = beta1*(-1.19795838582506e-5*b1_np_25od33_l110ae*compl1+-1.82379149746608e-6*b2_np_25od33_l110ae*compl2+7.16828076457641e-7*b3_np_25od33_l110ae*compl3+5.37817650381446e-6*b4_np_25od33_l110ae*compl4+2.18032634914409e-5*b5_np_25od33_l110ae*compl5)*mis_flag*l_factor_n
+parameters  dvth0_n_25od33_l110ae_l = beta*(-0.000958694841441935*b1_np_25od33_l110ae*compl1+-0.000155086264616356*b2_np_25od33_l110ae*compl2+0.000102700921393485*b3_np_25od33_l110ae*compl3+0.000183775397545632*b4_np_25od33_l110ae*compl4+2.55181969657889e-5*b5_np_25od33_l110ae*compl5)*mis_flag*l_factor_n
+parameters  drdsw_n_25od33_l110ae_l = beta1*(-0.801845896976261*b1_np_25od33_l110ae*compl1+-0.152438490067667*b2_np_25od33_l110ae*compl2+0.125045754552699*b3_np_25od33_l110ae*compl3+-0.244209696275606*b4_np_25od33_l110ae*compl4+0.0473005464253724*b5_np_25od33_l110ae*compl5)*mis_flag*l_factor_n
+parameters  dxw_n_25od33_l110ae_l = beta*(0*b1_np_25od33_l110ae*compl1+0*b2_np_25od33_l110ae*compl2+0*b3_np_25od33_l110ae*compl3+0*b4_np_25od33_l110ae*compl4+0*b5_np_25od33_l110ae*compl5)*mis_flag*l_factor_n
+parameters  dnlx_n_25od33_l110ae_l = beta*(0*b1_np_25od33_l110ae*compl1+0*b2_np_25od33_l110ae*compl2+0*b3_np_25od33_l110ae*compl3+0*b4_np_25od33_l110ae*compl4+0*b5_np_25od33_l110ae*compl5)*mis_flag*l_factor_n
+parameters  dk3_n_25od33_l110ae_l = beta*(0*b1_np_25od33_l110ae*compl1+0*b2_np_25od33_l110ae*compl2+0*b3_np_25od33_l110ae*compl3+0*b4_np_25od33_l110ae*compl4+0*b5_np_25od33_l110ae*compl5)*mis_flag*l_factor_n
+parameters  dpvth0_n_25od33_l110ae_l = beta*(0*b1_np_25od33_l110ae*compl1+0*b2_np_25od33_l110ae*compl2+0*b3_np_25od33_l110ae*compl3+0*b4_np_25od33_l110ae*compl4+0*b5_np_25od33_l110ae*compl5)*mis_flag*l_factor_n
+parameters  dwwl_n_25od33_l110ae_l = beta*(0*b1_np_25od33_l110ae*compl1+0*b2_np_25od33_l110ae*compl2+0*b3_np_25od33_l110ae*compl3+0*b4_np_25od33_l110ae*compl4+0*b5_np_25od33_l110ae*compl5)*mis_flag*l_factor_n
+parameters  dvsat_n_25od33_l110ae_l = beta*(0*b1_np_25od33_l110ae*compl1+0*b2_np_25od33_l110ae*compl2+0*b3_np_25od33_l110ae*compl3+0*b4_np_25od33_l110ae*compl4+0*b5_np_25od33_l110ae*compl5)*mis_flag*l_factor_n
+parameters  dpvsat_n_25od33_l110ae_l = beta*(0*b1_np_25od33_l110ae*compl1+0*b2_np_25od33_l110ae*compl2+0*b3_np_25od33_l110ae*compl3+0*b4_np_25od33_l110ae*compl4+0*b5_np_25od33_l110ae*compl5)*mis_flag*l_factor_n
+parameters  dcj_n_25od33_l110ae_l = beta*(0*b1_np_25od33_l110ae*compl1+0*b2_np_25od33_l110ae*compl2+0*b3_np_25od33_l110ae*compl3+0*b4_np_25od33_l110ae*compl4+0*b5_np_25od33_l110ae*compl5)*mis_flag*l_factor_n
+parameters  dcjsw_n_25od33_l110ae_l = beta*(0*b1_np_25od33_l110ae*compl1+0*b2_np_25od33_l110ae*compl2+0*b3_np_25od33_l110ae*compl3+0*b4_np_25od33_l110ae*compl4+0*b5_np_25od33_l110ae*compl5)*mis_flag*l_factor_n
+parameters  dcjswg_n_25od33_l110ae_l = beta*(0*b1_np_25od33_l110ae*compl1+0*b2_np_25od33_l110ae*compl2+0*b3_np_25od33_l110ae*compl3+0*b4_np_25od33_l110ae*compl4+0*b5_np_25od33_l110ae*compl5)*mis_flag*l_factor_n
+parameters  dcgdo_n_25od33_l110ae_l = beta*(0*b1_np_25od33_l110ae*compl1+0*b2_np_25od33_l110ae*compl2+0*b3_np_25od33_l110ae*compl3+0*b4_np_25od33_l110ae*compl4+0*b5_np_25od33_l110ae*compl5)*mis_flag*l_factor_n
+parameters  dcgso_n_25od33_l110ae_l = beta*(0*b1_np_25od33_l110ae*compl1+0*b2_np_25od33_l110ae*compl2+0*b3_np_25od33_l110ae*compl3+0*b4_np_25od33_l110ae*compl4+0*b5_np_25od33_l110ae*compl5)*mis_flag*l_factor_n
+parameters  dags_n_25od33_l110ae_l = beta*(0*b1_np_25od33_l110ae*compl1+0*b2_np_25od33_l110ae*compl2+0*b3_np_25od33_l110ae*compl3+0*b4_np_25od33_l110ae*compl4+0*b5_np_25od33_l110ae*compl5)*mis_flag*l_factor_n
+parameters  deta0_n_25od33_l110ae_l = beta*(0*b1_np_25od33_l110ae*compl1+0*b2_np_25od33_l110ae*compl2+0*b3_np_25od33_l110ae*compl3+0*b4_np_25od33_l110ae*compl4+0*b5_np_25od33_l110ae*compl5)*mis_flag*l_factor_n
+parameters  dcgdl_n_25od33_l110ae_l = beta*(0*b1_np_25od33_l110ae*compl1+0*b2_np_25od33_l110ae*compl2+0*b3_np_25od33_l110ae*compl3+0*b4_np_25od33_l110ae*compl4+0*b5_np_25od33_l110ae*compl5)*mis_flag*l_factor_n
+parameters  dcgsl_n_25od33_l110ae_l = beta*(0*b1_np_25od33_l110ae*compl1+0*b2_np_25od33_l110ae*compl2+0*b3_np_25od33_l110ae*compl3+0*b4_np_25od33_l110ae*compl4+0*b5_np_25od33_l110ae*compl5)*mis_flag*l_factor_n
+parameters  dwags_n_25od33_l110ae_l = beta*(0*b1_np_25od33_l110ae*compl1+0*b2_np_25od33_l110ae*compl2+0*b3_np_25od33_l110ae*compl3+0*b4_np_25od33_l110ae*compl4+0*b5_np_25od33_l110ae*compl5)*mis_flag*l_factor_n
+parameters  dwb0_n_25od33_l110ae_l = beta*(0*b1_np_25od33_l110ae*compl1+0*b2_np_25od33_l110ae*compl2+0*b3_np_25od33_l110ae*compl3+0*b4_np_25od33_l110ae*compl4+0*b5_np_25od33_l110ae*compl5)*mis_flag*l_factor_n
+parameters  dwvsat_n_25od33_l110ae_l = beta*(0*b1_np_25od33_l110ae*compl1+0*b2_np_25od33_l110ae*compl2+0*b3_np_25od33_l110ae*compl3+0*b4_np_25od33_l110ae*compl4+0*b5_np_25od33_l110ae*compl5)*mis_flag*l_factor_n
+parameters  db0_n_25od33_l110ae_l = beta*(0*b1_np_25od33_l110ae*compl1+0*b2_np_25od33_l110ae*compl2+0*b3_np_25od33_l110ae*compl3+0*b4_np_25od33_l110ae*compl4+0*b5_np_25od33_l110ae*compl5)*mis_flag*l_factor_n
+parameters  djtsswd_n_25od33_l110ae_l = beta*(0*b1_np_25od33_l110ae*compl1+0*b2_np_25od33_l110ae*compl2+0*b3_np_25od33_l110ae*compl3+0*b4_np_25od33_l110ae*compl4+0*b5_np_25od33_l110ae*compl5)*mis_flag*l_factor_n
+parameters  djtsswgd_n_25od33_l110ae_l = beta*(0*b1_np_25od33_l110ae*compl1+0*b2_np_25od33_l110ae*compl2+0*b3_np_25od33_l110ae*compl3+0*b4_np_25od33_l110ae*compl4+0*b5_np_25od33_l110ae*compl5)*mis_flag*l_factor_n
+
+parameters  dtox_n_25od33_l110ae = ((global_flag_n_25od33_l110ae*dtox_n_25od33_l110ae_g  + local_flag_n_25od33_l110ae*dtox_n_25od33_l110ae_l))*(1-total_flag_n_25od33_l110ae)+ total_flag_n_25od33_l110ae*dtox_n_25od33_l110ae_t
+parameters  dxl_n_25od33_l110ae = ((global_flag_n_25od33_l110ae*dxl_n_25od33_l110ae_g  + local_flag_n_25od33_l110ae*dxl_n_25od33_l110ae_l))*(1-total_flag_n_25od33_l110ae)+ total_flag_n_25od33_l110ae*dxl_n_25od33_l110ae_t
+parameters  du0_n_25od33_l110ae = ((global_flag_n_25od33_l110ae*du0_n_25od33_l110ae_g  + local_flag_n_25od33_l110ae*du0_n_25od33_l110ae_l))*(1-total_flag_n_25od33_l110ae)+ total_flag_n_25od33_l110ae*du0_n_25od33_l110ae_t
+parameters  dvth0_n_25od33_l110ae = ((global_flag_n_25od33_l110ae*dvth0_n_25od33_l110ae_g  + local_flag_n_25od33_l110ae*dvth0_n_25od33_l110ae_l))*(1-total_flag_n_25od33_l110ae)+ total_flag_n_25od33_l110ae*dvth0_n_25od33_l110ae_t
+parameters  drdsw_n_25od33_l110ae = ((global_flag_n_25od33_l110ae*drdsw_n_25od33_l110ae_g  + local_flag_n_25od33_l110ae*drdsw_n_25od33_l110ae_l))*(1-total_flag_n_25od33_l110ae)+ total_flag_n_25od33_l110ae*drdsw_n_25od33_l110ae_t
+parameters  dxw_n_25od33_l110ae = ((global_flag_n_25od33_l110ae*dxw_n_25od33_l110ae_g  + local_flag_n_25od33_l110ae*dxw_n_25od33_l110ae_l))*(1-total_flag_n_25od33_l110ae)+ total_flag_n_25od33_l110ae*dxw_n_25od33_l110ae_t
+parameters  dnlx_n_25od33_l110ae = ((global_flag_n_25od33_l110ae*dnlx_n_25od33_l110ae_g  + local_flag_n_25od33_l110ae*dnlx_n_25od33_l110ae_l))*(1-total_flag_n_25od33_l110ae)+ total_flag_n_25od33_l110ae*dnlx_n_25od33_l110ae_t
+parameters  dk3_n_25od33_l110ae = ((global_flag_n_25od33_l110ae*dk3_n_25od33_l110ae_g  + local_flag_n_25od33_l110ae*dk3_n_25od33_l110ae_l))*(1-total_flag_n_25od33_l110ae)+ total_flag_n_25od33_l110ae*dk3_n_25od33_l110ae_t
+parameters  dpvth0_n_25od33_l110ae = ((global_flag_n_25od33_l110ae*dpvth0_n_25od33_l110ae_g  + local_flag_n_25od33_l110ae*dpvth0_n_25od33_l110ae_l))*(1-total_flag_n_25od33_l110ae)+ total_flag_n_25od33_l110ae*dpvth0_n_25od33_l110ae_t
+parameters  dwwl_n_25od33_l110ae = ((global_flag_n_25od33_l110ae*dwwl_n_25od33_l110ae_g  + local_flag_n_25od33_l110ae*dwwl_n_25od33_l110ae_l))*(1-total_flag_n_25od33_l110ae)+ total_flag_n_25od33_l110ae*dwwl_n_25od33_l110ae_t
+parameters  dvsat_n_25od33_l110ae = ((global_flag_n_25od33_l110ae*dvsat_n_25od33_l110ae_g  + local_flag_n_25od33_l110ae*dvsat_n_25od33_l110ae_l))*(1-total_flag_n_25od33_l110ae)+ total_flag_n_25od33_l110ae*dvsat_n_25od33_l110ae_t
+parameters  dpvsat_n_25od33_l110ae = ((global_flag_n_25od33_l110ae*dpvsat_n_25od33_l110ae_g  + local_flag_n_25od33_l110ae*dpvsat_n_25od33_l110ae_l))*(1-total_flag_n_25od33_l110ae)+ total_flag_n_25od33_l110ae*dpvsat_n_25od33_l110ae_t
+parameters  dcj_n_25od33_l110ae = ((global_flag_n_25od33_l110ae*dcj_n_25od33_l110ae_g  + local_flag_n_25od33_l110ae*dcj_n_25od33_l110ae_l))*(1-total_flag_n_25od33_l110ae)+ total_flag_n_25od33_l110ae*dcj_n_25od33_l110ae_t
+parameters  dcjsw_n_25od33_l110ae = ((global_flag_n_25od33_l110ae*dcjsw_n_25od33_l110ae_g  + local_flag_n_25od33_l110ae*dcjsw_n_25od33_l110ae_l))*(1-total_flag_n_25od33_l110ae)+ total_flag_n_25od33_l110ae*dcjsw_n_25od33_l110ae_t
+parameters  dcjswg_n_25od33_l110ae = ((global_flag_n_25od33_l110ae*dcjswg_n_25od33_l110ae_g  + local_flag_n_25od33_l110ae*dcjswg_n_25od33_l110ae_l))*(1-total_flag_n_25od33_l110ae)+ total_flag_n_25od33_l110ae*dcjswg_n_25od33_l110ae_t
+parameters  dcgdo_n_25od33_l110ae = ((global_flag_n_25od33_l110ae*dcgdo_n_25od33_l110ae_g  + local_flag_n_25od33_l110ae*dcgdo_n_25od33_l110ae_l))*(1-total_flag_n_25od33_l110ae)+ total_flag_n_25od33_l110ae*dcgdo_n_25od33_l110ae_t
+parameters  dcgso_n_25od33_l110ae = ((global_flag_n_25od33_l110ae*dcgso_n_25od33_l110ae_g  + local_flag_n_25od33_l110ae*dcgso_n_25od33_l110ae_l))*(1-total_flag_n_25od33_l110ae)+ total_flag_n_25od33_l110ae*dcgso_n_25od33_l110ae_t
+parameters  dags_n_25od33_l110ae = ((global_flag_n_25od33_l110ae*dags_n_25od33_l110ae_g  + local_flag_n_25od33_l110ae*dags_n_25od33_l110ae_l))*(1-total_flag_n_25od33_l110ae)+ total_flag_n_25od33_l110ae*dags_n_25od33_l110ae_t
+parameters  deta0_n_25od33_l110ae = ((global_flag_n_25od33_l110ae*deta0_n_25od33_l110ae_g  + local_flag_n_25od33_l110ae*deta0_n_25od33_l110ae_l))*(1-total_flag_n_25od33_l110ae)+ total_flag_n_25od33_l110ae*deta0_n_25od33_l110ae_t
+parameters  dcgdl_n_25od33_l110ae = ((global_flag_n_25od33_l110ae*dcgdl_n_25od33_l110ae_g  + local_flag_n_25od33_l110ae*dcgdl_n_25od33_l110ae_l))*(1-total_flag_n_25od33_l110ae)+ total_flag_n_25od33_l110ae*dcgdl_n_25od33_l110ae_t
+parameters  dcgsl_n_25od33_l110ae = ((global_flag_n_25od33_l110ae*dcgsl_n_25od33_l110ae_g  + local_flag_n_25od33_l110ae*dcgsl_n_25od33_l110ae_l))*(1-total_flag_n_25od33_l110ae)+ total_flag_n_25od33_l110ae*dcgsl_n_25od33_l110ae_t
+parameters  dwags_n_25od33_l110ae = ((global_flag_n_25od33_l110ae*dwags_n_25od33_l110ae_g  + local_flag_n_25od33_l110ae*dwags_n_25od33_l110ae_l))*(1-total_flag_n_25od33_l110ae)+ total_flag_n_25od33_l110ae*dwags_n_25od33_l110ae_t
+parameters  dwb0_n_25od33_l110ae = ((global_flag_n_25od33_l110ae*dwb0_n_25od33_l110ae_g  + local_flag_n_25od33_l110ae*dwb0_n_25od33_l110ae_l))*(1-total_flag_n_25od33_l110ae)+ total_flag_n_25od33_l110ae*dwb0_n_25od33_l110ae_t
+parameters  dwvsat_n_25od33_l110ae = ((global_flag_n_25od33_l110ae*dwvsat_n_25od33_l110ae_g  + local_flag_n_25od33_l110ae*dwvsat_n_25od33_l110ae_l))*(1-total_flag_n_25od33_l110ae)+ total_flag_n_25od33_l110ae*dwvsat_n_25od33_l110ae_t
+parameters  db0_n_25od33_l110ae = ((global_flag_n_25od33_l110ae*db0_n_25od33_l110ae_g  + local_flag_n_25od33_l110ae*db0_n_25od33_l110ae_l))*(1-total_flag_n_25od33_l110ae)+ total_flag_n_25od33_l110ae*db0_n_25od33_l110ae_t
+parameters  djtsswd_n_25od33_l110ae = ((global_flag_n_25od33_l110ae*djtsswd_n_25od33_l110ae_g  + local_flag_n_25od33_l110ae*djtsswd_n_25od33_l110ae_l))*(1-total_flag_n_25od33_l110ae)+ total_flag_n_25od33_l110ae*djtsswd_n_25od33_l110ae_t
+parameters  djtsswgd_n_25od33_l110ae = ((global_flag_n_25od33_l110ae*djtsswgd_n_25od33_l110ae_g  + local_flag_n_25od33_l110ae*djtsswgd_n_25od33_l110ae_l))*(1-total_flag_n_25od33_l110ae)+ total_flag_n_25od33_l110ae*djtsswgd_n_25od33_l110ae_t
+//.unprot
+
+
+n_25od33_l110ae ( d g s b  ) n_25od33_l110ae_main w=w l=l  ad=ad as=as pd=pd ps=ps 
++ m=1 dtemp=dtemp
++ sa=sa sb=sb
+model n_25od33_l110ae_main bsim3v3 type=n
+//***** Flag Parameter ***
++version    = 3.24                                                        
++binunit    = 2                                                           mobmod     = 1                                                           
++capmod     = 3                                                           nqsmod     = 0                                                           
++noimod     = 2                                                           stimod     = 1                                                           
+//***** Geometry Range Parameter ***
++lmin       = 4.95e-7                                                     lmax       = 4.5e-5                                                      
++wmin       = 3.5e-7                                                      wmax       = 9e-5                                                        
+//***** Process Parameter ***
++tox        = 5.4e-9+dtox_n_25od33_l110ae                               xj         = 1.07e-7                                                     
++nch        = 3.472875e17                                                 
+//***** dW and dL Parameter ***
++wint       = 3.3853408e-008                                              wl         = -3.39718e-14                                                
++wln        = 0.991221                                                    ww         = -1.020215e-14                                               
++wwn        = 0.918202                                                    wwl        = 6.05e-21+dwwl_n_25od33_l110ae                             
++lint       = 5.617647e-8                                                 ll         = -9.3e-15                                                    
++lln        = 0.996075                                                    lw         = -3e-14                                                      
++lwn        = 0.836858                                                    lwl        = -7.737104e-22                                               
++llc        = -3.811294e-15                                               lwc        = 8.815656e-14                                                
++lwlc       = 7.8509e-21                                                  wlc        = -7.42099e-15                                                
++wwc        = 9.101659e-17                                                wwlc       = -1.03129e-20                                                
++dwg        = -4.39044e-9                                                 dwb        = -6.38e-10                                                   
++xl         = 1.3e-8+dxl_n_25od33_l110ae+1.2e-8                         xw         = 1e-9+dxw_n_25od33_l110ae                                  
+//***** Vth Related  Parameter ***
++vth0       = 4.8738742e-001+dvth0_n_25od33_l110ae                      pvth0      = -7.0815349e-015+dpvth0_n_25od33_l110ae                    
++k1         = 0.549809                                                    pk1        = -1.221696e-14                                               
++k2         = -2.14972e-2                                                 lk2        = -8.51e-9                                                    
++pk2        = 2.980466e-15                                                k3         = 3.0066332e-002+dk3_n_25od33_l110ae                        
++k3b        = -0.3                                                        wk3b       = 1.2e-7                                                      
++w0         = 1e-9                                                        nlx        = 1.0065910e-007+dnlx_n_25od33_l110ae                       
++wnlx       = 0                                                           pnlx       = 1.271476e-20                                                
++dvt0       = 26.633549                                                   dvt1       = 1.089                                                       
++dvt2       = 0                                                           dvt0w      = 0.900275                                                    
++dvt1w      = 1.28983e6                                                   dvt2w      = -6.25e-3                                                    
++ngate      = 6.2e20                                                      wk3        = -1.5e-7                                                     
+//***** Mobility Related Parameter ***
++u0         = 2.5783496e-002+du0_n_25od33_l110ae                        pu0        = -3.9050156e-016                                             
++ua         = -1.23e-9                                                    lua        = -5.4612e-17                                                 
++wua        = 3.323752e-17                                                pua        = -2.10862e-24                                                
++ub         = 2.12e-18                                                    lub        = 5.245644e-26                                                
++wub        = -2.947308e-27                                               pub        = -3.942225e-32                                               
++uc         = 5.758717e-11                                                luc        = -2.174618e-18                                               
++puc        = -4.766636e-24                                               vsat       = 8.7802414e+004+dvsat_n_25od33_l110ae                      
++lvsat      = -1.285915e-3                                                pvsat      = -1.7069560e-009+dpvsat_n_25od33_l110ae                    
++a0         = 1.577212                                                    la0        = -4.578093e-7                                                
++pa0        = 5.55776e-14                                                 ags        = 3.7324497e-001+dags_n_25od33_l110ae                       
++wags       = -4.95e-9+dwags_n_25od33_l110ae                            pags       = 2.750618e-14                                                
++b0         = 3.7289769e-007+db0_n_25od33_l110ae                        wb0        = -5.653187e-14+dwb0_n_25od33_l110ae                        
++b1         = 1.485675e-6                                                 keta       = -0.033453                                                   
++lketa      = 4.9248e-9                                                   pketa      = 1.103949e-15                                                
++a1         = -2.05875e-2                                                 a2         = 0.99                                                        
++rdsw       = 5.9322132e+002+drdsw_n_25od33_l110ae                      lrdsw      = 2.447427e-5                                                 
++prwb       = -0.073793                                                   lprwb      = 3.977211e-8                                                 
++pprwb      = -6.302685e-15                                               prwg       = 1.45817e-2                                                  
++wr         = 1                                                           lwr        = 1.193356e-8                                                 
++wvsat      = 0+dwvsat_n_25od33_l110ae                                  
+//***** Subthreshold Related Parameter ***
++voff       = -0.109789                                                   pvoff      = 1.070443e-15                                                
++nfactor    = 0.75                                                        eta0       = 1.3158871e-002+deta0_n_25od33_l110ae                      
++peta0      = 1.0799186e-015                                              etab       = -0.0119                                                     
++petab      = 3.9375e-16                                                  dsub       = 0.28                                                        
++cit        = 0                                                           cdsc       = 2e-4                                                        
++cdscb      = 1.6e-4                                                      cdscd      = 1e-4                                                        
+//***** Output Resistance Related Parameter ***
++pclm       = 1.34064                                                     pdiblc1    = 4.63145e-2                                                  
++ppdiblc1   = 1.389435e-14                                                pdiblc2    = 6.530388e-4                                                 
++pdiblcb    = 0.1184                                                      drout      = 0.56                                                        
++pscbe1     = 5.883e8                                                     pscbe2     = 1.35e-6                                                     
++pvag       = 0                                                           ppvag      = -4.003292e-15                                               
++delta      = 9.877e-3                                                    alpha0     = 6.38982e-8                                                  
++alpha1     = 0.178646                                                    beta0      = 14.250298                                                   
+//***** Flicker Noise Model Parameter ***
++noia       = 2.2387211e+20                                               noib       = 1.8197009e+04                                               
++noic       = 3.6000000e-13                                               em         = 4.1000000e+07                                               
++ef         = 0.91                                                        
+//***** Capacitance Parameter ***
++xpart      = 1                                                           cgso       = 1.25e-11+dcgso_n_25od33_l110ae                            
++cgdo       = 1.25e-11+dcgdo_n_25od33_l110ae                            cgbo       = 0                                                           
++ckappa     = 0.743242                                                    clc        = 1e-7                                                        
++cle        = 0.6                                                         dlc        = 4.302810e-8                                                 
++dwc        = -4.202453e-9                                                vfbcv      = -1                                                          
++noff       = 1.643                                                       lnoff      = 3.9e-7                                                      
++imelt       = 0.1                                                         voffcv     = -8.54318e-2                                                 
++lvoffcv    = -1.58655e-8                                                 pvoffcv    = 3.553426e-15                                                
++acde       = 0.4                                                         moin       = 5.67                                                        
++cgsl       = 2.7e-10+dcgsl_n_25od33_l110ae                             cgdl       = 2.7e-10+dcgdl_n_25od33_l110ae                             
+//***** Souce/Drain Junction Diode Model Parameter ***
++tlev       = 1                                                           tlevc      = 1                                                           
++hdif       = 2.2e-7                                                      rsh        = 8.5                                                         
++cj         = 7.8122e-4+dcj_n_25od33_l110ae                             mj         = 0.27981                                                     
++mjsw       = 0.1087                                                      cjsw       = 1.1247e-10+dcjsw_n_25od33_l110ae                          
++cjswg      = 2.155e-10+dcjswg_n_25od33_l110ae                          mjswg      = 0.53071                                                     
++js         = 1.198e-7                                                    jsw        = 2.4256e-13                                                  
++pbsw       = 0.91068                                                     pb         = 0.61343                                                     
++pbswg      = 0.84049                                                     jtsswd     = 1e-9+djtsswd_n_25od33_l110ae                              
++jtsswgd    = 1e-7+djtsswgd_n_25od33_l110ae                             njtssw     = 60                                                          
++njtsswg    = 60                                                          xtsswd     = 0.02                                                        
++xtsswgd    = 0.02                                                        jtsswgs    = 1e-7+djtsswgd_n_25od33_l110ae                             
+//***** Temperature Coeffient ***
++tnom       = 25                                                          ute        = -1.058606                                                   
++wute       = 5.13e-8                                                     kt1        = -0.29348                                                    
++kt1l       = 1.2096e-8                                                   kt2        = -0.04276                                                    
++lkt2       = 4.2e-9                                                      ua1        = 2.576422e-9                                                 
++lua1       = -3.640008e-17                                               pua1       = -5.781491e-23                                               
++ub1        = -2.790047e-18                                               lub1       = 8.913486e-26                                                
++wub1       = 8.009705e-26                                                pub1       = 9.720049e-32                                                
++uc1        = -1.300537e-11                                               at         = 2.59545e4                                                   
++prt        = 0.951562                                                    nj         = 1.0338                                                      
++xti        = 3                                                           tpb        = 1.3743e-3                                                   
++tpbsw      = 3.0712e-3                                                   tpbswg     = 2.34e-3                                                     
++tcj        = 8.6537e-4                                                   tcjsw      = 6.6436e-4                                                   
++tcjswg     = 1.3946e-3                                                   
+//***** Stress Effect Related Parameter ***
++saref      = 2.2e-6                                                      sbref      = 2.2e-6                                                      
++wlod       = 0                                                           ku0        = -1.1e-7                                                     
++kvsat      = 0                                                           kvth0      = 4.25e-9                                                     
++tku0       = 0                                                           llodku0    = 1.5                                                         
++wlodku0    = 1                                                           llodvth    = 1                                                           
++wlodvth    = 1                                                           lku0       = 1.05e-8                                                     
++wku0       = 0                                                           pku0       = 0                                                           
++lkvth0     = -6e-8                                                       wkvth0     = 0                                                           
++pkvth0     = 0                                                           stk2       = 0                                                           
++lodk2      = 1                                                           steta0     = -1e-9                                                       
++lodeta0    = 1                                                           
++imax=0.01                 minr=0.1
+//*
+ends n_25od33_l110ae
+
+
+
+inline subckt p_25od33_l110ae ( d g s b )
+parameters w=0u l=0u
++ dtemp=0 nf=1 mf=1 mis_flag=1
++ nf_odd=nf-2*int(nf/2) nf_even=1-nf_odd
++ sa=0 sb=0 sd=0
++ a_unit=sd*w   p_unit=2*(sd+w)  a_sa_edge=sa*w   p_sa_edge=2*(sa+w)
++ a_sb_edge=sb*w   p_sb_edge=2*(sb+w)
++ ad=(nf_odd*(a_unit*((nf+1)/2-1)+a_sb_edge) + nf_even*(a_unit*nf/2))/nf
++ as=(nf_odd*(a_unit*((nf+1)/2-1)+a_sa_edge) + nf_even*(a_unit*(nf/2-1)+a_sa_edge+a_sb_edge))/nf
++ pd=(nf_odd*(p_unit*((nf+1)/2-1)+p_sb_edge) + nf_even*(p_unit*nf/2))/nf
++ ps=(nf_odd*(p_unit*((nf+1)/2-1)+p_sa_edge) + nf_even*(p_unit*(nf/2-1)+p_sa_edge+p_sb_edge))/nf
+//******************
+//**** MISMATCH ****
+//******************
+parameters  beta  = 1.4
+parameters  beta1  = 0.95
+parameters compl1	= 6.13537479203154
+parameters compl2	= 3.16449558573009
+parameters compl3	= 2.04207623679017
+parameters compl4	= 0.416015014555578
+parameters compl5	= 4.8949228914575e-13
+parameters l_factor_p=1/sqrt(2*w*0.9*(l*0.9+12e-9)*mf*1e+12)
+parameters b1_np_25od33_l110ae = b1_p_25od33_l110ae_xx
+parameters b2_np_25od33_l110ae = b2_p_25od33_l110ae_xx
+parameters b3_np_25od33_l110ae = b3_p_25od33_l110ae_xx
+parameters b4_np_25od33_l110ae = b4_p_25od33_l110ae_xx
+parameters b5_np_25od33_l110ae = b5_p_25od33_l110ae_xx
+
+parameters  dtox_p_25od33_l110ae_l = beta*(0*b1_np_25od33_l110ae*compl1+0*b2_np_25od33_l110ae*compl2+0*b3_np_25od33_l110ae*compl3+0*b4_np_25od33_l110ae*compl4+0*b5_np_25od33_l110ae*compl5)*mis_flag*l_factor_p
+parameters  dxl_p_25od33_l110ae_l = beta*(0*b1_np_25od33_l110ae*compl1+0*b2_np_25od33_l110ae*compl2+0*b3_np_25od33_l110ae*compl3+0*b4_np_25od33_l110ae*compl4+0*b5_np_25od33_l110ae*compl5)*mis_flag*l_factor_p
+parameters  du0_p_25od33_l110ae_l = beta1*(9.90768271661625e-7*b1_np_25od33_l110ae*compl1+1.94214410834055e-6*b2_np_25od33_l110ae*compl2+7.22314316919772e-7*b3_np_25od33_l110ae*compl3+3.14377406650802e-6*b4_np_25od33_l110ae*compl4+4.62293973152803e-8*b5_np_25od33_l110ae*compl5)*mis_flag*l_factor_p
+parameters  dvth0_p_25od33_l110ae_l = beta*(0.0002697070140478*b1_np_25od33_l110ae*compl1+0.000808560124731235*b2_np_25od33_l110ae*compl2+0.000210796610829576*b3_np_25od33_l110ae*compl3+8.16475090981282e-5*b4_np_25od33_l110ae*compl4+0.000119495661262703*b5_np_25od33_l110ae*compl5)*mis_flag*l_factor_p
+parameters  drdsw_p_25od33_l110ae_l = beta1*(-0.259088050982219*b1_np_25od33_l110ae*compl1+-1.8703451039345*b2_np_25od33_l110ae*compl2+0.171205869704675*b3_np_25od33_l110ae*compl3+2.01145648284189*b4_np_25od33_l110ae*compl4+-0.360409295204404*b5_np_25od33_l110ae*compl5)*mis_flag*l_factor_p
+parameters  dwu0_p_25od33_l110ae_l = beta*(0*b1_np_25od33_l110ae*compl1+0*b2_np_25od33_l110ae*compl2+0*b3_np_25od33_l110ae*compl3+0*b4_np_25od33_l110ae*compl4+0*b5_np_25od33_l110ae*compl5)*mis_flag*l_factor_p
+parameters  dlvth0_p_25od33_l110ae_l = beta*(0*b1_np_25od33_l110ae*compl1+0*b2_np_25od33_l110ae*compl2+0*b3_np_25od33_l110ae*compl3+0*b4_np_25od33_l110ae*compl4+0*b5_np_25od33_l110ae*compl5)*mis_flag*l_factor_p
+parameters  dwvth0_p_25od33_l110ae_l = beta*(0*b1_np_25od33_l110ae*compl1+0*b2_np_25od33_l110ae*compl2+0*b3_np_25od33_l110ae*compl3+0*b4_np_25od33_l110ae*compl4+0*b5_np_25od33_l110ae*compl5)*mis_flag*l_factor_p
+parameters  dpvth0_p_25od33_l110ae_l = beta*(0*b1_np_25od33_l110ae*compl1+0*b2_np_25od33_l110ae*compl2+0*b3_np_25od33_l110ae*compl3+0*b4_np_25od33_l110ae*compl4+0*b5_np_25od33_l110ae*compl5)*mis_flag*l_factor_p
+parameters  dprdsw_p_25od33_l110ae_l = beta*(0*b1_np_25od33_l110ae*compl1+0*b2_np_25od33_l110ae*compl2+0*b3_np_25od33_l110ae*compl3+0*b4_np_25od33_l110ae*compl4+0*b5_np_25od33_l110ae*compl5)*mis_flag*l_factor_p
+parameters  dags_p_25od33_l110ae_l = beta*(0*b1_np_25od33_l110ae*compl1+0*b2_np_25od33_l110ae*compl2+0*b3_np_25od33_l110ae*compl3+0*b4_np_25od33_l110ae*compl4+0*b5_np_25od33_l110ae*compl5)*mis_flag*l_factor_p
+parameters  dlags_p_25od33_l110ae_l = beta*(0*b1_np_25od33_l110ae*compl1+0*b2_np_25od33_l110ae*compl2+0*b3_np_25od33_l110ae*compl3+0*b4_np_25od33_l110ae*compl4+0*b5_np_25od33_l110ae*compl5)*mis_flag*l_factor_p
+parameters  dwags_p_25od33_l110ae_l = beta*(0*b1_np_25od33_l110ae*compl1+0*b2_np_25od33_l110ae*compl2+0*b3_np_25od33_l110ae*compl3+0*b4_np_25od33_l110ae*compl4+0*b5_np_25od33_l110ae*compl5)*mis_flag*l_factor_p
+parameters  dpags_p_25od33_l110ae_l = beta*(0*b1_np_25od33_l110ae*compl1+0*b2_np_25od33_l110ae*compl2+0*b3_np_25od33_l110ae*compl3+0*b4_np_25od33_l110ae*compl4+0*b5_np_25od33_l110ae*compl5)*mis_flag*l_factor_p
+parameters  dcgdo_p_25od33_l110ae_l = beta*(0*b1_np_25od33_l110ae*compl1+0*b2_np_25od33_l110ae*compl2+0*b3_np_25od33_l110ae*compl3+0*b4_np_25od33_l110ae*compl4+0*b5_np_25od33_l110ae*compl5)*mis_flag*l_factor_p
+parameters  dcgso_p_25od33_l110ae_l = beta*(0*b1_np_25od33_l110ae*compl1+0*b2_np_25od33_l110ae*compl2+0*b3_np_25od33_l110ae*compl3+0*b4_np_25od33_l110ae*compl4+0*b5_np_25od33_l110ae*compl5)*mis_flag*l_factor_p
+parameters  dcgdl_p_25od33_l110ae_l = beta*(0*b1_np_25od33_l110ae*compl1+0*b2_np_25od33_l110ae*compl2+0*b3_np_25od33_l110ae*compl3+0*b4_np_25od33_l110ae*compl4+0*b5_np_25od33_l110ae*compl5)*mis_flag*l_factor_p
+parameters  dcgsl_p_25od33_l110ae_l = beta*(0*b1_np_25od33_l110ae*compl1+0*b2_np_25od33_l110ae*compl2+0*b3_np_25od33_l110ae*compl3+0*b4_np_25od33_l110ae*compl4+0*b5_np_25od33_l110ae*compl5)*mis_flag*l_factor_p
+parameters  dcj_p_25od33_l110ae_l = beta*(0*b1_np_25od33_l110ae*compl1+0*b2_np_25od33_l110ae*compl2+0*b3_np_25od33_l110ae*compl3+0*b4_np_25od33_l110ae*compl4+0*b5_np_25od33_l110ae*compl5)*mis_flag*l_factor_p
+parameters  dcjsw_p_25od33_l110ae_l = beta*(0*b1_np_25od33_l110ae*compl1+0*b2_np_25od33_l110ae*compl2+0*b3_np_25od33_l110ae*compl3+0*b4_np_25od33_l110ae*compl4+0*b5_np_25od33_l110ae*compl5)*mis_flag*l_factor_p
+parameters  dcjswg_p_25od33_l110ae_l = beta*(0*b1_np_25od33_l110ae*compl1+0*b2_np_25od33_l110ae*compl2+0*b3_np_25od33_l110ae*compl3+0*b4_np_25od33_l110ae*compl4+0*b5_np_25od33_l110ae*compl5)*mis_flag*l_factor_p
+parameters  djtsswgd_p_25od33_l110ae_l = beta*(0*b1_np_25od33_l110ae*compl1+0*b2_np_25od33_l110ae*compl2+0*b3_np_25od33_l110ae*compl3+0*b4_np_25od33_l110ae*compl4+0*b5_np_25od33_l110ae*compl5)*mis_flag*l_factor_p
+
+parameters  dtox_p_25od33_l110ae = ((global_flag_p_25od33_l110ae*dtox_p_25od33_l110ae_g  + local_flag_p_25od33_l110ae*dtox_p_25od33_l110ae_l))*(1-total_flag_p_25od33_l110ae)+ total_flag_p_25od33_l110ae*dtox_p_25od33_l110ae_t
+parameters  dxl_p_25od33_l110ae = ((global_flag_p_25od33_l110ae*dxl_p_25od33_l110ae_g  + local_flag_p_25od33_l110ae*dxl_p_25od33_l110ae_l))*(1-total_flag_p_25od33_l110ae)+ total_flag_p_25od33_l110ae*dxl_p_25od33_l110ae_t
+parameters  du0_p_25od33_l110ae = ((global_flag_p_25od33_l110ae*du0_p_25od33_l110ae_g  + local_flag_p_25od33_l110ae*du0_p_25od33_l110ae_l))*(1-total_flag_p_25od33_l110ae)+ total_flag_p_25od33_l110ae*du0_p_25od33_l110ae_t
+parameters  dvth0_p_25od33_l110ae = ((global_flag_p_25od33_l110ae*dvth0_p_25od33_l110ae_g  + local_flag_p_25od33_l110ae*dvth0_p_25od33_l110ae_l))*(1-total_flag_p_25od33_l110ae)+ total_flag_p_25od33_l110ae*dvth0_p_25od33_l110ae_t
+parameters  drdsw_p_25od33_l110ae = ((global_flag_p_25od33_l110ae*drdsw_p_25od33_l110ae_g  + local_flag_p_25od33_l110ae*drdsw_p_25od33_l110ae_l))*(1-total_flag_p_25od33_l110ae)+ total_flag_p_25od33_l110ae*drdsw_p_25od33_l110ae_t
+parameters  dwu0_p_25od33_l110ae = ((global_flag_p_25od33_l110ae*dwu0_p_25od33_l110ae_g  + local_flag_p_25od33_l110ae*dwu0_p_25od33_l110ae_l))*(1-total_flag_p_25od33_l110ae)+ total_flag_p_25od33_l110ae*dwu0_p_25od33_l110ae_t
+parameters  dlvth0_p_25od33_l110ae = ((global_flag_p_25od33_l110ae*dlvth0_p_25od33_l110ae_g  + local_flag_p_25od33_l110ae*dlvth0_p_25od33_l110ae_l))*(1-total_flag_p_25od33_l110ae)+ total_flag_p_25od33_l110ae*dlvth0_p_25od33_l110ae_t
+parameters  dwvth0_p_25od33_l110ae = ((global_flag_p_25od33_l110ae*dwvth0_p_25od33_l110ae_g  + local_flag_p_25od33_l110ae*dwvth0_p_25od33_l110ae_l))*(1-total_flag_p_25od33_l110ae)+ total_flag_p_25od33_l110ae*dwvth0_p_25od33_l110ae_t
+parameters  dpvth0_p_25od33_l110ae = ((global_flag_p_25od33_l110ae*dpvth0_p_25od33_l110ae_g  + local_flag_p_25od33_l110ae*dpvth0_p_25od33_l110ae_l))*(1-total_flag_p_25od33_l110ae)+ total_flag_p_25od33_l110ae*dpvth0_p_25od33_l110ae_t
+parameters  dprdsw_p_25od33_l110ae = ((global_flag_p_25od33_l110ae*dprdsw_p_25od33_l110ae_g  + local_flag_p_25od33_l110ae*dprdsw_p_25od33_l110ae_l))*(1-total_flag_p_25od33_l110ae)+ total_flag_p_25od33_l110ae*dprdsw_p_25od33_l110ae_t
+parameters  dags_p_25od33_l110ae = ((global_flag_p_25od33_l110ae*dags_p_25od33_l110ae_g  + local_flag_p_25od33_l110ae*dags_p_25od33_l110ae_l))*(1-total_flag_p_25od33_l110ae)+ total_flag_p_25od33_l110ae*dags_p_25od33_l110ae_t
+parameters  dlags_p_25od33_l110ae = ((global_flag_p_25od33_l110ae*dlags_p_25od33_l110ae_g  + local_flag_p_25od33_l110ae*dlags_p_25od33_l110ae_l))*(1-total_flag_p_25od33_l110ae)+ total_flag_p_25od33_l110ae*dlags_p_25od33_l110ae_t
+parameters  dwags_p_25od33_l110ae = ((global_flag_p_25od33_l110ae*dwags_p_25od33_l110ae_g  + local_flag_p_25od33_l110ae*dwags_p_25od33_l110ae_l))*(1-total_flag_p_25od33_l110ae)+ total_flag_p_25od33_l110ae*dwags_p_25od33_l110ae_t
+parameters  dpags_p_25od33_l110ae = ((global_flag_p_25od33_l110ae*dpags_p_25od33_l110ae_g  + local_flag_p_25od33_l110ae*dpags_p_25od33_l110ae_l))*(1-total_flag_p_25od33_l110ae)+ total_flag_p_25od33_l110ae*dpags_p_25od33_l110ae_t
+parameters  dcgdo_p_25od33_l110ae = ((global_flag_p_25od33_l110ae*dcgdo_p_25od33_l110ae_g  + local_flag_p_25od33_l110ae*dcgdo_p_25od33_l110ae_l))*(1-total_flag_p_25od33_l110ae)+ total_flag_p_25od33_l110ae*dcgdo_p_25od33_l110ae_t
+parameters  dcgso_p_25od33_l110ae = ((global_flag_p_25od33_l110ae*dcgso_p_25od33_l110ae_g  + local_flag_p_25od33_l110ae*dcgso_p_25od33_l110ae_l))*(1-total_flag_p_25od33_l110ae)+ total_flag_p_25od33_l110ae*dcgso_p_25od33_l110ae_t
+parameters  dcgdl_p_25od33_l110ae = ((global_flag_p_25od33_l110ae*dcgdl_p_25od33_l110ae_g  + local_flag_p_25od33_l110ae*dcgdl_p_25od33_l110ae_l))*(1-total_flag_p_25od33_l110ae)+ total_flag_p_25od33_l110ae*dcgdl_p_25od33_l110ae_t
+parameters  dcgsl_p_25od33_l110ae = ((global_flag_p_25od33_l110ae*dcgsl_p_25od33_l110ae_g  + local_flag_p_25od33_l110ae*dcgsl_p_25od33_l110ae_l))*(1-total_flag_p_25od33_l110ae)+ total_flag_p_25od33_l110ae*dcgsl_p_25od33_l110ae_t
+parameters  dcj_p_25od33_l110ae = ((global_flag_p_25od33_l110ae*dcj_p_25od33_l110ae_g  + local_flag_p_25od33_l110ae*dcj_p_25od33_l110ae_l))*(1-total_flag_p_25od33_l110ae)+ total_flag_p_25od33_l110ae*dcj_p_25od33_l110ae_t
+parameters  dcjsw_p_25od33_l110ae = ((global_flag_p_25od33_l110ae*dcjsw_p_25od33_l110ae_g  + local_flag_p_25od33_l110ae*dcjsw_p_25od33_l110ae_l))*(1-total_flag_p_25od33_l110ae)+ total_flag_p_25od33_l110ae*dcjsw_p_25od33_l110ae_t
+parameters  dcjswg_p_25od33_l110ae = ((global_flag_p_25od33_l110ae*dcjswg_p_25od33_l110ae_g  + local_flag_p_25od33_l110ae*dcjswg_p_25od33_l110ae_l))*(1-total_flag_p_25od33_l110ae)+ total_flag_p_25od33_l110ae*dcjswg_p_25od33_l110ae_t
+parameters  djtsswgd_p_25od33_l110ae = ((global_flag_p_25od33_l110ae*djtsswgd_p_25od33_l110ae_g  + local_flag_p_25od33_l110ae*djtsswgd_p_25od33_l110ae_l))*(1-total_flag_p_25od33_l110ae)+ total_flag_p_25od33_l110ae*djtsswgd_p_25od33_l110ae_t
+//.unprot
+
+
+p_25od33_l110ae ( d g s b  ) p_25od33_l110ae_main w=w l=l  ad=ad as=as pd=pd ps=ps 
++ m=1 dtemp=dtemp
++ sa=sa sb=sb
+model p_25od33_l110ae_main bsim3v3 type=p
+//**************************************************************
+//*               MODEL FLAG PARAMETERS
+//**************************************************************
++version    = 3.24                                                        lmin       = 4.95e-007                                                   
++lmax       = 4.5e-005                                                    wmin       = 3.5e-7                                                      
++wmax       = 9e-005                                                      binunit    = 2                                                           
++mobmod     = 1                                                           capmod     = 3                                                           
++nqsmod     = 0                                                           stimod     = 1                                                           
+//**************************************************************
+//*               GENERAL MODEL PARAMETERS
+//**************************************************************
++tnom       = 25                                                          tox        = 5.5e-009+dtox_p_25od33_l110ae                              
++toxm       = 5.5e-009+dtox_p_25od33_l110ae                              wint       = 1.4978672e-009                                              
++lint       = 1.290888e-008                                               dlc        = 4.24195e-008                                                
++dwc        = 4.380143e-009                                               hdif       = 2.2e-007                                                    
++xpart      = 1                                                           
++xl         = 1.5e-008+dxl_p_25od33_l110ae+1.2e-8                        
++xw         = 4e-009                                                      xj         = 1.17e-007                                                   
++ngate      = 1.483009e+020                                               ll         = 0                                                           
++wl         = 0                                                           lln        = 1                                                           
++wln        = 1                                                           lw         = 0                                                           
++ww         = 0                                                           lwn        = 1                                                           
++wwn        = 1                                                           lwl        = 0                                                           
++wwl        = -7.9761e-022                                                llc        = 0                                                           
++wlc        = 0                                                           lwc        = -7.8e-017                                                   
++wwc        = -7.621503e-016                                              lwlc       = 7.3602e-22                                                  
++wwlc       = -1.636e-21                                                  
+//**************************************************************
+//*               EXPERT PARAMETERS
+//**************************************************************
++vth0       = -4.8083191e-001+dvth0_p_25od33_l110ae                      lvth0      = 6.6361778e-008+dlvth0_p_25od33_l110ae                      
++pvth0      = -1.0159155e-015+dpvth0_p_25od33_l110ae                     vfb        = -1.10158                                                    
++k1         = 0.723564                                                    k2         = 0.0039248                                                   
++lk2        = 3.56305e-009                                                pk2        = 2.449075e-016                                               
++k3         = -3.8668452e-001                                             lk3        = -7.56208e-007                                               
++wk3        = -7e-008                                                     pk3        = 9.3180351e-015                                              
++k3b        = 1.606935                                                    pk3b       = 1.08208e-013                                                
++nlx        = 1.995701e-007                                               w0         = 7.7449e-008                                                 
++dvt0       = 17.0859                                                     dvt1       = 1.255131                                                    
++ldvt1      = 1.424086e-008                                               wdvt1      = -9.277795e-008                                              
++pdvt1      = 3.710069e-014                                               dvt2       = -0.0914011                                                  
++wdvt2      = 5.177068e-008                                               pdvt2      = -1.335372e-014                                              
++dvt0w      = 10                                                          dvt1w      = 23237320                                                    
++dvt2w      = -0.446927                                                   nch        = 3.6e+017                                                    
++voff       = -0.10658                                                    nfactor    = 1.046                                                       
++lnfactor   = 9.576e-008                                                  cdsc       = 0.00359                                                     
++cdscb      = 0.00135                                                     cdscd      = 1e-020                                                      
++cit        = 0                                                           alpha0     = 4.4626e-006                                                 
++alpha1     = 12.87                                                       beta0      = 27.824                                                      
++eta0       = 0.012626                                                    peta0      = -1.039062e-015                                              
++etab       = -0.05                                                       wetab      = -1e-008                                                     
++petab      = -2.0368e-014                                                dsub       = 0.51001                                                     
++u0         = 1.0059402e-002+du0_p_25od33_l110ae                         wu0        = -2.02127e-010+dwu0_p_25od33_l110ae                         
++ua         = 5.835e-010                                                  pua        = 9.1026e-023                                                 
++ub         = 9.4872070e-019                                              wub        = 1.7267013e-025                                              
++pub        = -6.201709e-032                                              uc         = -2.347e-011                                                 
++wuc        = 3.332815e-017                                               puc        = -1.2142e-023                                                
++prwg       = 0.0041                                                      prwb       = -0.293116                                                   
++pprwb      = 1.261907e-014                                               wr         = 1                                                           
++rdsw       = 9.3096524e+002+drdsw_p_25od33_l110ae                       lrdsw      = -1.2109325e-004                                             
++wrdsw      = 0.0001828195                                                prdsw      = -4.4440750e-012+dprdsw_p_25od33_l110ae                     
++a0         = 1.3133512e+000                                              ags        = 2.2432776e-001+dags_p_25od33_l110ae                        
++lags       = 6.4968344e-008+dlags_p_25od33_l110ae                       wags       = -1.3206908e-008+dwags_p_25od33_l110ae                      
++pags       = -2.9950e-014+dpags_p_25od33_l110ae                         a1         = 0                                                           
++a2         = 1                                                           b0         = -2.561011e-008                                              
++lb0        = 2.036849e-014                                               wb0        = 3.2722551e-015                                              
++pb0        = -1.601488e-021                                              b1         = 1.3224e-007                                                 
++vsat       = 141415.6                                                    lvsat      = -4.5209262e-003                                             
++wvsat      = -0.009964635                                                pvsat      = -1.6083579e-009                                             
++keta       = -0.0169                                                     lketa      = -2.0776e-8                                                  
++wketa      = 1.61487e-9                                                  pketa      = 5.1392e-15                                                  
++delta      = 0.00343882                                                  ldelta     = 8.12812e-009                                                
++dwg        = -6.172406e-009                                              ldwg       = -3.930075e-015                                              
++wdwg       = -3.39696e-015                                               pdwg       = -9.504335e-022                                              
++dwb        = 1.268947e-008                                               pclm       = 2.149898                                                    
++lpclm      = -1.151631e-007                                              ppclm      = 3.76476e-014                                                
++pdiblc1    = 0.091304                                                    pdiblc2    = 0                                                           
++lpdiblc2   = 1.2e-009                                                    pdiblcb    = 0                                                           
++drout      = 0.7088                                                      pvag       = 5.42e-007                                                   
++pscbe1     = 6.4807e+008                                                 pscbe2     = 8.3017e-006                                                 
++elm        = 5                                                           wvth0      = 0+dwvth0_p_25od33_l110ae                                   
++pu0        = -9.6960501e-017                                             
+//**************************************************************
+//*               CAPACITANCE PARAMETERS
+//**************************************************************
++cf         = 6.7752e-011                                                 ckappa     = 1.0548                                                      
++pckappa    = 1.067985e-012                                               acde       = 0.450207                                                    
++moin       = 5.519018                                                    vfbcv      = -1                                                          
++noff       = 2.21                                                        voffcv     = -0.03762                                                    
++cgbo       = 0                                                           cgso       = 9.3e-011+dcgso_p_25od33_l110ae                             
++cgdo       = 9.3e-011+dcgdo_p_25od33_l110ae                             cgdl       = 2.171e-010+dcgdl_p_25od33_l110ae                           
++cgsl       = 2.171e-010+dcgsl_p_25od33_l110ae                           
+//**************************************************************
+//*               TEMPERATURE PARAMETERS
+//**************************************************************
++kt1        = -0.3327                                                     wkt1       = 3.8e-009                                                    
++pkt1       = -7.309176e-016                                              kt1l       = 0                                                           
++kt2        = -0.0423                                                     wkt2       = 3.2e-9                                                      
++pkt2       = 2.6e-15                                                     ute        = -0.73269                                                    
++wute       = -3.849126e-008                                              pute       = 3.855662e-14                                                
++ua1        = 2.699733e-9                                                 lua1       = -4.63e-016                                                  
++wua1       = -8.8e-17                                                    pua1       = 3.768204e-22                                                
++ub1        = -3.039056e-18                                               lub1       = 1.646815e-025                                               
++wub1       = 1.7496e-025                                                 pub1       = -2.535824e-31                                               
++uc1        = -1e-010                                                     wuc1       = 7.68e-18                                                    
++puc1       = 6.37509e-24                                                 prt        = 810                                                         
++pprt       = 3.399699e-12                                                at         = 74900                                                       
++pat        = -8.459816e-9                                                
+//**************************************************************
+//*               NOISE PARAMETERS
+//**************************************************************
++noia       = 2.361113e+020                                               noib       = 5530.384                                                    
++noic       = 3.610864e-011                                               em         = 21981610                                                    
++ef         = 1.2                                                         noimod     = 2                                                           
+//**************************************************************
+//*               DIODE PARAMETERS
+//**************************************************************
++rsh        = 7.67                                                        js         = 2.0349e-007                                                 
++jsw        = 9.9321e-013                                                 cj         = 0.00096321+dcj_p_25od33_l110ae                             
++mj         = 0.33                                                        cjsw       = 1.0525e-010+dcjsw_p_25od33_l110ae                          
++mjsw       = 0.13                                                        cjswg      = 3.3746e-010+dcjswg_p_25od33_l110ae                         
++mjswg      = 0.45                                                        pb         = 0.79                                                        
++pbsw       = 0.78                                                        pbswg      = 0.7                                                         
++rd         = 0                                                           rdc        = 0                                                           
++rs         = 0                                                           rsc        = 0                                                           
++xti        = 3                                                           tpb        = 0.0015                                                      
++tpbsw      = 0.0005                                                      tpbswg     = 0.00258                                                     
++tcj        = 0.00072                                                     tcjsw      = 0.0001                                                      
++tcjswg     = 0.001416                                                    
++nj         = 1.1027                                                      
++imelt       = 0.0011355                                                   jtssws     = 0                                                           
++jtsswd     = 0                                                           jtsswgd    = 3.09e-7+djtsswgd_p_25od33_l110ae                           
++njtssw     = 50                                                          njtsswg    = 50                                                          
++jtsswgs    = 3.09e-7+djtsswgd_p_25od33_l110ae                           
+//**************************************************************
+//*               STRESS PARAMETERS
+//**************************************************************
++saref      = 2.2e-006                                                    sbref      = 2.2e-006                                                    
++wlod       = 0                                                           kvth0      = -1.44e-009                                                  
++lkvth0     = 0                                                           wkvth0     = 0                                                           
++pkvth0     = 0                                                           llodvth    = 1                                                           
++wlodvth    = 1                                                           stk2       = 1.129e-009                                                  
++lodk2      = 1                                                           lodeta0    = 1                                                           
++ku0        = 1.02e-007                                                   lku0       = 3.1e-008                                                    
++wku0       = 0                                                           pku0       = 0                                                           
++llodku0    = 1.22                                                        wlodku0    = 1                                                           
++imax=0.01                 minr=0.1
+//*
+//*
+ends p_25od33_l110ae
+
+inline subckt n_bpw_25od33_l110ae ( d g s b )
+parameters w=0u l=0u
++ dtemp=0 nf=1 mf=1 mis_flag=1
++ nf_odd=nf-2*int(nf/2) nf_even=1-nf_odd
++ sa=0 sb=0 sd=0
++ a_unit=sd*w   p_unit=2*(sd+w)  a_sa_edge=sa*w   p_sa_edge=2*(sa+w)
++ a_sb_edge=sb*w   p_sb_edge=2*(sb+w)
++ ad=(nf_odd*(a_unit*((nf+1)/2-1)+a_sb_edge) + nf_even*(a_unit*nf/2))/nf
++ as=(nf_odd*(a_unit*((nf+1)/2-1)+a_sa_edge) + nf_even*(a_unit*(nf/2-1)+a_sa_edge+a_sb_edge))/nf
++ pd=(nf_odd*(p_unit*((nf+1)/2-1)+p_sb_edge) + nf_even*(p_unit*nf/2))/nf
++ ps=(nf_odd*(p_unit*((nf+1)/2-1)+p_sa_edge) + nf_even*(p_unit*(nf/2-1)+p_sa_edge+p_sb_edge))/nf
+//******************
+//**** MISMATCH ****
+//******************
+//******************
+parameters beta = 1
+parameters beta1 = 0.4
+parameters compl1	= 6.13537479203154
+parameters compl2	= 3.16449558573009
+parameters compl3	= 2.04207623679017
+parameters compl4	= 0.416015014555578
+parameters compl5	= 4.8949228914575e-13
+parameters l_factor_n=1/sqrt(2*w*0.9*(l*0.9+12e-9)*mf*1e+12)
+parameters b1_np_25od33_bpw_l110ae = b1_np_25od33_bpw_l110ae_xx
+parameters b2_np_25od33_bpw_l110ae = b2_np_25od33_bpw_l110ae_xx
+parameters b3_np_25od33_bpw_l110ae = b3_np_25od33_bpw_l110ae_xx
+parameters b4_np_25od33_bpw_l110ae = b4_np_25od33_bpw_l110ae_xx
+parameters b5_np_25od33_bpw_l110ae = b5_np_25od33_bpw_l110ae_xx
+
+parameters  dtox_n_25od33_bpw_l110ae_l = beta*(0*b1_np_25od33_bpw_l110ae*compl1+0*b2_np_25od33_bpw_l110ae*compl2+0*b3_np_25od33_bpw_l110ae*compl3+0*b4_np_25od33_bpw_l110ae*compl4+0*b5_np_25od33_bpw_l110ae*compl5)*mis_flag*l_factor_n
+parameters  dxl_n_25od33_bpw_l110ae_l = beta*(0*b1_np_25od33_bpw_l110ae*compl1+0*b2_np_25od33_bpw_l110ae*compl2+0*b3_np_25od33_bpw_l110ae*compl3+0*b4_np_25od33_bpw_l110ae*compl4+0*b5_np_25od33_bpw_l110ae*compl5)*mis_flag*l_factor_n
+parameters  dxw_n_25od33_bpw_l110ae_l = beta*(0*b1_np_25od33_bpw_l110ae*compl1+0*b2_np_25od33_bpw_l110ae*compl2+0*b3_np_25od33_bpw_l110ae*compl3+0*b4_np_25od33_bpw_l110ae*compl4+0*b5_np_25od33_bpw_l110ae*compl5)*mis_flag*l_factor_n
+parameters  dvth0_n_25od33_bpw_l110ae_l = beta*(-0.00117750563085457*b1_np_25od33_bpw_l110ae*compl1+0.00053582483781349*b2_np_25od33_bpw_l110ae*compl2+0.000402688640412702*b3_np_25od33_bpw_l110ae*compl3+9.23590528301908e-5*b4_np_25od33_bpw_l110ae*compl4+0.000351178465000873*b5_np_25od33_bpw_l110ae*compl5)*mis_flag*l_factor_n
+parameters  dnlx_n_25od33_bpw_l110ae_l = beta*(0*b1_np_25od33_bpw_l110ae*compl1+0*b2_np_25od33_bpw_l110ae*compl2+0*b3_np_25od33_bpw_l110ae*compl3+0*b4_np_25od33_bpw_l110ae*compl4+0*b5_np_25od33_bpw_l110ae*compl5)*mis_flag*l_factor_n
+parameters  dk3_n_25od33_bpw_l110ae_l = beta*(0.00082417669180051*b1_np_25od33_bpw_l110ae*compl1+-0.000850530124866572*b2_np_25od33_bpw_l110ae*compl2+0.00363785638728211*b3_np_25od33_bpw_l110ae*compl3+-0.000733624537075149*b4_np_25od33_bpw_l110ae*compl4+-1.416774016223e-5*b5_np_25od33_bpw_l110ae*compl5)*mis_flag*l_factor_n
+parameters  dpvth0_n_25od33_bpw_l110ae_l = beta*(1.40945843552328e-17*b1_np_25od33_bpw_l110ae*compl1+-8.60919841445218e-18*b2_np_25od33_bpw_l110ae*compl2+1.32781659537548e-17*b3_np_25od33_bpw_l110ae*compl3+-4.19437073890264e-18*b4_np_25od33_bpw_l110ae*compl4+3.50900323472918e-18*b5_np_25od33_bpw_l110ae*compl5)*mis_flag*l_factor_n
+parameters  du0_n_25od33_bpw_l110ae_l = beta1*(-5.92547109715267e-6*b1_np_25od33_bpw_l110ae*compl1+2.67453761126502e-6*b2_np_25od33_bpw_l110ae*compl2+2.2065618052418e-6*b3_np_25od33_bpw_l110ae*compl3+4.34026315982738e-7*b4_np_25od33_bpw_l110ae*compl4+-1.4590741850608e-5*b5_np_25od33_bpw_l110ae*compl5)*mis_flag*l_factor_n
+parameters  dlu0_n_25od33_bpw_l110ae_l = beta1*(1.78035972851546e-11*b1_np_25od33_bpw_l110ae*compl1+-8.15221412783945e-12*b2_np_25od33_bpw_l110ae*compl2+-5.67082330379117e-12*b3_np_25od33_bpw_l110ae*compl3+-1.46774057887469e-12*b4_np_25od33_bpw_l110ae*compl4+-3.72099534742977e-12*b5_np_25od33_bpw_l110ae*compl5)*mis_flag*l_factor_n
+parameters  dwu0_n_25od33_bpw_l110ae_l = beta1*(-5.26260415821445e-13*b1_np_25od33_bpw_l110ae*compl1+1.51706375971175e-13*b2_np_25od33_bpw_l110ae*compl2+9.03500321796778e-13*b3_np_25od33_bpw_l110ae*compl3+-8.22069368524135e-14*b4_np_25od33_bpw_l110ae*compl4+1.42088678319507e-13*b5_np_25od33_bpw_l110ae*compl5)*mis_flag*l_factor_n
+parameters  dpu0_n_25od33_bpw_l110ae_l = beta1*(6.59632609706448e-18*b1_np_25od33_bpw_l110ae*compl1+-3.24693274196019e-18*b2_np_25od33_bpw_l110ae*compl2+-2.33947680241859e-19*b3_np_25od33_bpw_l110ae*compl3+-8.62468257688979e-19*b4_np_25od33_bpw_l110ae*compl4+-1.26538464626229e-18*b5_np_25od33_bpw_l110ae*compl5)*mis_flag*l_factor_n
+parameters  drdsw_n_25od33_bpw_l110ae_l = beta*(0*b1_np_25od33_bpw_l110ae*compl1+0*b2_np_25od33_bpw_l110ae*compl2+0*b3_np_25od33_bpw_l110ae*compl3+0*b4_np_25od33_bpw_l110ae*compl4+0*b5_np_25od33_bpw_l110ae*compl5)*mis_flag*l_factor_n
+parameters  dags_n_25od33_bpw_l110ae_l = beta*(0*b1_np_25od33_bpw_l110ae*compl1+0*b2_np_25od33_bpw_l110ae*compl2+0*b3_np_25od33_bpw_l110ae*compl3+0*b4_np_25od33_bpw_l110ae*compl4+0*b5_np_25od33_bpw_l110ae*compl5)*mis_flag*l_factor_n
+parameters  dvsat_n_25od33_bpw_l110ae_l = beta*(0*b1_np_25od33_bpw_l110ae*compl1+0*b2_np_25od33_bpw_l110ae*compl2+0*b3_np_25od33_bpw_l110ae*compl3+0*b4_np_25od33_bpw_l110ae*compl4+0*b5_np_25od33_bpw_l110ae*compl5)*mis_flag*l_factor_n
+parameters  dwags_n_25od33_bpw_l110ae_l = beta*(0*b1_np_25od33_bpw_l110ae*compl1+0*b2_np_25od33_bpw_l110ae*compl2+0*b3_np_25od33_bpw_l110ae*compl3+0*b4_np_25od33_bpw_l110ae*compl4+0*b5_np_25od33_bpw_l110ae*compl5)*mis_flag*l_factor_n
+parameters  dpvsat_n_25od33_bpw_l110ae_l = beta*(0*b1_np_25od33_bpw_l110ae*compl1+0*b2_np_25od33_bpw_l110ae*compl2+0*b3_np_25od33_bpw_l110ae*compl3+0*b4_np_25od33_bpw_l110ae*compl4+0*b5_np_25od33_bpw_l110ae*compl5)*mis_flag*l_factor_n
+parameters  dcj_n_25od33_bpw_l110ae_l = beta*(0*b1_np_25od33_bpw_l110ae*compl1+0*b2_np_25od33_bpw_l110ae*compl2+0*b3_np_25od33_bpw_l110ae*compl3+0*b4_np_25od33_bpw_l110ae*compl4+0*b5_np_25od33_bpw_l110ae*compl5)*mis_flag*l_factor_n
+parameters  dcjsw_n_25od33_bpw_l110ae_l = beta*(0*b1_np_25od33_bpw_l110ae*compl1+0*b2_np_25od33_bpw_l110ae*compl2+0*b3_np_25od33_bpw_l110ae*compl3+0*b4_np_25od33_bpw_l110ae*compl4+0*b5_np_25od33_bpw_l110ae*compl5)*mis_flag*l_factor_n
+parameters  dcjswg_n_25od33_bpw_l110ae_l = beta*(0*b1_np_25od33_bpw_l110ae*compl1+0*b2_np_25od33_bpw_l110ae*compl2+0*b3_np_25od33_bpw_l110ae*compl3+0*b4_np_25od33_bpw_l110ae*compl4+0*b5_np_25od33_bpw_l110ae*compl5)*mis_flag*l_factor_n
+parameters  dcgdo_n_25od33_bpw_l110ae_l = beta*(0*b1_np_25od33_bpw_l110ae*compl1+0*b2_np_25od33_bpw_l110ae*compl2+0*b3_np_25od33_bpw_l110ae*compl3+0*b4_np_25od33_bpw_l110ae*compl4+0*b5_np_25od33_bpw_l110ae*compl5)*mis_flag*l_factor_n
+parameters  dcgso_n_25od33_bpw_l110ae_l = beta*(0*b1_np_25od33_bpw_l110ae*compl1+0*b2_np_25od33_bpw_l110ae*compl2+0*b3_np_25od33_bpw_l110ae*compl3+0*b4_np_25od33_bpw_l110ae*compl4+0*b5_np_25od33_bpw_l110ae*compl5)*mis_flag*l_factor_n
+parameters  dcgdl_n_25od33_bpw_l110ae_l = beta*(0*b1_np_25od33_bpw_l110ae*compl1+0*b2_np_25od33_bpw_l110ae*compl2+0*b3_np_25od33_bpw_l110ae*compl3+0*b4_np_25od33_bpw_l110ae*compl4+0*b5_np_25od33_bpw_l110ae*compl5)*mis_flag*l_factor_n
+parameters  dcgsl_n_25od33_bpw_l110ae_l = beta*(0*b1_np_25od33_bpw_l110ae*compl1+0*b2_np_25od33_bpw_l110ae*compl2+0*b3_np_25od33_bpw_l110ae*compl3+0*b4_np_25od33_bpw_l110ae*compl4+0*b5_np_25od33_bpw_l110ae*compl5)*mis_flag*l_factor_n
+parameters  djtsswd_n_25od33_bpw_l110ae_l = beta*(0*b1_np_25od33_bpw_l110ae*compl1+0*b2_np_25od33_bpw_l110ae*compl2+0*b3_np_25od33_bpw_l110ae*compl3+0*b4_np_25od33_bpw_l110ae*compl4+0*b5_np_25od33_bpw_l110ae*compl5)*mis_flag*l_factor_n
+parameters  djtsswgd_n_25od33_bpw_l110ae_l = beta*(0*b1_np_25od33_bpw_l110ae*compl1+0*b2_np_25od33_bpw_l110ae*compl2+0*b3_np_25od33_bpw_l110ae*compl3+0*b4_np_25od33_bpw_l110ae*compl4+0*b5_np_25od33_bpw_l110ae*compl5)*mis_flag*l_factor_n
+parameters  deta0_n_25od33_bpw_l110ae_l = beta*(0*b1_np_25od33_bpw_l110ae*compl1+0*b2_np_25od33_bpw_l110ae*compl2+0*b3_np_25od33_bpw_l110ae*compl3+0*b4_np_25od33_bpw_l110ae*compl4+0*b5_np_25od33_bpw_l110ae*compl5)*mis_flag*l_factor_n
+parameters  dpeta0_n_25od33_bpw_l110ae_l = beta*(0*b1_np_25od33_bpw_l110ae*compl1+0*b2_np_25od33_bpw_l110ae*compl2+0*b3_np_25od33_bpw_l110ae*compl3+0*b4_np_25od33_bpw_l110ae*compl4+0*b5_np_25od33_bpw_l110ae*compl5)*mis_flag*l_factor_n
+
+parameters  dtox_n_25od33_bpw_l110ae = ((global_flag_n_25od33_bpw_l110ae*dtox_n_25od33_bpw_l110ae_g  + local_flag_n_25od33_bpw_l110ae*dtox_n_25od33_bpw_l110ae_l))*(1-total_flag_n_25od33_bpw_l110ae)+ total_flag_n_25od33_bpw_l110ae*dtox_n_25od33_bpw_l110ae_t
+parameters  dxl_n_25od33_bpw_l110ae = ((global_flag_n_25od33_bpw_l110ae*dxl_n_25od33_bpw_l110ae_g  + local_flag_n_25od33_bpw_l110ae*dxl_n_25od33_bpw_l110ae_l))*(1-total_flag_n_25od33_bpw_l110ae)+ total_flag_n_25od33_bpw_l110ae*dxl_n_25od33_bpw_l110ae_t
+parameters  dxw_n_25od33_bpw_l110ae = ((global_flag_n_25od33_bpw_l110ae*dxw_n_25od33_bpw_l110ae_g  + local_flag_n_25od33_bpw_l110ae*dxw_n_25od33_bpw_l110ae_l))*(1-total_flag_n_25od33_bpw_l110ae)+ total_flag_n_25od33_bpw_l110ae*dxw_n_25od33_bpw_l110ae_t
+parameters  dvth0_n_25od33_bpw_l110ae = ((global_flag_n_25od33_bpw_l110ae*dvth0_n_25od33_bpw_l110ae_g  + local_flag_n_25od33_bpw_l110ae*dvth0_n_25od33_bpw_l110ae_l))*(1-total_flag_n_25od33_bpw_l110ae)+ total_flag_n_25od33_bpw_l110ae*dvth0_n_25od33_bpw_l110ae_t
+parameters  dnlx_n_25od33_bpw_l110ae = ((global_flag_n_25od33_bpw_l110ae*dnlx_n_25od33_bpw_l110ae_g  + local_flag_n_25od33_bpw_l110ae*dnlx_n_25od33_bpw_l110ae_l))*(1-total_flag_n_25od33_bpw_l110ae)+ total_flag_n_25od33_bpw_l110ae*dnlx_n_25od33_bpw_l110ae_t
+parameters  dk3_n_25od33_bpw_l110ae = ((global_flag_n_25od33_bpw_l110ae*dk3_n_25od33_bpw_l110ae_g  + local_flag_n_25od33_bpw_l110ae*dk3_n_25od33_bpw_l110ae_l))*(1-total_flag_n_25od33_bpw_l110ae)+ total_flag_n_25od33_bpw_l110ae*dk3_n_25od33_bpw_l110ae_t
+parameters  dpvth0_n_25od33_bpw_l110ae = ((global_flag_n_25od33_bpw_l110ae*dpvth0_n_25od33_bpw_l110ae_g  + local_flag_n_25od33_bpw_l110ae*dpvth0_n_25od33_bpw_l110ae_l))*(1-total_flag_n_25od33_bpw_l110ae)+ total_flag_n_25od33_bpw_l110ae*dpvth0_n_25od33_bpw_l110ae_t
+parameters  du0_n_25od33_bpw_l110ae = ((global_flag_n_25od33_bpw_l110ae*du0_n_25od33_bpw_l110ae_g  + local_flag_n_25od33_bpw_l110ae*du0_n_25od33_bpw_l110ae_l))*(1-total_flag_n_25od33_bpw_l110ae)+ total_flag_n_25od33_bpw_l110ae*du0_n_25od33_bpw_l110ae_t
+parameters  dlu0_n_25od33_bpw_l110ae = ((global_flag_n_25od33_bpw_l110ae*dlu0_n_25od33_bpw_l110ae_g  + local_flag_n_25od33_bpw_l110ae*dlu0_n_25od33_bpw_l110ae_l))*(1-total_flag_n_25od33_bpw_l110ae)+ total_flag_n_25od33_bpw_l110ae*dlu0_n_25od33_bpw_l110ae_t
+parameters  dwu0_n_25od33_bpw_l110ae = ((global_flag_n_25od33_bpw_l110ae*dwu0_n_25od33_bpw_l110ae_g  + local_flag_n_25od33_bpw_l110ae*dwu0_n_25od33_bpw_l110ae_l))*(1-total_flag_n_25od33_bpw_l110ae)+ total_flag_n_25od33_bpw_l110ae*dwu0_n_25od33_bpw_l110ae_t
+parameters  dpu0_n_25od33_bpw_l110ae = ((global_flag_n_25od33_bpw_l110ae*dpu0_n_25od33_bpw_l110ae_g  + local_flag_n_25od33_bpw_l110ae*dpu0_n_25od33_bpw_l110ae_l))*(1-total_flag_n_25od33_bpw_l110ae)+ total_flag_n_25od33_bpw_l110ae*dpu0_n_25od33_bpw_l110ae_t
+parameters  drdsw_n_25od33_bpw_l110ae = ((global_flag_n_25od33_bpw_l110ae*drdsw_n_25od33_bpw_l110ae_g  + local_flag_n_25od33_bpw_l110ae*drdsw_n_25od33_bpw_l110ae_l))*(1-total_flag_n_25od33_bpw_l110ae)+ total_flag_n_25od33_bpw_l110ae*drdsw_n_25od33_bpw_l110ae_t
+parameters  dags_n_25od33_bpw_l110ae = ((global_flag_n_25od33_bpw_l110ae*dags_n_25od33_bpw_l110ae_g  + local_flag_n_25od33_bpw_l110ae*dags_n_25od33_bpw_l110ae_l))*(1-total_flag_n_25od33_bpw_l110ae)+ total_flag_n_25od33_bpw_l110ae*dags_n_25od33_bpw_l110ae_t
+parameters  dvsat_n_25od33_bpw_l110ae = ((global_flag_n_25od33_bpw_l110ae*dvsat_n_25od33_bpw_l110ae_g  + local_flag_n_25od33_bpw_l110ae*dvsat_n_25od33_bpw_l110ae_l))*(1-total_flag_n_25od33_bpw_l110ae)+ total_flag_n_25od33_bpw_l110ae*dvsat_n_25od33_bpw_l110ae_t
+parameters  dwags_n_25od33_bpw_l110ae = ((global_flag_n_25od33_bpw_l110ae*dwags_n_25od33_bpw_l110ae_g  + local_flag_n_25od33_bpw_l110ae*dwags_n_25od33_bpw_l110ae_l))*(1-total_flag_n_25od33_bpw_l110ae)+ total_flag_n_25od33_bpw_l110ae*dwags_n_25od33_bpw_l110ae_t
+parameters  dpvsat_n_25od33_bpw_l110ae = ((global_flag_n_25od33_bpw_l110ae*dpvsat_n_25od33_bpw_l110ae_g  + local_flag_n_25od33_bpw_l110ae*dpvsat_n_25od33_bpw_l110ae_l))*(1-total_flag_n_25od33_bpw_l110ae)+ total_flag_n_25od33_bpw_l110ae*dpvsat_n_25od33_bpw_l110ae_t
+parameters  dcj_n_25od33_bpw_l110ae = ((global_flag_n_25od33_bpw_l110ae*dcj_n_25od33_bpw_l110ae_g  + local_flag_n_25od33_bpw_l110ae*dcj_n_25od33_bpw_l110ae_l))*(1-total_flag_n_25od33_bpw_l110ae)+ total_flag_n_25od33_bpw_l110ae*dcj_n_25od33_bpw_l110ae_t
+parameters  dcjsw_n_25od33_bpw_l110ae = ((global_flag_n_25od33_bpw_l110ae*dcjsw_n_25od33_bpw_l110ae_g  + local_flag_n_25od33_bpw_l110ae*dcjsw_n_25od33_bpw_l110ae_l))*(1-total_flag_n_25od33_bpw_l110ae)+ total_flag_n_25od33_bpw_l110ae*dcjsw_n_25od33_bpw_l110ae_t
+parameters  dcjswg_n_25od33_bpw_l110ae = ((global_flag_n_25od33_bpw_l110ae*dcjswg_n_25od33_bpw_l110ae_g  + local_flag_n_25od33_bpw_l110ae*dcjswg_n_25od33_bpw_l110ae_l))*(1-total_flag_n_25od33_bpw_l110ae)+ total_flag_n_25od33_bpw_l110ae*dcjswg_n_25od33_bpw_l110ae_t
+parameters  dcgdo_n_25od33_bpw_l110ae = ((global_flag_n_25od33_bpw_l110ae*dcgdo_n_25od33_bpw_l110ae_g  + local_flag_n_25od33_bpw_l110ae*dcgdo_n_25od33_bpw_l110ae_l))*(1-total_flag_n_25od33_bpw_l110ae)+ total_flag_n_25od33_bpw_l110ae*dcgdo_n_25od33_bpw_l110ae_t
+parameters  dcgso_n_25od33_bpw_l110ae = ((global_flag_n_25od33_bpw_l110ae*dcgso_n_25od33_bpw_l110ae_g  + local_flag_n_25od33_bpw_l110ae*dcgso_n_25od33_bpw_l110ae_l))*(1-total_flag_n_25od33_bpw_l110ae)+ total_flag_n_25od33_bpw_l110ae*dcgso_n_25od33_bpw_l110ae_t
+parameters  dcgdl_n_25od33_bpw_l110ae = ((global_flag_n_25od33_bpw_l110ae*dcgdl_n_25od33_bpw_l110ae_g  + local_flag_n_25od33_bpw_l110ae*dcgdl_n_25od33_bpw_l110ae_l))*(1-total_flag_n_25od33_bpw_l110ae)+ total_flag_n_25od33_bpw_l110ae*dcgdl_n_25od33_bpw_l110ae_t
+parameters  dcgsl_n_25od33_bpw_l110ae = ((global_flag_n_25od33_bpw_l110ae*dcgsl_n_25od33_bpw_l110ae_g  + local_flag_n_25od33_bpw_l110ae*dcgsl_n_25od33_bpw_l110ae_l))*(1-total_flag_n_25od33_bpw_l110ae)+ total_flag_n_25od33_bpw_l110ae*dcgsl_n_25od33_bpw_l110ae_t
+parameters  djtsswd_n_25od33_bpw_l110ae = ((global_flag_n_25od33_bpw_l110ae*djtsswd_n_25od33_bpw_l110ae_g  + local_flag_n_25od33_bpw_l110ae*djtsswd_n_25od33_bpw_l110ae_l))*(1-total_flag_n_25od33_bpw_l110ae)+ total_flag_n_25od33_bpw_l110ae*djtsswd_n_25od33_bpw_l110ae_t
+parameters  djtsswgd_n_25od33_bpw_l110ae = ((global_flag_n_25od33_bpw_l110ae*djtsswgd_n_25od33_bpw_l110ae_g  + local_flag_n_25od33_bpw_l110ae*djtsswgd_n_25od33_bpw_l110ae_l))*(1-total_flag_n_25od33_bpw_l110ae)+ total_flag_n_25od33_bpw_l110ae*djtsswgd_n_25od33_bpw_l110ae_t
+parameters  deta0_n_25od33_bpw_l110ae = ((global_flag_n_25od33_bpw_l110ae*deta0_n_25od33_bpw_l110ae_g  + local_flag_n_25od33_bpw_l110ae*deta0_n_25od33_bpw_l110ae_l))*(1-total_flag_n_25od33_bpw_l110ae)+ total_flag_n_25od33_bpw_l110ae*deta0_n_25od33_bpw_l110ae_t
+parameters  dpeta0_n_25od33_bpw_l110ae = ((global_flag_n_25od33_bpw_l110ae*dpeta0_n_25od33_bpw_l110ae_g  + local_flag_n_25od33_bpw_l110ae*dpeta0_n_25od33_bpw_l110ae_l))*(1-total_flag_n_25od33_bpw_l110ae)+ total_flag_n_25od33_bpw_l110ae*dpeta0_n_25od33_bpw_l110ae_t
+//.unprot
+
+
+n_bpw_25od33_l110ae ( d g s b  ) n_25od33_bpw_l110ae_main w=w l=l  ad=ad as=as pd=pd ps=ps 
++ m=1 dtemp=dtemp
++ sa=sa sb=sb
+
+model n_25od33_bpw_l110ae_main bsim3v3 type=n
+//***** Flag Parameter ***
++version    = 3.24                                                        
++binunit    = 2                                                           mobmod     = 1                                                           
++capmod     = 3                                                           nqsmod     = 0                                                           
++noimod     = 2                                                           stimod     = 1                                                           
+//***** Geometry Range Parameter ***
++lmin       = 4.95e-7                                                     lmax       = 4.5e-5                                                      
++wmin       = 3.5e-7                                                      wmax       = 9e-5                                                        
+//***** Process Parameter ***
++tox        = 5.4e-9+dtox_n_25od33_bpw_l110ae                           xj         = 1.2e-7                                                      
++nch        = 3.472875e17                                                 
+//***** dW and dL Parameter ***
++wint       = 3.911441e-8                                                 wl         = -1.707663e-14                                               
++wln        = 0.991221                                                    ww         = -1.692211e-14                                               
++wwn        = 0.918202                                                    wwl        = -6.341742e-22                                               
++lint       = 4.037101e-8                                                 ll         = -9.241989e-16                                               
++lln        = 0.996075                                                    lw         = -3.90312e-14                                                
++lwn        = 0.836858                                                    lwl        = 1.45126e-20                                                 
++llc        = -3.811294e-15                                               lwc        = 8.815656e-14                                                
++lwlc       = 7.8509e-21                                                  wlc        = -7.42099e-15                                                
++wwc        = 9.101659e-17                                                wwlc       = -1.03129e-20                                                
++dwg        = -4.39044e-9                                                 dwb        = -6.38e-10                                                   
++xl         = 1.3e-8+dxl_n_25od33_bpw_l110ae+1.2e-8                     xw         = 1e-9+dxw_n_25od33_bpw_l110ae                              
+//***** Vth Related  Parameter ***
++vth0       = 4.8384929e-001+dvth0_n_25od33_bpw_l110ae                  pvth0      = -1.6928833e-014+dpvth0_n_25od33_bpw_l110ae                
++k1         = 0.599809                                                    pk1        = 3.5e-15                                                     
++k2         = -2.36692e-2                                                 lk2        = -1.2663e-8                                                  
++k3         = 0.05126+dk3_n_25od33_bpw_l110ae                           lk3        = -1.38402e-7                                                 
++wk3        = -1.9591115e-007                                             pk3        = -3.671209e-13                                               
++k3b        = 0.91476                                                     lk3b       = 1.052808e-6                                                 
++wk3b       = 4.8e-9                                                      pk3b       = -1.684899e-13                                               
++w0         = 1e-9                                                        nlx        = 9.3398227e-008+dnlx_n_25od33_bpw_l110ae                   
++wnlx       = 6.060896e-14                                                pnlx       = 6.140752e-21                                                
++dvt0       = 15.298297                                                   pdvt0      = -3.854e-13                                                  
++dvt1       = 1.029                                                       dvt2       = 3.70565e-2                                                  
++pdvt2      = 2.73312e-15                                                 dvt0w      = 0.900275                                                    
++dvt1w      = 4.682083e6                                                  dvt2w      = -0.2525                                                     
++ngate      = 6.2e20                                                      
+//***** Mobility Related Parameter ***
++u0         = 2.4970752e-002+du0_n_25od33_bpw_l110ae                    lu0        = 1.4616160e-010+dlu0_n_25od33_bpw_l110ae                   
++wu0        = 3.2886049e-012+dwu0_n_25od33_bpw_l110ae                   pu0        = -2.4665626e-016+dpu0_n_25od33_bpw_l110ae                  
++ua         = -1.23e-9                                                    lua        = -1.09224e-17                                                
++wua        = 3.69949e-17                                                 pua        = 1.860098e-23                                                
++ub         = 2.12e-18                                                    lub        = -5.350557e-26                                               
++wub        = -1.927539e-26                                               pub        = -7.579315e-32                                               
++uc         = 5.758717e-11                                                luc        = -2.174618e-18                                               
++puc        = -8.007948e-24                                               vsat       = 7.1742339e+004+dvsat_n_25od33_bpw_l110ae                  
++lvsat      = 6.300984e-4                                                 wvsat      = -9.5e-4                                                     
++pvsat      = -5.5880097e-010+dpvsat_n_25od33_bpw_l110ae                a0         = 1.583773                                                    
++la0        = -4.578093e-7                                                pa0        = -3.286637e-14                                               
++ags        = 3.4738010e-001+dags_n_25od33_bpw_l110ae                   lags       = 1.522962e-7                                                 
++wags       = -3.4428116e-009+dwags_n_25od33_bpw_l110ae                 pags       = 2.750618e-14                                                
++b0         = 1.955392e-7                                                 lb0        = -1.4e-13                                                    
++wb0        = -2.410754e-14                                               b1         = 1.485675e-6                                                 
++keta       = -5.24889e-2                                                 lketa      = 3e-9                                                        
++pketa      = 2.349203e-15                                                a1         = 0                                                           
++a2         = 0.99                                                        rdsw       = 591.14441+drdsw_n_25od33_bpw_l110ae                       
++lrdsw      = 2.447427e-5                                                 prdsw      = 0                                                           
++prwb       = -0.073793                                                   lprwb      = 3.977211e-8                                                 
++pprwb      = -6.302685e-15                                               prwg       = 1.45817e-2                                                  
++wr         = 1                                                           
+//***** Subthreshold Related Parameter ***
++voff       = -0.109789                                                   nfactor    = 1.0001407e+000                                              
++pnfactor   = 3.5892879e-014                                              eta0       = 1.5853087e-001+deta0_n_25od33_bpw_l110ae                  
++peta0      = -5.2465964e-015+dpeta0_n_25od33_bpw_l110ae                etab       = -0.117388                                                   
++letab      = 1.921484e-8                                                 petab      = -4.132e-16                                                  
++dsub       = 0.56                                                        cit        = 0                                                           
++cdsc       = 2e-4                                                        cdscb      = 1.6e-4                                                      
++cdscd      = 1e-4                                                        
+//***** Output Resistance Related Parameter ***
++pclm       = 1.34064                                                     ppclm      = 3.78e-14                                                    
++pdiblc1    = 0                                                           ppdiblc1   = 0                                                           
++pdiblc2    = 6.530388e-4                                                 pdiblcb    = 0.1184                                                      
++drout      = 0.56                                                        pscbe1     = 5.883e8                                                     
++pscbe2     = 1.35e-6                                                     pvag       = 0                                                           
++delta      = 9.877e-3                                                    alpha0     = 6.38982e-8                                                  
++alpha1     = 0.178646                                                    beta0      = 14.250298                                                   
+//***** Flicker Noise Model Parameter ***
++noia       = 2.238721e20                                                 noib       = 1.819701e4                                                  
++noic       = 3.6e-13                                                     em         = 4.1e7                                                       
++ef         = 0.91                                                        
+//***** Capacitance Parameter ***
++xpart      = 1                                                           cgso       = 1.25e-11+dcgso_n_25od33_bpw_l110ae                        
++cgdo       = 1.25e-11+dcgdo_n_25od33_bpw_l110ae                        cgbo       = 0                                                           
++ckappa     = 0.743242                                                    clc        = 1e-7                                                        
++cle        = 0.6                                                         dlc        = 4.30281e-8                                                  
++dwc        = -4.202453e-9                                                vfbcv      = -1                                                          
++noff       = 1.643                                                       lnoff      = 3.9e-7                                                      
++imelt       = 0.1                                                         voffcv     = -8.54318e-2                                                 
++lvoffcv    = -1.58655e-8                                                 pvoffcv    = 3.553426e-15                                                
++acde       = 0.4                                                         moin       = 5.67                                                        
++cgsl       = 2.7e-10+dcgsl_n_25od33_bpw_l110ae                         cgdl       = 2.7e-10+dcgdl_n_25od33_bpw_l110ae                         
+//***** Souce/Drain Junction Diode Model Parameter ***
++tlev       = 1                                                           tlevc      = 1                                                           
++hdif       = 2.2e-7                                                      rsh        = 8.3                                                         
++cj         = 7.8122e-4+dcj_n_25od33_bpw_l110ae                         mj         = 0.27981                                                     
++mjsw       = 0.1087                                                      cjsw       = 1.1247e-10+dcjsw_n_25od33_bpw_l110ae                      
++cjswg      = 2.155e-10+dcjswg_n_25od33_bpw_l110ae                      mjswg      = 0.53071                                                     
++js         = 1.198e-7                                                    jsw        = 2.4256e-13                                                  
++pbsw       = 0.91068                                                     pb         = 0.61343                                                     
++pbswg      = 0.84049                                                     
+//***** Temperature Coeffient ***
++tnom       = 25                                                          ute        = -1.058606                                                   
++wute       = 5.13e-8                                                     kt1        = -0.29348                                                    
++kt1l       = 1.2096e-8                                                   kt2        = -0.04276                                                    
++lkt2       = 4.2e-9                                                      ua1        = 2.576422e-9                                                 
++lua1       = -3.640008e-17                                               pua1       = -5.781491e-23                                               
++ub1        = -2.790047e-18                                               lub1       = 8.913486e-26                                                
++wub1       = 8.009705e-26                                                pub1       = 9.720049e-32                                                
++uc1        = -1.300537e-11                                               at         = 2.59545e4                                                   
++prt        = 0.951562                                                    nj         = 1.0338                                                      
++xti        = 3                                                           tpb        = 1.3743e-3                                                   
++tpbsw      = 3.0712e-3                                                   tpbswg     = 2.34e-3                                                     
++tcj        = 8.6537e-4                                                   tcjsw      = 6.6436e-4                                                   
++tcjswg     = 1.3946e-3                                                   
+//***** Stress Effect Related Parameter ***
++saref      = 2.2e-6                                                      sbref      = 2.2e-6                                                      
++wlod       = 0                                                           ku0        = -1.1e-7                                                     
++kvsat      = 0                                                           kvth0      = 4.25e-9                                                     
++tku0       = 0                                                           llodku0    = 1.5                                                         
++wlodku0    = 1                                                           llodvth    = 1                                                           
++wlodvth    = 1                                                           lku0       = 1.05e-8                                                     
++wku0       = 0                                                           pku0       = 0                                                           
++lkvth0     = -6e-8                                                       wkvth0     = 0                                                           
++pkvth0     = 0                                                           stk2       = 0                                                           
++lodk2      = 1                                                           steta0     = -1e-9                                                       
++lodeta0    = 1                                                           
+//***** Unknown Parameters ***
++jtsswd     = 1e-9+djtsswd_n_25od33_bpw_l110ae                          jtsswgd    = 1e-8+djtsswgd_n_25od33_bpw_l110ae                         
++njtssw     = 60                                                          njtsswg    = 60                                                          
++jtsswgs    = 1e-8+djtsswgd_n_25od33_bpw_l110ae                         
++imax=0.01                 minr=0.1
+ends n_bpw_25od33_l110ae
+
+
+
+
+

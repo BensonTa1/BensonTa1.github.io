@@ -1,0 +1,3 @@
+projectDir = '"~/simulation"
+designInfo = '("TEST_TSMC13_ALLTEK_PLL" "VCO_RING" "schematic" "spectre")
+descriptionText = "None"

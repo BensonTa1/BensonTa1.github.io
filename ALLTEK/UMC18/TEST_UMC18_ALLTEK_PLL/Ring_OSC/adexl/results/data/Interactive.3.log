@@ -1,0 +1,58 @@
+Starting Single Run, Sweeps and Corners...
+
+Current time: Tue Mar 24 21:55:35 2026 
+Best design point: 1
+Design specs: 
+	TEST_UMC18_ALLTEK_PLL:Ring_OSC:1	corner	C0_0 - 
+	v /I3/VOUT1; tstab (V)		Error	No
+	output noise: (PM, DSB, dBc/Hz)		Error	No
+	TEST_UMC18_ALLTEK_PLL:Ring_OSC:1	corner	C0_1 - 
+	v /I3/VOUT1; tstab (V)		Error	No
+	output noise: (PM, DSB, dBc/Hz)		Error	No
+	TEST_UMC18_ALLTEK_PLL:Ring_OSC:1	corner	C0_2 - 
+	v /I3/VOUT1; tstab (V)		Error	No
+	output noise: (PM, DSB, dBc/Hz)		Error	No
+	TEST_UMC18_ALLTEK_PLL:Ring_OSC:1	corner	C0_3 - 
+	v /I3/VOUT1; tstab (V)		Error	No
+	output noise: (PM, DSB, dBc/Hz)		Error	No
+	TEST_UMC18_ALLTEK_PLL:Ring_OSC:1	corner	C0_4 - 
+	v /I3/VOUT1; tstab (V)		Error	No
+	output noise: (PM, DSB, dBc/Hz)		Error	No
+	TEST_UMC18_ALLTEK_PLL:Ring_OSC:1	corner	C0_5 - 
+	v /I3/VOUT1; tstab (V)		Error	No
+	output noise: (PM, DSB, dBc/Hz)		Error	No
+	TEST_UMC18_ALLTEK_PLL:Ring_OSC:1	corner	C0_6 - 
+	v /I3/VOUT1; tstab (V)		Error	No
+	output noise: (PM, DSB, dBc/Hz)		Error	No
+	TEST_UMC18_ALLTEK_PLL:Ring_OSC:1	corner	C0_7 - 
+	v /I3/VOUT1; tstab (V)		Error	No
+	output noise: (PM, DSB, dBc/Hz)		Error	No
+	TEST_UMC18_ALLTEK_PLL:Ring_OSC:1	corner	C0_8 - 
+	v /I3/VOUT1; tstab (V)		Error	No
+	output noise: (PM, DSB, dBc/Hz)		Error	No
+	TEST_UMC18_ALLTEK_PLL:Ring_OSC:1	corner	C0_9 - 
+	v /I3/VOUT1; tstab (V)		Error	No
+	output noise: (PM, DSB, dBc/Hz)		Error	No
+	TEST_UMC18_ALLTEK_PLL:Ring_OSC:1	corner	C0_10 - 
+	v /I3/VOUT1; tstab (V)		Error	No
+	output noise: (PM, DSB, dBc/Hz)		Error	No
+	TEST_UMC18_ALLTEK_PLL:Ring_OSC:1	corner	C0_11 - 
+	v /I3/VOUT1; tstab (V)		Error	No
+	output noise: (PM, DSB, dBc/Hz)		Error	No
+	TEST_UMC18_ALLTEK_PLL:Ring_OSC:1	corner	C0_12 - 
+	v /I3/VOUT1; tstab (V)		Error	No
+	output noise: (PM, DSB, dBc/Hz)		Error	No
+	TEST_UMC18_ALLTEK_PLL:Ring_OSC:1	corner	C0_13 - 
+	v /I3/VOUT1; tstab (V)		Error	No
+	output noise: (PM, DSB, dBc/Hz)		Error	No
+	TEST_UMC18_ALLTEK_PLL:Ring_OSC:1	corner	C0_14 - 
+	v /I3/VOUT1; tstab (V)		Error	No
+	output noise: (PM, DSB, dBc/Hz)		Error	No
+Design parameters: 
+	VCTRL		600m
+
+Interactive.3
+Number of points completed: 1
+Number of simulation errors: 30
+Interactive.3 completed. 
+Current time: Tue Mar 24 21:57:30 2026 

@@ -1,0 +1,9 @@
+// VerilogA for Verilog_A, IDELA_SR_LATCH, veriloga
+
+`include "constants.vams"
+`include "disciplines.vams"
+
+module IDELA_SR_LATCH;
+
+
+endmodule

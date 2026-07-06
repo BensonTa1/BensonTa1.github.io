@@ -1,0 +1,51 @@
+simulator lang=spectre insensitive=yes
+library mylib
+
+section res_typ
+parameters drend_rnnpo_mm		=   0.0000e+00 
+parameters drs_rnnpo_mm			=   0.0000e+00 
+parameters ddw_rnnpo_mm			=   0.0000e+00 
+parameters drend_rnppo_mm		=   0.0000e+00 
+parameters drs_rnppo_mm			=   0.0000e+00 
+parameters ddw_rnppo_mm			=   0.0000e+00 
+parameters drend_rnhr1000_mm		=   0.0000e+00 
+parameters drs_rnhr1000_mm		=   0.0000e+00 
+parameters ddw_rnhr1000_mm		=   0.0000e+00 
+ 
+include "./mm180_res_v141.mdl.scs"
+ 
+endsection res_typ
+ 
+section res_max
+parameters drend_rnnpo_mm		= 7.6500e-06 
+parameters drs_rnnpo_mm			= 2.8250e+01 
+parameters ddw_rnnpo_mm			=-5.1000e-08 
+parameters drend_rnppo_mm		= 2.3520e-05 
+parameters drs_rnppo_mm			= 7.5000e+01 
+parameters ddw_rnppo_mm			=-1.9000e-08 
+parameters drend_rnhr1000_mm		= 1.0e-04 
+parameters drs_rnhr1000_mm		= 2.5975e+02 
+parameters ddw_rnhr1000_mm		=-1.8000e-08 
+ 
+include "./mm180_res_v141.mdl.scs"
+ 
+ 
+endsection res_max
+ 
+section res_min
+parameters drend_rnnpo_mm		=-7.6500e-06
+parameters drs_rnnpo_mm			=-2.8250e+01
+parameters ddw_rnnpo_mm			= 5.1000e-08
+parameters drend_rnppo_mm		=-2.3520e-05
+parameters drs_rnppo_mm			=-8.8000e+01
+parameters ddw_rnppo_mm			= 1.9000e-08
+parameters drend_rnhr1000_mm		=-1.0e-04
+parameters drs_rnhr1000_mm		=-2.5975e+02
+parameters ddw_rnhr1000_mm		= 1.8000e-08
+ 
+include "./mm180_res_v141.mdl.scs"
+ 
+ 
+endsection res_min
+ 
+endlibrary mylib

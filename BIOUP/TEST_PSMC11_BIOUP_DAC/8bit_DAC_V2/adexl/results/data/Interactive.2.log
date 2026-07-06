@@ -1,0 +1,57 @@
+Starting Single Run, Sweeps and Corners...
+
+Current time: Thu Apr 23 01:19:45 2026 
+Best design point: 1
+Design specs: 
+	TEST_PSMC11_BIOUP_DAC:8bit_DAC_V2:1	corner	C0_0 - 
+	v /VIN; tran (V)		Error	No
+	v /CLKIN; tran (V)		Error	No
+	TEST_PSMC11_BIOUP_DAC:8bit_DAC_V2:1	corner	C0_1 - 
+	v /VIN; tran (V)		Error	No
+	v /CLKIN; tran (V)		Error	No
+	TEST_PSMC11_BIOUP_DAC:8bit_DAC_V2:1	corner	C0_2 - 
+	v /VIN; tran (V)		Error	No
+	v /CLKIN; tran (V)		Error	No
+	TEST_PSMC11_BIOUP_DAC:8bit_DAC_V2:1	corner	C0_3 - 
+	v /VIN; tran (V)		Error	No
+	v /CLKIN; tran (V)		Error	No
+	TEST_PSMC11_BIOUP_DAC:8bit_DAC_V2:1	corner	C0_4 - 
+	v /VIN; tran (V)		Error	No
+	v /CLKIN; tran (V)		Error	No
+	TEST_PSMC11_BIOUP_DAC:8bit_DAC_V2:1	corner	C0_5 - 
+	v /VIN; tran (V)		Error	No
+	v /CLKIN; tran (V)		Error	No
+	TEST_PSMC11_BIOUP_DAC:8bit_DAC_V2:1	corner	C0_6 - 
+	v /VIN; tran (V)		Error	No
+	v /CLKIN; tran (V)		Error	No
+	TEST_PSMC11_BIOUP_DAC:8bit_DAC_V2:1	corner	C0_7 - 
+	v /VIN; tran (V)		Error	No
+	v /CLKIN; tran (V)		Error	No
+	TEST_PSMC11_BIOUP_DAC:8bit_DAC_V2:1	corner	C0_8 - 
+	v /VIN; tran (V)		Error	No
+	v /CLKIN; tran (V)		Error	No
+	TEST_PSMC11_BIOUP_DAC:8bit_DAC_V2:1	corner	C0_9 - 
+	v /VIN; tran (V)		Error	No
+	v /CLKIN; tran (V)		Error	No
+	TEST_PSMC11_BIOUP_DAC:8bit_DAC_V2:1	corner	C0_10 - 
+	v /VIN; tran (V)		Error	No
+	v /CLKIN; tran (V)		Error	No
+	TEST_PSMC11_BIOUP_DAC:8bit_DAC_V2:1	corner	C0_11 - 
+	v /VIN; tran (V)		Error	No
+	v /CLKIN; tran (V)		Error	No
+	TEST_PSMC11_BIOUP_DAC:8bit_DAC_V2:1	corner	C0_12 - 
+	v /VIN; tran (V)		Error	No
+	v /CLKIN; tran (V)		Error	No
+	TEST_PSMC11_BIOUP_DAC:8bit_DAC_V2:1	corner	C0_13 - 
+	v /VIN; tran (V)		Error	No
+	v /CLKIN; tran (V)		Error	No
+	TEST_PSMC11_BIOUP_DAC:8bit_DAC_V2:1	corner	C0_14 - 
+	v /VIN; tran (V)		Error	No
+	v /CLKIN; tran (V)		Error	No
+Design parameters: 
+
+Interactive.2
+Number of points completed: 1
+Number of simulation errors: 30
+Interactive.2 completed. 
+Current time: Thu Apr 23 04:43:30 2026 

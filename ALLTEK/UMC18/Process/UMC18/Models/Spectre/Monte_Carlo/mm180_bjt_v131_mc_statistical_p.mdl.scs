@@ -1,0 +1,51 @@
+
+simulator lang=spectre insensitive=yes
+parameters mc_is_pnp_v50x50_mm = 0
+parameters mc_bf_pnp_v50x50_mm = 0
+parameters mc_nf_pnp_v50x50_mm = 0
+parameters mc_re_pnp_v50x50_mm = 0
+parameters mc_rc_pnp_v50x50_mm = 0
+parameters mc_cjc_pnp_v50x50_mm = 0
+parameters mc_cje_pnp_v50x50_mm = 0
+parameters mc_is_pnp_v100x100_mm = 0
+parameters mc_bf_pnp_v100x100_mm = 0
+parameters mc_nf_pnp_v100x100_mm = 0
+parameters mc_re_pnp_v100x100_mm = 0
+parameters mc_rc_pnp_v100x100_mm = 0
+parameters mc_cjc_pnp_v100x100_mm = 0
+parameters mc_cje_pnp_v100x100_mm = 0
+
+parameters dis_pnp_v50x50_mm = (2.00000e-01 / 3) * mc_is_pnp_v50x50_mm
+parameters dbf_pnp_v50x50_mm = (1.50000e-01 / 3) * mc_bf_pnp_v50x50_mm
+parameters dnf_pnp_v50x50_mm = (5.00000e-03 / 3) * mc_nf_pnp_v50x50_mm
+parameters dre_pnp_v50x50_mm = (2.00000e-01 / 3) * mc_re_pnp_v50x50_mm
+parameters drc_pnp_v50x50_mm = (2.00000e-01 / 3) * mc_rc_pnp_v50x50_mm
+parameters dcjc_pnp_v50x50_mm = (1.00000e-01 / 3) * mc_cjc_pnp_v50x50_mm
+parameters dcje_pnp_v50x50_mm = (1.00000e-01 / 3) * mc_cje_pnp_v50x50_mm
+parameters dis_pnp_v100x100_mm = (2.00000e-01 / 3) * mc_is_pnp_v100x100_mm
+parameters dbf_pnp_v100x100_mm = (1.50000e-01 / 3) * mc_bf_pnp_v100x100_mm
+parameters dnf_pnp_v100x100_mm = (5.00000e-03 / 3) * mc_nf_pnp_v100x100_mm
+parameters dre_pnp_v100x100_mm = (2.00000e-01 / 3) * mc_re_pnp_v100x100_mm
+parameters drc_pnp_v100x100_mm = (2.00000e-01 / 3) * mc_rc_pnp_v100x100_mm
+parameters dcjc_pnp_v100x100_mm = (1.00000e-01 / 3) * mc_cjc_pnp_v100x100_mm
+parameters dcje_pnp_v100x100_mm = (1.00000e-01 / 3) * mc_cje_pnp_v100x100_mm
+
+statistics {
+process {
+vary mc_is_pnp_v50x50_mm dist=gauss std=sigma/3
+vary mc_bf_pnp_v50x50_mm dist=gauss std=sigma/3
+vary mc_nf_pnp_v50x50_mm dist=gauss std=sigma/3
+vary mc_re_pnp_v50x50_mm dist=gauss std=sigma/3
+vary mc_rc_pnp_v50x50_mm dist=gauss std=sigma/3
+vary mc_cjc_pnp_v50x50_mm dist=gauss std=sigma/3
+vary mc_cje_pnp_v50x50_mm dist=gauss std=sigma/3
+vary mc_is_pnp_v100x100_mm dist=gauss std=sigma/3
+vary mc_bf_pnp_v100x100_mm dist=gauss std=sigma/3
+vary mc_nf_pnp_v100x100_mm dist=gauss std=sigma/3
+vary mc_re_pnp_v100x100_mm dist=gauss std=sigma/3
+vary mc_rc_pnp_v100x100_mm dist=gauss std=sigma/3
+vary mc_cjc_pnp_v100x100_mm dist=gauss std=sigma/3
+vary mc_cje_pnp_v100x100_mm dist=gauss std=sigma/3
+ }
+}
+

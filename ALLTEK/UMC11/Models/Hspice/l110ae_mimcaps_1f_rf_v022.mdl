@@ -1,0 +1,163 @@
+****      #########################################################################################
+****      #                                                                             
+****      #  110nm RFCMOS 1.0fF/um2 PLANAR MIM CAPACITOR RF MODEL   for FSG process  
+****      #                             July 2010  
+****      #                             Bing Chang Wu                                               
+****      #                                                                             
+****      #       * Scaling range:  drawn L: 3um ~ 50um					      
+****      #                                  drawn W: 3um ~ 50um
+****      #                                  L/W ratio:  0.5 ~ 1.5                                
+****      #                                  Temperature: -55C to 125C                             
+****      #                                  Freq:  upto 20G Hz     
+****      #                                  Shrink factor : 0.9    
+****      #                           
+****      #       * Node definition:     top: top plate                                     
+****      #                                        bottom: bottom plate                               
+****      #                                        psub: substrate                                  
+****      #                            
+****      #       * Models included in this model file: 
+****      #          mimcaps_1f_psub_rfkf : 3-terminal RF model with native P-sub underneath
+****      #          mimcaps_1f_nwell_rfkf : 4-terminal RF model with nwell underneath
+****      #          mimcaps_1f_mm : simplified 2 terminal model which considers only capacitance 
+****      #                            without parasitics, for low frequency application only
+****      #
+****      #       * Backend metal options supported in this model:
+****      #           
+****      #       mo	Metal Options	 1X metal 2x metal top metal(8k, 12k, 20k, 40k)  MMC BP layer MIM TP location
+****      #======================================================================================
+****      #       26	1P8M             	  m2-m6    m7        m8                                          M6                     M6-M7
+****      #       21	1P7M      	  m2-m5	  m6        m7  	                               M5                     M5-M6
+****      #        15	1P7M      	  m2-m6	  m7  	-	                               M6                     M6-M7
+****      #        12	1P6M      	  m2-m4	  m5        m6                                          M4                     M4-M5
+****      #        9	1P6M      	  m2-m5	  m6        -                                              M5                     M5-M6
+****      #        6	1P5M      	  m2-m3	  m4        m5	                              M3                     M3-M4
+****      #        3	1P5M      	  m2-m4	  m5        -                                              M4                     M4-M5
+****      #        1	1P4M      	  m2-m3	  m4        -	                               M3                     M3-M4
+****      # =====================================================================================
+****      # 
+****      #       Version: V022
+****      #       
+****      #       Revison history:
+****      #        V021 (07/25/2010): orignal release of Silicon-based model for all  metal options   
+****      #       Revison history:
+****      #        V022 (08/19/2013): typo update
+****      #        
+****      ##########################################################################################
+
+.subckt mimcaps_1f_psub_rfkf top bottom psub w=5u l=5u mo=21
+.param w_offset=2.5u l_offset=7.0u
++ p_rtop='11.5/4/((l / 4.36u) * (w / 4.36u))+ 10 / ((l / 4.36u) * (w / 4.36u) * 4)'
++ p_rbot='384.7323*(pwr(log10((l+l_offset)*(w+w_offset)/1e-12),-6.815991))*0.65'
++ p_cox='(l+l_offset)*(w+w_offset)*7.96e-6 + 2*(l+l_offset+w+w_offset)*2.62e-11'
++ p_rsubx='20e-2 * (w + w_offset) / (540u * (l + l_offset))' 
++ p_rsuby='20e-2 * (l + l_offset) / (540u * (w + w_offset)) '
++ p_l='3.175e-7*(l+l_offset+w+w_offset)-5.008e-12'
+*// bottom plate capacitance ratio 
++ c26=0.9999999
++ c21=1.226257
++ c15=0.9999999
++ c12=1.5848375
++ c9=1.226257
++ c6=2.2397959
++ c3=1.5848375
++ c1=2.2397959
++ i1='(1-sgn(abs(1-int(mo))))'
++ i3='(1-sgn(abs(3-int(mo))))'
++ i6='(1-sgn(abs(6-int(mo))))'
++ i9='(1-sgn(abs(9-int(mo))))'
++ i12='(1-sgn(abs(12-int(mo))))'
++ i15='(1-sgn(abs(15-int(mo))))'
++ i21='(1-sgn(abs(21-int(mo))))'
++ i26='(1-sgn(abs(26-int(mo))))'
++ ratio='i1*c1+i3*c3+i6*c6+i9*c9+i12*c12+i15*c15+i21*c21+i26*c26'
+lbot bottom 22 'p_l'
+rtop top 4 'p_rtop*(1+drtop_mimcap_10)' 
+cint 5 4  mimcaps_1f_mm l='l' w='w'
+cox1  5 6 'p_cox/2*(1+dcox_mimcap_10)*ratio/1.226257' 
+cox2  22 6 'p_cox/2*(1+dcox_mimcap_10)*ratio/1.226257'
+rsubx  6 psub 'p_rsubx'
+rsuby  6 psub 'p_rsuby' 
+rbot1  5 22 'p_rbot*(1+drbot_mimcap_10)'
+.ends mimcaps_1f_psub_rfkf
+
+
+.subckt mimcaps_1f_nwell_rfkf top bottom nwell psub w=10u l=10u dx=2.0u dy=2.0u mo=21
+.param w_offset=2.5u l_offset=7.0u d=0.5u rsh_sub=330 
++ p_rtop='11.5/4/((l / 4.36u) * (w / 4.36u))+ 10 / ((l / 4.36u) * (w / 4.36u) * 4)'
++ p_rbot='384.7323*(pwr(log10((l+l_offset)*(w+w_offset)/1e-12),-6.815991))*0.65'
++ p_cox='(l+l_offset)*(w+w_offset)*7.96e-6 + 2*(l+l_offset+w+w_offset)*2.62e-11'
++ p_rsubx='575 * (w + w_offset) / ((l + l_offset))' 
++ p_rsuby='575 * (l + l_offset) / ((w + w_offset)) '
++ p_l='3.175e-7*(l+l_offset+w+w_offset)-5.008e-12'
++ p_lnw='l+l_offset+dx' 
++ p_wnw='w+w_offset+dy' 
++ nsq_sub='1/(4/log((p_lnw+2*d)/p_lnw)+4/log((p_wnw+2*d)/p_wnw))' 
++ p_rsub='rsh_sub*nsq_sub' 
+*// bottom plate capacitance ratio 
++ c26=0.9999999
++ c21=1.226257
++ c15=0.9999999
++ c12=1.5848375
++ c9=1.226257
++ c6=2.2397959
++ c3=1.5848375
++ c1=2.2397959
++ i1='(1-sgn(abs(1-int(mo))))'
++ i3='(1-sgn(abs(3-int(mo))))'
++ i6='(1-sgn(abs(6-int(mo))))'
++ i9='(1-sgn(abs(9-int(mo))))'
++ i12='(1-sgn(abs(12-int(mo))))'
++ i15='(1-sgn(abs(15-int(mo))))'
++ i21='(1-sgn(abs(21-int(mo))))'
++ i26='(1-sgn(abs(26-int(mo))))'
++ ratio='i1*c1+i3*c3+i6*c6+i9*c9+i12*c12+i15*c15+i21*c21+i26*c26'
+lbot bottom 22 'p_l' 
+rtop top 4 'p_rtop*(1+drtop_mimcap_10)' 
+cint 5 4  mimcaps_1f_mm l='l' w='w' 
+cox1 5 6 'p_cox/2*(1+dcox_mimcap_10)*ratio/1.226257' 
+cox2 22 6 'p_cox/2*(1+dcox_mimcap_10)*ratio/1.226257' 
+rsubx 6 nwell 'p_rsubx' 
+rsuby 6 nwell 'p_rsuby' 
+rbot1 5 22 'p_rbot*(1+drbot_mimcap_10)' 
+d1 3 nwell nwell_dio area='p_lnw*p_wnw' pj='2*(p_lnw+p_wnw)' 
+rsub 3 psub 'p_rsub' 
+
+.model  nwell_dio d  level = 3
+**************************************************************
+*               GENERAL PARAMETERS 
+**************************************************************
++area    = 1.68e-007       pj      = 0.00469         tref    = 25            
+**************************************************************
+*               DC PARAMETERS 
+**************************************************************
++is      = 2.05e-006       jsw     = 5.34e-011       ik      = 17856           vb      = 9.662         
++ibv     = 5.952           ikr     = 595.2           n       = 1.0525          rs      = 3.0891e-007   
+**************************************************************
+*               CAPACITANCE PARAMETERS 
+**************************************************************
++cj      = '8.28e-005+dcj_dionw_l110e_mim_10'  cjp     = '9.92e-010+dcjp_dionw_l110e_mim_10'  pb      = 0.588           php     = 0.62          
++mj      = 0.474           mjsw    = 0.27          
+**************************************************************
+*               NOISE PARAMETERS 
+**************************************************************
+**************************************************************
+*               TEMPERATURE PARAMETERS 
+**************************************************************
++tlev    = 1               tlevc   = 1               trs     = 0.00322         tcv     = -0.000539     
++xti     = 5.4936          cta     = 0.00332         ctp     = 0.001           eg      = 1.16          
++tpb     = 0.0028          tphp    = 0.001         
+
+.ends mimcaps_1f_nwell_rfkf 
+
+****      #######################################################################################
+****      #                                                                                                                                                                           #
+****      #  110nm RFCMOS 1.0fF/um2 PLANAR MIM CAPACITOR    Mixed-Mode MODEL                              #
+****      #                                                                                                                                                                           #
+****      #                                                                                                                                                                           #
+****      #       Note: This is a simplified two-terminal model for MIM                                                                            #
+****      #######################################################################################
+**** 
+  
+.model mimcaps_1f_mm c
++ cox='1.0e-3*(1+dcj_mimcap_10)' capsw='0.0473e-9*(1+dcjsw_mimcap_10)' tc1=17.8u  tc2=0.0119u tref=25
+

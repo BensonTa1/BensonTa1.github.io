@@ -1,0 +1,30 @@
+simulator lang=spectre insensitive=yes
+//.prot
+parameters mc_dion_25_l110ae = 0
+statistics {
+    process {
+        vary mc_dion_25_l110ae dist=gauss std=sigma/3
+    }
+}
+parameters mc_sta_dion_25_l110ae = mc_dion_25_l110ae
+parameters mc_diop_25_l110ae = 0
+statistics {
+    process {
+        vary mc_diop_25_l110ae dist=gauss std=sigma/3
+    }
+}
+parameters mc_sta_diop_25_l110ae = mc_diop_25_l110ae
+
+parameters dcj_dion_25_l110ae = (-1.00000e-01 / 3) * mc_sta_dion_25_l110ae 
+parameters dcjp_dion_25_l110ae = (-1.00000e-01 / 3) * mc_sta_dion_25_l110ae 
+parameters dn_dion_25_l110ae = (3.00000e-03 / 3) * mc_sta_dion_25_l110ae 
+parameters djs_dion_25_l110ae = (5.00000e-01 / 3) * mc_sta_dion_25_l110ae 
+parameters djsw_dion_25_l110ae = (6.70000e-01 / 3) * mc_sta_dion_25_l110ae 
+parameters drs_dion_25_l110ae = (-2.50000e-01 / 3) * mc_sta_dion_25_l110ae 
+parameters dcj_diop_25_l110ae = (-1.00000e-01 / 3) * mc_sta_diop_25_l110ae 
+parameters dcjp_diop_25_l110ae = (-1.00000e-01 / 3) * mc_sta_diop_25_l110ae 
+parameters dn_diop_25_l110ae = (3.00000e-03 / 3) * mc_sta_diop_25_l110ae 
+parameters djs_diop_25_l110ae = (5.00000e-01 / 3) * mc_sta_diop_25_l110ae 
+parameters djsw_diop_25_l110ae = (6.70000e-01 / 3) * mc_sta_diop_25_l110ae 
+parameters drs_diop_25_l110ae = (-2.50000e-01 / 3) * mc_sta_diop_25_l110ae 
+//.unprot

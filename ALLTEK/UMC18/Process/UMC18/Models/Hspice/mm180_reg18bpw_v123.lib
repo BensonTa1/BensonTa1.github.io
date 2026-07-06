@@ -1,0 +1,91 @@
+.lib tt 
+.param  
+
+*1.8V NMOS 
++  dtox_n_bpw_18_mm      =   0.0000e+00                  dxl_n_bpw_18_mm       =   0.0000e+00                
++  dxw_n_bpw_18_mm       =   0.0000e+00                  dvth0_n_bpw_18_mm     =   0.0000e+00                
++  du0_n_bpw_18_mm       =   0.0000e+00                  dlvth0_n_bpw_18_mm    =   0.0000e+00
++  dwvth0_n_bpw_18_mm    =   0.0000e+00                  dwu0_n_bpw_18_mm      =   0.0000e+00
++  dpvth0_n_bpw_18_mm    =   0.0000e+00                  dpvsat_n_bpw_18_mm    =   0.0000e+00
++  dcgdo_n_bpw_18_mm     =   0.0000e+00                  dcgso_n_bpw_18_mm     =   0.0000e+00                
++  dcj_n_bpw_18_mm       =   0.0000e+00                  dcjsw_n_bpw_18_mm     =   0.0000e+00                
++  dcjgate_n_bpw_18_mm   =   0.0000e+00  
+
+
+.include './mm180_reg18bpw_v123.mdl'   
+
+.endl  tt    
+
+
+.lib ss 
+.param 
+ 
+*1.8V NMOS 
++  dtox_n_bpw_18_mm      =   1.0000e-10                  dxl_n_bpw_18_mm       =   2.2000e-08                
++  dxw_n_bpw_18_mm       =  -2.0000e-08                  dvth0_n_bpw_18_mm     =   1.4500e-02                
++  du0_n_bpw_18_mm       =  -1.0000e+01                  dlvth0_n_bpw_18_mm    =   1.4000e-03
++  dwvth0_n_bpw_18_mm    =   1.1000e-02                  dwu0_n_bpw_18_mm      =  -4.5000e+00
++  dpvth0_n_bpw_18_mm    =  -1.0000e-03                  dpvsat_n_bpw_18_mm    =   1.4000e+02
++  dcgdo_n_bpw_18_mm     =  -2.3500e-11                  dcgso_n_bpw_18_mm     =  -2.3500e-11                
++  dcj_n_bpw_18_mm       =   1.0300e-04                  dcjsw_n_bpw_18_mm     =   1.3400e-11                
++  dcjgate_n_bpw_18_mm   =   5.0000e-11 
+
+             
+.include './mm180_reg18bpw_v123.mdl'  
+
+.endl  ss     
+
+.lib ff 
+.param  
+
+*1.8V NMOS 
++  dtox_n_bpw_18_mm      =  -1.0000e-10                  dxl_n_bpw_18_mm       =  -1.3600e-08                
++  dxw_n_bpw_18_mm       =   2.0000e-08                  dvth0_n_bpw_18_mm     =  -1.4500e-02                
++  du0_n_bpw_18_mm       =   1.0000e+01                  dlvth0_n_bpw_18_mm    =  -7.0000e-04
++  dwvth0_n_bpw_18_mm    =  -1.0100e-02                  dwu0_n_bpw_18_mm      =   2.0000e+00
++  dpvth0_n_bpw_18_mm    =   6.5000e-04                  dpvsat_n_bpw_18_mm    =  -8.0000e+01
++  dcgdo_n_bpw_18_mm     =   2.3500e-11                  dcgso_n_bpw_18_mm     =   2.3500e-11                
++  dcj_n_bpw_18_mm       =  -1.0300e-04                  dcjsw_n_bpw_18_mm     =  -1.3400e-11                
++  dcjgate_n_bpw_18_mm   =  -5.0000e-11 
+
+
+
+ .include './mm180_reg18bpw_v123.mdl'  
+
+.endl  ff     
+
+.lib snfp 
+.param 
+ 
+*1.8V NMOS 
++  dtox_n_bpw_18_mm      =   0.0000e+00                  dxl_n_bpw_18_mm       =   1.1000e-08                
++  dxw_n_bpw_18_mm       =  -1.0000e-08                  dvth0_n_bpw_18_mm     =   1.3000e-02                
++  du0_n_bpw_18_mm       =  -5.0000e+00                  dlvth0_n_bpw_18_mm    =   1.1000e-03
++  dwvth0_n_bpw_18_mm    =   4.7000e-03                  dwu0_n_bpw_18_mm      =  -2.0000e+00
++  dpvth0_n_bpw_18_mm    =  -5.5000e-04                  dpvsat_n_bpw_18_mm    =   6.0000e+01
++  dcgdo_n_bpw_18_mm     =   0.0000e+00                  dcgso_n_bpw_18_mm     =   0.0000e+00                
++  dcj_n_bpw_18_mm       =   1.0300e-04                  dcjsw_n_bpw_18_mm     =   1.3400e-11                
++  dcjgate_n_bpw_18_mm   =   5.0000e-11 
+
+ 
+.include './mm180_reg18bpw_v123.mdl'  
+ 
+.endl  snfp  
+    
+.lib fnsp 
+.param  
+
+*1.8V NMOS 
++  dtox_n_bpw_18_mm      =   0.0000e+00                  dxl_n_bpw_18_mm       =  -9.5000e-09     
++  dxw_n_bpw_18_mm       =   1.0000e-08                  du0_n_bpw_18_mm       =   6.0000e+00
++  dvth0_n_bpw_18_mm     =  -1.2300e-02                  dlvth0_n_bpw_18_mm    =  -7.0000e-04
++  dwvth0_n_bpw_18_mm    =  -4.6000e-03                  dwu0_n_bpw_18_mm      =   1.7000e+00
++  dpvth0_n_bpw_18_mm    =   4.1000e-04                  dpvsat_n_bpw_18_mm    =  -7.0000e+01
++  dcgdo_n_bpw_18_mm     =   0.0000e+00                
++  dcgso_n_bpw_18_mm     =   0.0000e+00                  dcj_n_bpw_18_mm       =  -1.0300e-04                
++  dcjsw_n_bpw_18_mm     =  -1.3400e-11                  dcjgate_n_bpw_18_mm   =  -5.0000e-11                
+  
+  
+.include './mm180_reg18bpw_v123.mdl'  
+
+.endl  fnsp            

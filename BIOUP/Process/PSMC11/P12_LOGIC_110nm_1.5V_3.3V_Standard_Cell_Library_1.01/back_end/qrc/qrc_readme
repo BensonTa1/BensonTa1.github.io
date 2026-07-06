@@ -1,0 +1,5 @@
+## generate QRC CapTbl  command
+generateCapTbl -ict MAX_1P4M_TM6K.ict -output MAX_1P4M_TM6K.CapTbl
+
+## generate QRCtechfile 
+Techgen -simulation -multi_cpu 4  MAX_1P4M_TM6K.ict

@@ -1,0 +1,20 @@
+Starting Single Run, Sweeps and Corners...
+
+Current time: Tue Feb 10 22:44:16 2026 
+Best design point: 1
+Design specs: 
+	TEST_TSMC13_ALLTEK_PLL:DIVIDER_TSPC_D3_D4:1	corner	C0_0 - 
+	TEST_TSMC13_ALLTEK_PLL:DIVIDER_TSPC_D3_D4:1	corner	C0_1 - 
+	TEST_TSMC13_ALLTEK_PLL:DIVIDER_TSPC_D3_D4:1	corner	C0_2 - 
+	TEST_TSMC13_ALLTEK_PLL:DIVIDER_TSPC_D3_D4:1	corner	C0_3 - 
+	TEST_TSMC13_ALLTEK_PLL:DIVIDER_TSPC_D3_D4:1	corner	C0_4 - 
+Design parameters: 
+	FS		4G
+	VS		1.2
+	temperature		30
+
+Interactive.0
+Number of points completed: 1
+Number of simulation errors: 0
+Interactive.0 completed. 
+Current time: Tue Feb 10 22:44:24 2026 

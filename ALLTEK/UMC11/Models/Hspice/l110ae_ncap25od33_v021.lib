@@ -1,0 +1,35 @@
+.lib tt
+.param
+*device 1
++  dtoxe_ncap_25od33    =   0.0000e+00                
++  dxw_ncap_25od33      =   0.0000e+00    
++  dxl_ncap_25od33      =   0.0000e+00
++  dcwwl_ncap_25od33    =   0.0000e+00
++  dclwl_ncap_25od33    =   0.0000e+00      
++  dcmina_ncap_25od33   =   0.0000e+00
+.include 'l110ae_ncap25od33_v021.mdl'
+.endl tt 
+
+.lib ss 
+.param
+*device 1
++  dtoxe_ncap_25od33    =  +5.65000e-10        
++  dxw_ncap_25od33      =  -1.2000e-08        
++  dxl_ncap_25od33      =  -4.300e-09 
++  dcwwl_ncap_25od33    =  -3.0e-09
++  dclwl_ncap_25od33    =  +3.0000e-9 
++  dcmina_ncap_25od33   =  +7.45e-02
+.include 'l110ae_ncap25od33_v021.mdl'
+.endl ss 
+
+.lib ff 
+.param
+*device 1
++  dtoxe_ncap_25od33    =  -4.5800e-10        
++  dxw_ncap_25od33      =  +7.800e-09    
++  dxl_ncap_25od33      =  +4.00e-09  
++  dcwwl_ncap_25od33    =  +3.100e-09
++  dclwl_ncap_25od33    =  -4.000e-9    
++  dcmina_ncap_25od33   =  -6.25e-02
+.include 'l110ae_ncap25od33_v021.mdl'
+.endl ff 

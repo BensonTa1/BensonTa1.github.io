@@ -1,0 +1,25 @@
+simulator lang=spectre insensitive=yes 
+library mylib 
+ 
+section mc 
+include "l110ae_pcap12_v012_mc_statistical_p.mdl.scs" 
+include "l110ae_pcap12_v012_mc_statistical_m.mdl.scs" 
+include "l110ae_pcap12_v012_mc.mdl.scs" 
+endsection mc 
+  
+section typ 
+include "l110ae_pcap12_v012_mc_statistical_m.mdl.scs" 
+include "l110ae_pcap12_v012_mc.lib.scs" section=typ 
+endsection typ 
+  
+section min 
+include "l110ae_pcap12_v012_mc_statistical_m.mdl.scs" 
+include "l110ae_pcap12_v012_mc.lib.scs" section=min 
+endsection min 
+  
+section max 
+include "l110ae_pcap12_v012_mc_statistical_m.mdl.scs" 
+include "l110ae_pcap12_v012_mc.lib.scs" section=max 
+endsection max 
+  
+endlibrary mylib 

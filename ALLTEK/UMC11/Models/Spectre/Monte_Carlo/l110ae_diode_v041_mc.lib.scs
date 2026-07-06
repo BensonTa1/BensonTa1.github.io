@@ -1,0 +1,171 @@
+//* 
+simulator lang=spectre insensitive=yes
+library mylib
+
+section tt
+parameters 
+//*  
++djs_dion_l110e        =   0                  
++djsw_dion_l110e     =   0    
++dn_dion_l110e        =   0               
++dcj_dion_l110e        =   0                  
++dcjp_dion_l110e       =   0  
++drs_dion_l110e      =   0 
+//*  
++djs_diop_l110e        =   0                  
++djsw_diop_l110e     =   0    
++dn_diop_l110e        =   0                                 
++dcj_diop_l110e        =   0                  
++dcjp_diop_l110e       =   0 
++drs_diop_l110e      =   0    
+//* 
++djs_dion_33_l110e        =   0                  
++djsw_dion_33_l110e     =   0    
++dn_dion_33_l110e        =   0               
++dcj_dion_33_l110e        =   0                  
++dcjp_dion_33_l110e       =   0 
++drs_dion_33_l110e      =   0  
+//*  
++djs_diop_33_l110e        =   0                  
++djsw_diop_33_l110e     =   0   
++dn_diop_33_l110e        =   0                               
++dcj_diop_33_l110e        =   0                  
++dcjp_diop_33_l110e       =   0 
++drs_diop_33_l110e      =   0       
+//*  
++djs_dionw_l110e        =   0                  
++djsw_dionw_l110e     =   0   
++dn_dionw_l110e        =   0                               
++dcj_dionw_l110e        =   0                  
++dcjp_dionw_l110e       =   0 
++drs_dionw_l110e      =   0       
+//* 
++djs_diodnw_l110e        =   0                  
++djsw_diodnw_l110e     =   0   
++dn_diodnw_l110e        =   0    
++dcj_diodnw_l110e       =   0 
++dcjp_diodnw_l110e      =  0 
++drs_diodnw_l110e      =   0  
+//* 
++djs_diopw_l110e        =   0                  
++djsw_diopw_l110e     =   0   
++dn_diopw_l110e        =   0    
++dcj_diopw_l110e       =   0 
++dcjp_diopw_l110e      =  0 
++drs_diopw_l110e      =   0  
+//* 
+include "l110ae_diode_v041_mc.mdl.scs"
+endsection  tt 
+
+section ff
+parameters 
+//* 
++djs_dion_l110e        =  +1                  
++djsw_dion_l110e     =  +2 
++dn_dion_l110e        =  +0.003 
++dcj_dion_l110e        =   -0.1                  
++dcjp_dion_l110e       =  -0.1                  
++drs_dion_l110e      =  -0.25 
+//*  
++djs_diop_l110e        =  +1                  
++djsw_diop_l110e     =  +2 
++dn_diop_l110e        =  +0.003 
++dcj_diop_l110e        =   -0.1                  
++dcjp_diop_l110e       =  -0.1                  
++drs_diop_l110e      =  -0.25 
+//* 
++djs_dion_33_l110e        =  +1                  
++djsw_dion_33_l110e     =  +2 
++dn_dion_33_l110e        =  +0.003 
++dcj_dion_33_l110e        =   -0.1                  
++dcjp_dion_33_l110e       =  -0.1                  
++drs_dion_33_l110e      =  -0.25 
+//*  
++djs_diop_33_l110e        =  +1                  
++djsw_diop_33_l110e     =  +2 
++dn_diop_33_l110e        =  +0.003 
++dcj_diop_33_l110e        =   -0.1                  
++dcjp_diop_33_l110e       =  -0.1                  
++drs_diop_33_l110e      =  -0.25 
+//* 
++djs_dionw_l110e        =   +1                  
++djsw_dionw_l110e     =   +2   
++dn_dionw_l110e        =   +0.003                               
++dcj_dionw_l110e        =   -0.1                  
++dcjp_dionw_l110e       =   -0.1 
++drs_dionw_l110e      =   -0.25       
+//* 
++djs_diodnw_l110e        =  +1                  
++djsw_diodnw_l110e     =  +2 
++dn_diodnw_l110e        =  +0.003 
++dcj_diodnw_l110e       =   -0.1 
++dcjp_diodnw_l110e      =  -0.1 
++drs_diodnw_l110e      =  -0.25 
+//* 
++djs_diopw_l110e        =  +1                  
++djsw_diopw_l110e     =  +2 
++dn_diopw_l110e        =  +0.003 
++dcj_diopw_l110e       =   -0.1 
++dcjp_diopw_l110e      =  -0.1 
++drs_diopw_l110e      =  -0.25 
+//* 
+include "l110ae_diode_v041_mc.mdl.scs"
+endsection  ff 
+
+section ss
+parameters 
+//*    
++djs_dion_l110e        = -0.5                  
++djsw_dion_l110e     =   -0.67                  
++dn_dion_l110e        =  -0.003 
++dcj_dion_l110e        =   0.1                  
++dcjp_dion_l110e       =  0.1                  
++drs_dion_l110e      =  0.25 
+//*  
++djs_diop_l110e        = -0.5                  
++djsw_diop_l110e        =   -0.67                  
++dn_diop_l110e        =  -0.003 
++dcj_diop_l110e        =   0.1                  
++dcjp_diop_l110e       =  0.1                  
++drs_diop_l110e      =  0.25 
+//* 
++djs_dion_33_l110e        = -0.5                  
++djsw_dion_33_l110e     =   -0.67                  
++dn_dion_33_l110e        =  -0.003 
++dcj_dion_33_l110e        =   0.1                  
++dcjp_dion_33_l110e       =  0.1                  
++drs_dion_33_l110e      =  0.25 
+//*  
++djs_diop_33_l110e        = -0.5                  
++djsw_diop_33_l110e     =   -0.67                  
++dn_diop_33_l110e        =  -0.003 
++dcj_diop_33_l110e        =   0.1                  
++dcjp_diop_33_l110e       =  0.1                  
++drs_diop_33_l110e      =  0.25 
+//* 
++djs_dionw_l110e        =   -0.5                  
++djsw_dionw_l110e     =   -0.67   
++dn_dionw_l110e        =   -0.003                               
++dcj_dionw_l110e        =   0.1                  
++dcjp_dionw_l110e       =   0.1 
++drs_dionw_l110e      =   0.25     
+//* 
++djs_diodnw_l110e        = -0.5                  
++djsw_diodnw_l110e     =   -0.67                  
++dn_diodnw_l110e        =  -0.003 
++dcj_diodnw_l110e       =   0.1 
++dcjp_diodnw_l110e      =  0.1 
++drs_diodnw_l110e      =  0.25 
+//* 
++djs_diopw_l110e        = -0.5                  
++djsw_diopw_l110e     =   -0.67                  
++dn_diopw_l110e        =  -0.003 
++dcj_diopw_l110e       =   0.1 
++dcjp_diopw_l110e      =  0.1 
++drs_diopw_l110e      =  0.25 
+//* 
+include "l110ae_diode_v041_mc.mdl.scs"
+endsection  ss 
+
+endlibrary mylib
+

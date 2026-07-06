@@ -1,0 +1,46 @@
+// 
+simulator lang=spectre insensitive=yes
+//  *************************************************************************
+//         L110AE RF Bonding Pad V.02p1
+//        May  2010 by Ji Wei Hsu
+// 
+//       This model support
+//          1. Metal layer option ( 1P8M ) 
+//          2. Metal thickness option ( 40.0K )
+//          3. pad type  50 um BOAC pad   (pad width=53um, pad length=80.2um)
+//  
+//  *************************************************************************  
+ 
+//   Note : 1. One PORT MODEL for Pads      
+ 
+//          2. Input parameters
+// 
+//            (1) Metal layer option        
+//             index_layer=8   (1P8M process ==> with Al, M8  + sub (Ground))
+//            (2) Top metal thickness
+//             index_thick=1 top metal thickness=40.0K)
+//            (3) Pad type
+//             index_pad=1 50 um BOAC pad (pad width=53um, pad length=80.2um)
+// 
+// 
+inline subckt pad_rf ( top sub ) 
+parameters index_layer=8 index_thick=1 index_pad=1
++ cox811=3.02e-14 
++ csi811=2.92e-14  
++ rsi811=110.5  
++ il8=(int(index_layer)==8) ? 1 : 0
++ it1=(int(index_thick)==1) ? 1 : 0
++ ip1=(int(index_pad)==1) ? 1 : 0
++ p_cox=il8*it1*ip1*cox811
++ p_csi=il8*it1*ip1*csi811
++ p_rsi=il8*it1*ip1*rsi811
+
+// 
+//  --------- Equivalent network -------------------
+// 
+ 
+pad_rf ( top 11 ) capacitor c=p_cox * (1 + d_cpad)
+csi ( 11 sub ) capacitor c=p_csi
+rsi ( 11 sub ) resistor r=p_rsi
+ends pad_rf
+// 

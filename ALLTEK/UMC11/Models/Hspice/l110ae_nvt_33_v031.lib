@@ -1,0 +1,60 @@
+********************************************************************************
+* TT:   Typical n-ch MOSFET and Typical p-ch MOSFET
+* FF:   Fast n-ch MOSFET and Fast p-ch MOSFET
+* SS:   Slow n-ch MOSFET and Slow p-ch MOSFET
+* FNSP: Fast n-ch MOSFET and Slow p-ch MOSFET
+* SNFP: Slow n-ch MOSFET and Fast p-ch MOSFET
+********************************************************************************
+* 
+.lib tt
+.param
+* 
+* Device1
++dtox_n_nvt_33_l110e   =  0.0000000e+000  dxl_n_nvt_33_l110e    =  0.0000000e+000  dvth0_n_nvt_33_l110e  =  0.0000000e+000  
++du0_n_nvt_33_l110e    =  0.0000000e+000  drdsw_n_nvt_33_l110e  =  0.0000000e+000  dlvth0_n_nvt_33_l110e =  0.0000000e+000  
++dk3_n_nvt_33_l110e    =  0.0000000e+000  dxw_n_nvt_33_l110e    =  0.0000000e+000  dwwl_n_nvt_33_l110e   =  0.0000000e+000  
++dcj_n_nvt_33_l110e    =  0.0000000e+000  dcjsw_n_nvt_33_l110e  =  0.0000000e+000  dcjswg_n_nvt_33_l110e =  0.0000000e+000  
++dcgdo_n_nvt_33_l110e  =  0.0000000e+000  dcgso_n_nvt_33_l110e  =  0.0000000e+000  dpvth0_n_nvt_33_l110e =  0.0000000e+000  
++dwu0_n_nvt_33_l110e   =  0.0000000e+000  dags_n_nvt_33_l110e   =  0.0000000e+000  dvsat_n_nvt_33_l110e  =  0.0000000e+000  
++dwags_n_nvt_33_l110e  =  0.0000000e+000  dpags_n_nvt_33_l110e  =  0.0000000e+000  dlu0_n_nvt_33_l110e   =  0.0000000e+000  
++dpu0_n_nvt_33_l110e   =  0.0000000e+000  
+* 
+.include 'l110ae_nvt_33_v031.mdl'
+* 
+.endl tt
+* 
+.lib ff
+.param
+* 
+* Device1
++dtox_n_nvt_33_l110e   = -1.5000000e-010  dxl_n_nvt_33_l110e    = -1.0000000e-008  dvth0_n_nvt_33_l110e  = -6.8241738e-002  
++du0_n_nvt_33_l110e    =  1.5362355e-003  drdsw_n_nvt_33_l110e  = -3.3791421e+002  dlvth0_n_nvt_33_l110e = -4.1457609e-008  
++dk3_n_nvt_33_l110e    = -5.2078634e+000  dxw_n_nvt_33_l110e    =  6.7710000e-009  dwwl_n_nvt_33_l110e   =  3.0182042e-023  
++dcj_n_nvt_33_l110e    = -1.2064000e-005  dcjsw_n_nvt_33_l110e  = -3.4543000e-011  dcjswg_n_nvt_33_l110e = -1.1260000e-011  
++dcgdo_n_nvt_33_l110e  =  2.1620000e-011  dcgso_n_nvt_33_l110e  =  2.1620000e-011  dpvth0_n_nvt_33_l110e =  4.0654000e-014  
++dwu0_n_nvt_33_l110e   =  2.7425966e-010  dags_n_nvt_33_l110e   = -2.9680866e-002  dvsat_n_nvt_33_l110e  = -3.0667473e+003  
++dwags_n_nvt_33_l110e  = -1.2762955e-007  dpags_n_nvt_33_l110e  =  6.3932063e-013  dlu0_n_nvt_33_l110e   =  3.7319258e-011  
++dpu0_n_nvt_33_l110e   = -4.2179631e-016  
+* 
+.include 'l110ae_nvt_33_v031.mdl'
+* 
+.endl ff
+* 
+.lib ss
+.param
+* 
+* Device1
++dtox_n_nvt_33_l110e   =  1.5000000e-010  dxl_n_nvt_33_l110e    =  1.0000000e-008  dvth0_n_nvt_33_l110e  =  6.8165293e-002  
++du0_n_nvt_33_l110e    = -1.4878105e-003  drdsw_n_nvt_33_l110e  =  4.2018477e+002  dlvth0_n_nvt_33_l110e =  3.6984510e-008  
++dk3_n_nvt_33_l110e    =  4.8206537e+000  dxw_n_nvt_33_l110e    = -1.1190000e-008  dwwl_n_nvt_33_l110e   = -4.4320597e-023  
++dcj_n_nvt_33_l110e    =  1.2064000e-005  dcjsw_n_nvt_33_l110e  =  3.4543000e-011  dcjswg_n_nvt_33_l110e =  1.1260000e-011  
++dcgdo_n_nvt_33_l110e  = -2.1620000e-011  dcgso_n_nvt_33_l110e  = -2.1620000e-011  dpvth0_n_nvt_33_l110e = -3.9811332e-014  
++dwu0_n_nvt_33_l110e   = -3.4903452e-010  dags_n_nvt_33_l110e   =  7.6731390e-003  dvsat_n_nvt_33_l110e  =  9.9354206e+003  
++dwags_n_nvt_33_l110e  =  1.3112506e-007  dpags_n_nvt_33_l110e  = -6.1048787e-013  dlu0_n_nvt_33_l110e   = -4.1020381e-009  
++dpu0_n_nvt_33_l110e   =  1.2739422e-015  
+* 
+.include 'l110ae_nvt_33_v031.mdl'
+* 
+.endl ss
+* 
+* 

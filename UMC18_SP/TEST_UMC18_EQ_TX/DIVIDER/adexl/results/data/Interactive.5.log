@@ -1,0 +1,50 @@
+Starting Single Run, Sweeps and Corners...
+
+Current time: Tue Nov 19 13:03:27 2024 
+Best design point: 1
+Design specs: 
+	TEST:DIVIDER:1	corner	C1_0 - 
+	v /FOUT; tran (V)		Error	No
+	v /DIVOUT; tran (V)		Error	No
+	TEST:DIVIDER:1	corner	C1_1 - 
+	v /FOUT; tran (V)		Error	No
+	v /DIVOUT; tran (V)		Error	No
+	TEST:DIVIDER:1	corner	C1_2 - 
+	v /FOUT; tran (V)		Error	No
+	v /DIVOUT; tran (V)		Error	No
+	TEST:DIVIDER:1	corner	C1_3 - 
+	v /FOUT; tran (V)		Error	No
+	v /DIVOUT; tran (V)		Error	No
+	TEST:DIVIDER:1	corner	C1_4 - 
+	v /FOUT; tran (V)		Error	No
+	v /DIVOUT; tran (V)		Error	No
+	TEST:DIVIDER:1	corner	C2_0 - 
+	v /FOUT; tran (V)		Error	No
+	v /DIVOUT; tran (V)		Error	No
+	TEST:DIVIDER:1	corner	C2_1 - 
+	v /FOUT; tran (V)		Error	No
+	v /DIVOUT; tran (V)		Error	No
+	TEST:DIVIDER:1	corner	C2_2 - 
+	v /FOUT; tran (V)		Error	No
+	v /DIVOUT; tran (V)		Error	No
+	TEST:DIVIDER:1	corner	C2_3 - 
+	v /FOUT; tran (V)		Error	No
+	v /DIVOUT; tran (V)		Error	No
+	TEST:DIVIDER:1	corner	C2_4 - 
+	v /FOUT; tran (V)		Error	No
+	v /DIVOUT; tran (V)		Error	No
+	TEST:DIVIDER:1	corner	C2_5 - 
+	v /FOUT; tran (V)		Error	No
+	v /DIVOUT; tran (V)		Error	No
+	TEST:DIVIDER:1	corner	C2_6 - 
+	v /FOUT; tran (V)		Error	No
+	v /DIVOUT; tran (V)		Error	No
+	TEST:DIVIDER:1	corner	Nominal - 
+	v /FOUT; tran (V)		Error	No
+	v /DIVOUT; tran (V)		Error	No
+Design parameters: 
+	VDD		1.71
+
+Received stop signal from user. 
+Interactive.5 completed. 
+Current time: Tue Nov 19 13:04:33 2024 

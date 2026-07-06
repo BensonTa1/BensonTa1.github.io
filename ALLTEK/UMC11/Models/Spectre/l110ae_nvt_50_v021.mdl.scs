@@ -1,0 +1,142 @@
+//#
+simulator lang=spectre insensitive=yes
+//******************************************************************************
+//Property of UMC
+//Unauthorized reproduction, modification and/or distribution are strictly
+//prohibited.
+//This product is protected under copyright law and trade secret law.
+//This model card may not be sent in any form outside of UMC without
+//the written consent of the UMC ATD Modeling Division.
+//******************************************************************************
+//Process:  0.11um Logic and Mixed-Mode 1P8M Metal Metal Capacitor Al Advanced
+//Enhancement Process
+//Device Type:  n-ch MOSFET
+//Description:  5V Native Device
+//Model:    BSIM3 3.24
+//Simulator:  SPECTRE
+//Model features:
+//Global model    : Yes
+//Igate model     : NA
+//Flicker Noise   : Yes
+//LOD model     : NA
+//RF model      : NA
+//Well proximity effect : NA
+//******************************************************************************
+//
+//Revision history:     
+//<Revision 1>     
+//Version : 0.2 p1     
+//Date  : 2012/10/08     
+//Author  : Wei Lun Hung    
+//Remark  : Original release.
+//******************************************************************************
+//Application ranges:
+//Geometry range(After 90% shrink):
+//
+//For Vcc=5V n-ch MOSFET:
+//
+//1.988um <=LDES <=10um
+//1um <=WDES <=10um
+//
+//Voltage range:
+//
+//For n-ch MOSFET:
+//
+//0V <=VGS <=Vcc(*1.1)
+//0V <=VDS <=Vcc(*1.1)
+//-Vcc <=VBS <=0V
+//
+//Temperature range:-40c ~ 125c ; nominal temperature=25c
+//**********************************************************************************
+//
+model n_nvt_50_l110ae bsim3v3 type=n
+//***** Flag Parameter ***
++ version=3.24              binunit=2
++ mobmod=1                  capmod=3                  nqsmod=0
++ noimod=2                
+//***** Geometry Range Parameter ***
++ lmin=1.988e-6
++ lmax=1e-5                 wmin=1e-6                 wmax=1e-5
+//***** Process Parameter ***
++ tox=1.18825e-8+dtox_n_nvt_50_l110ae
++ xj=1.2e-7                 nch=6e16                
+//***** dW and dL Parameter ***
++ wint=1.0116e-7            wl=-2.75e-14              wln=1.010924
++ ww=-2.096581e-14          wwn=1.013419              wwl=1.222819e-20
++ lint=1.042e-7             ll=1.83675e-16            lln=1.08
++ lw=6.42943e-14            lwn=0.994254              lwl=-2.82184e-20
++ llc=0                     lwc=0                     lwlc=0
++ wlc=0                     wwc=0                     wwlc=0
++ dwg=-2.2433857e-009       wdwg=-2.3e-15             dwb=-2.28e-10
++ xl=0+1.2e-8+dxl_n_nvt_50_l110ae               
++ xw=0+dxw_n_nvt_50_l110ae                        
+//***** Vth Related  Parameter ***
++ vth0=-2.1203329e-001+dvth0_n_nvt_50_l110ae    
++ pvth0=4.8196414e-014+dpvth0_n_nvt_50_l110ae       k1=8.29934e-2
++ lvth0=0+dlvth0_n_nvt_50_l110ae                    k2=-2.279522e-3
++ pk2=4.8e-15               k3=1.4816825e+001+dk3_n_nvt_50_l110ae
++ k3b=-10.381376            w0=4.65e-7                nlx=6.2543361e-008
++ dvt0=0.200263             dvt1=6.58732e-2           dvt2=-8.36696e-2
++ dvt0w=0.3                 dvt1w=4.478446e6          dvt2w=-0.28077
++ ngate=1e21              
+//***** Mobility Related Parameter ***
++ u0=5.2042561e-002+du0_n_nvt_50_l110ae           
++ pu0=-1.4943028e-016+dpu0_n_nvt_50_l110ae        ua=1.232759e-9
++ wu0=0+dwu0_n_nvt_50_l110ae                        ub=7.2e-19
++ uc=-6.32574e-12           vsat=1.2236988e+005+dvsat_n_nvt_50_l110ae
++ lvsat=-0.031              wvsat=0.019             
++ pvsat=8.1379743e-008+dpvsat_n_nvt_50_l110ae       a0=0.80456
++ la0=-1.708e-6             ags=1.0962051e+000+dags_n_nvt_50_l110ae
++ lags=1.519687e-6          b0=3.1154839e-006+db0_n_nvt_50_l110ae
++ wb0=-9.3e-13              b1=0                      keta=-0.023
++ lketa=6e-8                wketa=6e-9                pketa=8e-15
++ a1=-0.049                 a2=1                    
++ rdsw=5.6503050e+002+drdsw_n_nvt_50_l110ae         prwb=2.80661e-2
++ prwg=0                    wr=1                    
+//***** Subthreshold Related Parameter ***
++ voff=-0.087               nfactor=0.165           
++ eta0=7.0759509e-001       etab=0.134311
++ petab=-1.031872e-12       dsub=0.246                pdsub=4.7e-13
++ cit=0                     cdsc=0                    cdscb=0
++ cdscd=0                 
+//***** Output Resistance Related Parameter ***
++ pclm=0.304399
++ pdiblc1=0.01              pdiblc2=6.5e-3            pdiblcb=0
++ drout=0.2                 pscbe1=9e8                pscbe2=1e-6
++ pvag=1                    delta=0.01                alpha0=-7.7e-9
++ alpha1=-1.283e-3          walpha1=7e-9              palpha1=1.4e-13
++ beta0=4.31625             lbeta0=6.8587e-6          wbeta0=8.2e-6
+//***** NQS Parameter ***
++ elm=5                   
+//***** Capacitance Parameter ***
++ xpart=1                   cgso=(1.5525e-11)*(1+dcgso_n_nvt_50_l110ae)
++ cgdo=(1.5525e-11)*(1+dcgdo_n_nvt_50_l110ae)     cgbo=0
++ ckappa=0.6                cf=5.8167e-11             clc=1e-7
++ cle=0.6                   dlc=3.0392e-7             dwc=-4.202453e-9
++ vfbcv=-1                  noff=2.78297              voffcv=-0.01
++ imelt=1                   acde=0.42585              moin=18.315
++ cgsl=(8.477229e-10)*(1+dcgsl_n_nvt_50_l110ae) 
++ cgdl=(8.477229e-10)*(1+dcgdl_n_nvt_50_l110ae) 
+//***** Souce/Drain Junction Diode Model Parameter ***
++ hdif=2.2e-7               rsh=8.3                   rd=0
++ rs=7.3773e-7              rsc=0                     rdc=0
++ cj=(1.1288e-4)*(1+dcj_n_nvt_50_l110ae)          mj=0.29022
++ mjsw=0.0886               cjsw=(3.3e-10)*(1+dcjsw_n_nvt_50_l110ae)
++ js=3.3473e-6              jsw=2.8138e-14            pbsw=0.38068
++ pb=0.43781                pbswg=0.40675           
++ cjswg=(1.153e-010)*(1+dcjswg_n_nvt_50_l110ae)   mjswg=0.31683
+//***** Temperature Coeffient ***
++ tnom=25                   ute=-1.49022
++ lute=-2e-7                wute=1e-7                 kt1=-0.251
++ kt1l=-3.571409e-8         kt2=-0.013194             ua1=2.155e-9
++ ub1=-4.6e-18              uc1=-1e-11                at=1.1e5
++ lat=-0.25                 wat=-0.15                 prt=0
++ nj=1.017                  xti=3.2077                tpb=0.0018375
++ tpbsw=0.0019643           tpbswg=0.001544           tcj=3.7896e-3
++ tcjsw=9.1954e-4           tcjswg=4.3606e-3        
+//***** Flicker Noise Model Parameter ***
++noia=5.0118723e+18
++noib=9.5499259e+04
++noic=-2.0000000e-13
++ef=0.93
++em=4.0000000e+07                 

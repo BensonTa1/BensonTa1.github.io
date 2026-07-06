@@ -1,0 +1,138 @@
+// VerilogA for Fractional_PLL, DSM_MASH_3rd, veriloga
+
+`include "constants.vams"
+`include "disciplines.vams"
+
+module DSM_MASH_3rd(D0,D1,D2,D3,D4,D5,D6,D7,CLKIN,DOUT0,DOUT1,DOUT2,DOUT3,DOUT4,DOUT5,AOUT);
+	electrical D0,D1,D2,D3,D4,D5,D6,D7,CLKIN,DOUT0,DOUT1,DOUT2,DOUT3,DOUT4,DOUT5,AOUT;
+	input D0,D1,D2,D3,D4,D5,D6,D7,CLKIN;
+	output DOUT0,DOUT1,DOUT2,DOUT3,DOUT4,DOUT5,AOUT;
+
+	parameter real VOH=1;
+	parameter real VOL=0;
+	parameter real VTH=0.5;
+	
+	parameter FS=256;			//Full scale 10bit=1024
+
+	real DD0,DD1,DD2,DD3,DD4,DD5,DD6,DD7;
+	
+	real Y1,INTG1_1=0,INTG1_2=0,V1=0,V1D=0;	
+	real Y2=0,INTG2_1=0,INTG2_2=0,V2=0,V2D=0;	
+	real Y3=0,INTG3_1=0,INTG3_2=0,V3=0,V3D=0;
+	
+	real V1D_D=0,V1D_DD=0,V2D_D=0,V3D_D=0,U1D=0,U1D_D,U2D;
+	real DDOUT0=0,DDOUT1=0,DDOUT2=0,DDOUT3=0,DDOUT4=0,DDOUT5=0;	
+
+	intger LR0=0;
+
+	analog begin
+
+		DD0 = (V(D0)>VTH) ? 1 : 0;
+		DD1 = (V(D1)>VTH) ? 1 : 0;
+		DD2 = (V(D2)>VTH) ? 1 : 0;
+		DD3 = (V(D3)>VTH) ? 1 : 0;
+		DD4 = (V(D4)>VTH) ? 1 : 0;
+		DD5 = (V(D5)>VTH) ? 1 : 0;
+		DD6 = (V(D6)>VTH) ? 1 : 0;
+		DD7 = (V(D7)>VTH) ? 1 : 0;
+		Y1= DD0*1+DD1*2+DD2*4+DD3*8+DD4*16+DD5*32+DD6*64+DD7*128;
+
+		@(cross(V(CLKIN)-VTH,1))begin
+			//================================LSFR
+			LR0=LR5^LR6;
+			LR6=LR5; LR5=LR4; LR4=LR3; LR3=LR2; LR2=LR1; LR1=LR0;
+			
+
+			//================================INTG3
+			INTG3_1=Y3-V3+LR0;
+			INTG3_2=INTG3_1+INTG3_2;
+
+			if(INTG3_2>(FS/2)) begin 
+				V3=FS;
+				V3D=1;
+			end else begin
+				V3=0;
+				V3D=0;
+			end
+
+			//================================INTG2
+			INTG2_1=Y2-V2;
+			INTG2_2=INTG2_1+INTG2_2;
+
+			if(INTG2_2>(FS/2)) begin 
+				V2=FS;
+				V2D=1;
+			end else begin
+				V2=0;
+				V2D=0;
+			end
+
+			Y3=V2-INTG2_2+(FS/2);
+
+			//================================INTG1
+			
+			INTG1_1=Y1-V1;
+			INTG1_2=INTG1_1+INTG1_2;
+
+			if(INTG1_2>(FS/2)) begin 
+				V1=FS;
+				V1D=1;
+			end else begin
+				V1=0;
+				V1D=0;
+			end
+			
+			Y2=V1-INTG1_2+(FS/2);
+
+			//================================noise cancellation 2rd
+			//U1=V1D_D+(V2D-V2D_D);
+			//V1D_D=V1D;		
+			//V2D_D=V2D;
+
+			//================================noise cancellation 3rd
+			
+			U1D=V2D_D-(V3D-V3D_D);
+			U2D=V1D_DD-(U1D-U1D_D);
+
+			V1D_DD=V1D_D;
+			V1D_D=V1D;
+		
+			V2D_D=V2D;
+			V3D_D=V3D;
+
+			U1D_D=U1D;
+
+			//================================ADC
+			case(U2D)
+				4: begin DDOUT5=VOL; DDOUT4=VOL; DDOUT3=VOL; DDOUT2=VOH; DDOUT1=VOL; DDOUT0=VOL; end	//000100
+				3: begin DDOUT5=VOL; DDOUT4=VOL; DDOUT3=VOL; DDOUT2=VOL; DDOUT1=VOH; DDOUT0=VOH; end	//000011
+				2: begin DDOUT5=VOL; DDOUT4=VOL; DDOUT3=VOL; DDOUT2=VOL; DDOUT1=VOH; DDOUT0=VOL; end	//000010
+				1: begin DDOUT5=VOL; DDOUT4=VOL; DDOUT3=VOL; DDOUT2=VOL; DDOUT1=VOL; DDOUT0=VOH; end	//000001
+
+				0: begin DDOUT5=VOL; DDOUT4=VOL; DDOUT3=VOL; DDOUT2=VOL; DDOUT1=VOL; DDOUT0=VOL; end	//000000
+
+				-1: begin DDOUT5=VOH; DDOUT4=VOH; DDOUT3=VOH; DDOUT2=VOH; DDOUT1=VOH; DDOUT0=VOH; end	//111111
+				-2: begin DDOUT5=VOH; DDOUT4=VOH; DDOUT3=VOH; DDOUT2=VOH; DDOUT1=VOH; DDOUT0=VOL; end	//111110
+				-3: begin DDOUT5=VOH; DDOUT4=VOH; DDOUT3=VOH; DDOUT2=VOH; DDOUT1=VOL; DDOUT0=VOH; end	//111101
+				
+				
+				default: begin
+					DDOUT5=VOL; DDOUT4=VOL; DDOUT3=VOL; DDOUT2=VOL; DDOUT1=VOL; DDOUT0=VOL;
+				end
+			endcase
+			//================================ADC
+
+		end
+
+		V(DOUT5)<+DDOUT5;		
+		V(DOUT4)<+DDOUT4;
+		V(DOUT3)<+DDOUT3;
+		V(DOUT2)<+DDOUT2;
+		V(DOUT1)<+DDOUT1;
+		V(DOUT0)<+DDOUT0;
+
+		V(AOUT)<+U2D;
+
+	end
+
+endmodule

@@ -1,0 +1,180 @@
+.lib tt
+.param
+*
++ dcgs_n_33_rf=0
++ drgate_n_33_rf=0
++ dcd_n_33_rf=0
++ dcj_n_33_rf=0.0000e+00
++ dcjsw_n_33_rf=0.0000e+00
++ dcjgate_n_33_rf=0.0000e+00
++ dcf_n_33_rf=0.0000e+00
+*
++ dtox_n_33_rf=0
++ dlint_n_33_rf=0
++ dwint_n_33_rf=0
++ dvth0_n_33_rf=0
++ dcgdo_n_33_rf=0
++ dcgso_n_33_rf=0
+*
++ dcgs_p_33_rf=0
++ drgate_p_33_rf=0
++ dcd_p_33_rf=0
++ dcj_p_33_rf=0.0000e+00
++ dcjsw_p_33_rf=0.0000e+00
++ dcjgate_p_33_rf=0.0000e+00
++ dcf_p_33_rf=0.0000e+00
+*
++ dtox_p_33_rf=0
++ dlint_p_33_rf=0
++ dwint_p_33_rf=0
++ dvth0_p_33_rf=0
++ dcgdo_p_33_rf=0
++ dcgso_p_33_rf=0
+.include './io_rf_v2d4.mdl'
+* 
+.endl tt
+*
+.lib ss
+.param
+*
++ dcgs_n_33_rf=0.15
++ drgate_n_33_rf=0.35
++ dcd_n_33_rf=0.1
++ dcj_n_33_rf=0.1
++ dcjsw_n_33_rf=0.1
++ dcjgate_n_33_rf=0.1
++ dcf_n_33_rf=0.15
+*
++ dtox_n_33_rf=5e-10
++ dlint_n_33_rf=-1.23e-8
++ dwint_n_33_rf=8e-9
++ dvth0_n_33_rf=0.05
++ dcgdo_n_33_rf=-0.1
++ dcgso_n_33_rf=-0.1
+*
++ dcgs_p_33_rf=0.15
++ drgate_p_33_rf=0.35
++ dcd_p_33_rf=0.1
++ dcj_p_33_rf=0.1
++ dcjsw_p_33_rf=0.1
++ dcjgate_p_33_rf=0.1
++ dcf_p_33_rf=0.15
+*
++ dtox_p_33_rf=5e-10
++ dlint_p_33_rf=-1.3396e-8
++ dwint_p_33_rf=2e-8
++ dvth0_p_33_rf=-0.05
++ dcgdo_p_33_rf=-0.1
++ dcgso_p_33_rf=-0.1
+.include './io_rf_v2d4.mdl'
+* 
+.endl ss
+*
+.lib ff
+.param
+*
++ dcgs_n_33_rf=-0.15
++ drgate_n_33_rf=-0.35
++ dcd_n_33_rf=-0.1
++ dcj_n_33_rf=-0.1
++ dcjsw_n_33_rf=-0.1
++ dcjgate_n_33_rf=-0.1
++ dcf_n_33_rf=-0.15
+*
++ dtox_n_33_rf=-5e-10
++ dlint_n_33_rf=9.4e-9
++ dwint_n_33_rf=-3e-9
++ dvth0_n_33_rf=-0.05
++ dcgdo_n_33_rf=0.1
++ dcgso_n_33_rf=0.1
+*
++ dcgs_p_33_rf=-0.15
++ drgate_p_33_rf=-0.35
++ dcd_p_33_rf=-0.1
++ dcj_p_33_rf=-0.1
++ dcjsw_p_33_rf=-0.1
++ dcjgate_p_33_rf=-0.1
++ dcf_p_33_rf=-0.15
+*
++ dtox_p_33_rf=-5e-10
++ dlint_p_33_rf=1.01e-8
++ dwint_p_33_rf=-1e-8
++ dvth0_p_33_rf=0.05
++ dcgdo_p_33_rf=0.1
++ dcgso_p_33_rf=0.1
+.include './io_rf_v2d4.mdl'
+* 
+.endl ff
+*
+.lib snfp
+.param
+*
++ dcgs_n_33_rf=0.075
++ drgate_n_33_rf=0.175
++ dcd_n_33_rf=0.05
++ dcj_n_33_rf=0.05
++ dcjsw_n_33_rf=0.05
++ dcjgate_n_33_rf=0.05
++ dcf_n_33_rf=0.075
+*
++ dtox_n_33_rf=0
++ dlint_n_33_rf=-7.8e-9
++ dwint_n_33_rf=7e-9
++ dvth0_n_33_rf=0.040663
++ dcgdo_n_33_rf=0
++ dcgso_n_33_rf=0
+*
++ dcgs_p_33_rf=-0.075
++ drgate_p_33_rf=-0.175
++ dcd_p_33_rf=-0.05
++ dcj_p_33_rf=-0.05
++ dcjsw_p_33_rf=-0.05
++ dcjgate_p_33_rf=-0.05
++ dcf_p_33_rf=-0.075
+*
++ dtox_p_33_rf=0
++ dlint_p_33_rf=7.43e-9
++ dwint_p_33_rf=-5e-9
++ dvth0_p_33_rf=0.02
++ dcgdo_p_33_rf=0
++ dcgso_p_33_rf=0
+.include './io_rf_v2d4.mdl'
+* 
+.endl snfp
+*
+.lib fnsp
+.param
+*
++ dcgs_n_33_rf=-0.075
++ drgate_n_33_rf=-0.175
++ dcd_n_33_rf=-0.05
++ dcj_n_33_rf=-0.05
++ dcjsw_n_33_rf=-0.05
++ dcjgate_n_33_rf=-0.05
++ dcf_n_33_rf=-0.075
+*
++ dtox_n_33_rf=0
++ dlint_n_33_rf=9.2e-9
++ dwint_n_33_rf=-2e-9
++ dvth0_n_33_rf=-0.03
++ dcgdo_n_33_rf=0
++ dcgso_n_33_rf=0
+*
++ dcgs_p_33_rf=0.075
++ drgate_p_33_rf=0.175
++ dcd_p_33_rf=0.05
++ dcj_p_33_rf=0.05
++ dcjsw_p_33_rf=0.05
++ dcjgate_p_33_rf=0.05
++ dcf_p_33_rf=0.075
+*
++ dtox_p_33_rf=0
++ dlint_p_33_rf=-8.44e-9
++ dwint_p_33_rf=1e-8
++ dvth0_p_33_rf=-0.02
++ dcgdo_p_33_rf=0
++ dcgso_p_33_rf=0
+.include './io_rf_v2d4.mdl'
+* 
+.endl fnsp
+

@@ -1,0 +1,70 @@
+//  ******************************************************************************************************************************
+simulator lang=spectre insensitive=yes
+//         non salicide n+ poly resistor subcircuit
+// netlist for typical case              *
+//  *****************************************************************************************************************************
+ahdl_include "mm180_res_v141.va"
+inline subckt rnnpo_mm ( n2 n1 pw )
+parameters rend=17e-6+drend_rnnpo_mm rs=113+drs_rnnpo_mm dw=-0.097e-6+ddw_rnnpo_mm vcr1=-0.00376e-6  vcr2=-0.08474e-12  tc1=-1.6e-4  tc2=4.18e-7 wr=1 lr=1 mis_flag=1
+//
+
++ arnnpo=6.101e-02
++ dr_ma_nnpo_xx=arnnpo / sqrt(2 * wr * lr * 1e12)
++ pr_ma_nnpo=dr_ma_nnpo_xx * mc_res_ma_nnpo * mis_flag
+//
+
++ca   = 9.0755e-5
+
+c1 ( pw n1 ) capacitor c=ca*(wr+dw)*lr/2 m=1
+rnnpo_mm ( n2 n1 ) res_va rend=(17e-6+drend_rnnpo_mm)*(1+pr_ma_nnpo) rs=(113+drs_rnnpo_mm)*(1+pr_ma_nnpo) dw=-0.097e-6+ddw_rnnpo_mm vcr1=-0.00376e-6  vcr2=-0.08474e-12  tc1=-1.6e-4  tc2=4.18e-7 res_type=2 lr=lr wr=wr temper=temp m=1
+c2 ( pw n2 ) capacitor c=ca*(wr+dw)*lr/2 m=1
+
+ends rnnpo_mm
+
+
+//  *****************************************************************************************************************************
+//
+//          non salicide p+ poly resistor subcircuit
+// netlist for typical case                  *
+//  *****************************************************************************************************************************
+inline subckt rnppo_mm ( n2 n1 nw)
+parameters rend=105e-6+drend_rnppo_mm rs=352+drs_rnppo_mm dw=-0.046e-6+ddw_rnppo_mm vcr1=-0.0106e-6   vcr2=-0.105e-12  tc1=-2.84e-4  tc2=3e-7 wr=1 lr=1 mis_flag=1
+//
+
++ arnppo=1.900e-02
++ dr_ma_nppo_xx=arnppo / sqrt(2 * wr * lr * 1e12)
++ pr_ma_nppo=dr_ma_nppo_xx * mc_res_ma_nppo * mis_flag
+//
+
++ca   = 9.0755e-5
+
+c1 ( n1 nw ) capacitor c=ca*(wr+dw)*lr/2 m=1
+rnppo_mm ( n2 n1 ) res_va rend=(105e-6+drend_rnppo_mm)*(1+pr_ma_nppo) rs=(352+drs_rnppo_mm)*(1+pr_ma_nppo) dw=-0.046e-6+ddw_rnppo_mm vcr1=-0.0106e-6   vcr2=-0.105e-12  tc1=-2.84e-4  tc2=3e-7 res_type=2 lr=lr wr=wr temper=temp m=1
+c2 ( n2 nw ) capacitor c=ca*(wr+dw)*lr/2 m=1
+
+ends rnppo_mm
+
+
+//  *****************************************************************************************************************************
+//
+//          non salicide hr poly resistor subcircuit
+// netlist for typical case                  *
+//  *****************************************************************************************************************************
+inline subckt rnhr1000_mm ( n2 n1 nw)
+parameters rend=120e-6+drend_rnhr1000_mm rs=1039+drs_rnhr1000_mm dw=-0.043e-6+ddw_rnhr1000_mm vcr1=-0.035e-6   vcr2=-0.15e-12  tc1=-8.34e-4  tc2=1.3e-6  wr=1 lr=1 mis_flag=1
+//
+
++ arnhr=2.622e-02
++ dr_ma_nhr_xx=arnhr / sqrt(2 * wr * lr * 1e12)
++ pr_ma_nhr=dr_ma_nhr_xx * mc_res_ma_nhr * mis_flag
+//
+
++ca   = 9.0755e-5
+
+c1 ( n1 nw ) capacitor c=ca*(wr+dw)*lr/2 m=1
+rnhr1000_mm ( n2 n1 ) res_va rend=(120e-6+drend_rnhr1000_mm)*(1+pr_ma_nhr) rs=(1039+drs_rnhr1000_mm)*(1+pr_ma_nhr) dw=-0.043e-6+ddw_rnhr1000_mm vcr1=-0.035e-6   vcr2=-0.15e-12  tc1=-8.34e-4  tc2=1.3e-6 res_type=3 lr=lr wr=wr temper=temp m=1
+c2 ( n2 nw ) capacitor c=ca*(wr+dw)*lr/2 m=1
+
+ends rnhr1000_mm
+
+

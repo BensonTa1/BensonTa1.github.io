@@ -1,0 +1,9 @@
+// VerilogA for Verilog_A, IDEAL_Weight_multiplexer, veriloga
+
+`include "constants.vams"
+`include "disciplines.vams"
+
+module IDEAL_Weight_multiplexer;
+
+
+endmodule

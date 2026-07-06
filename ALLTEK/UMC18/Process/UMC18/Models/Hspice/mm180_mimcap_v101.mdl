@@ -1,0 +1,15 @@
+*************************************************************************
+* the following subcircuits refer to umc 0.18um mm/rf edr.              *                              
+* spec no: g-02-mixed_mode/rfcmos18-1.8v/3.3v-1p6m-mmc-edr              *
+*************************************************************************
+
+*****************************************  
+*         mim capacitance               *  
+***************************************** 
+.subckt mimcaps_mm n2 n1  
+.param w=1e-6 l=1e-6 m=1 cm='1.0e-15+dcm_mimcaps_mm' cmf='0.075e-15+dcmf_mimcaps_mm' 
++ctc1=40e-06 cvc1=30e-06  temp   = 'temper'
+.param tcoef = '1.0+ctc1*(temp-25.0)'
+c1 n2 n1 '(w*1e6*l*1e6*cm+2*(w*1e6+l*1e6)*cmf)*(1.0+cvc1*abs(v(n1,n2)))*tcoef' m=m
+
+.ends mimcaps_mm 

@@ -1,0 +1,15 @@
+Starting Single Run, Sweeps and Corners...
+
+Current time: Tue Apr  7 22:00:57 2026 
+Best design point: 1
+Design specs: 
+	TEST_TSMC13_ALLTEK_PLL:CONSTANT_GM:1	corner	C1 - 
+Design parameters: 
+	VS		1.08
+	temperature		-25
+
+Interactive.6
+Number of points completed: 15
+Number of simulation errors: 15
+Interactive.6 completed. 
+Current time: Tue Apr  7 22:01:02 2026 

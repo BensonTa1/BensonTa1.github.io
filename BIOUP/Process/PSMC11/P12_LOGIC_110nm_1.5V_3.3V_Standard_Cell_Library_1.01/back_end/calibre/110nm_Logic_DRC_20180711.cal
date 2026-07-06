@@ -1,0 +1,1774 @@
+//====================================================================
+//
+//    Calibre DRC check rules for 110nm Logic Design Rule
+//
+// Confidential Information.
+// << POWERCHIP CONFIDENTIAL >>
+//         Copyright (C) POWERCHIP Technology Corporation 2015
+//         Document No.: 
+//         Creation date: 2018.07.11
+//         Version: v0.59                         by Ken 
+//====================================================================
+
+//====================================================================
+//  Changed history
+//====================================================================
+//
+// 2015.12.27: New Create 
+//
+// 2016.02.25: (P12_LOGIC_110nm_1.5V_3.3V_Design_Rule_V0.53) 
+//           1. S81 from 12 -> 10
+//           2. R81 from 3  -> 2
+//           3. R89 from 5  -> 2.5 
+// 2016.03.10: (P12_LOGIC_110nm_1.5V_3.3V_Design_Rule_V0.53) 
+//           1. MIM.4.3K MIM.4.4K use min2s 
+//           2. MIM.1.3K MIM.1.4K from 0.2 -> 4 
+// 2016.03.15: (P12_LOGIC_110nm_1.5V_3.3V_Design_Rule_V0.54) 
+//           1. DM : V0.54 
+//           2. Revise 3N/3P rules
+// 2016.03.22: (P12_LOGIC_110nm_1.5V_3.3V_Design_Rule_V0.54) 
+//           1. DM : V0.54 
+//           2. Revise U28 from 0.07 -> 0.06 
+//           3. Revise U20 from 0.06 -> 0.07
+// 2016.03.31: (P12_LOGIC_110nm_1.5V_3.3V_Design_Rule_V0.54) 
+//           1. DM : V0.54 
+//           2. Update 6N_BLO operation : add not NOCHECK 
+// 2016.06.13: (P12_LOGIC_110nm_1.5V_3.3V_Design_Rule_V0.55) 
+//           1. DM : V0.55 
+//           2. Modify MIM.7_nK description
+//           3. S62,S64,S66 space rule for different metal width 
+//           4. Update ANP.2 connection flow 
+// 2016.07.21: (P12_LOGIC_110nm_1.5V_3.3V_Design_Rule_V0.55) 
+//           1. DM : V0.55 
+//           2. Revise S1, mins setup
+// 2016.09.13: (P12_LOGIC_110nm_1.5V_3.3V_Design_Rule_V0.55)
+//           1. Add 1P4M option
+// 2016.10.12: (P12_LOGIC_110nm_1.5V_3.3V_Design_Rule_V0.55)
+//           1. Update Antenna connection style
+// 2016.11.14: (P12_LOGIC_110nm_1.5V_3.3V_Design_Rule_V0.55)
+//           1. Update 6N operation 
+// 2017.04.05: (P12_LOGIC_110nm_1.5V_3.3V_Design_Rule_V0.55)
+//           1. Update 6N operation 
+// 2017.04.17: (P12_LOGIC_110nm_1.5V_3.3V_Design_Rule_V0.55)
+//           1. Update S158 rule (request form number : 20170413012) 
+// 2018.02.12: (P12_LOGIC_110nm_1.5V_3.3V_Design_Rule_V0.56)
+//           1. Update R111 rule 
+// 2018.07.11: (P12_LOGIC_110nm_1.5V_3.3V_Design_Rule_V0.57) (From:2018071007)
+//           1. Add R150 rule 
+//           2. Remove U158 ~ U161 rule 
+//
+//====================================================================
+
+//====================================================================
+//    USER DEFINITION
+//====================================================================
+
+#DEFINE 1P5M
+//#DEFINE 1P4M
+
+//====================================================================
+//    SPECIFICATION STATEMENTS            
+//====================================================================
+
+ LAYOUT PATH "../chip.db"
+ LAYOUT PRIMARY "change_top_chip"
+
+ LAYOUT SYSTEM GDSII
+ DRC RESULTS DATABASE "output.db"  ASCII /* ASCII or GDSII PSEUDO */
+ DRC SUMMARY REPORT   "output.sum" HIER
+
+ // DRC SELECT CHECK check1 check2 "check?" ... group1 group2 ..."group?"
+ // DRC UNSELECT CHECK check1 check2 "check?" ... group1 group2 ..."group?"
+ // DRC GROUP group_name check1 check2 ... "check?"
+  // LAYOUT WINDOW x1 y1 x2 y2 x3 y3 ...
+ // LAYOUT WINDEL x1 y1 x2 y2 x3 y3 ...
+ // EXCLUDE CELL cell1 cell2 ... "cell?"
+ LAYOUT DEPTH ALL
+ DRC MAXIMUM VERTEX 199
+// DRC MAXIMUM RESULTS ALL
+ DRC MAXIMUM RESULTS ALL
+ UNIT LENGTH U
+ PRECISION 1000
+ RESOLUTION 1          /* Grid check = 1/1000 = 0.001um */
+ FLAG OFFGRID YES
+ //INCLUDE "/home/guest/base/calibre/off_grid_check.all_layers"
+ LAYOUT WINDOW CLIP NO   /* About Layout Window option */
+ LAYOUT ERROR ON INPUT YES
+ FLAG ACUTE YES
+ FLAG SKEW YES
+ FLAG NONSIMPLE YES
+ DRC KEEP EMPTY NO
+ DRC CHECK TEXT ALL
+ //DRC CELL NAME YES CELL SPACE XFORM
+ LAYOUT ALLOW DUPLICATE CELL NO
+
+//====================================================================
+//   LAYER DEFINITION
+//====================================================================
+
+LAYER  mPV	7  
+LAYER  m3E_SIL	13 
+LAYER  m3P	15 
+LAYER  m3N	16 
+LAYER  m2P	17 
+LAYER  m2N	18 
+LAYER  m2I	27 
+LAYER  m3I_LDMOS	28 
+LAYER  mLD_BLK	30 
+LAYER  m1F_ACT	31 
+LAYER  m2M_MET	32 
+LAYER  m1G_GATE	33 
+LAYER  m1C_CON	35 
+LAYER  m1M_MET	36 
+LAYER  mTM_SLOT	40 
+LAYER  m2E	41 
+LAYER  m4I	44 
+LAYER  m5I	45 
+LAYER  m1T_V1	55 
+LAYER  m2T_V2	56 
+LAYER  m3T_V3	57 
+LAYER  m3M_MET	58 
+LAYER  m4M_MET	59 
+LAYER  m3S	62 
+LAYER  m1I	69 
+LAYER  m1F_DB	90 
+LAYER  m1G_DB	93 
+LAYER  m1M_DB	94 
+LAYER  m2M_DB	95 
+LAYER  m3M_DB	96 
+LAYER  m4M_DB	97 
+LAYER  mTM_DB	98 
+LAYER  m3K_MIM	103
+LAYER  m4K_MIM	104
+LAYER  mTM_MET	115
+LAYER  mTT_V4	124
+
+LAYER  DLERR	        200
+LAYER  3K_MIM_Shield	83 
+LAYER  4K_MIM_Shield	84 
+LAYER  DRCERR		244
+LAYER  seal_ring	246
+
+//====================================================================
+//    VARIABLE DEFINITION
+//====================================================================
+
+#IFDEF 1P5M
+  3K_UV = copy 3T_V3
+  3K_UM = copy 4M_MET
+  STM   = copy 4M_MET
+#ELSE
+  3K_UV = copy TT_V4
+  3K_UM = copy TM_MET
+  STM   = copy 3M_MET
+#ENDIF
+
+NOCHECK = DLERR or DRCERR
+
+PV	= mPV		not NOCHECK
+3E_SIL	= m3E_SIL	not NOCHECK
+3P	= m3P		not NOCHECK
+3N	= m3N		not NOCHECK
+2P	= m2P		not NOCHECK
+2N	= m2N		not NOCHECK
+2I	= m2I		not NOCHECK
+3I_LDMOS = m3I_LDMOS	not NOCHECK
+LD_BLK	= mLD_BLK	not NOCHECK
+1F_ACT	= m1F_ACT	not NOCHECK
+2M_MET	= m2M_MET	not NOCHECK
+1G_GATE = m1G_GATE	not NOCHECK
+1C_CON	= m1C_CON	not NOCHECK
+1M_MET	= m1M_MET	not NOCHECK
+TM_SLOT	= mTM_SLOT	not NOCHECK
+2E	= m2E		not NOCHECK
+4I	= m4I		not NOCHECK
+5I	= m5I		not NOCHECK
+1T_V1	= m1T_V1	not NOCHECK
+2T_V2	= m2T_V2	not NOCHECK
+3T_V3	= m3T_V3	not NOCHECK
+3M_MET	= m3M_MET	not NOCHECK
+4M_MET	= m4M_MET	not NOCHECK
+3S	= m3S		not NOCHECK
+1I	= m1I		not NOCHECK
+1F_DB	= m1F_DB	not NOCHECK
+1G_DB	= m1G_DB	not NOCHECK
+1M_DB	= m1M_DB	not NOCHECK
+2M_DB	= m2M_DB	not NOCHECK
+3M_DB	= m3M_DB	not NOCHECK
+4M_DB	= m4M_DB	not NOCHECK
+TM_DB	= mTM_DB	not NOCHECK
+3K_MIM	= m3K_MIM	not NOCHECK
+4K_MIM	= m4K_MIM	not NOCHECK
+TM_MET	= mTM_MET	not NOCHECK
+TT_V4	= mTT_V4	not NOCHECK
+
+1Dtemp	= ( m2P and m2I ) not m2E
+2Dtemp	= ( m2N not m2I ) not m2E 
+m1Dmask	= size ( size ( size 1Dtemp by 0.225 ) by -0.450 ) by 0.225
+m2Dmask	= size ( size ( size 2Dtemp by 0.225 ) by -0.450 ) by 0.225
+1Dmask	= m1Dmask	not NOCHECK
+2Dmask	= m2Dmask	not NOCHECK
+3Pmask	= copy 3P 
+3Nmask	= copy 3N 
+6N_BLO	= (size m2P by 0.12) not NOCHECK 
+
+ALL	= EXTENT
+mPWmask = ALL not ( m2I or (mLD_BLK not m3I_LDMOS) )
+PWmask	= mPWmask not NOCHECK
+
+PDIF	= 1F_ACT and 2P
+NDIF	= 1F_ACT and 2N
+GATE	= 1G_GATE and 1F_ACT
+PGATE	= 1G_GATE and PDIF
+NGATE	= 1G_GATE and NDIF
+PSD	= ( PDIF not PGATE ) touch PGATE
+NSD	= ( NDIF not NGATE ) touch NGATE
+PMOS	= PSD or PGATE
+NMOS	= NSD or NGATE
+MOS	= PMOS or NMOS
+
+15_PAA	= ( PDIF and 1Dmask ) and 2I
+15_NAA	= ( NDIF and 2Dmask ) and PWmask
+33_PAA	= ( PDIF and 3Pmask ) and 2I
+33_NAA	= ( NDIF and 3Nmask ) and PWmask
+15_AA	= 15_PAA or 15_NAA
+33_AA	= 33_PAA or 33_NAA
+PAA	= 15_PAA or 33_PAA
+NAA	= 15_NAA or 33_NAA
+DVS_AA	= ( 1F_ACT enclose 15_GATE ) enclose 33_GATE
+15_GATE	= 15_AA and GATE
+33_GATE	= 33_AA and GATE
+
+GTAP	= 1F_ACT not interact 1G_GATE
+PTAP	= PDIF and PWmask
+NTAP	= NDIF and 2I
+TAP	= GTAP or ( PTAP or NTAP )
+
+//====================================================================
+//    CONNECTION DEFINITION
+//====================================================================
+
+SUBSTRATE = EXTENT
+PWELCNT = ( m1F_ACT and m2P ) and mPWmask
+NWELCNT = ( m1F_ACT and m2N ) and m2I
+PDRFCNT = ( m1F_ACT and m2P ) and m5I
+NDRFCNT = ( m1F_ACT and m2N ) and m4I
+
+connect		m2M_MET	m3M_MET		by  m2T_V2
+connect		m1M_MET	m2M_MET		by  m1T_V1
+connect		m1M_MET	m1G_GATE	by  m1C_CON 
+connect		m1M_MET	PSD		by  m1C_CON 
+connect		m1M_MET	NSD		by  m1C_CON 
+connect		m1M_MET	NWELCNT		by  m1C_CON
+connect		m1M_MET	PWELCNT		by  m1C_CON
+connect		m1M_MET	NDRFCNT		by  m1C_CON
+connect		m1M_MET	PDRFCNT		by  m1C_CON
+connect		NSD	PSD
+
+connect		NWELCNT	m2I
+connect		PWELCNT	mPWmask
+connect		NDRFCNT	m4I
+connect		PDRFCNT	m5I
+sconnect	m2I	m1I
+sconnect	m4I	m1I
+sconnect	mPWmask	SUBSTRATE	by  PWELCNT 
+
+//====================================================================
+//    Process Layer: 1F (Active Area)
+//====================================================================
+
+W1   { @Width of  a) active
+       @          b) interconnect
+       int ( 1F_ACT touch edge GATE ) < 0.240 abut < 90 opposite region
+       cmacro minw 1F_ACT 0.150 }
+
+S1   { @Space of AA
+       cmacro mins 1F_ACT 0.210 }
+
+A1   { @Area
+       cmacro mina 1F_ACT 0.150 }
+
+A2   { @Enclosed area
+       cmacro minha 1F_ACT 0.150 }
+
+R16a { @P+AA enclosure by Nwell, a) 1.5V
+       cmacro mineci 15_PAA 2I 0.300 }
+
+R16b { @P+AA enclosure by Nwell, b) 3.3V
+       cmacro mineci 33_PAA 2I 0.340 }
+
+R17  { @NWell STRAP enclosure by Nwell
+       cmacro mineci NTAP 2I 0.240 }
+
+U16a { @NWell space to N+AA, a) 1.5V
+       cmacro min2s 15_NAA 2I 0.300 }
+
+U16b { @NWell space to N+AA, b) 3.3V
+       cmacro min2s 33_NAA 2I 0.340 }
+
+U17  { @NWell space to PWell STRAP
+       cmacro min2s PTAP 2I 0.240 }
+
+//====================================================================
+//    Process Layer: 1I (Bottom N Well)
+//====================================================================
+
+W150 { @Width
+       cmacro minw 1I 3.000 }
+
+S150 { @Spacing
+       cmacro mins 1I 4.200 }
+
+A151 { @Area
+       cmacro mina 1I 25.000 }
+
+A152 { @Enclosed Area
+       cmacro minha 1I 25.000 }
+
+R150 { @Bottom NWell enclosure inner NWell , 0um
+       2I cut (size 1I by 0.001) }
+
+U150 { @Bottom NWell space to outer NWell
+       DMY1 = 2I outside ( SNWI or SNW )
+       cmacro min2s DMY1 1I 3.500 }
+
+U151 { @Bottom NWell space to PWell STRAP
+       cmacro min2s PTAP 1I 0.700 }
+
+U152 { @Bottom NWell space to N+AA
+       cmacro min2s NAA 1I 2.500 }
+
+U153 { @Bottom NWell space to 3S AA
+       DMY1 = ( 1F_ACT and 3S ) outside 1I
+       cmacro min2s DMY1 1I 2.500 }
+
+/*------- NWELL on Bottom NWell -------*/
+
+W157 { @Between the same potential PWell
+       @Between the different potential PWell
+       DMY1 = ext PWmask < 1.000 abut < 90 singular region connected
+       DMY2 = ext PWmask < 1.400 abut < 90 singular region not connected
+       DMY1 and ( 2I interact 1I )
+       DMY2 and ( 2I interact 1I ) }
+
+/*-------  Shield NWell -------*/
+
+SNW1	= holes 2I
+SNW2	= SNW1 interact PWmask
+SNW3	= 2I touch SNW2
+SNWA	= holes 2I inner empty 
+SNWB	= SNWA interact PWmask
+SNWC	= 2I touch SNWB
+SNW	= ( SNW3 or SNWC ) interact 1I
+
+
+SNWI	= SNW2 interact SNW
+SNW1I	= enc 1I [SNW] < 1.500 abut < 90 opposite 
+
+W156 { @Between the same potential PWell
+       @Between the different potential PWell
+       @ R150<1.1um (including negative value)
+       @ R150=or>1.1um
+       cmacro minw SNW 1.400
+       DMY  = ext PWmask < 2.500 abut < 90 opposite region not connected
+       DMY1 = enc [SNW] 1I < 1.100 abut < 90 opposite
+       DMY2 = int DMY1 ( SNW coincident edge SNWI ) < 2.500 abut < 90 opposite region
+       SNW and ( DMY2 and DMY )
+       DMYA = enc 1I [SNW] < 2.500 abut < 90 opposite
+       DMYB = int DMYA ( SNW coincident edge SNWI ) < 2.500 abut < 90 opposite region
+       SNW and ( DMYB and DMY ) }
+
+S156 { @Spacing
+       DMY1 = 2I inside SNWI
+       cmacro min2s DMY1 SNW 1.000 }
+
+U156 { @Spacing to N+A/A
+       DMY1 = NAA inside SNWI
+       cmacro min2s DMY1 SNW 0.700 }
+
+U157 { @Spacing to PWell STRAP
+       DMY1 = PTAP inside SNWI
+       cmacro min2s PTAP SNW 0.700 }
+
+R153 { @Shield NWell enclosure P+A/A
+       cmacro mineci PAA SNW 0.400 }
+
+R154 { @Shield NWell enclosure NWell STRAP
+       cmacro mineci NTAP SNW 0.300 }
+
+//U158 { @Shield NWell spacing to outer NWell(If Shield NWell Encl 1I <1.5)
+//       DMY1 = 2I outside ( SNWI or SNW )
+//       ext DMY1 SNW1I < 3.500 abut < 90 region }
+
+//U159 { @Shield NWell spacing to PWell STRAP(If Shield NWell Encl 1I <1.5)
+//       DMY1 = PTAP outside ( SNWI or SNW )
+//       ext DMY1 SNW1I < 0.700 abut < 90 region }
+
+//U160 { @Shield NWell spacing to N+A/A(If Shield NWell Encl 1I <1.5)
+//       DMY1 = NAA outside ( SNWI or SNW )
+//       ext DMY1 SNW1I < 2.500 abut < 90 region }
+
+//U161 { @Shield NWell spacing to 3S A/A(If Shield NWell Encl 1I <1.5)
+//      DMY1 = ( 3S and 1F_ACT ) outside ( SNWI or SNW )
+//      ext DMY1 SNW1I < 2.500 abut < 90 region }
+
+//====================================================================
+//    Process Layer: 2I (NWell)
+//====================================================================
+
+W16  { @Width
+       cmacro minw 2I 0.600 }
+
+S16  { @Space
+       cmacro mins 2I 0.600 }
+
+S17  { @Spacing of two 1.5V NWell with different potential
+       @Spacing of 1.5V/3.3V NWell with different potential
+       @Spacing of two 3.3V NWell with different potential
+       DMY1 = ext m2I < 1.000 abut < 90 singular region not connected
+       DMY1 not NOCHECK }
+
+A16  { @Area
+       cmacro mina 2I 4.000 }
+
+A17  { @Enclosed area
+       cmacro minha 2I 4.000 }
+
+//====================================================================
+//    Process Layer: 4I/5I (LDMOS)
+//====================================================================
+
+W17  { @Width
+       cmacro minw 4I 0.60
+       cmacro minw 5I 0.60 }
+
+S18  { @Space of N drift to N drift
+       @Space of P drift to P drift
+       cmacro mins 4I 0.60
+       cmacro mins 5I 0.60 }
+
+S19  { @Spacing of two 1.5V  N/P drift with different potential
+       @Spacing of 1.5V/3.3V N/P drift with different potential
+       @Spacing of two 3.3V  N/P drift with different potential
+       DMY1 = ext m4I < 1.000 abut < 90 singular region not connected
+       DMY1 not NOCHECK  
+       DMY2 = ext m5I < 1.000 abut < 90 singular region not connected
+       DMY2 not NOCHECK }
+
+U18  { @Space of N drift to PWell
+       cmacro min2s 4I mPWmask 0.50 }
+
+U19  { @Space of P drift to NWell
+       cmacro min2s 5I 2I 0.20 }
+
+A18  { @Area
+       cmacro mina 4I 4.000  
+       cmacro mina 5I 4.000 }
+
+A19  { @Enclosed area
+       cmacro minha 4I 4.000  
+       cmacro minha 5I 4.000 }
+
+//====================================================================
+//    Process Layer: 1D/2D (1.5V N/P channel dope) DRC purpose only
+//====================================================================
+
+W211 { @Width
+       cmacro minw 1Dmask 0.460
+       cmacro minw 2Dmask 0.460 }
+
+S211 { @Space 
+       cmacro mins 1Dmask 0.460
+       cmacro mins 2Dmask 0.460 }
+
+U211 { @Space to AA (Transistor)
+       cmacro min2s MOS 1Dmask 0.220
+       cmacro min2s MOS 2Dmask 0.220 }
+
+R211 { @Enclosure of AA (Transistor)
+       cmacro mineci MOS 1Dmask 0.220
+       cmacro mineci MOS 2Dmask 0.220 }
+
+U212 { @Space to 3.3V Poly Gate in S/D direction
+       DMY1 = 33_GATE inside edge DVS_AA
+       ext DMY1 1Dmask < 0.300 abut < 90 opposite region
+       ext DMY1 2Dmask < 0.300 abut < 90 opposite region }
+
+E211 { @Extension on 1.5V Poly Gate in S/D direction
+       DMY1 = 15_GATE inside edge DVS_AA
+       enc DMY1 1Dmask < 0.300 abut <= 90 opposite region
+       enc DMY1 2Dmask < 0.300 abut <= 90 opposite region }
+
+E212 { @Extension on 1.5V AA
+       DMY1 = 15_AA and DVS_AA
+       cmacro minex DMY1 1Dmask 0.300
+       cmacro minex DMY1 2Dmask 0.300 }
+
+//====================================================================
+//    Process Layer: 3S (Depletion MOS Capacitor)
+//====================================================================
+
+W91  { @Width
+       cmacro minw 3S 0.600 }
+
+S91  { @Spacing
+       cmacro mins 3S 0.600 }
+
+A60  { @Minimum Area
+       cmacro mina 3S 3.000 }
+
+R91  { @Enclosure AA
+       cmacro mineci 1F_ACT 3S 0.300 }
+
+U164 { @Spacing to N+A/A & P+A/A  
+       cmacro min2s NDIF 3S 0.220
+       cmacro min2s PDIF 3S 0.220 }
+
+//====================================================================
+//    Process Layer: 2E (Dual Open)
+//====================================================================
+
+W111 { @Width
+       cmacro minw 2E 0.620 }
+
+S112 { @Space
+       cmacro mins 2E 0.860 }
+
+U114 { @Space to AA (Transistor)
+       cmacro min2s MOS 2E 0.270 }
+
+R111 { @Enclosure on AA (Transistor)
+       cmacro mineci MOS 2E 0.80 }
+
+U116 { @Space to 1.5V Poly Gate in S/D direction
+       DMY1 = 15_GATE inside edge DVS_AA
+       ext DMY1 2E < 0.340 abut < 90 opposite region }
+
+E116 { @Extension on 3.3V Poly Gate in S/D direction
+       DMY1 = 33_GATE inside edge DVS_AA
+       enc DMY1 2E < 0.80 abut <= 90 opposite region }
+
+E117 { @Extension on 3.3V AA
+       DMY1 = 33_AA and DVS_AA
+       cmacro minex DMY1 2E 1.00 }
+
+//====================================================================
+//    Process Layer: 6N (N+ Gate Implant)
+//====================================================================
+
+W160 { @Width
+       cmacro minw 6N_BLO 0.460 }
+
+S158 { @Space
+       //cmacro mins 6N_BLO 0.460 }
+       DMYA = ext 6N_BLO < 0.460 abut < 90 singular region 
+       DMYA cut 1G_GATE }
+
+A27  { @Area
+       cmacro mina 6N_BLO 0.250 }
+
+A28  { @Enclosed area
+       cmacro minha 6N_BLO 0.250 }
+
+//====================================================================
+//    Process Layer: 1G (Poly Gate)
+//====================================================================
+
+W18  { @Width of 1.5V NMOS/PMOS
+       DMY1 = 1G_GATE inside edge 15_AA
+       int DMY1 < 0.130 abut < 90 region }
+
+W19  { @Width of 3.3V NMOS
+       DMY1 = 1G_GATE inside edge 33_NAA
+       int DMY1 < 0.350 abut < 90 region }
+
+W20  { @Width of 3.3V PMOS
+       DMY1 = 1G_GATE inside edge 33_PAA
+       int DMY1 < 0.300 abut < 90 region }
+
+W21  { @Width of interconnection 
+       DMY1 = 1G_GATE outside edge 1F_ACT
+       int DMY1 < 0.130 abut < 90 region }
+
+W22  { @45-degree Field Poly width (L>=0.39)
+       DMY1 = 1G_GATE outside edge 1F_ACT
+       DMY2 = int [DMY1] < 0.160 abut < 90 opposite
+       DMY3 = length (int (DMY1) < 0.160 abut < 90 opposite) < 0.39
+       angle DMY2 == 45  
+       angle DMY3 == 45 }
+
+S20  { @Space on Field
+       DMY1 = 1G_GATE outside edge 1F_ACT
+       ext DMY1 < 0.180 abut < 90 region }
+
+S21  { @Space on same AA
+       DMY1 = 1G_GATE inside edge 1F_ACT
+       ext DMY1 < 0.180 abut < 90 opposite region }
+
+S22  { @Space on same A/A [inside DO]
+       DMY1 = 1G_GATE inside edge ( 1F_ACT and 2E )
+       ext DMY1 < 0.250 abut < 90 opposite region }
+
+A21  { @Area
+       cmacro mina 1G_GATE 0.160 }
+
+A22  { @Enclosed area
+       cmacro minha 1G_GATE 0.160 }
+
+E20  { @Gate Extension on AA [End Cap]
+       cmacro minex 1F_ACT 1G_GATE 0.170 }
+
+E21  { @AA extension on Poly
+       cmacro minex 1G_GATE 1F_ACT 0.230 }
+
+U22  { @Field Poly space to AA
+       DMY1 = 1G_GATE outside edge 1F_ACT
+       ext DMY1 1F_ACT < 0.070 abut < 90 region }
+
+U20  { @Field Poly [L-shape] space to A/A
+       DMY1 = interact ( 1F_ACT and ( size 1F_ACT by 0.149 underover ) ) 1G_GATE
+       DMY2 = 1F_ACT not DMY1
+       DMY3 = DMY1 OR ( interact 1G_GATE DMY1 )
+       DMY4 = DMY2 OR ( interact 1G_GATE DMY2 )
+       DMY5 = ext ( ANGLE DMY3 == 0 ) < 0.070 abut < 90 opposite NOTCH region
+       DMY6 = ext ( ANGLE DMY4 == 0 ) < 0.080 abut < 90 opposite NOTCH region
+       WITH EDGE ( WITH EDGE ( interact DMY5 DMY1 ) ( ANGLE 1G_GATE == 90 ) ) ( ANGLE 1G_GATE == 0 )
+       WITH EDGE ( WITH EDGE ( interact DMY6 DMY2 ) ( ANGLE 1G_GATE == 90 ) ) ( ANGLE 1G_GATE == 0 ) }
+
+CHANNEL_SHAPE { @Poly overlap AA need rectangle shape
+                not rectangle GATE
+                vertex GATE > 4 }
+
+//====================================================================
+//    Process Layer: 3N/3P (3.3V N/P LDD)
+//====================================================================
+
+W221 { @Width
+       cmacro minw 3Pmask 0.460
+       cmacro minw 3Nmask 0.460 }
+
+S221 { @Space
+       cmacro mins 3Pmask 0.460
+       cmacro mins 3Nmask 0.460 }
+
+U221 { @Space to 1.5V Poly Gate in S/D direction
+       DMY1 = 15_GATE inside edge DVS_AA
+       ext DMY1 3Pmask < 0.300 abut < 90 opposite region
+       ext DMY1 3Nmask < 0.300 abut < 90 opposite region }
+
+E221 { @Extension on 3.3V Poly Gate in S/D direction
+       DMY1 = 33_GATE inside edge DVS_AA
+       enc DMY1 3Pmask < 0.300 abut <= 90 opposite region
+       enc DMY1 3Nmask < 0.300 abut <= 90 opposite region }
+
+E222 { @Extension on 3.3V A/A
+       DMY1 = 33_AA and DVS_AA
+       cmacro minex DMY1 3Pmask 0.300
+       cmacro minex DMY1 3Nmask 0.300 }
+
+A31  { @Area
+       cmacro mina 3Pmask 0.250
+       cmacro mina 3Nmask 0.250 }
+
+A32  { @Enclosed area
+       cmacro minha 3Pmask 0.250
+       cmacro minha 3Nmask 0.250 }
+
+/*** 3P [P-LDD] ***/
+
+R221 { @Enclosure of P-AA
+       cmacro mineci 33_PAA 3Pmask 0.220 }
+
+R222 { @Enclosure of PWell STRAP
+       cmacro mineci PTAP 3Pmask 0.030 }
+
+U222 { @Space to N+AA [non-butted]
+       DMY1 = NAA not interact PTAP
+       cmacro min2s DMY1 3Pmask 0.220 }
+
+U223 { @Space to NWell STRAP   [non-butted]
+       @                       [butted]
+       DMY1 = NTAP not interact PAA
+       cmacro min2s DMY1 3Pmask 0.070
+       PAA and NTAP }
+
+U226 { @Space to N type non-CoSi Poly or AA
+       DMY1 = ( 1F_ACT  and 2N ) and 3E_SIL
+       DMY2 = ( 1G_GATE and 2N ) and 3E_SIL
+       cmacro min2s DMY1 3Pmask 0.200
+       cmacro min2s DMY2 3Pmask 0.200 }
+
+R226 { @Enclosure on P type non-CoSi Poly or AA
+       DMY1 = ( 1F_ACT  and 2P ) and 3E_SIL
+       DMY2 = ( 1G_GATE and 2P ) and 3E_SIL
+       cmacro mineci DMY1 3Pmask 0.220
+       cmacro mineci DMY2 3Pmask 0.220 }
+
+/*** 3N [N-LDD] ***/
+
+R223 { @Enclosure of N-AA 
+       cmacro mineci 33_NAA 3Nmask 0.220 }
+
+R224 { @Enclosure of NWell STRAP
+       cmacro mineci NTAP 3Nmask 0.030 }
+
+U224 { @Space to P+AA [non-butted]
+       DMY1 = PAA not interact NTAP
+       cmacro min2s DMY1 3Nmask 0.220 }
+
+U225 { @Space to PWell STRAP   [non-butted]
+       @                       [butted]
+       DMY1 = PTAP not interact NAA
+       cmacro min2s DMY1 3Nmask 0.070
+       NAA and PTAP }
+
+U227 { @Space to P type non-CoSi Poly or AA
+       DMY1 = ( 1F_ACT  and 2P ) and 3E_SIL
+       DMY2 = ( 1G_GATE and 2P ) and 3E_SIL
+       cmacro min2s DMY1 3Nmask 0.200
+       cmacro min2s DMY2 3Nmask 0.200 }
+
+R227 { @Enclosure on N type non-CoSi Poly or AA
+       DMY1 = ( 1F_ACT  and 2N ) and 3E_SIL
+       DMY2 = ( 1G_GATE and 2N ) and 3E_SIL
+       cmacro mineci DMY1 3Nmask 0.220
+       cmacro mineci DMY2 3Nmask 0.220 }
+
+//====================================================================
+//    Process Layer: 2N/2P (Source Drain)
+//====================================================================
+
+W25  { @Width 
+       cmacro minw 2P 0.460
+       cmacro minw 2N 0.460 }
+
+S25  { @Space 
+       cmacro mins 2P 0.460
+       cmacro mins 2N 0.460 }
+
+A25  { @Area
+       cmacro mina 2P 0.250
+       cmacro mina 2N 0.250 }
+
+A26  { @Enclosed area
+       cmacro minha 2P 0.250
+       cmacro minha 2N 0.250 }
+
+/*** 2P [P+ S/D] ***/
+
+R25  { @Enclosure of P+AA
+       cmacro mineci PAA 2P 0.220 }
+
+R26  { @Enclosure of PWell STRAP
+       cmacro mineci PTAP 2P 0.030 }
+
+U25  { @Space to N+AA [non-butted]
+       DMY1 = NAA not interact PTAP
+       cmacro min2s DMY1 2P 0.220 }
+
+U26  { @Space to NWell STRAP   [non-butted] 
+       @                       [butted]
+       DMY1 = NTAP not interact PAA
+       cmacro min2s DMY1 2P 0.070
+       PAA and NTAP }
+
+U29  { @Space to N type non-CoSi Poly or AA
+       DMY1 = ( 1F_ACT  and 2N ) and 3E_SIL
+       DMY2 = ( 1G_GATE and 2N ) and 3E_SIL
+       cmacro min2s DMY1 2P 0.200
+       cmacro min2s DMY2 2P 0.200 }
+
+R29  { @Enclosure on P type non-CoSi Poly or AA
+       DMY1 = ( 1F_ACT  and 2P ) and 3E_SIL
+       DMY2 = ( 1G_GATE and 2P ) and 3E_SIL
+       cmacro mineci DMY1 2P 0.220
+       cmacro mineci DMY2 2P 0.220 }
+
+/*** 2N [N+ S/D] ***/
+
+R27  { @Enclosure of N+AA
+       cmacro mineci NAA 2N 0.220 }
+
+R28  { @Enclosure of NWell STRAP
+       cmacro mineci NTAP 2N 0.030 }
+
+U27  { @Space to P+AA [non-butted]
+       DMY1 = PAA not interact NTAP
+       cmacro min2s DMY1 2N 0.220 }
+
+U28  { @Space to PWell STRAP   [non-butted] 
+       @                       [butted]
+       DMY1 = PTAP not interact NAA
+       cmacro min2s DMY1 2N 0.060
+       NAA and PTAP }
+
+U30  { @Space to P type non-CoSi Poly or AA
+       DMY1 = ( 1F_ACT  and 2P ) and 3E_SIL
+       DMY2 = ( 1G_GATE and 2P ) and 3E_SIL
+       cmacro min2s DMY1 2N 0.200
+       cmacro min2s DMY2 2N 0.200 }
+
+R30  { @Enclosure on N type non-CoSi Poly or AA
+       DMY1 = ( 1F_ACT  and 2N ) and 3E_SIL
+       DMY2 = ( 1G_GATE and 2N ) and 3E_SIL
+       cmacro mineci DMY1 2N 0.220
+       cmacro mineci DMY2 2N 0.220 }
+
+//====================================================================
+//    Process Layer: 3E (Silicide Protection)
+//====================================================================
+
+W46  { @Width
+       cmacro minw 3E_SIL 0.600 }
+
+S46  { @Space
+       cmacro mins 3E_SIL 0.600 }
+
+A46  { @Area
+       cmacro mina 3E_SIL 1.000 }
+
+A47  { @Enclosed area
+       cmacro minha 3E_SIL 1.000 }
+
+E46  { @Extension on non-CoSi A/A
+       @               [for SP width >= 10um]
+       DMY1 = 3E_SIL with width <  10.000
+       DMY2 = 3E_SIL with width >= 10.000
+       enc 1F_ACT DMY1 < 0.220 abut < 90 opposite region 
+       enc 1F_ACT DMY2 < 0.300 abut < 90 opposite region }
+
+E49  { @Extension on non-CoSi Poly
+       @               [for SP width >= 10um]
+       DMY1 = 3E_SIL with width <  10.000
+       DMY2 = 3E_SIL with width >= 10.000
+       enc 1G_GATE DMY1 < 0.220 abut < 90 opposite region
+       enc 1G_GATE DMY2 < 0.300 abut < 90 opposite region }
+
+E50  { @AA extension on SP
+       cmacro minex 3E_SIL 1F_ACT 0.220 }
+
+U47  { @Space to contact (overlap not allowed)
+       3E_SIL and 1C_CON
+       cmacro min2s 1C_CON 3E_SIL 0.220 }
+
+U48  { @Space to A/A
+       cmacro min2s 1F_ACT 3E_SIL 0.220 }
+
+U49  { @Space to Poly
+       cmacro min2s 1G_GATE 3E_SIL 0.300 }
+
+U50  { @Space to Poly gate (overlap not allowed)
+       3E_SIL and GATE
+       DMY1 = 3E_SIL inside edge 1F_ACT
+       DMY2 = 1G_GATE inside edge 1F_ACT
+       ext DMY1 DMY2 < 0.380 abut < 90 opposite region }
+
+//====================================================================
+//    Process Layer: 1C (Contact Hole)
+//====================================================================
+
+X1   { @Width
+       cmacro reca 1C_CON 0.140 }
+
+S50  { @Space
+       cmacro mins 1C_CON 0.180 }
+
+R50  { @Enclosure by a) AA
+       @             b) STRAP (Well Contact)
+       cmacro mineci 1C_CON MOS 0.060
+       cmacro mineci 1C_CON TAP 0.050 }
+
+R51  { @Enclosure by Poly
+       cmacro mineci 1C_CON 1G_GATE 0.060 }
+
+R52  { @Enclosure by butted P+S/D on AA 
+       DMY1 = PAA touch NAA
+       1C_CON and DMY1 }
+
+R53  { @Enclosure by butted N+S/D on AA 
+       DMY1 = NAA touch PAA
+       1C_CON and DMY1 }
+
+U51  { @Space to 3.3V Poly gate
+       cmacro min2s 1C_CON 33_GATE 0.130 }
+
+U52  { @Space to 1.5V Poly gate
+       cmacro min2s 1C_CON 15_GATE 0.110 }
+
+S51  { @Space of 1C on Poly to A/A
+       DMY1 = 1C_CON inside 1G_GATE
+       cmacro min2s 1F_ACT DMY1 0.120 }
+
+//====================================================================
+//    Process Layer: 1M (Metal-1)
+//====================================================================
+
+W60  { @Width
+       cmacro minw 1M_MET 0.160 }
+
+S60a { @Space   a) 0.16 <= W60 < 0.40
+       cmacro minw2s 1M_MET 0.160 0.400 0.150 }
+
+S60b { @Space   b) 0.40 <= W60
+       cmacro minw1s 1M_MET 0.400 0.180 }
+
+R60a { @Enclosure of contact(1C)  a) general rule
+       1C_CON NOT 1M_MET  }
+
+R60b { @Enclosure of contact(1C)  b) line end,at least one in two adjacent sides 
+       cmacro minre 1C_CON 1M_MET 0 0.050 }
+
+A61  { @Area
+       cmacro mina 1M_MET 0.120 }
+
+A71  { @Enclosure area
+       cmacro minha 1M_MET 0.200 }
+
+//====================================================================
+//    Process Layer: 1T (1st Via)
+//====================================================================
+
+X2   { @Width
+       cmacro reca 1T_V1 0.170 }
+
+S61  { @Space
+       cmacro mins 1T_V1 0.200 }
+
+R61a { @Enclosure by metal-1 of 1st Via(1T)  a) general rule 
+       cmacro mineco 1T_V1 1M_MET 0.010 }
+
+R61b { @Enclosure by metal-1 of 1st Via(1T)  b) line end,at least one in two adjacent sides 
+       cmacro minre 1T_V1 1M_MET 0.010 0.050 }
+
+//====================================================================
+//    Process Layer: 2M (Metal-2)
+//====================================================================
+
+W62  { @Width
+       cmacro minw 2M_MET 0.200 }
+
+S62a { @Space   a) 0.20 <= W62 < 0.40
+       cmacro minw2s 2M_MET 0.200 0.400 0.180 }
+
+S62b { @Space   b) 0.40 <= W62 < 1.00
+       cmacro minw2s 2M_MET 0.400 1.000 0.240 }
+
+S62c { @Space   c) 1.00 <= W62 < 10.0
+       cmacro minw2s 2M_MET 1.000 10.00 0.300 }
+
+S62d { @Space   d) 10.0 <= W62
+       cmacro minw1s 2M_MET 10.00 0.560 }
+
+R62a { @Enclosure of 1st Via(1T)  a) general rule
+       cmacro mineco 1T_V1 2M_MET 0.010 }
+
+R62b { @Enclosure of 1st Via(1T)  b) line end,at least one in two adjacent sides
+       cmacro minre 1T_V1 2M_MET 0.01 0.050 }
+
+A62  { @Area
+       cmacro mina 2M_MET 0.144 }
+
+A72  { @Enclosure area
+       cmacro minha 2M_MET 0.265 }
+
+//====================================================================
+//    Process Layer: 2T (2nd Via)
+//====================================================================
+
+X3   { @Width
+       cmacro reca 2T_V2 0.170 }
+
+S63  { @Space
+       cmacro mins 2T_V2 0.200 }
+
+R63a { @Enclosure by metal-2 of 2nd Via(2T)  a) general rule
+       cmacro mineco 2T_V2 2M_MET 0.010 }
+
+R63b { @Enclosure by metal-2 of 2nd Via(2T)  b) line end,at least one in two adjacent sides
+       cmacro minre 2T_V2 2M_MET 0.010 0.050 }
+
+//====================================================================
+//    Process Layer: 3M (Metal-3)
+//====================================================================
+
+W64  { @Width
+       cmacro minw 3M_MET 0.200 }
+
+S64a { @Space   a) 0.20 <= W64 < 0.40
+       cmacro minw2s 3M_MET 0.200 0.400 0.180 }
+
+S64b { @Space   b) 0.40 <= W64 < 1.00
+       cmacro minw2s 3M_MET 0.400 1.000 0.240 }
+
+S64c { @Space   c) 1.00 <= W64 < 10.0
+       cmacro minw2s 3M_MET 1.000 10.00 0.300 }
+
+S64d { @Space   d) 10.0 <= W64
+       cmacro minw1s 3M_MET 10.00 0.560 }
+
+R64a { @Enclosure of 2nd Via(2T)  a) general rule
+       cmacro mineco 2T_V2 3M_MET 0.010 }
+
+R64b { @Enclosure of 2nd Via(2T)  b) line end,at least one in two adjacent sides
+       cmacro minre 2T_V2 3M_MET 0.01 0.050 }
+
+A63  { @Area
+       cmacro mina 3M_MET 0.144 }
+
+A73  { @Enclosure area
+       cmacro minha 3M_MET 0.265 }
+
+//====================================================================
+//    Process Layer: 3T (3rd Via)
+//====================================================================
+
+#IFDEF 1P5M
+
+X4   { @Width
+       cmacro reca 3T_V3 0.170 }
+
+S65  { @Space
+       cmacro mins 3T_V3 0.200 }
+
+R65a { @Enclosure by metal-3 of 3rd Via(3T)  a) general rule
+       cmacro mineco 3T_V3 3M_MET 0.010 }
+
+R65b { @Enclosure by metal-3 of 3rd Via(3T)  b) line end,at least one in two adjacent sides
+       cmacro minre 3T_V3 3M_MET 0.010 0.050 }
+
+#ENDIF
+
+//====================================================================
+//    Process Layer: 4M (Metal-4)
+//====================================================================
+
+#IFDEF 1P5M
+
+W66  { @Width
+       cmacro minw 4M_MET 0.200 }
+
+S66a { @Space   a) 0.20 <= W66 < 0.40
+       cmacro minw2s 4M_MET 0.200 0.400 0.180 }
+
+S66b { @Space   b) 0.40 <= W66 < 1.00
+       cmacro minw2s 4M_MET 0.400 1.000 0.240 }
+
+S66c { @Space   c) 1.00 <= W66 < 10.0
+       cmacro minw2s 4M_MET 1.000 10.00 0.300 }
+
+S66d { @Space   d) 10.0 <= W66
+       cmacro minw1s 4M_MET 10.00 0.560 }
+
+R66a { @Enclosure by metal-4 of 3rd Via(3T)  a) general rule
+       cmacro mineco 3T_V3 4M_MET 0.010 }
+
+R66b { @Enclosure by metal-4 of 3rd Via(3T)  b) line end,at least one in two adjacent sides
+       cmacro minre 3T_V3 4M_MET 0.01 0.050 }
+
+A64  { @Area
+       cmacro mina 4M_MET 0.144 }
+
+A74  { @Enclosure area
+       cmacro minha 4M_MET 0.265 }
+
+#ENDIF
+
+//====================================================================
+//    Process Layer: TV (Top Via)
+//====================================================================
+
+X5   { @Width
+       cmacro reca TT_V4 0.220 }
+
+S67  { @Space
+       cmacro mins TT_V4 0.220 }
+
+R67a { @Enclosure by metal-3/metal-4 of Top Via(TV)  a) general rule
+       cmacro mineco TT_V4 STM 0.010 }
+
+R67b { @Enclosure by metal-3/metal-4 of Top Via(TV)  b) line end,at least one in two adjacent sides
+       cmacro minre TT_V4 STM 0.010 0.100 }
+
+//====================================================================
+//    Process Layer: TM (Top Metal)
+//====================================================================
+
+W68  { @Width
+       cmacro minw TM_MET 0.360 }
+
+S68a { @Space   a) general rule 
+       cmacro mins TM_MET 0.390 }
+
+S68b { @Space   b) W68 >= 10um one/both side
+       cmacro minw1s TM_MET 10.00 0.600 }
+
+R68a { @Enclosure by top metal of Top Via(TV)  a) general rule
+       cmacro mineco TT_V4 TM_MET 0.090 }
+
+R68b { @Enclosure by top metal of Top Via(TV)  b) line end,at least one in two adjacent sides
+       cmacro minre TT_V4 TM_MET 0.09 0.100 }
+
+A65  { @Area
+       cmacro mina TM_MET 0.562 }
+
+//====================================================================
+//    Process Layer: 3K (MIM Capacitor)
+//====================================================================
+
+MIM.1.3K  { @Min/Max Width
+            cmacro minw 3K_MIM 4.00
+            3K_MIM with width > 100 }
+
+MIM.2.3K  { @Minimum Space between two MIM
+            cmacro mins 3K_MIM 0.800 }
+
+MIM.3.3K  { @Minimum enclosure from MIM to top via(3T/TT) (inside MIM)
+            cmacro mineci 3K_UV 3K_MIM 0.460 }
+
+MIM.4.3K  { @Minimum enclosure from MIM to top via(3T/TT) (outside MIM)
+            cmacro min2s 3K_UV 3K_MIM 0.500 }
+
+MIM.5.3K  { @Minimum enclosure from bottom plate(3M) to MIM
+            cmacro mineci 3K_MIM 3M_MET 0.500 }
+
+MIM.6.3K  { @MIM must be connected by via(3T/TT) to upper plate(4M/TM)
+            DMYA = 3K_MIM and (3K_UM and 3K_UV)
+            3K_MIM not enclose DMYA }
+
+MIM.7.3K  { @Minimum space between two via(3T/TT) located on one same MIM top plate(nK) 
+            DMYA = 3K_UV and 3K_MIM
+            DMYB = ext DMYA < 2 abut<90 singular region
+            DMYB inside 3K_MIM }
+
+MIM.8.3K  { @Via 2T(2T) under MIM(3K) not allowed
+            3K_MIM and (3M_MET and 2T_V2) }
+
+MIM.9.3K  { @Minimum space between MIM(3K) to Via 2T(2T) outside of MIM
+            DMYA = 3K_MIM and 3M_MET
+            cmacro min2s DMYA 2T_V2 0.5 }
+
+#IFDEF 1P5M
+
+MIM.10.3K  { @2 terminal MIM prohibit metal routing underneath MIM area.(MOS capacitor only)
+             @3 terminal MIM metal routing underneath MIM is allowed
+             Shield_2M = 2M_MET and 3K_MIM_Shield
+            ((3K_MIM AND 3M_MET) and 2M_MET) not Shield_2M }
+
+MIM.11.3K  { @MIM shield must be equal or large than bottom electorde
+             Shield_2M = 2M_MET and 3K_MIM_Shield
+             MIMBE   = 3M_MET and 3K_MIM
+            (MIMBE interact Shield_2M) not 2M_MET }
+
+#ENDIF
+
+//====================================================================
+//    Process Layer: 4K (MIM Capacitor)
+//====================================================================
+
+#IFDEF 1P5M
+
+MIM.1.4K  { @Min/Max Width
+            cmacro minw 4K_MIM 4.00 
+            4K_MIM with width > 100 }
+
+MIM.2.4K  { @Minimum Space between two MIM
+            cmacro mins 4K_MIM 0.800 }
+
+MIM.3.4K  { @Minimum enclosure from MIM to top via(TV) (inside MIM)
+            cmacro mineci TT_V4 4K_MIM 0.460 }
+
+MIM.4.4K  { @Minimum enclosure from MIM to top via(TV) (outside MIM)
+            cmacro min2s TT_V4 4K_MIM 0.500 }
+
+MIM.5.4K  { @Minimum enclosure from bottom plate(4M) to MIM 
+            cmacro mineci 4K_MIM 4M_MET 0.500 }
+
+MIM.6.4K  { @MIM must be connected by via(TV) to upper plate(TM) 
+            DMYA = 4K_MIM and (TM_MET and TT_V4) 
+            4K_MIM not enclose DMYA }
+
+MIM.7.4K  { @Minimum space between two via(TV) located on one same MIM top plate(nK) 
+            DMYA = TT_V4 and 4K_MIM
+            DMYB = ext DMYA < 2 abut<90 singular region
+            DMYB inside 4K_MIM }
+
+MIM.8.4K  { @Via 3T(3T) under MIM(4K) not allowed 
+            4K_MIM and (4M_MET and 3T_V3) } 
+
+MIM.9.4K  { @Minimum space between MIM(4K) to Via 3T(3T) outside of MIM
+            DMYA = 4K_MIM and 4M_MET
+            cmacro min2s DMYA 3T_V3 0.5 }
+
+MIM.10.4K  { @2 terminal MIM prohibit metal routing underneath MIM area.(MOS capacitor only) 
+             @3 terminal MIM metal routing underneath MIM is allowed
+             Shield_2M = 2M_MET and 3K_MIM_Shield
+             Shield_3M = 3M_MET and 4K_MIM_Shield
+             Double_MIM_Shield_3M = Shield_3M not interact 3K_MIM
+            (((4K_MIM AND 4M_MET) and 3M_MET)  not Shield_3M ) not interact 3K_MIM 
+            (((3K_MIM AND 3M_MET) and 2M_MET)  not Shield_2M )     interact 4K_MIM }
+
+MIM.11.4K  { @MIM shield must be equal or large than bottom electorde 
+             Shield_3M = 3M_MET and 4K_MIM_Shield
+             MIMBE   = 4M_MET and 4K_MIM
+            (MIMBE interact Shield_3M) not 3M_MET }
+
+#ENDIF
+
+//====================================================================
+//    Process Layer: PV (Passivation)
+//====================================================================
+
+//W90  { @PV width
+//       cmacro minw PV TBD }
+
+S81  { @PV Space
+       cmacro mins PV 10.000 }
+
+R89  { @Top Metal enclosure of PV
+       cmacro mineci PV TM_MET 2.500 }
+
+//W88  { @Top Metal width
+//       DMY1 = size PV by TBD inside of TM_MET step 0.10
+//       DMY2 = DMY1 and TM_MET
+//       cmacro minw DMY2 TBD }
+
+/*----- Intermetal [1M/2M/3M/4M] -----*/
+
+//W88  { @Metal-4 Width
+//       DMY1 = size PV by TBD inside of 4M_MET step 0.10
+//       DMY2 = DMY1 and 4M_MET
+//       cmacro minw DMY2 TBD }
+//
+//W87  { @Metal-3 Width
+//       DMY1 = size PV by TBD inside of 3M_MET step 0.10
+//       DMY2 = DMY1 and 3M_MET
+//       cmacro minw DMY2 TBD }
+//
+//W86  { @Metal-2 Width
+//       DMY1 = size PV by TBD inside of 2M_MET step 0.10
+//       DMY2 = DMY1 and 2M_MET
+//       cmacro minw DMY2 TBD }
+//
+//W85  { @Metal-1 Width
+//       DMY1 = size PV by TBD inside of 1M_MET step 0.10
+//       DMY2 = DMY1 and 1M_MET
+//       cmacro minw DMY2 TBD }
+
+/*----- Contact & Via [1C/1T/2T/3T/TV] -----*/
+
+#IFDEF 1P5M
+
+R81  { @Metal Pad enclosure of contact/Via
+       DMY1 = size PV by 5.000 inside of 1M_MET step 0.100
+       DMY2 = size PV by 5.000 inside of 2M_MET step 0.100
+       DMY3 = size PV by 5.000 inside of 3M_MET step 0.100
+       DMY4 = size PV by 5.000 inside of 4M_MET step 0.100
+       DMY5 = size PV by 5.000 inside of TM_MET step 0.100
+       DMYa = DMY1 and 1M_MET
+       DMYb = DMY2 and 2M_MET
+       DMYc = DMY3 and 3M_MET
+       DMYd = DMY4 and 4M_MET
+       DMYe = DMY5 and TM_MET
+       cmacro mineci 1C_CON DMYa 2.000
+
+       cmacro mineci 1T_V1  DMYa 2.000
+       cmacro mineci 1T_V1  DMYb 2.000
+
+       cmacro mineci 2T_V2  DMYb 2.000
+       cmacro mineci 2T_V2  DMYc 2.000  
+
+       cmacro mineci 3T_V3  DMYc 2.000  
+       cmacro mineci 3T_V3  DMYd 2.000  
+
+       cmacro mineci TT_V4  DMYd 2.000  
+       cmacro mineci TT_V4  DMYe 2.000 }
+
+#ELSE
+
+R81  { @Metal Pad enclosure of contact/Via
+       DMY1 = size PV by 5.000 inside of 1M_MET step 0.100
+       DMY2 = size PV by 5.000 inside of 2M_MET step 0.100
+       DMY3 = size PV by 5.000 inside of 3M_MET step 0.100
+       DMY5 = size PV by 5.000 inside of TM_MET step 0.100
+       DMYa = DMY1 and 1M_MET
+       DMYb = DMY2 and 2M_MET
+       DMYc = DMY3 and 3M_MET
+       DMYe = DMY5 and TM_MET
+       cmacro mineci 1C_CON DMYa 2.000
+
+       cmacro mineci 1T_V1  DMYa 2.000
+       cmacro mineci 1T_V1  DMYb 2.000
+
+       cmacro mineci 2T_V2  DMYb 2.000
+       cmacro mineci 2T_V2  DMYc 2.000  
+
+       cmacro mineci TT_V4  DMYc 2.000  
+       cmacro mineci TT_V4  DMYe 2.000 }
+
+#ENDIF
+
+//====================================================================
+//    Antanna Ratio Rule 
+//====================================================================
+
+variable  MIN_DIODE_AREA  0.085
+variable  1G_THICKNESS    0.20
+
+#IFDEF 1P5M
+
+variable  1M_THICKNESS    0.23
+variable  2M_THICKNESS    0.28
+variable  3M_THICKNESS    0.28
+variable  4M_THICKNESS    0.28
+variable  TM_THICKNESS    0.865
+
+#ELSE
+
+variable  1M_THICKNESS    0.23
+variable  2M_THICKNESS    0.28
+variable  3M_THICKNESS    0.28
+variable  TM_THICKNESS    0.865
+
+#ENDIF
+
+DISCONNECT
+SD   = 1F_ACT NOT 1G_GATE
+POLY = 1G_GATE INTERACT GATE
+DIODE = AREA SD > MIN_DIODE_AREA
+
+//POLY
+CONNECT GATE POLY
+ANP.1 { @ POLY/GATE > 100
+       NET AREA RATIO POLY GATE > 100
+       [(PERIMETER(POLY)*1G_THICKNESS) / AREA(GATE)]
+       RDB ANTENNA.db POLY GATE }
+
+1C_CON_poly = 1C_CON and POLY
+CONNECT POLY 1C_CON_poly
+ANP.2 { @ 1C/GATE > 10
+       NET AREA RATIO 1C_CON_poly GATE > 10
+       [AREA(1C_CON_poly) / AREA(GATE)]
+       RDB ANTENNA.db 1C_CON_poly GATE }
+
+//1M
+POLY_1 = copy POLY
+GATE_1 = copy GATE
+1C_CON_poly_1 = copy 1C_CON_poly
+1M_MET_1 = copy 1M_MET
+1C_CON_1 = copy 1C_CON 
+1T_V1_1  = copy 1T_V1
+
+CONNECT GATE_1 POLY_1
+CONNECT POLY_1 1C_CON_poly_1
+CONNECT 1M_MET_1 POLY_1  BY 1C_CON_1
+CONNECT 1M_MET_1 DIODE   BY 1C_CON_1
+AN1.1a { @ 1M/GATE > 400 (w/o protection diode)
+        NET AREA RATIO 1M_MET_1 GATE_1 DIODE > 400
+        [(PERIMETER(1M_MET_1)*1M_THICKNESS)  *!  AREA(DIODE) / AREA(GATE_1)]
+        RDB ANTENNA.db 1M_MET_1 GATE_1 }
+
+AN1.1b { @ 1M/GATE > 2500 (w/i protection diode)
+        NET AREA RATIO 1M_MET_1 GATE_1 DIODE > 2500
+        [((PERIMETER(1M_MET_1)*1M_THICKNESS) *!! AREA(DIODE) / AREA(GATE_1)) - (AREA(DIODE)*450)]
+        RDB ANTENNA.db 1M_MET_1 GATE_1 DIODE }
+
+CONNECT 1M_MET_1 1T_V1_1
+AN1.2a { @ 1T/GATE > 20 (w/o protection diode)
+        NET AREA RATIO 1T_V1_1 1M_MET_1 GATE_1 DIODE > 20
+        [AREA(1T_V1_1) *! AREA(DIODE) / AREA(GATE_1)]
+        RDB ANTENNA.db 1T_V1_1 1M_MET_1 GATE_1 }
+
+AN1.2b { @ 1T/GATE > 80 (w/i protection diode)
+        NET AREA RATIO 1T_V1_1 GATE_1 DIODE > 80
+        [((AREA(1T_V1_1) *!! AREA(DIODE)) / AREA(GATE_1)) - (AREA(DIODE)*100)]
+        RDB ANTENNA.db 1T_V1_1 GATE_1 DIODE }
+
+//2M
+POLY_2 = copy POLY_1
+GATE_2 = copy GATE_1
+1C_CON_poly_2 = copy 1C_CON_poly_1
+1M_MET_2 = copy 1M_MET_1
+1C_CON_2 = copy 1C_CON_1
+1T_V1_2  = copy 1T_V1_1
+2M_MET_2 = copy 2M_MET
+2T_V2_2  = copy 2T_V2
+
+CONNECT GATE_2 POLY_2
+CONNECT POLY_2 1C_CON_poly_2
+CONNECT 1M_MET_2 POLY_2  BY 1C_CON_2
+CONNECT 1M_MET_2 DIODE   BY 1C_CON_2
+CONNECT 1M_MET_2 1T_V1_2
+CONNECT 2M_MET_2 1M_MET_2 BY 1T_V1_2
+AN2.1a { @ 2M/GATE > 400 (w/o protection diode)
+        NET AREA RATIO 2M_MET_2 GATE_2 DIODE > 400
+        [(PERIMETER(2M_MET_2)*2M_THICKNESS)  *!  AREA(DIODE) / AREA(GATE_2)]
+        RDB ANTENNA.db 2M_MET_2 GATE_2 }
+
+AN2.1b { @ 2M/GATE > 2500 (w/i protection diode)
+        NET AREA RATIO 2M_MET_2 GATE_2 DIODE > 2500
+        [((PERIMETER(2M_MET_2)*2M_THICKNESS) *!! AREA(DIODE) / AREA(GATE_2)) - (AREA(DIODE)*450)]
+        RDB ANTENNA.db 2M_MET_2 GATE_2 DIODE }
+
+CONNECT 2M_MET_2 2T_V2_2
+AN2.2a { @ 2T/GATE > 20 (w/o protection diode)
+        NET AREA RATIO 2T_V2_2 2M_MET_2 1M_MET_2 GATE_2 DIODE > 20
+        [AREA(2T_V2_2) *! AREA(DIODE) / AREA(GATE_2)]
+        RDB ANTENNA.db 2T_V2_2 2M_MET_2 1M_MET_2 GATE_2 }
+
+AN2.2b { @ 2T/GATE > 80 (w/i protection diode)
+        NET AREA RATIO 2T_V2_2 GATE_2 DIODE > 80
+        [((AREA(2T_V2_2) *!! AREA(DIODE)) / AREA(GATE_2)) - (AREA(DIODE)*100)]
+        RDB ANTENNA.db 2T_V2_2 GATE_2 DIODE }
+
+//3M
+POLY_3 = copy POLY_2
+GATE_3 = copy GATE_2
+1C_CON_poly_3 = copy 1C_CON_poly_2
+1M_MET_3 = copy 1M_MET_2
+1C_CON_3 = copy 1C_CON_2
+1T_V1_3  = copy 1T_V1_2
+2M_MET_3 = copy 2M_MET_2
+2T_V2_3  = copy 2T_V2_2
+3M_MET_3 = copy 3M_MET
+3T_V3_3  = copy 3T_V3
+
+CONNECT GATE_3 POLY_3
+CONNECT POLY_3 1C_CON_poly_3
+CONNECT 1M_MET_3 POLY_3  BY 1C_CON_3
+CONNECT 1M_MET_3 DIODE   BY 1C_CON_3
+CONNECT 1M_MET_3 1T_V1_3
+CONNECT 2M_MET_3 1M_MET_3 BY 1T_V1_3
+CONNECT 2M_MET_3 2T_V2_3
+CONNECT 3M_MET_3 2M_MET_3 BY 2T_V2_3
+AN3.1a { @ 3M/GATE > 400 (w/o protection diode)
+        NET AREA RATIO 3M_MET_3 GATE_3 DIODE > 400
+        [(PERIMETER(3M_MET_3)*3M_THICKNESS)  *!  AREA(DIODE) / AREA(GATE_3)]
+        RDB ANTENNA.db 3M_MET_3 GATE_3 }
+
+AN3.1b { @ 3M/GATE > 2500 (w/i protection diode)
+        NET AREA RATIO 3M_MET_3 GATE_3 DIODE > 2500
+        [((PERIMETER(3M_MET_3)*3M_THICKNESS) *!! AREA(DIODE) / AREA(GATE_3)) - (AREA(DIODE)*450)]
+        RDB ANTENNA.db 3M_MET_3 GATE_3 DIODE }
+
+CONNECT 3M_MET_3 3T_V3_3
+AN3.2a { @ 3T/GATE > 20 (w/o protection diode)
+        NET AREA RATIO 3T_V3_3 3M_MET_3 2M_MET_3 GATE_3 DIODE > 20
+        [AREA(3T_V3_3) *! AREA(DIODE) / AREA(GATE_3)]
+        RDB ANTENNA.db 3T_V3_3 3M_MET_3 2M_MET_3 GATE_3 }
+
+AN3.2b { @ 3T/GATE > 80 (w/i protection diode)
+        NET AREA RATIO 3T_V3_3 GATE_3 DIODE > 80
+        [((AREA(3T_V3_3) *!! AREA(DIODE)) / AREA(GATE_3)) - (AREA(DIODE)*100)]
+        RDB ANTENNA.db 3T_V3_3 GATE_3 DIODE }
+
+#IFDEF 1P5M
+
+//4M
+POLY_4 = copy POLY_3
+GATE_4 = copy GATE_3
+1C_CON_poly_4 = copy 1C_CON_poly_3
+1M_MET_4 = copy 1M_MET_3
+1C_CON_4 = copy 1C_CON_3
+1T_V1_4  = copy 1T_V1_3
+2M_MET_4 = copy 2M_MET_3
+2T_V2_4  = copy 2T_V2_3
+3M_MET_4 = copy 3M_MET_3
+3T_V3_4  = copy 3T_V3_3
+4M_MET_4 = copy 4M_MET
+TT_V4_4  = copy TT_V4
+
+CONNECT GATE_4 POLY_4
+CONNECT POLY_4 1C_CON_poly_4
+CONNECT 1M_MET_4 POLY_4  BY 1C_CON_4
+CONNECT 1M_MET_4 DIODE   BY 1C_CON_4
+CONNECT 1M_MET_4 1T_V1_4
+CONNECT 2M_MET_4 1M_MET_4 BY 1T_V1_4
+CONNECT 2M_MET_4 2T_V2_4
+CONNECT 3M_MET_4 2M_MET_4 BY 2T_V2_4
+CONNECT 3M_MET_4 3T_V3_4
+CONNECT 4M_MET_4 3M_MET_4 BY 3T_V3_4
+AN4.1a { @ 4M/GATE > 400 (w/o protection diode)
+        NET AREA RATIO 4M_MET_4 GATE_4 DIODE > 400
+        [(PERIMETER(4M_MET_4)*4M_THICKNESS)  *!  AREA(DIODE) / AREA(GATE_4)]
+        RDB ANTENNA.db 4M_MET_4 GATE_4 }
+
+AN4.1b { @ 4M/GATE > 2500 (w/i protection diode)
+        NET AREA RATIO 4M_MET_4 GATE_4 DIODE > 2500
+        [((PERIMETER(4M_MET_4)*4M_THICKNESS) *!! AREA(DIODE) / AREA(GATE_4)) - (AREA(DIODE)*450)]
+        RDB ANTENNA.db 4M_MET_4 GATE_4 DIODE }
+
+CONNECT 4M_MET_4 TT_V4_4
+AN4.2a { @ TT/GATE > 20 (w/o protection diode)
+        NET AREA RATIO TT_V4_4 4M_MET_4 3M_MET_4 GATE_4 DIODE > 20
+        [AREA(TT_V4_4) *! AREA(DIODE) / AREA(GATE_4)]
+        RDB ANTENNA.db TT_V4_4 4M_MET_4 3M_MET_4 GATE_4 }
+
+AN4.2b { @ TT/GATE > 80 (w/i protection diode)
+        NET AREA RATIO TT_V4_4 GATE_4 DIODE > 80
+        [((AREA(TT_V4_4) *!! AREA(DIODE)) / AREA(GATE_4)) - (AREA(DIODE)*100)]
+        RDB ANTENNA.db TT_V4_4 GATE_4 DIODE }
+
+//TM
+POLY_5 = copy POLY_4
+GATE_5 = copy GATE_4
+1C_CON_poly_5 = copy 1C_CON_poly_4
+1M_MET_5 = copy 1M_MET_4
+1C_CON_5 = copy 1C_CON_4
+1T_V1_5  = copy 1T_V1_4
+2M_MET_5 = copy 2M_MET_4
+2T_V2_5  = copy 2T_V2_4
+3M_MET_5 = copy 3M_MET_4
+3T_V3_5  = copy 3T_V3_4
+4M_MET_5 = copy 4M_MET_4
+TT_V4_5  = copy TT_V4_4
+TM_MET_5 = copy TM_MET
+
+CONNECT GATE_5 POLY_5
+CONNECT POLY_5 1C_CON_poly_5
+CONNECT 1M_MET_5 POLY_5  BY 1C_CON_5
+CONNECT 1M_MET_5 DIODE   BY 1C_CON_5
+CONNECT 1M_MET_5 1T_V1_5
+CONNECT 2M_MET_5 1M_MET_5 BY 1T_V1_5
+CONNECT 2M_MET_5 2T_V2_5
+CONNECT 3M_MET_5 2M_MET_5 BY 2T_V2_5
+CONNECT 3M_MET_5 3T_V3_5
+CONNECT 4M_MET_5 3M_MET_5 BY 3T_V3_5
+CONNECT 4M_MET_5 TT_V4_5
+CONNECT TM_MET_5 4M_MET_5 BY TT_V4_5
+ANT.1a { @ top_metal/GATE > 400 (w/o protection diode)
+        NET AREA RATIO TM_MET_5 GATE_5 DIODE > 400
+        [(PERIMETER(TM_MET_5)*TM_THICKNESS)  *!  AREA(DIODE) / AREA(GATE_5)]
+        RDB ANTENNA.db TM_MET_5 GATE_5 }
+
+ANT.1b { @ top_metal/GATE > 35000 (w/i protection diode)
+        NET AREA RATIO TM_MET_5 GATE_5 DIODE > 35000
+        [((PERIMETER(TM_MET_5)*TM_THICKNESS) *!! AREA(DIODE) / AREA(GATE_5)) - (AREA(DIODE)*9000)]
+        RDB ANTENNA.db TM_MET_5 GATE_5 DIODE }
+
+#ELSE
+
+//TM
+POLY_4 = copy POLY_3
+GATE_4 = copy GATE_3
+1C_CON_poly_4 = copy 1C_CON_poly_3
+1M_MET_4 = copy 1M_MET_3
+1C_CON_4 = copy 1C_CON_3
+1T_V1_4  = copy 1T_V1_3
+2M_MET_4 = copy 2M_MET_3
+2T_V2_4  = copy 2T_V2_3
+3M_MET_4 = copy 3M_MET_3
+TT_V4_4  = copy TT_V4
+TM_MET_4 = copy TM_MET
+
+CONNECT GATE_4 POLY_4
+CONNECT POLY_4 1C_CON_poly_4
+CONNECT 1M_MET_4 POLY_4  BY 1C_CON_4
+CONNECT 1M_MET_4 DIODE   BY 1C_CON_4
+CONNECT 1M_MET_4 1T_V1_4
+CONNECT 2M_MET_4 1M_MET_4 BY 1T_V1_4
+CONNECT 2M_MET_4 2T_V2_4
+CONNECT 3M_MET_4 2M_MET_4 BY 2T_V2_4
+CONNECT 3M_MET_4 TT_V4_4
+CONNECT TM_MET_4 3M_MET_4 BY TT_V4_4
+ANT.1a { @ top_metal/GATE > 400 (w/o protection diode)
+        NET AREA RATIO TM_MET_4 GATE_4 DIODE > 400
+        [(PERIMETER(TM_MET_4)*TM_THICKNESS)  *!  AREA(DIODE) / AREA(GATE_4)]
+        RDB ANTENNA.db TM_MET_4 GATE_4 }
+
+ANT.1b { @ top_metal/GATE > 35000 (w/i protection diode)
+        NET AREA RATIO TM_MET_4 GATE_4 DIODE > 35000
+        [((PERIMETER(TM_MET_4)*TM_THICKNESS) *!! AREA(DIODE) / AREA(GATE_4)) - (AREA(DIODE)*9000)]
+        RDB ANTENNA.db TM_MET_4 GATE_4 DIODE }
+
+#ENDIF
+
+//====================================================================
+//    Seal-Ring (Guideline) 
+//====================================================================
+
+1C_seal = 1C_CON interact seal_ring
+1M_seal = 1M_MET interact seal_ring
+1T_seal = 1T_V1  interact seal_ring
+2M_seal = 2M_MET interact seal_ring
+2T_seal = 2T_V2  interact seal_ring
+3M_seal = 3M_MET interact seal_ring
+
+#IFDEF 1P5M
+
+3T_seal = 3T_V3  interact seal_ring
+4M_seal = 4M_MET interact seal_ring
+
+#ENDIF
+
+TT_seal = TT_V4  interact seal_ring
+TM_seal = TM_MET interact seal_ring
+
+
+W201   { @ 1C Ring Width
+         INT (1C_seal) == 0.14 ABUT < 90 SINGULAR SQUARE }
+
+W202   { @ 1T Ring Width
+         INT (1T_seal) == 0.17 ABUT < 90 SINGULAR SQUARE }
+
+W203   { @ 2T Ring Width
+         INT (2T_seal) == 0.17 ABUT < 90 SINGULAR SQUARE }
+
+#IFDEF 1P5M
+
+W204   { @ 3T Ring Width
+         INT (3T_seal) == 0.17 ABUT < 90 SINGULAR SQUARE }
+
+#ENDIF
+
+W205   { @ TT Ring Width
+         INT (TT_seal) == 0.22 ABUT < 90 SINGULAR SQUARE }
+
+#IFDEF 1P5M
+
+W206   { @ 1M/2M/3M/4M/TM Ring Width
+         INT (1M_seal) == 6.00 ABUT < 90 SINGULAR SQUARE 
+         INT (2M_seal) == 6.00 ABUT < 90 SINGULAR SQUARE 
+         INT (3M_seal) == 6.00 ABUT < 90 SINGULAR SQUARE 
+         INT (4M_seal) == 6.00 ABUT < 90 SINGULAR SQUARE 
+         INT (TM_seal) == 6.00 ABUT < 90 SINGULAR SQUARE }
+
+#ELSE 
+
+W206   { @ 1M/2M/3M/TM Ring Width
+         INT (1M_seal) == 6.00 ABUT < 90 SINGULAR SQUARE 
+         INT (2M_seal) == 6.00 ABUT < 90 SINGULAR SQUARE 
+         INT (3M_seal) == 6.00 ABUT < 90 SINGULAR SQUARE 
+         INT (TM_seal) == 6.00 ABUT < 90 SINGULAR SQUARE }
+
+#ENDIF
+
+S201   { @ 1C Ring to 1C Ring Space 
+         EXT 1C_seal == 1.80 ABUT < 90 SINGULAR }
+
+S202   { @ 1T Ring to 1T Ring Space 
+         EXT 1T_seal == 1.80 ABUT < 90 SINGULAR }
+
+S203   { @ 2T Ring to 2T Ring Space 
+         EXT 2T_seal == 1.80 ABUT < 90 SINGULAR }
+
+#IFDEF 1P5M
+
+S204   { @ 3T Ring to 3T Ring Space 
+         EXT 3T_seal == 1.80 ABUT < 90 SINGULAR }
+
+#ENDIF
+
+S205   { @ TT Ring to TT Ring Space 
+         EXT TT_seal == 1.80 ABUT < 90 SINGULAR }
+
+S206   { @ TM Ring to TM Bond Pad Space 
+         TM_PAD = TM_MET and PV
+         EXT TM_seal TM_PAD < 3.00 ABUT < 90 SINGULAR }
+
+R201   { @ 1M enclose of 1C 
+         ENC 1C_seal 1M_seal < 0.32 ABUT < 90 SINGULAR OVERLAP OUTSIDE ALSO }
+
+R202   { @ 2M enclose of 1T 
+         ENC 1T_seal 2M_seal < 0.32 ABUT < 90 SINGULAR OVERLAP OUTSIDE ALSO }
+
+R203   { @ 3M enclose of 2T 
+         ENC 2T_seal 3M_seal < 0.32 ABUT < 90 SINGULAR OVERLAP OUTSIDE ALSO }
+
+#IFDEF 1P5M
+
+R204   { @ 4M enclose of 3T 
+         ENC 3T_seal 4M_seal < 0.32 ABUT < 90 SINGULAR OVERLAP OUTSIDE ALSO }
+
+#ENDIF
+
+R205   { @ TM enclose of TV 
+         ENC TT_seal TM_seal < 0.32 ABUT < 90 SINGULAR OVERLAP OUTSIDE ALSO }
+
+#IFDEF 1P5M
+
+W208   { @ PV ring width (space to scribe line = 0) 
+         ALL = EXTENT
+         ALL_UN1 = size ALL by -1
+         DMYA = (((((((((1F_ACT or 1C_CON) or 1M_MET ) or 1T_V1) or 2M_MET) or 2T_V2) or 3M_MET) or 3T_V3) or 4M_MET)
+                or TT_V4) or TM_MET
+         (ALL not ALL_UN1) and DMYA }
+
+//U202   { @ Seal-ring region to Frame mark/Testkey space } 
+//U203   { @ scribe line space } 
+
+U204   { @ Metal ring to scribe line region space 
+         ALL = EXTENT
+         ENC 1M_MET ALL < 2.00 ABUT < 90 SINGULAR OVERLAP OUTSIDE ALSO 
+         ENC 2M_MET ALL < 2.00 ABUT < 90 SINGULAR OVERLAP OUTSIDE ALSO 
+         ENC 3M_MET ALL < 2.00 ABUT < 90 SINGULAR OVERLAP OUTSIDE ALSO 
+         ENC 4M_MET ALL < 2.00 ABUT < 90 SINGULAR OVERLAP OUTSIDE ALSO 
+         ENC TM_MET ALL < 2.00 ABUT < 90 SINGULAR OVERLAP OUTSIDE ALSO } 
+
+#ELSE
+
+W208   { @ PV ring width (space to scribe line = 0) 
+         ALL = EXTENT
+         ALL_UN1 = size ALL by -1
+         DMYA = (((((((1F_ACT or 1C_CON) or 1M_MET ) or 1T_V1) or 2M_MET) or 2T_V2) or 3M_MET) or TT_V4) or TM_MET
+         (ALL not ALL_UN1) and DMYA }
+
+//U202   { @ Seal-ring region to Frame mark/Testkey space } 
+//U203   { @ scribe line space } 
+
+U204   { @ Metal ring to scribe line region space 
+         ALL = EXTENT
+         ENC 1M_MET ALL < 2.00 ABUT < 90 SINGULAR OVERLAP OUTSIDE ALSO 
+         ENC 2M_MET ALL < 2.00 ABUT < 90 SINGULAR OVERLAP OUTSIDE ALSO 
+         ENC 3M_MET ALL < 2.00 ABUT < 90 SINGULAR OVERLAP OUTSIDE ALSO 
+         ENC TM_MET ALL < 2.00 ABUT < 90 SINGULAR OVERLAP OUTSIDE ALSO } 
+
+#ENDIF
+
+//====================================================================
+//    MACRO DEFINITION                        
+//====================================================================
+
+dmacro minw lay val {
+       int lay < val abut < 90 singular region }
+
+dmacro mins lay val {
+       //ext lay < val abut < 90 singular space region }
+       ext lay < val abut < 90 singular region }
+
+dmacro min2s lay1 lay2 val {
+       ext lay1 lay2 < val abut < 90 singular region }
+
+dmacro minw1s lay valw val {
+       DMY1 = lay with width > valw
+       DMY2 = DMY1 coincident edge lay
+       ext lay DMY2 < val abut < 90 region }
+
+dmacro minw2s lay valwmin valwmax val {
+       DMY1 = lay with width >= valwmin < valwmax
+       DMY2 = DMY1 coincident edge lay
+       ext lay DMY2 < val abut < 90 region }
+
+dmacro minex lay1 lay2 val {
+       enc lay1 lay2 < val abut < 90 singular opposite region }
+
+dmacro mineci lay1 lay2 val {
+       enc lay1 lay2 < val abut < 90 singular inside also region }
+
+dmacro mineco lay1 lay2 val {
+       enc lay1 lay2 < val abut < 90 singular outside also region }
+
+dmacro reca lay val {
+       not rectangle lay == val by == val }
+
+dmacro minre vlay mlay vals vale {
+       X = size vlay by -0.001
+       Y = rectangle enclosure X mlay abut < 90 singular outside also
+       good vals+0.001 opposite vale+0.001 opposite vals+0.001 opposite vale+0.001 opposite
+       size Y by 0.001 }
+
+dmacro mina lay val {
+       area lay < val }
+
+dmacro minha lay val {
+       DMY1 = holes lay inner empty
+       area DMY1 < val }

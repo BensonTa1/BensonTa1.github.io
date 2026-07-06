@@ -1,0 +1,13 @@
+Starting Single Run, Sweeps and Corners...
+
+Current time: Fri Mar 20 21:26:04 2026 
+Best design point: 1
+Design specs: 
+	TEST_UMC18_CDR:Ring_OSC:1	corner	Nominal - 
+	harm=1 freq; pss (Hz)		1.849G
+Design parameters: 
+	VC		0
+
+Received stop signal from user. 
+Interactive.0 completed. 
+Current time: Fri Mar 20 21:55:53 2026 

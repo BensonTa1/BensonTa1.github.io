@@ -1,0 +1,43 @@
+*     ###############################################
+*     #                                             #
+*     #    018RFCMOS PN VARACTOR HSPICE MODEL       #
+*     #                                             #
+*     ###############################################
+*
+.subckt vardiop_rf 1 2 nf=60 
+.param p_nf_30='nf/30'
+.param p_l1='(15.2*p_nf_30)*1e-12'
+.param p_l2='1.31e-11'
+.param p_c2='(86.62*p_nf_30)*1e-15'
+.param p_csub='(12.19*2*p_nf_30)*1e-15'
+.param p_rsub='143.3/p_nf_30'
+.param p_diode_area='nf*(2*5)*1e-12'
+.param p_diode_pj='nf*(2*(2+5))*1e-6'
+.param p_sub_area='((39.94*int(nf/15)+(nf-(int(nf/15)*15)*1.5)*1.5+1.94)*8.88)*1e-12'
+.param p_sub_pj='2*((39.94*int(nf/15)+(nf-(int(nf/15)*15)*1.5)*1.5+1.94)+8.88)*1e-6'
+l1 1 11 p_l1
+l2 2 22 p_l2
+c2 22 223 p_c2
+csub 223 0 p_csub
+rsub 223 0 p_rsub
+d1 11 22 diode
+.model diode d
++ level = 3                   area = 'p_diode_area'   pj = 'p_diode_pj'        
++ is = 1.12e-7                 xti = 3                  tlevc = 1
++ jsw = 5e-15                 bv = 11.75               ibv = 125
++ rs = 9.355e-10              cjo = '1.136e-3*(1+dcj_vardiop_rf)'           pb = 0.6599     
++ mj = 0.3307                 cjsw = '1.56e-10*(1+dcjsw_vardiop_rf)'          php = 0.665 
++ mjsw = 0.324                fc = 0.5                 eg = 1.165    
++ cta = 7.3e-4                tpb = 1.2e-4             tm1 = 0.001
++ n = 1                       ik = 3.383e+7
+d2 0 22 d_sub
+.model d_sub d
++ level = 3 		area = 'p_sub_area' 	pj = 'p_sub_pj' 
++ is = 4.204e-06 	jsw = 3.231e-12 	n = 1.02  
++ rs = 9.223e-06 	ik = 400 		ikr = 3.4e+04  
++ bv = 14.38 		ibv = 1e-3 		tlevc = 1  
++ tlev = 1 		eg = 1.17 		xti = 3  
++ trs = 0.00249 	cj = '0.000107*(1+dcj_vardiop_rf)' 		mj = 0.458  
++ pb = 0.75 		cjsw = '2.4e-11*(1+dcjsw_vardiop_rf)' 		mjsw = 0.384  
++ php = 0.75                
+.ends

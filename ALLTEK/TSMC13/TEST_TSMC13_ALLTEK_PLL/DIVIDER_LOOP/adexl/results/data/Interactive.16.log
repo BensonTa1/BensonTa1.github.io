@@ -1,0 +1,15 @@
+Starting Single Run, Sweeps and Corners...
+
+Current time: Tue Apr  7 20:58:57 2026 
+Best design point: 1
+Design specs: 
+	TEST_TSMC13_ALLTEK_PLL:DIVIDER_LOOP:1	corner	Nominal - 
+	(cross(vtime('tran "/FOUT") 0.6 4 "rising" nil nil nil) - cross(vtime('tran "/FOUT") 0.6 3 "rising" nil nil nil))		23.5n
+Design parameters: 
+	P0		0
+	P1		0
+	FS		4G
+
+Received stop signal from user. 
+Interactive.16 completed. 
+Current time: Tue Apr  7 21:00:11 2026 

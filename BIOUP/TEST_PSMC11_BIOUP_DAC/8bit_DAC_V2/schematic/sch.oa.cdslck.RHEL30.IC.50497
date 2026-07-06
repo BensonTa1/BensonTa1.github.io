@@ -1,0 +1,16 @@
+#
+# Edit Lock-Stake file. CAUTION: Please do not change.
+#
+# Information about current Edit Lock Owner.
+#
+LockStakeVersion               1.1
+LoginName                      IC
+HostName                       IC
+ProcessIdentifier              50497
+ProcessCreationTime_UTC        1781553282
+ProcessCreationTime_Readable   Tue Jun 16 03:54:42 2026 CST
+AppIdentifier                  OA File System Design Manager
+OSType                         unix
+ReasonForPlacingEditLock       OpenAccess edit lock
+FilePathUsedToEditLock         /home/IC/Desktop/virtuoso/TEST_PSMC11_BIOUP_DAC/8bit_DAC_V2/schematic/sch.oa.cdslck.dirlck
+TimeEditLocked                 Wed Jun 17 03:58:22 2026 CST

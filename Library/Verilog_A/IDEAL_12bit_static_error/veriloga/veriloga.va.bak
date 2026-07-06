@@ -1,0 +1,9 @@
+// VerilogA for Verilog_A, IDEAL_12bit_static_error, veriloga
+
+`include "constants.vams"
+`include "disciplines.vams"
+
+module IDEAL_12bit_static_error;
+
+
+endmodule

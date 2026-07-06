@@ -1,0 +1,36 @@
+Need modify streamOut.map layer define for stream out gds.
+
+Please reference MPD document for correct layer number.
+
+Modify streamOut.map example is as below:
+
+2M_L112   NET         112   0
+2M_L112   SPNET       112   0
+2M_L112   PIN         112   0
+2M_L112   LEFPIN      112   0
+2M_L112   FILL        112   0
+2M_L112   FILLOPC     112   0
+2M_L112   VIA         112   0
+2M_L112   VIAFILL     112   0
+2M_L112   VIAFILLOPC  112   0
+2M_L112   LEFOBS      112   0
+TXT2M_L7  2M/NET      7     0
+TXT2M_L7  2M/SPNET    7     0
+TXT2M_L7  2M/PIN      7     0
+TXT2M_L7  2M/LEFPIN   7     0
+2T_L122   LEFPIN      122   0
+2T_L122   FILL        122   0
+2T_L122   FILLOPC     122   0
+2T_L122   VIA         122   0
+2T_L122   VIAFILL     122   0
+2T_L122   VIAFILLOPC  122   0
+3M_L113   NET         113   0
+3M_L113   SPNET       113   0
+3M_L113   PIN         113   0
+3M_L113   LEFPIN      113   0
+3M_L113   FILL        113   0
+3M_L113   FILLOPC     113   0
+3M_L113   VIA         113   0
+3M_L113   VIAFILL     113   0
+3M_L113   VIAFILLOPC  113   0
+3M_L113   LEFOBS      113   0

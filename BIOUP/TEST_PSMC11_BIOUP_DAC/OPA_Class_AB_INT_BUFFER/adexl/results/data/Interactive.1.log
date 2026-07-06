@@ -1,0 +1,44 @@
+Starting Single Run, Sweeps and Corners...
+
+Current time: Thu Apr 23 01:08:21 2026 
+Best design point: 1
+Design specs: 
+	TEST_PSMC11_BIOUP_DAC:OPA_Class_AB_INT_BUFFER:1	corner	C0_0 - 
+	Phase Margin		106.5
+	TEST_PSMC11_BIOUP_DAC:OPA_Class_AB_INT_BUFFER:1	corner	C0_1 - 
+	Phase Margin		107.4
+	TEST_PSMC11_BIOUP_DAC:OPA_Class_AB_INT_BUFFER:1	corner	C0_2 - 
+	Phase Margin		103.3
+	TEST_PSMC11_BIOUP_DAC:OPA_Class_AB_INT_BUFFER:1	corner	C0_3 - 
+	Phase Margin		105.5
+	TEST_PSMC11_BIOUP_DAC:OPA_Class_AB_INT_BUFFER:1	corner	C0_4 - 
+	Phase Margin		105.9
+	TEST_PSMC11_BIOUP_DAC:OPA_Class_AB_INT_BUFFER:1	corner	C0_5 - 
+	Phase Margin		106.2
+	TEST_PSMC11_BIOUP_DAC:OPA_Class_AB_INT_BUFFER:1	corner	C0_6 - 
+	Phase Margin		107.2
+	TEST_PSMC11_BIOUP_DAC:OPA_Class_AB_INT_BUFFER:1	corner	C0_7 - 
+	Phase Margin		101.9
+	TEST_PSMC11_BIOUP_DAC:OPA_Class_AB_INT_BUFFER:1	corner	C0_8 - 
+	Phase Margin		104.6
+	TEST_PSMC11_BIOUP_DAC:OPA_Class_AB_INT_BUFFER:1	corner	C0_9 - 
+	Phase Margin		105.5
+	TEST_PSMC11_BIOUP_DAC:OPA_Class_AB_INT_BUFFER:1	corner	C0_10 - 
+	Phase Margin		106.7
+	TEST_PSMC11_BIOUP_DAC:OPA_Class_AB_INT_BUFFER:1	corner	C0_11 - 
+	Phase Margin		107.5
+	TEST_PSMC11_BIOUP_DAC:OPA_Class_AB_INT_BUFFER:1	corner	C0_12 - 
+	Phase Margin		104.1
+	TEST_PSMC11_BIOUP_DAC:OPA_Class_AB_INT_BUFFER:1	corner	C0_13 - 
+	Phase Margin		106
+	TEST_PSMC11_BIOUP_DAC:OPA_Class_AB_INT_BUFFER:1	corner	C0_14 - 
+	Phase Margin		106.1
+Design parameters: 
+	VIN		1.65
+	VS		3.3
+
+Interactive.1
+Number of points completed: 1
+Number of simulation errors: 0
+Interactive.1 completed. 
+Current time: Thu Apr 23 01:10:12 2026 

@@ -1,0 +1,487 @@
+*     ############################################
+*     #                                          #
+*     #  018RFCMOS 3.3V NMOS scalable with NF    #
+*     #  HSPICE MODEL                            #
+*     #                                          #  
+*     ############################################
+*
+*
+.subckt n_l34w500_33_rf 1 2 3 4 nf=21
+*
+* #### define RF Extension Model Varable #####
+*
+.param p_rg='-7.0913+216.04/nf-411.06/(nf*nf)'
+.param p_cd='(0.306+0.1838*nf+0.0049*(nf*nf))*1e-15'
+.param p_cgs=2e-15
+.param p_ld=1e-11
+.param p_ls=6e-11
+.param p_djdb_a='(4.25*((nf+1)/2))*1e-12'
+.param p_djdb_p='(1.7*((nf+1)/2)+5)*1e-6'
+.param p_djdb_g='(5*nf)*1e-6'
+.param p_djsb_a='(4.25*((nf+1)/2))*1e-12'
+.param p_djsb_p='(1.7*((nf+1)/2)+5)*1e-6'
+.param p_djsb_g='(5*nf)*1e-6'
+.param p_rsub1='70.9+224.53/nf-396.9/(nf*nf)'
+.param p_rsub2=2
+.param p_rsub3=2
+*
+* --------- Gate network ------------------------------
+cgs_ext 21 30 'p_cgs*(1+dcgs_n_33_rf)'
+rgate 2 21 'p_rg*(1+drgate_n_33_rf)'
+*
+* --------- Drain network -----------------------------
+ldrain 1 11 p_ld
+lsource 30 3 p_ls
+cd 11 30 'p_cd*(1+dcd_n_33_rf)'
+*
+* --------- Substrate network -------------------------
+*
+djdb_area 12 11
++ bsim_diode_area
++ area = p_djdb_a
+djdb_perim 12 11
++ bsim_diode_perim
++ area = p_djdb_p
+djdb_swg 12 11
++ bsim_diode_swg
++ area = p_djdb_g
+*
+djsb_area 31 30
++ bsim_diode_area
++ area = p_djsb_a
+djsb_perim 31 30
++ bsim_diode_perim
++ area = p_djsb_p
+djsb_swg 31 30
++ bsim_diode_swg
++ area = p_djsb_g
+*
+*
+rsub2 12 40 p_rsub2
+rsub3 31 40 p_rsub3
+rsub1 40 4 p_rsub1
+*
+* --------- Ideal mos transistor ----------------------
+main 11 21 30 40
++ bsim_mos_transistor
++ l = 3.4e-07
++ w = 5e-06
++ ad = 0
++ as = 0
++ pd = 0
++ ps = 0
++ m = nf
+*
+
+.model bsim_diode_area d
++ cj0 = '0.0007673*(1+dcj_n_33_rf )'  vj = 0.7131  m = 0.3299 is = 1e-05 n = 1
+*
+.model bsim_diode_perim d
++ cj0 = '1.089e-10*(1+ dcjsw_n_33_rf)'  vj = 0.7131 m = 0.1037 is = 5.1e-11 n = 1
+*
+.model bsim_diode_swg d
++ cj0 = '2.9e-10*(1+dcjgate_n_33_rf)'  vj = 0.7131 m = 0.1037 is = 5.1e-11 n = 1
+*
+.model bsim_mos_transistor nmos
++ level = 49  version = 3.2 mobmod = 1 binunit = 2 
++ capmod = 3 nqsmod = 0 tox = '7e-09+ dtox_n_33_rf' xj = 2.5e-07
++ nch = 1.7e+17 rsh = 8 lint = '0+ dlint_n_33_rf' wint = '0+ dwint_n_33_rf'
++ dwg = 3.553e-15 dwb = 6.2e-09 vth0 = '0.5924+dvth0_n_33_rf' k1 = 0.7138
++ k2 = -0.02583 k3 = 62 dvt0 = 4.75 dvt1 = 0.634
++ dvt2 = -0.1139 dvt0w = 0.15 dvt1w = 5.95e+05 dvt2w = 0
++ nlx = 1.372e-07 w0 = 5.68e-06 k3b = 32 vsat = 1.052e+05
++ ua = -4.855e-10 ub = 2.265e-18 uc = 5.518e-11 u0 = 0.03913
++ a0 = 0.651 keta = 0.005 a1 = 0.1 a2 = 0.99 ags = 0.06
++ b0 = 2e-08 b1 = 9e-07 voff = -0.1361 nfactor = 1
++ cit = 0 cdsc = 0.00024 cdscb = 0 cdscd = 0
++ eta0 = 0.02 etab = -0.0015 dsub = 0.201 pclm = 1.21
++ pdiblc1 = 0.025 pdiblc2 = 0.002 pdiblcb = 0 drout = 0.46
++ pscbe1 = 4.04e+08 pscbe2 = 1e-05 pvag = 0.2 delta = 0.02
++ rdsw = 495.9 prwb = 0.05715 prwg = 0.088 wr = 1.01
++ alpha0 = 0 alpha1 = 0 beta0 = 30 cgdo = '2.7e-10*(1+dcgdo_n_33_rf)'
++ cgso = '2.7e-10*(1+dcgso_n_33_rf)' cgbo = 0 xpart = 0 cf = '1.392e-10*(1+dcf_n_33_rf)'
++ xl = 2.5e-08 xw = 0 cj = '0.0007673*(1+dcj_n_33_rf )' mj = 0.3299
++ pb = 0.7131 cjsw = '1.089e-10*(1+dcjsw_n_33_rf )' mjsw = 0.1037 js = 1e-05
++ jsw = 5.1e-11 tnom = 25 kt1 = -0.3166 kt2 = -0.04461
++ at = 500 ute = -1.601 ua1 = 4.203e-11 ub1 = 3.8e-19
++ uc1 = 2.8e-11 kt1l = 0 prt = -271.3 lln = 1
++ lwn = 1 wln = 1 wwn = 1 ll = 1.214e-14 lw = 0
++ lwl = -2.886e-22 wl = 0 ww = -2.01e-16 wwl = -1.502e-21
++ acm = 3 ldif = 0 hdif = 3.2e-07 lnfactor = 1e-07
++ lu0 = 0 lvsat = -0.0045 lua = 0 lub = 0 php = 0.4347
++ cta = 0.001082 ctp = 0.0007482 pta = 0.001822 ptp = 0.002009
++ elm = 5 cjgate = '2.9e-10*(1+dcjgate_n_33_rf )' tlevc = 1 noff = 50 dwc = 0
++ lmin = 3.4e-07 lmax = 3.405e-07 wmin = 5e-06 wmax = 1.05e-04 
++ noimod= 2 noia= 1.2386e+21 noib= 44531.5473
++ noic= -1.05e-14  ef= 0.9396  em= 2063059.9427
+*
+* ##### End of RF NMOSFET Structure #####
+*
+.ends
+*
+*     ############################################
+*     #                                          #
+*     # 018RFCMOS 3.3V NMOS scalable with Length #
+*     # HSPICE MODEL                             #
+*     #                                          #
+*     ############################################
+*
+*
+.subckt n_po7w500_33_rf 1 2 3 4 l=0.8u
+*
+.param l_um='l*1e6'
+*
+* #### define RF Extension Model Varable #####
+*
+.param p_rg='33.476-13.353/l_um+2.0572/(l_um*l_um)'
+.param p_cd='(20.609-34.728*l_um+19.022*(l_um*l_um))*1e-15'
+.param p_cgs=2e-15
+.param p_ld=1e-11
+.param p_ls=6e-11
+.param p_djdb_a='(4.25*((7+1)/2))*1e-12'
+.param p_djdb_p='(1.7*((7+1)/2)+5)*1e-6'
+.param p_djdb_g='(5*7)*1e-6'
+.param p_djsb_a='(4.25*((7+1)/2))*1e-12'
+.param p_djsb_p='(1.7*((7+1)/2)+5)*1e-6'
+.param p_djsb_g='(5*7)*1e-6'
+.param p_rsub1=70
+.param p_rsub2=2
+.param p_rsub3=2
+*
+* --------- Gate network ------------------------------
+cgs_ext 21 30 'p_cgs*(1+dcgs_n_33_rf)'
+rgate 2 21 'p_rg*(1+drgate_n_33_rf)'
+*
+* --------- Drain network -----------------------------
+ldrain 1 11 p_ld
+lsource 30 3 p_ls
+cd 11 30 'p_cd*(1+dcd_n_33_rf)'
+*
+* --------- Substrate network -------------------------
+*
+djdb_area 12 11
++ bsim_diode_area
++ area = p_djdb_a
+djdb_perim 12 11
++ bsim_diode_perim
++ area = p_djdb_p
+djdb_swg 12 11
++ bsim_diode_swg
++ area = p_djdb_g
+*
+djsb_area 31 30
++ bsim_diode_area
++ area = p_djsb_a
+djsb_perim 31 30
++ bsim_diode_perim
++ area = p_djsb_p
+djsb_swg 31 30
++ bsim_diode_swg
++ area = p_djsb_g
+*
+rsub2 12 40 p_rsub2
+rsub3 31 40 p_rsub3
+rsub1 40 4 p_rsub1
+*
+* --------- Ideal mos transistor ----------------------
+main 11 21 30 40
++ bsim_mos_transistor
++ l = l
++ w = 5u
++ ad = 0
++ as = 0
++ pd = 0
++ ps = 0
++ m = 7
+*
+* -------- DIODES & NMOSFET SPICE PARAMETERS ------------
+*
+.model bsim_diode_area d
++ cj0 = '0.0007673*(1+ dcj_n_33_rf )' vj = 0.7131 m = 0.3299 is = 1e-05 n = 1
+*
+.model bsim_diode_perim d
++ cj0 = '1.089e-10*(1+dcjsw_n_33_rf )' vj = 0.7131 m = 0.1037 is = 5.1e-11 n = 1
+*
+.model bsim_diode_swg d
++ cj0 = '2.9e-10*(1+ dcjgate_n_33_rf )' vj = 0.7131 m = 0.1037 is = 5.1e-11 n = 1
+*
+.model bsim_mos_transistor nmos
++ level = 49 version = 3.2 mobmod = 1 binunit = 2
++ capmod = 3 nqsmod = 0 tox = '7e-09+dtox_n_33_rf' xj = 2.5e-07
++ nch = 1.7e+17 rsh = 8 lint = '0+ dlint_n_33_rf' wint = '0+ dwint_n_33_rf' dwg = 3.553e-15
++ dwb = 6.2e-09 vth0 = '0.6124+dvth0_n_33_rf' k1 = 0.7138 k2 = -0.02583 k3 = 62
++ dvt0 = 4.75 dvt1 = 0.634 dvt2 = -0.1139 dvt0w = 0.15
++ dvt1w = 5.95e+05 dvt2w = 0 nlx = 1.372e-07 w0 = 5.68e-06
++ k3b = 32 vsat = 1.052e+05 ua = -4.855e-10 ub = 2.065e-18
++ uc = 5.518e-11 u0 = 0.03913 a0 = 1.042 keta = 0.005
++ a1 = 0.1 a2 = 0.99 ags = 0.1603 b0 = 2e-08
++ b1 = 9e-07 voff = -0.1361 nfactor = 1 cit = 0
++ cdsc = 0.00024 cdscb = 0 cdscd = 0 eta0 = 0.02
++ etab = -0.0015 dsub = 0.201 pclm = 1.01 pdiblc1 = 0.025
++ pdiblc2 = 0.002 pdiblcb = 0 drout = 0.46 pscbe1 = 4.04e+08
++ pscbe2 = 1e-05 pvag = 0 delta = 4.441e-19 rdsw = 495.9
++ prwb = 0.05715 prwg = 0.088 wr = 1.01 alpha0 = 0
++ alpha1 = 0 beta0 = 30 cgdo = '2.7e-10*(1+dcgdo_n_33_rf)' cgso = '2.7e-10*(1+dcgso_n_33_rf )'
++ cgbo = 0 xpart = 0 cf = '1.392e-10*(1+dcf_n_33_rf)' xl = 2.5e-08
++ xw = 0 cj = '0.0007673*(1+ dcj_n_33_rf )' mj = 0.3299 pb = 0.7131
++ cjsw = '1.089e-10*(1+ dcjsw_n_33_rf )' mjsw = 0.1037 js = 1e-05 jsw = 5.1e-11
++ tnom = 25 kt1 = -0.3166 kt2 = -0.04461 at = 500
++ ute = -1.601 ua1 = 4.203e-11 ub1 = 3.8e-19 uc1 = 2.8e-11
++ kt1l = 0 prt = -271.3 lln = 1 lwn = 1 wln = 1
++ wwn = 1 ll = 1.214e-14 lw = 0 lwl = -2.886e-22 wl = 0
++ ww = -2.01e-16 wwl = -1.502e-21 acm = 3 ldif = 0
++ hdif = 3.2e-07 lnfactor = 1e-07 lu0 = 0 lvsat = -0.0045
++ lua = 0 lub = 0 php = 0.4347 cta = 0.001082
++ ctp = 0.0007482 pta = 0.001822 ptp = 0.002009 elm = 5
++ cjgate = '2.9e-10*(1+ dcjgate_n_33_rf )' tlevc = 1 noff = 50 dwc = 1e-07
++ lmin = 3.4e-07 lmax = 8e-07 wmin = 5e-06 wmax = 3.5e-05
++ noimod= 2 noia= 1.2386e+21 noib= 44531.5473
++ noic= -1.05e-14  ef= 0.9396  em= 2063059.9427
+*
+* ##### End of RF NMOSFET Structure #####
+*
+.ends
+*
+*     ############################################
+*     #                                          #
+*     # 018RFCMOS 3.3V PMOS scalable with NF     #
+*     # HSPICE MODEL                             #
+*     #                                          #
+*     ############################################
+*
+*
+.subckt p_l34w500_33_rf 1 2 3 4 nf=21
+*
+*
+* #### define RF Extension Model Varable #####
+*
+.param p_rg='2.9978+41.357/nf-36.796/(nf*nf)'
+.param p_cd='(9.4819-0.5777*nf+0.0508*(nf*nf))*1e-15'
+.param p_cgs=1e-15
+.param p_ld=1e-11
+.param p_ls=6e-11
+.param p_djdb_a='(4.25*((nf+1)/2))*1e-12'
+.param p_djdb_p='(1.7*((nf+1)/2)+5)*1e-6'
+.param p_djdb_g='(5*nf)*1e-6'
+.param p_djsb_a='(4.25*((nf+1)/2))*1e-12'
+.param p_djsb_p='(1.7*((nf+1)/2)+5)*1e-6'
+.param p_djsb_g='(5*nf)*1e-6'
+.param p_rsub1='20.979+437.18/nf-705.05/(nf*nf)'
+.param p_rsub2=2
+.param p_rsub3=2
+*
+* --------- Gate network ------------------------------
+cgs_ext 21 30 'p_cgs*(1+dcgs_p_33_rf)'
+rgate 2 21 'p_rg*(1+drgate_p_33_rf)'
+*
+* --------- Drain network -----------------------------
+ldrain 1 11 p_ld
+lsource 30 3 p_ls
+cd 11 30 'p_cd*(1+dcd_p_33_rf)'
+*
+* --------- Substrate network -------------------------
+* Diodes are for p-type MOS transistors
+*
+djdb_area 11 12
++ bsim_diode_area
++ area = p_djdb_a
+djdb_perim 11 12
++ bsim_diode_perim
++ area = p_djdb_p
+djdb_swg 11 12
++ bsim_diode_swg
++ area = p_djdb_g
+*
+djsb_area 30 31
++ bsim_diode_area
++ area = p_djsb_a
+djsb_perim 30 31
++ bsim_diode_perim
++ area = p_djsb_p
+djsb_swg 30 31
++ bsim_diode_swg
++ area = p_djsb_g
+*
+rsub2 12 40 p_rsub2
+rsub3 31 40 p_rsub3
+rsub1 40 4 p_rsub1
+*
+* --------- Ideal mos transistor ----------------------
+main 11 21 30 40
++ bsim_mos_transistor
++ l = 3.4e-7
++ w = 5e-6
++ ad = 0
++ as = 0
++ pd = 0
++ ps = 0
++ m = nf
+*
+.model bsim_diode_area d
++ cj0 = '0.0012*(1+ dcj_p_33_rf)' mjsw = 0.4097 vj = 0.7618 is = 9e-05 n = 1
+*
+.model bsim_diode_perim d
++ cj0 = '2.243e-10*(1+ dcjsw_p_33_rf)' vj = 0.7618 mjsw = 0.4745 is = 4.9e-12 n = 1
+*
+.model bsim_diode_swg d
++ cj0 = '4.2e-10*(1+dcjgate_p_33_rf)' vj = 0.7618 mjsw = 0.4745 is = 4.9e-12 n = 1
+*
+.model bsim_mos_transistor pmos
++ level = 49 version = 3.2 mobmod = 1 capmod = 3
++ nqsmod = 0 tox = '7e-09+dtox_p_33_rf' xj = 1.8e-07 nch = 4.31e+17
++ rsh = 8 lint = '2.24e-08+dlint_p_33_rf' wint = '3.361e-08+dwint_p_33_rf' dwg = -1.437e-08
++ dwb = 5.984e-09 vth0 = '-0.7104+dvth0_p_33_rf' k1 = 0.7667 k2 = 0.05429
++ k3 = 2.089 dvt0 = 7.395 dvt1 = 0.6635 dvt2 = 0.007805
++ dvt0w = 1.797 dvt1w = 2.876e+06 dvt2w = 0.1026 nlx = 5e-08
++ w0 = 2.125e-07 k3b = 1.003 vsat = 9.09e+04 ua = -8e-13
++ ub = 1.82e-18 uc = -3.65e-11 u0 = 0.008064 a0 = 0.8
++ keta = -0.01035 a1 = 0.01 a2 = 0.99 ags = 0.3138
++ b0 = 0 b1 = 1e-06 voff = -0.1239 nfactor = 0.4964
++ cit = 0.0005334 cdsc = 0.003166 cdscb = 0.002463 cdscd = 0
++ eta0 = 0.2 etab = -0.01893 dsub = 0.9052 pclm = 0.8
++ pdiblc1 = 0.03524 pdiblc2 = 0.02018 pdiblcb = 0.1478 drout = 0.5
++ pscbe1 = 4.643e+08 pscbe2 = 1.07e-05 pvag = 0 delta = 0.02
++ rdsw = 467 prwb = 0 prwg = 0 wr = 1.1
++ alpha0 = 0 beta0 = 30 cgdo = '2.6e-10*(1+dcgdo_p_33_rf)' cgso = '2.6e-10*(1+dcgso_p_33_rf)'
++ cgbo = 0 xpart = 0 cf = '1.392e-10*(1+dcf_p_33_rf)' xl = -2e-08
++ xw = 0 cj = '0.0012*(1+dcj_p_33_rf)' mj = 0.4097 pb = 0.7618 cjsw = '2.243e-10*(1+dcjsw_p_33_rf)'
++ mjsw = 0.4745 js = 9e-05 jsw = 4.9e-12 tnom = 25
++ kt1 = -0.3346 kt2 = -0.05747 at = 4.95e+04 ute = -1.128
++ ua1 = 1.402e-09 ub1 = -3.417e-18 uc1 = -1.393e-10 kt1l = 1e-08
++ prt = 0 lln = 1 lwn = 1 wln = 1 wwn = 1
++ ll = 0 lw = 0 lwl = 0 wl = 0
++ ww = 0 wwl = 0 lmin = 3.4e-07 lmax = 3.405e-07
++ wmin = 5e-06 wmax = 1.05e-04 lua = 0 lub = 0
++ wua = 0 lpclm = 0 lvth0 = 0 php = 0.9297
++ cta = 0.0009969 ctp = 0.0007119 pta = 0.001504 ptp = 0.001216
++ elm = 10 tlevc = 1 acm = 3 hdif = 3.2e-07
++ lu0 = 0.0004 wvsat = 0 lvsat = 0 wu0 = 0.001
++ voffcv = 0 dwc = 1e-07 noff = 20
++ noimod = 2 noia= 4.8632e+19  noib= 142700
++ noic= 1.04e-11  ef= 1.117  em= 5015000
+.ends
+*
+*     ############################################
+*     #                                          #
+*     # 018RFCMOS 3.3V PMOS scalable with Length #
+*     # HSPICE MODEL                             #
+*     #                                          #
+*     ############################################
+*
+*
+.subckt p_po7w500_33_rf 1 2 3 4 l=0.8u
+*
+*
+.param l_um='l*1e6'
+*
+* #### define RF Extension Model Varable #####
+*
+.param p_rg='192.37-151.74/l_um+30.28/(l_um*l_um)'
+.param p_cd='(33.148-64.815*l_um+37.037*(l_um*l_um))*1e-15'
+.param p_cgs=1e-15
+.param p_ld=1e-11
+.param p_ls=6e-11
+.param p_djdb_a='(4.25*((7+1)/2))*1e-12'
+.param p_djdb_p='(1.7*((7+1)/2)+5)*1e-6'
+.param p_djdb_g='(5*7)*1e-6'
+.param p_djsb_a='(4.25*((7+1)/2))*1e-12'
+.param p_djsb_p='(1.7*((7+1)/2)+5)*1e-6'
+.param p_djsb_g='(5*7)*1e-6'
+.param p_rsub1=70
+.param p_rsub2=2
+.param p_rsub3=2
+*
+* --------- Gate network ------------------------------
+cgs_ext 21 30 'p_cgs*(1+dcgs_p_33_rf)'
+rgate 2 21 'p_rg*(1+drgate_p_33_rf)'
+*
+* --------- Drain network -----------------------------
+ldrain 1 11 p_ld
+lsource 30 3 p_ls
+cd 11 30 'p_cd*(1+dcd_p_33_rf)'
+*
+* --------- Substrate network -------------------------
+* Diodes are for p-type MOS transistors
+*
+djdb_area 11 12
++ bsim_diode_area
++ area = p_djdb_a
+djdb_perim 11 12
++ bsim_diode_perim
++ area = p_djdb_p
+djdb_swg 11 12
++ bsim_diode_swg
++ area = p_djdb_g
+*
+djsb_area 30 31
++ bsim_diode_area
++ area = p_djsb_a
+djsb_perim 30 31
++ bsim_diode_perim
++ area = p_djsb_p
+djsb_swg 30 31
++ bsim_diode_swg
++ area = p_djsb_g
+*
+rsub2 12 40 p_rsub2
+rsub3 31 40 p_rsub3
+rsub1 40 4 p_rsub1
+*
+* --------- Ideal mos transistor ----------------------
+main 11 21 30 40
++ bsim_mos_transistor
++ l = l
++ w = 5u
++ ad = 0
++ as = 0
++ pd = 0
++ ps = 0
++ m = 7
+*
+* -------- DIODES & PMOSFET SPICE PARAMETERS ------------
+*
+.model bsim_diode_area d
++ cj0 = '0.0012*(1+dcj_p_33_rf)' mjsw = 0.4097 vj = 0.7618 is = 9e-05 n = 1
+*
+.model bsim_diode_perim d
++ cj0 = '2.243e-10*(1+dcjsw_p_33_rf)'  vj = 0.7618 mjsw = 0.4745 is = 4.9e-12 n = 1
+*
+.model bsim_diode_swg d
++ cj0 = '4.2e-10*(1+dcjgate_p_33_rf)'  vj = 0.7618 mjsw = 0.4745 is = 4.9e-12 n = 1
+*
+.model bsim_mos_transistor pmos
++ level = 49 version = 3.2 mobmod = 1 capmod = 3 nqsmod = 0 
++ tox = '7e-09+dtox_p_33_rf' xj = 1.8e-07 nch = 4.31e+17 rsh = 8
++ lint = '2.24e-08+dlint_p_33_rf' wint = '3.361e-08+dwint_p_33_rf' dwg = -1.437e-08 dwb = 5.984e-09
++ vth0 = '-0.7104+dvth0_p_33_rf' k1 = 0.7667 k2 = 0.05429 k3 = 2.089 
++ dvt0 = 7.395 dvt1 = 0.6635 dvt2 = 0.007805 dvt0w = 1.797 
++ dvt1w = 2.876e+06 dvt2w = 0.1026 nlx = 5e-08 w0 = 2.125e-07 
++ k3b = 1.003 vsat = 1.209e+05 ua = -8e-13 ub = 1.82e-18
++ uc = -3.65e-11 u0 = 0.008064 a0 = 1.2 keta = -0.01035
++ a1 = 0.01 a2 = 0.99 ags = 0.3138 b0 = 0
++ b1 = 1e-06 voff = -0.1239 nfactor = 0.4964 cit = 0.0005334
++ cdsc = 0.003166 cdscb = 0.002463 cdscd = 0 eta0 = 0.2
++ etab = -0.01893 dsub = 0.9052 pclm = 0.8 pdiblc1 = 0.03524
++ pdiblc2 = 0.02018 pdiblcb = 0.1478 drout = 0.5 pscbe1 = 4.643e+08
++ pscbe2 = 1.07e-05 pvag = 0 delta = 0.02 rdsw = 467
++ prwb = 0 prwg = 0 wr = 1.1 alpha0 = 0
++ beta0 = 30 cgdo = '2.6e-10*(1 + dcgdo_p_33_rf)' cgso = '2.6e-10*(1 + dcgso_p_33_rf)' cgbo = 0
++ xpart = 0 cf = '1.392e-10*(1+ dcf_p_33_rf)' xl = -2e-08 xw = 0
++ cj = '0.0012*(1+ dcj_p_33_rf)' mj = 0.4097 pb = 0.7618 cjsw = '2.243e-10*(1 + dcjsw_p_33_rf)'
++ mjsw = 0.4745 js = 9e-05 jsw = 4.9e-12 tnom = 25
++ kt1 = -0.3346 kt2 = -0.05747 at = 4.95e+04 ute = -1.128
++ ua1 = 1.402e-09 ub1 = -3.417e-18 uc1 = -1.393e-10 kt1l = 1e-08
++ prt = 0 lln = 1 lwn = 1 wln = 1 wwn = 1
++ ll = 0 lw = 0 lwl = 0 wl = 0 ww = 0
++ wwl = 0 lmin = 3.4e-07 lmax = 8e-07 wmin = 5e-06
++ wmax = 3.5e-05 lua = 0 lub = 0 wua = 0 lpclm = 0
++ lvth0 = 0 php = 0.9297 cta = 0.0009969 ctp = 0.0007119
++ pta = 0.001504 ptp = 0.001216 elm = 10 tlevc = 1
++ acm = 3 hdif = 3.2e-07 lu0 = 0.0004 wvsat = 0
++ wu0 = 0.001 voffcv = 0 dwc = 1e-07 noff = 20
++ noimod = 2 noia= 4.8632e+19  noib= 142700
++ noic= 1.04e-11  ef= 1.117  em= 5015000
+*
+* ##### End of RF PMOSFET Structure #####
+*
+.ends

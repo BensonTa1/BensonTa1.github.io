@@ -1,0 +1,21 @@
+Starting Single Run, Sweeps and Corners...
+
+Current time: Tue Apr  1 14:43:59 2025 
+Best design point: 1
+Design specs: 
+	TEST_ADC:IDEAL_CIFF:1	corner	Nominal - 
+	spectrum_snr		-6.261
+	(20 * log10((VAR("VDM") / 1.8)))		-131.1
+Design parameters: 
+	TS		100n
+	CU		100f
+	N1		7
+	N2		1
+	VCM		900m
+	VDM		500n
+
+Interactive.7
+Number of points completed: 30
+Number of simulation errors: 0
+Interactive.7 completed. 
+Current time: Tue Apr  1 14:50:55 2025 

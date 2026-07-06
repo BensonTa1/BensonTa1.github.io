@@ -1,0 +1,5064 @@
+
+////////////////////////////////////////////////////////////////////////////////
+//                                                                            //
+//     Title      : Calibre DRC of 0.13um Logic and Mixed-Mode 1P6M2T          //
+//                  MMC AL Enhancement Shrinkable Process Topological         //
+//                  Layout Rule                                               //
+//                                                                            //
+//     Parent Doc : G-03-LOGIC/MIXED_MODE13-1P8M-MMC/AL/L130E/                //
+//                  SHRINKABLE-TLR   Version 2.5_P1                           //
+//                                                                            //
+//     DRC Version: 2.5_P1                                                    //
+//                                                                            //
+//     Copyrignt (c) United Microelectronics Corporation, 1980-2020           //
+//     All Rights Reserved                                                    //
+//                                                                            //
+//                                                                            //
+//     This source file is proprietary information of United                  //
+//     Microelectronics Corporation.It may not be distributed,                //
+//     in whole or in any part without prior written permission.              //
+//                                                                            //
+// DISCLAIMER OF WARRANTY                                                     //
+//                                                                            //
+//   United Microelectronics Corporation software and associated              //
+//   files are provided "as is" and without warranty. United                  //
+//   Microelectronics Corporation has no obligation to support or             //
+//   otherwise maintain software. United Microelectronics                     //
+//   Corporation makes no warranties, express or implied with                 //
+//   respect to software including any warranty of merchantability            //
+//   or fitness for a particular purpose.                                     //
+//                                                                            //
+// LIMITATION OF LIABILITY                                                    //
+//                                                                            //
+//   United Microelectronics Corporation is not liable for any                //
+//   property damage, personal injury, loss of profits,                       //
+//   interruption of business, or for any other special,                      //
+//   consequential or incidental damages, however caused, whether             //
+//   for breach of warranty, contract tort (including negligence),            //
+//   strict liability or otherwise. United Microelectronics                   //
+//   Corporationfurther further assumes no responsibility for any             //
+//   errors that may appear within this set of files for any                  //
+//   damages, direct or indirect, that may result from using this             //
+//   document.                                                                //
+//                                                                            //
+//   This file includes SVRF/TVF Technology under license by Mentor           //
+//   Graphics Corporation."SVRF/TVF Technology"shall mean Mentor Graphics'    //
+//   Standard  Verification Rule  Format ( " SVRF " ) and Tcl Verification    //
+//   Format (" TVF " ) proprietary syntaxes for  expressing process rules.    //
+//   You  shall not  use  SVRF / TVF  Technology  unless  you are a Mentor    //
+//   Graphics customer  with  a  license to use  Mentor Graphics' CalibreR    //
+//   tools. The exact terms of your obligations and rights are governed by    //
+//   your respective license. You shall not use SVRF/TVF Technology except    //
+//   for use with Mentor Graphics' CalibreR tools. All SVRF/FVF Technology    //
+//   contained  in  this  file  constitutes  or  contains  trade   secrets    //
+//   and confidential  information  of  Mentor  Graphics or its licensors.    //
+//   Unless you  have obtained Mentor Graphics' prior written consent, you    //
+//   shall not make SVRF/TVF  Technology available in any form to a Mentor    //
+//   Graphics Competitor.						                              //
+//                                                                            //
+//     This runset is validated with Calibre 20114_2220                       //
+//                                                                            //
+////////////////////////////////////////////////////////////////////////////////
+// revision  date        who              changes                             //
+//========= ============ ======== ============================================//
+// T.A_PB    07/18/2008  K.C.Hsu  New Creation                                //
+//                                                                            //
+// T.B_PB    08/14/2008  K.C.Hsu  1.Modify 4B.6A_MEx, 4B.6B.a_MEx,            //
+//                                         4B.6E_MEx, 4B.6F_MEx,              //
+//                                         4B.7A_MEx, 4C.5F, 4C.6F            //
+//                                                                            //
+// T.C_PB    04/07/2009  K.C.Hsu  1.Add SRAM SPS, SPLLS, DP3S, DP4S           //
+//                                  from L130E (Cu)                           //
+//                                2.Update layer mapping file to v1.3         //
+//                                3.Update metal slot rule to v2              //
+//                                4.Update antenna rule to v2                 //
+//                                5.Modify rules 4B.1E, 4B.1F, 4B.3E_MEx,     //
+//                                  4B.3F_MEx, 4B.6F_MEx                      //
+//                                                                            //
+// T.D_PB    06/02/2009  K.C.Hsu  1.Update layer mapping file to v1.4         //
+//                                2.Update antenna rule to v3                 //
+//                                3.Add 12KA top metal rules, 4A.8G,          //
+//                                  4A.8H, 4A.8I, 4A.8J, 4A.8K, 4A.8L,        //
+//                                  4A.10O                                    //
+//                                4.Remove VTNL and VTPL rules                //
+//                                                                            //
+// T.0_P1    06/24/2009  K.C.Hsu  1.Update sram rule file to v1.1             //
+//                                2.Modify 4A.13D                             //
+//                                                                            //
+// T.1_P1    09/21/2009  K.C.Hsu  1.Add 20KA top metal                        //
+//                                2.Update antenna rule to v4                 //
+//                                3.Modify Die Seal Ring rules,               //
+//                                  4B.7D (split to a, b, c)                  //
+//                                                                            //
+// T.2_P1    01/11/2010  K.C.Hsu  1.Update layer mapping file to v1.4_p1      //
+//                                2.Update antenna rule to v5                 //
+//                                3.Update metal slot rule to v3              //
+//                                4.Modify deck with new MMC methodology      //
+//                                5.Modify 4A.9Ab1Bb1_25V, 4C.1C, 4C.1D,      //
+//                                  4C.1E, 4C.Note1, top metal section        //
+//                                6.Add 4A.9Ab2Bb2_33V_REG, 4A.9Ab3_33V_HG,   //
+//                                  4A.9Bb3_33V_HG, NCAP/PCAP section,        //
+//                                  INDUCTOR section                          //
+//                                                                            //
+// 0.1_P2_01 04/30/2010  K.C.Hsu  1.Update antenna rule to v6                 //
+//                                2.Update sram rule file to v1.2             //
+//                                3.Add 4C.1J, 4C.5M, 4C.6M, 4C.7J, 5.3X      //
+//                                                                            //
+// 0.1_P3_01 05/11/2010  K.C.Hsu  1.Rename 4A.1AB --> 4A.1A.a1b1__4A.1B       //
+//                                2.Add 4A.1A.a2b2__4A.1A.a3b3,               //
+//                                  ILLEGAL_DUMMY*                            //
+//                                                                            //
+// 0.1_P3_02 06/07/2010  K.C.Hsu  1.Update antenna rule to v7                 //
+//                                                                            //
+// 0.1_P3_03 07/23/2010  K.C.Hsu  1.Update DSR rule                           //
+//                                                                            //
+// 0.1_P3_04 02/18/2011  K.C.Hsu  1.Update sram rule file to v1.3             //
+//                                2.Update logo rule file to v2.3_P1          //
+//                                3.Modify 4C.7J                              //
+//                                                                            //
+// 0.2_P1    08/19/2011  K.C.Hsu  1.Update layer mapping file to v1.8_p2      //
+//                                2.Add 4A.9Ab1_2Bb1_2_25V, 4A.9I.b3_33V_HG,  //
+//                                  4A.9I.b1_1_25V, 4A.9I.b1_2_25V, 4A.9L,    //
+//                                  4A.9M, 4A.9_Note1, P_WELL_BLOCK (4A.15*), //
+//                                  4C.Note8, 4B.7B.b_MEn                     //
+//                                3.Modify 4A.9Ab1_1Bb1_1_25V,                //
+//                                  4A.9Ab3Bb3_33V_HG, 4A.9I.b2_33V_REG,      //
+//                                  Density (*.DEN), 4B.7B.a_MEn, 6.2Ab.MEn   //
+//                                4.Remove 4C.1J                              //
+//                                                                            //
+// 0.3_P1    01/02/2012  K.C.Hsu  1.Update layer mapping file to v1.8_p3      //
+//                                2.Add 4A.1A.a3b3_25V                        //
+//                                3.Modify 5.3S (40KA)                        //
+//                                4.Rename 4A.1A.a2b2__4A.1A.a3b3 -->         //
+//                                         4A.1A.a2b2_33V                     //
+//                                                                            //
+// 0.3_P2    02/29/2012  K.C.Hsu  1.Update sram rule file to v1.4             //
+// 0.4_P1    08/03/2012  Eric     1.Add: 4A.Note2_33V 4A.1A.a4b4_5V           // 
+//                                  4A.1C.a4b4_5V 4A.1D.b_5V 4A.2B.b2_5V      //
+//                                  4A.9Ab4Bb4_Ab5Bb5_5V 4A.9I.b4_b5_5V       //
+//                                  4A.13C.b_5V 4C.2A.b_5V 4C.4B.b4_5V        // 
+//                                  4C.4D.d_5V 4C.4G.d_5V 4A.1G.b_5V          //
+//                                                                            //
+// 0.4_P2    01/02/2013  C.T Lai  1.Update for the SRAM CELL (Doc No.ATSI-93DEXB)//
+//                                                                            //
+// 0.4_P3    02/18/2013  C.T Lai  1.Set Switch of Grid size (Doc No.LCJC-94N8UP) //
+//                                                                            //
+// 1.0_P1    07/25/2013  C.T Lai  1.Update layer mapping                      //
+//                                2.MMC should be place between thin and thick metal //
+//                                3.Update 4A.1E, 4A.1G?, 4A.11M, 4C.2D, 4C.3E//
+//                                  4C.2F, 4C.2G, 4C.2H, 4C.4C, 4C.4E, 4A.15J //
+//                                4.Delete 4A.15E, 5.3X.a                     //
+//                                5.Add 4C.8?                                 //
+//                                6.Change rule ID: 5.3X.b to 5.3X.a          //
+//                                7.Update metal slot & antenna rule          //
+//                                                                            //
+// 1.0_P2    10/15/2013  C.T Lai  1.Update definition of P_sub for 4A.15J     //
+//                                                                            //
+// 1.1_P1    03/12/2014  C.T Lai  1.Delete 4A.15L, 4A.15M                     //
+//                                2.Change rule ID :                          //
+//                                  4A.15F~K to 4A.15E~J                      //
+//                                3.Update SRAM version                       //
+//                                                                            //
+// 1.2_P1    07/29/2014  C.T Lai  1.Add 4A.9D.a3_5V, 4A.9D.b3_5V,             //
+//                                  4A.9D.c3.1_5V, 4A.9D.c3.2_5V              //
+//                                2.Modify 4A.13C.b_5V, 4C.8.1.Ab, 4C.8.1.Bb  //
+//                                  4C.8.1Nb, 4C.8.1Nc, 4C.8.2Pb, 4C.8.2Pc    //
+//                                                                            //
+// 1.3_P1    09/23/2014  C.T Lai  1.Update 4B.2B.c.VI1, 4C.8.1K, 4C.8.1L      //
+//                                  4C.8.2Ja, 4C.8.2K?, 4C.8.2L?, 4C.8.2P?    //
+//                                2.Add 4C.8.2R                               //
+//                                3.Delete 4C.8_Note2                         //
+//                                                                            //
+// 1.5_P1    12/09/2014  C.T Lai  1.Update 4B.4B.c_VI?, 4B.5B.c_VI?           //
+//                                2.Add 4C.1H                                 //
+//                                                                            //
+// 1.5_P2    03/02/2015  C.T Lai  1.Update 4C.1H, 4C.8.2D.b                   //
+//                                                                            //
+// 1.6_P1    07/02/2015  Todd Hung 1.Update  4B.5D_VI?			      //
+//				   2.Add     4C.1I			      //
+//									      //
+// 1.7_P1    12/17/2015  C.C. Hung 1.Update  4A.1I, 4B.2D, 4B.4D	      //
+//				   2.Add     4A.10E__11E.Note		      // 
+//									      //
+// 1.8_P1    04/14/2016  Janice Tseng 					      //
+//				   1.Update  4B.5D_VI?, 4C.1I		      //
+//									      //
+// 1.9_P1    01/19/2017  Todd Hung 1.Update  5.3T, 5.3W			      //
+//									      //
+// 1.10_P1   05/31/2017  Todd Hung 1.Add     4A.Note3			      //
+//									      //
+// 1.10_P2   04/25/2018  Todd Hung 1.Update: 4C.8.1.Bb			      //
+//									      //
+// 2.0_P1    07/23/2018  Todd Hung 1.Update: 4B.2E, 4B.4E_VIn(n=1X small via),//
+//					     4B.5E_VIn(n=2X large via)	      //
+//									      //
+// 2.1_P1    09/26/2019  D.C Wu    1.Update version only //
+//									      //
+// 2.2_P1    02/03/2020  D.C Wu    1.Add: 4C.1J, 4C.1K //
+//                                 2.Update: 4C.1F, 110nm_layers_v1.8_p5.cal //
+//									      //
+// 2.3_P1    03/18/2020  D.C Wu    1.Add: umc_ant_LOGIC_MIXED-MODE13_1PxMyT-MMC-AL-L130E-SHRINKABLE-CALIBRE-DRC-0.1_P1.cal //
+//                                 2.Delete: umc_ant_LOGIC_MIXED-MODE13_1PxMyT-MMC-AL-L130E-SHRINKABLE-CALIBRE-DRC-v8.cal //
+//									      //
+// 2.5_P1    06/16/2020  D.C Wu    1.Add: 4C.1J.? //
+//                                 2.Update: umc_ant_LOGIC_MIXED-MODE13_1PxMyT-MMC-AL-L130E-SHRINKABLE-CALIBRE-DRC-0.1_P2.cal //
+//                                 3.Delete: 4C.1J, 4C.1K //
+////////////////////////////////////////////////////////////////////////////////
+// Notice (Important, Read Me First)
+// =================================
+// (1) Please set up RESOLUTION,LAYOUT PATH,LAYOUT PRIMARY
+//     according to your design before run CALIBRE drc.
+//     Set up DRC UNSLECT CHECK as your requirements
+//     Use DRC SELECT CHECK to check one or two groups only
+//
+// (2) The grid size is 0.005um (0.001um after shrunk)
+//
+// (3) The following rules are excluded by default
+//     4A.1H(Metal1 field transistor), MAX_MET_SPACE, 4C.1G,
+//
+// (4) MMC restricted to located between last thin metal and first thick metal
+//
+// (5) This document includes following files
+//     110nm_layers_v1.8_p5.cal
+//     G-DF-LOGIC_MIXED_MODE13-1P4M1T-MMC_AL_L130E_SHRINKABLE-CALIBRE-DRC-2.5_P1
+//     G-DF-LOGIC_MIXED_MODE13-1P5M1T-MMC_AL_L130E_SHRINKABLE-CALIBRE-DRC-2.5_P1
+//     G-DF-LOGIC_MIXED_MODE13-1P5M2T-MMC_AL_L130E_SHRINKABLE-CALIBRE-DRC-2.5_P1
+//     G-DF-LOGIC_MIXED_MODE13-1P6M1T-MMC_AL_L130E_SHRINKABLE-CALIBRE-DRC-2.5_P1
+//     G-DF-LOGIC_MIXED_MODE13-1P6M2T-MMC_AL_L130E_SHRINKABLE-CALIBRE-DRC-2.5_P1
+//     G-DF-LOGIC_MIXED_MODE13-1P7M1T-MMC_AL_L130E_SHRINKABLE-CALIBRE-DRC-2.5_P1
+//     G-DF-LOGIC_MIXED_MODE13-1P7M2T-MMC_AL_L130E_SHRINKABLE-CALIBRE-DRC-2.5_P1
+//     G-DF-LOGIC_MIXED_MODE13-1P8M2T-MMC_AL_L130E_SHRINKABLE-CALIBRE-DRC-2.5_P1
+//     G-DF-LOGIC_MIXED_MODE13-1P4M1T_12KA-MMC_AL_L130E_SHRINKABLE-CALIBRE-DRC-2.5_P1
+//     G-DF-LOGIC_MIXED_MODE13-1P5M1T_12KA-MMC_AL_L130E_SHRINKABLE-CALIBRE-DRC-2.5_P1
+//     G-DF-LOGIC_MIXED_MODE13-1P5M2T_12KA-MMC_AL_L130E_SHRINKABLE-CALIBRE-DRC-2.5_P1
+//     G-DF-LOGIC_MIXED_MODE13-1P6M1T_12KA-MMC_AL_L130E_SHRINKABLE-CALIBRE-DRC-2.5_P1
+//     G-DF-LOGIC_MIXED_MODE13-1P6M2T_12KA-MMC_AL_L130E_SHRINKABLE-CALIBRE-DRC-2.5_P1
+//     G-DF-LOGIC_MIXED_MODE13-1P7M1T_12KA-MMC_AL_L130E_SHRINKABLE-CALIBRE-DRC-2.5_P1
+//     G-DF-LOGIC_MIXED_MODE13-1P7M2T_12KA-MMC_AL_L130E_SHRINKABLE-CALIBRE-DRC-2.5_P1
+//     G-DF-LOGIC_MIXED_MODE13-1P8M2T_12KA-MMC_AL_L130E_SHRINKABLE-CALIBRE-DRC-2.5_P1
+//     G-DF-LOGIC_MIXED_MODE13-1P4M1T_20KA-MMC_AL_L130E_SHRINKABLE-CALIBRE-DRC-2.5_P1
+//     G-DF-LOGIC_MIXED_MODE13-1P5M1T_20KA-MMC_AL_L130E_SHRINKABLE-CALIBRE-DRC-2.5_P1
+//     G-DF-LOGIC_MIXED_MODE13-1P5M2T_20KA-MMC_AL_L130E_SHRINKABLE-CALIBRE-DRC-2.5_P1
+//     G-DF-LOGIC_MIXED_MODE13-1P6M1T_20KA-MMC_AL_L130E_SHRINKABLE-CALIBRE-DRC-2.5_P1
+//     G-DF-LOGIC_MIXED_MODE13-1P6M2T_20KA-MMC_AL_L130E_SHRINKABLE-CALIBRE-DRC-2.5_P1
+//     G-DF-LOGIC_MIXED_MODE13-1P7M1T_20KA-MMC_AL_L130E_SHRINKABLE-CALIBRE-DRC-2.5_P1
+//     G-DF-LOGIC_MIXED_MODE13-1P7M2T_20KA-MMC_AL_L130E_SHRINKABLE-CALIBRE-DRC-2.5_P1
+//     G-DF-LOGIC_MIXED_MODE13-1P8M2T_20KA-MMC_AL_L130E_SHRINKABLE-CALIBRE-DRC-2.5_P1
+//     G-DF-LOGIC_MIXED_MODE13-1P4M1T_40KA-MMC_AL_L130E_SHRINKABLE-CALIBRE-DRC-2.5_P1
+//     G-DF-LOGIC_MIXED_MODE13-1P5M1T_40KA-MMC_AL_L130E_SHRINKABLE-CALIBRE-DRC-2.5_P1
+//     G-DF-LOGIC_MIXED_MODE13-1P5M2T_40KA-MMC_AL_L130E_SHRINKABLE-CALIBRE-DRC-2.5_P1
+//     G-DF-LOGIC_MIXED_MODE13-1P6M1T_40KA-MMC_AL_L130E_SHRINKABLE-CALIBRE-DRC-2.5_P1
+//     G-DF-LOGIC_MIXED_MODE13-1P6M2T_40KA-MMC_AL_L130E_SHRINKABLE-CALIBRE-DRC-2.5_P1
+//     G-DF-LOGIC_MIXED_MODE13-1P7M1T_40KA-MMC_AL_L130E_SHRINKABLE-CALIBRE-DRC-2.5_P1
+//     G-DF-LOGIC_MIXED_MODE13-1P7M2T_40KA-MMC_AL_L130E_SHRINKABLE-CALIBRE-DRC-2.5_P1
+//     G-DF-LOGIC_MIXED_MODE13-1P8M2T_40KA-MMC_AL_L130E_SHRINKABLE-CALIBRE-DRC-2.5_P1
+//     LOGO-LOGIC_MIXED_MODE13-1P4M1T-MMC-AL-L130E-SHRINKABLE-CALIBRE-DRC-2.3_P1
+//     LOGO-LOGIC_MIXED_MODE13-1P5M1T-MMC-AL-L130E-SHRINKABLE-CALIBRE-DRC-2.3_P1
+//     LOGO-LOGIC_MIXED_MODE13-1P5M2T-MMC-AL-L130E-SHRINKABLE-CALIBRE-DRC-2.3_P1
+//     LOGO-LOGIC_MIXED_MODE13-1P6M1T-MMC-AL-L130E-SHRINKABLE-CALIBRE-DRC-2.3_P1
+//     LOGO-LOGIC_MIXED_MODE13-1P6M2T-MMC-AL-L130E-SHRINKABLE-CALIBRE-DRC-2.3_P1
+//     LOGO-LOGIC_MIXED_MODE13-1P7M1T-MMC-AL-L130E-SHRINKABLE-CALIBRE-DRC-2.3_P1
+//     LOGO-LOGIC_MIXED_MODE13-1P7M2T-MMC-AL-L130E-SHRINKABLE-CALIBRE-DRC-2.3_P1
+//     LOGO-LOGIC_MIXED_MODE13-1P8M2T-MMC-AL-L130E-SHRINKABLE-CALIBRE-DRC-2.3_P1
+//     metal_slot_0.11_1P4M1T_MMC_AL_BEOL_calibre_v4.cal
+//     metal_slot_0.11_1P5M1T_MMC_AL_BEOL_calibre_v4.cal
+//     metal_slot_0.11_1P5M2T_MMC_AL_BEOL_calibre_v4.cal
+//     metal_slot_0.11_1P6M1T_MMC_AL_BEOL_calibre_v4.cal
+//     metal_slot_0.11_1P6M2T_MMC_AL_BEOL_calibre_v4.cal
+//     metal_slot_0.11_1P7M1T_MMC_AL_BEOL_calibre_v4.cal
+//     metal_slot_0.11_1P7M2T_MMC_AL_BEOL_calibre_v4.cal
+//     metal_slot_0.11_1P8M2T_MMC_AL_BEOL_calibre_v4.cal
+//     umc_ant_LOGIC_MIXED-MODE13_1P4M1T-MMC-AL-L130E-SHRINKABLE-CALIBRE-DRC-0.1_P2.cal
+//     umc_ant_LOGIC_MIXED-MODE13_1P5M1T-MMC-AL-L130E-SHRINKABLE-CALIBRE-DRC-0.1_P2.cal
+//     umc_ant_LOGIC_MIXED-MODE13_1P5M2T-MMC-AL-L130E-SHRINKABLE-CALIBRE-DRC-0.1_P2.cal
+//     umc_ant_LOGIC_MIXED-MODE13_1P6M1T-MMC-AL-L130E-SHRINKABLE-CALIBRE-DRC-0.1_P2.cal
+//     umc_ant_LOGIC_MIXED-MODE13_1P6M2T-MMC-AL-L130E-SHRINKABLE-CALIBRE-DRC-0.1_P2.cal
+//     umc_ant_LOGIC_MIXED-MODE13_1P7M1T-MMC-AL-L130E-SHRINKABLE-CALIBRE-DRC-0.1_P2.cal
+//     umc_ant_LOGIC_MIXED-MODE13_1P7M2T-MMC-AL-L130E-SHRINKABLE-CALIBRE-DRC-0.1_P2.cal
+//     umc_ant_LOGIC_MIXED-MODE13_1P8M2T-MMC-AL-L130E-SHRINKABLE-CALIBRE-DRC-0.1_P2.cal
+//     L130A_Shrink_memory_rules_v1.6.cal
+//     DRC_QA_Report_LOGIC_MIXED_MODE13-1P8M-MMC-AL-L130E-SHRINKBLE-CALIBRE-DRC-2.5_P1.pdf
+//     Application_Note_LOGIC_MIXED_MODE13-1P8M-MMC-AL-L130E-SHRINKBLE-CALIBRE-DRC-2.5_P1.pdf
+//
+//////////////////////////////////////////////////////////////////////
+
+// INPUT LAYERS refer to 110nm_layers_v1.8.cal
+
+INCLUDE 110nm_layers_v1.8_p5.cal
+
+
+// *************************************************************
+// you can comment one or more lines to run these opional checks
+// with basic rule check, or change DRC UNSELECT CHECK ... to
+// DRC SLELECT CHECK ... to run one or more optional checks only
+// *************************************************************
+
+GROUP METAL_DENSITY ?.DEN
+GROUP MAX_MET_SPACE ?.MAX
+
+//DRC UNSELECT CHECK DIFF_DENSITY
+//DRC UNSELECT CHECK POLY_DENSITY
+//DRC UNSELECT CHECK METAL_DENSITY
+//DRC UNSELECT CHECK SEAL_RING_RULES
+DRC UNSELECT CHECK MAX_MET_SPACE
+//DRC UNSELECT CHECK Recommend_SAB_CHECK   // For Recommend SAB rules
+//DRC UNSELECT CHECK Extra_CHECK           // For PSYMBOL & RSYMBOL layer check
+//DRC UNSELECT CHECK ILLEGAL_DUMMY         // Simple dummy rule check
+DRC UNSELECT CHECK Recommend_PO1_CHECK   // For voltage drop rules
+//DRC UNSELECT CHECK 4A.Note2_Recommended  // 4A.Note2_33V Recommended rule
+
+// ****************************************************
+// This part is the switch for Grid size 0.005 check.
+// Please turn on/off the options to meet your design !
+// ****************************************************
+
+GROUP OFFGRID_5 OFF_GRID_?
+//DRC UNSELECT CHECK OFFGRID_5     // Default check Grid size for 0.005
+
+// *************************************************************
+// This part is switch for 2.5V/3.3V/5V I/O check.
+// Please turn on/off the options to meet your design !
+// 2.5V, 3.3V, and 5V IO can not exist at the same time.
+// *************************************************************
+
+DRC UNSELECT CHECK CHECK_2.5V_IO      // For 2.5V I/O check
+DRC UNSELECT CHECK CHECK_3.3V_IO      // For 3.3V I/O check all rule(PO1 & Diffusion check)
+//DRC UNSELECT CHECK CHECK_5V_IO        // For 5V I/O check
+
+DRC UNSELECT CHECK CHECK_3.3V_REGULAR_IO   // For 3.3V REGULAR I/O device check
+//DRC UNSELECT CHECK CHECK_3.3V_HG_IO        // For 3.3V HG I/O device check
+
+
+//===========================
+//===  Setup Environment  ===
+//===========================
+
+LAYOUT DEPTH  ALL
+LAYOUT SYSTEM GDSII
+
+UNIT CAPACITANCE FF
+UNIT LENGTH      U
+UNIT RESISTANCE  OHM
+UNIT TIME        US
+
+FLAG ACUTE   YES
+FLAG OFFGRID YES
+FLAG SKEW    YES
+
+RESOLUTION 1
+PRECISION  1000
+
+//================================
+//===  Setup Defaults for DRC  ===
+//================================
+
+LAYOUT PATH "top.gds"
+LAYOUT PRIMARY "top"
+
+DRC CHECK TEXT       COMMENTS RFI
+DRC KEEP EMPTY       NO
+DRC MAXIMUM RESULTS  1000
+DRC MAXIMUM VERTEX   4096
+DRC RESULTS DATABASE "./QA_top.db" ASCII
+DRC SUMMARY REPORT   "./QA_top.sum"
+DRC TOLERANCE FACTOR .003
+
+//======================================
+//===  Map TEXT layer to port names  ===
+//======================================
+
+VIRTUAL CONNECT COLON NO
+VIRTUAL CONNECT NAME GND VBB VCC ?VSS? ?VDD? V3IO V0IO VAS VAD
+
+TEXT DEPTH PRIMARY
+TEXT LAYER ME1 ME2 ME3 ME4 ME5 ME6 PADAL
+TEXT LAYER PO_TEXT M1_TEXT M2_TEXT M3_TEXT M4_TEXT M5_TEXT M6_TEXT AL_TEXT
+LAYOUT TOP LAYER PADAL ME6 VI5 ME5 VI4 ME4 VI3 ME3 VI2 ME2 VI1 ME1 
+
+ME6_C = (ME6 NOT M6RESMK) NOT IND 
+ME5_C = (ME5 NOT M5RESMK) NOT IND 
+ME4_C = (ME4 NOT M4RESMK) NOT IND 
+ME3_C = (ME3 NOT M3RESMK) NOT IND 
+ME2_C = (ME2 NOT M2RESMK) NOT IND 
+ME1_C = (ME1 NOT M1RESMK) NOT IND 
+PADAL_C = (PADAL NOT ALRESMK) NOT IND
+
+ATTACH M6_TEXT ME6_C
+ATTACH ME6 ME6_C
+ATTACH M5_TEXT ME5_C
+ATTACH ME5 ME5_C
+ATTACH M4_TEXT ME4_C
+ATTACH ME4 ME4_C
+ATTACH M3_TEXT ME3_C
+ATTACH ME3 ME3_C
+ATTACH M2_TEXT ME2_C
+ATTACH ME2 ME2_C
+ATTACH M1_TEXT ME1_C
+ATTACH ME1 ME1_C
+ATTACH AL_TEXT PADAL_C
+ATTACH PADAL PADAL_C
+
+//===========================
+// MMC customer's definition
+//===========================
+
+M45_MMC = COPY MMCAL
+
+//*******************
+//***  DRC Rules  ***
+//*******************
+
+Off_Grid {
+   @ Vertice is drawn off-grid.
+   DRAWN OFFGRID
+}
+
+SkewEdges {
+   @ Safety: Edge violates 45 or 90 degrees
+   ANGLE DIFF_N_LOGO >0<45
+   ANGLE DIFF_N_LOGO >45<90
+   ANGLE NWEL_N_LOGO >0<45
+   ANGLE NWEL_N_LOGO >45<90
+   ANGLE TWEL_N_LOGO >0<45
+   ANGLE TWEL_N_LOGO >45<90
+   ANGLE VTN_SP >0<45
+   ANGLE VTN_SP >45<90
+   ANGLE VTP_SP >0<45
+   ANGLE VTP_SP >45<90
+   ANGLE VTNH >0<45
+   ANGLE VTNH >45<90
+   ANGLE VTPH >0<45
+   ANGLE VTPH >45<90
+   ANGLE NATIVE >0<45
+   ANGLE NATIVE >45<90
+   ANGLE TG_N_LOGO  >0<45
+   ANGLE TG_N_LOGO  >45<90
+   ANGLE PO1_N_LOGO >0<45
+   ANGLE PO1_N_LOGO >45<90
+   ANGLE HR_N_LOGO  >0<45
+   ANGLE HR_N_LOGO  >45<90
+   ANGLE NPLUS_N_LOGO >0<45
+   ANGLE NPLUS_N_LOGO >45<90
+   ANGLE PPLUS_N_LOGO >0<45
+   ANGLE PPLUS_N_LOGO >0<45
+   ANGLE SAB_N_LOGO >45<90
+   ANGLE SAB_N_LOGO >45<90
+   ANGLE CONT_N_LOGO >0<45
+   ANGLE CONT_N_LOGO >45<90
+   ANGLE PESD_N_LOGO >0<45
+   ANGLE PESD_N_LOGO >45<90
+   ANGLE NCAP >0<45
+   ANGLE NCAP >45<90
+   ANGLE PAD_N_LOGO >0<45
+   ANGLE PAD_N_LOGO >45<90
+   ANGLE MMC_N_LOGO >0<45
+   ANGLE MMC_N_LOGO >45<90
+   ANGLE ME1_N_LOGO >0<45
+   ANGLE ME1_N_LOGO >45<90
+   ANGLE ME2_N_LOGO >0<45
+   ANGLE ME2_N_LOGO >45<90
+   ANGLE ME3_N_LOGO >0<45
+   ANGLE ME3_N_LOGO >45<90
+   ANGLE ME4_N_LOGO >0<45
+   ANGLE ME4_N_LOGO >45<90
+   ANGLE ME5_N_LOGO >0<45
+   ANGLE ME5_N_LOGO >45<90
+   ANGLE (ME6_N_LOGO NOT IND) >0<45
+   ANGLE (ME6_N_LOGO NOT IND) >45<90
+   ANGLE VI1_N_LOGO >0<45
+   ANGLE VI1_N_LOGO >45<90
+   ANGLE VI2_N_LOGO >0<45
+   ANGLE VI2_N_LOGO >45<90
+   ANGLE VI3_N_LOGO >0<45
+   ANGLE VI3_N_LOGO >45<90
+   ANGLE VI4_N_LOGO >0<45
+   ANGLE VI4_N_LOGO >45<90
+   ANGLE VI5_N_LOGO >0<45
+   ANGLE VI5_N_LOGO >45<90
+
+}
+
+//==================================================
+//===  Establish Layer Connectivity for DRC Only ===
+//==================================================
+
+NULL  = PADAL NOT BULK
+
+CONT_ALL = CONT OR CONTBAR
+VI1_ALL = VI1 OR VI1BAR
+VI2_ALL = VI2 OR VI2BAR
+VI3_ALL = VI3 OR VI3BAR
+VI4_ALL = VI4 OR VI4BAR
+VI5_ALL = VI5 OR VI5BAR
+
+SCONNECT NTAP NWEL
+SCONNECT PTAP TWEL
+CONNECT ME1_C NTAP PTAP BY CONT_ALL
+CONNECT ME2_C ME1_C BY VI1_ALL
+CONNECT ME3_C ME2_C BY VI2_ALL
+CONNECT ME4_C ME3_C BY VI3_ALL
+CONNECT ME5_C M45_MMC ME4_C BY VI4_ALL
+CONNECT ME6_C ME5_C BY VI5_ALL
+CONNECT PADAL_C ME6_C
+
+NULL1 = COPY NULL
+CONNECT ME1 NULL1
+NULL2 = COPY NULL
+CONNECT ME2 NULL2
+NULL3 = COPY NULL
+CONNECT ME3 NULL3
+NULL4 = COPY NULL
+CONNECT ME4 NULL4
+NULL5 = COPY NULL
+CONNECT ME5 NULL5
+NULL6 = COPY NULL
+CONNECT ME6 NULL6
+NULL7 = COPY NULL
+CONNECT PADAL NULL7
+
+//===================================================================
+//===  Defined types from combinations of layers (DO NOT MODIFY)  ===
+//===================================================================
+
+DIFF_ALL = DIFF OR DIFFDUMY
+SRAM     = DIFF NOT BULK   // (To disable SRAM rules )
+DRC:1    = EXTENT
+BULK     = SIZE DRC:1 BY 1.0
+
+//   DEFINE NWELL AND NWELL RESISTOR
+RNWELL    = NWEL INTERACT     NWR       // define N_WELL for resistor
+NWELL     = NWEL NOT INTERACT NWR       // define N_WELL not for resistor
+
+//   DEFINE MOS S/D AND P/N WELL TAP
+ACTIVE_NW = DIFF NOT OUTSIDE NWEL
+ACTIVE_PS = DIFF OUTSIDE NWEL
+
+ACTIVE_TW = ACTIVE_NW NOT OUTSIDE TWEL
+ACTIVE_NT = ACTIVE_NW OUTSIDE TWEL
+
+PTAP      = ( ACTIVE_PS AND PPLUS ) OR ( ACTIVE_TW AND PPLUS )
+NDIF      = ( ACTIVE_PS NOT PPLUS ) OR ( ACTIVE_TW NOT PPLUS )
+PDIF      = ACTIVE_NT AND PPLUS
+NTAP      = ACTIVE_NT NOT PPLUS
+
+PDIF3     = PDIF INTERACT TG
+PDIF1     = PDIF NOT INTERACT TG
+//PDIF1_S   = PDIF1 AND SRAM
+PDIF1_P   = PDIF1 NOT SRAM
+NDIF3     = NDIF INTERACT TG
+NDIF1     = NDIF NOT INTERACT TG
+//NDIF1_S   = NDIF1 AND SRAM
+NDIF1_P   = NDIF1 NOT SRAM
+
+BUT_PPLUS = PPLUS INSIDE EDGE DIFF      // define for P+/N+ butting rules
+BUT_NPLUS = NPLUS INSIDE EDGE DIFF
+PSD       = PDIF NOT PO1                // define P+ Source/Drain
+NSD       = NDIF NOT PO1                // define N+ Source/Drain
+BUT_PS    = PSD  TOUCH NTAP
+BUT_NTAP  = NTAP TOUCH PSD
+BUT_NS    = NSD  TOUCH PTAP
+BUT_PTAP  = PTAP TOUCH NSD
+
+CO_PSD    = (PSD ENCLOSE DIFCNT) OR ((PTAP NOT PO1) ENCLOSE DIFCNT)
+CO_NSD    = (NSD ENCLOSE DIFCNT) OR ((NTAP NOT PO1) ENCLOSE DIFCNT)
+CO_SD     = CO_PSD OR CO_NSD
+
+//   DEFINE GATE PO1 AND INTERCONNECT PO1
+GATE      = PO1 AND DIFF
+GATE_W    = PO1 COIN INSIDE EDGE GATE
+GATE1_W   = GATE_W NOT INSIDE EDGE TG
+GATE3_W   = GATE_W     INSIDE EDGE TG
+GATE1     = GATE NOT TG
+GATE_L    = DIFF COIN INSIDE EDGE GATE
+
+EXPOL     = PO1  NOT DIFF               // define POLY1 on field oxide
+EXPO_E    = PO1 NOT COIN INSIDE EDGE GATE
+INTPOL    = EXPOL NOT INTERACT CONT
+
+SPO       = SIZE PO1 BY -0.12
+WPO       = SIZE SPO  BY 0.12 TRUNCATE 0 INSIDE OF PO1 STEP 0.12
+
+GATE_Woc  = GATE_W NOT COIN OUTSIDE EDGE CO_SD  //Without contact
+GATE_Wc   = GATE_W     COIN OUTSIDE EDGE CO_SD  //With contact
+
+WGATE_Wc  = GATE_Wc  COIN INSIDE EDGE WPO
+WGATE_Woc = GATE_Woc COIN INSIDE EDGE WPO
+TGATE_Wc  = GATE_Wc  NOT COIN INSIDE EDGE WPO
+TGATE_Woc = GATE_Woc NOT COIN INSIDE EDGE WPO
+
+WEXPO_E   = EXPO_E COIN INSIDE EDGE WPO
+TEXPO_E   = EXPO_E NOT COIN INSIDE EDGE WPO
+
+//   DEFINE PO1 CONT AND DIFF CONT
+POLCNT    = CONT OUTSIDE DIFF
+DIFCNT    = CONT NOT OUTSIDE DIFF
+DIFCNT3   = DIFCNT     INTERACT TG
+DIFCNT1   = DIFCNT NOT INTERACT TG
+
+//For High Resistor PO1
+HRPOLY  = PO1 INTERACT HR
+PURPOLY = PO1 NOT HRPOLY
+SAB_E_IN_HRPOLY = SAB INSIDE EDGE HRPOLY
+SABPOLY = HRPOLY INSIDE EDGE SAB
+HRCONT  = CONT AND HR
+
+// For AL_FUSE_PAD area rules
+mf        =  PADAL INTERACT AL_FUSE_PAD
+mf_body_e = CONVEX EDGE mf == 0
+
+mf_body   = ( EXPAND EDGE mf_body_e INSIDE BY 0.50 ) AND mf
+mf_head   = mf NOT mf_body
+
+pobar     = PO1 INTERACT mf_head
+
+AI_f      = PADAL INTERACT pobar
+AI_f_h    = HOLES AI_f
+fpr_ai    = AI_f TOUCH AI_f_h
+/*
+// This DIE_CORNER for poly density rules
+AL_RDL_COR_T     = PADAL NOT SEALRMARK
+DIE_CORNER_TEMP  = EXTENT AL_RDL_COR_T
+CORNER_AREA      = SIZE DIE_CORNER_TEMP BY 1.0
+
+FLIP_TMV  = TMV_RDL  AND FLPMARK
+RDL_TMV   = TMV_RDL  NOT ((FUSE_TMV OR PAD_TMV) OR (MMC_TMV OR SEALRMARK))
+MMC_TMV   = TMV_RDL  AND (MMCTP OR MMCBP)
+FUSE_TMV  = TMV_RDL  AND mf_head
+PAD_TMV   = TMV_RDL  AND PAD_MK_ALL   // For pad TMV_RDL
+*/
+// This is ME1 for memory check
+m1u      = SIZE ME1 BY -0.099      // width <  0.2  are deleted
+m1v      = SIZE m1u BY -0.02       // width <  0.24 are deleted
+m1w      = SIZE m1v BY -0.761      // width <= 1.76 are deleted
+WM1_020  = SIZE m1u BY 0.099 INSIDE OF ME1 TRUNCATE 0 STEP 0.099   // ME1 >= 0.20
+WM1_024  = SIZE m1v BY 0.119 INSIDE OF ME1 TRUNCATE 0 STEP 0.119   // ME1 >= 0.24
+SM1_024  = ME1 NOT WM1_024                                         // MET  < 0.24
+WM1_176a = SIZE m1w BY 0.881 INSIDE OF ME1 TRUNCATE 0 STEP 0.881
+WM1_176  = WM1_176a AND ME1
+
+WM1_014 = SIZE ( SIZE ME1 BY -0.7 ) BY 0.7 TRUNCATE 0.7
+WM2_014 = SIZE ( SIZE ME2 BY -0.7 ) BY 0.7 TRUNCATE 0.7
+WM3_014 = SIZE ( SIZE ME3 BY -0.7 ) BY 0.7 TRUNCATE 0.7
+WM4_014 = SIZE ( SIZE ME4 BY -0.7 ) BY 0.7 TRUNCATE 0.7
+WM5_014 = SIZE ( SIZE ME5 BY -0.7 ) BY 0.7 TRUNCATE 0.7
+WM6_014 = SIZE ( SIZE ME6 BY -0.7 ) BY 0.7 TRUNCATE 0.7
+MMC_014 = SIZE ( SIZE MMCAL BY -0.7 ) BY 0.7 TRUNCATE 0.7
+
+
+//++ FEOL_RULE_CHECK_START
+
+//==============================================
+//===  Diffusion (Active) Layer Rules (P20)  ===
+//==============================================
+
+// 4A.Note 2.5V, 3.3V and 5V device is not allowed to coexist with each other. It cannot check by DRC. 
+
+GROUP  4A.Note2_Recommended 4A.Note2_33V
+
+
+OFF_GRID_DIFF {@ Grid size diff is 0.005
+   OFFGRID (DIFF OUTSIDE (SP_18 OR SP_16)) 5
+   OFFGRID DIFF 1
+}
+
+4A.Note2_33V {@ Recommended 3.3V device Minimum DIFFUSION width >= 0.25um
+    x = (DIFF COIN INSIDE EDGE GATE) INSIDE EDGE TG
+    E = INT x < 0.25 ABUT<90 REGION
+    E NOT LOGOMK
+}
+
+4A.Note3 {@ The mixed-use of 1.41um-sq/1.85um-sq 6T SRAM on the same ship is prohibited
+          @ 1.41um-sq SRAM indicates 141HSSP_6TSRAM_MARK  or 141LL_6TSRAM_MARK
+          @ 1.85um-sq SRAM indicates 228HSSPS_6TSRAM_MARK or 228LLS_6TSRAM_MARK
+    SRAM_141 = SP_16 OR SP_18
+    SRAM_185 = SPS   OR SPLLS
+    (BULK INTERACT SRAM_141) INTERACT SRAM_185
+}
+
+4A.1A.a1b1__4A.1B {@ Minimum DIFFUSION width for NMOS/PMOS is 0.16um
+                   @ Minimum DIFFUSION width for interconnect is 0.16um
+    x = INT DIFF < 0.16 ABUT>0<90 SINGULAR REGION
+    ((((x NOT SPS) NOT SPLLS) NOT SP_16) NOT SP_18) NOT LOGOMK
+}
+
+4A.1A.a2b2_33V {@ Minimum DIFFUSION width for NMOS/PMOS(3.3V) is 0.178um
+    x = (DIFF COIN INSIDE EDGE GATE) INSIDE EDGE TG
+    E = INT x < 0.178 ABUT<90 REGION
+    E NOT LOGOMK
+}
+
+4A.1A.a3b3_25V {@ Minimum DIFFUSION width for NMOS/PMOS(2.5V) is 0.389um
+    x = (DIFF COIN INSIDE EDGE GATE) INSIDE EDGE TG
+    E = INT x < 0.389 ABUT<90 REGION
+    E NOT LOGOMK
+}
+
+4A.1A.a4b4_5V {@ Minimum DIFFUSION width for NMOS/PMOS(5V) is 0.389um
+    x = (DIFF COIN INSIDE EDGE GATE) INSIDE EDGE TG
+    E = INT x < 0.389 ABUT<90 REGION
+    E NOT LOGOMK
+}
+
+4A.1C.a1b1 {@ Minimum space between two DIFF regions is 0.20um
+    x = EXT DIFF < 0.20 ABUT>0<90 SINGULAR REGION
+    ((((((x NOT SPS) NOT SPLLS) NOT SP_4) NOT SP_5) NOT SP_16) NOT SP_18) NOT LOGOMK
+}
+
+4A.1C.a2b2_33V {@ Minimum DIFF space for 3.3V is 0.22um
+    GATE3 = GATE AND TG
+    HV_DIFF1 = (DIFF NOT INTERACT PO1) INTERACT TG
+    HV_DIFF2 = ((DIFF CUT PO1) NOT PO1) NOT INTERACT GATE1
+    HV_DIFF  = (HV_DIFF1 OR HV_DIFF2) OR GATE3
+    X = DIFF COIN INSIDE EDGE HV_DIFF
+    Y = EXT X DIFF < 0.22 ABUT>0<90 REGION
+    Y NOT LOGOMK
+}
+
+4A.1C.a3b3_25V {@ Minimum DIFF space for 2.5V is 0.22um
+    GATE3 = GATE AND TG
+    HV_DIFF1 = (DIFF NOT INTERACT PO1) INTERACT TG
+    HV_DIFF2 = ((DIFF CUT PO1) NOT PO1) NOT INTERACT GATE1
+    HV_DIFF  = (HV_DIFF1 OR HV_DIFF2) OR GATE3
+    X = DIFF COIN INSIDE EDGE HV_DIFF
+    Y = EXT X DIFF < 0.22 ABUT>0<90 REGION
+    Y NOT LOGOMK
+}
+
+
+4A.1C.a4b4_5V {@ Minimum DIFF space for 5V is 0.44um
+    GATE3 = GATE AND TG
+    HV_DIFF1 = (DIFF NOT INTERACT PO1) INTERACT TG
+    HV_DIFF2 = ((DIFF CUT PO1) NOT PO1) NOT INTERACT GATE1
+    HV_DIFF  = (HV_DIFF1 OR HV_DIFF2) OR GATE3
+    X = DIFF COIN INSIDE EDGE HV_DIFF
+    Y = EXT X DIFF < 0.44 ABUT>0<90 REGION
+    Y NOT LOGOMK
+}
+
+
+4A.1D.a {@ Minimum NWEL to a N+ DIFF(1.2V) spacing is 0.3um
+    x = EXT NWEL NDIF1_P < 0.3 ABUT<90 OVERLAP SINGULAR REGION
+    ((((((((x NOT SPS) NOT SPLLS) NOT DP4S) NOT DP3S) NOT SP_4) NOT SP_5) NOT SP_16) NOT SP_18) NOT LOGOMK
+}
+
+4A.1D.b_25V {@ Minimum NWEL to a N+ DIFF(2.5V) spacing is 0.5um
+    x = EXT NWEL NDIF3 < 0.5 ABUT<90 OVERLAP SINGULAR REGION
+    x NOT LOGOMK
+}
+
+4A.1D.b_33V {@ Minimum NWEL to a N+ DIFF(3.3V) spacing is 0.5um
+    x = EXT NWEL NDIF3 < 0.5 ABUT<90 OVERLAP SINGULAR REGION
+    x NOT LOGOMK
+}
+
+4A.1D.b_5V {@ Minimum NWEL to a N+ DIFF(5V) spacing is 1.44um
+    x = EXT NWEL NDIF3 < 1.44 ABUT<90 OVERLAP SINGULAR REGION
+    x NOT LOGOMK
+}
+
+4A.1E {@ Minimum NWEL enclosure of N+ DIFF exclude CAD_5V_LMOS_MARK is 0.16um
+    NTAP_Logic = NTAP NOT INTERACT (( SPS OR SPLLS ) OR LD5VMK)
+    x = ENC NTAP_Logic NWEL < 0.16 ABUT<90 SINGULAR OVERLAP REGION
+    (((x NOT SPS) NOT SPLLS) NOT LD5VMK) NOT LOGOMK
+}
+
+4A.1F {@ Minimum NWEL to P+ DIFF spcing exclude CAD_5V_LMOS_MARK is 0.16um
+       @ exclude CAD_5V_LMOS_MARK
+    x = EXT NWEL PTAP < 0.16 ABUT<90 SINGULAR OVERLAP REGION
+    (((x NOT SP_16) NOT SP_18) NOT LD5VMK) NOT LOGOMK
+} 
+
+4A.1G.a {@ Minimum NWEL overlap P+ DIFF(1.2V) is 0.3um
+    x = ENC PDIF1_P NWEL < 0.3 ABUT<90 SINGULAR OVERLAP REGION
+    (((((((((x NOT SPS) NOT SPLLS) NOT DP4S) NOT DP3S) NOT SP_4) NOT SP_5) NOT SP_16) NOT SP_18) NOT LD5VMK) NOT LOGOMK
+}
+
+4A.1G.b_25V {@ Minimum NWEL overlap P+ DIFF(2.5V) is 0.5um
+    x = ENC PDIF3 NWEL < 0.5 ABUT<90 SINGULAR OVERLAP REGION
+    (x NOT LD5VMK) NOT LOGOMK
+}
+
+4A.1G.b_33V {@ Minimum NWEL overlap P+ DIFF(3.3V) is 0.5um
+    x = ENC PDIF3 NWEL < 0.5 ABUT<90 SINGULAR OVERLAP REGION
+    (x NOT LD5VMK) NOT LOGOMK
+}
+
+4A.1G.b_5V {@ Minimum NWEL overlap P+ DIFF(5V) is 1.44um
+    x = ENC PDIF3 NWEL < 1.44 ABUT<90 SINGULAR OVERLAP REGION
+    (x NOT LD5VMK) NOT LOGOMK
+}
+
+4A.1H {@ Minimum DIFF/isolation area 0.1024
+    E = AREA ( DIFF NOT LOGOMK ) < 0.1024
+    (E NOT SP_4) NOT SP_5
+}
+
+GROUP DIFF_DENSITY 4A.1I
+
+4A.1I {@ Diffusion density, 450umx450um, 150um increments must > 20%
+    DENSITY DIFF_ALL INSIDE OF LAYER BULK < 0.2 WINDOW 450 STEP 150 BACKUP PRINT DIFF_DENSITY
+}
+
+//===========================
+//===  N-Well Rules (P92)  ==
+//===========================
+
+//GROUP 4A.2B_FAST 4A.2B.a 4A.2B.b1 4A.2B.b2
+
+OFF_GRID_NWEL {@ Grid size NWEL is 0.005
+   OFFGRID (NWEL OUTSIDE (SP_18 OR SP_16)) 5
+   OFFGRID NWEL 1 
+}
+
+4A.2A.a {@ Minimum N_WELL width is 0.63um
+    E = INT NWEL < 0.63 ABUT>0<90 SINGULAR REGION
+    E NOT LOGOMK
+}
+
+4A.2A.b {@ Minimum N_WELL width for N_WELL resistor is 1.67um
+    E = INT RNWELL < 1.67 ABUT>0<90 SINGULAR REGION
+    E NOT LOGOMK
+}
+
+4A.2A.c {@ Maximum N_WELL width for resistor is 20 um
+    NWEL_RES_BODY = ( RNWELL AND NWR ) NOT LOGOMK
+    X = NWEL_RES_BODY COIN INSIDE EDGE RNWELL
+    Y = EXPAND EDGE X INSIDE BY 10 CORNER FILL
+    NWEL_RES_BODY INTERACT (NWEL_RES_BODY NOT Y)
+}
+
+4A.2B.a {@ Minimum N_WELL to N_WELL spacing for equal-potential is 0.63um
+    E = EXT NWELL < 0.63 ABUT>0<90 SINGULAR REGION
+    E NOT LOGOMK
+}
+
+4A.2B.b1 {@ Minium N_WELL to N_WELL spacing of non-potential (1.2V) is 1.0um
+    E = EXT NWELL < 1.0 ABUT>0<90 SINGULAR NOT CONNECTED REGION
+    E NOT LOGOMK
+}
+
+4A.2B.b2_25V {@ Minimum N_WELL to N_WELL spacing of non-potential (2.5V) is 1.5um
+    HNWELL = (NWELL INTERACT PDIF3) OR (NWELL INTERACT (NTAP INTERACT TG))
+    HNWELL_CONNECTED = STAMP HNWELL BY NWELL
+    E = EXT HNWELL_CONNECTED NWELL < 1.5 ABUT>0<90 SINGULAR NOT CONNECTED REGION
+    E NOT LOGOMK
+}
+
+4A.2B.b2_33V {@ Minimum N_WELL to N_WELL spacing of non-potential (3.3V) is 1.5um
+    HNWELL = (NWELL INTERACT PDIF3) OR (NWELL INTERACT (NTAP INTERACT TG))
+    HNWELL_CONNECTED = STAMP HNWELL BY NWELL
+    E = EXT HNWELL_CONNECTED NWELL < 1.5 ABUT>0<90 SINGULAR NOT CONNECTED REGION
+    E NOT LOGOMK
+}
+
+4A.2B.b2_5V {@ Minimum N_WELL to N_WELL spacing of non-potential (5V) is 2.22um
+    HNWELL = (NWELL INTERACT PDIF3) OR (NWELL INTERACT (NTAP INTERACT TG))
+    HNWELL_CONNECTED = STAMP HNWELL BY NWELL
+    E = EXT HNWELL_CONNECTED NWELL < 2.22 ABUT>0<90 SINGULAR NOT CONNECTED REGION
+    (E NOT LD5VMK) NOT LOGOMK
+}   // PEI will exclude LD5VMK in next version
+
+4A.2B.c_d {@ Minimum N_WELL resistor to N_WELL resistor is 2.20um
+           @ Minimum N_WELL resistor to N_WELL          is 2.20um
+    E = EXT RNWELL NWEL < 2.20 ABUT>0<90 SINGULAR REGION
+    E NOT LOGOMK
+}
+
+4A.2C_2D {@ Minimum N_WELL enclosure of N_WELL resistor is 0um
+          @ N_WELL resistor to N+ DIFFUSION (for N_WELL tap) spacing is 0um
+    X = ( NWR NOT LOGOMK ) NOT COIN INSIDE EDGE RNWELL
+    X NOT TOUCH OUTSIDE EDGE NTAP
+    ( NTAP AND NWR ) NOT LOGOMK
+}
+
+//==================================
+//===  VTN_SP Layer Rules (P1K)  ===
+//==================================
+
+GATE1_VTN_SP     = (GATE1 AND VTN_SP) NOT PPLUS
+GATE_NOT_VTN_SP  = GATE NOT GATE1_VTN_SP
+
+OFF_GRID_VTN_SP {@ Grid SIZE of VTN_SP is 0.005
+   OFFGRID (VTN_SP OUTSIDE (SP_18 OR SP_16)) 5
+   OFFGRID VTN_SP 1
+}
+
+4A.4.2A {@ Minimum VTN_SP width is 0.40um
+    E = INT VTN_SP < 0.40 ABUT>0<90 REGION // singular is not checked for Vt implant
+    E NOT LOGOMK
+}
+
+4A.4.2B {@ Minimum VTN_SP to VTN_SP spacing is 0.40um
+    E = EXT VTN_SP < 0.40 ABUT>0<90 REGION // singular is not checked for Vt implant
+    E NOT LOGOMK
+}
+
+4A.4.2C {@ Minimum VTN_SP enclosure of POLY1 gate (POLY1 on DIFFUSION)
+         @ of the NMOS device is 0.16um
+    E = ENC GATE1_VTN_SP VTN_SP < 0.16 ABUT<90 REGION
+    (E NOT SP_16) NOT LOGOMK
+
+    (VTN_SP NOT LOGOMK) INSIDE EDGE GATE
+}
+
+4A.4.2D {@ Minimum VTN_SP to unrelated POLY1 gate spacing is 0.28um
+    E = EXT VTN_SP GATE_NOT_VTN_SP < 0.28 ABUT INSIDE ALSO REGION
+    (((E NOT SPS) NOT SP_5) NOT SP_16) NOT LOGOMK
+
+    (VTN_SP NOT LOGOMK) INSIDE EDGE GATE
+}
+
+//==============================================
+//===  VTNH Layer Rules (P95)                ===
+//==============================================
+
+GATE1_VTNH     = (GATE1 AND VTNH) NOT PPLUS
+GATE_NOT_VTNH  = GATE NOT GATE1_VTNH
+
+OFF_GRID_VTNH {@ Grid size VTNH is 0.005
+   OFFGRID (VTNH OUTSIDE (SP_18 OR SP_16)) 5
+   OFFGRID VTNH 1
+}
+
+4A.4.3A {@ Minimum VTNH width is 0.40um
+    E = INT VTNH < 0.40 ABUT>0<90 REGION // singular is not checked for Vt implant
+    E NOT LOGOMK
+}
+
+4A.4.3B {@ Minimum VTNH to VTNH spacing is 0.40um
+    E = EXT VTNH < 0.40 ABUT>0<90 REGION // singular is not checked for Vt implant
+    E NOT LOGOMK
+}
+
+4A.4.3C {@ Minimum VTNH  enclosure of POLY1 gate (POLY1 on DIFFUSION)
+         @ of the low leakage NMOS device is 0.16um
+    E = ENC GATE1_VTNH VTNH < 0.16 ABUT<90 REGION
+    (E NOT SP_18) NOT LOGOMK
+
+    ( VTNH NOT LOGOMK ) INSIDE EDGE GATE
+}
+
+4A.4.3D {@ Minimum VTNH to unrelated POLY1 gate spacing is 0.28 um
+    E = EXT VTNH GATE_NOT_VTNH < 0.28 ABUT INSIDE ALSO REGION
+    ((((E NOT SPLLS) NOT DP3S) NOT SP_4) NOT SP_18) NOT LOGOMK
+
+    ( VTNH NOT LOGOMK ) INSIDE EDGE GATE
+}
+
+//==============================================
+//===  VTP_SP Layer Rules (P1L)              ===
+//==============================================
+
+GATE1_VTP_SP     = (GATE1 AND VTP_SP) AND PPLUS
+GATE_NOT_VTP_SP  = GATE NOT GATE1_VTP_SP
+
+OFF_GRID_VTP_SP {@ Grid size VTP_SP is 0.005
+   OFFGRID (VTP_SP OUTSIDE (SP_18 OR SP_16)) 5
+   OFFGRID VTP_SP 1
+}
+
+4A.5.2A {@ Minimum VTP_SP width is 0.40um
+    E = INT VTP_SP < 0.40 ABUT>0<90 REGION // singular is not checked for Vt implant
+    E NOT LOGOMK
+}
+
+4A.5.2B {@ Minimum VTP_SP to VTP_SP spacing is 0.40um
+    E = EXT VTP_SP < 0.40 ABUT>0<90 REGION // singular is not checked for Vt implant
+    E NOT LOGOMK
+}
+
+4A.5.2C {@ Minimum VTP_SP enclosure of POLY1 gate (POLY1 on DIFFUSION)
+         @ of the PMOS device is 0.16um
+    E = ENC GATE1_VTP_SP VTP_SP < 0.16 ABUT<90 REGION
+    (E NOT SP_16) NOT LOGOMK
+
+    ( VTP_SP NOT LOGOMK ) INSIDE EDGE GATE
+}
+
+4A.5.2D {@ Minimum VTP_SP to unrelated POLY1 gate spacing is 0.28um
+    E = EXT VTP_SP GATE_NOT_VTP_SP < 0.28 ABUT INSIDE ALSO REGION
+    (((E NOT SPS) NOT SP_5) NOT SP_16) NOT LOGOMK
+
+    ( VTP_SP NOT LOGOMK ) INSIDE EDGE GATE
+}
+
+//==============================================
+//===  VTPH Layer Rules (P17)                ===
+//==============================================
+
+GATE1_VTPH     = (GATE1 AND VTPH) AND PPLUS
+GATE_NOT_VTPH  = GATE NOT GATE1_VTPH
+
+OFF_GRID_VTPH {@ Grid size VTPH is 0.005
+   OFFGRID (VTPH OUTSIDE (SP_18 OR SP_16)) 5
+   OFFGRID VTPH 1
+}
+
+4A.5.3A {@ Minimum VTPH width is 0.40um
+    E = INT VTPH < 0.40 ABUT>0<90 REGION // singular is not checked for Vt implant
+    E NOT LOGOMK
+}
+
+4A.5.3B {@ Minimum VTPH to VTPH spacing is 0.40um
+    E = EXT VTPH < 0.40 ABUT>0<90 REGION // singular is not checked for Vt implant
+    E NOT LOGOMK
+}
+
+4A.5.3C {@ Minimum VTPH enclosure of POLY1 gate (POLY1 on DIFFUSION)
+         @ of low leakage PMOS device is 0.16um
+    E = ENC GATE1_VTPH VTPH < 0.16 ABUT<90 REGION
+    (E NOT SP_18) NOT LOGOMK
+
+    ( VTPH NOT LOGOMK ) INSIDE EDGE GATE
+}
+
+4A.5.3D {@ Minimum VTPH to unrelated POLY1 gate spacing is 0.28um
+    E = EXT VTPH GATE_NOT_VTPH < 0.28 ABUT INSIDE ALSO REGION
+    ((((E NOT SPLLS) NOT DP3S) NOT SP_4) NOT SP_18) NOT LOGOMK
+
+    ( VTPH NOT LOGOMK ) INSIDE EDGE GATE
+}
+
+//======================================
+//===  TG (3.3v oxide)  Rules (21)  ===
+//======================================
+
+OFF_GRID_TG {@ Grid size TG is 0.005
+   OFFGRID TG 5
+}
+
+4A.8A {@ Minimum TG width is 0.45um
+    E = INT TG < 0.45 ABUT>0<90 SINGULAR REGION
+    E NOT LOGOMK
+}
+
+4A.8B {@ Minimum TG to TG spacing is 0.45um
+    E = EXT TG < 0.45 ABUT>0<90 SINGULAR REGION
+    E NOT LOGOMK
+}
+
+4A.8C {@ Minimum TG enclosure of DIFFUSION for 2.5V/3.3V/5V device is 0.3um
+    X = DIFF INTERACT TG
+    E = ENC X TG < 0.3 ABUT<90 SINGULAR REGION
+    E NOT LOGOMK
+}
+
+4A.8D {@ Minimum TG to unrelated DIFFUSION spacing is 0.3um
+    E = EXT TG DIFF < 0.3 ABUT<90 SINGULAR REGION
+    E NOT LOGOMK
+}
+
+4A.8E {@ Minimum TG enclosure of POLY1 gate for 2.5V/3.3V/5V device is 0.4um
+    E1 = ENC GATE3_W TG < 0.4 ABUT<90 OPPOSITE REGION
+    E2 = ENC (PO1 INSIDE EDGE DIFF) TG < 0.4 ABUT<90 OPPOSITE REGION
+    (E1 OR E2) NOT LOGOMK
+
+    (TG INSIDE EDGE GATE) OUTSIDE EDGE LOGOMK
+}
+
+4A.8F {@ Minimum TG to unrelated POLY1 gate spacing is 0.4um
+    TG_E_IN_DIFF = TG INSIDE EDGE DIFF
+    E = EXT TG_E_IN_DIFF GATE1_W < 0.4 ABUT<90 REGION
+    E NOT LOGOMK
+
+    (TG INSIDE EDGE GATE) OUTSIDE EDGE LOGOMK
+}
+
+4A.8G {@ Minimum OTP_TG0 width is 0.45um
+    E = INT OTP_TG0 < 0.45 ABUT<90 SINGULAR REGION
+    E NOT LOGOMK
+}
+
+4A.8H {@ Minimum OTP_TG0 to OTP_TG0 spacing or notch is 0.45um
+    E = EXT OTP_TG0 < 0.45 ABUT<90 SINGULAR REGION
+    E NOT LOGOMK
+}
+
+4A.8I {@ Minimum OTP_TG0 enclosure of DIFFUSION for 3.3V device is 0.3um
+    E = ENC DIFF OTP_TG0 < 0.3 ABUT<90 SINGULAR REGION
+    E NOT LOGOMK
+}
+
+4A.8J {@ Minimum OTP_TG0 to unrelated DIFFUSION spacing is 0.3um
+    E = EXT OTP_TG0 DIFF < 0.3 ABUT<90 SINGULAR REGION
+    E NOT LOGOMK
+}
+
+4A.8K {@ Minimum OTP_TG0 enclosure of POLY1 gate for 3.3V device is 0.23um
+    E = ENC GATE_W OTP_TG0 < 0.23 ABUT<90 OPPOSITE REGION
+    E NOT LOGOMK
+
+    (OTP_TG0 INSIDE EDGE GATE) OUTSIDE EDGE LOGOMK
+}
+
+4A.8L {@ Minimum OTP_TG0 to unrelated POLY1 gate spacing is 0.2um
+    OTP_TG0_E_IN_DIFF = OTP_TG0 INSIDE EDGE DIFF
+    E = EXT OTP_TG0_E_IN_DIFF GATE_W < 0.2 ABUT<90 REGION
+    E NOT LOGOMK
+
+    (OTP_TG0 INSIDE EDGE GATE) OUTSIDE EDGE LOGOMK
+}
+
+//==========================
+//===  PO1 Rules (P30)   ===
+//==========================
+
+
+GROUP Recommend_PO1_CHECK 4A.9L 4A.9M
+
+GROUP CHECK_2.5V_IO ?_25V
+GROUP CHECK_3.3V_IO ?_33V ?_33V_HG ?_33V_REG
+GROUP CHECK_5V_IO   ?_5V
+
+GROUP CHECK_3.3V_HG_IO ?_33V_HG
+GROUP CHECK_3.3V_REGULAR_IO ?_33V_REG
+
+OFF_GRID_PO1 {@ Grid size PO1 is 0.005
+   OFFGRID (PO1 OUTSIDE (SP_18 OR SP_16)) 5
+   OFFGRID PO1 1
+}
+
+4A.9AaBaC {@ Minimum POLY1 width for 1.2V NMOS is 0.12um
+           @ Minimum POLY1 width for 1.2V PMOS is 0.12um
+           @ Minimum POLY1 width for interconnect is 0.12um
+    E = INT PO1 < 0.12 ABUT>0<90 SINGULAR REGION
+    ((((((((E NOT SPS) NOT SPLLS) NOT DP4S) NOT DP3S) NOT SP_4) NOT SP_5) NOT SP_16) NOT SP_18) NOT LOGOMK
+}
+
+4A.9Ab1_1Bb1_1_25V {@ Minimum POLY1 width for 2.5V NMOS is 0.26um
+                    @ Minimum POLY1 width for 2.5V PMOS is 0.26um
+    E = INT GATE3_W < 0.26 ABUT>0<90 REGION
+    E NOT LOGOMK
+}
+
+4A.9Ab1_2Bb1_2_25V {@ Minimum POLY1 width for 2.5V overdrive 3.3V NMOS is 0.55um
+                    @ Minimum POLY1 width for 2.5V overdrive 3.3V PMOS is 0.55um
+                    @ (over TG and CAD_OD3P3V_GOX50_MARK)
+    E = INT (GATE3_W INSIDE EDGE OD3P3VGMK) < 0.55 ABUT>0<90 REGION
+    E NOT LOGOMK
+}
+
+4A.9Ab2Bb2_33V_REG {@ Minimum POLY1 width for 3.3V NMOS is 0.34um
+                    @ Minimum POLY1 width for 3.3V PMOS is 0.34um
+                    @ (Regular)
+    E = INT GATE3_W < 0.34 ABUT>0<90 REGION
+    E NOT LOGOMK
+}
+
+4A.9Ab3Bb3_33V_HG {@ Minimum POLY1 width for 3.3V NMOS is 0.364um
+                   @ Minimum POLY1 width for 3.3V PMOS is 0.364um
+                   @ (HG)
+    E = INT GATE3_W < 0.364 ABUT>0<90 REGION
+    E NOT LOGOMK
+}
+
+4A.9Ab4Bb4_Ab5Bb5_5V {@ Minimum POLY1 width for 5V NMOS is 0.542um
+                      @ Minimum POLY1 width for 5V PMOS is 0.542um
+                      @ (LVT & RVT)
+    E = INT GATE3_W < 0.542 ABUT>0<90 REGION
+    E NOT LOGOMK
+}
+
+
+4A.9D.a1_4A.9D.c1 {@ Minimum POLY1 to POLY1 spacing on DIFFUSION regions is 0.2 um
+                   @ (without CONTACT)
+    E = EXT PO1 < 0.20 ABUT>0<90 SINGULAR REGION
+    (((((((E NOT SPS) NOT SPLLS) NOT DP3S) NOT SP_4) NOT SP_5) NOT SP_16) NOT SP_18) NOT LOGOMK
+}
+
+4A.9D.a2 {@ Minimum POLY1 to POLY1 spacing on DIFFUSION regions is 0.24um
+          @ (without CONTACT, when POLY1 width > 0.24um)
+    E = EXT WGATE_Woc GATE_Woc < 0.24 ABUT>0<90 REGION
+    E NOT LOGOMK
+}
+
+4A.9D.a3_5V {@ Minimum POLY1 to POLY1 spacing on DIFFUSION regions is 0.32um
+          @ (for 5.0V device , without CONTACT)
+    X = GATE_Woc INSIDE EDGE TG
+    E = EXT X < 0.32 ABUT>0<90 REGION
+    E NOT LOGOMK
+}
+
+4A.9D.b1 {@ Minimum POLY1 to POLY1 spacing on DIFFUSION regions is 0.26um
+          @ (with CONTACT, when POLY1 width <= 0.24um)
+    E = EXT GATE_Wc < 0.26 ABUT>0<90 REGION
+    ((E NOT SPS) NOT SPLLS) NOT LOGOMK
+}
+
+4A.9D.b2 {@ Minimum POLY1 to POLY1 spacing on DIFFUSION regions is 0.30um
+          @ (with contact, when POLY1 width > 0.24um)
+    E = EXT WGATE_Wc GATE_Wc < 0.30 ABUT>0<90 REGION
+    E NOT LOGOMK
+}
+
+4A.9D.b3_5V {@ Minimum POLY1 to POLY1 spacing on DIFFUSION regions is 0.34um
+          @ (for 5.0V device , with contact)
+    X = GATE_Wc INSIDE EDGE TG
+    E = EXT X < 0.34 ABUT>0<90 REGION
+    E NOT LOGOMK
+}
+
+// 4A.9D.c2.1 is covered by 4A.9D.a1_4A.9D.c1
+
+4A.9D.c2.2 {@ Minimum POLY1 to POLY1 spacing on field area is 0.24um
+            @ (when POLY1 width > 0.24um and POLY1 overlap length > 1um)
+    x = EXT WEXPO_E EXPO_E < 0.24 ABUT>0<90 OPPOSITE REGION
+    ( x WITH EDGE (LENGTH x > 1.0) ) NOT LOGOMK
+}
+
+4A.9D.c3.1_5V {@ Minimum POLY1 to POLY1 spacing on field area is 0.24um
+               @ (5.0V device and POLY1 overlap length <= 1um)
+    Y = EXPO_E INSIDE EDGE TG
+    x = EXT Y < 0.24 ABUT>0<90 OPPOSITE REGION
+    ( x WITH EDGE (LENGTH x <= 1.0) ) NOT LOGOMK
+}
+
+4A.9D.c3.2_5V {@ Minimum POLY1 to POLY1 spacing on field area is 0.28um
+               @ (5.0V device and POLY1 overlap length > 1um)
+    Y = EXPO_E INSIDE EDGE TG
+    x = EXT Y < 0.28 ABUT>0<90 OPPOSITE REGION
+    ( x WITH EDGE (LENGTH x > 1.0) ) NOT LOGOMK
+}
+
+4A.9E {@ Minimum POLY1 overhang of DIFFUSION is 0.18um
+    E = ENC DIFF PO1 < 0.18 ABUT<90 SINGULAR REGION
+    ((((((E NOT SPS) NOT SPLLS) NOT SP_4) NOT SP_5) NOT SP_16) NOT SP_18) NOT LOGOMK
+}
+
+4A.9F {@ Minimum POLY1 on field region to DIFFUSION spacing is 0.10um
+    E = EXT PO1 DIFF < 0.10 ABUT<90 SINGULAR REGION
+    ((((((((E NOT SPS) NOT SPLLS) NOT DP4S) NOT DP3S) NOT SP_4) NOT SP_5) NOT SP_16) NOT SP_18) NOT LOGOMK
+}
+
+4A.9G {@ Minimum endcap POLY1 to related DIFFUSION spacing is 0.10um
+    END_CAP =  INTPOL TOUCH GATE == 1
+    X = DIFF OUTSIDE EDGE GATE
+    Y = GATE TOUCH EDGE END_CAP
+    E = EXT Y X < 0.1 PERP ONLY ABUT == 90 REGION
+    (((((E NOT SPS) NOT SPLLS) NOT DP4S) NOT SP_4) NOT SP_5) NOT LOGOMK
+}
+
+DIFF_E_WO_GATE = DIFF NOT TOUCH EDGE GATE
+
+4A.9H.a__4A.9O {@ Minimum DIFFUSION overhang of POLY1 is 0.20um
+    E = ENC GATE_W DIFF < 0.20 ABUT<90 REGION
+    ((((E NOT SPS) NOT SPLLS) NOT DP4S) NOT DP3S) NOT LOGOMK
+}
+
+4A.9H.b {@ Minimum DIFFUSION overhang of POLY1 is 0.24 um
+         @ (When POLY1 width > 0.24um)
+    WGATE_W = WPO COIN INSIDE EDGE GATE_W
+    E1 = ENC WGATE_W DIFF < 0.24 REGION PARALLEL ONLY
+    E2 = ENC WGATE_W DIFF_E_WO_GATE < 0.24 REGION
+    ( E1 OR E2 ) NOT LOGOMK
+}
+
+4A.9I.a {@ Minimum POLY1 width for 45 degree bent gate(1.2V) is 0.14um
+    E = INT GATE1_W < 0.14 ANGLED == 2 REGION
+    E NOT LOGOMK
+}
+
+4A.9I.b1_1_25V {@ Minimum POLY1 width for 45 degree bent gate(2.5V) is 0.3um
+    E = INT GATE3_W < 0.3 ANGLED == 2 REGION
+    E NOT LOGOMK
+}
+
+4A.9I.b1_2_25V {@ Minimum POLY1 width for 45 degree bent gate(2.5V overdrive 3.3V) is 0.59um
+                @ (over TG and CAD_OD3P3V_GOX50_MARK)
+    E = INT (GATE3_W INSIDE EDGE OD3P3VGMK) < 0.59 ANGLED == 2 REGION
+    E NOT LOGOMK
+}
+
+4A.9I.b2_33V_REG {@ Minimum POLY1 width for 45 degree bent gate(3.3V) is 0.38um
+                  @ (Regular)
+    E = INT GATE3_W < 0.38 ANGLED == 2 REGION
+    E NOT LOGOMK
+}
+
+4A.9I.b3_33V_HG {@ Minimum POLY1 width for 45 degree bent gate(3.3V) is 0.404um
+                 @ (HG)
+    E = INT GATE3_W < 0.404 ANGLED == 2 REGION
+    E NOT LOGOMK
+}
+
+4A.9I.b4_b5_5V {@ Minimum POLY1 width for 45 degree bent gate(5V) is 0.587um
+                @ (LVT & RVT)
+    E = INT GATE3_W < 0.587 ANGLED == 2 REGION
+    E NOT LOGOMK
+}
+
+4A.9J {@ POLY1 90 degree bent gate is not allowed.
+    E1 = EXT GATE_W < 0.1 ABUT == 90 REGION  // check external corner
+    E2 = INT GATE_W < 0.1 ABUT == 90 REGION  // check internal corner
+    (((E1 OR E2) NOT SPS) NOT SPLLS) NOT LOGOMK
+}
+
+4A.9K {@ Maximum POLY1 overlap DIFFUSION area is 80um x 80um.
+    E = AREA GATE > 6400
+    E NOT LOGOMK
+}
+
+4A.9L {@ Maximum POLY1 length on DIFFUSION if POLY1 to POLY1 spacing on DIFFUSION regions with CONTACT < 0.4um is 0.74um
+    E = EXT GATE_Wc < 0.4 OPPOSITE PROJ > 0.74 PARALLEL REGION
+    E NOT LOGOMK
+}
+
+4A.9M {@ Maximum POLY1 length on DIFF if DIFFUSION overhang of POLY1 < 0.34um is 2um
+    E = ENC PO1 DIFF < 0.34 OPPOSITE PROJ > 2 PARALLEL REGION
+    E NOT LOGOMK
+}
+
+4A.9N {@ Minimum POLY1 bent gate on field region to DIFFUSION spacing is 0.10um
+    E = EXT GATE_W EXPO_E < 0.10 OBTUSE ONLY REGION
+    ((E NOT SPS) NOT SPLLS) NOT LOGOMK
+}
+
+4A.9O {@ Minimum POLY1 bent gate on DIFFUSION region to field spacing is 0.20um
+    x = ANGLE GATE_W >0<90
+    E = ENC x DIFF < 0.20 ABUT<90 REGION
+    E NOT LOGOMK
+}
+
+GROUP POLY_DENSITY 4A.9P
+
+4A.9P {@ The PO1 density 1mmX1mm 500um increments must >15%
+    PO1_ALL = PO1 OR PO1DUMY
+    DENSITY PO1_ALL INSIDE OF LAYER BULK < 0.15  WINDOW 1000 STEP 500 BACKUP PRINT POLY_DENSITY
+}
+
+4A.9Q {@ POLY1 may only intersect DIFFUSION at 90 degrees.
+    X = ENC GATE_W DIFF < 0.1 ABUT>0<90 INTERSECTING ONLY REGION  // check external corner
+    Y = INT GATE_W DIFF < 0.1 ABUT>0<90 INTERSECTING ONLY REGION  // check internal corner
+    Z = X OR Y
+    ((Z NOT SPS) NOT SPLLS) NOT LOGOMK
+}
+
+4A.9_Note1 {@ The region of "CAD_OD3P3V_GOX50_MARK" is the same as TG
+    OD3P3VGMK NOT COIN INSIDE EDGE TG
+}
+
+//================================
+//===  N+ Implant Rules (P98)  ===
+//================================
+
+//GROUP DRAWN_NPLUS 4A.10? 4A.10?.?
+
+OFF_GRID_NPLUS {@ Grid size NPLUS is 0.005
+   OFFGRID (NPLUS OUTSIDE (SP_18 OR SP_16)) 5
+   OFFGRID NPLUS 1
+}
+
+4A.10A {@ Minimum N+ implant width is 0.24um
+    E = INT NPLUS < 0.24 ABUT>0<90 SINGULAR REGION
+    E NOT LOGOMK
+}
+
+4A.10B {@ Minimum N+ implant to N+ implant spacing is 0.24um
+    E = EXT NPLUS < 0.24 ABUT>0<90 SINGULAR REGION
+    (((E NOT SP_5) NOT SP_16) NOT SP_18) NOT LOGOMK
+}
+
+4A.10C.a {@ Minimum N+ implant overhang of N+ DIFFUSION (inside P_WELL) is 0.16um
+    x = ENC ACTIVE_PS NPLUS < 0.16 ABUT<90 SINGULAR REGION
+    y = ENC ACTIVE_TW NPLUS < 0.16 ABUT<90 SINGULAR REGION
+    (((x OR y) NOT SP_16) NOT SP_18) NOT LOGOMK
+}
+
+4A.10C.b {@ Minimum N+ implant overhang of N+ DIFFUSION (inside N_WELL) is 0.06um
+    E = ENC ACTIVE_NT NPLUS < 0.06 ABUT<90 SINGULAR REGION
+    (E NOT SP_5) NOT LOGOMK
+}
+
+4A.10D.a {@ Minimum N+ implant to P+ DIFFUSION spacing (inside N_WELL) is 0.16um
+          @ (DIFFUSION overlap (N+ and P+) is not allowed)
+    E = EXT NPLUS ACTIVE_NT < 0.16  ABUT<90 SINGULAR REGION
+    ((((E NOT SP_4) NOT SP_5) NOT SP_16) NOT SP_18) NOT LOGOMK
+
+    DIFF AND (PPLUS AND NPLUS)
+}
+
+4A.10D.b {@ Minimum N+ implant to P+ DIFFUSION spacing (inside P_WELL) is 0.06um
+          @ (DIFFUSION overlap (N+ and P+) is not allowed)
+    x = EXT NPLUS ACTIVE_PS < 0.06 ABUT<90 SINGULAR REGION
+    y = EXT NPLUS ACTIVE_TW < 0.06 ABUT<90 SINGULAR REGION
+    (x OR y) NOT LOGOMK
+
+   DIFF AND (PPLUS AND NPLUS)
+}
+
+//===================================
+//===   N+/P+ Butting Rules (P97) ===
+//===================================
+
+4A.10E {@ Minimum N+ to P+ DIFFUSION in the same potential is 0 um
+    E = (NPLUS AND PPLUS) AND DIFF
+    E NOT LOGOMK
+}
+
+4A.10E__11E.Note {@ Exact spacing of N+ implant to P+ implant on the same DIFFUSION
+                  @ in the same potential = 0 um
+    X = (DIFF INTERACT NPLUS) INTERACT PPLUS
+    NPLUS_X = NPLUS INSIDE EDGE X
+    PPLUS_X = PPLUS INSIDE EDGE X
+    NPLUS_X NOT COIN EDGE PPLUS_X
+}
+
+4A.10F {@ Minimum NPLUS overlap DIFF to form N+ region is 0.16um
+    X = INT BUT_NPLUS DIFF < 0.16 ABUT<90 REGION
+    X NOT LOGOMK
+}
+
+4A.10G {@ Minimum DIFF extension over NPLUS to form P+ region is 0.16um
+    X = ENC BUT_NPLUS DIFF < 0.16 ABUT<90 REGION
+    X NOT LOGOMK
+}
+
+4A.10H {@ Minimum NPLUS to PO1 spacing to form P+ S/D region is 0.24um
+    X = EXT BUT_NPLUS GATE_W < 0.24 ABUT<90 REGION
+    X NOT LOGOMK
+}
+
+4A.10I {@ Minimum NPLUS extension over PO1 to form N+ S/D is 0.24um
+    x = ENC GATE_W BUT_NPLUS < 0.24 ABUT REGION
+    x NOT LOGOMK
+}
+
+4A.10J {@ Minimum NPLUS overlap CONT region is 0.10um
+    X = ENC DIFCNT BUT_NPLUS < 0.10 ABUT REGION
+    X NOT LOGOMK
+}
+
+4A.10K {@ Minimum NPLUS to P+ CONT spacing is 0.10um, no butted contact
+    X = EXT DIFCNT BUT_NPLUS < 0.10 ABUT<90 REGION
+    X NOT LOGOMK
+
+    BUT_NPLUS INSIDE EDGE DIFCNT
+}
+
+// 4A.10M should be checked no matter NPLUS is drawn or not, name it as 4A.10M
+// to remove it from check group DRAWN_NPLUS
+
+4A.10M {@ Maximum N+ DIFFUSION to the nearest P+ pick-up spacing is 20um
+        @ (I/O, RAM, ROM, capacitor, diode, and inactive diffusion are excepted)
+    NWEL1 = NWELL NOT TWEL // refer to mask tooling
+    EXP_PTAP = SIZE PTAP BY 20 OUTSIDE OF NWEL1 STEP 0.5
+    X = (NDIF INTERACT PO1) NOT EXP_PTAP
+    ((((((((X NOT SPS) NOT SPLLS) NOT DP4S) NOT DP3S) NOT SP_4) NOT SP_5) NOT ROM_ID) NOT IOID) NOT LOGOMK
+}
+
+// Rule 4A.10G to 4A.10L checked by 4A.11F to 4A.11L
+
+4A.10N {@ Minimun N+ implant area is 0.1764 sq.um
+    E = AREA NPLUS < 0.1764
+    E NOT LOGOMK
+}
+
+4A.10O {@ Minimun N+ implant enclosed area is 0.25 sq.um
+    x = HOLES NPLUS < 0.25*50 INNER
+    y = x NOT NPLUS
+    E = AREA y < 0.25
+    E NOT LOGOMK
+}
+
+//================================
+//===  P+ Implant Rules (P97)  ===
+//================================
+
+OFF_GRID_PPLUS {@ Grid size PPLUS is 0.005
+   OFFGRID (PPLUS OUTSIDE (SP_18 OR SP_16)) 5
+   OFFGRID PPLUS 1
+}
+
+4A.11A {@ Minimum P+ implant width is 0.24um
+    E = INT PPLUS < 0.24 ABUT>0<90 SINGULAR REGION
+    E NOT LOGOMK
+}
+
+4A.11B {@ Minimum P+ implant to P+ implant spacing is 0.24um
+    E = EXT PPLUS < 0.24 ABUT>0<90 SINGULAR REGION
+    ((E NOT SP_16) NOT SP_18) NOT LOGOMK
+}
+
+4A.11C.a {@ Minimum P+ implant overhang of P+ DIFFUSION (inside N_WELL) is 0.16um
+    E = ENC ACTIVE_NT PPLUS < 0.16 ABUT<90 SINGULAR REGION
+    ((((E NOT SP_4) NOT SP_5) NOT SP_16) NOT SP_18) NOT LOGOMK
+}
+
+4A.11C.b {@ Minimum P+ implant overhang of P+ DIFFUSION (inside P_WELL) is 0.06um
+    X1 = ENC ACTIVE_TW PPLUS < 0.06 ABUT<90 SINGULAR REGION
+    X2 = ENC ACTIVE_PS PPLUS < 0.06 ABUT<90 SINGULAR REGION
+    (X1 OR X2) NOT LOGOMK
+}
+
+4A.11D.a {@ Minimum P+ implant to N+ DIFFUSION spacing (inside P_WELL) is 0.16um
+    x = EXT PPLUS ACTIVE_PS < 0.16 ABUT<90 SINGULAR REGION
+    y = EXT PPLUS ACTIVE_TW < 0.16 ABUT<90 SINGULAR REGION
+    (((x OR y) NOT SP_16) NOT SP_18) NOT LOGOMK
+}
+
+4A.11D.b {@ Minimum P+ implant to N+ DIFFUSION spacing (inside N_WELL) is 0.06um
+    E = EXT PPLUS ACTIVE_NT < 0.06 ABUT<90 SINGULAR REGION
+    E NOT LOGOMK
+}
+
+//===================================
+//===   N+/P+ Butting Rules (P97) ===
+//===================================
+
+4A.11E {@ Minimum N+ to P+ DIFFUSION spacing in the same potential is 0.00 um
+    E = (NPLUS AND PPLUS) AND DIFF
+    E NOT LOGOMK
+}
+
+4A.11F {@ Minimum P+ implant overlap DIFFUSION to form P+ region is 0.16um
+    E = INT BUT_PPLUS DIFF < 0.16 ABUT<90 REGION
+    E NOT LOGOMK
+}
+
+4A.11G {@ Minimum DIFFUSION overhang of P+ implant to form N+ region is 0.16um
+    E = ENC BUT_PPLUS DIFF < 0.16 ABUT<90 REGION
+    E NOT LOGOMK
+}
+
+4A.11H {@ Minimum P+ implant to POLY1 spacing to form N+ S/D region is 0.24um
+    E = EXT BUT_PPLUS GATE_W < 0.24 ABUT<90 REGION
+    E NOT LOGOMK
+}
+
+4A.11I {@ Minimum P+ implant overhang of POLY1 to form P+ S/D region is 0.24um
+    E = ENC GATE_W BUT_PPLUS < 0.24 ABUT REGION
+    E NOT LOGOMK
+}
+
+4A.11J {@ Minimum P+ implant enclosure of CONTACT region is 0.10um
+    E = ENC DIFCNT BUT_PPLUS < 0.10 ABUT REGION
+    E NOT LOGOMK
+}
+
+4A.11K {@ Minimum P+ implant to N+ CONTACT spacing is 0.10um, no butted contact
+    E = EXT DIFCNT BUT_PPLUS < 0.10 ABUT<90 REGION
+    E NOT LOGOMK
+
+    BUT_PPLUS INSIDE EDGE DIFCNT
+}
+
+4A.10L_4A.11L {@ Soft Contacts are prohibited
+    A = BUT_PS   NOT ENCLOSE CONT
+    B = BUT_NS   NOT ENCLOSE CONT
+    C = BUT_NTAP NOT ENCLOSE CONT
+    D = BUT_PTAP NOT ENCLOSE CONT
+    ((((A OR B) OR C) OR D) NOT DIFFBK ) NOT LOGOMK
+}
+
+4A.11M {@ Maximum P+ DIFFUSION to the nearest N+ pick-up spacing is 20um exclude CAD_5V_LMOS_MARK 
+        @ (I/O, RAM, ROM, capacitor, diode, and inactive diffusion are excepted)
+    EXP_NTAP = SIZE NTAP BY 20 INSIDE OF NWELL STEP 0.5
+    X = (PDIF INTERACT PO1) NOT  EXP_NTAP
+    (((((((((X NOT SPS) NOT SPLLS) NOT DP4S) NOT DP3S) NOT SP_4) NOT SP_5) NOT ROM_ID) NOT IOID) NOT LD5VMK) NOT LOGOMK
+}
+
+4A.11N {@ Minimun P+ implant area is 0.1764 sq.um
+    E = AREA PPLUS < 0.1764
+    E NOT LOGOMK
+}
+
+//==========================================
+//===  Salicide-Block (SAB) Rules (P29)  ===
+//==========================================
+
+SAB_DIF = DIFF INTERACT SAB      // ACTIVE with SAB
+IO_SD   = SAB_DIF INTERACT GATE  // SAB DIFF with gates
+IO_SDa  = IO_SD NOT GATE         // I/O S/D
+IO_D    = IO_SDa INTERACT SAB    // I/O drain
+IO_SAB  = SAB INTERACT IO_SD
+
+
+OFF_GRID_SAB {@ Grid size SAB is 0.005
+   OFFGRID SAB 5
+}
+
+4A.12A {@ Minimum SAB width is 0.40um
+    E = INT SAB < 0.40 ABUT>0<90 SINGULAR REGION
+    E NOT LOGOMK
+}
+
+4A.12B {@ Minimum SAB to SAB spacing is 0.40um
+    E = EXT SAB < 0.40 ABUT>0<90 SINGULAR REGION
+    E NOT LOGOMK
+}
+
+4A.12C {@ Non-salicide CONTACT is not allowed
+        @ (CONTACT is not allowed in SAB)
+    ( AND SAB CONT ) NOT LOGOMK
+}
+
+4A.12E {@ Minimum SAB overhang of DIFFUSION is 0.20um
+    E = ENC IO_SD IO_SAB < 0.20 ABUT<90 SINGULAR REGION
+    E NOT LOGOMK
+}
+
+   DIFF_INTERACT_SAB   =  DIFF INTERACT SAB
+   PO1_INTERACT_SAB    =  PO1 INTERACT ( DIFF_INTERACT_SAB OR SAB )
+   E4A_12F.a_X  =  ( DIFF_INTERACT_SAB  OR  PO1_INTERACT_SAB ) OR SAB
+   E4A_12F.a_Y  = NOT DRC:1 BULK
+   E4A_12F.a_PO1 =  COPY PO1
+   E4A_12F.a_SAB =  COPY SAB
+   CONNECT E4A_12F.a_X E4A_12F.a_Y            // Pseudo connection for sconnect purpose
+   SCONNECT E4A_12F.a_X E4A_12F.a_PO1
+   SCONNECT E4A_12F.a_X E4A_12F.a_SAB
+
+4A.12F.a {@ Minimum SAB to unrelated POLY1 spacing is 0.24um
+    E = EXT E4A_12F.a_SAB E4A_12F.a_PO1 < 0.24 ABUT<90 SINGULAR NOT CONNECTED REGION
+    E NOT (IOID OR LOGOMK)
+}
+
+4A.12F.b {@ Minimum SAB to related POLY1 spacing is 0.20um
+    E = EXT SAB PO1 < 0.20 ABUT<90 SINGULAR REGION
+    E NOT (IOID OR LOGOMK)
+}
+
+4A.12G {@ Minimum SAB to unrelated DIFFUSION spacing is 0.20um
+    E = EXT SAB DIFF < 0.20 ABUT<90 SINGULAR REGION
+    E NOT LOGOMK
+}
+
+4A.12H.b {@ Minimum SAB to POLY1 CONTACT spacing is 0.24um, no contact allowed in SAB
+    E = EXT IO_SAB POLCNT < 0.24 ABUT SINGULAR INSIDE ALSO REGION
+    E NOT LOGOMK
+
+    (CONT AND SAB) NOT LOGOMK
+}
+
+// SAB rules for Non-Salicide Resistor
+
+
+RES        = PSYMBOL OR RSYMBOL
+RES2_SAB   = SAB  INTERACT RES
+RES2_DIF   = ( DIFF INTERACT SAB ) INTERACT RSYMBOL
+RES2_POL   = ( ( PO1  INTERACT SAB ) INTERACT PSYMBOL ) NOT INTERACT HR
+RES2_POL_BODY = RES2_POL AND RES2_SAB
+RES2_DIF_BODY = RES2_DIF AND RES2_SAB
+
+P_RES2_POL = RES2_POL INTERACT PPLUS
+N_RES2_POL = RES2_POL NOT P_RES2_POL
+P_RES2_DIF = RES2_DIF INTERACT PPLUS
+N_RES2_DIF = RES2_DIF NOT P_RES2_DIF
+
+4A.12J {@ Minimum SAB overhang of DIFFUSION non-salicide resistor is 0.20um
+    E = ENC RES2_DIF SAB < 0.20 ABUT<90 SINGULAR REGION
+    E NOT LOGOMK
+}
+
+4A.12K {@ Minimum SAB overhang of POLY1 non-salicide resistor is 0.20um
+    E = ENC RES2_POL SAB < 0.20 ABUT<90 SINGULAR REGION
+    E NOT LOGOMK
+}
+
+4A.12L {@ Minimum SAB (on resistor) to CONTACT spacing is 0.24um
+    X = SAB INSIDE EDGE RES2_DIF
+    Y = SAB INSIDE EDGE RES2_POL
+    E1 = EXT X CONT < 0.24 ABUT REGION
+    E2 = EXT Y CONT < 0.24 ABUT REGION
+    (E1 OR E2) NOT LOGOMK
+}
+
+4A.12M {@ Minimum P+ implant enclosure of P+ POLY1 non-salicide resistor is 0.24um
+    E = ENC P_RES2_POL PPLUS < 0.24 ABUT<90 SINGULAR OVERLAP REGION
+    E NOT LOGOMK
+}
+
+4A.12N {@ Minimum P+ implant to N+ POLY1 non-salicide resistor spacing is 0.24um
+    E1 = EXT N_RES2_POL PPLUS < 0.24 ABUT SINGULAR INSIDE ALSO REGION
+    E1 NOT LOGOMK
+    E2 = EXT RES2_POL PPLUS < 0.01 ABUT<90 SINGULAR REGION     // For poly resistor butting pplus case
+    E2 NOT LOGOMK
+}
+
+4A.12O {@ Minimum N_WELL enclosure of P+ POLY1 non-salicider resistor is 0.24um
+    E = ENC P_RES2_POL NWEL < 0.24 ABUT<90 SINGULAR OVERLAP REGION
+    E NOT LOGOMK
+}
+
+4A.12P {@ Minimum N_WELL to N+ POLY1 non-saliceder resistor spacing is 0.24um
+    E = EXT N_RES2_POL NWEL < 0.24 ABUT<90 SINGULAR OVERLAP REGION
+    E NOT LOGOMK
+}
+
+4A.12Q {@ Minimum N+ implant enclosure of N+ POLY1 non-salicide resistor is 0.24um
+    E = ENC N_RES2_POL NPLUS < 0.24 ABUT<90 SINGULAR OVERLAP REGION
+    E NOT LOGOMK
+}
+
+4A.12R {@ Minimum N+ implant to P+ POLY1 non-salicide resistor spacing is 0.24um
+    E = EXT P_RES2_POL NPLUS < 0.24 ABUT<90 SINGULAR INSIDE ALSO REGION
+    E NOT LOGOMK
+}
+
+4A.12S {@ Minimum SAB area is 0.37 sq.um
+    E = AREA SAB < 0.37
+    E NOT LOGOMK
+}
+
+4A.12T {@ Minimum SAB width for resistor is 1.0um
+    X = SAB INSIDE EDGE RES2_DIF
+    Y = SAB INSIDE EDGE RES2_POL
+    E1 = INT X < 1 ABUT OPPOSITE REGION
+    E2 = INT Y < 1 ABUT OPPOSITE REGION
+    (E1 OR E2) NOT LOGOMK
+}
+
+4A.12U {@ Minimum POLY1 width for non-salicide resistor is 0.50um
+    X = RES2_POL INSIDE EDGE SAB
+    E = INT X < 0.5 ABUT<90 REGION
+    E NOT LOGOMK
+}
+
+4A.12V {@ Minimum DIFFUSION width for non-salicide resistor is 0.50um
+    X = RES2_DIF INSIDE EDGE SAB
+    E = INT X < 0.5 ABUT<90 REGION
+    E NOT LOGOMK
+}
+
+4A.12Wa {@ Minimum TG to (SAB and POLY1) of non-salicide resistor spacing is 0.24um
+    E = EXT RES2_POL_BODY TG < 0.24 ABUT<90 SINGULAR OVERLAP REGION
+    E NOT LOGOMK
+}
+
+4A.12Wb {@ Minimum TG to (SAB and DIFFUSION) of non-salicide resistor spacing is 0.24um
+    E = EXT RES2_DIF_BODY TG < 0.24 ABUT<90 SINGULAR OVERLAP REGION
+    E NOT LOGOMK
+}
+
+4A.12Xa {@ Minimum TG enclosure of (SAB and POLY1) of non-salicide resistor is 0.24um
+    E = ENC RES2_POL_BODY TG < 0.24 ABUT<90 SINGULAR OVERLAP REGION
+    E NOT LOGOMK
+}
+
+4A.12Xb {@ Minimum TG enclosure (SAB and DIFFUSION) of non-salicide resistor is 0.24um
+    E = ENC RES2_DIF_BODY TG < 0.24 ABUT<90 SINGULAR OVERLAP REGION
+    E NOT LOGOMK
+}
+
+4A.12Ya {@ N+ DIFFUSION non-salicide resistor should be drawn outside N_WELL
+    ( AND N_RES2_DIF NWEL ) NOT LOGOMK
+}
+
+4A.12Yb {@ P+ DIFFUSION non-salicide resistor should be drawn within N_WELL
+    ( NOT P_RES2_DIF NWEL ) NOT LOGOMK
+}
+
+GROUP Recommend_SAB_CHECK 4A.12Yc 4A.12Yd
+GROUP Extra_CHECK 4A.12Ye 4A.12Yf
+
+4A.12Yc {@ TG over N+DIFFUSION and P+DIFFUSION non-salicide resistor are not recommended.
+    ( AND TG RES2_DIF ) NOT LOGOMK
+}
+
+4A.12Yd {@ TG over N+POLY1 and P+POLY1 non-salicide resistor are not recommended
+    ( AND TG RES2_POL ) NOT LOGOMK
+}
+
+4A.12Ye {@ The layer CAD_DIFFUSION_RESISTOR_SYMBOL "GDS layer number 81(0)" must be drawn on
+         @ non-salicide DIFFUSION resistor area for DRC.
+    x = AND ((HOLES SAB) INTERACT CONT) DIFF              // Emitter in BJT or some Diode structure
+    y = AND ((DIFF NOT INTERACT x) NOT INTERACT PO1) SAB
+    ((DIFF INTERACT y) NOT INTERACT RSYMBOL) NOT LOGOMK
+}
+
+4A.12Yf {@ The layer CAD_POLY_RESISTOR_SYMBOL "GDS layer number 82(0)" must be drawn on
+         @ non-salicide POLY resistor area for DRC.
+    x = AND ((PO1 NOT INTERACT DIFF) NOT INTERACT HR) SAB
+    ((PO1 INTERACT x) NOT INTERACT PSYMBOL) NOT LOGOMK
+}
+
+4A.12Za {@ Minimum N+POLY1 non-salicide resistor to P+ implant layer spacing is 0.24um
+    X1 = EXT N_RES2_POL PPLUS < 0.24 ABUT SINGULAR REGION
+    X2 = ( AND RES2_POL PPLUS ) AND NPLUS
+    ( X1 OR X2 ) NOT LOGOMK
+}
+
+4A.12Zb {@ Minimum N+ implant layer to  P+POLY1 non-salicide resistor spacing is 0.24um
+    X1 = EXT P_RES2_POL NPLUS < 0.24 ABUT SINGULAR REGION
+    X2 = ( AND RES2_POL PPLUS ) AND NPLUS
+    ( X1 OR X2 ) NOT LOGOMK
+}
+
+4A.12Zc {@ Minimum N_WELL layer extension to N+POLY1 non-salicide resistor is 0.24um
+    X = ENC N_RES2_POL NWEL < 0.24 ABUT SINGULAR REGION
+    X NOT LOGOMK
+}
+
+// 4A.12.3 Others
+
+
+END_CAP =  INTPOL TOUCH GATE == 1
+
+SAB_PO1  = PO1        AND       SAB
+SAB_INEDGE_PO1  = SAB    INSIDE EDGE   PO1   // select SAB edge inside poly region
+SAB_CORNER_PO1  = INT   SAB_INEDGE_PO1 < 0.01 ABUT==90 REGION // select SAB edge have a corner
+SAB_ACEDGE_PO1  = SAB_INEDGE_PO1 NOT TOUCH EDGE SAB_CORNER_PO1  // select SAB edge just across PO1
+SAB_ACROSS_PO1  = SAB_PO1  WITH EDGE     SAB_ACEDGE_PO1  // select SAB which fully across PO1
+        // (SAB lies across POLY1)
+SAB_PO1_CUT_N   = SAB_ACROSS_PO1 CUT NPLUS
+SAB_PO1_CUT_P   = SAB_ACROSS_PO1 CUT PPLUS
+
+NO_SQ_SAB_PO1   = VERTEX SAB_PO1 > 4    // find out (POLY1 OVER SAB)
+        // not a rectangle (square)
+PO1_NOT_SAB     = (PO1 NOT SAB) TOUCH SAB_PO1
+PO1_WITH_CONT = PO1_NOT_SAB ENCLOSE CONT   // for current concern
+
+SAB_POINT_SAB   = INT SAB PO1 < 0.01 ABUT==90 REGION  // find out the intersection point of
+        // POLY1 and SAB
+
+SAB_HANG12_PO1  = ENC (SAB_INEDGE_PO1 NOT TOUCH EDGE SAB_POINT_SAB)  PO1 < 0.12 ABUT<90 REGION
+        // It will be concerned
+        // if POLY1 salicide channel < 0.12um
+
+
+SAB_PO1_WITHCO1 = SAB_ACROSS_PO1 COIN OUTSIDE EDGE PO1_WITH_CONT
+SAB_PO1_WITHCO2 = (SAB_PO1 TOUCH SAB_HANG12_PO1) TOUCH PO1_WITH_CONT
+
+        // find out the non-square SAB_PO1
+        // touch edge the POLY1 (without CONTACT)
+
+
+4A.12A1.a {@ Minimum N+ implant overhang of (N+ POLY1 OVER SAB) is 0.20 um
+          @ (POLY1 endcap is excepted from this rule)
+    E1 = ENC SAB_PO1_WITHCO1 NPLUS < 0.20 OPPOSITE ABUT<90 REGION
+    E2 = ENC SAB_PO1_WITHCO2 NPLUS < 0.20 OPPOSITE ABUT<90 REGION
+    (E1 NOT INTERACT HR) NOT END_CAP
+    (E2 NOT INTERACT HR) NOT END_CAP
+}
+
+4A.12A1.b {@ If SAB lies across POLY1,(POLY1 OVER SAB) partially covered
+          @ by N+ and partially not covered by N+ is not allowed
+    E1 = NO_SQ_SAB_PO1 CUT NPLUS     //find out (POLY1 OVER SAB) not a rectangle
+    ((SAB_PO1 TOUCH SAB_HANG12_PO1) CUT NPLUS) TOUCH PO1_WITH_CONT
+    E2 = (SAB_PO1_CUT_N AND NPLUS) TOUCH PO1_WITH_CONT
+    E3 = (SAB_PO1_CUT_N NOT NPLUS) TOUCH PO1_WITH_CONT
+
+   (E1 OR (E2 OR E3)) NOT INTERACT HR
+}
+
+4A.12A2.a {@ Minimum P+ implant overhang of (P+ POLY1 OVER SAB) is 0.20 um
+          @ (POLY1 endcap is excepted from this rule)
+    E1 = ENC SAB_PO1_WITHCO1 PPLUS < 0.20 OPPOSITE ABUT<90 REGION
+    E2 = ENC SAB_PO1_WITHCO2 PPLUS < 0.20 OPPOSITE ABUT<90 REGION
+    (E1 NOT INTERACT HR) NOT END_CAP
+    (E2 NOT INTERACT HR) NOT END_CAP
+}
+
+4A.12A2.b {@ If SAB lies across POLY1,(POLY1 OVER SAB) partially covered
+        @ by P+ and partially not covered by P+ is not allowed
+    E1 = NO_SQ_SAB_PO1 CUT PPLUS     //find out (POLY1 OVER SAB) not a rectangle
+    ((SAB_PO1 TOUCH SAB_HANG12_PO1) CUT PPLUS) TOUCH PO1_WITH_CONT
+    E2 = (SAB_PO1_CUT_P AND PPLUS) TOUCH PO1_WITH_CONT
+    E3 = (SAB_PO1_CUT_P NOT PPLUS) TOUCH PO1_WITH_CONT
+
+    (E1 OR (E2 OR E3)) NOT INTERACT HR
+}
+
+SAB_DIFF = DIFF       AND       SAB
+SAB_INEDGE_DIFF = SAB    INSIDE EDGE   DIFF   // select SAB edge inside diffusion region
+SAB_CORNER_DIFF = INT   SAB_INEDGE_DIFF < 0.01 ABUT==90 REGION // select SAB edge have a corner
+SAB_ACROSS_DIFF = SAB_DIFF OUTSIDE     SAB_CORNER_DIFF  // select SAB which fully across diffusion
+        // (SAB lies across diffusion)
+SAB_DIFF_CUT_N   = SAB_ACROSS_DIFF CUT NPLUS
+SAB_DIFF_CUT_P   = SAB_ACROSS_DIFF CUT PPLUS
+
+NO_SQ_SAB_DIFF  = VERTEX SAB_DIFF > 4    // find out (DIFFUSION OVER SAB)
+        // not a rectangle (square)
+
+DIFF_NOT_SAB    = (DIFF NOT SAB) TOUCH SAB_DIFF
+DIFF_WITH_CONT = DIFF_NOT_SAB  ENCLOSE CONT   // for current concern
+
+SAB_DIFF_WITHCO1 = NO_SQ_SAB_DIFF COIN OUTSIDE EDGE DIFF_WITH_CONT
+        // find out the non-square SAB_DIFF
+        // touch edge the DIFFUSION (without CONTACT)
+SAB_DIFF_WITHCO2 = SAB_ACROSS_DIFF COIN OUTSIDE EDGE DIFF_WITH_CONT
+        // find out the full-across SAB_PO1
+        // touch edge the DIFFUSION (without CONTACT)
+
+
+4A.12A3.a {@ Minimum N+ implant overhang of (N+ DIFFUSION OVER SAB) is 0.20 um
+           @ (DIFFUSION endcap is excepted from this rule)
+    ENC SAB_DIFF_WITHCO1 NPLUS < 0.20 ABUT<90 REGION
+    ENC SAB_DIFF_WITHCO2 NPLUS < 0.20 ABUT<90 REGION
+}
+
+4A.12A3.b {@ (DIFFUSION OVER SAB) partially covered by N+ and partially not covered by N+ is not allowed
+    NO_SQ_SAB_DIFF CUT NPLUS     //find out (DIFFUSION OVER SAB) not a rectangle
+
+    (SAB_DIFF_CUT_N AND NPLUS) TOUCH DIFF_WITH_CONT
+    (SAB_DIFF_CUT_N NOT NPLUS) TOUCH DIFF_WITH_CONT
+}
+
+
+4A.12A4.a {@ Minimum P+ implant overhang of (P+ DIFFUSION OVER SAB) is 0.20 um
+           @ (DIFFUSION endcap is excepted from this rule)
+    ENC SAB_DIFF_WITHCO1 PPLUS < 0.20 ABUT<90 REGION
+    ENC SAB_DIFF_WITHCO2 PPLUS < 0.20 ABUT<90 REGION
+}
+
+4A.12A4.b {@ (DIFFUSION OVER SAB) partially covered by P+ and partially not covered by P+ is not allowed
+    NO_SQ_SAB_DIFF CUT PPLUS     //find out (DIFFUSION OVER SAB) not a rectangle
+
+    (SAB_DIFF_CUT_P AND PPLUS) TOUCH DIFF_WITH_CONT
+    (SAB_DIFF_CUT_P NOT PPLUS) TOUCH DIFF_WITH_CONT
+}
+
+//============================
+//===  Contact Rule (P56)  ===
+//============================
+
+OFF_GRID_CONT {@ Grid size CONT is 0.005
+   OFFGRID (CONT OUTSIDE (SP_18 OR SP_16)) 5
+   OFFGRID CONT 1
+}
+
+4A.13A {@ Maximum and Minimum CONTACT size is 0.16um
+    E = NOT RECTANGLE CONT == 0.16 BY == 0.16
+    ((((((E NOT SPS) NOT SPLLS) NOT SP_4) NOT SP_5) NOT SP_16) NOT SP_18) NOT LOGOMK
+}
+
+4A.13B {@ Minimum CONTACT to CONTACT spacing is 0.20um
+    E = EXT CONT < 0.20 ABUT>0<90 SINGULAR REGION
+    ((((((E NOT SPS) NOT SPLLS) NOT SP_4) NOT SP_5) NOT SP_16) NOT SP_18) NOT LOGOMK
+}
+
+4A.13C.a {@ Minimum DIFFUSION CONTACT to POLY1 (1.2V) spacing is 0.12um
+          @ CONTACT over GATE is not allowed
+    E = EXT GATE1_W DIFCNT < 0.12 ABUT<90 REGION
+    ((((((((E NOT SPS) NOT SPLLS) NOT DP4S) NOT DP3S) NOT SP_4) NOT SP_5) NOT SP_16) NOT SP_18) NOT LOGOMK
+
+    (((GATE AND CONT) NOT SPS) NOT SPLLS) NOT LOGOMK
+}
+
+4A.13C.b_25V {@ Minimum DIFFUSION CONTACT to POLY1 (2.5V) spacing is 0.14um
+              @ CONTACT over GATE is not allowed
+    E = EXT GATE3_W DIFCNT < 0.14 ABUT<90 REGION
+    E NOT LOGOMK
+}
+
+4A.13C.b_33V {@ Minimum DIFFUSION CONTACT to POLY1 (3.3V) spacing is 0.14um
+              @ CONTACT over GATE is not allowed
+    E = EXT GATE3_W DIFCNT < 0.14 ABUT<90 REGION
+    E NOT LOGOMK
+}
+
+4A.13C.b_5V {@ Minimum DIFFUSION CONTACT to POLY1 (5V) spacing is 0.4um
+             @ CONTACT over GATE is not allowed
+    E = EXT GATE3_W DIFCNT < 0.4 ABUT<90 REGION
+    E NOT LOGOMK
+}
+
+4A.13D {@ Minimum POLY1 CONTACT to DIFFUSION spaceing is 0.16um
+    E = EXT POLCNT DIFF < 0.16 ABUT<90 SINGULAR REGION
+    ((((((((E NOT SPS) NOT SPLLS) NOT DP4S) NOT DP3S) NOT SP_4) NOT SP_5) NOT SP_16) NOT SP_18) NOT LOGOMK
+}
+
+4A.13E {@ Minimum POLY1 enclosure of CONTACT is 0.06um
+        @ Floating CONTACT is not allowed
+    E = ENC POLCNT PO1 < 0.06 ABUT<90 SINGULAR OUTSIDE ALSO REGION
+    (((((((((E NOT SPS) NOT SPLLS) NOT DP4S) NOT DP3S) NOT SP_4) NOT SP_5) NOT SP_16) NOT SP_18) NOT FUSEMARK) NOT LOGOMK
+}
+
+4A.13FG {@ Minimum P+ DIFFUSION enclosure of CONTACT is 0.06um
+         @ Minimum N+ DIFFUSION enclosure of CONTACT is 0.06um
+    E = ENC DIFCNT DIFF < 0.06 ABUT<90 SINGULAR OVERLAP REGION
+    ((((((((E NOT SPS) NOT SPLLS) NOT DP4S) NOT DP3S) NOT SP_4) NOT SP_5) NOT SP_16) NOT SP_18) NOT LOGOMK
+}
+
+// 4A.13H NOT checked
+
+4A.13I {@ POLY1 CONTACT on DIFFUSION is not allowed.
+    (((GATE AND CONT) NOT SPS) NOT SPLLS) NOT LOGOMK
+}
+
+//============================
+//===  PESD Rule           ===
+//============================
+
+OFF_GRID_PESD {@ Grid size PESD is 0.005
+   OFFGRID PESD 5
+}
+
+4A.14A {@ Minimum PESD width is 0.60um
+    E = INT PESD < 0.60 ABUT>0<90 SINGULAR REGION
+    E NOT LOGOMK
+}
+
+4A.14B {@ Minimum PESD to PESD spacing is 0.60um
+    E = EXT PESD < 0.60 ABUT>0<90 SINGULAR REGION
+    E NOT LOGOMK
+}
+
+//====================================
+//===  P_WELL_BLOCK Rule           ===
+//====================================
+
+OFF_GRID_PWBLK {@ Grid size PWBLK is 0.005
+   OFFGRID PWBLK 5
+}
+
+4A.15A {@ Minimum P_WELL_BLOCK width is 0.63 um
+    X = INT PWBLK < 0.63 ABUT<90 SINGULAR REGION
+    X NOT LOGOMK
+}
+
+4A.15B {@ Minimum P_WELL_BLOCK to P_WELL_BLOCK spacing or notch is 0.63 um
+    X = EXT PWBLK < 0.63 ABUT<90 SINGULAR REGION
+    X NOT LOGOMK
+}
+
+4A.15C {@ Minimum P_WELL_BLOCK to NATIVE spacing or notch is 0.63 um
+    X = EXT NATIVE PWBLK < 0.63 ABUT<90 SINGULAR INSIDE ALSO REGION
+    X NOT LOGOMK
+}
+
+4A.15D {@ Minimum P_WELL_BLOCK to N_WELL spacing or notch is 0.90 um
+    X = EXT NWEL PWBLK < 0.90 ABUT<90 SINGULAR INSIDE ALSO REGION
+    X NOT LOGOMK
+}
+
+//4A.15E {@ Minimum P_WELL_BLOCK to IND spacing or notch is 0.63 um
+//    X = EXT IND PWBLK < 0.63 ABUT<90 SINGULAR INSIDE ALSO REGION
+//    X NOT LOGOMK
+//}
+
+4A.15E {@ Minimum P_WELL_BLOCK to DIFFUSION spacing is 0.25 um
+    X = EXT DIFF PWBLK < 0.25 ABUT<90 SINGULAR OVERLAP REGION
+    X NOT LOGOMK
+}
+
+4A.15F {@ Minimum P_WELL_BLOCK enclosure of DIFFUSION is 0.30 um
+    X = ENC DIFF PWBLK < 0.30 ABUT<90 SINGULAR OVERLAP REGION
+    X NOT LOGOMK
+}
+
+4A.15G {@ P_WELL_BLOCK touching GATE is not allowed
+    X = AND PWBLK GATE
+    X NOT LOGOMK
+}
+
+4A.15H {@ P_WELL_BLOCK touching N_WELL is not allowed
+    X = AND PWBLK NWEL
+    X NOT LOGOMK
+}
+
+4A.15I {@ P_WELL_BLOCK touching IND is not allowed exclude IND in P-sub
+    PSUB = (BULK NOT (NWEL OR TWEL)) AND (PWBLK OR NATIVE)
+    X = PWBLK INTERACT (IND NOT PSUB)
+    X NOT LOGOMK
+}
+
+4A.15J {@ P_WELL_BLOCK touching NATIVE is not allowed
+    X = AND PWBLK NATIVE
+    X NOT LOGOMK
+}
+
+//4A.15L {@ Minimum IND to NATIVE spacing is 0.63 um
+//    X = EXT IND NATIVE < 0.63 ABUT<90 SINGULAR INSIDE ALSO REGION
+//    X NOT LOGOMK
+//}
+
+//4A.15M {@ Minimum IND to N_WELL spacing is 0.90 um
+//    X = EXT IND NWEL < 0.90 ABUT<90 SINGULAR OVERLAP REGION
+//    X NOT LOGOMK
+//}
+
+//++ BEOL_RULE_CHECK_START
+
+//============================
+//===  Metal-1 Rule (P60)  ===
+//============================
+
+//BMET1_a = SIZE (SIZE ME1 BY -4.999) BY 4.999 TRUNCATE 0 INSIDE OF ME1 STEP 4.999 // ME1 width >= 10
+//BMET1 = BMET1_a AND ME1
+//BM_VIA1 = VI1 INSIDE BMET1
+
+OFF_GRID_ME1 {@ Grid size ME1 is 0.005
+   OFFGRID (ME1 OUTSIDE (SP_18 OR SP_16)) 5
+   OFFGRID ME1 1
+}
+
+4B.1A {@ Minimum METAL1 width is 0.16um
+   E = INT ME1 < 0.16 ABUT>0<90 SINGULAR REGION
+   E NOT LOGOMK
+}
+
+4B.1B.a {@ Minimum METAL1 to METAL1 spacing is 0.16um
+         @ where one METAL1 width < 2.0um
+   E = EXT ME1 < 0.16 ABUT>0<90 SINGULAR REGION
+   ((((E NOT SP_4) NOT SP_5) NOT SP_16) NOT SP_18) NOT LOGOMK
+}
+
+4B.1B.b {@ Minimum METAL1 to METAL1 spacing is 0.22um
+         @ where one METAL1 width >= 2.0um <= 5.0um
+   WM1_2 = SIZE ( SIZE ME1_N_LOGO BY -0.999 ) BY 0.999 INSIDE OF ME1 TRUNCATE 0 STEP 0.999
+   WM1_2_C = STAMP WM1_2 BY ME1
+   X = WM1_2 COIN INSIDE EDGE ME1
+   Y = WM1_2_C INSIDE EDGE ME1
+   E1 = EXT X ME1 < 0.22 ABUT>0<90 REGION
+   E2 = EXT Y ME1 < 0.22 MEASURE ALL NOT CONNECTED REGION
+   E1 NOT LOGOMK
+   E2 NOT LOGOMK
+}
+
+4B.1B.c {@ Minimum METAL1 to METAL1 spacing is 0.26um
+         @ where one METAL1 width > 5.0um
+   WM1_5 = SIZE ( SIZE ME1_N_LOGO BY -2.5 ) BY 2.5 INSIDE OF ME1 TRUNCATE 0 STEP 2.5
+   WM1_5_C = STAMP WM1_5 BY ME1
+   X = WM1_5 COIN INSIDE EDGE ME1
+   Y = WM1_5_C INSIDE EDGE ME1
+   E1 = EXT X ME1 < 0.26 ABUT>0<90 REGION
+   E2 = EXT Y ME1 < 0.26 MEASURE ALL NOT CONNECTED REGION
+   E1 NOT LOGOMK
+   E2 NOT LOGOMK
+}
+
+4B.1C.MAX {@ Maximum ME1 to ME1 spacing 500um
+   x = SIZE (ME1 OR M1DUMY) BY 250
+   y = BULK NOT x
+   SIZE y BY 250 INSIDE OF BULK
+}
+
+4B.1D.a {@ Minimum METAL1 enclosure of CONTACT is 0um, no CONTACT outside METAL1
+   E = CONT NOT ME1
+   ((E NOT SPS) NOT SPLLS) NOT LOGOMK
+}
+
+4B.1D.b {@ Minimum METAL1 enclosure of CONTACT at end-of-line or outer corner is 0.06um
+         @ when METAL1 width < 0.24um
+   co_sm24 = CONT INTERACT SM1_024
+   E = RECTANGLE ENC co_sm24 ME1
+   GOOD 0.00 0.06 OPPOSITE 0.00 0.06 OPPOSITE
+   (((((((E NOT SPS) NOT SPLLS) NOT DP4S) NOT SP_4) NOT SP_5) NOT SP_16) NOT SP_18) NOT LOGOMK
+}
+
+4B.1D.c {@ Minimum METAL1 enclosure of CONTACT at end-of-line is 0.1um
+         @ When the METAL1 width < 0.18um and spacing to three adjacent METAL1 shapes <= 0.18um
+   A = CONVEX EDGE ME1 ==2 WITH LENGTH <= 0.18
+   B = EXT [A] ME1 <= 0.18 OPPOSITE
+   C = EXPAND EDGE B INSIDE BY 0.02
+   D = ( SIZE C BY 0.08 TRUNCATE 0 INSIDE OF ME1 STEP 0.08 ) INTERACT CONT // 0.08*2 < 0.18um (ME1 spacing, d1, d2, d3)
+   E = D COIN INSIDE EDGE ME1
+   F = INT B [E] < 0.1 ABUT==90 PERP ONLY MEASURE COIN
+   G = EXT [F] ME1 <= 0.18 OPPOSITE
+   H = INT [G] >= 0.16 <  0.18 OPPOSITE    //Note:Min width = 0.16
+   I = INT H [B] < 0.1 ABUT==90 PERP ONLY MEASURE COIN
+   J = CONT INTERACT (D WITH EDGE I)
+   K = ENC J I < 0.1 OPPOSITE REGION
+   K NOT LOGOMK
+}
+
+4B.1E {@ Minimum area of METAL1 region 0.1024 sq.um
+   E = AREA ME1 < 0.1024
+   ((((E NOT SP_4) NOT SP_5) NOT SP_16) NOT SP_18) NOT LOGOMK
+}
+
+4B.1F {@ Minimum METAL1 enclosed area 0.3072 sq.um
+   x = HOLES ME1 < 0.3072*50 INNER
+   y = x NOT ME1
+   E = AREA y < 0.3072
+   E NOT LOGOMK
+}
+
+4B.1G.DEN {@ The ME1 coverage must be larger than 30% of entire chip area
+   DENSITY (ME1 OR M1DUMY) < 0.30 INSIDE OF EXTENT // PRINT MET1.density
+}
+
+4B.1H.DEN {@ The ME1 coverage must be larger than 25% for every millimeter square
+   DENSITY (ME1 OR M1DUMY) < 0.25 WINDOW 1000 STEP 500 BACKUP // PRINT MET1_local.density
+}
+    
+//=========================
+//===  Via1 Rule (P66)  ===
+//=========================
+
+BMET1_a = SIZE (SIZE ME1 BY -4.999) BY 4.999 TRUNCATE 0 INSIDE OF ME1 STEP 4.999 // ME1 width >= 10
+BMET1 = BMET1_a AND ME1
+BM_VIA1 = VI1 INSIDE BMET1
+
+OFF_GRID_VI1 {@ Grid size VI1 is 0.005
+   OFFGRID (VI1 OUTSIDE (SP_18 OR SP_16)) 5
+   OFFGRID VI1 1
+}
+
+4B.2A.VI1 {@ Exact MVIA1 size is 0.20um X 0.20um
+   E = NOT RECTANGLE VI1 == 0.20 BY == 0.20
+   E NOT LOGOMK
+}
+
+4B.2B.a_b.VI1 {@ Minimum MVI1 to MVIA1 spacing is 0.20um
+   E = EXT VI1 < 0.20 ABUT>0<90 SINGULAR REGION
+   ((E NOT SP_4) NOT SP_5) NOT LOGOMK
+}
+
+4B.2B.c.VI1 {@ Minimum MVIA1 to MVIA1 spacing (in MVIA1 array with size>=6x6) is 0.24um
+             @ (Two MVIA1 within 0.24um spacing is considered to be in the same array)
+             @ (When either the number of row or coulmn of the array is smaller than 6,
+             @ for example 6x5 ,1x7 ,2x10 , smaller spacing "0.20" can be applied)
+   a = SIZE (SIZE VI1 BY 0.12) BY -0.12            // select two MVIA1 within 0.24um spacing
+   b = SIZE a BY -0.98                             // select MVIA1 array coulmn or row < 6
+   c = SIZE b BY  0.98                             // (0.24x4 + 0.2x5)/2 = 0.98
+   d = c CUT VI1 >= 36                              // select array interact >= 36 vias
+   e = VI1 INTERACT d
+   EXT e < 0.24 ABUT<90
+}
+
+4B.2C.a {@ Minimum extension from METAL1(width<10um) to MVIA1 is 0um, no VI1 outside ME1
+   E = NOT VI1 ME1
+   ((E NOT SP_16) NOT SP_18) NOT LOGOMK
+}
+
+4B.2C.b {@ Minimum extension from METAL1(width>=10um) to MVIA1 is 0.18um
+   E = ENC BM_VIA1 ME1 < 0.18 ABUT<90 SINGULAR REGION
+   E NOT LOGOMK
+}
+
+4B.2C.c_d_e {@ METAL1 enclose MVIA1 at end-of-line or outer corner is 0.06um
+   x = ENC [VI1] ME1 < 0.06 ABUT<90 OPPOSITE          // via edge with metal enc < 0.06
+   E = INT x < 0.2 ABUT==90 INTERSECTING ONLY REGION  // 0.2 is MVIA1 size
+   ((((E NOT DP4S) NOT DP3S) NOT SP_16) NOT SP_18) NOT LOGOMK
+}
+
+4B.2C.f {@ Minimum METAL1 enclosure of MVIA1 at end-of-line is 0.1um
+         @ When the METAL1 width < 0.18um and spacing to three adjacent METAL1 shapes <= 0.18um
+   A = CONVEX EDGE ME1 ==2 WITH LENGTH <= 0.18
+   B = EXT [A] ME1 <= 0.18 OPPOSITE
+   C = EXPAND EDGE B INSIDE BY 0.02
+   D = ( SIZE C BY 0.08 TRUNCATE 0 INSIDE OF ME1 STEP 0.08 ) INTERACT VI1 // 0.08*2 < 0.18um( ME1 spacing)
+   E = D COIN INSIDE EDGE ME1
+   F = INT B [E] < 0.1 ABUT==90 PERP ONLY MEASURE COIN
+   G = EXT [F] ME1 <= 0.18 OPPOSITE
+   H = INT [G] >= 0.16 < 0.18 OPPOSITE    //Note:Min width = 0.16
+   I = INT H [B] < 0.1 ABUT==90 PERP ONLY MEASURE COIN
+   J = VI1 INTERACT (D WITH EDGE I)
+   K = ENC J I < 0.1 OPPOSITE REGION
+   K NOT LOGOMK
+}
+
+4B.2D {@ A Minimum fo two MVIA1 must be used and with a spacing <= 0.6um to connect METAL1 and METAL2
+       @ when METAL1,METAL2 > 1.4um
+   M_COIN = ME1 AND ME2
+   WMA = M_COIN AND WM1_014
+   WMB = M_COIN AND WM2_014
+   WVIA_A = VI1 INSIDE WMA
+   WVIA_B = VI1 INSIDE WMB
+   VIA_OCT = VI1 NOT (INT VI1 < 0.001 ABUT REGION)
+   X = SIZE VIA_OCT BY 0.3 INSIDE OF M_COIN
+   Y = (X INTERACT WVIA_A) INTERACT VI1 >= 2
+   ((WMA NOT INTERACT Y) AND WVIA_A) NOT (LOGOMK OR PADMARK)
+   Z = (X INTERACT WVIA_B) INTERACT VI1 >= 2
+   ((WMB NOT INTERACT Z) AND WVIA_B) NOT (LOGOMK OR PADMARK)
+}
+
+4B.2E {@ All MVIA1 shapes must be square or rectangular and 
+       @ at 45 degree rectangular and 45 degree MVIA1(called MVIA1_BAR) is only permitted 
+       @ in Die Seal Ring and Fuse structure
+   ANGLE (VI1 NOT LOGOMK) >0<90
+   ANGLE (VI1BAR NOT LOGOMK) >0<45 
+   ANGLE (VI1BAR NOT LOGOMK) >45<90 
+   (ANGLE VI1BAR == 45) OUTSIDE EDGE (SEALRMARK OR FUSEMARK)
+}
+
+
+//============================
+//===  Metal-2 Rule (P67)  ===
+//============================
+
+//BMET2_a = SIZE (SIZE ME2 BY -4.999) BY 4.999 TRUNCATE 0 INSIDE OF ME2 STEP 4.999 // ME2 width >= 10
+//BMET2 = BMET2_a AND ME2
+//BM_VIA2 = VI2 INSIDE BMET2
+
+OFF_GRID_ME2 {@ Grid size ME2 is 0.005
+   OFFGRID (ME2 OUTSIDE (SP_18 OR SP_16)) 5
+   OFFGRID ME2 1
+}
+
+4B.3A_ME2 {@ Minimum METAL2 width is 0.20um
+   E = INT ME2 < 0.20 ABUT>0<90 SINGULAR REGION
+   E NOT LOGOMK
+}
+
+4B.3B.a_ME2 {@ Minimum METAL2 to METAL2 spacing is 0.20um
+             @ where one METAL2 width < 2.0um
+   E = EXT ME2 < 0.20 ABUT>0<90 SINGULAR REGION
+   ((E NOT SP_16) NOT SP_18) NOT LOGOMK
+}
+
+4B.3B.b_ME2 {@ Minimum METAL2 to METAL2 spacing is 0.22um
+             @ where one METAL2 width >= 2.0um <= 5.0um
+   WM2_2 = SIZE ( SIZE ME2_N_LOGO BY -0.999 ) BY 0.999 INSIDE OF ME2 TRUNCATE 0 STEP 0.999
+   WM2_2_C = STAMP WM2_2 BY ME2
+   X = WM2_2 COIN INSIDE EDGE ME2
+   Y = WM2_2_C INSIDE EDGE ME2
+   E1 = EXT X ME2 < 0.22 ABUT>0<90 REGION
+   E2 = EXT Y ME2 < 0.22 MEASURE ALL NOT CONNECTED REGION
+   E1 NOT LOGOMK
+   E2 NOT LOGOMK
+}
+
+4B.3B.c_ME2 {@ Minimum METAL2 to METAL2 spacing is 0.26um
+             @ where one METAL2 width > 5.0um
+   WM2_5 = SIZE ( SIZE ME2_N_LOGO BY -2.5 ) BY 2.5 INSIDE OF ME2 TRUNCATE 0 STEP 2.5
+   WM2_5_C = STAMP WM2_5 BY ME2
+   X = WM2_5 COIN INSIDE EDGE ME2
+   Y = WM2_5_C INSIDE EDGE ME2
+   E1 = EXT X ME2 < 0.26 ABUT>0<90 REGION
+   E2 = EXT Y ME2 < 0.26 MEASURE ALL NOT CONNECTED REGION
+   E1 NOT LOGOMK
+   E2 NOT LOGOMK
+}
+
+4B.3C_ME2.MAX {@ Maximum ME2 to ME2 spacing 500um
+   x = SIZE (ME2 OR M2DUMY) BY 250
+   y = BULK NOT x
+   SIZE y BY 250 INSIDE OF BULK
+}
+
+4B.3D.a_ME2 {@ Minimum extension from METAL2 to MVIA1 is 0um, no MVIA1 outside METAL2
+   E = NOT VI1 ME2
+   E NOT LOGOMK
+}
+
+4B.3D.b_c_ME2 {@ METAL2 enclose MVIA1 at end-of-line or outer corner is 0.06um
+   x = ENC [VI1] ME2 < 0.06 ABUT<90 OPPOSITE           // via edge with metal enc < 0.06
+   E = INT x < 0.2 ABUT==90 INTERSECTING ONLY REGION   // 0.2 is MVIA1 size
+   (((E NOT DP4S) NOT SP_16) NOT SP_18) NOT LOGOMK
+}
+
+4B.3E_ME2 {@ Minimum area of METAL2 region 0.1024 sq.um
+   E = AREA ME2 < 0.1024
+   E NOT LOGOMK
+}
+
+4B.3F_ME2 {@ Minimum METAL2 enclosed area 0.3072 sq.um
+   x = HOLES ME2 < 0.3072*50 INNER
+   y = x NOT ME2
+   E = AREA y < 0.3072
+   E NOT LOGOMK
+}
+
+4B.3G_ME2.DEN {@ The ME2 coverage must be larger than 30% of entire chip area
+   DENSITY (ME2 OR M2DUMY) < 0.30 INSIDE OF EXTENT // PRINT MET2.density
+}
+
+4B.3H_ME2.DEN {@ The ME2 coverage must be larger than 25% for every millimeter square
+   DENSITY (ME2 OR M2DUMY) < 0.25 WINDOW 1000 STEP 500 BACKUP // PRINT MET2_local.density
+}
+    
+//============================
+//===  Via-2 Rule (P68)  =====
+//============================
+
+BMET2_a = SIZE (SIZE ME2 BY -4.999) BY 4.999 TRUNCATE 0 INSIDE OF ME2 STEP 4.999 // ME2 width >= 10
+BMET2 = BMET2_a AND ME2
+BM_VIA2 = VI2 INSIDE BMET2
+
+
+OFF_GRID_VI2 {@ Grid size VI2 is 0.005
+   OFFGRID (VI2 OUTSIDE (SP_18 OR SP_16)) 5
+   OFFGRID VI2 1
+}
+
+4B.4A_VI2 {@ Exact MVIA2 size is 0.20um
+   E = NOT RECTANGLE VI2 == 0.20 BY == 0.20
+   ((E NOT SP_16) NOT SP_18) NOT (FUSEMARK OR LOGOMK)
+}
+
+4B.4B.a_b_VI2 {@ Minimum MVI2 to MVIA2 spacing is 0.20um
+   E = EXT VI2 < 0.20 ABUT>0<90 SINGULAR REGION
+   E NOT LOGOMK
+}
+
+4B.4B.c_VI2 {@ Minimum MVIA2 to MVIA2 spacing (in MVIA2 array with size>=6x6) is 0.24um
+             @ (Two MVIA2 within 0.24um spacing is considered to be in the same array)
+             @ (When either the number of row or coulmn of the array is smaller than 6,
+             @ for example 6x5 ,1x7 ,2x10 , smaller spacing "0.20" can be applied)
+   a = SIZE (SIZE VI2 BY 0.12) BY -0.12            // select two MVIA2 within 0.24um spacing
+   b = SIZE a BY -0.98                             // select MVIA2 array coulmn or row < 6
+   c = SIZE b BY  0.98                             // (0.24X4 + 0.2x5)/2 = 0.98
+   d = c CUT VI2 >= 36                              // select array interact >= 36 vias
+   e = VI2 INTERACT d
+   EXT e < 0.24 ABUT<90
+}
+
+4B.4C.a_VI2 {@ Minimum extension from METAL2(width<10um) to MVIA2 is 0um, no MVIA2 outside METAL2
+   E = NOT VI2 ME2
+   E NOT LOGOMK
+}
+
+4B.4C.b_VI2 {@ Minimum extension from METAL2(width>=10um) to MVIA2 is 0.18um
+   E = ENC BM_VIA2 ME2 < 0.18 ABUT<90 SINGULAR REGION
+   E NOT LOGOMK
+}
+
+4B.4C.c_d_e_VI2 {@ METAL2 enclose MVIA2 at end-of-line or outer corner is 0.06um
+   x = ENC [VI2] ME2 < 0.06 ABUT<90 OPPOSITE       // via edge with metal enc < 0.06
+   E = INT x < 0.2 ABUT==90 INTERSECTING ONLY REGION  // 0.2 is MVIA2 size
+   ((E NOT SP_16) NOT SP_18) NOT LOGOMK
+}
+
+4B.4D_VI2 {@ A Minimum fo two MVIA2 must be used and with a spacing <= 0.6um to connect METAL2 and METAL3
+           @ when METAL2,METAL3 > 1.4um
+   M_COIN = ME2 AND ME3
+   WMA = M_COIN AND WM2_014
+   WMB = M_COIN AND WM3_014
+   WVIA_A = VI2 INSIDE WMA
+   WVIA_B = VI2 INSIDE WMB
+   VIA_OCT = VI2 NOT (INT VI2 < 0.001 ABUT REGION)
+   X = SIZE VIA_OCT BY 0.3 INSIDE OF M_COIN
+   Y = (X INTERACT WVIA_A) INTERACT VI2 >= 2
+   ((WMA NOT INTERACT Y) AND WVIA_A) NOT (LOGOMK OR PADMARK)
+   Z = (X INTERACT WVIA_B) INTERACT VI2 >= 2
+   ((WMB NOT INTERACT Z) AND WVIA_B) NOT (LOGOMK OR PADMARK)
+}
+
+4B.4E_VI2 {@ All MVIA2 shape must be square or rectangular and at 45 degree,
+            @ rectangular and 45 degree MVIA2(called MVIA2_BAR) is only permitted in Die Seal
+            @ Ring and Fuse structure
+
+   ANGLE ( VI2 NOT LOGOMK ) >0<90
+   ANGLE ( VI2BAR NOT LOGOMK ) >0<45
+   ANGLE ( VI2BAR NOT LOGOMK ) >45<90
+   (ANGLE VI2BAR == 45) OUTSIDE EDGE (SEALRMARK OR FUSEMARK)
+}
+
+//============================
+//===  Metal-3 Rule (P67)  ===
+//============================
+
+//BMET3_a = SIZE (SIZE ME3 BY -4.999) BY 4.999 TRUNCATE 0 INSIDE OF ME3 STEP 4.999 // ME3 width >= 10
+//BMET3 = BMET3_a AND ME3
+//BM_VIA3 = VI3 INSIDE BMET3
+
+OFF_GRID_ME3 {@ Grid size ME3 is 0.005
+   OFFGRID (ME3 OUTSIDE (SP_18 OR SP_16)) 5
+   OFFGRID ME3 1
+}
+
+4B.3A_ME3 {@ Minimum METAL3 width is 0.20um
+   E = INT ME3 < 0.20 ABUT>0<90 SINGULAR REGION
+   E NOT LOGOMK
+}
+
+4B.3B.a_ME3 {@ Minimum METAL3 to METAL3 spacing is 0.20um
+             @ where one METAL3 width < 2.0um
+   E = EXT ME3 < 0.20 ABUT>0<90 SINGULAR REGION
+   E NOT LOGOMK
+}
+
+4B.3B.b_ME3 {@ Minimum METAL3 to METAL3 spacing is 0.22um
+             @ where one METAL3 width >= 2.0um <= 5.0um
+   WM3_2 = SIZE ( SIZE ME3_N_LOGO BY -0.999 ) BY 0.999 INSIDE OF ME3 TRUNCATE 0 STEP 0.999
+   WM3_2_C = STAMP WM3_2 BY ME3
+   X = WM3_2 COIN INSIDE EDGE ME3
+   Y = WM3_2_C INSIDE EDGE ME3
+   E1 = EXT X ME3 < 0.22 ABUT>0<90 REGION
+   E2 = EXT Y ME3 < 0.22 MEASURE ALL NOT CONNECTED REGION
+   E1 NOT LOGOMK
+   E2 NOT LOGOMK
+}
+
+4B.3B.c_ME3 {@ Minimum METAL3 to METAL3 spacing is 0.26um
+             @ where one METAL3 width > 5.0um
+   WM3_5 = SIZE ( SIZE ME3_N_LOGO BY -2.5 ) BY 2.5 INSIDE OF ME3 TRUNCATE 0 STEP 2.5
+   WM3_5_C = STAMP WM3_5 BY ME3
+   X = WM3_5 COIN INSIDE EDGE ME3
+   Y = WM3_5_C INSIDE EDGE ME3
+   E1 = EXT X ME3 < 0.26 ABUT>0<90 REGION
+   E2 = EXT Y ME3 < 0.26 MEASURE ALL NOT CONNECTED REGION
+   E1 NOT LOGOMK
+   E2 NOT LOGOMK
+}
+
+4B.3C_ME3.MAX {@ Maximum ME3 to ME3 spacing 500um
+   x = SIZE (ME3 OR M3DUMY) BY 250
+   y = BULK NOT x
+   SIZE y BY 250 INSIDE OF BULK
+}
+
+4B.3D.a_ME3 {@ Minimum extension from METAL3 to MVIA2 is 0um, no MVIA2 outside METAL3
+   E = NOT VI2 ME3
+   E NOT LOGOMK
+}
+
+4B.3D.b_c_ME3 {@ METAL3 enclose MVIA2 at end-of-line or outer corner is 0.06um
+   x = ENC [VI2] ME3 < 0.06 ABUT<90 OPPOSITE           // via edge with metal enc < 0.06
+   E = INT x < 0.2 ABUT==90 INTERSECTING ONLY REGION   // 0.2 is MVIA2 size
+   ((E NOT SP_16) NOT SP_18) NOT LOGOMK
+}
+
+4B.3E_ME3 {@ Minimum area of METAL3 region 0.1024 sq.um
+   E = AREA ME3 < 0.1024
+   E NOT LOGOMK
+}
+
+4B.3F_ME3 {@ Minimum METAL3 enclosed area 0.3072 sq.um
+   x = HOLES ME3 < 0.3072*50 INNER
+   y = x NOT ME3
+   E = AREA y < 0.3072
+   E NOT LOGOMK
+}
+
+4B.3G_ME3.DEN {@ The ME3 coverage must be larger than 30% of entire chip area
+   DENSITY (ME3 OR M3DUMY) < 0.30 INSIDE OF EXTENT // PRINT MET3.density
+}
+
+4B.3H_ME3.DEN {@ The ME3 coverage must be larger than 25% for every millimeter square
+   DENSITY (ME3 OR M3DUMY) < 0.25 WINDOW 1000 STEP 500 BACKUP // PRINT MET3_local.density
+}
+
+//============================
+//===  Via-3 Rule (P68)  =====
+//============================
+
+BMET3_a = SIZE (SIZE ME3 BY -4.999) BY 4.999 TRUNCATE 0 INSIDE OF ME3 STEP 4.999 // ME3 width >= 10
+BMET3 = BMET3_a AND ME3
+BM_VIA3 = VI3 INSIDE BMET3
+
+
+OFF_GRID_VI3 {@ Grid size VI3 is 0.005
+   OFFGRID (VI3 OUTSIDE (SP_18 OR SP_16)) 5
+   OFFGRID VI3 1
+}
+
+4B.4A_VI3 {@ Exact MVIA3 size is 0.20um
+   E = NOT RECTANGLE VI3 == 0.20 BY == 0.20
+   E NOT (FUSEMARK OR LOGOMK)
+}
+
+4B.4B.a_b_VI3 {@ Minimum MVI3 to MVIA3 spacing is 0.20um
+   E = EXT VI3 < 0.20 ABUT>0<90 SINGULAR REGION
+   E NOT LOGOMK
+}
+
+4B.4B.c_VI3 {@ Minimum MVIA3 to MVIA3 spacing (in MVIA3 array with size>=6x6) is 0.24um
+             @ (Two MVIA3 within 0.24um spacing is considered to be in the same array)
+             @ (When either the number of row or coulmn of the array is smaller than 6,
+             @ for example 6x5 ,1x7 ,2x10 , smaller spacing "0.20" can be applied)
+   a = SIZE (SIZE VI3 BY 0.12) BY -0.12            // select two MVIA3 within 0.24um spacing
+   b = SIZE a BY -0.98                             // select MVIA3 array coulmn or row < 6
+   c = SIZE b BY  0.98                             // (0.24X4 + 0.2x5)/2 = 0.98
+   d = c CUT VI3 >= 36                              // select array interact >= 36 vias
+   e = VI3 INTERACT d
+   EXT e < 0.24 ABUT<90
+}
+
+4B.4C.a_VI3 {@ Minimum extension from METAL3(width<10um) to MVIA3 is 0um, no MVIA3 outside METAL3
+   E = NOT VI3 ME3
+   E NOT LOGOMK
+}
+
+4B.4C.b_VI3 {@ Minimum extension from METAL3(width>=10um) to MVIA3 is 0.18um
+   E = ENC BM_VIA3 ME3 < 0.18 ABUT<90 SINGULAR REGION
+   E NOT LOGOMK
+}
+
+4B.4C.c_d_e_VI3 {@ METAL3 enclose MVIA3 at end-of-line or outer corner is 0.06um
+   x = ENC [VI3] ME3 < 0.06 ABUT<90 OPPOSITE       // via edge with metal enc < 0.06
+   E = INT x < 0.2 ABUT==90 INTERSECTING ONLY REGION  // 0.2 is MVIA3 size
+   E NOT LOGOMK
+}
+
+4B.4D_VI3 {@ A Minimum fo two MVIA3 must be used and with a spacing <= 0.6um to connect METAL3 and METAL4
+           @ when METAL3,METAL4 > 1.4um
+   M_COIN = ME3 AND ME4
+   WMA = M_COIN AND WM3_014
+   WMB = M_COIN AND WM4_014
+   WVIA_A = VI3 INSIDE WMA
+   WVIA_B = VI3 INSIDE WMB
+   VIA_OCT = VI3 NOT (INT VI3 < 0.001 ABUT REGION)
+   X = SIZE VIA_OCT BY 0.3 INSIDE OF M_COIN
+   Y = (X INTERACT WVIA_A) INTERACT VI3 >= 2
+   ((WMA NOT INTERACT Y) AND WVIA_A) NOT (LOGOMK OR PADMARK)
+   Z = (X INTERACT WVIA_B) INTERACT VI3 >= 2
+   ((WMB NOT INTERACT Z) AND WVIA_B) NOT (LOGOMK OR PADMARK)
+}
+
+4B.4E_VI3 {@ All MVIA3 shape must be square or rectangular and at 45 degree,
+            @ rectangular and 45 degree MVIA3(called MVIA3_BAR) is only permitted in Die Seal
+            @ Ring and Fuse structure
+
+   ANGLE ( VI3 NOT LOGOMK ) >0<90
+   ANGLE ( VI3BAR NOT LOGOMK ) >0<45
+   ANGLE ( VI3BAR NOT LOGOMK ) >45<90
+   (ANGLE VI3BAR == 45) OUTSIDE EDGE (SEALRMARK OR FUSEMARK)
+}
+
+//============================
+//===  Metal-4 Rule (P67)  ===
+//============================
+
+//BMET4_a = SIZE (SIZE ME4 BY -4.999) BY 4.999 TRUNCATE 0 INSIDE OF ME4 STEP 4.999 // ME4 width >= 10
+//BMET4 = BMET4_a AND ME4
+//BM_VIA4 = VI4 INSIDE BMET4
+
+OFF_GRID_ME4 {@ Grid size ME4 is 0.005
+   OFFGRID (ME4 OUTSIDE (SP_18 OR SP_16)) 5
+   OFFGRID ME4 1
+}
+
+4B.3A_ME4 {@ Minimum METAL4 width is 0.20um
+   E = INT ME4 < 0.20 ABUT>0<90 SINGULAR REGION
+   E NOT LOGOMK
+}
+
+4B.3B.a_ME4 {@ Minimum METAL4 to METAL4 spacing is 0.20um
+             @ where one METAL4 width < 2.0um
+   E = EXT ME4 < 0.20 ABUT>0<90 SINGULAR REGION
+   E NOT LOGOMK
+}
+
+4B.3B.b_ME4 {@ Minimum METAL4 to METAL4 spacing is 0.22um
+             @ where one METAL4 width >= 2.0um <= 5.0um
+   WM4_2 = SIZE ( SIZE ME4_N_LOGO BY -0.999 ) BY 0.999 INSIDE OF ME4 TRUNCATE 0 STEP 0.999
+   WM4_2_C = STAMP WM4_2 BY ME4
+   X = WM4_2 COIN INSIDE EDGE ME4
+   Y = WM4_2_C INSIDE EDGE ME4
+   E1 = EXT X ME4 < 0.22 ABUT>0<90 REGION
+   E2 = EXT Y ME4 < 0.22 MEASURE ALL NOT CONNECTED REGION
+   E1 NOT LOGOMK
+   E2 NOT LOGOMK
+}
+
+4B.3B.c_ME4 {@ Minimum METAL4 to METAL4 spacing is 0.26um
+             @ where one METAL4 width > 5.0um
+   WM4_5 = SIZE ( SIZE ME4_N_LOGO BY -2.5 ) BY 2.5 INSIDE OF ME4 TRUNCATE 0 STEP 2.5
+   WM4_5_C = STAMP WM4_5 BY ME4
+   X = WM4_5 COIN INSIDE EDGE ME4
+   Y = WM4_5_C INSIDE EDGE ME4
+   E1 = EXT X ME4 < 0.26 ABUT>0<90 REGION
+   E2 = EXT Y ME4 < 0.26 MEASURE ALL NOT CONNECTED REGION
+   E1 NOT LOGOMK
+   E2 NOT LOGOMK
+}
+
+4B.3C_ME4.MAX {@ Maximum ME4 to ME4 spacing 500um
+   x = SIZE (ME4 OR M4DUMY) BY 250
+   y = BULK NOT x
+   SIZE y BY 250 INSIDE OF BULK
+}
+
+4B.3D.a_ME4 {@ Minimum extension from METAL4 to MVIA3 is 0um, no MVIA3 outside METAL4
+   E = NOT VI3 ME4
+   E NOT LOGOMK
+}
+
+4B.3D.b_c_ME4 {@ METAL4 enclose MVIA3 at end-of-line or outer corner is 0.06um
+   x = ENC [VI3] ME4 < 0.06 ABUT<90 OPPOSITE           // via edge with metal enc < 0.06
+   E = INT x < 0.2 ABUT==90 INTERSECTING ONLY REGION   // 0.2 is MVIA3 size
+   E NOT LOGOMK
+}
+
+4B.3E_ME4 {@ Minimum area of METAL4 region 0.1024 sq.um
+   E = AREA ME4 < 0.1024
+   E NOT LOGOMK
+}
+
+4B.3F_ME4 {@ Minimum METAL4 enclosed area 0.3072 sq.um
+   x = HOLES ME4 < 0.3072*50 INNER
+   y = x NOT ME4
+   E = AREA y < 0.3072
+   E NOT LOGOMK
+}
+
+4B.3G_ME4.DEN {@ The ME4 coverage must be larger than 30% of entire chip area
+   DENSITY (ME4 OR M4DUMY) < 0.30 INSIDE OF EXTENT // PRINT MET4.density
+}
+
+4B.3H_ME4.DEN {@ The ME4 coverage must be larger than 25% for every millimeter square
+   DENSITY (ME4 OR M4DUMY) < 0.25 WINDOW 1000 STEP 500 BACKUP // PRINT MET4_local.density
+}
+
+//============================
+//===  Embedded MMC Rules  ===
+//============================
+
+OFF_GRID_MMC {@ Grid size MMCAL is 0.005
+   OFFGRID MMCAL 5
+}
+
+4C.1A {@ Minimum width of MMCAL is 0.67um
+   E = INT MMCAL < 0.67 ABUT<90 SINGULAR REGION
+   E NOT LOGOMK
+}
+
+4C.1B {@ Minimum MMCAL spacing is 0.62um
+   E = EXT MMCAL < 0.62 ABUT<90 SINGULAR REGION
+   E NOT LOGOMK
+}
+
+4C.1C {@  Minimum extension from Bottom Metal to MMCAL is 0.56um
+   E = ENC M45_MMC ME4 < 0.56 ABUT<90 SINGULAR OUTSIDE ALSO REGION
+   E NOT LOGOMK
+
+}
+
+4C.1D {@ Minimum extension from MMCAL to CTTMvia is 0.56um
+   E = ENC VI4 M45_MMC < 0.56 ABUT<90 SINGULAR OVERLAP REGION
+   E NOT LOGOMK
+
+}
+
+4C.1E {@ Minimum clearance from unrelated CTTMvia to MMCAL is 0.56um
+   E = EXT M45_MMC VI4 < 0.56 ABUT<90 SINGULAR OVERLAP REGION
+   E NOT LOGOMK
+
+}
+
+4C.1F {@ Maximum area of MMCAL region is 10000 um2
+   E = AREA MMCAL > 10000
+   E NOT LOGOMK
+}
+
+// 4C.1G can not be check by DRC
+
+4C.1H {@ Minimum CTTMVIA to CTTMVIA spacing on METAL_CAP_AL(in CTTMVIA array with size>=3x3) is 0.45um
+       @ (Two CTTMVIA within 0.5um spacing is considered to be in the same array)
+       @ (When either the number of row or coulmn of the array is smaller than 3,
+       @ for example 3x2 ,1x7 ,2x10 , smaller spacing "0.40" can be applied)
+   VIA_MMC = VI4 INSIDE MMCAL                   // select MVIA4 inside the MMCAL region
+   a = SIZE (SIZE VIA_MMC BY 0.25) BY -0.25            // select two MVIA4 within 0.5um spacing
+   b = SIZE a BY -0.65                             // select MVIA4 array coulmn or row < 3
+   c = SIZE b BY  0.65                             // (0.5 + 0.4x2)/2 = 0.625
+   d = c CUT VIA_MMC >= 9                              // select array interact >= 9 vias
+   e = VIA_MMC INTERACT d
+   EXT e < 0.45 ABUT<90
+
+}
+
+//4C.1J {@ Minimum enclosed space from forced Top Metal to picked up Top Metal is 0.5um
+//
+//}
+
+
+4C.1J.a {@ Maximum MVIA density on METAL_CAP is 0.5% and the numbers of Via on MMC >= 9 counts
+         @ If 4500 um2 <= METAL_CAP area <= 10000 um2
+   M45_MMC_a = AREA M45_MMC >= 4500 <= 10000
+   CP_M45_MMC_a = M45_MMC_a AND DRC:1
+   E1 = DENSITY VI4 M45_MMC_a INSIDE OF LAYER CP_M45_MMC_a > 0.005
+        [AREA(VI4)/AREA(M45_MMC_a)]
+   D1 = M45_MMC_a NOT ENCLOSE VI4 >= 9
+   (E1 OR D1) NOT LOGOMK
+}
+
+4C.1J.b {@ Maximum MVIA density on METAL_CAP is 1.5% and the numbers of Via on MMC >= 9 counts
+         @ If 900 um2 <= METAL_CAP area < 4500 um2
+   M45_MMC_a = AREA M45_MMC >= 900 < 4500
+   CP_M45_MMC_a = M45_MMC_a AND DRC:1
+   E1 = DENSITY VI4 M45_MMC_a INSIDE OF LAYER CP_M45_MMC_a > 0.015
+        [AREA(VI4)/AREA(M45_MMC_a)]
+   D1 = M45_MMC_a NOT ENCLOSE VI4 >= 9
+   (E1 OR D1) NOT LOGOMK
+}
+
+4C.1J.c {@ Maximum MVIA density on METAL_CAP is 6% and the numbers of Via on MMC >= 9 counts
+         @ If 100 um2 <= METAL_CAP area < 900 um2
+   M45_MMC_a = AREA M45_MMC >= 100 < 900
+   CP_M45_MMC_a = M45_MMC_a AND DRC:1
+   E1 = DENSITY VI4 M45_MMC_a INSIDE OF LAYER CP_M45_MMC_a > 0.06
+        [AREA(VI4)/AREA(M45_MMC_a)]
+   D1 = M45_MMC_a NOT ENCLOSE VI4 >= 9
+   (E1 OR D1) NOT LOGOMK
+}
+
+ 
+4C.1J.d {@ The exact numbers of Via on MMC = 9 counts
+         @ If METAL_CAP area < 100 um2
+   M45_MMC_b = AREA M45_MMC < 100
+   E1 = M45_MMC_b NOT ENCLOSE VI4 == 9
+   E1 NOT LOGOMK 
+}
+
+4C.Note1 {@ METAL_CAP_AL must be restricted within Bottom Metal
+   E = M45_MMC NOT ME4
+   E NOT LOGOMK
+
+}
+
+4C.Note8 {@ METAL_CAP_AL over DIFFUSION, POLY1, N_WELL_RESISTOR is not allowed
+    AND MMCAL DIFF
+    AND MMCAL PO1
+    AND MMCAL NWR
+}
+    
+//============================
+//===  Via-4 Rule (P68)  =====2x
+//============================
+
+BMET4_a = SIZE (SIZE ME4 BY -4.999) BY 4.999 TRUNCATE 0 INSIDE OF ME4 STEP 4.999 // ME4 width >= 10
+BMET4 = BMET4_a AND ME4
+BM_VIA4 = VI4 INSIDE BMET4
+
+OFF_GRID_VI4 {@ Grid size VI4 is 0.005
+   OFFGRID (VI4 OUTSIDE (SP_18 OR SP_16)) 5
+   OFFGRID VI4 1
+}
+
+4B.5A_VI4 {@ Exact MVIA4 size is 0.40um
+   E = NOT RECTANGLE VI4 == 0.40 BY == 0.40
+   E NOT (FUSEMARK OR LOGOMK)
+}
+
+4B.5B.a_b_VI4 {@ Minimum MVI4 to MVIA4 spacing is 0.40um
+   E = EXT VI4 < 0.40 ABUT>0<90 SINGULAR REGION
+   E NOT LOGOMK
+}
+
+4B.5B.c_VI4 {@ Minimum MVIA4 to MVIA4 spacing (in MVIA4 array with size>=6x6) is 0.45um
+             @ (Two MVIA4 within 0.5um spacing is considered to be in the same array)
+             @ (When either the number of row or coulmn of the array is smaller than 6,
+             @ for example 6x5 ,1x7 ,2x10 , smaller spacing "0.40" can be applied)
+   a = SIZE (SIZE VI4 BY 0.25) BY -0.25            // select two MVIA4 within 0.5um spacing
+   b = SIZE a BY -2                             // select MVIA4 array coulmn or row < 6
+   c = SIZE b BY  2                             // (0.5X4 + 0.4x5)/2 = 2
+   d = c CUT VI4 >= 36                              // select array interact >= 36 vias
+   e = VI4 INTERACT d
+   EXT e < 0.45 ABUT<90
+}
+
+4B.5C.a_VI4 {@ Minimum extension from METAL4(width<10um) to MVIA4 is 0um, no MVIA4 outside METAL4
+   E = NOT VI4 ME4
+   E NOT LOGOMK
+}
+
+4B.5C.b_VI4 {@ Minimum extension from METAL4(width>=10um) to MVIA4 is 0.18um
+   E = ENC BM_VIA4 ME4 < 0.18 ABUT<90 SINGULAR REGION
+   E NOT LOGOMK
+}
+
+4B.5C.c_d_e_VI4 {@ METAL4 enclose MVIA4 at end-of-line or outer corner is 0.06um
+   x = ENC [VI4] ME4 < 0.06 ABUT<90 OPPOSITE          // via edge with metal enc < 0.06
+   E = INT x < 0.4 ABUT==90 INTERSECTING ONLY REGION  // 0.4 is MVIA4 size
+   E NOT LOGOMK
+}
+
+4B.5D_VI4 {@ A Minimum fo two MVIA4 must be used and with a spacing <= 0.6um to connect METAL4 and METAL5
+           @ when METAL4,METAL5 > 1.4um. Exclude CTTMVIA connected to METAL_CAP_AL and PAD_MARK.
+   M_COIN = ME4 AND ME5
+   WMA = M_COIN AND WM4_014
+   WMB = M_COIN AND WM5_014
+   WVIA_A = VI4 INSIDE WMA
+   WVIA_B = VI4 INSIDE WMB
+   VIA_OCT = VI4 NOT (INT VI4 < 0.001 ABUT REGION)
+   X = SIZE VIA_OCT BY 0.3 INSIDE OF M_COIN
+   Y = (X INTERACT WVIA_A) INTERACT VI4 >= 2
+   ((WMA NOT INTERACT Y) AND WVIA_A) NOT (LOGOMK OR (MMCAL OR PADMARK))
+   Z = (X INTERACT WVIA_B) INTERACT VI4 >= 2
+   ((WMB NOT INTERACT Z) AND WVIA_B) NOT (LOGOMK OR (MMCAL OR PADMARK))
+}  // 2X METAL
+
+4C.1I {@ A Minimum fo two CTTMVIA must be used and with a spacing <= 1.2um to connect METAL4 and METAL5
+       @ when the width of either METAL_CAP_AL > 1.4um or Top Metal > 1.4um.
+       @ Exclude PAD_MARK.
+   M_COIN = MMC_014 AND ME5
+   WMA = M_COIN AND MMC_014
+   WMB = M_COIN AND WM5_014
+   WVIA_A = VI4 INSIDE WMA
+   WVIA_B = VI4 INSIDE WMB
+   VIA_OCT = VI4 NOT (INT VI4 < 0.001 ABUT REGION)
+   X = SIZE VIA_OCT BY 0.6 INSIDE OF M_COIN
+   Y = (X INTERACT WVIA_A) INTERACT VI4 >= 2
+   ((WMA NOT INTERACT Y) AND WVIA_A) NOT (LOGOMK OR PADMARK)
+   Z = (X INTERACT WVIA_B) INTERACT VI4 >= 2
+   ((WMB NOT INTERACT Z) AND WVIA_B) NOT (LOGOMK OR PADMARK)
+}  // 2X METAL
+
+4B.5E_VI4 {@ All MVIA4 shape must be square or rectangular and at 45 degree,
+            @ rectangular and 45 degree MVIA4(called MVIA4_BAR) is only permitted in Die Seal
+            @ Ring and Fuse structure
+   ANGLE ( VI4 NOT LOGOMK ) >0<90
+   ANGLE ( VI4BAR NOT LOGOMK ) >0<45
+   ANGLE ( VI4BAR NOT LOGOMK ) >45<90
+   (ANGLE VI4BAR == 45) OUTSIDE EDGE (SEALRMARK OR FUSEMARK)
+}
+
+
+//============================
+//===  Metal-5 Rule (P67)  ===2x
+//============================
+
+//BMET5_a = SIZE (SIZE ME5 BY -4.999) BY 4.999 TRUNCATE 0 INSIDE OF ME5 STEP 4.999 // ME5 width >= 10
+//BMET5 = BMET5_a AND ME5
+//BM_VIA5 = VI5 INSIDE BMET5
+
+OFF_GRID_ME5 {@ Grid size ME5 is 0.005
+   OFFGRID (ME5 OUTSIDE (SP_18 OR SP_16)) 5
+   OFFGRID ME5 1
+}
+
+4B.6A_ME5 {@ Minimum METAL5 width is 0.44um
+   E = INT ME5 < 0.44 ABUT>0<90 SINGULAR REGION
+   E NOT LOGOMK
+}
+
+4B.6B.a_ME5 {@ Minimum METAL5 to METAL5 spacing is 0.44um
+             @ where one METAL5 width < 2.0um
+   E = EXT ME5 < 0.44 ABUT>0<90 SINGULAR REGION
+   E NOT LOGOMK
+}
+
+4B.6B.b_ME5 {@ Minimum METAL5 to METAL5 spacing is 0.5um
+             @ where one METAL5 width >= 2.0um
+   WM5_2 = SIZE ( SIZE ME5_N_LOGO BY -0.999 ) BY 0.999 INSIDE OF ME5 TRUNCATE 0 STEP 0.999
+   WM5_2_C = STAMP WM5_2 BY ME5
+   X = WM5_2 COIN INSIDE EDGE ME5
+   Y = WM5_2_C INSIDE EDGE ME5
+   E1 = EXT X ME5 < 0.5 ABUT>0<90 REGION
+   E2 = EXT Y ME5 < 0.5 MEASURE ALL NOT CONNECTED REGION
+   E1 NOT LOGOMK
+   E2 NOT LOGOMK
+}
+
+4B.6C_ME5.MAX {@ Maximum ME5 to ME5 spacing 500um
+   x = SIZE (ME5 OR M5DUMY) BY 250
+   y = BULK NOT x
+   SIZE y BY 250 INSIDE OF BULK
+}
+
+4B.6D.a_d_ME5 {@ Minimum extension from METAL5 to MVIA4 is 0um, no MVIA4 outside METAL5
+   E = NOT VI4 ME5
+   E NOT LOGOMK
+}
+
+4B.6D.b_c_e_ME5 {@ METAL5 enclose MVIA4 at end-of-line or outer corner is 0.06um
+   x = ENC [VI4] ME5 < 0.06 ABUT<90 OPPOSITE           // via edge with metal enc < 0.06
+   E = INT x < 0.4 ABUT==90 INTERSECTING ONLY REGION   // 0.4 is MVIA4 size
+   E NOT LOGOMK
+}
+
+4B.6E_ME5 {@ Minimum area of METAL5 region 0.4075 sq.um
+   E = AREA ME5 < 0.4075
+   E NOT LOGOMK
+}
+
+4B.6F_ME5 {@ Minimum METAL5 enclosed area 0.87 sq.um
+   x = HOLES ME5 < 0.87*50 INNER
+   y = x NOT ME5
+   E = AREA y < 0.87
+   E NOT LOGOMK
+}
+
+4B.6G_ME5.DEN {@ The ME5 coverage must be larger than 30% of entire chip area
+   DENSITY (ME5 OR M5DUMY) < 0.30 INSIDE OF EXTENT // PRINT MET5.density
+}
+
+4B.6H_ME5.DEN {@ The ME5 coverage must be larger than 25% for every millimeter square
+   DENSITY (ME5 OR M5DUMY) < 0.25 WINDOW 1000 STEP 500 BACKUP // PRINT MET5_local.density
+}
+    
+//============================
+//===  Via-5 Rule (P68)  =====2x
+//============================
+
+BMET5_a = SIZE (SIZE ME5 BY -4.999) BY 4.999 TRUNCATE 0 INSIDE OF ME5 STEP 4.999 // ME5 width >= 10
+BMET5 = BMET5_a AND ME5
+BM_VIA5 = VI5 INSIDE BMET5
+
+OFF_GRID_VI5 {@ Grid size VI5 is 0.005
+   OFFGRID (VI5 OUTSIDE (SP_18 OR SP_16)) 5
+   OFFGRID VI5 1
+}
+
+4B.5A_VI5 {@ Exact MVIA5 size is 0.40um
+   E = NOT RECTANGLE VI5 == 0.40 BY == 0.40
+   E NOT (FUSEMARK OR LOGOMK)
+}
+
+4B.5B.a_b_VI5 {@ Minimum MVI5 to MVIA5 spacing is 0.40um
+   E = EXT VI5 < 0.40 ABUT>0<90 SINGULAR REGION
+   E NOT LOGOMK
+}
+
+4B.5B.c_VI5 {@ Minimum MVIA5 to MVIA5 spacing (in MVIA5 array with size>=6x6) is 0.45um
+             @ (Two MVIA5 within 0.5um spacing is considered to be in the same array)
+             @ (When either the number of row or coulmn of the array is smaller than 6,
+             @ for example 6x5 ,1x7 ,2x10 , smaller spacing "0.40" can be applied)
+   a = SIZE (SIZE VI5 BY 0.25) BY -0.25            // select two MVIA5 within 0.5um spacing
+   b = SIZE a BY -2                             // select MVIA5 array coulmn or row < 6
+   c = SIZE b BY  2                             // (0.5X4 + 0.4x5)/2 = 2
+   d = c CUT VI5 >= 36                              // select array interact >= 36 vias
+   e = VI5 INTERACT d
+   EXT e < 0.45 ABUT<90
+}
+
+4B.5C.a_VI5 {@ Minimum extension from METAL5(width<10um) to MVIA5 is 0um, no MVIA5 outside METAL5
+   E = NOT VI5 ME5
+   E NOT LOGOMK
+}
+
+4B.5C.b_VI5 {@ Minimum extension from METAL5(width>=10um) to MVIA5 is 0.18um
+   E = ENC BM_VIA5 ME5 < 0.18 ABUT<90 SINGULAR REGION
+   E NOT LOGOMK
+}
+
+4B.5C.c_d_e_VI5 {@ METAL5 enclose MVIA5 at end-of-line or outer corner is 0.06um
+   x = ENC [VI5] ME5 < 0.06 ABUT<90 OPPOSITE          // via edge with metal enc < 0.06
+   E = INT x < 0.4 ABUT==90 INTERSECTING ONLY REGION  // 0.4 is MVIA5 size
+   E NOT LOGOMK
+}
+
+4B.5D_VI5 {@ A Minimum fo two MVIA5 must be used and with a spacing <= 0.6um to connect METAL5 and METAL6
+           @ when METAL5,METAL6 > 1.4um. Exclude CTTMVIA connected to PAD_MARK.
+   M_COIN = ME5 AND ME6
+   WMA = M_COIN AND WM5_014
+   WMB = M_COIN AND WM6_014
+   WVIA_A = VI5 INSIDE WMA
+   WVIA_B = VI5 INSIDE WMB
+   VIA_OCT = VI5 NOT (INT VI5 < 0.001 ABUT REGION)
+   X = SIZE VIA_OCT BY 0.3 INSIDE OF M_COIN
+   Y = (X INTERACT WVIA_A) INTERACT VI5 >= 2
+   ((WMA NOT INTERACT Y) AND WVIA_A) NOT (LOGOMK OR PADMARK)
+   Z = (X INTERACT WVIA_B) INTERACT VI5 >= 2
+   ((WMB NOT INTERACT Z) AND WVIA_B) NOT (LOGOMK OR PADMARK)
+}  // 2X METAL
+
+4B.5E_VI5 {@ All MVIA5 shape must be square or rectangular and at 45 degree,
+            @ rectangular and 45 degree MVIA5(called MVIA5_BAR) is only permitted in Die Seal
+            @ Ring and Fuse structure
+   ANGLE ( VI5 NOT LOGOMK ) >0<90
+   ANGLE ( VI5BAR NOT LOGOMK ) >0<45
+   ANGLE ( VI5BAR NOT LOGOMK ) >45<90
+   (ANGLE VI5BAR == 45) OUTSIDE EDGE (SEALRMARK OR FUSEMARK)
+}
+
+
+//============================
+//===  Metal-6 Rule (P67)  ===2x
+//============================
+
+//BMET6_a = SIZE (SIZE ME6 BY -4.999) BY 4.999 TRUNCATE 0 INSIDE OF ME6 STEP 4.999 // ME6 width >= 10
+//BMET6 = BMET6_a AND ME6
+//BM_VIA6 = VI6 INSIDE BMET6
+
+OFF_GRID_ME6 {@ Grid size ME6 is 0.005
+   OFFGRID (ME6 OUTSIDE (SP_18 OR SP_16)) 5
+   OFFGRID ME6 1
+}
+
+4B.7A_ME6 {@ Minimum METAL6 width is 0.44um
+   E = INT ME6 < 0.44 ABUT>0<90 SINGULAR REGION
+   E NOT LOGOMK
+}
+
+4B.7B.a_ME6 {@ Minimum METAL6 to METAL6 spacing is 0.44um
+             @ where one METAL6 width < 2.0um
+   E = EXT ME6 < 0.44 ABUT>0<90 SINGULAR REGION
+   E NOT LOGOMK
+}
+
+4B.7B.b_ME6 {@ Minimum METAL6 to METAL6 spacing is 0.5um
+             @ where one METAL6 width >= 2.0um
+   WM6_2 = SIZE ( SIZE ME6_N_LOGO BY -0.999 ) BY 0.999 INSIDE OF ME6 TRUNCATE 0 STEP 0.999
+   WM6_2_C = STAMP WM6_2 BY ME6
+   X = WM6_2 COIN INSIDE EDGE ME6
+   Y = WM6_2_C INSIDE EDGE ME6
+   E1 = EXT X ME6 < 0.5 ABUT>0<90 REGION
+   E2 = EXT Y ME6 < 0.5 MEASURE ALL NOT CONNECTED REGION
+   E1 NOT LOGOMK
+   E2 NOT LOGOMK
+}
+
+4B.7C_ME6.MAX {@ Maximum ME6 to ME6 spacing 500um
+   x = SIZE (ME6 OR M6DUMY) BY 250
+   y = BULK NOT x
+   SIZE y BY 250 INSIDE OF BULK
+}
+
+4B.7D.a_ME6 {@ Minimum extension from METAL6 to MVIA5 is 0um, no MVIA5 outside METAL6
+   E = NOT VI5 ME6
+   E NOT LOGOMK
+}
+
+4B.7D.b_c_ME6 {@ METAL6 enclose MVIA5 at end-of-line or outer corner is 0.06um
+   x = ENC [VI5] ME6 < 0.06 ABUT<90 OPPOSITE           // via edge with metal enc < 0.06
+   E = INT x < 0.4 ABUT==90 INTERSECTING ONLY REGION   // 0.4 is MVIA5 size
+   E NOT LOGOMK
+}
+
+4B.7E_ME6 {@ Minimum area of METAL6 region 0.4075 sq.um
+   E = AREA ME6 < 0.4075
+   E NOT LOGOMK
+}
+
+4B.7F_ME6.DEN {@ The ME6 coverage must be larger than 30% of entire chip area
+   DENSITY (ME6 OR M6DUMY) < 0.30 INSIDE OF EXTENT // PRINT MET6.density
+}
+
+4B.7G_ME6.DEN {@ The ME6 coverage must be larger than 25% for every millimeter square
+   DENSITY (ME6 OR M6DUMY) < 0.25 WINDOW 1000 STEP 500 BACKUP // PRINT MET6_local.density
+}
+    
+//======================================
+//===  NATIVE (NATIVE Rules)         ===
+//======================================
+
+GATE3_NATIVE     = GATE3_W     INSIDE EDGE NATIVE
+GATE3_NOT_NATIVE = GATE3_W NOT INSIDE EDGE NATIVE
+DIFF_NATIVE      = DIFF INTERACT NATIVE
+GATE1_NATIVE     = GATE1_W     INSIDE EDGE NATIVE
+GATE_NATIVE      = GATE_W      INSIDE EDGE NATIVE
+
+OFF_GRID_NATIVE {@ Grid size NATIVE is 0.005
+   OFFGRID NATIVE 5
+}
+
+4C.2A.a {@ Minimum POLY1(1.2V) width for NATIVE device (core) is 1.2um
+    X = INT GATE1_NATIVE < 1.2 ABUT>0<90 REGION
+    X NOT LOGOMK
+}
+
+4C.2A.b_25V {@ Minimum POLY1(2.5V) width for NATIVE device (I/O) is 1.8um
+    X = INT GATE3_NATIVE < 1.8 ABUT>0<90 REGION
+    X NOT LOGOMK
+}
+
+4C.2A.b_33V {@ Minimum POLY1(3.3V) width for NATIVE device (I/O) is 1.8um
+    X = INT GATE3_NATIVE < 1.8 ABUT>0<90 REGION
+    X NOT LOGOMK
+}
+
+4C.2A.b_5V {@ Minimum POLY1(5V) width for NATIVE device (I/O) is 2.22um
+    X = INT GATE3_NATIVE < 2.22 ABUT>0<90 REGION
+    X NOT LOGOMK
+}
+
+4C.2B {@ Minimum NATIVE width is 1.6um
+       @ exclude CAD_5V_LDMOS_MARK
+    X = INT NATIVE < 1.6 ABUT>0<90 SINGULAR REGION
+    (X NOT LD5VMK) NOT LOGOMK
+}
+
+4C.2C {@ Minimum NATIVE spacing is 0.63um
+    X = EXT NATIVE < 0.63 ABUT>0<90 SINGULAR REGION
+    X NOT LOGOMK
+}
+
+4C.2D {@ Exact NATIVE enclosure of DIFFUSION exclude CAD_5V_LMOS_MARK is 0.3um
+    X1 = ENC DIFF NATIVE < 0.3 ABUT<90 SINGULAR OVERLAP REGION
+    (X1 NOT LD5VMK) NOT LOGOMK
+    X = NATIVE INTERACT DIFF
+    Z = DIFF INTERACT NATIVE
+    Y = SIZE X BY -0.3
+    (( Y NOT Z ) NOT LD5VMK) NOT LOGOMK
+    (( Z NOT NATIVE ) NOT LD5VMK) NOT LOGOMK
+}
+
+4C.2E {@ Minimum NATIVE to unrelated Diffusion spacing exclude CAD_5V_LMOS_MARK is 0.25um
+    X = EXT NATIVE DIFF < 0.25 ABUT<90 SINGULAR OVERLAP REGION
+    (X NOT LD5VMK) NOT LOGOMK
+}
+
+4C.2F {@ Minimum NATIVE to NWELL spacing exclude CAD_5V_LMOS_MARK is 0.9um
+    X = EXT NATIVE NWEL < 0.9 ABUT<90 SINGULAR INSIDE ALSO REGION
+    (X NOT LD5VMK) NOT LOGOMK
+}
+
+4C.2G {@ NATIVE shapes must be orthogonal exclude CAD_5V_LMOS_MARK
+    ANGLE ( (NATIVE NOT LD5VMK) NOT LOGOMK ) >0<90
+}
+
+4C.2H {@ NATIVE must be enclosed by N+ exclude CAD_5V_LMOS_MARK
+       @ exclude CAD_5V_LDMOS_MARK
+    ( (NATIVE NOT LD5VMK) NOT NPLUS ) NOT LOGOMK
+}
+
+//================================
+//===  HR Rules (P31)          ===
+//================================
+
+OFF_GRID_HR {@ Grid size HR is 0.005
+   OFFGRID HR 5
+}
+
+4C.3A {@ Minimum HR width is 0.60um
+    X = INT HR < 0.60 ABUT>0<90 SINGULAR REGION
+    X NOT LOGOMK
+}
+
+4C.3B {@ Minimum space between two HR regions is 0.60um
+    X = EXT HR < 0.60 ABUT>0<90 SINGULAR REGION
+    X NOT LOGOMK
+}
+
+4C.3C {@ Minimum HR PO1 width is 0.50um
+    X = INT HRPOLY < 0.50 ABUT>0<90 SINGULAR REGION
+    X NOT LOGOMK
+}
+
+4C.3D {@ Minimum SAB width for HR PO1 resistor is 1.0um(define HR POLY length)
+    X = INT SAB_E_IN_HRPOLY < 1.0 ABUT OPPOSITE REGION
+    X NOT LOGOMK
+}
+
+4C.3E {@ Minimum HR mask overlap HR PO1 resistor is 0.50um, no HRPOLY outside HR
+    X = ENC HRPOLY HR < 0.50 ABUT<90 SINGULAR OUTSIDE ALSO REGION
+    X NOT LOGOMK
+}
+
+4C.3F {@ Minimum HR to unrelated PO1 spacing is 2.0um
+    X = EXT HR PURPOLY < 2.0 ABUT<90 SINGULAR REGION
+    X NOT LOGOMK
+}
+
+4C.3G {@ Minimum HR to NPLUS spacing is 1.5um
+    X = EXT NPLUS HRPOLY < 1.5 ABUT<90 SINGULAR INSIDE ALSO REGION
+    X NOT LOGOMK
+}
+
+4C.3H {@ Minimum HR to PPLUS spacing is 0.50um
+    X = EXT PPLUS HR < 0.50 ABUT<90 SINGULAR OVERLAP REGION
+    X NOT LOGOMK
+}
+
+4C.3I {@ Minimum SAB overlap HR PO1 resistor is 0.24um
+    X = ENC HRPOLY SAB < 0.24 ABUT<90 SINGULAR REGION
+    X NOT LOGOMK
+    ( HRPOLY OUTSIDE SAB ) NOT LOGOMK
+}
+
+4C.3J {@ Minimum HR PO1 CONTACT to SAB spacing is 0.50um
+    X = EXT HRCONT SAB < 0.50 ABUT<90 SINGULAR INSIDE ALSO REGION
+    X NOT LOGOMK
+}
+
+4C.3K {@ Minimum HR to unrelated DIFF spacing is 0.50um
+    X = EXT HR DIFF < 0.50 ABUT<90 SINGULAR INSIDE ALSO REGION
+    X NOT LOGOMK
+}
+
+4C.3L {@ Minimum NWELL overlap HR PO1 resistor is 1.5um
+    X = ENC HRPOLY NWELL < 1.5 ABUT<90 SINGULAR OUTSIDE ALSO REGION
+    X NOT LOGOMK
+}
+
+4C.3M {@ Exact PPLUS overlap SAB is 0.20 um
+    SAB_E_IN_HR_POLY = SAB INSIDE EDGE HRPOLY
+    X = (HRPOLY AND SAB) AND PPLUS
+    Y = EXPAND EDGE (SAB INSIDE EDGE HRPOLY) INSIDE BY 0.20
+    Z = EXPAND EDGE (PPLUS INSIDE EDGE HRPOLY) INSIDE BY 0.20
+    (SAB_E_IN_HR_POLY NOT INSIDE EDGE PPLUS) OUTSIDE EDGE LOGOMK
+
+    E1 = X NOT Y
+    E2 = X NOT Z
+    E3 = INT SAB_E_IN_HR_POLY PPLUS  < 0.20 ABUT<90 REGION
+    (E1 OR (E2 OR E3)) NOT LOGOMK
+}
+
+4C.3N {@ Minimum P+ implant spacing to unrelated poly resistor is 0.40um
+    X = EXT PPLUS SABPOLY < 0.40 ABUT<90 REGION
+    X NOT LOGOMK
+}
+
+4C.3O {@ Minimum PPLUS overhang of PPLUS PO1 HR resistor is 0.24um
+    X = ENC HRPOLY PPLUS < 0.24 ABUT<90 SINGULAR REGION
+    X NOT LOGOMK
+}
+
+4C.3_Note {@ HR-PO1 must be located in NWEL
+    ( HRPOLY NOT NWEL ) NOT LOGOMK
+}
+
+//============================
+//===  T-Well Rule (P90)   ===
+//============================
+
+TWELL33 = (TWEL INTERACT NDIF3) OR (TWEL INTERACT (PTAP AND TG))
+TWELL12 = TWEL ENCLOSE NDIF1
+TWELL_GOOD = OR TWELL33 TWELL12
+
+OFF_GRID_TW {@ Grid size TWEL is 0.005
+   OFFGRID TWEL 5
+}
+
+4C.4A {@ Minimum width of TWELL region is 0.63um
+    X = INT TWEL < 0.63 ABUT>0<90 SINGULAR REGION
+    X NOT LOGOMK
+}
+
+4C.4B.a {@ Minimum space between two TWELL regions is 0.63um
+    X = EXT TWEL < 0.63 ABUT>0<90 SINGULAR REGION
+    X NOT LOGOMK
+}
+
+4C.4B.b1 {@ Minimum space between two TWELL(1.2V) regions is 1.0um
+    X = EXT TWEL < 1.0 ABUT>0<90 SINGULAR NOT CONNECTED REGION
+    X NOT LOGOMK
+}
+
+4C.4B.b2_25V {@ Minimum space between two TWELL(2.5V) regions is 1.5um
+    TWELL33_CONNECTED = STAMP TWELL33 BY TWEL
+    X = EXT TWELL33_CONNECTED TWEL < 1.5 ABUT>0<90 SINGULAR NOT CONNECTED REGION
+    X NOT LOGOMK
+}
+
+4C.4B.b3_33V {@ Minimum space between two TWELL(3.3V) regions is 1.5um
+    TWELL33_CONNECTED = STAMP TWELL33 BY TWEL
+    X = EXT TWELL33_CONNECTED TWEL < 1.5 ABUT>0<90 SINGULAR NOT CONNECTED REGION
+    X NOT LOGOMK
+}
+
+4C.4B.b4_5V {@ Minimum space between two TWELL(5V) regions is 2.22um
+    TWELL33_CONNECTED = STAMP TWELL33 BY TWEL
+    X = EXT TWELL33_CONNECTED TWEL < 2.22 ABUT>0<90 SINGULAR NOT CONNECTED REGION
+    X NOT LOGOMK
+}
+
+4C.4C {@ Minimum NWELL overlap TWELL exclude CAD_5V_LMOS_MARK is 1.5um
+    X = ENC TWEL NWELL < 1.5 ABUT OUTSIDE ALSO REGION
+    (X NOT LD5VMK) NOT LOGOMK
+}
+
+4C.4D.a {@ Minimum TWELL to a P+ diffusion(1.2V) spacing is 0.3um
+    X = EXT TWEL PDIF1 < 0.3 ABUT<90 SINGULAR OVERLAP REGION
+    X NOT LOGOMK
+}
+
+4C.4D.b_25V {@ Minimum TWELL to a P+ diffusion(2.5V) spacing is 0.5um
+    X = EXT TWEL PDIF3 < 0.5 ABUT<90 SINGULAR OVERLAP REGION
+    X NOT LOGOMK
+}
+
+4C.4D.c_33V {@ Minimum TWELL to a P+ diffusion(3.3V) spacing is 0.5um
+    X = EXT TWEL PDIF3 < 0.5 ABUT<90 SINGULAR OVERLAP REGION
+    X NOT LOGOMK
+}
+
+4C.4D.d_5V {@ Minimum TWELL to a P+ diffusion(5V) spacing is 1.44um
+    X = EXT TWEL PDIF3 < 1.44 ABUT<90 SINGULAR OVERLAP REGION
+    X NOT LOGOMK
+}
+
+4C.4E {@ Minimum TWELL overlap P+ diffusion exclude CAD_5V_LMOS_MARK is 0.16um
+    X = ENC PTAP TWEL < 0.16 ABUT<90 SINGULAR OVERLAP REGION
+    (X NOT LD5VMK) NOT LOGOMK
+}
+
+4C.4F {@ Minimum TWELL to N+ diffusion is 0.16um
+    X = EXT TWEL NTAP < 0.16 ABUT<90 SINGULAR OVERLAP REGION
+    X NOT LOGOMK
+}
+
+4C.4G.a {@ Minimum TWELL overlap N+ diffusion(1.2V) spacing is 0.3um
+    X  = NDIF1 INTERACT TWEL
+    X1 = ENC X TWEL < 0.3 ABUT<90 SINGULAR OVERLAP REGION
+    X1 NOT LOGOMK
+}
+
+4C.4G.b_25V {@ Minimum TWELL overlap N+ diffusion(2.5V) spacing is 0.5um
+    X  = NDIF3 INTERACT TWEL
+    X1 = ENC X TWEL < 0.5 ABUT<90 SINGULAR OVERLAP REGION
+    X1 NOT LOGOMK
+}
+
+4C.4G.c_33V {@ Minimum TWELL overlap N+ diffusion(3.3V) spacing is 0.5um
+    X  = NDIF3 INTERACT TWEL
+    X1 = ENC X TWEL < 0.5 ABUT<90 SINGULAR OVERLAP REGION
+    X1 NOT LOGOMK
+}
+
+4C.4G.d_5V {@ Minimum TWELL overlap N+ diffusion(5V) spacing is 1.44um
+    X  = NDIF3 INTERACT TWEL
+    X1 = ENC X TWEL < 1.44 ABUT<90 SINGULAR OVERLAP REGION
+    X1 NOT LOGOMK
+}
+
+//======================================
+//===  NCAP (NCAP Rules)             ===
+//======================================
+
+NCAP_GATE = GATE INTERACT NCAP
+
+OFF_GRID_NCAP {@ Grid size NCAP is 0.005
+   OFFGRID NCAP 5
+}
+
+4C.5A {@ Minimum NCAP width is 0.44um
+    X = INT NCAP < 0.44 ABUT>0<90 SINGULAR REGION
+    X NOT LOGOMK
+}
+
+4C.5B {@ Minimum NCAP spacing and notch is 0.44um
+    X = EXT NCAP < 0.44 ABUT>0<90 SINGULAR REGION
+    X NOT LOGOMK
+}
+
+4C.5C {@ Minimum N_WELL enclosure of NCAP is 0 or >=0.44um
+    X = ENC NCAP NWEL < 0.44 ABUT>0<90 SINGULAR OUTSIDE ALSO REGION
+    X NOT LOGOMK
+}
+
+4C.5D.a__4C.5D.b {@ Minimum TG enclosure of NCAP is 0 or >=0.44um
+    X = ENC NCAP TG < 0.44 ABUT>0<90 SINGULAR OVERLAP REGION
+    X NOT LOGOMK
+}
+
+4C.5E {@ NCAP is not allowed over T_WELL, SAB, NATIVE and PCAP
+    ( NCAP AND TWEL ) NOT LOGOMK
+    ( NCAP AND SAB ) NOT LOGOMK
+    ( NCAP AND NATIVE ) NOT LOGOMK
+    ( NCAP AND PCAP ) NOT LOGOMK
+}
+
+4C.5F {@ (Gate over NCAP) is not allowed over P+
+    ( NCAP_GATE AND PPLUS ) NOT LOGOMK
+}
+
+4C.5G {@ Minimum NCAP enclosure of (Gate over NCAP) is 0.3um
+    X = ENC NCAP_GATE NCAP < 0.3 ABUT<90 SINGULAR OVERLAP REGION
+    X NOT LOGOMK
+}
+
+4C.5H {@ Minimum spacing of NCAP to gate is 0.55um
+    X = EXT NCAP GATE < 0.55 ABUT<90 SINGULAR OVERLAP REGION
+    X NOT LOGOMK
+}
+
+4C.5I {@ NCAP shapes must be orthogonal
+    ANGLE ( NCAP NOT LOGOMK ) >0<90
+}
+
+4C.5J {@ Minimum spacing of NCAP to TG is 0.44um
+    X = EXT NCAP TG < 0.44 ABUT<90 SINGULAR OVERLAP REGION
+    X NOT LOGOMK
+}
+
+4C.5K {@ Minimum spacing of NCAP to T_WELL is 0.44um
+    X = EXT NCAP TWEL < 0.44 ABUT<90 SINGULAR INSIDE ALSO REGION
+    X NOT LOGOMK
+}
+
+4C.5L {@ Minimum spacing of NCAP to N+/P+ SAB POLY1 and DIFFUSION resistor body is 0.58um
+    X1 = EXT RES2_POL_BODY NCAP < 0.58 ABUT SINGULAR INSIDE ALSO REGION
+    X2 = EXT RES2_DIF_BODY NCAP < 0.58 ABUT SINGULAR INSIDE ALSO REGION
+    X1 NOT LOGOMK
+    X2 NOT LOGOMK
+}
+
+4C.5M {@ Minimum spacing of NCAP to PCAP is 0.44um
+    X = EXT NCAP PCAP < 0.44 ABUT<90 SINGULAR INSIDE ALSO REGION
+    X NOT LOGOMK
+}
+
+//======================================
+//===  PCAP (PCAP Rules)             ===
+//======================================
+
+PCAP_GATE = GATE INTERACT PCAP
+
+OFF_GRID_PCAP {@ Grid size PCAP is 0.005
+   OFFGRID PCAP 5
+}
+
+4C.6A {@ Minimum PCAP width is 0.44um
+    X = INT PCAP < 0.44 ABUT>0<90 SINGULAR REGION
+    X NOT LOGOMK
+}
+
+4C.6B {@ Minimum PCAP spacing and notch is 0.44um
+    X = EXT PCAP < 0.44 ABUT>0<90 SINGULAR REGION
+    X NOT LOGOMK
+}
+
+4C.6C {@ Minimum T_WELL enclosure of PCAP is 0 or >=0.44um
+    X = ENC PCAP TWEL < 0.44 ABUT>0<90 SINGULAR OVERLAP REGION
+    X NOT LOGOMK
+}
+
+4C.6D.a__4C.6D.b {@ Minimum TG enclosure of PCAP is 0 or >=0.44um
+    X = ENC PCAP TG < 0.44 ABUT>0<90 SINGULAR OVERLAP REGION
+    X NOT LOGOMK
+}
+
+4C.6E {@ PCAP is not allowed over N_WELL, NCAP, SAB and NATIVE. Only PCAP in T_WELL
+       @ could be allowed in N_WELL becasue T_WELL must be surrendered by N_WELL
+    ( PCAP AND ( NWEL NOT TWEL ) ) NOT LOGOMK
+    ( PCAP AND SAB ) NOT LOGOMK
+    ( PCAP AND NATIVE ) NOT LOGOMK
+    ( PCAP AND NCAP ) NOT LOGOMK
+}
+
+4C.6F {@ (Gate over PCAP) is not allowed over N+
+    ( PCAP_GATE AND NPLUS ) NOT LOGOMK
+}
+
+4C.6G {@ Minimum PCAP enclosure of (Gate over PCAP) is 0.3um
+    X = ENC PCAP_GATE PCAP < 0.3 ABUT<90 SINGULAR OVERLAP REGION
+    X NOT LOGOMK
+}
+
+4C.6H {@ Minimum spacing of PCAP to gate is 0.55um
+    X = EXT PCAP GATE < 0.55 ABUT<90 SINGULAR OVERLAP REGION
+    X NOT LOGOMK
+}
+
+4C.6I {@ PCAP shapes must be orthogonal
+    ANGLE ( PCAP NOT LOGOMK ) >0<90
+}
+
+4C.6J {@ Minimum spacing of PCAP to TG is 0.44um
+    X = EXT PCAP TG < 0.44 ABUT<90 SINGULAR OVERLAP REGION
+    X NOT LOGOMK
+}
+
+4C.6K {@ Minimum spacing of PCAP to T_WELL is 0.44um
+    X = EXT PCAP TWEL < 0.44 ABUT<90 SINGULAR OVERLAP REGION
+    X NOT LOGOMK
+}
+
+4C.6L {@ Minimum spacing of PCAP to N+/P+ SAB POLY1 and DIFFUSION resistor body is 0.58um
+    X1 = EXT RES2_POL_BODY PCAP < 0.58 ABUT SINGULAR INSIDE ALSO REGION
+    X2 = EXT RES2_DIF_BODY PCAP < 0.58 ABUT SINGULAR INSIDE ALSO REGION
+    X1 NOT LOGOMK
+    X2 NOT LOGOMK
+}
+
+4C.6M {@ Minimum spacing of PCAP to NCAP is 0.44um
+    X = EXT NCAP PCAP < 0.44 ABUT<90 SINGULAR INSIDE ALSO REGION
+    X NOT LOGOMK
+}
+
+//========================
+//===  INDUCTOR Rules  ===
+//========================
+
+IND_METAL = ME6 AND IND
+
+OFF_GRID_IND {@ Grid size IND is 0.005
+   OFFGRID IND 5
+}
+
+4C.7A {@ Maximum width of IND is 355.55um
+    E = SIZE (SIZE IND BY -177.775) BY 177.775 INSIDE OF IND
+    E NOT LOGOMK
+}
+
+4C.7B {@ Minimum width of IND is 33.34um
+    E = INT IND < 33.34 ABUT<90 SINGULAR REGION
+    E NOT LOGOMK
+}
+
+4C.7C {@ Minimum IND to IND spacing is 17.34um (inductor coupling issue need to be considered if minimum IND to IND space usage)
+    E = EXT IND < 17.34 ABUT<90 SINGULAR REGION
+    E NOT LOGOMK
+}
+
+4C.7D {@ Minimum IND enclosure of Top METAL is 11.12um
+    E = ENC ME6 IND < 11.12 ABUT<90 SINGULAR REGION
+    E NOT LOGOMK
+}
+
+// 4C.7E is not checked
+
+4C.7F {@ Maximum width of Top METAL within IND is 40um
+    E = SIZE (SIZE IND_METAL BY -20.0) BY 20.0 TRUNCATE 20.0
+    E NOT LOGOMK
+}
+
+4C.7G {@ Minimum spacing of Top METAL within IND is 0.44um
+   E = EXT IND_METAL < 0.44 ABUT<90 SINGULAR REGION
+   E NOT LOGOMK
+
+}
+
+4C.7H {@ Minimum width of Top METAL within IND 0.44um
+   E = INT IND_METAL < 0.44 ABUT<90 SINGULAR REGION
+   E NOT LOGOMK
+
+}
+
+4C.7I {@ Minimum N_WELL enclosure of Top METAL within IND is 11.12um
+    E = ENC IND_METAL NWEL < 11.12 ABUT<90 SINGULAR REGION
+    E NOT LOGOMK
+}
+
+IND_ME_UP = IND AND ME6
+IND_VIA = IND AND VI5
+IND_ME_BOT = IND AND ME5
+CONNECT IND_ME_UP IND_ME_BOT BY IND_VIA
+
+4C.7J {@ One IND layer could be allowed with only one inductor pattern
+    E = IND INTERACT IND_ME_UP > 1 BY NET
+    E NOT LOGOMK
+}
+
+//================================
+//===     LDMOS Layout Rule    ===
+//================================
+
+//For LDNMOS
+LD_PO1 = PO1 INTERACT LD5VMK
+LD_DIFF = DIFF INTERACT LD5VMK
+LD_NTDIF = LD_DIFF AND NPLUS
+LD_PTDIF = LD_DIFF AND PPLUS
+LD_PODIF = LD_DIFF INTERACT PO1
+
+LD_NWEL = NWEL INTERACT LD5VMK
+LDN_NWEL = LD_NWEL INTERACT WELL_OL // define LDNMOS NWEL
+
+LD_TWEL = TWEL INTERACT LD5VMK
+LD_NATIVE = NATIVE INTERACT LD5VMK
+LD_GATE_W = GATE_W INSIDE EDGE LD5VMK
+LD_GATE_L = GATE_L INSIDE EDGE LD5VMK
+
+
+LD_N_PODIF = LD_PODIF INTERACT LDN_NWEL 
+LD_P_PODIF = LD_PODIF INTERACT LD_TWEL  
+
+LD_NWEL_GRING_X = (DONUT LD_NWEL) NOT INTERACT GATE // N_WELL Ring is defined by Chien Liang Lu on 07/14/2011
+LD_NWEL_GRING   = LD_NWEL_GRING_X TOUCH ((HOLES LD_NWEL_GRING_X INNER) INTERACT LD_N_PODIF)
+
+
+
+4C.8.1.Aa {@ Exact space between N_WELL Ring and device N_WELL is 1.86um
+           @ For left and right side
+    X = (LDN_NWEL INTERACT LD_PO1) INSIDE EDGE LD_DIFF
+    Y = LDN_NWEL TOUCH EDGE X
+    E = EXT (Y) LD_NWEL_GRING == 1.86 ABUT<90 
+    E OUTSIDE EDGE LOGOMK
+}
+
+4C.8.1.Ab {@ Exact space between N_WELL Ring and device N_WELL is 2um
+           @ For down side
+    X = HOLES (( LD_PO1 OR LD_DIFF) INSIDE LD5VMK)
+    Y = (((LD_NWEL INTERACT LD_PO1) NOT LD_DIFF) NOT INTERACT X) NOT INTERACT TWEL
+    Z = (Y NOT COIN OUTSIDE EDGE LD_DIFF) NOT COIN INSIDE EDGE WELL_OL
+    E = EXT (Z) LD_NWEL_GRING == 2 ABUT<90 
+    E OUTSIDE EDGE LOGOMK
+}
+
+4C.8.1.Ac {@ Exact space between N_WELL Ring and device N_WELL is 2.0um
+           @ For up side
+    X = HOLES (( LD_PO1 OR LD_DIFF) INSIDE LD5VMK)
+    Y = (((LD_NWEL INTERACT LD_PO1) NOT LD_DIFF) INTERACT X) NOT INTERACT TWEL
+    Z = (Y NOT COIN OUTSIDE EDGE LD_DIFF) NOT COIN INSIDE EDGE WELL_OL
+    E = EXT (Z) LD_NWEL_GRING == 2.0 ABUT<90 
+    E OUTSIDE EDGE LOGOMK
+}
+
+4C.8.1.Ba {@ Exact space between N_WELL Ring and DIFFUSION is 0.44um
+           @ For left and right side
+    X = LD_PODIF NOT TOUCH EDGE (LD_PODIF INSIDE EDGE LD_NWEL)
+    E = EXT (X) LD_NWEL_GRING == 0.44 ABUT<90
+    E OUTSIDE EDGE LOGOMK
+}
+
+4C.8.1.Bb {@ Exact space between N_WELL Ring and DIFFUSION is 3um
+           @ For down side
+    X = HOLES (( LD_PO1 OR LD_DIFF) INSIDE LD5VMK)
+    Y = (((LD_NWEL NOT LD_NWEL_GRING) NOT LD_DIFF) NOT INTERACT X) NOT INTERACT TWEL
+    Z = LD_DIFF TOUCH OUTSIDE EDGE Y
+    E = EXT (Z) LD_NWEL_GRING == 3 ABUT<90
+    E OUTSIDE EDGE LOGOMK
+}
+
+4C.8.1.Bc {@ Exact space between N_WELL Ring and DIFFUSION is 3.0um
+           @ For up side
+    X = HOLES (( LD_PO1 OR LD_DIFF) INSIDE LD5VMK)
+    Y = ((LD_NWEL NOT LD_DIFF) INTERACT X) NOT INTERACT TWEL
+    Z = LD_DIFF TOUCH OUTSIDE EDGE Y
+    E = EXT (Z) LD_NWEL_GRING == 3.0 ABUT<90
+    E OUTSIDE EDGE LOGOMK
+}
+
+4C.8.1.C {@ DIFFUSION width for define Channel width is 10.0<= X <= 100.0
+    E1 = LENGTH LD_GATE_W < 10
+    E2 = LENGTH LD_GATE_W > 100
+    E1 OUTSIDE EDGE LOGOMK
+    E2 OUTSIDE EDGE LOGOMK
+}
+
+4C.8.1.D {@ Exact N_WELL RING width is 2um
+    E1 = INT LD_NWEL_GRING < 2 ABUT<90 SINGULAR REGION
+    E2 = SIZE (SIZE LD_NWEL_GRING BY -1) BY 1 TRUNCATE 1
+    (E1 OR E2) NOT LOGOMK
+}
+
+4C.8.1.E {@ Exact POLY1 overlap of N_WELL (For channel length direction) is 0.6um
+    X = (LD_PO1 AND LD_NWEL) NOT INTERACT TWEL
+    E1 = INT X < 0.6 ABUT<90 SINGULAR REGION
+    E2 = SIZE (SIZE X BY -0.3) BY 0.3 TRUNCATE 0.3
+    (E1 OR E2) NOT LOGOMK
+}
+
+4C.8.1F {@ Exact POLY1 width for define channel length of LDNMOS is 1um
+    x  = LD_GATE_W INSIDE EDGE LD_NTDIF
+    y  = LD_GATE_L COIN INSIDE EDGE LD_NTDIF
+    E1 = INT (x) == 1
+    E1 OUTSIDE EDGE LOGOMK
+    E2 = NOT LENGTH y == 1
+    E2 OUTSIDE EDGE LOGOMK
+}
+
+4C.8.1G.a {@ Exact N_WELL dimension Width (For channel Length direction) is 2.32um
+    E1 = NOT RECTANGLE LDN_NWEL == 2.32 BY >= 12 <= 102
+    E1 NOT LOGOMK
+    E2 = INT LDN_NWEL < 2.32 ABUT<90 SINGULAR REGION
+    E2 NOT LOGOMK
+    E3 = SIZE (SIZE LDN_NWEL BY -1.16) BY 1.16 TRUNCATE 1.16
+    E3 NOT LOGOMK
+}
+
+4C.8.1G.b {@ The N_WELL dimension Length (For channel width direction) is >= 12um <= 102um
+    LDN_NWEL_E = LDN_NWEL INSIDE EDGE GATE
+    x = LDN_NWEL TOUCH INSIDE EDGE LDN_NWEL_E
+    E1 = NOT LENGTH x >= 12 <= 102
+    E1 OUTSIDE EDGE LOGOMK
+    y = LDN_NWEL NOT TOUCH INSIDE EDGE LDN_NWEL_E
+    z = INT LDN_NWEL x < 0.005 ABUT == 90 REGION
+    w = y TOUCH INSIDE EDGE z
+    E2 = INT (w) >= 12 <= 102
+    E2 OUTSIDE EDGE LOGOMK
+}
+
+4C.8.1H {@ WELL_OL must be inside N_WELL
+    E = WELL_OL NOT NWEL
+    E NOT LOGOMK
+}
+
+4C.8.1I.a {@ Exact WELL_OL dimension Width (For channel Length direction) is 0.4um
+    E1 = NOT RECTANGLE WELL_OL == 0.4 BY >= 12 <= 102
+    E1 NOT LOGOMK
+    E2 = INT WELL_OL < 0.4 ABUT<90 SINGULAR REGION
+    E2 NOT LOGOMK
+    E3 = SIZE (SIZE WELL_OL BY -0.2) BY 0.2 TRUNCATE 0.2
+    E3 NOT LOGOMK
+}
+
+4C.8.1I.b {@ The WELL_OL dimension Length (For channel width direction) is >= 12um <= 102um
+    WELL_OL_E = WELL_OL INSIDE EDGE GATE
+    x = WELL_OL TOUCH INSIDE EDGE WELL_OL_E
+    E1 = NOT LENGTH x >= 12 <= 102
+    E1 OUTSIDE EDGE LOGOMK
+    y = WELL_OL NOT TOUCH INSIDE EDGE WELL_OL_E
+    E2 = INT (y) >= 12 <= 102
+    E2 OUTSIDE EDGE LOGOMK
+}
+
+4C.8.1J {@ Exact N_WELL overhang of Diffusion (For channel Length direction) is 1um
+    E1 = ENC LD_PODIF ((LD_NWEL INTERACT LD_PO1) NOT INTERACT TWEL) < 1 ABUT<90 SINGULAR REGION
+    x = ((LD_NWEL INTERACT LD_PO1) NOT LD_PODIF) NOT INTERACT TWEL
+    E2 = SIZE ( SIZE X BY -0.5) BY 0.5 TRUNCATE 0.5
+    (E1 OR E2) NOT LOGOMK
+}
+
+4C.8.1K {@ Exact POLY1 to POLY1 spacing is 1.12um
+    X = LD_GATE_W INSIDE EDGE LD_N_PODIF
+    Y = ((LD_N_PODIF NOT LD_PO1) AND NWEL) INTERACT GATE > 1
+
+    E1 = EXT X < 1.12 REGION
+    E2 = SIZE (SIZE Y BY -0.56) BY 0.56 TRUNCATE 0.56
+ 
+    (E1 AND Y) NOT LOGOMK
+    E2 NOT LOGOMK
+}
+
+4C.8.1L {@ Exact WELL_OL to WELL_OL spacing is 1.52um
+    X = WELL_OL INSIDE EDGE LD_N_PODIF
+
+    Y = ((LD_N_PODIF NOT WELL_OL) AND NWEL) INTERACT GATE > 1
+
+    E1 = EXT X < 1.52 REGION
+    E2 = SIZE (SIZE Y BY -0.76) BY 0.76 TRUNCATE 0.76
+
+    (E1 AND Y) NOT LOGOMK
+    E2 NOT LOGOMK
+}
+
+4C.8.1M {@ Exact P+ DIFFUSION width for channel length direction id 0.46um
+    X = (PPLUS AND LD_PODIF) NOT INTERACT TWEL
+    E1 = INT X < 0.46 ABUT<90 SINGULAR REGION
+    E2 = SIZE ( SIZE X BY -0.23) BY 0.23 TRUNCATE 0.23
+    (E1 OR E2) NOT LOGOMK
+}
+
+4C.8.1Na {@ Exact space between P+ implant and N_WELL ring is 0.26um
+          @ For left and right side
+    X = PPLUS TOUCH EDGE (PPLUS INSIDE EDGE LD_PODIF)
+    Y = EXPAND EDGE X INSIDE BY 0.01
+    Z = (PPLUS INTERACT LD_PODIF) NOT TOUCH EDGE Y
+    E = EXT LD_NWEL_GRING (Z) == 0.26 ABUT<90 
+    E OUTSIDE EDGE LOGOMK
+}
+
+4C.8.1Nb {@ Exact space between P+ implant and N_WELL ring is 2.7um
+          @ For down side
+    X = HOLES (( LD_PO1 OR LD_DIFF) INSIDE LD5VMK)
+    Y = ((LD_NWEL NOT LD_DIFF) NOT INTERACT X) NOT INTERACT TWEL
+    Z = LD_DIFF TOUCH OUTSIDE EDGE Y
+    X1 = PPLUS TOUCH EDGE (PPLUS INSIDE EDGE LD_PODIF)
+    Y1 = (EXPAND EDGE X1 INSIDE BY 0.01) NOT LD_PODIF
+    Y2 = Y1 WITH EDGE (Y1 TOUCH OUTSIDE EDGE Z)
+    Z1 = (PPLUS INTERACT LD_PODIF) NOT TOUCH EDGE X1
+    Z2 = Z1 TOUCH EDGE Y2
+    E = EXT LD_NWEL_GRING (Z2) == 2.7 ABUT<90 
+    E OUTSIDE EDGE LOGOMK
+}
+
+4C.8.1Nc {@ Exact space between P+ implant and N_WELL ring is 1.22um
+          @ For up side
+    X = HOLES (( LD_PO1 OR LD_DIFF) INSIDE LD5VMK)
+    Y = ((LD_NWEL NOT LD_DIFF) INTERACT X) NOT INTERACT TWEL
+    Z = LD_DIFF TOUCH OUTSIDE EDGE Y
+    X1 = PPLUS TOUCH EDGE (PPLUS INSIDE EDGE LD_PODIF)
+    Y1 = (EXPAND EDGE X1 INSIDE BY 0.01) NOT LD_PODIF
+    Y2 = Y1 WITH EDGE (Y1 TOUCH OUTSIDE EDGE Z)
+    Z1 = (PPLUS INTERACT LD_PODIF) NOT TOUCH EDGE X1
+    Z2 = Z1 TOUCH EDGE Y2
+    E = EXT LD_NWEL_GRING (Z2) == 1.22 ABUT<90 
+    E OUTSIDE EDGE LOGOMK
+}
+
+4C.8.1O {@ Exact N+ implant width for channel length direction is 4.24um
+    X = NPLUS INSIDE EDGE (LD_PODIF NOT INTERACT TWEL)
+    E1 = INT (X) == 4.24 ABUT<90 
+    Y = (LD_PODIF NOT INTERACT TWEL) INSIDE EDGE NPLUS
+    E2 = LENGTH Y != 4.24
+    E1 OUTSIDE EDGE LOGOMK
+    E2 OUTSIDE EDGE LOGOMK
+}
+
+
+// LDPMOS
+
+4C.8.2A {@ Diffusion with for define channel width is >=10um or <= 100um
+    x = LD_GATE_L COIN INSIDE EDGE LD_PTDIF
+    E = INT (x) >= 10 <= 100
+    E OUTSIDE EDGE LOGOMK
+}
+
+4C.8.2B {@ Exact POLY1 overlap N_WELL (For channel Length direction) is 0.6um
+    x = NWEL INSIDE EDGE LD_DIFF
+    E1 = INT LD_GATE_W x < 0.6 ABUT<90 REGION
+    E2 = SIZE (SIZE (NWEL AND (PO1 AND LD_DIFF)) BY -0.3) BY 0.3 TRUNCATE 0.3
+    E3 = (PO1 AND LD_DIFF) NOT CUT NWEL
+    E1 NOT LOGOMK
+    E2 NOT LOGOMK
+    E3 NOT LOGOMK
+} // check both LD N/P MOS
+
+4C.8.2C {@ Exact POLY1 width for define channel length of LDPMOS is 0.8um
+    x  = LD_GATE_W INSIDE EDGE LD_PTDIF
+    y  = LD_GATE_L COIN INSIDE EDGE LD_PTDIF
+    E1 = INT (x) == 0.8
+    E1 OUTSIDE EDGE LOGOMK
+    E2 = NOT LENGTH y == 0.8
+    E2 OUTSIDE EDGE LOGOMK
+}
+
+4C.8.2D.a {@ Exact NATIVE dimension Width (For channel Length direction) is 1.52um
+    E1 = NOT RECTANGLE LD_NATIVE == 1.52 BY >= 12 <= 102
+    E1 NOT LOGOMK
+    E2 = INT LD_NATIVE < 1.52 ABUT<90 SINGULAR REGION
+    E2 NOT LOGOMK
+    E3 = SIZE (SIZE LD_NATIVE BY -0.76) BY 0.76 TRUNCATE 0.76
+    E3 NOT LOGOMK
+}
+
+4C.8.2D.b {@ The NATIVE dimension Length (For channel width direction) is >= 12um <= 102um
+    LD_NATIVE_E = LD_NATIVE INSIDE EDGE GATE
+    x = LD_NATIVE TOUCH INSIDE EDGE LD_NATIVE_E
+    E1 = NOT LENGTH x >= 12 <= 102
+    E1 OUTSIDE EDGE LOGOMK
+    y = LD_NATIVE NOT TOUCH INSIDE EDGE LD_NATIVE_E
+    z = INT LD_NATIVE x < 0.005 ABUT == 90 REGION
+    w = y TOUCH INSIDE EDGE z
+    E2 = INT (w) >= 12 <= 102
+    E2 OUTSIDE EDGE LOGOMK
+}
+
+4C.8.2D.c {@ Exact NATIVE overhang of DIFFUSION is 1um
+    E1 = ENC LD_DIFF LD_NATIVE < 1 ABUT<90 SINGULAR REGION
+    E1 NOT LOGOMK
+    X = LD_NATIVE NOT LD_DIFF
+    E2 = SIZE (SIZE X BY -0.5) BY 0.5 TRUNCATE 0.5
+    E2 NOT LOGOMK
+}
+
+4C.8.2E {@ NATIVE must be within T_WELL
+    E = LD_NATIVE NOT TWEL
+    E NOT LOGOMK
+}
+
+4C.8.2F.a {@ Exact T_WELL dimension Width (For channel Length direction) is 1.92um
+    E1 = NOT RECTANGLE LD_TWEL == 1.92 BY >= 12 <= 102
+    E1 NOT LOGOMK
+    E2 = INT LD_TWEL < 1.92 ABUT<90 SINGULAR REGION
+    E2 NOT LOGOMK
+    E3 = SIZE (SIZE LD_TWEL BY -0.96) BY 0.96 TRUNCATE 0.96
+    E3 NOT LOGOMK
+}
+
+4C.8.2F.b {@ Exact T_WELL dimension Length (For channel width direction) is >= 12um <= 102um
+    LD_TWEL_E = LD_TWEL INSIDE EDGE GATE
+    x = LD_TWEL TOUCH INSIDE EDGE LD_TWEL_E
+    E1 = NOT LENGTH x >= 12 <= 102
+    E1 OUTSIDE EDGE LOGOMK
+    y = LD_TWEL NOT TOUCH INSIDE EDGE LD_TWEL_E
+    z = INT LD_TWEL x < 0.005 ABUT == 90 REGION
+    w = y TOUCH INSIDE EDGE z
+    E2 = INT (w) >= 12 <= 102
+    E2 OUTSIDE EDGE LOGOMK
+}
+
+4C.8.2F.c {@ Exact T_WELL overlap of PO1 is 0.4um
+    LD_TWEL_E = LD_TWEL INSIDE EDGE GATE
+    E = INT LD_GATE_W (LD_TWEL_E) == 0.4 ABUT<90
+    E OUTSIDE EDGE LOGOMK
+}
+
+4C.8.2G {@ Exact T_WELL overlap N_WELL is 0.2um
+    x = NWEL INSIDE EDGE LD_DIFF
+    y = TWEL INSIDE EDGE LD_DIFF
+    E1 = INT x y < 0.2 ABUT<90 REGION
+    E2 = SIZE (SIZE (TWEL AND (NWEL AND (PO1 AND LD_DIFF))) BY -0.1) BY 0.1 TRUNCATE 0.1
+    E3 = LD_TWEL NOT CUT NWEL
+    E1 NOT LOGOMK
+    E2 NOT LOGOMK
+    E3 NOT LOGOMK
+}
+
+4C.8.2H {@ Exact NATIVE overlap POLY1 is 0.2um
+    x = NATIVE INSIDE EDGE LD_DIFF
+    E1 = INT LD_GATE_W x < 0.2 ABUT<90 REGION
+    E2 = SIZE (SIZE (NATIVE AND (PO1 AND LD_DIFF)) BY -0.1) BY 0.1 TRUNCATE 0.1
+    E3 = LD_NATIVE NOT CUT (PO1 AND LD_DIFF)
+    E1 NOT LOGOMK
+    E2 NOT LOGOMK
+    E3 NOT LOGOMK
+}
+
+4C.8.2I {@ Exact T_WELL overlap Diffusion (For channel Length direction) is 1um
+    x = TWEL INTERACT LD_PO1
+    E1 = ENC LD_DIFF x < 1 ABUT<90 REGION
+    E2 = SIZE (SIZE (x NOT (LD_DIFF INTERACT PO1)) BY -0.5) BY 0.5 TRUNCATE 0.5
+    E1 NOT LOGOMK
+    E2 NOT LOGOMK
+}
+
+4C.8.2Ja {@ Minimum N_WELL enclosure of DIFFUSION is 0.84um
+          @ For left and right side
+    X = LD_DIFF INTERACT (GATE INTERACT PPLUS)
+    Y = X NOT TOUCH EDGE LD_GATE_L
+    E = ENC [Y] LD_NWEL < 0.84 ABUT<90
+    E OUTSIDE EDGE LOGOMK
+}
+
+4C.8.2Jb {@ Exact N_WELL enclosure of DIFFUSION is 3.0um
+          @ For up and down side
+    X = LD_DIFF INTERACT (GATE INTERACT PPLUS)
+    Y = X TOUCH EDGE LD_GATE_L
+    Z = EXTENTS LD_NWEL
+    E = ENC (Y) Z == 3.0 ABUT<90
+    E OUTSIDE EDGE LOGOMK
+}
+
+4C.8.2Ka {@ Minimum N_WELL enclosure of T_WELL is 2.36um
+          @ For left and right side
+    LD_TWEL_E = LD_TWEL INSIDE EDGE GATE
+    X = LD_TWEL TOUCH INSIDE EDGE LD_TWEL_E
+    E = ENC [X] LD_NWEL < 2.36 ABUT<90
+    E OUTSIDE EDGE LOGOMK
+}
+
+4C.8.2Kb {@ Minimum N_WELL enclosure of T_WELL is 2.0um
+          @ For up and down side
+    LD_TWEL_E = LD_TWEL INSIDE EDGE GATE
+    X = LD_TWEL NOT TOUCH INSIDE EDGE LD_TWEL_E
+    Z = EXTENTS LD_NWEL
+    E = ENC [X] Z < 2.0 ABUT<90
+    E OUTSIDE EDGE LOGOMK
+}
+
+4C.8.2La {@ Minimum N_WELL enclosure of NATIVE is 2.56um
+          @ For left and right side
+    LD_NATIVE_E = LD_NATIVE INSIDE EDGE GATE
+    X = LD_NATIVE TOUCH INSIDE EDGE LD_NATIVE_E
+    Z = EXTENTS LD_NWEL
+    E = ENC [X] Z < 2.56 ABUT<90
+    E OUTSIDE EDGE LOGOMK
+}
+
+4C.8.2Lb {@ Minimum N_WELL enclosure of NATIVE is 2.0um
+          @ For up and down side
+    LD_NATIVE_E = LD_NATIVE INSIDE EDGE GATE
+    X = LD_NATIVE NOT TOUCH INSIDE EDGE LD_NATIVE_E
+    Z = EXTENTS LD_NWEL
+    E = ENC [X] Z < 2.0 ABUT<90
+    E OUTSIDE EDGE LOGOMK
+}
+
+4C.8.2M {@ N_WELL_LDMOS_MARK is as large as T_WELL
+    NWLDMK NOT LD_TWEL
+    LD_TWEL NOT NWLDMK
+}
+
+4C.8.2N {@ Exact N+ DIFFUSION width for channel length direction is 0.46um
+    X = NPLUS INSIDE EDGE (LD_DIFF INTERACT (GATE INTERACT PPLUS))
+    E1 = INT X LD_DIFF < 0.46 ABUT<90 REGION
+    E1 NOT LOGOMK
+    Y = NPLUS AND (LD_DIFF INTERACT (GATE INTERACT PPLUS))
+    E2 = SIZE ( SIZE Y BY -0.23) BY 0.23 TRUNCATE 0.23
+    E2 NOT LOGOMK
+}
+
+4C.8.2O {@ Exact POLY1 to POLY1 spacing is 1.12um
+    X = LD_GATE_W INSIDE EDGE LD_P_PODIF
+    Y = ((LD_P_PODIF NOT LD_PO1) NOT NWEL) INTERACT LD_PO1 > 1
+
+    E1 = EXT X < 1.12 REGION
+    E2 = SIZE (SIZE Y BY -0.56) BY 0.56 TRUNCATE 0.56
+
+    (E1 AND Y) NOT LOGOMK
+    E2 NOT LOGOMK
+}
+
+4C.8.2Pa {@ Minimum N_WELL enclosure of N+ implant is 0.58um
+          @ For left and right side
+    X = NPLUS TOUCH EDGE (NPLUS INSIDE EDGE LD_P_PODIF)
+    Y = EXPAND EDGE X INSIDE BY 0.01
+    Z = (NPLUS INTERACT LD_P_PODIF) NOT TOUCH EDGE Y
+    E = ENC [Z] LD_NWEL < 0.58 ABUT<90 
+    E OUTSIDE EDGE LOGOMK
+}
+
+4C.8.2Pb {@ Minimum N_WELL enclosure of N+ implant is 2.7um
+          @ For down side
+    X = HOLES (( LD_PO1 OR LD_DIFF) INSIDE LD5VMK)
+    Y = (LD_TWEL NOT LD_DIFF) NOT INTERACT X
+    Z = LD_DIFF TOUCH OUTSIDE EDGE Y
+    X1 = NPLUS TOUCH EDGE (NPLUS INSIDE EDGE LD_P_PODIF)
+    Y1 = (EXPAND EDGE X1 INSIDE BY 0.01) NOT LD_P_PODIF
+    Y2 = Y1 WITH EDGE (Y1 TOUCH OUTSIDE EDGE Z)
+    Z1 = (NPLUS INTERACT LD_P_PODIF) NOT TOUCH EDGE X1
+    Z2 = Z1 TOUCH EDGE Y2
+    E = ENC [Z2] LD_NWEL < 2.7 ABUT<90 
+    E OUTSIDE EDGE LOGOMK
+}
+
+4C.8.2Pc {@ Minimum N_WELL enclosure of N+ implant is 1.22um
+          @ For up side
+    X = HOLES (( LD_PO1 OR LD_DIFF) INSIDE LD5VMK)
+    Y = (LD_TWEL NOT LD_DIFF) INTERACT X
+    Z = LD_DIFF TOUCH OUTSIDE EDGE Y
+    X1 = NPLUS TOUCH EDGE (NPLUS INSIDE EDGE LD_P_PODIF)
+    Y1 = (EXPAND EDGE X1 INSIDE BY 0.01) NOT LD_P_PODIF
+    Y2 = Y1 WITH EDGE (Y1 TOUCH OUTSIDE EDGE Z)
+    Z1 = (NPLUS INTERACT LD_P_PODIF) NOT TOUCH EDGE X1
+    Z2 = Z1 TOUCH EDGE Y2
+    E = ENC [Z2] LD_NWEL < 1.22 ABUT<90 
+    E OUTSIDE EDGE LOGOMK
+}
+
+4C.8.2Q {@ Exact P+ implant width for channel length direction is 4.04um
+    LD_PPLUS_E = PPLUS INSIDE EDGE LD_P_PODIF
+    E1 = INT (LD_PPLUS_E) == 4.04 ABUT<90
+    E1 OUTSIDE EDGE LOGOMK
+    LD_PPLUS_L = LD_P_PODIF INSIDE EDGE PPLUS
+    E2 = LENGTH LD_PPLUS_L != 4.04
+    E2 OUTSIDE EDGE LOGOMK
+}
+
+4C.8.2R {@ Exact DIFFUSION to DIFFUSION spacing is 1.68um
+    NWEL_X = NWEL INTERACT LD_P_PODIF
+    NW_C = (NWEL_X OR (HOLES NWEL_X)) ENCLOSE LD_P_PODIF > 1
+    SNW_C = SIZE NW_C BY -3     // Exact NWEL enclosure DIFF == 3um(up down)
+    REG_X = SNW_C NOT LD_P_PODIF
+    REG = REG_X INTERACT LD_P_PODIF > 1
+    CHK_EDGE = LD_P_PODIF COIN OUTSIDE EDGE REG
+    E = EXT (CHK_EDGE) == 1.68 ABUT<90
+    E OUTSIDE EDGE LOGOMK
+}
+
+4C.8_Note1 {@ WELL_OL must be within N_WELL and to right side of N_WELL space is 0um
+    LD_NWEL_E = LD_NWEL INSIDE EDGE (PO1 AND LD_NTDIF)
+    x  = LD_NWEL TOUCH INSIDE EDGE LD_NWEL_E
+    E1 = x NOT COIN INSIDE EDGE WELL_OL
+    E1 OUTSIDE EDGE LOGOMK
+    E2 = WELL_OL NOT LD_NWEL
+    E2 NOT LOGOMK
+}
+
+//4C.8_Note2 {@ NATIVE must be within T_WELL and to left side of T_WELL space is 0um
+//    LD_NATIVE_E = LD_NATIVE INSIDE EDGE GATE
+//    x  = LD_NATIVE TOUCH INSIDE EDGE LD_NATIVE_E
+//    y  = LD_NATIVE NOT TOUCH INSIDE EDGE LD_NATIVE_E
+//    z  = INT LD_NATIVE x < 0.005 ABUT == 90 REGION
+//    w  = y NOT TOUCH INSIDE EDGE z
+//    E1 = w NOT COIN INSIDE EDGE TWEL
+//    E1 OUTSIDE EDGE LOGOMK
+//    E2 = LD_NATIVE NOT TWEL
+//    E2 NOT LOGOMK
+//}
+
+
+
+
+/*
+//======================================
+//===  VTNL (Vtnl Rules)  (14)       ===
+//======================================
+
+GATE_W_VTNL     = GATE_W INSIDE EDGE VTNL
+
+4C.5A {@ Minimum POLY1 width for 1.2V low Vt NMOS is 0.12um
+    E = INT GATE_W_VTNL < 0.12 ABUT>0<90 REGION
+    E NOT LOGOMK
+}
+
+4C.5B {@ Minimum VTNL width is 0.40um
+    E = INT VTNL < 0.40 ABUT>0<90 REGION   // do not check "singular" because of cell issue
+    E NOT LOGOMK
+}
+
+4C.5C {@ Minimum VTNL to VTNL spacing is 0.40um
+    E = EXT VTNL < 0.40 ABUT>0<90 REGION   // do not check "singular" because of cell issue
+    E NOT LOGOMK
+}
+
+4C.5D {@ Minimum VTNL enclosure of DIFFUSION on the DIFFUSION of related device is 0.30um
+    E = ENC DIFF VTNL < 0.30 ABUT<90 SINGULAR REGION
+    E NOT LOGOMK
+}
+
+4C.5E {@ Minimum VTNL to unrelated DIFFUSION spacing is 0.30um
+    E = EXT VTNL DIFF < 0.30 ABUT<90 SINGULAR REGION
+    E NOT LOGOMK
+}
+
+4C.5F {@ Minimum VTNL enclosure of POLY1 of related device is 0.40um
+       @ VTNL straddles GATE is not allowed
+    E1 = ENC GATE_W_VTNL VTNL < 0.4 ABUT<90 REGION
+    E2 = ENC (PO1 INSIDE EDGE DIFF) VTNL < 0.4 ABUT<90 REGION
+    (E1 OR E2) NOT LOGOMK
+
+    (VTNL INSIDE EDGE GATE) OUTSIDE EDGE LOGOMK
+}
+
+4C.5G {@ Minimum VTNL to unrelated POLY1 spacing is 0.4um
+    X = VTNL INSIDE EDGE DIFF
+    E = EXT X GATE_W < 0.4 ABUT REGION
+    E NOT LOGOMK
+}
+
+//======================================
+//===  VTPL (Vtpl Rules)  (14)       ===
+//======================================
+
+GATE_W_VTPL     = GATE_W INSIDE EDGE VTPL
+
+4C.6A {@ Minimum POLY1 width for 1.2V low Vt PMOS is 0.12um
+    E = INT GATE_W_VTPL < 0.12 ABUT>0<90 REGION
+    E NOT LOGOMK
+}
+
+4C.6B {@ Minimum VTPL width is 0.40um
+    E = INT VTPL < 0.40 ABUT>0<90 REGION   // do not check "singular" because of cell issue
+    E NOT LOGOMK
+}
+
+4C.6C {@ Minimum VTPL to VTPL spacing is 0.40um
+    E = EXT VTPL < 0.40 ABUT>0<90 REGION   // do not check "singular" because of cell issue
+    E NOT LOGOMK
+}
+
+4C.6D {@ Minimum VTPL enclosure of DIFFUSION on the DIFFUSION of related device is 0.30um
+    E = ENC DIFF VTPL < 0.30 ABUT<90 SINGULAR REGION
+    E NOT LOGOMK
+}
+
+4C.6E {@ Minimum VTPL to unrelated DIFFUSION spacing is 0.30um
+    E = EXT VTPL DIFF < 0.30 ABUT<90 SINGULAR REGION
+    E NOT LOGOMK
+}
+
+4C.6F {@ Minimum VTPL enclosure of POLY1 of related device is 0.40um
+       @ VTPL straddles GATE is not allowed
+    E1 = ENC GATE_W_VTPL VTPL < 0.4 ABUT<90 REGION
+    E2 = ENC (PO1 INSIDE EDGE DIFF) VTPL < 0.4 ABUT<90 REGION
+    (E1 OR E2) NOT LOGOMK
+
+    (VTPL INSIDE EDGE GATE) OUTSIDE EDGE LOGOMK
+}
+
+4C.6G {@ Minimum VTPL to unrelated POLY1 spacing is 0.4um
+    X = VTPL INSIDE EDGE DIFF
+    E = EXT X GATE_W < 0.4 ABUT REGION
+    E NOT LOGOMK
+}
+*/
+    
+//===============================
+//=====  Die Seal ring Rules  ===
+//===============================
+
+GROUP DIE_CORNER_CHECK_SR 5.1.1?
+GROUP SEAL_RING_RULES 5.3?
+
+CENTER_LINE = SIZE ME1_SEAL_RING BY -1.5
+DIFF_SEAL_RING  = DIFF INTERACT SEALRMARK
+DIFF_OUT_SRING  = DIFF OUTSIDE SEALRMARK
+CONTBAR_SEAL_RING  = CONTBAR AND SEALRMARK
+ME1_SEAL_RING   = ME1 INTERACT SEALRMARK
+ME1_SEAL_RING_W = ME1 AND SEALRMARK
+ME1_OUT_SRING   = ME1 OUTSIDE SEALRMARK
+VI1_SEAL_RING   = VI1BAR AND SEALRMARK
+ME2_SEAL_RING   = ME2 INTERACT SEALRMARK
+ME2_SEAL_RING_W = ME2 AND SEALRMARK
+ME2_OUT_SRING   = ME2 OUTSIDE SEALRMARK
+VI2_SEAL_RING   = VI2BAR AND SEALRMARK
+ME3_SEAL_RING   = ME3 INTERACT SEALRMARK
+ME3_SEAL_RING_W = ME3 AND SEALRMARK
+ME3_OUT_SRING   = ME3 OUTSIDE SEALRMARK
+VI3_SEAL_RING   = VI3BAR AND SEALRMARK
+ME4_SEAL_RING   = ME4 INTERACT SEALRMARK
+ME4_SEAL_RING_W = ME4 AND SEALRMARK
+ME4_OUT_SRING   = ME4 OUTSIDE SEALRMARK
+VI4_SEAL_RING   = VI4BAR AND SEALRMARK
+ME5_SEAL_RING   = ME5 INTERACT SEALRMARK
+ME5_SEAL_RING_W = ME5 AND SEALRMARK
+ME5_OUT_SRING   = ME5 OUTSIDE SEALRMARK
+VI5_SEAL_RING   = VI5BAR AND SEALRMARK
+ME6_SEAL_RING   = ME6 INTERACT SEALRMARK
+ME6_SEAL_RING_W = ME6 AND SEALRMARK
+ME6_OUT_SRING   = ME6 OUTSIDE SEALRMARK
+VI6_SEAL_RING   = VI6BAR AND SEALRMARK
+ME7_SEAL_RING   = ME7 INTERACT SEALRMARK
+ME7_SEAL_RING_W = ME7 AND SEALRMARK
+ME7_OUT_SRING   = ME7 OUTSIDE SEALRMARK
+VI7_SEAL_RING   = VI7BAR AND SEALRMARK
+ME8_SEAL_RING   = ME8 INTERACT SEALRMARK
+ME8_SEAL_RING_W = ME8 AND SEALRMARK
+ME8_OUT_SRING   = ME8 OUTSIDE SEALRMARK
+DIE_SEAL_WIDTH  = COPY DIFF_SEAL_RING
+
+// ======5.1.1 SEAL RING DIE CORNER RULE  ======
+
+SEALR_TEMP      = EXTENT SEALRMARK
+SEAL_AREA       = SIZE ( SIZE SEALR_TEMP BY 1.0 ) BY -1.0
+
+ASEAL_RING = INT SEAL_AREA < 26 ABUT == 90 REGION
+BSEAL_RING = INT SEAL_AREA < 25 ABUT == 90 REGION
+CSEAL_RING = EXTENTS BSEAL_RING
+DSEAL_RING = EXTENTS ASEAL_RING
+SEALR_DIFF = DIFF AND DSEAL_RING
+
+5.1.1.DIFF {@ Die seal ring rule 1, DIFF must draw with 135 angle
+    a = EXT SEALR_DIFF < 0.1 ABUT!=135 REGION
+    b = INT SEALR_DIFF < 0.1 ABUT!=135 REGION
+    (a OR b) AND CSEAL_RING
+}
+
+SEALR_CONT_BAR = CONTBAR AND DSEAL_RING
+
+5.1.1.CONTBAR {@ Die seal ring rule 1, CONT bar must draw with 135 angle
+    a = EXT SEALR_CONT_BAR < 0.1 ABUT!=135 REGION
+    b = INT SEALR_CONT_BAR < 0.1 ABUT!=135 REGION
+    (a OR b) AND CSEAL_RING
+}
+
+SEALR_ME1 = ME1 AND DSEAL_RING
+
+5.1.1.ME1 {@ Die seal ring rule 1, ME1 bar must draw with 135 angle
+    a = EXT SEALR_ME1 < 0.1 ABUT!=135 REGION
+    b = INT SEALR_ME1 < 0.1 ABUT!=135 REGION
+    (a OR b) AND CSEAL_RING
+}
+
+SEALR_VI1 = VI1BAR AND DSEAL_RING
+
+5.1.1.VI1 {@ Die seal ring rule 1, VI1 bar must draw with 135 angle
+    a = EXT SEALR_VI1 < 0.1 ABUT!=135 REGION
+    b = INT SEALR_VI1 < 0.1 ABUT!=135 REGION
+    (a OR b) AND CSEAL_RING
+}
+
+SEALR_ME2 = ME2 AND DSEAL_RING
+
+5.1.1.ME2 {@ Die seal ring rule 1, ME2 bar must draw with 135 angle
+    a = EXT SEALR_ME2 < 0.1 ABUT!=135 REGION
+    b = INT SEALR_ME2 < 0.1 ABUT!=135 REGION
+    (a OR b) AND CSEAL_RING
+}
+
+SEALR_VI2 = VI2BAR AND DSEAL_RING
+
+5.1.1.VI2 {@ Die seal ring rule 1, VI2 bar must draw with 135 angle
+    a = EXT SEALR_VI2 < 0.1 ABUT!=135 REGION
+    b = INT SEALR_VI2 < 0.1 ABUT!=135 REGION
+    (a OR b) AND CSEAL_RING
+}
+
+SEALR_ME3 = ME3 AND DSEAL_RING
+
+5.1.1.ME3 {@ Die seal ring rule 1, ME3 bar must draw with 135 angle
+    a = EXT SEALR_ME3 < 0.1 ABUT!=135 REGION
+    b = INT SEALR_ME3 < 0.1 ABUT!=135 REGION
+    (a OR b) AND CSEAL_RING
+}
+
+SEALR_VI3 = VI3BAR AND DSEAL_RING
+
+5.1.1.VI3 {@ Die seal ring rule 1, VI3 bar must draw with 135 angle
+    a = EXT SEALR_VI3 < 0.1 ABUT!=135 REGION
+    b = INT SEALR_VI3 < 0.1 ABUT!=135 REGION
+    (a OR b) AND CSEAL_RING
+}
+
+SEALR_ME4 = ME4 AND DSEAL_RING
+
+5.1.1.ME4 {@ Die seal ring rule 1, ME4 bar must draw with 135 angle
+    a = EXT SEALR_ME4 < 0.1 ABUT!=135 REGION
+    b = INT SEALR_ME4 < 0.1 ABUT!=135 REGION
+    (a OR b) AND CSEAL_RING
+}
+
+SEALR_VI4 = VI4BAR AND DSEAL_RING
+
+5.1.1.VI4 {@ Die seal ring rule 1, VI4 bar must draw with 135 angle
+    a = EXT SEALR_VI4 < 0.1 ABUT!=135 REGION
+    b = INT SEALR_VI4 < 0.1 ABUT!=135 REGION
+    (a OR b) AND CSEAL_RING
+}
+
+SEALR_ME5 = ME5 AND DSEAL_RING
+
+5.1.1.ME5 {@ Die seal ring rule 1, ME5 bar must draw with 135 angle
+    a = EXT SEALR_ME5 < 0.1 ABUT!=135 REGION
+    b = INT SEALR_ME5 < 0.1 ABUT!=135 REGION
+    (a OR b) AND CSEAL_RING
+}
+
+SEALR_VI5 = VI5BAR AND DSEAL_RING
+
+5.1.1.VI5 {@ Die seal ring rule 1, VI5 bar must draw with 135 angle
+    a = EXT SEALR_VI5 < 0.1 ABUT!=135 REGION
+    b = INT SEALR_VI5 < 0.1 ABUT!=135 REGION
+    (a OR b) AND CSEAL_RING
+}
+
+SEALR_ME6 = ME6 AND DSEAL_RING
+
+5.1.1.ME6 {@ Die seal ring rule 1, ME6 bar must draw with 135 angle
+    a = EXT SEALR_ME6 < 0.1 ABUT!=135 REGION
+    b = INT SEALR_ME6 < 0.1 ABUT!=135 REGION
+    (a OR b) AND CSEAL_RING
+}
+
+// ======5.3 SEAL RING RULE  ======
+
+PAD_MK_ALL    = (PADMARK OR RFPADMK) OR BOACMK
+PASV_RDL_RING = (PADAL NOT INTERACT (PAD_MK_ALL OR FUSEMARK)) NOT (HOLES PADAL)
+
+5.3A {@ Minimum DIFF width is 4.5um
+    INT DIFF_SEAL_RING < 4.5 ABUT>0<90 SINGULAR REGION
+}
+
+5.3AA {@ Maximum DIFF width is 6.5 um
+    x = SIZE DIFF_SEAL_RING BY -3.25
+    SIZE x BY 3.25
+}
+
+5.3B {@ Minimum DIFF enclosure of CONT bar is 0.16um
+    ENC CONTBAR_SEAL_RING DIFF_SEAL_RING < 0.16 ABUT<90 SINGULAR OUTSIDE ALSO REGION
+}
+
+5.3C {@ Exact size of a CONT bar region is 0.16um (tolerance 0.01um)
+    INT CONTBAR_SEAL_RING < 0.16 ABUT>0<90 SINGULAR REGION
+    SIZE ( SIZE CONTBAR_SEAL_RING BY -0.085 ) BY 0.085 TRUNCATE 0.085
+}
+
+5.3D {@ Minimum space between two CONT regions is 1.50um
+    EXT CONTBAR_SEAL_RING < 1.50 ABUT>0<90 SINGULAR REGION
+}
+
+5.3E {@ Exact width of ME1 region is 4.5um (tolerance 0.01um)
+    INT ME1_SEAL_RING_W < 4.5 ABUT>0<90 SINGULAR REGION
+    SIZE ( SIZE ME1_SEAL_RING_W BY -2.255 ) BY 2.255 TRUNCATE 2.255
+}
+
+5.3EA.a.M2 {@ Minimum width of ME2 region is 3.44um
+    INT ME2_SEAL_RING_W < 3.44 ABUT>0<90 SINGULAR REGION
+}
+
+5.3EA.b.M2 {@ Maximum width of ME2 region is 4.5um (tolerance 0.01um)
+    SIZE ( SIZE ME2_SEAL_RING_W BY -2.255 ) BY 2.255 TRUNCATE 2.255
+}
+
+5.3EA.c.M2M1 {@ Minimum ME2 width <= ME1
+    NOT ME2_SEAL_RING_W ME1_SEAL_RING_W
+}
+
+5.3EA.a.M3 {@ Minimum width of ME3 region is 3.44um
+    INT ME3_SEAL_RING_W < 3.44 ABUT>0<90 SINGULAR REGION
+}
+
+5.3EA.b.M3 {@ Maximum width of ME3 region is 4.5um (tolerance 0.01um)
+    SIZE ( SIZE ME3_SEAL_RING_W BY -2.255 ) BY 2.255 TRUNCATE 2.255
+}
+
+5.3EA.c.M3M2 {@ Minimum ME3 width <= ME2
+    NOT ME3_SEAL_RING_W ME2_SEAL_RING_W
+}
+
+5.3EA.a.M4 {@ Minimum width of ME4 region is 3.44um
+    INT ME4_SEAL_RING_W < 3.44 ABUT>0<90 SINGULAR REGION
+}
+
+5.3EA.b.M4 {@ Maximum width of ME4 region is 4.5um (tolerance 0.01um)
+    SIZE ( SIZE ME4_SEAL_RING_W BY -2.255 ) BY 2.255 TRUNCATE 2.255
+}
+
+5.3EA.c.M4M3 {@ Minimum ME4 width <= ME3
+    NOT ME4_SEAL_RING_W ME3_SEAL_RING_W
+}
+
+5.3EA.a.M5 {@ Minimum width of ME5 region is 3.44um
+    INT ME5_SEAL_RING_W < 3.44 ABUT>0<90 SINGULAR REGION
+}
+
+5.3EA.b.M5 {@ Maximum width of ME5 region is 4.5um (tolerance 0.01um)
+    SIZE ( SIZE ME5_SEAL_RING_W BY -2.255 ) BY 2.255 TRUNCATE 2.255
+}
+
+5.3EA.c.M5M4 {@ Minimum ME5 width <= ME4
+    NOT ME5_SEAL_RING_W ME4_SEAL_RING_W
+}
+
+5.3P {@ Exact width of ME6 region is 3.0um (tolerance 0.01um)
+    INT ME6_SEAL_RING_W < 3.0 ABUT>0<90 SINGULAR REGION
+    SIZE ( SIZE ME6_SEAL_RING_W BY -1.505 ) BY 1.505 TRUNCATE 1.505
+}
+
+5.3F {@ Minimum ME1 overlap CONT is 0.16um
+    ENC CONTBAR_SEAL_RING ME1_SEAL_RING < 0.16 ABUT OUTSIDE ALSO REGION
+}
+
+5.3G.V1 {@ Exact width of VI1 region is 0.2um (tolerance 0.01um)
+    INT VI1_SEAL_RING < 0.2 ABUT>0<90 SINGULAR REGION
+    SIZE ( SIZE VI1_SEAL_RING BY -0.105 ) BY 0.105 TRUNCATE 0.105
+}
+
+5.3H.V1 {@ Minimum space between two VI1 regions is 1.30um
+    EXT VI1_SEAL_RING < 1.30 ABUT>0<90 SINGULAR REGION
+}
+
+5.3HA.V2 {@ Minimum space between VIA2 to VIA1 regions is 0.2um
+    CENTER_VI2 = VI2_SEAL_RING INTERACT CENTER_LINE
+    CENTER_VI1 = VI1_SEAL_RING INTERACT CENTER_LINE
+    EXT CENTER_VI2 CENTER_VI1 < 0.2 ABUT<90 REGION
+    AND CENTER_VI2 CENTER_VI1
+}
+
+5.3I.M1 {@ Minimum ME1 overlap VI1 is 0.16um (tolerance 0.01um)
+    ENC VI1_SEAL_RING ME1_SEAL_RING < 0.16 ABUT SINGULAR OUTSIDE ALSO ANGLED==0 REGION
+    ENC VI1_SEAL_RING ME1_SEAL_RING < 0.15 ABUT SINGULAR OUTSIDE ALSO ANGLED REGION
+}
+
+5.3G.V2 {@ Exact width of VI2 region is 0.2um (tolerance 0.01um)
+    INT VI2_SEAL_RING < 0.2 ABUT>0<90 SINGULAR REGION
+    SIZE ( SIZE VI2_SEAL_RING BY -0.105 ) BY 0.105 TRUNCATE 0.105
+}
+
+5.3H.V2 {@ Minimum space between two VI2 regions is 1.30um
+    EXT VI2_SEAL_RING < 1.30 ABUT>0<90 SINGULAR REGION
+}
+
+5.3HA.V3 {@ Minimum space between VIA3 to VIA2 regions is 0.2um
+    CENTER_VI3 = VI3_SEAL_RING INTERACT CENTER_LINE
+    CENTER_VI2 = VI2_SEAL_RING INTERACT CENTER_LINE
+    EXT CENTER_VI3 CENTER_VI2 < 0.2 ABUT<90 REGION
+    AND CENTER_VI3 CENTER_VI2
+}
+
+5.3I.M2 {@ Minimum ME2 overlap VI2 is 0.16um (tolerance 0.01um)
+    ENC VI2_SEAL_RING ME2_SEAL_RING < 0.16 ABUT SINGULAR OUTSIDE ALSO ANGLED==0 REGION
+    ENC VI2_SEAL_RING ME2_SEAL_RING < 0.15 ABUT SINGULAR OUTSIDE ALSO ANGLED REGION
+}
+
+5.3G.V3 {@ Exact width of VI3 region is 0.2um (tolerance 0.01um)
+    INT VI3_SEAL_RING < 0.2 ABUT>0<90 SINGULAR REGION
+    SIZE ( SIZE VI3_SEAL_RING BY -0.105 ) BY 0.105 TRUNCATE 0.105
+}
+
+5.3H.V3 {@ Minimum space between two VI3 regions is 1.30um
+    EXT VI3_SEAL_RING < 1.30 ABUT>0<90 SINGULAR REGION
+}
+
+5.3HA.V4 {@ Minimum space between VIA4 to VIA3 regions is 0.2um
+    CENTER_VI4 = VI4_SEAL_RING INTERACT CENTER_LINE
+    CENTER_VI3 = VI3_SEAL_RING INTERACT CENTER_LINE
+    EXT CENTER_VI4 CENTER_VI3 < 0.2 ABUT<90 REGION
+    AND CENTER_VI4 CENTER_VI3
+}
+
+5.3I.M3 {@ Minimum ME3 overlap VI3 is 0.16um (tolerance 0.01um)
+    ENC VI3_SEAL_RING ME3_SEAL_RING < 0.16 ABUT SINGULAR OUTSIDE ALSO ANGLED==0 REGION
+    ENC VI3_SEAL_RING ME3_SEAL_RING < 0.15 ABUT SINGULAR OUTSIDE ALSO ANGLED REGION
+}
+
+5.3K.V4 {@ Exact width of VI4 region is 0.4um (tolerance 0.01um)
+    INT VI4_SEAL_RING < 0.4 ABUT>0<90 SINGULAR REGION
+    SIZE ( SIZE VI4_SEAL_RING BY -0.205 ) BY 0.205 TRUNCATE 0.205
+}
+
+5.3LM.VI4 {@ Minimum space between two VI4 regions is 2.0um
+    EXT VI4_SEAL_RING < 2.0 ABUT>0<90 SINGULAR REGION
+}
+
+5.3NO.VI4 {@ Minimum ME4 overlap VI4 is 0.31um(Tolerance is 0.01,rule is 0.32)
+    ENC VI4_SEAL_RING ME4_SEAL_RING < 0.32 ABUT SINGULAR OUTSIDE ALSO ANGLED==0 REGION
+    ENC VI4_SEAL_RING ME4_SEAL_RING < 0.31 ABUT SINGULAR OUTSIDE ALSO ANGLED REGION
+}
+
+5.3K.V5 {@ Exact width of VI5 region is 0.4um (tolerance 0.01um)
+    INT VI5_SEAL_RING < 0.4 ABUT>0<90 SINGULAR REGION
+    SIZE ( SIZE VI5_SEAL_RING BY -0.205 ) BY 0.205 TRUNCATE 0.205
+}
+
+5.3LM.VI5 {@ Minimum space between two VI5 regions is 2.0um
+    EXT VI5_SEAL_RING < 2.0 ABUT>0<90 SINGULAR REGION
+}
+
+5.3NO.VI5 {@ Minimum ME5 overlap VI5 is 0.31um(Tolerance is 0.01,rule is 0.32)
+    ENC VI5_SEAL_RING ME5_SEAL_RING < 0.32 ABUT SINGULAR OUTSIDE ALSO ANGLED==0 REGION
+    ENC VI5_SEAL_RING ME5_SEAL_RING < 0.31 ABUT SINGULAR OUTSIDE ALSO ANGLED REGION
+}
+
+5.3JA.M2V1 {@ Minimum ME2 enclosure of VI1_BAR is 0.10um (tolerance 0.01um)
+    ENC VI1_SEAL_RING ME2_SEAL_RING < 0.10 ABUT SINGULAR OUTSIDE ALSO ANGLED==0 REGION
+    ENC VI1_SEAL_RING ME2_SEAL_RING < 0.09 ABUT SINGULAR OUTSIDE ALSO ANGLED REGION
+}
+
+5.3JA.M3V2 {@ Minimum ME3 enclosure of VI2_BAR is 0.10um (tolerance 0.01um)
+    ENC VI2_SEAL_RING ME3_SEAL_RING < 0.10 ABUT SINGULAR OUTSIDE ALSO ANGLED==0 REGION
+    ENC VI2_SEAL_RING ME3_SEAL_RING < 0.09 ABUT SINGULAR OUTSIDE ALSO ANGLED REGION
+}
+
+5.3JA.M4V3 {@ Minimum ME4 enclosure of VI3_BAR is 0.10um (tolerance 0.01um)
+    ENC VI3_SEAL_RING ME4_SEAL_RING < 0.10 ABUT SINGULAR OUTSIDE ALSO ANGLED==0 REGION
+    ENC VI3_SEAL_RING ME4_SEAL_RING < 0.09 ABUT SINGULAR OUTSIDE ALSO ANGLED REGION
+}
+
+5.3JB.M5V4 {@ Minimum ME5 enclosure of VI4_BAR is 0.10um (tolerance 0.01um)
+    ENC VI4_SEAL_RING ME5_SEAL_RING < 0.10 ABUT SINGULAR OUTSIDE ALSO ANGLED==0 REGION
+    ENC VI4_SEAL_RING ME5_SEAL_RING < 0.09 ABUT SINGULAR OUTSIDE ALSO ANGLED REGION
+}
+
+5.3JB.M6V5 {@ Minimum ME6 enclosure of VI5_BAR is 0.10um (tolerance 0.01um)
+    ENC VI5_SEAL_RING ME6_SEAL_RING < 0.10 ABUT SINGULAR OUTSIDE ALSO ANGLED==0 REGION
+    ENC VI5_SEAL_RING ME6_SEAL_RING < 0.09 ABUT SINGULAR OUTSIDE ALSO ANGLED REGION
+}
+
+// 5.3Q is not checked
+
+5.3R {@ Minimum Die Seal Ring width is 4.5um
+    INT DIE_SEAL_WIDTH < 4.5 ABUT>0<90 SINGULAR REGION
+}
+
+5.3S {@ Minimum space between two Seal ring regions is 2.0um
+    EXT DIE_SEAL_WIDTH < 2.0 ABUT>0<90 SINGULAR REGION
+}
+
+5.3T {@ Minimum active circuit edge to die seal ring spacing 10.0um
+    SEAL_AREA = SIZE SEALRMARK BY 10
+    SEAL_AREA AND DIFF_OUT_SRING
+    SEAL_AREA AND PO1
+    SEAL_AREA AND CONT
+    SEAL_AREA AND ME1_OUT_SRING
+    SEAL_AREA AND VI1
+    SEAL_AREA AND ME2_OUT_SRING
+    SEAL_AREA AND VI2
+    SEAL_AREA AND ME3_OUT_SRING
+    SEAL_AREA AND VI3
+    SEAL_AREA AND ME4_OUT_SRING
+    SEAL_AREA AND VI4
+    SEAL_AREA AND ME5_OUT_SRING
+    SEAL_AREA AND VI5
+    SEAL_AREA AND ME6_OUT_SRING
+    SEAL_AREA AND VI6
+    SEAL_AREA AND ME7_OUT_SRING
+    SEAL_AREA AND VI7
+    SEAL_AREA AND ME8_OUT_SRING
+}
+
+5.3U.a.CONT {@ Minimum contact and via within die seal ring
+             @ CONT count  3
+    DIE_SEAL_WIDTH NOT ENCLOSE CONTBAR_SEAL_RING >= 3
+}
+
+5.3U.b.VI1 {@ Minimum contact and via within die seal ring
+             @ VI1 count  3
+    DIE_SEAL_WIDTH NOT ENCLOSE VI1_SEAL_RING >= 3
+}
+
+5.3U.b.VI2 {@ Minimum contact and via within die seal ring
+             @ VI2 count  3
+    DIE_SEAL_WIDTH NOT ENCLOSE VI2_SEAL_RING >= 3
+}
+
+5.3U.b.VI3 {@ Minimum contact and via within die seal ring
+             @ VI3 count  3
+    DIE_SEAL_WIDTH NOT ENCLOSE VI3_SEAL_RING >= 3
+}
+
+5.3U.c.VI4 {@ Minimum contact and via within die seal ring
+             @ VI4 count  2
+    DIE_SEAL_WIDTH NOT ENCLOSE VI4_SEAL_RING >= 2
+}
+
+5.3U.c.VI5 {@ Minimum contact and via within die seal ring
+             @ VI5 count  2
+    DIE_SEAL_WIDTH NOT ENCLOSE VI5_SEAL_RING >= 2
+}
+
+// 5.3V is not checked
+
+5.3W {@ AL Pad over Die Seal Ring region is not allowed
+    PADAL AND SEALRMARK
+}
+
+5.3X {@ The outer Die Seal Ring must be surrounded with a PASV ring
+    x = HOLES (PADAL OUTSIDE SEAL_AREA)
+    DIE_SEAL_WIDTH NOT x
+}
+
+//5.3X.a {@ Minimum spacing of ME6 to PAD_WINDOW_AL ring
+//   EXT PASV_RDL_RING ME6 < 0.75 ABUT INSIDE ALSO REGION
+//}
+
+5.3X.a {@ Exact width of PAD_WINDOW_AL ring is 2.0um
+    PASV_RDL_RING WITH WIDTH != 2.0
+}
+
+// Section 5.4 is not checked
+
+// =============================
+// ====== DIE CORNER RULE ======
+// =============================
+// ********************************************
+// Followin checks just for your reference
+// BULK may not cover whole chip, seal ring may
+// cause false errors
+// ********************************************
+
+GROUP DIE_CORNER_CHECK 6.2Aa.? 6.2Ab.? 6.2Ba.? 6.2Bb.?
+
+CHIP_LT100 = AREA DRC:1 < 100*1000*1000   // chip area < 100mm^2
+CHIP_GE100 = DRC:1 NOT CHIP_LT100         // chip area >= 100mm^2
+
+CHIP_LT100_SR  = CHIP_LT100 INTERACT SEALRMARK
+CHIP_LT100_NSR = CHIP_LT100 NOT CHIP_LT100_SR
+CHIP_GE100_SR  = CHIP_GE100 INTERACT SEALRMARK
+CHIP_GE100_NSR = CHIP_GE100 NOT CHIP_GE100_SR
+
+ACORNER_100 = INT CHIP_GE100_SR  < 341 ABUT == 90 REGION
+BCORNER_100 = INT CHIP_GE100_SR  < 340 ABUT == 90 REGION
+CCORNER_100 = EXTENTS BCORNER_100
+DCORNER_100 = EXTENTS ACORNER_100
+
+ACORNER = INT CHIP_LT100_SR < 126 ABUT == 90 REGION
+BCORNER = INT CHIP_LT100_SR < 125 ABUT == 90 REGION
+CCORNER = EXTENTS BCORNER
+DCORNER = EXTENTS ACORNER
+
+
+CORNER_MET1_100 = ME1 AND DCORNER_100
+6.2Aa.ME1 {@ Die corner rule 1, ME1 must draw with 135 angle
+              a = EXT CORNER_MET1_100 < 0.1 ABUT!=135 REGION
+              b = INT CORNER_MET1_100 < 0.1 ABUT!=135 REGION
+              E = (a OR b) AND CCORNER_100
+              E NOT SEALRMARK
+}
+
+CORNER_MET1 = ME1 AND DCORNER
+6.2Ab.ME1 {@ Die corner rule 1, ME1 must draw with 135 angle
+              a = EXT CORNER_MET1 < 0.1 ABUT!=135 REGION
+              b = INT CORNER_MET1 < 0.1 ABUT!=135 REGION
+              E = (a OR b) AND CCORNER
+              E NOT SEALRMARK
+}
+
+
+CORNER_MET2_100 = ME2 AND DCORNER_100
+6.2Aa.ME2 {@ Die corner rule 1, ME2 must draw with 135 angle
+              a = EXT CORNER_MET2_100 < 0.1 ABUT!=135 REGION
+              b = INT CORNER_MET2_100 < 0.1 ABUT!=135 REGION
+              E = (a OR b) AND CCORNER_100
+              E NOT SEALRMARK
+}
+
+CORNER_MET2 = ME2 AND DCORNER
+6.2Ab.ME2 {@ Die corner rule 1, ME2 must draw with 135 angle
+              a = EXT CORNER_MET2 < 0.1 ABUT!=135 REGION
+              b = INT CORNER_MET2 < 0.1 ABUT!=135 REGION
+              E = (a OR b) AND CCORNER
+              E NOT SEALRMARK
+}
+
+
+CORNER_MET3_100 = ME3 AND DCORNER_100
+6.2Aa.ME3 {@ Die corner rule 1, ME3 must draw with 135 angle
+              a = EXT CORNER_MET3_100 < 0.1 ABUT!=135 REGION
+              b = INT CORNER_MET3_100 < 0.1 ABUT!=135 REGION
+              E = (a OR b) AND CCORNER_100
+              E NOT SEALRMARK
+}
+
+CORNER_MET3 = ME3 AND DCORNER
+6.2Ab.ME3 {@ Die corner rule 1, ME3 must draw with 135 angle
+              a = EXT CORNER_MET3 < 0.1 ABUT!=135 REGION
+              b = INT CORNER_MET3 < 0.1 ABUT!=135 REGION
+              E = (a OR b) AND CCORNER
+              E NOT SEALRMARK
+}
+
+
+CORNER_MET4_100 = ME4 AND DCORNER_100
+6.2Aa.ME4 {@ Die corner rule 1, ME4 must draw with 135 angle
+              a = EXT CORNER_MET4_100 < 0.1 ABUT!=135 REGION
+              b = INT CORNER_MET4_100 < 0.1 ABUT!=135 REGION
+              E = (a OR b) AND CCORNER_100
+              E NOT SEALRMARK
+}
+
+CORNER_MET4 = ME4 AND DCORNER
+6.2Ab.ME4 {@ Die corner rule 1, ME4 must draw with 135 angle
+              a = EXT CORNER_MET4 < 0.1 ABUT!=135 REGION
+              b = INT CORNER_MET4 < 0.1 ABUT!=135 REGION
+              E = (a OR b) AND CCORNER
+              E NOT SEALRMARK
+}
+
+
+CORNER_MET5_100 = ME5 AND DCORNER_100
+6.2Aa.ME5 {@ Die corner rule 1, ME5 must draw with 135 angle
+              a = EXT CORNER_MET5_100 < 0.1 ABUT!=135 REGION
+              b = INT CORNER_MET5_100 < 0.1 ABUT!=135 REGION
+              E = (a OR b) AND CCORNER_100
+              E NOT SEALRMARK
+}
+
+CORNER_MET5 = ME5 AND DCORNER
+6.2Ab.ME5 {@ Die corner rule 1, ME5 must draw with 135 angle
+              a = EXT CORNER_MET5 < 0.1 ABUT!=135 REGION
+              b = INT CORNER_MET5 < 0.1 ABUT!=135 REGION
+              E = (a OR b) AND CCORNER
+              E NOT SEALRMARK
+}
+
+
+CORNER_MET6_100 = ME6 AND DCORNER_100
+6.2Aa.ME6 {@ Die corner rule 1, ME6 must draw with 135 angle
+              a = EXT CORNER_MET6_100 < 0.1 ABUT!=135 REGION
+              b = INT CORNER_MET6_100 < 0.1 ABUT!=135 REGION
+              E = (a OR b) AND CCORNER_100
+              E NOT SEALRMARK
+}
+
+CORNER_MET6 = ME6 AND DCORNER
+6.2Ab.ME6 {@ Die corner rule 1, ME6 must draw with 135 angle
+              a = EXT CORNER_MET6 < 0.1 ABUT!=135 REGION
+              b = INT CORNER_MET6 < 0.1 ABUT!=135 REGION
+              E = (a OR b) AND CCORNER
+              E NOT SEALRMARK
+}
+
+
+CORNER_MET7_100 = ME7 AND DCORNER_100
+6.2Aa.ME7 {@ Die corner rule 1, ME7 must draw with 135 angle
+              a = EXT CORNER_MET7_100 < 0.1 ABUT!=135 REGION
+              b = INT CORNER_MET7_100 < 0.1 ABUT!=135 REGION
+              E = (a OR b) AND CCORNER_100
+              E NOT SEALRMARK
+}
+
+CORNER_MET7 = ME7 AND DCORNER
+6.2Ab.ME7 {@ Die corner rule 1, ME7 must draw with 135 angle
+              a = EXT CORNER_MET7 < 0.1 ABUT!=135 REGION
+              b = INT CORNER_MET7 < 0.1 ABUT!=135 REGION
+              E = (a OR b) AND CCORNER
+              E NOT SEALRMARK
+}
+
+
+CORNER_MET8_100 = ME8 AND DCORNER_100
+6.2Aa.ME8 {@ Die corner rule 1, ME8 must draw with 135 angle
+              a = EXT CORNER_MET8_100 < 0.1 ABUT!=135 REGION
+              b = INT CORNER_MET8_100 < 0.1 ABUT!=135 REGION
+              E = (a OR b) AND CCORNER_100
+              E NOT SEALRMARK
+}
+
+CORNER_MET8 = ME8 AND DCORNER
+6.2Ab.ME8 {@ Die corner rule 1, ME8 must draw with 135 angle
+              a = EXT CORNER_MET8 < 0.1 ABUT!=135 REGION
+              b = INT CORNER_MET8 < 0.1 ABUT!=135 REGION
+              E = (a OR b) AND CCORNER
+              E NOT SEALRMARK
+}
+
+
+ACORNER_100_NSR = INT CHIP_GE100_NSR < 318 ABUT == 90 REGION
+BCORNER_100_NSR = INT CHIP_GE100_NSR < 317 ABUT == 90 REGION
+CCORNER_100_NSR = EXTENTS BCORNER_100_NSR
+DCORNER_100_NSR = EXTENTS ACORNER_100_NSR
+
+ACORNER_NSR = INT CHIP_LT100_NSR < 103 ABUT == 90 REGION
+BCORNER_NSR = INT CHIP_LT100_NSR < 102 ABUT == 90 REGION
+CCORNER_NSR = EXTENTS BCORNER_NSR
+DCORNER_NSR = EXTENTS ACORNER_NSR
+
+
+CORNER_MET1_100_NSR = ME1 AND DCORNER_100_NSR
+6.2Ba.ME1 {@ Die corner rule 1, ME1 must draw with 135 angle
+         a = EXT CORNER_MET1_100_NSR < 0.1 ABUT!=135 REGION
+         b = INT CORNER_MET1_100_NSR < 0.1 ABUT!=135 REGION
+         (a OR b) AND CCORNER_100_NSR
+}
+
+CORNER_MET1_NSR = ME1 AND DCORNER_NSR
+6.2Bb.ME1 {@ Die corner rule 1, ME1 must draw with 135 angle
+         a = EXT CORNER_MET1_NSR < 0.1 ABUT!=135 REGION
+         b = INT CORNER_MET1_NSR < 0.1 ABUT!=135 REGION
+         (a OR b) AND CCORNER_NSR
+}
+
+
+CORNER_MET2_100_NSR = ME2 AND DCORNER_100_NSR
+6.2Ba.ME2 {@ Die corner rule 1, ME2 must draw with 135 angle
+         a = EXT CORNER_MET2_100_NSR < 0.1 ABUT!=135 REGION
+         b = INT CORNER_MET2_100_NSR < 0.1 ABUT!=135 REGION
+         (a OR b) AND CCORNER_100_NSR
+}
+
+CORNER_MET2_NSR = ME2 AND DCORNER_NSR
+6.2Bb.ME2 {@ Die corner rule 1, ME2 must draw with 135 angle
+         a = EXT CORNER_MET2_NSR < 0.1 ABUT!=135 REGION
+         b = INT CORNER_MET2_NSR < 0.1 ABUT!=135 REGION
+         (a OR b) AND CCORNER_NSR
+}
+
+
+CORNER_MET3_100_NSR = ME3 AND DCORNER_100_NSR
+6.2Ba.ME3 {@ Die corner rule 1, ME3 must draw with 135 angle
+         a = EXT CORNER_MET3_100_NSR < 0.1 ABUT!=135 REGION
+         b = INT CORNER_MET3_100_NSR < 0.1 ABUT!=135 REGION
+         (a OR b) AND CCORNER_100_NSR
+}
+
+CORNER_MET3_NSR = ME3 AND DCORNER_NSR
+6.2Bb.ME3 {@ Die corner rule 1, ME3 must draw with 135 angle
+         a = EXT CORNER_MET3_NSR < 0.1 ABUT!=135 REGION
+         b = INT CORNER_MET3_NSR < 0.1 ABUT!=135 REGION
+         (a OR b) AND CCORNER_NSR
+}
+
+
+CORNER_MET4_100_NSR = ME4 AND DCORNER_100_NSR
+6.2Ba.ME4 {@ Die corner rule 1, ME4 must draw with 135 angle
+         a = EXT CORNER_MET4_100_NSR < 0.1 ABUT!=135 REGION
+         b = INT CORNER_MET4_100_NSR < 0.1 ABUT!=135 REGION
+         (a OR b) AND CCORNER_100_NSR
+}
+
+CORNER_MET4_NSR = ME4 AND DCORNER_NSR
+6.2Bb.ME4 {@ Die corner rule 1, ME4 must draw with 135 angle
+         a = EXT CORNER_MET4_NSR < 0.1 ABUT!=135 REGION
+         b = INT CORNER_MET4_NSR < 0.1 ABUT!=135 REGION
+         (a OR b) AND CCORNER_NSR
+}
+
+
+CORNER_MET5_100_NSR = ME5 AND DCORNER_100_NSR
+6.2Ba.ME5 {@ Die corner rule 1, ME5 must draw with 135 angle
+         a = EXT CORNER_MET5_100_NSR < 0.1 ABUT!=135 REGION
+         b = INT CORNER_MET5_100_NSR < 0.1 ABUT!=135 REGION
+         (a OR b) AND CCORNER_100_NSR
+}
+
+CORNER_MET5_NSR = ME5 AND DCORNER_NSR
+6.2Bb.ME5 {@ Die corner rule 1, ME5 must draw with 135 angle
+         a = EXT CORNER_MET5_NSR < 0.1 ABUT!=135 REGION
+         b = INT CORNER_MET5_NSR < 0.1 ABUT!=135 REGION
+         (a OR b) AND CCORNER_NSR
+}
+
+
+CORNER_MET6_100_NSR = ME6 AND DCORNER_100_NSR
+6.2Ba.ME6 {@ Die corner rule 1, ME6 must draw with 135 angle
+         a = EXT CORNER_MET6_100_NSR < 0.1 ABUT!=135 REGION
+         b = INT CORNER_MET6_100_NSR < 0.1 ABUT!=135 REGION
+         (a OR b) AND CCORNER_100_NSR
+}
+
+CORNER_MET6_NSR = ME6 AND DCORNER_NSR
+6.2Bb.ME6 {@ Die corner rule 1, ME6 must draw with 135 angle
+         a = EXT CORNER_MET6_NSR < 0.1 ABUT!=135 REGION
+         b = INT CORNER_MET6_NSR < 0.1 ABUT!=135 REGION
+         (a OR b) AND CCORNER_NSR
+}
+
+
+CORNER_MET7_100_NSR = ME7 AND DCORNER_100_NSR
+6.2Ba.ME7 {@ Die corner rule 1, ME7 must draw with 135 angle
+         a = EXT CORNER_MET7_100_NSR < 0.1 ABUT!=135 REGION
+         b = INT CORNER_MET7_100_NSR < 0.1 ABUT!=135 REGION
+         (a OR b) AND CCORNER_100_NSR
+}
+
+CORNER_MET7_NSR = ME7 AND DCORNER_NSR
+6.2Bb.ME7 {@ Die corner rule 1, ME7 must draw with 135 angle
+         a = EXT CORNER_MET7_NSR < 0.1 ABUT!=135 REGION
+         b = INT CORNER_MET7_NSR < 0.1 ABUT!=135 REGION
+         (a OR b) AND CCORNER_NSR
+}
+
+
+CORNER_MET8_100_NSR = ME8 AND DCORNER_100_NSR
+6.2Ba.ME8 {@ Die corner rule 1, ME8 must draw with 135 angle
+         a = EXT CORNER_MET8_100_NSR < 0.1 ABUT!=135 REGION
+         b = INT CORNER_MET8_100_NSR < 0.1 ABUT!=135 REGION
+         (a OR b) AND CCORNER_100_NSR
+}
+
+CORNER_MET8_NSR = ME8 AND DCORNER_NSR
+6.2Bb.ME8 {@ Die corner rule 1, ME8 must draw with 135 angle
+         a = EXT CORNER_MET8_NSR < 0.1 ABUT!=135 REGION
+         b = INT CORNER_MET8_NSR < 0.1 ABUT!=135 REGION
+         (a OR b) AND CCORNER_NSR
+}
+    
+// ================================
+// ====== ILLEGAL DUMMY RULE ======
+// ================================
+
+GROUP ILLEGAL_DUMMY ILLEGAL_DUMMY_?
+
+ILLEGAL_DUMMY_DIFF {@ DIFFUSION_CUSTOMER_DUMMY interact original DIFFUSION, POLY1 or CONTACT is NOT recommended
+                    @ For details, please refer to relative DSM and command file for dummy
+    DIFFDUMY INTERACT CONT
+    DIFFDUMY INTERACT DIFF
+    DIFFDUMY INTERACT PO1
+}
+
+ILLEGAL_DUMMY_PO1 {@ POLY1_CUSTOMER_DUMMY interact original DIFFUSION, POLY1 or CONTACT is NOT recommended
+                   @ For details, please refer to relative DSM and command file for dummy
+    PO1DUMY INTERACT CONT
+    PO1DUMY INTERACT DIFF
+    PO1DUMY INTERACT PO1
+}
+
+ILLEGAL_DUMMY_ME1 {@ METAL1_CUSTOMER_DUMMY interact original CONTACT, VI1 or METAL1 is NOT recommended
+                   @ For details, please refer to relative DSM and command file for dummy
+    M1DUMY INTERACT CONT
+    M1DUMY INTERACT VI1
+    M1DUMY INTERACT ME1
+}
+
+ILLEGAL_DUMMY_ME2 {@ METAL2_CUSTOMER_DUMMY interact original VI1, VI2 or METAL2 is NOT recommended
+                   @ For details, please refer to relative DSM and command file for dummy
+    M2DUMY INTERACT VI1
+    M2DUMY INTERACT VI2
+    M2DUMY INTERACT ME2
+}
+
+ILLEGAL_DUMMY_ME3 {@ METAL3_CUSTOMER_DUMMY interact original VI2, VI3 or METAL3 is NOT recommended
+                   @ For details, please refer to relative DSM and command file for dummy
+    M3DUMY INTERACT VI2
+    M3DUMY INTERACT VI3
+    M3DUMY INTERACT ME3
+}
+
+ILLEGAL_DUMMY_ME4 {@ METAL4_CUSTOMER_DUMMY interact original VI3, VI4 or METAL4 is NOT recommended
+                   @ For details, please refer to relative DSM and command file for dummy
+    M4DUMY INTERACT VI3
+    M4DUMY INTERACT VI4
+    M4DUMY INTERACT ME4
+}
+
+ILLEGAL_DUMMY_ME5 {@ METAL5_CUSTOMER_DUMMY interact original VI4, VI5 or METAL5 is NOT recommended
+                   @ For details, please refer to relative DSM and command file for dummy
+    M5DUMY INTERACT VI4
+    M5DUMY INTERACT VI5
+    M5DUMY INTERACT ME5
+}
+
+ILLEGAL_DUMMY_ME6 {@ METAL6_CUSTOMER_DUMMY interact original VI5 or METAL6 is NOT recommended
+                   @ For details, please refer to relative DSM and command file for dummy
+    M6DUMY INTERACT VI5
+    M6DUMY INTERACT ME6
+}
+
+//  =============================
+//  =====   LOGO    RULE   ======
+//  =============================
+
+INCLUDE LOGO-LOGIC_MIXED_MODE13-1P6M2T-MMC-AL-L130E-SHRINKABLE-CALIBRE-DRC-2.3_P1
+
+//  =============================
+//  ====  METAL SLOT RULE   =====
+//  =============================
+
+INCLUDE metal_slot_0.11_1P6M2T_MMC_AL_BEOL_calibre_v4.cal
+
+//  =============================
+//  ======    SRAM RULE   =======
+//  =============================
+
+INCLUDE L130A_Shrink_memory_rules_v1.6.cal
+
+//  ===============================
+//  ====== Boundary RULE     ======
+//  ===============================
+
+// Please refer to Spec G-03BO-GENERATION13-OPC_BLOCK/HS_VT_SRAM_MARK-TLR/BOUNDARY
+
+//  ===============================================
+//  ====== Diffusion and Poly Dummy RULE     ======
+//  ===============================================
+
+// Please refer to Spec G-03D-GENERATION13_BEYOND-DIFFUSION/POLY1-TLR/DUMMY
+
+//  =======================
+//  ===== Dummy Rule ======
+//  =======================
+
+// Please refer to Spec G-03D-GENERATION11-AL-TLR/DUMMY
+
+//  ================================================
+//  ====== Flip Chip Layout Design Guildeline ======
+//  ================================================
+
+// Please refer to Spec G-03FC-GENERATION13-TLR/FLIP_CHIP
+
+//  =============================
+//  ====== Latch-up  RULE  ======
+//  =============================
+
+// Please refer to Spec G-03L-LOGIC/MIXED_MODE11-AL-TLR/LATCH_UP
+
+//  ======================================
+//  ====== Shrink Methodology RULE  ======
+//  ======================================
+
+// Please refer to Spec G-03SM-LOGIC/MIXED_MODE11-1P8M-MMC/AL/L110AE-TLR/SHRINK_METHODOLOGY
+// Please refer to Spec G-03SM-LOGIC/MIXED_MODE11-1P8M-MMC/AL/L110E-TLR/SHRINK_METHODOLOGY
+
+//  ======================
+//  ===== BOAC Rule ======
+//  ======================
+
+// Please refer to Spec G-03B-LOGIC/MIXED_MODE13-1P8M-MMC/AL/L130E/SHRINKABLE-TLR/BOAC
+
+//  ======================
+//  ===== ESD Rules ======
+//  ======================
+
+// Please refer to Spec G-03E-LOGIC/MIXED_MODE11-AL-TLR/ESD
+
+
+//the end of deck

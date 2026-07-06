@@ -1,0 +1,19 @@
+Starting Single Run, Sweeps and Corners...
+
+Current time: Sat Apr 26 13:09:45 2025 
+Best design point: 1
+Design specs: 
+	TEST_Adaptive_CTLE:Gain_stage:1	corner	Nominal - 
+	(VDC("/VOUTN") - VDC("/VOUTP"))		30.49n
+	VDC("/VOUTN")		1.355
+	VDC("/VOUTP")		1.355
+	((VDC("/VOUTN") - VDC("/VOUTP")) / 50)		609.8p
+Design parameters: 
+	VCTLE		1
+	sigma		3
+
+Interactive.1
+Number of points completed: 1
+Number of simulation errors: 0
+Interactive.1 completed. 
+Current time: Sat Apr 26 13:09:47 2025 

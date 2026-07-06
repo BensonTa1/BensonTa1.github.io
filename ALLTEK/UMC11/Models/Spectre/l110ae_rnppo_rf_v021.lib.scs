@@ -1,0 +1,31 @@
+//    
+simulator lang=spectre insensitive=yes 
+library mylib 
+ 
+section tt 
+parameters drend_rnppo_rf=0 
+parameters drs_rnppo_rf=0 
+parameters ddw_rnppo_rf=0 
+parameters p_cox_rnppo_rf=0 
+  
+include "l110ae_rnppo_rf_v021.mdl.scs" 
+endsection tt 
+  
+section ss 
+parameters drend_rnppo_rf=1.5470e-005 
+parameters drs_rnppo_rf=6.0000e+001 
+parameters ddw_rnppo_rf=-1.5000e-008 
+parameters p_cox_rnppo_rf=0.1 
+  
+include "l110ae_rnppo_rf_v021.mdl.scs" 
+endsection ss 
+  
+section ff 
+parameters drend_rnppo_rf=-1.6030e-005 
+parameters drs_rnppo_rf=-6.0000e+001 
+parameters ddw_rnppo_rf=1.6000e-008 
+parameters p_cox_rnppo_rf=-0.1 
+  
+include "l110ae_rnppo_rf_v021.mdl.scs" 
+endsection ff 
+endlibrary mylib 

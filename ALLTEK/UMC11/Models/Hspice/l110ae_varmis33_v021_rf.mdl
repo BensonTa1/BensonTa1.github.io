@@ -1,0 +1,129 @@
+*******************************************************************************
+* Property of UMC.
+* Unauthorized reproduction, modification and/or distribution are strictly
+* prohibited.
+* This product is protected under copyright law and trade secret law.
+* This model card may not be sent in any form outside of UMC without
+* the written consent of the UMC ATD Modeling Division.
+********************************************************************************
+* Process:      0.11 um Logic and Mixed-Mode 1P8M Metal Metal Capacitor Al Advanced Enhancement Process 
+* Device Type:  NCAP 3.3V RF 
+* Simulator:    HSPICE
+* Model Version: 0.2_p1
+********************************************************************************
+* Revision history:
+* <Revision 1>
+* Version : 0.1_p1
+* Date    : 2010/01/21
+* Owner   : Jian Zhi Hiang
+* Comment : Original release
+*
+* <Revision 2>
+* Version : 0.2_p1
+* Date    : 2010/07/08
+* Owner   : Laney Fan
+* Comment : 1.Modify RF model based on new silicon data.
+*           2.Baseband model was copied from l110ae_ncap33_v012. 
+****************************************************************************************
+*
+*            Model coverage:
+*            1. Gate finger width (Before 90% shrink)   (w): 2.5um to 10um
+*            2. Gate finger length (Before 90% shrink)  (l): 0.35um to 2um
+*            3. Gate finger number (nf): 2 to 8
+*            4. Temperature Range: -50C to 125C 
+*
+*            Node definition:
+*            1. gate:  gate
+*            2. nwell:  nwell
+*            3. psub:  psub
+*****************************************************************************************
+.subckt varmis_33_rf gate nwell psub
+.param lf=0.5u wf=5u nf=4 m=1
++ spc=0.17u sce=0.06u sdn=0.5u cnt=0.16u
++ l_diff='nf*(lf*0.9+1.2e-8)+(nf-1)*(spc+spc+cnt)+2*(sdn+sce+cnt)'
++ w_diff='wf*0.9'
++ l_nw='l_diff-sdn'
++ w_nw='w_diff'
++ temp   =  'temper'
++ tox0   =  '7.49e-09+dtoxe_varmis_33_rf'       
++ toxc   =  '7.49e-09+dtoxe_varmis_33_rf'       
++ tpvb   = -0.0004201
++ tpvc   = -4.158e-005
++ pva    =  0.12000753   
++ pvb    =  '0.67169332+tpvb*(temp-25)'
++ pvc    =  '0.15559681+tpvc*(temp-25)'
++ pvd    =  1.1255255  
++ pve    =  0.13970573
++ pvf    =  0.025327788
++ pvg    =  0.014590854
++ pvh    = -0.027265864
++ pvi    = -0.0049672659
++ pvj    = -0.0062160517
++ pvk    = -0.001070722       
++ dcw  =  '-0.04908+1e6*dxw_varmis_33_rf'
++ cww  =  -0.005138
++ cwl  =  -0.165
++ cwwl =  0.7361
++ dcl  =  '-0.01338+1e6*dxl_varmis_33_rf'
++ cll  =  0.000636
++ clw  =  3.138e-007
++ clwl =  -0.001153
++ cl3  =  9.594e-05
++ cl2  = -0.0004231
++ cl1  = -0.000206
++ cl0  =  0.001323
++ cw0  =  0
++ cwl0 =  0 
++ w1='wf*0.9*1e6'
++ l1='lf*0.9*1e6+0.012'
++ weff='w1+dcw+cww/w1+cwl/l1+cwwl/w1/l1'
++ leff='l1+dcl+cll/l1+clw/w1+clwl/w1/l1'
++ ccom='0.25*(((cl3*pow(l1,3)+cl2*pow(l1,2)+cl1*l1+cl0)*(w1+dcw)+cw0/w1)*(1+cwl0/(w1*l1)))'
++ cmina='0+dcmina_varmis_33_rf' cminb=-1.43977  cminc=-0.194022   cmind=0.34732787
+
+****** subcircuit parameters ******
+
+l_body nwell 201 '(500e-25)/(nf*(lf*0.9+1.2e-8)*wf*0.9)'
+l_gate 202 gate '(500e-25)/(nf*(lf*0.9+1.2e-8)*wf*0.9)'
+r_gate 20 202 '(17.5+4.4816*(w1/(l1*nf)-1.23)*(1+d_r_gate_varmis_33_rf)+530/pow(w1,4)-pow(w1,3)/120+pow(nf,3)/43+20/(l1*pow(nf,3)))'
+   
+r_ch 40 201 '-1.8+72.579*(10/(w1*pow(nf,2)))+80/pow(w1,3)-pow(nf,3)/300-(6.2*pow(l1,3))/nf+pow(w1,3)/72' noise=0
+
+r_body 40 41 '(9e-11)/(l_diff*wf*0.9)'
+dsub 42 41 nw_psub 
++ area = 'l_nw*w_nw'
++ pj = '2*(l_nw+w_nw)'
+r_sub 42 psub '53.948+122.12/(l1*w1)-(pow(nf,3)/28)'
+c1 20 40 '(((pva+pvc*pow(v(20, 40),1)+pve*pow(v(20, 40),2)+pvg*pow(v(20, 40),3)+pvi*pow(v(20, 40),4)+pvk*pow(v(20, 40),5))/(1+pvb*pow(v(20, 40),1)+pvd*pow(v(20, 40),2)+pvf*pow(v(20, 40),3)+pvh*pow(v(20, 40),4)+pvj*pow(v(20, 40),5))*weff*leff/(4.5*1.812*4)+ccom)*(tox0/toxc)*nf*1e-12)*(1+cmina*(cminb+atan((v(20, 40)-cminc)/cmind)))' 
+
+****** n-well / p-substrate diode parameters ******
+.model nw_psub d
+
++ level=3
++ js = 2.05e-06
++ jsw = 5.34e-11 
++ n = 1.0525  
++ rs = 0
++ bv = 9.662 
++ tref = 25 
++ tlev = 1 
++ eg = 1.16 
++ xti = 5.4936 
++ trs = 3.22e-03
++ cj = '(0.0000828)*(1+d_cj_varmis_33_rf)'
++ mj = 0.474
++ pb = 0.588
++ cjsw = '9.92e-10*(1+d_cjsw_varmis_33_rf)'
++ mjsw = 0.27
++ php = 0.62
++ cta = 0.00332
++ ctp = 0.001
++ tpb = 0.0028
++ tphp = 0.001 
++ tlevc = 1 
++ ik = 517.6627
++ tcv = -5.39e-04
++ ikr = 595.2
+
+.ends varmis_33_rf 
+***

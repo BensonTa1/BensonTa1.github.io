@@ -1,0 +1,163 @@
+**********************************************************************
+*            Case Definition:
+*            TT: Typical case N & P
+*            FF: fast N Fast P
+*            SS: Slow N Slow P
+*            FNSP: fast N slow P
+*            SNFP: Slow N Fast P            
+***************************** Start of Model Card *****************************
+.lib tt
+.param
++dtox_n_33_l110aerf = 0                    dxl_n_33_l110aerf  = 0                   du0_n_33_l110aerf  = 0                   
++dvth0_n_33_l110aerf = 0                   drdsw_n_33_l110aerf = 0                  dxw_n_33_l110aerf  = 0                   
++dlvth0_n_33_l110aerf = 0                  dk3_n_33_l110aerf  = 0                   dpvth0_n_33_l110aerf = 0                   
++dwwl_n_33_l110aerf = 0                   
++dcgdo_n_33_l110aerf = 0                   dcgso_n_33_l110aerf = 0                   
++dcj_n_33_l110aerf = 0                     dcjsw_n_33_l110aerf = 0                  dcjswg_n_33_l110aerf = 0                       
++dcgdl_n_33_l110aerf = 0                   dcgsl_n_33_l110aerf = 0 
++drshg_n_33_l110aerf=0                     drcnt_n_33_l110aerf=0                    drvia_n_33_l110aerf=0
++dcgd_ext_n_33_l110aerf=0                  dcgb_ext_n_33_l110aerf=0                 dcds_ext_n_33_l110aerf=0
++drch_n_33_l110aerf=0                      ddlc_n_33_l110aerf=0                     ddwc_n_33_l110aerf=0
++dcj_nwtw_n_33bpw_rf   =  0.0000000e+000   dcjsw_nwtw_n_33bpw_rf  =  0.0000000e+000   dcj_nw_n_33bpw_rf      =  0.0000000e+000   
++dcjsw_nw_n_33bpw_rf   =  0.0000000e+000   
+*                                       
++dtox_p_33_l110aerf = 0                    dxl_p_33_l110aerf  = 0                   du0_p_33_l110aerf  = 0                   
++dvth0_p_33_l110aerf = 0                   drdsw_p_33_l110aerf = 0                  dxw_p_33_l110aerf  = 0                   
++dlvth0_p_33_l110aerf = 0                  dk3_p_33_l110aerf  = 0                   dpvth0_p_33_l110aerf = 0                   
++dwwl_p_33_l110aerf = 0                    dcgdl_p_33_l110aerf = 0                  dcgsl_p_33_l110aerf = 0
++dcgdo_p_33_l110aerf = 0                   dcgso_p_33_l110aerf = 0
++dcj_p_33_l110aerf = 0                     dcjsw_p_33_l110aerf = 0                  dcjswg_p_33_l110aerf = 0 
++drshg_p_33_l110aerf=0                     drcnt_p_33_l110aerf=0                    drvia_p_33_l110aerf=0
++dcgd_ext_p_33_l110aerf=0                  dcgb_ext_p_33_l110aerf=0                 dcds_ext_p_33_l110aerf=0
++drch_p_33_l110aerf=0
++dcj_nw_p_33_l110aerf=0                    dcjsw_nw_p_33_l110aerf=0
++ddlc_p_33_l110aerf=0                      ddwc_p_33_l110aerf=0
+*
+.include 'l110ae_33_rf_v051.mdl'
+.endl tt
+*
+.lib ff
+.param
++dtox_n_33_l110aerf = -1.50000e-10         dxl_n_33_l110aerf  = -1.00000e-08        du0_n_33_l110aerf  = 3.50e-03         
++dvth0_n_33_l110aerf = -2.02970e-02        drdsw_n_33_l110aerf = -1.900e+02         dxw_n_33_l110aerf  = 3.00040e-10        
++dlvth0_n_33_l110aerf = -9.90e-09          dk3_n_33_l110aerf  = -7.54700e-01        dpvth0_n_33_l110aerf = -4.20450e-16        
++dwwl_n_33_l110aerf = -1.35e-22        
++dcgdo_n_33_l110aerf = 0.1                 dcgso_n_33_l110aerf = 0.1          
++dcj_n_33_l110aerf = -0.1                  dcjsw_n_33_l110aerf = -0.1               dcjswg_n_33_l110aerf = -0.1 
++dcgdl_n_33_l110aerf = 0.1                 dcgsl_n_33_l110aerf = 0.1 
++drshg_n_33_l110aerf=-0.8                  drcnt_n_33_l110aerf=-0.7                 drvia_n_33_l110aerf=-0.7
++dcgd_ext_n_33_l110aerf=-0.2               dcgb_ext_n_33_l110aerf=-0.2              dcds_ext_n_33_l110aerf=-0.2
++drch_n_33_l110aerf=-0.1                   ddlc_n_33_l110aerf=1.3e-8                ddwc_n_33_l110aerf=5.50e-8
+*
++dcj_nwtw_n_33bpw_rf   = -1.0000000e-001   dcjsw_nwtw_n_33bpw_rf  = -1.0000000e-001   dcj_nw_n_33bpw_rf      = -1.0000000e-001   
++dcjsw_nw_n_33bpw_rf   = -1.0000000e-001   
+*
++dtox_p_33_l110aerf = -1.50000e-10         dxl_p_33_l110aerf  = -5.00000e-09        du0_p_33_l110aerf  = 4.05900e-04         
++dvth0_p_33_l110aerf = 2.85520e-02         drdsw_p_33_l110aerf = -2.35830e+02       dxw_p_33_l110aerf  = 1.26200e-08         
++dlvth0_p_33_l110aerf = 6.00e-09           dk3_p_33_l110aerf  = -1.19510e-01        dpvth0_p_33_l110aerf = 1.65390e-15         
++dwwl_p_33_l110aerf = 1.50e-20             dcgdl_p_33_l110aerf = 0.1                dcgsl_p_33_l110aerf = 0.1
++dcgdo_p_33_l110aerf = 0.1                 dcgso_p_33_l110aerf = 0.1
++dcj_p_33_l110aerf = -0.1                  dcjsw_p_33_l110aerf = -0.1               dcjswg_p_33_l110aerf = -0.1  
++drshg_p_33_l110aerf=-0.2                  drcnt_p_33_l110aerf=-0.2                 drvia_p_33_l110aerf=-0.2
++dcgd_ext_p_33_l110aerf=-0.2               dcgb_ext_p_33_l110aerf=-0.2              dcds_ext_p_33_l110aerf=-0.2
++drch_p_33_l110aerf=-0.2
++dcj_nw_p_33_l110aerf=-0.1                 dcjsw_nw_p_33_l110aerf=-0.1
++ddlc_p_33_l110aerf=1.4e-8                 ddwc_p_33_l110aerf=1.0e-7
+*
+.include 'l110ae_33_rf_v051.mdl'
+.endl ff
+*
+.lib ss
+.param
++dtox_n_33_l110aerf = 1.50000e-10          dxl_n_33_l110aerf  = 1.00000e-08         du0_n_33_l110aerf  = -4.000e-03        
++dvth0_n_33_l110aerf = 1.92990e-02         drdsw_n_33_l110aerf = 2.90e+02           dxw_n_33_l110aerf  = -3.04050e-09        
++dlvth0_n_33_l110aerf = 1.10e-08           dk3_n_33_l110aerf  = 6.93660e-01         dpvth0_n_33_l110aerf = 6.31730e-16        
++dwwl_n_33_l110aerf = 1.95450e-22         
++dcgdo_n_33_l110aerf = -0.1                dcgso_n_33_l110aerf = -0.1         
++dcj_n_33_l110aerf = 0.1                   dcjsw_n_33_l110aerf = 0.1                dcjswg_n_33_l110aerf = 0.1 
++dcgdl_n_33_l110aerf = -0.1                dcgsl_n_33_l110aerf = -0.1 
++drshg_n_33_l110aerf=0.8                   drcnt_n_33_l110aerf=2.0                  drvia_n_33_l110aerf=2.3
++dcgd_ext_n_33_l110aerf=0.2                dcgb_ext_n_33_l110aerf=0.2               dcds_ext_n_33_l110aerf=0.2
++drch_n_33_l110aerf=0.1                    ddlc_n_33_l110aerf=-1.3e-8               ddwc_n_33_l110aerf=-1.03e-7
+*
++dcj_nwtw_n_33bpw_rf   =  1.0000000e-001   dcjsw_nwtw_n_33bpw_rf  =  1.0000000e-001   dcj_nw_n_33bpw_rf      =  1.0000000e-001   
++dcjsw_nw_n_33bpw_rf   =  1.0000000e-001   
+*
++dtox_p_33_l110aerf = 1.50000e-10          dxl_p_33_l110aerf  = 5.00000e-09         du0_p_33_l110aerf  = -4.89180e-04        
++dvth0_p_33_l110aerf = -2.73880e-02        drdsw_p_33_l110aerf = 4.20460e+02        dxw_p_33_l110aerf  = -2.200e-08        
++dlvth0_p_33_l110aerf = -6.70e-09          dk3_p_33_l110aerf  = 9.57600e-02         dpvth0_p_33_l110aerf = -1.28e-15        
++dwwl_p_33_l110aerf = -1.70e-20            dcgdl_p_33_l110aerf = -0.1               dcgsl_p_33_l110aerf = -0.1
++dcgdo_p_33_l110aerf = -0.1                dcgso_p_33_l110aerf = -0.1   
++dcj_p_33_l110aerf = 0.1                   dcjsw_p_33_l110aerf = 0.1                dcjswg_p_33_l110aerf = 0.1  
++drshg_p_33_l110aerf=0.2                   drcnt_p_33_l110aerf=0.2                  drvia_p_33_l110aerf=0.2
++dcgd_ext_p_33_l110aerf=0.2                dcgb_ext_p_33_l110aerf=0.2               dcds_ext_p_33_l110aerf=0.2
++drch_p_33_l110aerf=0.2
++dcj_nw_p_33_l110aerf=0.1                  dcjsw_nw_p_33_l110aerf=0.1
++ddlc_p_33_l110aerf=-1.6e-8                ddwc_p_33_l110aerf=-1.30e-7
+*
+.include 'l110ae_33_rf_v051.mdl'
+.endl ss
+*
+.lib fnsp
+.param
++dtox_n_33_l110aerf = 0.00000e+00          dxl_n_33_l110aerf  = -1.00000e-08        du0_n_33_l110aerf  = 2.20e-03         
++dvth0_n_33_l110aerf = -1.71030e-02        drdsw_n_33_l110aerf = -0.75600e+02       dxw_n_33_l110aerf  = 5.58200e-10         
++dlvth0_n_33_l110aerf = -4.20e-09          dk3_n_33_l110aerf  = -3.54e-01           dpvth0_n_33_l110aerf = -1.54780e-16         
++dwwl_n_33_l110aerf = -5.04600e-23        
++dcgdo_n_33_l110aerf = 0                   dcgso_n_33_l110aerf = 0                   
++dcj_n_33_l110aerf = -0.1                  dcjsw_n_33_l110aerf = -0.1               dcjswg_n_33_l110aerf = -0.1 
++dcgdl_n_33_l110aerf = 0                   dcgsl_n_33_l110aerf = 0 
++drshg_n_33_l110aerf=-0.4                  drcnt_n_33_l110aerf=-0.35                drvia_n_33_l110aerf=-0.35
++dcgd_ext_n_33_l110aerf=-0.1               dcgb_ext_n_33_l110aerf=-0.1              dcds_ext_n_33_l110aerf=-0.1
++drch_n_33_l110aerf=-0.05                  ddlc_n_33_l110aerf=6.5e-9                ddwc_n_33_l110aerf=2.25e-8
+*
++dcj_nwtw_n_33bpw_rf   = -5.0000000e-002   dcjsw_nwtw_n_33bpw_rf  = -5.0000000e-002   dcj_nw_n_33bpw_rf      = -5.0000000e-002   
++dcjsw_nw_n_33bpw_rf   = -5.0000000e-002   
+*
++dtox_p_33_l110aerf = 0.00000e+00          dxl_p_33_l110aerf  = 5.00000e-09         du0_p_33_l110aerf  = -2.92940e-04        
++dvth0_p_33_l110aerf = -2.23680e-02        drdsw_p_33_l110aerf = 1.26e+02           dxw_p_33_l110aerf  = -1.00e-08        
++dlvth0_p_33_l110aerf = -2.50e-09          dk3_p_33_l110aerf  = 3.16660e-02         dpvth0_p_33_l110aerf = -7.60e-16        
++dwwl_p_33_l110aerf = 1.52e-22             dcgdl_p_33_l110aerf = 0                  dcgsl_p_33_l110aerf = 0
++dcgdo_p_33_l110aerf = 0                   dcgso_p_33_l110aerf = 0
++dcj_p_33_l110aerf = 0.1                   dcjsw_p_33_l110aerf = 0.1                dcjswg_p_33_l110aerf = 0.1  
++drshg_p_33_l110aerf=0.1                   drcnt_p_33_l110aerf=0.1                  drvia_p_33_l110aerf=0.1
++dcgd_ext_p_33_l110aerf=0.1                dcgb_ext_p_33_l110aerf=0.1               dcds_ext_p_33_l110aerf=0.1
++drch_p_33_l110aerf=0.1
++dcj_nw_p_33_l110aerf=0.1                  dcjsw_nw_p_33_l110aerf=0.1
++ddlc_p_33_l110aerf=-8.0e-9                ddwc_p_33_l110aerf=-6.5e-8
+*
+.include 'l110ae_33_rf_v051.mdl'
+.endl fnsp
+*
+.lib snfp
+.param
++dtox_n_33_l110aerf = 0.00000e+00          dxl_n_33_l110aerf  = 1.00000e-08         du0_n_33_l110aerf  = -2.20e-03        
++dvth0_n_33_l110aerf = 1.68060e-02         drdsw_n_33_l110aerf = 0.90790e+02        dxw_n_33_l110aerf  = -9.85070e-10        
++dlvth0_n_33_l110aerf = 4.40e-09           dk3_n_33_l110aerf  = 3.58810e-01         dpvth0_n_33_l110aerf = 1.67180e-16        
++dwwl_n_33_l110aerf = 7.04700e-23         
++dcgdo_n_33_l110aerf = 0                   dcgso_n_33_l110aerf = 0                   
++dcj_n_33_l110aerf = 0.1                   dcjsw_n_33_l110aerf = 0.1                dcjswg_n_33_l110aerf = 0.1 
++dcgdl_n_33_l110aerf = 0                   dcgsl_n_33_l110aerf = 0 
++drshg_n_33_l110aerf=0.4                   drcnt_n_33_l110aerf=0.35                 drvia_n_33_l110aerf=0.35
++dcgd_ext_n_33_l110aerf=0.1                dcgb_ext_n_33_l110aerf=0.1               dcds_ext_n_33_l110aerf=0.1
++drch_n_33_l110aerf=0.05                   ddlc_n_33_l110aerf=-6.5e-9               ddwc_n_33_l110aerf=-5.0e-8
+*
++dcj_nwtw_n_33bpw_rf   =  5.0000000e-002   dcjsw_nwtw_n_33bpw_rf  =  5.0000000e-002   dcj_nw_n_33bpw_rf      =  5.0000000e-002   
++dcjsw_nw_n_33bpw_rf   =  5.0000000e-002   
+*
++dtox_p_33_l110aerf = 0.00000e+00          dxl_p_33_l110aerf  = -5.00000e-09        du0_p_33_l110aerf  = 2.71930e-04         
++dvth0_p_33_l110aerf = 2.29320e-02         drdsw_p_33_l110aerf = -9.00e+01          dxw_p_33_l110aerf  = 7.650e-09         
++dlvth0_p_33_l110aerf = 2.30e-09           dk3_p_33_l110aerf  = -3.44730e-02        dpvth0_p_33_l110aerf = 8.230e-16         
++dwwl_p_33_l110aerf = -1.1450e-22          dcgdl_p_33_l110aerf = 0                  dcgsl_p_33_l110aerf = 0
++dcgdo_p_33_l110aerf = 0                   dcgso_p_33_l110aerf = 0  
++dcj_p_33_l110aerf = -0.1                  dcjsw_p_33_l110aerf = -0.1               dcjswg_p_33_l110aerf = -0.1 
++drshg_p_33_l110aerf=-0.1                  drcnt_p_33_l110aerf=-0.1                 drvia_p_33_l110aerf=-0.1
++dcgd_ext_p_33_l110aerf=-0.1               dcgb_ext_p_33_l110aerf=-0.1              dcds_ext_p_33_l110aerf=-0.1
++drch_p_33_l110aerf=-0.1
++dcj_nw_p_33_l110aerf=-0.1                 dcjsw_nw_p_33_l110aerf=-0.1
++ddlc_p_33_l110aerf=7.0e-9                 ddwc_p_33_l110aerf=5.0e-8
+*
+.include 'l110ae_33_rf_v051.mdl'
+.endl snfp
+*
+****************************** End of Model Card *******************************

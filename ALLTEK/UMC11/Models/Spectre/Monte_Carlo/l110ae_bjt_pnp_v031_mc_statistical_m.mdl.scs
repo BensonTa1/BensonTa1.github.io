@@ -1,0 +1,33 @@
+
+simulator lang=spectre insensitive=yes
+
+
+parameters  mc_bf_pnp_v45x45   = 0
+parameters  mc_is_pnp_v45x45   = 0
+parameters  mc_bf_pnp_v90x90   = 0
+parameters  mc_is_pnp_v90x90   = 0
+parameters  mc_bf_pnp_v135x135 = 0
+parameters  mc_is_pnp_v135x135 = 0
+parameters  mc_bf_pnp_45x45   = 0
+parameters  mc_is_pnp_45x45   = 0
+parameters  mc_bf_pnp_90x90   = 0
+parameters  mc_is_pnp_90x90   = 0
+parameters  mc_bf_pnp_135x135 = 0
+parameters  mc_is_pnp_135x135 = 0
+statistics {
+mismatch {
+          vary mc_bf_pnp_v45x45 dist=gauss std=sigma/3
+          vary mc_is_pnp_v45x45 dist=gauss std=sigma/3
+          vary mc_bf_pnp_v90x90 dist=gauss std=sigma/3
+          vary mc_is_pnp_v90x90 dist=gauss std=sigma/3
+          vary mc_bf_pnp_v135x135 dist=gauss std=sigma/3
+          vary mc_is_pnp_v135x135 dist=gauss std=sigma/3
+          vary mc_bf_pnp_45x45 dist=gauss std=sigma/3
+          vary mc_is_pnp_45x45 dist=gauss std=sigma/3
+          vary mc_bf_pnp_90x90 dist=gauss std=sigma/3
+          vary mc_is_pnp_90x90 dist=gauss std=sigma/3
+          vary mc_bf_pnp_135x135 dist=gauss std=sigma/3
+          vary mc_is_pnp_135x135 dist=gauss std=sigma/3
+ }
+}
+

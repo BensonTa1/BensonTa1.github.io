@@ -1,0 +1,13 @@
+
+simulator lang=spectre insensitive=yes
+parameters mc_res_ma_nnpo=0
+parameters mc_res_ma_nppo=0
+parameters mc_res_ma_nhr=0
+statistics {
+    mismatch {
+        vary mc_res_ma_nnpo dist=gauss std=1/1
+        vary mc_res_ma_nppo dist=gauss std=1/1
+        vary mc_res_ma_nhr dist=gauss std=1/1
+        }
+    }
+

@@ -1,0 +1,15 @@
+Starting Single Run, Sweeps and Corners...
+
+Current time: Sun Oct 13 14:41:20 2024 
+Best design point: 1
+Design specs: 
+	TEST:CML_PRBS:1	corner	Nominal - 
+Design parameters: 
+	temperature		10
+	VDD		1.8
+
+Interactive.13
+Number of points completed: 4
+Number of simulation errors: 0
+Interactive.13 completed. 
+Current time: Sun Oct 13 14:42:13 2024 

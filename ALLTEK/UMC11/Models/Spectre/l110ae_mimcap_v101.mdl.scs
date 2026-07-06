@@ -1,0 +1,88 @@
+//********************************************************************************
+//* Property of UMC.
+//* Unauthorized reproduction, modification and/or distribution are strictly prohibited.
+//* This product is protected under copyright law and trade secret law.
+//* This model card may not be sent in any form outside of UMC without
+//* the written consent of the UMC ATD Modeling Division.
+//********************************************************************************
+//* Process : UMC 0.11 um Logic and Mixed-Mode 1P8M Metal Metal Capacitor Al Advanced Enhancement Process
+//* Device Type:  MIM Capacitor
+//* Description:  MIM model 
+//* Simulator:    Spectre 
+//* Model Version:V101
+//* Device  : 1.0 fF/um**2 MIMCAP
+//*           1.5 fF/um**2 MIMCAP           
+//*           2.0 fF/um**2 MIMCAP 
+//* Note:  This model is a simplified two-terminal capacitor model for Mixed-Mode application, in which the
+//*        parasitic effects such as serias resistance, inductance and substrate coupling capacitances are 
+//*        not included. 
+//*
+//********************************************************************************
+//* Revision history:
+//* <Revision 1>
+//* Version : 0.1 p1
+//* Date    : 2010 / 01 / 08
+//* Author  : Jian Zhi Huang
+//* Remark  : 1. Copy model from l110eal_mimcap_vt21.lib in the G-05-LOGIC/MIXED_MODE11-MMC/AL/L110E-SPICE
+//*           2. DSM version definition from 2009/11/30.
+//* <Revision 2>
+//* Version : 0.2 p1
+//* Date    : 2010 / 06 / 23
+//* Author  : Kelly Pao
+//* Remark  : 1. Based on new silicon data.
+//*           2. DSM version definition from 2009/11/30.
+//* <Revision 3>
+//* Version : 0.3 p1
+//* Date    : 2010 / 12 / 08
+//* Author  : Hung Wei Liao
+//* Remark  : 1. Add 20f MIMCAP Model 
+//*  <Revision 4>   
+//*  Version : 0.4 p1   
+//*  Date  : 2012/09/27 
+//*  Author  : Ji Wei Hsu   
+//*  Remark  : 1. Modify 20f MIMCAP Model
+//*  <Revision 5>   
+//*  Version : 0.5 p1   
+//*  Date  : 2013/08/9 
+//*  Author  : Ting Huei Wang   
+//*  Remark  : 1. Change 20f MIMCAP Model minimum size from 4.8*4.8(um**2) to 3.4*3.4(um**2)
+//* <Revision 5>   
+//* Version : 0.6 p1   
+//* Date  : 2015/04/15 
+//* Author  : Zung Jie Han   
+//* Remark  : 1. Change 20f MIMCAP Model "cf" parameter from 4.96e-11 to 4.95e-11
+//* <Revision 6>   
+//* Version : 1.0 p1   
+//* Date  : 2016/05/23 
+//* Author  : Tzu Kang Hsiung  
+//* Remark  : 1. Modify  15f and 10f MIMCAP Model based on new silicon data .
+//*           2. Add trend chart of mapping data into the  document .
+//*           3. Revise  the  verification  figure (with VC & with  TC)  of  2.0fF MIMCAP .
+//********************************************************************************
+simulator lang=spectre insensitive=yes
+inline subckt mimcaps_20f_mml110e ( n1 n2 )
+parameters  l=49.2e-6 w=49.2e-6
+parameters dt=temp-25      
+parameters ca=2e-3
+parameters cf=4.95e-11
+mimcaps_20f_mml110e ( n1 n2 ) bsource c=((l*0.9*w*0.9*ca)*(1+d_ca_mimcaps_20f_mml110e)+2*cf*(l*0.9+w*0.9))*(1+1.8e-5*dt-1.45e-9*dt*dt)*(1-8.97e-6*v(n1,n2)+1.42e-5*v(n1,n2)*v(n1,n2))
+
+ends mimcaps_20f_mml110e
+
+inline subckt mimcaps_15f_mml110e ( n1 n2 )
+parameters  l=49.2e-6 w=49.2e-6
+parameters dt=temp-25      
+parameters ca=1.5e-3
+parameters cf=3.98e-11
+mimcaps_15f_mml110e ( n1 n2 ) bsource c=((l*0.9*w*0.9*ca)*(1+d_ca_mimcaps_15f_mml110e)+2*cf*(l*0.9+w*0.9))*(1+1.58e-5*dt+2.90e-9*dt*dt)*(1-6.84e-6*v(n1,n2)+5.67e-6*v(n1,n2)*v(n1,n2))
+
+ends mimcaps_15f_mml110e
+
+inline subckt mimcaps_10f_mml110e ( n1 n2 )
+parameters  l=49.2e-6 w=49.2e-6
+parameters dt=temp-25      
+parameters ca=1.0e-3
+parameters cf=4.63e-11
+mimcaps_10f_mml110e ( n1 n2 ) bsource c=((l*0.9*w*0.9*ca)*(1+d_ca_mimcaps_10f_mml110e)+2*cf*(l*0.9+w*0.9))*(1+1.12e-5*dt+9.0e-9*dt*dt)*(1-2.81e-5*v(n1,n2)-2.17e-6*v(n1,n2)*v(n1,n2))
+
+ends mimcaps_10f_mml110e

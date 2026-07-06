@@ -1,0 +1,30 @@
+.lib typ
+.param
+*
++ dcj_vardiop_rf=0
++ dcjsw_vardiop_rf=0
+*
+.include './vardiop_rf_v2d3.mdl'
+* 
+.endl typ
+*
+.lib min
+.param
+*
++ dcj_vardiop_rf=-0.1
++ dcjsw_vardiop_rf=-0.1
+*
+.include './vardiop_rf_v2d3.mdl'
+*
+.endl min
+*
+.lib max
+.param
+*
++ dcj_vardiop_rf=0.1
++ dcjsw_vardiop_rf=0.1
+*
+.include './vardiop_rf_v2d3.mdl'
+* 
+.endl max
+

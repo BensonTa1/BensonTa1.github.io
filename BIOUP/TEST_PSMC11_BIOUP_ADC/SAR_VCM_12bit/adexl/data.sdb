@@ -1,0 +1,2245 @@
+<?xml version="1.0"?>
+<setupdb version="6">data
+	<active>Active Setup
+		<corners>
+			<corner enabled="1">_default</corner>
+			<corner enabled="0">C0
+				<models>
+					<model enabled="1">logic11_3p3v.lib
+						<modeltest>All</modeltest>
+						<modelblock>Global</modelblock>
+						<modelfile>/home/IC/Desktop/virtuoso/Process/PSMC11/Models/logic11_3p3v.lib</modelfile>
+						<modelsection>"TT" "SS" "FF" "FS" "SF"</modelsection>
+					</model>
+					<model enabled="1">logic11.lib
+						<modeltest>All</modeltest>
+						<modelblock>Global</modelblock>
+						<modelfile>/home/IC/Desktop/virtuoso/Process/PSMC11/Models/logic11.lib</modelfile>
+						<modelsection>"RES_TT" "RES_FF" "RES_SS"</modelsection>
+					</model>
+					<model enabled="1">110MIM.lib
+						<modeltest>All</modeltest>
+						<modelblock>Global</modelblock>
+						<modelfile>/home/IC/Desktop/virtuoso/Process/PSMC11/Models/110MIM.lib</modelfile>
+						<modelsection>"MIM_TT"</modelsection>
+					</model>
+				</models>
+			</corner>
+			<corner enabled="0">C1
+				<models>
+					<model enabled="1">logic11_3p3v.lib
+						<modeltest>All</modeltest>
+						<modelblock>Global</modelblock>
+						<modelfile>/home/IC/Desktop/virtuoso/Process/PSMC11/Models/logic11_3p3v.lib</modelfile>
+						<modelsection>"FF"</modelsection>
+					</model>
+					<model enabled="1">logic11.lib
+						<modeltest>All</modeltest>
+						<modelblock>Global</modelblock>
+						<modelfile>/home/IC/Desktop/virtuoso/Process/PSMC11/Models/logic11.lib</modelfile>
+						<modelsection>"RES_TT"</modelsection>
+					</model>
+					<model enabled="1">110MIM.lib
+						<modeltest>All</modeltest>
+						<modelblock>Global</modelblock>
+						<modelfile>/home/IC/Desktop/virtuoso/Process/PSMC11/Models/110MIM.lib</modelfile>
+						<modelsection>"MIM_TT"</modelsection>
+					</model>
+				</models>
+			</corner>
+		</corners>
+		<extensions>
+			<extension>Parasitics
+				<callback>_parSetupDBExtensionCB</callback>
+				<iconvalue></iconvalue>
+				<icontype></icontype>
+			</extension>
+		</extensions>
+		<currentmode>Single Run, Sweeps and Corners</currentmode>
+		<overwritehistory>0</overwritehistory>
+		<tests>
+			<test enabled="1">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1
+				<tool>ADE</tool>
+				<tooloptions>
+					<option>cell
+						<value>SAR_VCM_12bit</value>
+					</option>
+					<option>lib
+						<value>TEST_PSMC11_BIOUP_ADC</value>
+					</option>
+					<option>sim
+						<value>spectre</value>
+					</option>
+					<option>view
+						<value>config</value>
+					</option>
+					<option>path
+						<value>$AXL_SETUPDB_DIR/test_states</value>
+					</option>
+					<option>state
+						<value>TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1_active</value>
+					</option>
+				</tooloptions>
+				<origoptions>
+					<option>cell
+						<value>SAR_VCM_12bit</value>
+					</option>
+					<option>lib
+						<value>TEST_PSMC11_BIOUP_ADC</value>
+					</option>
+					<option>sim
+						<value>spectre</value>
+					</option>
+					<option>view
+						<value>config</value>
+					</option>
+					<option>path
+						<value>$AXL_SETUPDB_DIR/test_states</value>
+					</option>
+					<option>state
+						<value>tmpstate.157584038</value>
+					</option>
+				</origoptions>
+			</test>
+		</tests>
+		<vars>
+			<var>VA
+				<value>1</value>
+				<dependentTests>
+					<dependentTest enabled="1">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1</dependentTest>
+				</dependentTests>
+			</var>
+			<var>M
+				<value>1</value>
+				<dependentTests>
+					<dependentTest enabled="1">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1</dependentTest>
+				</dependentTests>
+			</var>
+			<var>N
+				<value>8</value>
+				<dependentTests>
+					<dependentTest enabled="1">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1</dependentTest>
+				</dependentTests>
+			</var>
+			<var>FCLK
+				<value>1M</value>
+				<dependentTests>
+					<dependentTest enabled="1">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1</dependentTest>
+				</dependentTests>
+			</var>
+			<var>FS
+				<value>FCLK/16</value>
+				<dependentTests>
+					<dependentTest enabled="1">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1</dependentTest>
+				</dependentTests>
+			</var>
+			<var>FIN
+				<value>M*FS/N</value>
+				<dependentTests>
+					<dependentTest enabled="1">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1</dependentTest>
+				</dependentTests>
+			</var>
+			<var>START_TIME
+				<value>2.5*(1/FS)</value>
+				<dependentTests>
+					<dependentTest enabled="1">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1</dependentTest>
+				</dependentTests>
+			</var>
+			<var>STOP_TIME
+				<value>START_TIME+M*(1/FIN)</value>
+				<dependentTests>
+					<dependentTest enabled="1">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1</dependentTest>
+				</dependentTests>
+			</var>
+			<var enabled="1">VDD
+				<value>{Exclusion List}3.3{Exclusion List}{Center/Span%}Auto:3.3:3:20{Center/Span%}</value>
+				<dependentTests>
+					<dependentTest enabled="1">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1</dependentTest>
+				</dependentTests>
+			</var>
+			<var enabled="1">temperature
+				<value>{Exclusion List}30{Exclusion List}{From/To}Auto:0:3:100{From/To}</value>
+			</var>
+		</vars>
+		<overwritehistoryname>Interactive.0</overwritehistoryname>
+		<plottingoptions>
+			<plottingoption>plottingmode
+				<value>Replace</value>
+			</plottingoption>
+			<plottingoption>plottype
+				<value>None</value>
+			</plottingoption>
+			<plottingoption>usewaveformtemplate
+				<value>no</value>
+			</plottingoption>
+			<plottingoption>useMaestroPlottingTemplate
+				<value>yes</value>
+			</plottingoption>
+			<plottingoption>waveformtemplate
+				<value></value>
+			</plottingoption>
+			<plottingoption>allplottingtemplates
+				<value></value>
+			</plottingoption>
+			<plottingoption>defaultplottingtemplate
+				<value></value>
+			</plottingoption>
+		</plottingoptions>
+	</active>
+	<history>History
+		<historyentry assemblerOrExplorer="adexl" roOrView="view">Interactive.8
+			<checkpoint>
+				<corners>
+					<corner enabled="0">_default</corner>
+					<corner enabled="1">C0
+						<models>
+							<model enabled="1">logic11_3p3v.lib
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/PSMC11/Models/logic11_3p3v.lib</modelfile>
+								<modelsection>"TT" "SS" "FF" "FS" "SF"</modelsection>
+							</model>
+							<model enabled="1">logic11.lib
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/PSMC11/Models/logic11.lib</modelfile>
+								<modelsection>"RES_TT" "RES_FF" "RES_SS"</modelsection>
+							</model>
+							<model enabled="1">110MIM.lib
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/PSMC11/Models/110MIM.lib</modelfile>
+								<modelsection>"MIM_TT"</modelsection>
+							</model>
+						</models>
+					</corner>
+				</corners>
+				<extensions>
+					<extension>Parasitics
+						<callback>_parSetupDBExtensionCB</callback>
+						<iconvalue></iconvalue>
+						<icontype></icontype>
+					</extension>
+				</extensions>
+				<currentmode>Single Run, Sweeps and Corners</currentmode>
+				<overwritehistory>0</overwritehistory>
+				<tests>
+					<test enabled="1">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1
+						<tool>ADE</tool>
+						<tooloptions>
+							<option>cell
+								<value>SAR_VCM_12bit</value>
+							</option>
+							<option>lib
+								<value>TEST_PSMC11_BIOUP_ADC</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>config</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1_tmpstate.157584038_Interactive.8</value>
+							</option>
+						</tooloptions>
+						<origoptions>
+							<option>cell
+								<value>SAR_VCM_12bit</value>
+							</option>
+							<option>lib
+								<value>TEST_PSMC11_BIOUP_ADC</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>config</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>tmpstate.157584038</value>
+							</option>
+						</origoptions>
+					</test>
+				</tests>
+				<vars>
+					<var>VA
+						<value>1</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>M
+						<value>1</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>N
+						<value>32</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>FCLK
+						<value>1M</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>FS
+						<value>FCLK/16</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>FIN
+						<value>M*FS/N</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>START_TIME
+						<value>10.5*(1/FS)</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>STOP_TIME
+						<value>START_TIME+M*(1/FIN)</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var enabled="0">VDD
+						<value>{Exclusion List}3.3{Exclusion List}{Center/Span%}Auto:3.3:3:20{Center/Span%}</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var enabled="0">temperature
+						<value>{Exclusion List}30{Exclusion List}{From/To}Auto:-25:3:100{From/To}</value>
+					</var>
+				</vars>
+				<overwritehistoryname>Interactive.0</overwritehistoryname>
+				<plottingoptions>
+					<plottingoption>plottingmode
+						<value>Replace</value>
+					</plottingoption>
+					<plottingoption>plottype
+						<value>None</value>
+					</plottingoption>
+					<plottingoption>usewaveformtemplate
+						<value>no</value>
+					</plottingoption>
+					<plottingoption>useMaestroPlottingTemplate
+						<value>yes</value>
+					</plottingoption>
+					<plottingoption>waveformtemplate
+						<value></value>
+					</plottingoption>
+					<plottingoption>allplottingtemplates
+						<value></value>
+					</plottingoption>
+					<plottingoption>defaultplottingtemplate
+						<value></value>
+					</plottingoption>
+				</plottingoptions>
+				<sortVariableValues>0</sortVariableValues>
+			</checkpoint>
+			<timestamp>Apr 4 00:42:22 2026</timestamp>
+			<resultsname>/home/IC/Desktop/virtuoso/TEST_PSMC11_BIOUP_ADC/SAR_VCM_12bit/adexl/results/data/Interactive.8.rdb</resultsname>
+			<simresults>$AXL_SETUPDB_DIR/results/data/Interactive.8.rdb</simresults>
+			<rawdatadelstrategy>SaveAll
+				<simdatasavemode>All</simdatasavemode>
+			</rawdatadelstrategy>
+			<netlistdelstrategy>SaveAll</netlistdelstrategy>
+			<uselocalpsfdir>false</uselocalpsfdir>
+			<localpsfdir>/tmp/IC_IC_004222530</localpsfdir>
+			<psfdir>/home/IC/simulation/TEST_PSMC11_BIOUP_ADC/SAR_VCM_12bit/adexl/results/data/Interactive.8</psfdir>
+			<simdir>$AXL_PROJECT_DIR/TEST_PSMC11_BIOUP_ADC/SAR_VCM_12bit/adexl/results/data/Interactive.8</simdir>
+			<gendatasheetplotsonsimulation>1</gendatasheetplotsonsimulation>
+			<runlog>/home/IC/Desktop/virtuoso/TEST_PSMC11_BIOUP_ADC/SAR_VCM_12bit/adexl/results/data/Interactive.8.log</runlog>
+			<runlogfile>$AXL_SETUPDB_DIR/results/data/Interactive.8.log</runlogfile>
+			<schematicpoint></schematicpoint>
+			<test>all</test>
+		</historyentry>
+		<historyentry assemblerOrExplorer="adexl" roOrView="view">Interactive.9
+			<checkpoint>
+				<corners>
+					<corner enabled="1">_default</corner>
+					<corner enabled="0">C0
+						<models>
+							<model enabled="1">logic11_3p3v.lib
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/PSMC11/Models/logic11_3p3v.lib</modelfile>
+								<modelsection>"TT" "SS" "FF" "FS" "SF"</modelsection>
+							</model>
+							<model enabled="1">logic11.lib
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/PSMC11/Models/logic11.lib</modelfile>
+								<modelsection>"RES_TT" "RES_FF" "RES_SS"</modelsection>
+							</model>
+							<model enabled="1">110MIM.lib
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/PSMC11/Models/110MIM.lib</modelfile>
+								<modelsection>"MIM_TT"</modelsection>
+							</model>
+						</models>
+					</corner>
+				</corners>
+				<extensions>
+					<extension>Parasitics
+						<callback>_parSetupDBExtensionCB</callback>
+						<iconvalue></iconvalue>
+						<icontype></icontype>
+					</extension>
+				</extensions>
+				<currentmode>Single Run, Sweeps and Corners</currentmode>
+				<overwritehistory>0</overwritehistory>
+				<tests>
+					<test enabled="1">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1
+						<tool>ADE</tool>
+						<tooloptions>
+							<option>cell
+								<value>SAR_VCM_12bit</value>
+							</option>
+							<option>lib
+								<value>TEST_PSMC11_BIOUP_ADC</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>config</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1_tmpstate.157584038_Interactive.9</value>
+							</option>
+						</tooloptions>
+						<origoptions>
+							<option>cell
+								<value>SAR_VCM_12bit</value>
+							</option>
+							<option>lib
+								<value>TEST_PSMC11_BIOUP_ADC</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>config</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>tmpstate.157584038</value>
+							</option>
+						</origoptions>
+					</test>
+				</tests>
+				<vars>
+					<var>VA
+						<value>1</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>M
+						<value>1</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>N
+						<value>32</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>FCLK
+						<value>1M</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>FS
+						<value>FCLK/16</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>FIN
+						<value>M*FS/N</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>START_TIME
+						<value>10.5*(1/FS)</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>STOP_TIME
+						<value>START_TIME+M*(1/FIN)</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var enabled="1">VDD
+						<value>{Exclusion List}3.3{Exclusion List}{Center/Span%}Auto:3.3:3:20{Center/Span%}</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var enabled="1">temperature
+						<value>{Exclusion List}30{Exclusion List}{From/To}Auto:-25:3:100{From/To}</value>
+					</var>
+				</vars>
+				<overwritehistoryname>Interactive.0</overwritehistoryname>
+				<plottingoptions>
+					<plottingoption>plottingmode
+						<value>Replace</value>
+					</plottingoption>
+					<plottingoption>plottype
+						<value>None</value>
+					</plottingoption>
+					<plottingoption>usewaveformtemplate
+						<value>no</value>
+					</plottingoption>
+					<plottingoption>useMaestroPlottingTemplate
+						<value>yes</value>
+					</plottingoption>
+					<plottingoption>waveformtemplate
+						<value></value>
+					</plottingoption>
+					<plottingoption>allplottingtemplates
+						<value></value>
+					</plottingoption>
+					<plottingoption>defaultplottingtemplate
+						<value></value>
+					</plottingoption>
+				</plottingoptions>
+				<sortVariableValues>0</sortVariableValues>
+			</checkpoint>
+			<timestamp>Apr 6 18:26:49 2026</timestamp>
+			<resultsname>/home/IC/Desktop/virtuoso/TEST_PSMC11_BIOUP_ADC/SAR_VCM_12bit/adexl/results/data/Interactive.9.rdb</resultsname>
+			<simresults>$AXL_SETUPDB_DIR/results/data/Interactive.9.rdb</simresults>
+			<rawdatadelstrategy>SaveAll
+				<simdatasavemode>All</simdatasavemode>
+			</rawdatadelstrategy>
+			<netlistdelstrategy>SaveAll</netlistdelstrategy>
+			<uselocalpsfdir>false</uselocalpsfdir>
+			<localpsfdir>/tmp/IC_IC_182649478</localpsfdir>
+			<psfdir>/home/IC/simulation/TEST_PSMC11_BIOUP_ADC/SAR_VCM_12bit/adexl/results/data/Interactive.9</psfdir>
+			<simdir>$AXL_PROJECT_DIR/TEST_PSMC11_BIOUP_ADC/SAR_VCM_12bit/adexl/results/data/Interactive.9</simdir>
+			<gendatasheetplotsonsimulation>1</gendatasheetplotsonsimulation>
+			<runlog>/home/IC/Desktop/virtuoso/TEST_PSMC11_BIOUP_ADC/SAR_VCM_12bit/adexl/results/data/Interactive.9.log</runlog>
+			<runlogfile>$AXL_SETUPDB_DIR/results/data/Interactive.9.log</runlogfile>
+			<schematicpoint>
+				<vars>
+					<var>VDD
+						<value>3.3</value>
+					</var>
+				</vars>
+			</schematicpoint>
+			<test>all</test>
+		</historyentry>
+		<historyentry assemblerOrExplorer="adexl" roOrView="view">Interactive.10
+			<checkpoint>
+				<corners>
+					<corner enabled="0">_default</corner>
+					<corner enabled="0">C0
+						<models>
+							<model enabled="1">logic11_3p3v.lib
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/PSMC11/Models/logic11_3p3v.lib</modelfile>
+								<modelsection>"TT" "SS" "FF" "FS" "SF"</modelsection>
+							</model>
+							<model enabled="1">logic11.lib
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/PSMC11/Models/logic11.lib</modelfile>
+								<modelsection>"RES_TT" "RES_FF" "RES_SS"</modelsection>
+							</model>
+							<model enabled="1">110MIM.lib
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/PSMC11/Models/110MIM.lib</modelfile>
+								<modelsection>"MIM_TT"</modelsection>
+							</model>
+						</models>
+					</corner>
+					<corner enabled="1">C1
+						<models>
+							<model enabled="1">logic11_3p3v.lib
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/PSMC11/Models/logic11_3p3v.lib</modelfile>
+								<modelsection>"FF"</modelsection>
+							</model>
+							<model enabled="1">logic11.lib
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/PSMC11/Models/logic11.lib</modelfile>
+								<modelsection>"RES_TT"</modelsection>
+							</model>
+							<model enabled="1">110MIM.lib
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/PSMC11/Models/110MIM.lib</modelfile>
+								<modelsection>"MIM_TT"</modelsection>
+							</model>
+						</models>
+					</corner>
+				</corners>
+				<extensions>
+					<extension>Parasitics
+						<callback>_parSetupDBExtensionCB</callback>
+						<iconvalue></iconvalue>
+						<icontype></icontype>
+					</extension>
+				</extensions>
+				<currentmode>Single Run, Sweeps and Corners</currentmode>
+				<overwritehistory>0</overwritehistory>
+				<tests>
+					<test enabled="1">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1
+						<tool>ADE</tool>
+						<tooloptions>
+							<option>cell
+								<value>SAR_VCM_12bit</value>
+							</option>
+							<option>lib
+								<value>TEST_PSMC11_BIOUP_ADC</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>config</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1_tmpstate.157584038_Interactive.10</value>
+							</option>
+						</tooloptions>
+						<origoptions>
+							<option>cell
+								<value>SAR_VCM_12bit</value>
+							</option>
+							<option>lib
+								<value>TEST_PSMC11_BIOUP_ADC</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>config</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>tmpstate.157584038</value>
+							</option>
+						</origoptions>
+					</test>
+				</tests>
+				<vars>
+					<var>VA
+						<value>1</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>M
+						<value>1</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>N
+						<value>32</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>FCLK
+						<value>1M</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>FS
+						<value>FCLK/16</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>FIN
+						<value>M*FS/N</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>START_TIME
+						<value>10.5*(1/FS)</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>STOP_TIME
+						<value>START_TIME+M*(1/FIN)</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var enabled="1">VDD
+						<value>{Exclusion List}3.3{Exclusion List}{Center/Span%}Auto:3.3:3:20{Center/Span%}</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var enabled="1">temperature
+						<value>{Exclusion List}30{Exclusion List}{From/To}Auto:-25:3:100{From/To}</value>
+					</var>
+				</vars>
+				<overwritehistoryname>Interactive.0</overwritehistoryname>
+				<plottingoptions>
+					<plottingoption>plottingmode
+						<value>Replace</value>
+					</plottingoption>
+					<plottingoption>plottype
+						<value>None</value>
+					</plottingoption>
+					<plottingoption>usewaveformtemplate
+						<value>no</value>
+					</plottingoption>
+					<plottingoption>useMaestroPlottingTemplate
+						<value>yes</value>
+					</plottingoption>
+					<plottingoption>waveformtemplate
+						<value></value>
+					</plottingoption>
+					<plottingoption>allplottingtemplates
+						<value></value>
+					</plottingoption>
+					<plottingoption>defaultplottingtemplate
+						<value></value>
+					</plottingoption>
+				</plottingoptions>
+				<sortVariableValues>0</sortVariableValues>
+			</checkpoint>
+			<timestamp>Apr 27 04:53:19 2026</timestamp>
+			<resultsname>/home/IC/Desktop/virtuoso/TEST_PSMC11_BIOUP_ADC/SAR_VCM_12bit/adexl/results/data/Interactive.10.rdb</resultsname>
+			<simresults>$AXL_SETUPDB_DIR/results/data/Interactive.10.rdb</simresults>
+			<rawdatadelstrategy>SaveAll
+				<simdatasavemode>All</simdatasavemode>
+			</rawdatadelstrategy>
+			<netlistdelstrategy>SaveAll</netlistdelstrategy>
+			<uselocalpsfdir>false</uselocalpsfdir>
+			<localpsfdir>/tmp/IC_IC_045319106</localpsfdir>
+			<psfdir>/home/IC/simulation/TEST_PSMC11_BIOUP_ADC/SAR_VCM_12bit/adexl/results/data/Interactive.10</psfdir>
+			<simdir>$AXL_PROJECT_DIR/TEST_PSMC11_BIOUP_ADC/SAR_VCM_12bit/adexl/results/data/Interactive.10</simdir>
+			<gendatasheetplotsonsimulation>1</gendatasheetplotsonsimulation>
+			<runlog>/home/IC/Desktop/virtuoso/TEST_PSMC11_BIOUP_ADC/SAR_VCM_12bit/adexl/results/data/Interactive.10.log</runlog>
+			<runlogfile>$AXL_SETUPDB_DIR/results/data/Interactive.10.log</runlogfile>
+			<schematicpoint>
+				<vars>
+					<var>VDD
+						<value>3.3</value>
+					</var>
+				</vars>
+			</schematicpoint>
+			<test>all</test>
+		</historyentry>
+		<historyentry assemblerOrExplorer="adexl" roOrView="view">Interactive.11
+			<checkpoint>
+				<corners>
+					<corner enabled="0">_default</corner>
+					<corner enabled="0">C0
+						<models>
+							<model enabled="1">logic11_3p3v.lib
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/PSMC11/Models/logic11_3p3v.lib</modelfile>
+								<modelsection>"TT" "SS" "FF" "FS" "SF"</modelsection>
+							</model>
+							<model enabled="1">logic11.lib
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/PSMC11/Models/logic11.lib</modelfile>
+								<modelsection>"RES_TT" "RES_FF" "RES_SS"</modelsection>
+							</model>
+							<model enabled="1">110MIM.lib
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/PSMC11/Models/110MIM.lib</modelfile>
+								<modelsection>"MIM_TT"</modelsection>
+							</model>
+						</models>
+					</corner>
+					<corner enabled="1">C1
+						<models>
+							<model enabled="1">logic11_3p3v.lib
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/PSMC11/Models/logic11_3p3v.lib</modelfile>
+								<modelsection>"FF"</modelsection>
+							</model>
+							<model enabled="1">logic11.lib
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/PSMC11/Models/logic11.lib</modelfile>
+								<modelsection>"RES_TT"</modelsection>
+							</model>
+							<model enabled="1">110MIM.lib
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/PSMC11/Models/110MIM.lib</modelfile>
+								<modelsection>"MIM_TT"</modelsection>
+							</model>
+						</models>
+					</corner>
+				</corners>
+				<extensions>
+					<extension>Parasitics
+						<callback>_parSetupDBExtensionCB</callback>
+						<iconvalue></iconvalue>
+						<icontype></icontype>
+					</extension>
+				</extensions>
+				<currentmode>Single Run, Sweeps and Corners</currentmode>
+				<overwritehistory>0</overwritehistory>
+				<tests>
+					<test enabled="1">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1
+						<tool>ADE</tool>
+						<tooloptions>
+							<option>cell
+								<value>SAR_VCM_12bit</value>
+							</option>
+							<option>lib
+								<value>TEST_PSMC11_BIOUP_ADC</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>config</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1_tmpstate.157584038_Interactive.11</value>
+							</option>
+						</tooloptions>
+						<origoptions>
+							<option>cell
+								<value>SAR_VCM_12bit</value>
+							</option>
+							<option>lib
+								<value>TEST_PSMC11_BIOUP_ADC</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>config</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>tmpstate.157584038</value>
+							</option>
+						</origoptions>
+					</test>
+				</tests>
+				<vars>
+					<var>VA
+						<value>1</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>M
+						<value>1</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>N
+						<value>32</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>FCLK
+						<value>1M</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>FS
+						<value>FCLK/16</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>FIN
+						<value>M*FS/N</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>START_TIME
+						<value>10.5*(1/FS)</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>STOP_TIME
+						<value>START_TIME+M*(1/FIN)</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var enabled="0">VDD
+						<value>{Exclusion List}3.3{Exclusion List}{Center/Span%}Auto:3.3:3:20{Center/Span%}</value>
+						<dependentTests>
+							<dependentTest omitted="0">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var enabled="0">temperature
+						<value>{Exclusion List}30{Exclusion List}{From/To}Auto:-25:3:100{From/To}</value>
+					</var>
+				</vars>
+				<overwritehistoryname>Interactive.0</overwritehistoryname>
+				<plottingoptions>
+					<plottingoption>plottingmode
+						<value>Replace</value>
+					</plottingoption>
+					<plottingoption>plottype
+						<value>None</value>
+					</plottingoption>
+					<plottingoption>usewaveformtemplate
+						<value>no</value>
+					</plottingoption>
+					<plottingoption>useMaestroPlottingTemplate
+						<value>yes</value>
+					</plottingoption>
+					<plottingoption>waveformtemplate
+						<value></value>
+					</plottingoption>
+					<plottingoption>allplottingtemplates
+						<value></value>
+					</plottingoption>
+					<plottingoption>defaultplottingtemplate
+						<value></value>
+					</plottingoption>
+				</plottingoptions>
+				<sortVariableValues>0</sortVariableValues>
+			</checkpoint>
+			<timestamp>Apr 27 16:04:41 2026</timestamp>
+			<resultsname>/home/IC/Desktop/virtuoso/TEST_PSMC11_BIOUP_ADC/SAR_VCM_12bit/adexl/results/data/Interactive.11.rdb</resultsname>
+			<simresults>$AXL_SETUPDB_DIR/results/data/Interactive.11.rdb</simresults>
+			<rawdatadelstrategy>SaveAll
+				<simdatasavemode>All</simdatasavemode>
+			</rawdatadelstrategy>
+			<netlistdelstrategy>SaveAll</netlistdelstrategy>
+			<uselocalpsfdir>false</uselocalpsfdir>
+			<localpsfdir>/tmp/IC_IC_160441968</localpsfdir>
+			<psfdir>/home/IC/simulation/TEST_PSMC11_BIOUP_ADC/SAR_VCM_12bit/adexl/results/data/Interactive.11</psfdir>
+			<simdir>$AXL_PROJECT_DIR/TEST_PSMC11_BIOUP_ADC/SAR_VCM_12bit/adexl/results/data/Interactive.11</simdir>
+			<gendatasheetplotsonsimulation>1</gendatasheetplotsonsimulation>
+			<runlog>/home/IC/Desktop/virtuoso/TEST_PSMC11_BIOUP_ADC/SAR_VCM_12bit/adexl/results/data/Interactive.11.log</runlog>
+			<runlogfile>$AXL_SETUPDB_DIR/results/data/Interactive.11.log</runlogfile>
+			<schematicpoint></schematicpoint>
+			<test>all</test>
+		</historyentry>
+		<historyentry assemblerOrExplorer="adexl" roOrView="view">Interactive.12
+			<checkpoint>
+				<corners>
+					<corner enabled="1">_default</corner>
+					<corner enabled="0">C0
+						<models>
+							<model enabled="1">logic11_3p3v.lib
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/PSMC11/Models/logic11_3p3v.lib</modelfile>
+								<modelsection>"TT" "SS" "FF" "FS" "SF"</modelsection>
+							</model>
+							<model enabled="1">logic11.lib
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/PSMC11/Models/logic11.lib</modelfile>
+								<modelsection>"RES_TT" "RES_FF" "RES_SS"</modelsection>
+							</model>
+							<model enabled="1">110MIM.lib
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/PSMC11/Models/110MIM.lib</modelfile>
+								<modelsection>"MIM_TT"</modelsection>
+							</model>
+						</models>
+					</corner>
+					<corner enabled="0">C1
+						<models>
+							<model enabled="1">logic11_3p3v.lib
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/PSMC11/Models/logic11_3p3v.lib</modelfile>
+								<modelsection>"FF"</modelsection>
+							</model>
+							<model enabled="1">logic11.lib
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/PSMC11/Models/logic11.lib</modelfile>
+								<modelsection>"RES_TT"</modelsection>
+							</model>
+							<model enabled="1">110MIM.lib
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/PSMC11/Models/110MIM.lib</modelfile>
+								<modelsection>"MIM_TT"</modelsection>
+							</model>
+						</models>
+					</corner>
+				</corners>
+				<extensions>
+					<extension>Parasitics
+						<callback>_parSetupDBExtensionCB</callback>
+						<iconvalue></iconvalue>
+						<icontype></icontype>
+					</extension>
+				</extensions>
+				<currentmode>Single Run, Sweeps and Corners</currentmode>
+				<overwritehistory>0</overwritehistory>
+				<tests>
+					<test enabled="1">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1
+						<tool>ADE</tool>
+						<tooloptions>
+							<option>cell
+								<value>SAR_VCM_12bit</value>
+							</option>
+							<option>lib
+								<value>TEST_PSMC11_BIOUP_ADC</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>schematic</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1_tmpstate.157584038_Interactive.12</value>
+							</option>
+						</tooloptions>
+						<origoptions>
+							<option>cell
+								<value>SAR_VCM_12bit</value>
+							</option>
+							<option>lib
+								<value>TEST_PSMC11_BIOUP_ADC</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>config</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>tmpstate.157584038</value>
+							</option>
+						</origoptions>
+					</test>
+				</tests>
+				<vars>
+					<var>VA
+						<value>1</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>M
+						<value>1</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>N
+						<value>32</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>FCLK
+						<value>1M</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>FS
+						<value>FCLK/16</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>FIN
+						<value>M*FS/N</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>START_TIME
+						<value>10.5*(1/FS)</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>STOP_TIME
+						<value>START_TIME+M*(1/FIN)</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var enabled="1">VDD
+						<value>{Exclusion List}3.3{Exclusion List}{Center/Span%}Auto:3.3:3:20{Center/Span%}</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var enabled="1">temperature
+						<value>{Exclusion List}30{Exclusion List}{From/To}Auto:-25:3:100{From/To}</value>
+					</var>
+				</vars>
+				<overwritehistoryname>Interactive.0</overwritehistoryname>
+				<plottingoptions>
+					<plottingoption>plottingmode
+						<value>Replace</value>
+					</plottingoption>
+					<plottingoption>plottype
+						<value>None</value>
+					</plottingoption>
+					<plottingoption>usewaveformtemplate
+						<value>no</value>
+					</plottingoption>
+					<plottingoption>useMaestroPlottingTemplate
+						<value>yes</value>
+					</plottingoption>
+					<plottingoption>waveformtemplate
+						<value></value>
+					</plottingoption>
+					<plottingoption>allplottingtemplates
+						<value></value>
+					</plottingoption>
+					<plottingoption>defaultplottingtemplate
+						<value></value>
+					</plottingoption>
+				</plottingoptions>
+				<sortVariableValues>0</sortVariableValues>
+			</checkpoint>
+			<timestamp>Jun 10 04:14:52 2026</timestamp>
+			<resultsname>/home/IC/Desktop/virtuoso/TEST_PSMC11_BIOUP_ADC/SAR_VCM_12bit/adexl/results/data/Interactive.12.rdb</resultsname>
+			<simresults>$AXL_SETUPDB_DIR/results/data/Interactive.12.rdb</simresults>
+			<rawdatadelstrategy>SaveAll
+				<simdatasavemode>All</simdatasavemode>
+			</rawdatadelstrategy>
+			<netlistdelstrategy>SaveAll</netlistdelstrategy>
+			<uselocalpsfdir>false</uselocalpsfdir>
+			<localpsfdir>/tmp/IC_IC_041452239</localpsfdir>
+			<psfdir>/home/IC/simulation/TEST_PSMC11_BIOUP_ADC/SAR_VCM_12bit/adexl/results/data/Interactive.12</psfdir>
+			<simdir>$AXL_PROJECT_DIR/TEST_PSMC11_BIOUP_ADC/SAR_VCM_12bit/adexl/results/data/Interactive.12</simdir>
+			<gendatasheetplotsonsimulation>1</gendatasheetplotsonsimulation>
+			<runlog>/home/IC/Desktop/virtuoso/TEST_PSMC11_BIOUP_ADC/SAR_VCM_12bit/adexl/results/data/Interactive.12.log</runlog>
+			<runlogfile>$AXL_SETUPDB_DIR/results/data/Interactive.12.log</runlogfile>
+			<schematicpoint>
+				<vars>
+					<var>VDD
+						<value>3.6</value>
+					</var>
+				</vars>
+			</schematicpoint>
+			<test>all</test>
+		</historyentry>
+		<historyentry assemblerOrExplorer="adexl" roOrView="view">Interactive.13
+			<checkpoint>
+				<corners>
+					<corner enabled="1">_default</corner>
+					<corner enabled="0">C0
+						<models>
+							<model enabled="1">logic11_3p3v.lib
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/PSMC11/Models/logic11_3p3v.lib</modelfile>
+								<modelsection>"TT" "SS" "FF" "FS" "SF"</modelsection>
+							</model>
+							<model enabled="1">logic11.lib
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/PSMC11/Models/logic11.lib</modelfile>
+								<modelsection>"RES_TT" "RES_FF" "RES_SS"</modelsection>
+							</model>
+							<model enabled="1">110MIM.lib
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/PSMC11/Models/110MIM.lib</modelfile>
+								<modelsection>"MIM_TT"</modelsection>
+							</model>
+						</models>
+					</corner>
+					<corner enabled="0">C1
+						<models>
+							<model enabled="1">logic11_3p3v.lib
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/PSMC11/Models/logic11_3p3v.lib</modelfile>
+								<modelsection>"FF"</modelsection>
+							</model>
+							<model enabled="1">logic11.lib
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/PSMC11/Models/logic11.lib</modelfile>
+								<modelsection>"RES_TT"</modelsection>
+							</model>
+							<model enabled="1">110MIM.lib
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/PSMC11/Models/110MIM.lib</modelfile>
+								<modelsection>"MIM_TT"</modelsection>
+							</model>
+						</models>
+					</corner>
+				</corners>
+				<extensions>
+					<extension>Parasitics
+						<callback>_parSetupDBExtensionCB</callback>
+						<iconvalue></iconvalue>
+						<icontype></icontype>
+					</extension>
+				</extensions>
+				<currentmode>Single Run, Sweeps and Corners</currentmode>
+				<overwritehistory>0</overwritehistory>
+				<tests>
+					<test enabled="1">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1
+						<tool>ADE</tool>
+						<tooloptions>
+							<option>cell
+								<value>SAR_VCM_12bit</value>
+							</option>
+							<option>lib
+								<value>TEST_PSMC11_BIOUP_ADC</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>schematic</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1_tmpstate.157584038_Interactive.13</value>
+							</option>
+						</tooloptions>
+						<origoptions>
+							<option>cell
+								<value>SAR_VCM_12bit</value>
+							</option>
+							<option>lib
+								<value>TEST_PSMC11_BIOUP_ADC</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>config</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>tmpstate.157584038</value>
+							</option>
+						</origoptions>
+					</test>
+				</tests>
+				<vars>
+					<var>VA
+						<value>1</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>M
+						<value>1</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>N
+						<value>32</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>FCLK
+						<value>1M</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>FS
+						<value>FCLK/16</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>FIN
+						<value>M*FS/N</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>START_TIME
+						<value>10.5*(1/FS)</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>STOP_TIME
+						<value>START_TIME+M*(1/FIN)</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var enabled="1">VDD
+						<value>{Exclusion List}3.3{Exclusion List}{Center/Span%}Auto:3.3:3:20{Center/Span%}</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var enabled="1">temperature
+						<value>{Exclusion List}30{Exclusion List}{From/To}Auto:-25:3:100{From/To}</value>
+					</var>
+				</vars>
+				<overwritehistoryname>Interactive.0</overwritehistoryname>
+				<plottingoptions>
+					<plottingoption>plottingmode
+						<value>Replace</value>
+					</plottingoption>
+					<plottingoption>plottype
+						<value>None</value>
+					</plottingoption>
+					<plottingoption>usewaveformtemplate
+						<value>no</value>
+					</plottingoption>
+					<plottingoption>useMaestroPlottingTemplate
+						<value>yes</value>
+					</plottingoption>
+					<plottingoption>waveformtemplate
+						<value></value>
+					</plottingoption>
+					<plottingoption>allplottingtemplates
+						<value></value>
+					</plottingoption>
+					<plottingoption>defaultplottingtemplate
+						<value></value>
+					</plottingoption>
+				</plottingoptions>
+				<sortVariableValues>0</sortVariableValues>
+			</checkpoint>
+			<timestamp>Jun 10 04:15:20 2026</timestamp>
+			<resultsname>/home/IC/Desktop/virtuoso/TEST_PSMC11_BIOUP_ADC/SAR_VCM_12bit/adexl/results/data/Interactive.13.rdb</resultsname>
+			<simresults>$AXL_SETUPDB_DIR/results/data/Interactive.13.rdb</simresults>
+			<rawdatadelstrategy>SaveAll
+				<simdatasavemode>All</simdatasavemode>
+			</rawdatadelstrategy>
+			<netlistdelstrategy>SaveAll</netlistdelstrategy>
+			<uselocalpsfdir>false</uselocalpsfdir>
+			<localpsfdir>/tmp/IC_IC_041520909</localpsfdir>
+			<psfdir>/home/IC/simulation/TEST_PSMC11_BIOUP_ADC/SAR_VCM_12bit/adexl/results/data/Interactive.13</psfdir>
+			<simdir>$AXL_PROJECT_DIR/TEST_PSMC11_BIOUP_ADC/SAR_VCM_12bit/adexl/results/data/Interactive.13</simdir>
+			<gendatasheetplotsonsimulation>1</gendatasheetplotsonsimulation>
+			<runlog>/home/IC/Desktop/virtuoso/TEST_PSMC11_BIOUP_ADC/SAR_VCM_12bit/adexl/results/data/Interactive.13.log</runlog>
+			<runlogfile>$AXL_SETUPDB_DIR/results/data/Interactive.13.log</runlogfile>
+			<schematicpoint>
+				<vars>
+					<var>VDD
+						<value>3.6</value>
+					</var>
+				</vars>
+			</schematicpoint>
+			<test>all</test>
+		</historyentry>
+		<historyentry assemblerOrExplorer="adexl" roOrView="view">Interactive.14
+			<checkpoint>
+				<corners>
+					<corner enabled="1">_default</corner>
+					<corner enabled="0">C0
+						<models>
+							<model enabled="1">logic11_3p3v.lib
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/PSMC11/Models/logic11_3p3v.lib</modelfile>
+								<modelsection>"TT" "SS" "FF" "FS" "SF"</modelsection>
+							</model>
+							<model enabled="1">logic11.lib
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/PSMC11/Models/logic11.lib</modelfile>
+								<modelsection>"RES_TT" "RES_FF" "RES_SS"</modelsection>
+							</model>
+							<model enabled="1">110MIM.lib
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/PSMC11/Models/110MIM.lib</modelfile>
+								<modelsection>"MIM_TT"</modelsection>
+							</model>
+						</models>
+					</corner>
+					<corner enabled="0">C1
+						<models>
+							<model enabled="1">logic11_3p3v.lib
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/PSMC11/Models/logic11_3p3v.lib</modelfile>
+								<modelsection>"FF"</modelsection>
+							</model>
+							<model enabled="1">logic11.lib
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/PSMC11/Models/logic11.lib</modelfile>
+								<modelsection>"RES_TT"</modelsection>
+							</model>
+							<model enabled="1">110MIM.lib
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/PSMC11/Models/110MIM.lib</modelfile>
+								<modelsection>"MIM_TT"</modelsection>
+							</model>
+						</models>
+					</corner>
+				</corners>
+				<extensions>
+					<extension>Parasitics
+						<callback>_parSetupDBExtensionCB</callback>
+						<iconvalue></iconvalue>
+						<icontype></icontype>
+					</extension>
+				</extensions>
+				<currentmode>Single Run, Sweeps and Corners</currentmode>
+				<overwritehistory>0</overwritehistory>
+				<tests>
+					<test enabled="1">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1
+						<tool>ADE</tool>
+						<tooloptions>
+							<option>cell
+								<value>SAR_VCM_12bit</value>
+							</option>
+							<option>lib
+								<value>TEST_PSMC11_BIOUP_ADC</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>schematic</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1_tmpstate.157584038_Interactive.14</value>
+							</option>
+						</tooloptions>
+						<origoptions>
+							<option>cell
+								<value>SAR_VCM_12bit</value>
+							</option>
+							<option>lib
+								<value>TEST_PSMC11_BIOUP_ADC</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>config</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>tmpstate.157584038</value>
+							</option>
+						</origoptions>
+					</test>
+				</tests>
+				<vars>
+					<var>VA
+						<value>1</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>M
+						<value>1</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>N
+						<value>8</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>FCLK
+						<value>1M</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>FS
+						<value>FCLK/16</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>FIN
+						<value>M*FS/N</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>START_TIME
+						<value>2.5*(1/FS)</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>STOP_TIME
+						<value>START_TIME+M*(1/FIN)</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var enabled="1">VDD
+						<value>{Exclusion List}3.3{Exclusion List}{Center/Span%}Auto:3.3:3:20{Center/Span%}</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var enabled="1">temperature
+						<value>{Exclusion List}30{Exclusion List}{From/To}Auto:-25:3:100{From/To}</value>
+					</var>
+				</vars>
+				<overwritehistoryname>Interactive.0</overwritehistoryname>
+				<plottingoptions>
+					<plottingoption>plottingmode
+						<value>Replace</value>
+					</plottingoption>
+					<plottingoption>plottype
+						<value>None</value>
+					</plottingoption>
+					<plottingoption>usewaveformtemplate
+						<value>no</value>
+					</plottingoption>
+					<plottingoption>useMaestroPlottingTemplate
+						<value>yes</value>
+					</plottingoption>
+					<plottingoption>waveformtemplate
+						<value></value>
+					</plottingoption>
+					<plottingoption>allplottingtemplates
+						<value></value>
+					</plottingoption>
+					<plottingoption>defaultplottingtemplate
+						<value></value>
+					</plottingoption>
+				</plottingoptions>
+				<sortVariableValues>0</sortVariableValues>
+			</checkpoint>
+			<timestamp>Jun 10 04:35:19 2026</timestamp>
+			<resultsname>/home/IC/Desktop/virtuoso/TEST_PSMC11_BIOUP_ADC/SAR_VCM_12bit/adexl/results/data/Interactive.14.rdb</resultsname>
+			<simresults>$AXL_SETUPDB_DIR/results/data/Interactive.14.rdb</simresults>
+			<rawdatadelstrategy>SaveAll
+				<simdatasavemode>All</simdatasavemode>
+			</rawdatadelstrategy>
+			<netlistdelstrategy>SaveAll</netlistdelstrategy>
+			<uselocalpsfdir>false</uselocalpsfdir>
+			<localpsfdir>/tmp/IC_IC_043519307</localpsfdir>
+			<psfdir>/home/IC/simulation/TEST_PSMC11_BIOUP_ADC/SAR_VCM_12bit/adexl/results/data/Interactive.14</psfdir>
+			<simdir>$AXL_PROJECT_DIR/TEST_PSMC11_BIOUP_ADC/SAR_VCM_12bit/adexl/results/data/Interactive.14</simdir>
+			<gendatasheetplotsonsimulation>1</gendatasheetplotsonsimulation>
+			<runlog>/home/IC/Desktop/virtuoso/TEST_PSMC11_BIOUP_ADC/SAR_VCM_12bit/adexl/results/data/Interactive.14.log</runlog>
+			<runlogfile>$AXL_SETUPDB_DIR/results/data/Interactive.14.log</runlogfile>
+			<schematicpoint>
+				<vars>
+					<var>VDD
+						<value>3.6</value>
+					</var>
+				</vars>
+			</schematicpoint>
+			<test>all</test>
+		</historyentry>
+		<historyentry assemblerOrExplorer="adexl" roOrView="view">Interactive.15
+			<checkpoint>
+				<corners>
+					<corner enabled="1">_default</corner>
+					<corner enabled="0">C0
+						<models>
+							<model enabled="1">logic11_3p3v.lib
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/PSMC11/Models/logic11_3p3v.lib</modelfile>
+								<modelsection>"TT" "SS" "FF" "FS" "SF"</modelsection>
+							</model>
+							<model enabled="1">logic11.lib
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/PSMC11/Models/logic11.lib</modelfile>
+								<modelsection>"RES_TT" "RES_FF" "RES_SS"</modelsection>
+							</model>
+							<model enabled="1">110MIM.lib
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/PSMC11/Models/110MIM.lib</modelfile>
+								<modelsection>"MIM_TT"</modelsection>
+							</model>
+						</models>
+					</corner>
+					<corner enabled="0">C1
+						<models>
+							<model enabled="1">logic11_3p3v.lib
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/PSMC11/Models/logic11_3p3v.lib</modelfile>
+								<modelsection>"FF"</modelsection>
+							</model>
+							<model enabled="1">logic11.lib
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/PSMC11/Models/logic11.lib</modelfile>
+								<modelsection>"RES_TT"</modelsection>
+							</model>
+							<model enabled="1">110MIM.lib
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/PSMC11/Models/110MIM.lib</modelfile>
+								<modelsection>"MIM_TT"</modelsection>
+							</model>
+						</models>
+					</corner>
+				</corners>
+				<extensions>
+					<extension>Parasitics
+						<callback>_parSetupDBExtensionCB</callback>
+						<iconvalue></iconvalue>
+						<icontype></icontype>
+					</extension>
+				</extensions>
+				<currentmode>Single Run, Sweeps and Corners</currentmode>
+				<overwritehistory>0</overwritehistory>
+				<tests>
+					<test enabled="1">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1
+						<tool>ADE</tool>
+						<tooloptions>
+							<option>cell
+								<value>SAR_VCM_12bit</value>
+							</option>
+							<option>lib
+								<value>TEST_PSMC11_BIOUP_ADC</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>schematic</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1_tmpstate.157584038_Interactive.15</value>
+							</option>
+						</tooloptions>
+						<origoptions>
+							<option>cell
+								<value>SAR_VCM_12bit</value>
+							</option>
+							<option>lib
+								<value>TEST_PSMC11_BIOUP_ADC</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>config</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>tmpstate.157584038</value>
+							</option>
+						</origoptions>
+					</test>
+				</tests>
+				<vars>
+					<var>VA
+						<value>1</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>M
+						<value>1</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>N
+						<value>8</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>FCLK
+						<value>1M</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>FS
+						<value>FCLK/16</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>FIN
+						<value>M*FS/N</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>START_TIME
+						<value>2.5*(1/FS)</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>STOP_TIME
+						<value>START_TIME+M*(1/FIN)</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var enabled="1">VDD
+						<value>{Exclusion List}3.3{Exclusion List}{Center/Span%}Auto:3.3:3:20{Center/Span%}</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var enabled="1">temperature
+						<value>{Exclusion List}30{Exclusion List}{From/To}Auto:0:3:100{From/To}</value>
+					</var>
+				</vars>
+				<overwritehistoryname>Interactive.0</overwritehistoryname>
+				<plottingoptions>
+					<plottingoption>plottingmode
+						<value>Replace</value>
+					</plottingoption>
+					<plottingoption>plottype
+						<value>None</value>
+					</plottingoption>
+					<plottingoption>usewaveformtemplate
+						<value>no</value>
+					</plottingoption>
+					<plottingoption>useMaestroPlottingTemplate
+						<value>yes</value>
+					</plottingoption>
+					<plottingoption>waveformtemplate
+						<value></value>
+					</plottingoption>
+					<plottingoption>allplottingtemplates
+						<value></value>
+					</plottingoption>
+					<plottingoption>defaultplottingtemplate
+						<value></value>
+					</plottingoption>
+				</plottingoptions>
+				<sortVariableValues>0</sortVariableValues>
+			</checkpoint>
+			<timestamp>Jun 10 05:17:43 2026</timestamp>
+			<resultsname>/home/IC/Desktop/virtuoso/TEST_PSMC11_BIOUP_ADC/SAR_VCM_12bit/adexl/results/data/Interactive.15.rdb</resultsname>
+			<simresults>$AXL_SETUPDB_DIR/results/data/Interactive.15.rdb</simresults>
+			<rawdatadelstrategy>SaveAll
+				<simdatasavemode>All</simdatasavemode>
+			</rawdatadelstrategy>
+			<netlistdelstrategy>SaveAll</netlistdelstrategy>
+			<uselocalpsfdir>false</uselocalpsfdir>
+			<localpsfdir>/tmp/IC_IC_051743904</localpsfdir>
+			<psfdir>/home/IC/simulation/TEST_PSMC11_BIOUP_ADC/SAR_VCM_12bit/adexl/results/data/Interactive.15</psfdir>
+			<simdir>$AXL_PROJECT_DIR/TEST_PSMC11_BIOUP_ADC/SAR_VCM_12bit/adexl/results/data/Interactive.15</simdir>
+			<gendatasheetplotsonsimulation>1</gendatasheetplotsonsimulation>
+			<runlog>/home/IC/Desktop/virtuoso/TEST_PSMC11_BIOUP_ADC/SAR_VCM_12bit/adexl/results/data/Interactive.15.log</runlog>
+			<runlogfile>$AXL_SETUPDB_DIR/results/data/Interactive.15.log</runlogfile>
+			<schematicpoint>
+				<vars>
+					<var>VDD
+						<value>3.6</value>
+					</var>
+				</vars>
+			</schematicpoint>
+			<test>all</test>
+		</historyentry>
+		<historyentry assemblerOrExplorer="adexl" roOrView="view">Interactive.16
+			<checkpoint>
+				<corners>
+					<corner enabled="1">_default</corner>
+					<corner enabled="0">C0
+						<models>
+							<model enabled="1">logic11_3p3v.lib
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/PSMC11/Models/logic11_3p3v.lib</modelfile>
+								<modelsection>"TT" "SS" "FF" "FS" "SF"</modelsection>
+							</model>
+							<model enabled="1">logic11.lib
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/PSMC11/Models/logic11.lib</modelfile>
+								<modelsection>"RES_TT" "RES_FF" "RES_SS"</modelsection>
+							</model>
+							<model enabled="1">110MIM.lib
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/PSMC11/Models/110MIM.lib</modelfile>
+								<modelsection>"MIM_TT"</modelsection>
+							</model>
+						</models>
+					</corner>
+					<corner enabled="0">C1
+						<models>
+							<model enabled="1">logic11_3p3v.lib
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/PSMC11/Models/logic11_3p3v.lib</modelfile>
+								<modelsection>"FF"</modelsection>
+							</model>
+							<model enabled="1">logic11.lib
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/PSMC11/Models/logic11.lib</modelfile>
+								<modelsection>"RES_TT"</modelsection>
+							</model>
+							<model enabled="1">110MIM.lib
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/PSMC11/Models/110MIM.lib</modelfile>
+								<modelsection>"MIM_TT"</modelsection>
+							</model>
+						</models>
+					</corner>
+				</corners>
+				<extensions>
+					<extension>Parasitics
+						<callback>_parSetupDBExtensionCB</callback>
+						<iconvalue></iconvalue>
+						<icontype></icontype>
+					</extension>
+				</extensions>
+				<currentmode>Single Run, Sweeps and Corners</currentmode>
+				<overwritehistory>0</overwritehistory>
+				<tests>
+					<test enabled="1">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1
+						<tool>ADE</tool>
+						<tooloptions>
+							<option>cell
+								<value>SAR_VCM_12bit</value>
+							</option>
+							<option>lib
+								<value>TEST_PSMC11_BIOUP_ADC</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>schematic</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1_tmpstate.157584038_Interactive.16</value>
+							</option>
+						</tooloptions>
+						<origoptions>
+							<option>cell
+								<value>SAR_VCM_12bit</value>
+							</option>
+							<option>lib
+								<value>TEST_PSMC11_BIOUP_ADC</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>config</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>tmpstate.157584038</value>
+							</option>
+						</origoptions>
+					</test>
+				</tests>
+				<vars>
+					<var>VA
+						<value>1</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>M
+						<value>1</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>N
+						<value>8</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>FCLK
+						<value>1M</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>FS
+						<value>FCLK/16</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>FIN
+						<value>M*FS/N</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>START_TIME
+						<value>2.5*(1/FS)</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>STOP_TIME
+						<value>START_TIME+M*(1/FIN)</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var enabled="1">VDD
+						<value>{Exclusion List}3.3{Exclusion List}{Center/Span%}Auto:3.3:3:20{Center/Span%}</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var enabled="1">temperature
+						<value>{Exclusion List}30{Exclusion List}{From/To}Auto:0:3:100{From/To}</value>
+					</var>
+				</vars>
+				<overwritehistoryname>Interactive.0</overwritehistoryname>
+				<plottingoptions>
+					<plottingoption>plottingmode
+						<value>Replace</value>
+					</plottingoption>
+					<plottingoption>plottype
+						<value>None</value>
+					</plottingoption>
+					<plottingoption>usewaveformtemplate
+						<value>no</value>
+					</plottingoption>
+					<plottingoption>useMaestroPlottingTemplate
+						<value>yes</value>
+					</plottingoption>
+					<plottingoption>waveformtemplate
+						<value></value>
+					</plottingoption>
+					<plottingoption>allplottingtemplates
+						<value></value>
+					</plottingoption>
+					<plottingoption>defaultplottingtemplate
+						<value></value>
+					</plottingoption>
+				</plottingoptions>
+				<sortVariableValues>0</sortVariableValues>
+			</checkpoint>
+			<timestamp>Jun 10 05:18:44 2026</timestamp>
+			<resultsname>/home/IC/Desktop/virtuoso/TEST_PSMC11_BIOUP_ADC/SAR_VCM_12bit/adexl/results/data/Interactive.16.rdb</resultsname>
+			<simresults>$AXL_SETUPDB_DIR/results/data/Interactive.16.rdb</simresults>
+			<rawdatadelstrategy>SaveAll
+				<simdatasavemode>All</simdatasavemode>
+			</rawdatadelstrategy>
+			<netlistdelstrategy>SaveAll</netlistdelstrategy>
+			<uselocalpsfdir>false</uselocalpsfdir>
+			<localpsfdir>/tmp/IC_IC_051844659</localpsfdir>
+			<psfdir>/home/IC/simulation/TEST_PSMC11_BIOUP_ADC/SAR_VCM_12bit/adexl/results/data/Interactive.16</psfdir>
+			<simdir>$AXL_PROJECT_DIR/TEST_PSMC11_BIOUP_ADC/SAR_VCM_12bit/adexl/results/data/Interactive.16</simdir>
+			<gendatasheetplotsonsimulation>1</gendatasheetplotsonsimulation>
+			<runlog>/home/IC/Desktop/virtuoso/TEST_PSMC11_BIOUP_ADC/SAR_VCM_12bit/adexl/results/data/Interactive.16.log</runlog>
+			<runlogfile>$AXL_SETUPDB_DIR/results/data/Interactive.16.log</runlogfile>
+			<schematicpoint>
+				<vars>
+					<var>VDD
+						<value>3.6</value>
+					</var>
+				</vars>
+			</schematicpoint>
+			<test>all</test>
+		</historyentry>
+		<historyentry assemblerOrExplorer="adexl" roOrView="view">Interactive.17
+			<checkpoint>
+				<corners>
+					<corner enabled="1">_default</corner>
+					<corner enabled="0">C0
+						<models>
+							<model enabled="1">logic11_3p3v.lib
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/PSMC11/Models/logic11_3p3v.lib</modelfile>
+								<modelsection>"TT" "SS" "FF" "FS" "SF"</modelsection>
+							</model>
+							<model enabled="1">logic11.lib
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/PSMC11/Models/logic11.lib</modelfile>
+								<modelsection>"RES_TT" "RES_FF" "RES_SS"</modelsection>
+							</model>
+							<model enabled="1">110MIM.lib
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/PSMC11/Models/110MIM.lib</modelfile>
+								<modelsection>"MIM_TT"</modelsection>
+							</model>
+						</models>
+					</corner>
+					<corner enabled="0">C1
+						<models>
+							<model enabled="1">logic11_3p3v.lib
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/PSMC11/Models/logic11_3p3v.lib</modelfile>
+								<modelsection>"FF"</modelsection>
+							</model>
+							<model enabled="1">logic11.lib
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/PSMC11/Models/logic11.lib</modelfile>
+								<modelsection>"RES_TT"</modelsection>
+							</model>
+							<model enabled="1">110MIM.lib
+								<modeltest>All</modeltest>
+								<modelblock>Global</modelblock>
+								<modelfile>/home/IC/Desktop/virtuoso/Process/PSMC11/Models/110MIM.lib</modelfile>
+								<modelsection>"MIM_TT"</modelsection>
+							</model>
+						</models>
+					</corner>
+				</corners>
+				<extensions>
+					<extension>Parasitics
+						<callback>_parSetupDBExtensionCB</callback>
+						<iconvalue></iconvalue>
+						<icontype></icontype>
+					</extension>
+				</extensions>
+				<currentmode>Single Run, Sweeps and Corners</currentmode>
+				<overwritehistory>0</overwritehistory>
+				<tests>
+					<test enabled="1">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1
+						<tool>ADE</tool>
+						<tooloptions>
+							<option>cell
+								<value>SAR_VCM_12bit</value>
+							</option>
+							<option>lib
+								<value>TEST_PSMC11_BIOUP_ADC</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>config</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1_tmpstate.157584038_Interactive.17</value>
+							</option>
+						</tooloptions>
+						<origoptions>
+							<option>cell
+								<value>SAR_VCM_12bit</value>
+							</option>
+							<option>lib
+								<value>TEST_PSMC11_BIOUP_ADC</value>
+							</option>
+							<option>sim
+								<value>spectre</value>
+							</option>
+							<option>view
+								<value>config</value>
+							</option>
+							<option>path
+								<value>$AXL_SETUPDB_DIR/test_states</value>
+							</option>
+							<option>state
+								<value>tmpstate.157584038</value>
+							</option>
+						</origoptions>
+					</test>
+				</tests>
+				<vars>
+					<var>VA
+						<value>1</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>M
+						<value>1</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>N
+						<value>8</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>FCLK
+						<value>1M</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>FS
+						<value>FCLK/16</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>FIN
+						<value>M*FS/N</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>START_TIME
+						<value>2.5*(1/FS)</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var>STOP_TIME
+						<value>START_TIME+M*(1/FIN)</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var enabled="1">VDD
+						<value>{Exclusion List}3.3{Exclusion List}{Center/Span%}Auto:3.3:3:20{Center/Span%}</value>
+						<dependentTests>
+							<dependentTest enabled="1">TEST_PSMC11_BIOUP_ADC:SAR_VCM_12bit:1</dependentTest>
+						</dependentTests>
+					</var>
+					<var enabled="1">temperature
+						<value>{Exclusion List}30{Exclusion List}{From/To}Auto:0:3:100{From/To}</value>
+					</var>
+				</vars>
+				<overwritehistoryname>Interactive.0</overwritehistoryname>
+				<plottingoptions>
+					<plottingoption>plottingmode
+						<value>Replace</value>
+					</plottingoption>
+					<plottingoption>plottype
+						<value>None</value>
+					</plottingoption>
+					<plottingoption>usewaveformtemplate
+						<value>no</value>
+					</plottingoption>
+					<plottingoption>useMaestroPlottingTemplate
+						<value>yes</value>
+					</plottingoption>
+					<plottingoption>waveformtemplate
+						<value></value>
+					</plottingoption>
+					<plottingoption>allplottingtemplates
+						<value></value>
+					</plottingoption>
+					<plottingoption>defaultplottingtemplate
+						<value></value>
+					</plottingoption>
+				</plottingoptions>
+				<sortVariableValues>0</sortVariableValues>
+			</checkpoint>
+			<timestamp>Jun 10 05:19:49 2026</timestamp>
+			<resultsname>/home/IC/Desktop/virtuoso/TEST_PSMC11_BIOUP_ADC/SAR_VCM_12bit/adexl/results/data/Interactive.17.rdb</resultsname>
+			<simresults>$AXL_SETUPDB_DIR/results/data/Interactive.17.rdb</simresults>
+			<rawdatadelstrategy>SaveAll
+				<simdatasavemode>All</simdatasavemode>
+			</rawdatadelstrategy>
+			<netlistdelstrategy>SaveAll</netlistdelstrategy>
+			<uselocalpsfdir>false</uselocalpsfdir>
+			<localpsfdir>/tmp/IC_IC_051949852</localpsfdir>
+			<psfdir>/home/IC/simulation/TEST_PSMC11_BIOUP_ADC/SAR_VCM_12bit/adexl/results/data/Interactive.17</psfdir>
+			<simdir>$AXL_PROJECT_DIR/TEST_PSMC11_BIOUP_ADC/SAR_VCM_12bit/adexl/results/data/Interactive.17</simdir>
+			<gendatasheetplotsonsimulation>1</gendatasheetplotsonsimulation>
+			<runlog>/home/IC/Desktop/virtuoso/TEST_PSMC11_BIOUP_ADC/SAR_VCM_12bit/adexl/results/data/Interactive.17.log</runlog>
+			<runlogfile>$AXL_SETUPDB_DIR/results/data/Interactive.17.log</runlogfile>
+			<schematicpoint>
+				<vars>
+					<var>VDD
+						<value>3.6</value>
+					</var>
+				</vars>
+			</schematicpoint>
+			<test>all</test>
+		</historyentry>
+	</history>
+</setupdb>

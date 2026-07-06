@@ -1,0 +1,12 @@
+
+simulator lang=spectre insensitive=yes
+parameters mc_c1_vp_mml110ae = 0
+parameters mc_cox_vp_mml110ae = 0
+parameters d_c1_vp_mml110ae = (0.15/3) * mc_c1_vp_mml110ae
+parameters d_cox_vp_mml110ae = (0.15/3) * mc_cox_vp_mml110ae
+statistics {
+process {
+vary mc_c1_vp_mml110ae dist=gauss std=sigma/3
+vary mc_cox_vp_mml110ae dist=gauss std=sigma/3
+ }
+}

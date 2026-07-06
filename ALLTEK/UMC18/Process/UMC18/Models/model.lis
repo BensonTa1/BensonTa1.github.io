@@ -1,0 +1,47 @@
+HSPICE
+'core_rf_v2d5.lib'            -----p_l18w500_18_rf、p_po7w500_18_rf、n_l18w500_18_rf、n_po7w500_18_rf
+'io_rf_v2d4.lib'              -----p_l34w500_33_rf、p_po7w500_33_rf、n_l34w500_33_rf、n_po7w500_33_rf   
+'l_slcr20k_rf_v2d3.lib'       -----l_slcr20k-rf      
+'mimcapm_rf_v2d3.lib'         -----mimcapm_rf       
+'mm180_mimcap_v101.lib'       -----mimcaps_mm
+'mm180_reg18bpw_v123.lib'     -----n_bpw_18_mm
+'mm180_reg18_v124.lib'        -----p_18_mm、n_18_mm
+'mm180_reg33bpw_v123.lib'     -----n_bpw_33_mm
+'mm180_reg33_v114.lib'        -----p_33_mm、n_33_mm、
+'mm180_res_v141.lib'          -----rnnpo_mm、rnppo_mm、rnhr1000_mm
+'mm180_zvt18_v121.lib'        -----n_zero_18_mm
+'mm180_zvt33_v113.lib'        -----n_zero_33_mm
+'mm180_lvt33_v113.lib'        -----p_lv_33_mm、n_lv_33_mm
+'mm180_lvt18_v113.lib'        -----p_lv_18_mm、n_lv_18_mm
+'pad_rf_v2d3.lib'             -----pad_rf
+'rnhr_rf_v2d3.lib'            -----rnhr_rf    
+'rnnpo_rf_v2d3.lib'           -----rnnpo_rf
+'rnppo_rf_v2d3.lib'           -----rnppo_rf
+'vardiop_rf_v2d3.lib'         -----vardiop_rf       
+'varmis_18_rf_v2d3.lib'       -----varmis_18_rf  
+'mm180_bjt_v121.lib'          -----pnp_v50x50_mm、pnp_v100x100_mm    
+'mm180_diode_v113.mdl'        -----dion_mm、diop_mm、dionw_mm           
+
+SPECTRE(MMSIM)
+"core_rf_v2d4.lib.scs"        -----p_l18w500_18_rf、p_po7w500_18_rf、n_l18w500_18_rf、n_po7w500_18_rf 
+"io_rf_v2d3.lib.scs"          -----p_l34w500_33_rf、p_po7w500_33_rf、n_l34w500_33_rf、n_po7w500_33_rf 
+"l_slcr20k_rf_v2d3.lib.scs"   -----l_slcr20k-rf                                                       
+"mimcapm_rf_v2d3.lib.scs"     -----mimcapm_rf                                                         
+"mm180_mimcap_v101.lib.scs"   -----mimcaps_mm                                                         
+"mm180_reg18bpw_v123.lib.scs" -----n_bpw_18_mm                                                        
+"mm180_reg18_v124.lib.scs"    -----p_18_mm、n_18_mm                                 
+"mm180_reg33bpw_v123.lib.scs" -----n_bpw_33_mm                                                        
+"mm180_reg33_v114.lib.scs"    -----p_33_mm、n_33_mm、                                                 
+"mm180_res_v141.lib.scs"      -----rnnpo_mm、rnppo_mm、rnhr1000_mm                                    
+"mm180_zvt18_v121.lib.scs"    -----n_zero_18_mm                                                       
+"mm180_zvt33_v113.lib.scs"    -----n_zero_33_mm                                                       
+"mm180_lvt33_v113.lib.scs"    -----p_lv_33_mm、n_lv_33_mm                                             
+"mm180_lvt18_v113.lib.scs"    -----p_lv_18_mm、n_lv_18_mm                                             
+"pad_rf_v2d3.lib.scs"         -----pad_rf                                                             
+"rnhr_rf_v2d4.lib.scs"        -----rnhr_rf                                                            
+"rnnpo_rf_v2d4.lib.scs"       -----rnnpo_rf                                                           
+"rnppo_rf_v2d4.lib.scs"       -----rnppo_rf                                                           
+"vardiop_rf_v2d3.lib.scs"     -----vardiop_rf                                                         
+"varmis_18_rf_v2d3.lib.scs"   -----varmis_18_rf                                                       
+"mm180_bjt_v121.lib.scs"      -----pnp_v50x50_mm、pnp_v100x100_mm                                     
+"mm180_diode_v113.mdl.scs"    -----dion_mm、diop_mm、dionw_mm            

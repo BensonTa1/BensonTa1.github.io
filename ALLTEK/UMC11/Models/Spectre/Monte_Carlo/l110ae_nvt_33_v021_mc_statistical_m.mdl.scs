@@ -1,0 +1,17 @@
+//.prot
+simulator lang=spectre insensitive=yes
+parameters b1_np_nvt_33_l110e_xx = 0
+parameters b2_np_nvt_33_l110e_xx = 0
+parameters b3_np_nvt_33_l110e_xx = 0
+parameters b4_np_nvt_33_l110e_xx = 0
+parameters b5_np_nvt_33_l110e_xx = 0
+statistics {
+mismatch {
+vary b1_np_nvt_33_l110e_xx dist=gauss std=1/1
+vary b2_np_nvt_33_l110e_xx dist=gauss std=1/1
+vary b3_np_nvt_33_l110e_xx dist=gauss std=1/1
+vary b4_np_nvt_33_l110e_xx dist=gauss std=1/1
+vary b5_np_nvt_33_l110e_xx dist=gauss std=1/1
+ }
+}
+//.unprot

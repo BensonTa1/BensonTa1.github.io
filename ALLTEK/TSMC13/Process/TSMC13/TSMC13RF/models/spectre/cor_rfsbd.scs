@@ -1,0 +1,16 @@
+library rfsbd_cor 
+
+section ff_rfsbd 
+include "cr013g_2d5_v1d4.scs" section = ff_rfsbd 
+endsection ff_rfsbd 
+
+section ss_rfsbd 
+include "cr013g_2d5_v1d4.scs" section = ss_rfsbd 
+endsection ss_rfsbd 
+
+section tt_rfsbd 
+include "cr013g_2d5_v1d4.scs" section = tt_rfsbd 
+endsection tt_rfsbd 
+
+
+endlibrary rfsbd_cor 

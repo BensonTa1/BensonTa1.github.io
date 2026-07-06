@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<setupdb version="6">expVPInfo
+	<active>Active Setup
+		<vars>
+			<var>VC
+				<value>0</value>
+				<dependentTests>
+					<dependentTest omitted="0">TEST:CTLE:1</dependentTest>
+				</dependentTests>
+			</var>
+			<var>VDIF
+				<value>200m</value>
+				<dependentTests>
+					<dependentTest omitted="0">TEST:CTLE:1</dependentTest>
+				</dependentTests>
+			</var>
+		</vars>
+	</active>
+	<history>History</history>
+</setupdb>

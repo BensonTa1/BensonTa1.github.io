@@ -1,0 +1,25 @@
+Starting Single Run, Sweeps and Corners...
+
+Current time: Wed Mar 25 21:40:43 2026 
+Best design point: 1
+Design specs: 
+	TEST_TSMC13_ALLTEK_PLL:DIVIDER_LOOP:1	corner	C0_0 - 
+	(cross(vtime('tran "/FOUT") 0.6 4 "rising" nil nil nil) - cross(vtime('tran "/FOUT") 0.6 3 "rising" nil nil nil))		23.5n
+	TEST_TSMC13_ALLTEK_PLL:DIVIDER_LOOP:1	corner	C0_1 - 
+	(cross(vtime('tran "/FOUT") 0.6 4 "rising" nil nil nil) - cross(vtime('tran "/FOUT") 0.6 3 "rising" nil nil nil))		23.5n
+	TEST_TSMC13_ALLTEK_PLL:DIVIDER_LOOP:1	corner	C0_2 - 
+	(cross(vtime('tran "/FOUT") 0.6 4 "rising" nil nil nil) - cross(vtime('tran "/FOUT") 0.6 3 "rising" nil nil nil))		23.5n
+	TEST_TSMC13_ALLTEK_PLL:DIVIDER_LOOP:1	corner	C0_3 - 
+	(cross(vtime('tran "/FOUT") 0.6 4 "rising" nil nil nil) - cross(vtime('tran "/FOUT") 0.6 3 "rising" nil nil nil))		23.5n
+	TEST_TSMC13_ALLTEK_PLL:DIVIDER_LOOP:1	corner	C0_4 - 
+	(cross(vtime('tran "/FOUT") 0.6 4 "rising" nil nil nil) - cross(vtime('tran "/FOUT") 0.6 3 "rising" nil nil nil))		23.5n
+Design parameters: 
+	P0		0
+	P1		0
+	FS		4G
+
+Interactive.14
+Number of points completed: 4
+Number of simulation errors: 2
+Interactive.14 completed. 
+Current time: Wed Mar 25 22:02:36 2026 

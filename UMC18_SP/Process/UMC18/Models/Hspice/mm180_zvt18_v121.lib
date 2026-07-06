@@ -1,0 +1,83 @@
+.lib tt
+.param
+
+*1.8v zero vt nmos 
++dtox_n_zero_18_mm  = 0              dlint_n_zero_18_mm  = 0           dwint_n_zero_18_mm = 0
++dvth0_n_zero_18_mm = 0              dcgdo_n_zero_18_mm  = 0           dcgso_n_zero_18_mm = 0
+
+.include 'mm180_zvt18_v121.mdl'
+ 
+.endl  tt
+
+
+
+.lib ss
+.param
+
+*1.8v zero vt nmos 
++dtox_n_zero_18_mm  = 2.5e-10        dlint_n_zero_18_mm  = -4.95e-8    dwint_n_zero_18_mm = 1e-8
++dvth0_n_zero_18_mm = 0.1            dcgdo_n_zero_18_mm  = -4.0e-11    dcgso_n_zero_18_mm = -4.0e-11
+
+.include 'mm180_zvt18_v121.mdl'
+ 
+.endl  ss
+
+
+
+
+.lib ff
+.param
+
+*1.8v zero vt nmos 
++dtox_n_zero_18_mm  = -2.5e-10       dlint_n_zero_18_mm  = 4.09e-8     dwint_n_zero_18_mm = -8.6e-9
++dvth0_n_zero_18_mm = -0.1           dcgdo_n_zero_18_mm  = 4.0e-11     dcgso_n_zero_18_mm = 4.0e-11
+
+.include 'mm180_zvt18_v121.mdl'
+ 
+.endl  ff
+
+
+
+
+.lib snfp
+.param
+
+*1.8v zero vt nmos 
++dtox_n_zero_18_mm  = 0              dlint_n_zero_18_mm  = -2.5e-8    dwint_n_zero_18_mm = 5e-9
++dvth0_n_zero_18_mm = 0.05           dcgdo_n_zero_18_mm  = 0          dcgso_n_zero_18_mm = 0
+
+
+.include 'mm180_zvt18_v121.mdl'
+ 
+.endl  snfp
+
+
+
+
+
+.lib fnsp
+.param
+
+*1.8v zero vt nmos 
++dtox_n_zero_18_mm  = 0              dlint_n_zero_18_mm  = 2.05e-8     dwint_n_zero_18_mm = -4.8e-9
++dvth0_n_zero_18_mm = -0.05          dcgdo_n_zero_18_mm  = 0           dcgso_n_zero_18_mm = 0
+
+
+
+
+.include 'mm180_zvt18_v121.mdl'
+ 
+.endl  fnsp
+
+
+
+
+
+
+
+
+
+
+
+
+

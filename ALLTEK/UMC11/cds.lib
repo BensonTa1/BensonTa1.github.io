@@ -1,0 +1,19 @@
+#===============================================================================================Artist
+DEFINE analogLib $CDS_INST_DIR/tools/dfII/etc/cdslib/artist/analogLib
+DEFINE basic $CDS_INST_DIR/tools/dfII/etc/cdslib/basic
+DEFINE ahdlLib /opt/eda/cadence/IC618/tools.lnx86/dfII/samples/artist/ahdlLib
+DEFINE pllLib /opt/eda/cadence/IC618/tools.lnx86/dfII/samples/artist/pllLib
+DEFINE bmslib /opt/eda/cadence/IC618/tools.lnx86/dfII/samples/artist/bmslib
+DEFINE pllMMLib /opt/eda/cadence/IC618/tools.lnx86/dfII/samples/artist/pllMMLib
+DEFINE rfLib /opt/eda/cadence/IC618/tools.lnx86/dfII/samples/artist/rfLib
+DEFINE rfTlineLib /opt/eda/cadence/IC618/tools.lnx86/dfII/samples/artist/rfTlineLib
+DEFINE passiveLib /opt/eda/cadence/IC618/tools.lnx86/dfII/samples/artist/passiveLib
+
+#===============================================================================================Process
+DEFINE umc110ae ./umc110ae
+
+#===============================================================================================
+DEFINE UMC11_STD_CELL /home/IC/Desktop/virtuoso/ALLTEK/UMC11/UMC11_STD_CELL
+DEFINE TEST_UMC11_STD_CELL /home/IC/Desktop/virtuoso/ALLTEK/UMC11/TEST_UMC11_STD_CELL
+DEFINE UMC11_ALLTEK_PLL /home/IC/Desktop/virtuoso/ALLTEK/UMC11/UMC11_ALLTEK_PLL
+DEFINE TEST_UMC11_ALLTEK_PLL /home/IC/Desktop/virtuoso/ALLTEK/UMC11/TEST_UMC11_ALLTEK_PLL

@@ -1,0 +1,212 @@
+********************************************************************************
+* TT:   Typical n-ch MOSFET and Typical p-ch MOSFET
+* FF:   Fast n-ch MOSFET and Fast p-ch MOSFET
+* SS:   Slow n-ch MOSFET and Slow p-ch MOSFET
+* FNSP: Fast n-ch MOSFET and Slow p-ch MOSFET
+* SNFP: Slow n-ch MOSFET and Fast p-ch MOSFET
+********************************************************************************
+
+.lib tt 
+.param
+*device 1
++  dtox_n_12_sprf           =   0.0000e+00        dvth0_n_12_sprf          =   0.0000e+00      
++  dk3_n_12_sprf            =   0.0000e+00        dnlx_n_12_sprf           =   0.0000e+00      
++  du0_n_12_sprf            =   0.0000e+00        dags_n_12_sprf           =   0.0000e+00      
++  db0_n_12_sprf            =   0.0000e+00        dvsat_n_12_sprf          =   0.0000e+00      
++  deta0_n_12_sprf          =   0.0000e+00        drdsw_n_12_sprf          =   0.0000e+00      
++  dcgso_n_12_sprf          =   0.0000e+00        dcgdo_n_12_sprf          =   0.0000e+00      
++  dxl_n_12_sprf            =   0.0000e+00        dxw_n_12_sprf            =   0.0000e+00      
++  dwwl_n_12_sprf           =   0.0000e+00        dpvth0_n_12_sprf         =   0.0000e+00      
++  dwk3_n_12_sprf           =   0.0000e+00        dcj_n_12_sprf            =   0
++  dcjsw_n_12_sprf          =   0                 dcjswg_n_12_sprf         =   0
++  dlvsat_n_12_sprf         =   0                 dwu0_n_12_sprf          =0
+*
++drgi_n_12_sprf     = 0              drch_n_12_sprf       = 0              drgc_n_12_sprf   = 0 
++dcgd_ext_n_12_sprf = 0              dcds_ext_n_12_sprf   = 0 
+*
++dcj_nwtw_n_12bpw_sprf   =  0.0000000e+000   dcjsw_nwtw_n_12bpw_sprf  =  0.0000000e+000   dcj_nw_n_12bpw_sprf      =  0.0000000e+000   
++dcjsw_nw_n_12bpw_sprf   =  0.0000000e+000   
+*
+*device 2
++  dtox_p_12_sprf           =   0.0000e+00        dvth0_p_12_sprf          =   0.0000e+00      
++  dk3_p_12_sprf            =   0.0000e+00        dnlx_p_12_sprf           =   0.0000e+00      
++  du0_p_12_sprf            =   0.0000e+00        dags_p_12_sprf           =   0.0000e+00      
++  db0_p_12_sprf            =   0.0000e+00        dvsat_p_12_sprf          =   0.0000e+00      
++  deta0_p_12_sprf          =   0.0000e+00        drdsw_p_12_sprf          =   0.0000e+00      
++  dcgso_p_12_sprf          =   0.0000e+00        dcgdo_p_12_sprf          =   0.0000e+00      
++  dxl_p_12_sprf            =   0.0000e+00        dxw_p_12_sprf            =   0.0000e+00      
++  dwwl_p_12_sprf           =   0.0000e+00        dpvth0_p_12_sprf         =   0.0000e+00      
++  dcj_p_12_sprf            =   0                 dcjswg_p_12_sprf         =   0
++  dcjsw_p_12_sprf          =   0                 dcj_nw_p_12_sprf         =   0
++  dcjsw_nw_p_12_sprf       =   0                 dlvsat_p_12_sprf         =   0
++  dlags_p_12_sprf           =   0                dcf_p_12_sprf           = 0
+*
++drgi_p_12_sprf     = 0              drch_p_12_sprf       = 0              drgc_p_12_sprf   = 0 
++dcgd_ext_p_12_sprf = 0              dcds_ext_p_12_sprf   = 0 
+*
+.include 'l110ae_sp12_v021_rf.mdl'
+.endl tt 
+
+.lib ss 
+.param
+*device 1
++  dtox_n_12_sprf           =  7.89000e-11        dvth0_n_12_sprf          =  2.02000e-002      
++  dk3_n_12_sprf            =   12.90000e+000        dnlx_n_12_sprf           =   1.55000e-008      
++  du0_n_12_sprf            =  -1.20000e-003        dags_n_12_sprf           =   0.0000e-001      
++  db0_n_12_sprf            =   0.0000e+00        dvsat_n_12_sprf          =  +0.00000e+003      
++  deta0_n_12_sprf          =   +1.30000e-02        drdsw_n_12_sprf          =  -3.00000e+000      
++  dcgso_n_12_sprf          =  -2.6460e-11        dcgdo_n_12_sprf          =  -2.6460e-11      
++  dxl_n_12_sprf            =   5.00000e-09        dxw_n_12_sprf            =   -2.0000000e-008      
++  dwwl_n_12_sprf           =   -8.00000e-022        dpvth0_n_12_sprf         =  0.420000e-015      
++  dwk3_n_12_sprf           =   0.0000e+00        dcj_n_12_sprf            =   0.1
++  dcjsw_n_12_sprf          =   0.1               dcjswg_n_12_sprf         =   0.1
++  dlvsat_n_12_sprf         =   0                 dwu0_n_12_sprf          = 2.000000e-009
+*
++drgi_n_12_sprf     = 0.2              drch_n_12_sprf       = 0.2              drgc_n_12_sprf   = 0.2 
++dcgd_ext_n_12_sprf = 0.83              dcds_ext_n_12_sprf   = 0.3 
+*
++dcj_nwtw_n_12bpw_sprf   =  1.0000000e-001   dcjsw_nwtw_n_12bpw_sprf  =  1.0000000e-001   dcj_nw_n_12bpw_sprf      =  1.0000000e-001   
++dcjsw_nw_n_12bpw_sprf   =  1.0000000e-001   
+*
+*device 2
++  dtox_p_12_sprf           =  8.49000e-11        dvth0_p_12_sprf          =  -02.8300e-002     
++  dk3_p_12_sprf            =   13.50000e+000        dnlx_p_12_sprf           =   +1.60000e-009      
++  du0_p_12_sprf            =   5.600e-004        dags_p_12_sprf           =   +0.00000e-001      
++  db0_p_12_sprf            =   0.0000e+00        dvsat_p_12_sprf          =  -0.0000000e+004       
++  deta0_p_12_sprf          =   +0.000e-03        drdsw_p_12_sprf          =  0.00000e+000      
++  dcgso_p_12_sprf          =  -1.7500e-11        dcgdo_p_12_sprf          =  -1.7500e-11      
++  dxl_p_12_sprf            =   5.00000e-09        dxw_p_12_sprf            =   -2.50000e-008      
++  dwwl_p_12_sprf           =   +9.00000e-022        dpvth0_p_12_sprf         =  0.18000e-015      
++  dcj_p_12_sprf            =   0.1               dcjswg_p_12_sprf         =   0.1
++  dcjsw_p_12_sprf          =   0.1               dcj_nw_p_12_sprf         =   0.1
++  dcjsw_nw_p_12_sprf       =   0.1               dlvsat_p_12_sprf         =   -0.00000e-3
++  dlags_p_12_sprf           =  -0.000e-007       dcf_p_12_sprf           =0.75
+*
++drgi_p_12_sprf     = 0.2              drch_p_12_sprf       = 0.2              drgc_p_12_sprf   = 0.2 
++dcgd_ext_p_12_sprf = 0.2              dcds_ext_p_12_sprf   = 2.0 
+*
+.include 'l110ae_sp12_v021_rf.mdl'
+.endl ss 
+
+.lib ff 
+.param
+*device 1
++  dtox_n_12_sprf           =  -7.89000e-11        dvth0_n_12_sprf          =  -2.2500e-002      
++  dk3_n_12_sprf            =   -13.000e+000        dnlx_n_12_sprf           =   -1.2500e-008      
++  du0_n_12_sprf            =  1.7000e-03        dags_n_12_sprf           =   -00.0000e-001      
++  db0_n_12_sprf            =   0.0000e+00        dvsat_n_12_sprf          =  0.0000000e+003      
++  deta0_n_12_sprf          =   -17.0000e-03        drdsw_n_12_sprf          =  +5.5000000e+000      
++  dcgso_n_12_sprf          =   2.6460e-11        dcgdo_n_12_sprf          =   2.6460e-11      
++  dxl_n_12_sprf            =   -5.00000e-09        dxw_n_12_sprf            =   2.000000e-008      
++  dwwl_n_12_sprf           =   -00.0000e-022        dpvth0_n_12_sprf         =  -0.2600e-015      
++  dwk3_n_12_sprf           =   0.0000e+00        dcj_n_12_sprf            =   -0.1
++  dcjsw_n_12_sprf          =   -0.1                 dcjswg_n_12_sprf         =   -0.1
++  dlvsat_n_12_sprf         =   -0.00000e-002        dwu0_n_12_sprf          =  -3.40000e-09
+*
++drgi_n_12_sprf     = -0.2             drch_n_12_sprf       = -0.2             drgc_n_12_sprf   = -0.2 
++dcgd_ext_n_12_sprf = -0.8             dcds_ext_n_12_sprf   = -0.2                                 
+*
++dcj_nwtw_n_12bpw_sprf   = -1.0000000e-001   dcjsw_nwtw_n_12bpw_sprf  = -1.0000000e-001   dcj_nw_n_12bpw_sprf      = -1.0000000e-001   
++dcjsw_nw_n_12bpw_sprf   = -1.0000000e-001   
+*
+*device 2
++  dtox_p_12_sprf           = -8.49000e-11        dvth0_p_12_sprf          =  +3.5200e-002      
++  dk3_p_12_sprf            =   -15.00000e+000        dnlx_p_12_sprf           =   +4.60000e-009     
++  du0_p_12_sprf            =  -5.5000e-004        dags_p_12_sprf           =   0.00000e-001      
++  db0_p_12_sprf            =   0.0000e+00        dvsat_p_12_sprf          =  +0.0000000e+004      
++  deta0_p_12_sprf          =   -18.000e-03        drdsw_p_12_sprf          =  -0.00000e+000      
++  dcgso_p_12_sprf          =   1.7500e-11        dcgdo_p_12_sprf          =   1.7500e-11      
++  dxl_p_12_sprf            =   -5.00000e-09        dxw_p_12_sprf            =   2.50000e-008      
++  dwwl_p_12_sprf           =  32.00000e-022        dpvth0_p_12_sprf         =  -0.10000e-015       
++  dcj_p_12_sprf            =   -0.1                 dcjswg_p_12_sprf         =   -0.1
++  dcjsw_p_12_sprf          =   -0.1                 dcj_nw_p_12_sprf         =   -0.1
++  dcjsw_nw_p_12_sprf       =   -0.1               dlvsat_p_12_sprf         =   +0.0000e-3
++  dlags_p_12_sprf           =   0       dcf_p_12_sprf           =-0.57
+*
++drgi_p_12_sprf     = -0.2             drch_p_12_sprf       = -0.2             drgc_p_12_sprf   = -0.2 
++dcgd_ext_p_12_sprf = -0.20             dcds_ext_p_12_sprf   = -0.2  
+*
+.include 'l110ae_sp12_v021_rf.mdl'
+.endl ff 
+
+.lib snfp 
+.param
+*device 1
++  dtox_n_12_sprf           =  0                     dvth0_n_12_sprf          =  2.14000000e-002      
++  dk3_n_12_sprf            =   -0.5400000e+000        dnlx_n_12_sprf           =   0.2080000e-008      
++  du0_n_12_sprf            =  -1.9300000e-003        dags_n_12_sprf           =   1.1030000e-001      
++  db0_n_12_sprf            =   0.0000e+00        dvsat_n_12_sprf          =  +1.8100000e+003      
++  deta0_n_12_sprf          =   +1.780e-02        drdsw_n_12_sprf          =  -5.5600000e+000      
++  dcgso_n_12_sprf          =  0                   dcgdo_n_12_sprf          = 0      
++  dxl_n_12_sprf            =   5.00000e-09        dxw_n_12_sprf            =   +6.0000000e-008      
++  dwwl_n_12_sprf           =   +2.0730000e-022        dpvth0_n_12_sprf         =  2.000000e-015      
++  dwk3_n_12_sprf           =   0.0000e+00        dcj_n_12_sprf            =   0.1
++  dcjsw_n_12_sprf          =   0.1                 dcjswg_n_12_sprf         =   0.1
++  dlvsat_n_12_sprf         =   0                dwu0_n_12_sprf          =0
+*
++drgi_n_12_sprf     = 0.1              drch_n_12_sprf       = 0.1              drgc_n_12_sprf   = 0.1  
++dcgd_ext_n_12_sprf = 0.2              dcds_ext_n_12_sprf   = 0.1  
+*
++dcj_nwtw_n_12bpw_sprf   =  5.0000000e-002   dcjsw_nwtw_n_12bpw_sprf  =  5.0000000e-002   dcj_nw_n_12bpw_sprf      =  5.0000000e-002   
++dcjsw_nw_n_12bpw_sprf   =  5.0000000e-002   
+*
+*device 2
++  dtox_p_12_sprf           = 0                    dvth0_p_12_sprf          =  3.82e-02      
++  dk3_p_12_sprf            =   -7.50e+00        dnlx_p_12_sprf           =   14.25e-09     
++  du0_p_12_sprf            =  -2.45e-04        dags_p_12_sprf           =   +4.0000e-001      
++  db0_p_12_sprf            =   0.0000e+00        dvsat_p_12_sprf          =  -0.0000000e+004      
++  deta0_p_12_sprf          =   -28.00e-03        drdsw_p_12_sprf          =  0.00000e+000      
++  dcgso_p_12_sprf          = 0                     dcgdo_p_12_sprf          =   0      
++  dxl_p_12_sprf            =   -5.00000e-09        dxw_p_12_sprf            =   -2.50000e-008      
++  dwwl_p_12_sprf           =  2.0000e-022        dpvth0_p_12_sprf         =  +11.00e-17       
++  dcj_p_12_sprf            =   -0.1                 dcjswg_p_12_sprf         =   -0.1
++  dcjsw_p_12_sprf          =   -0.1                 dcj_nw_p_12_sprf         =   -0.05
++  dcjsw_nw_p_12_sprf       =   -0.05               dlvsat_p_12_sprf         =   0.00e-04
++  dlags_p_12_sprf           =   -1.23e-7       dcf_p_12_sprf           =0
+*
++drgi_p_12_sprf     = -0.1             drch_p_12_sprf       = -0.1             drgc_p_12_sprf   = -0.1  
++dcgd_ext_p_12_sprf = -0.2             dcds_ext_p_12_sprf   = -0.1  
+*
+.include 'l110ae_sp12_v021_rf.mdl'
+.endl snfp 
+
+.lib fnsp 
+.param
+*device 1
++  dtox_n_12_sprf           =  0                    dvth0_n_12_sprf          =  -1.740e-002      
++  dk3_n_12_sprf            =   -6.900e+000        dnlx_n_12_sprf           =   -0.440000e-008      
++  du0_n_12_sprf            =  1.4000e-03        dags_n_12_sprf           =   -0.0000e-001      
++  db0_n_12_sprf            =   0.0000e+00        dvsat_n_12_sprf          =  0.0000000e+003      
++  deta0_n_12_sprf          =   -18.7000e-03        drdsw_n_12_sprf          =  +4.50000e+000      
++  dcgso_n_12_sprf          =    0                  dcgdo_n_12_sprf          =   0     
++  dxl_n_12_sprf            =   -5.00000e-09        dxw_n_12_sprf            =   2.0000000e-008      
++  dwwl_n_12_sprf           =   -0.0000e-022        dpvth0_n_12_sprf         =  -0.20000e-015      
++  dwk3_n_12_sprf           =   0.0000e+00        dcj_n_12_sprf            =   -0.1
++  dcjsw_n_12_sprf          =   -0.1                 dcjswg_n_12_sprf         =   -0.1
++  dlvsat_n_12_sprf         =   0                dwu0_n_12_sprf          =   -2.50000e-09
+*
++drgi_n_12_sprf     = -0.1             drch_n_12_sprf       = -0.1             drgc_n_12_sprf   = -0.1  
++dcgd_ext_n_12_sprf = -0.3             dcds_ext_n_12_sprf   = -0.1  
+*
++dcj_nwtw_n_12bpw_sprf   = -5.0000000e-002   dcjsw_nwtw_n_12bpw_sprf  = -5.0000000e-002   dcj_nw_n_12bpw_sprf      = -5.0000000e-002   
++dcjsw_nw_n_12bpw_sprf   = -5.0000000e-002   
+*
+*device 2
++  dtox_p_12_sprf           =  0                      dvth0_p_12_sprf          =  -3.041e-02     
++  dk3_p_12_sprf            =   7.00e+00        dnlx_p_12_sprf           =  -70.50e-10      
++  du0_p_12_sprf            =  2.55e-04        dags_p_12_sprf           =   3.50e-01      
++  db0_p_12_sprf            =   0.0000e+00        dvsat_p_12_sprf          =  0.0000000e+004      
++  deta0_p_12_sprf          =   215.00e-04        drdsw_p_12_sprf          =  0.000000e+001      
++  dcgso_p_12_sprf          =  0                    dcgdo_p_12_sprf          =  0      
++  dxl_p_12_sprf            =   5.00000e-09        dxw_p_12_sprf            =   +2.5000e-008      
++  dwwl_p_12_sprf           =   -5.00e-22        dpvth0_p_12_sprf         =  -23.00e-17      
++  dcj_p_12_sprf            =   0.1                 dcjswg_p_12_sprf         =   0.1
++  dcjsw_p_12_sprf          =   0.1                 dcj_nw_p_12_sprf         =   0.05
++  dcjsw_nw_p_12_sprf       =   0.05               dlvsat_p_12_sprf         =   -1.00e-04
++  dlags_p_12_sprf           =   -0.65e-07       dcf_p_12_sprf           =0
+*
++drgi_p_12_sprf     = 0.1              drch_p_12_sprf       = 0.1              drgc_p_12_sprf   = 0.1  
++dcgd_ext_p_12_sprf = 0.01              dcds_ext_p_12_sprf   = 0.1  
+*
+.include 'l110ae_sp12_v021_rf.mdl'
+.endl fnsp 

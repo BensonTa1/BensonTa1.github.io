@@ -1,0 +1,30 @@
+// VerilogA for ADC, Ideal_Comparator, veriloga
+
+`include "constants.vams"
+`include "disciplines.vams"
+
+module Ideal_Comparator(VINP,VINN,CLK,VOUTP,VOUTN);
+	electrical VINP,VINN,CLK,VOUTP,VOUTN;
+	input VINP,VINN,CLK;
+	output VOUTP,VOUTN;
+	
+	parameter real VOH=1;
+
+	real state=0;
+
+	analog begin
+		@(cross(V(CLK)-0.1,-1))begin
+			if(V(VINP)>V(VINN))begin
+				state=VOH;
+			end
+
+			if(V(VINP)<=V(VINN))begin
+				state=0;
+			end
+		end
+
+	V(VOUTP)<+state;
+	V(VOUTN)<+(VOH-state);
+	end
+
+endmodule

@@ -1,0 +1,22 @@
+Starting Single Run, Sweeps and Corners...
+
+Current time: Tue Mar 24 00:10:14 2026 
+Best design point: 1
+Design specs: 
+	TEST_TSMC13_ALLTEK_PLL:PFD:1	corner	C0_0 - 
+	TEST_TSMC13_ALLTEK_PLL:PFD:1	corner	C0_1 - 
+	TEST_TSMC13_ALLTEK_PLL:PFD:1	corner	C0_2 - 
+	TEST_TSMC13_ALLTEK_PLL:PFD:1	corner	C0_3 - 
+	TEST_TSMC13_ALLTEK_PLL:PFD:1	corner	C0_4 - 
+	TEST_TSMC13_ALLTEK_PLL:PFD:1	corner	Nominal - 
+Design parameters: 
+	TS		1/(19.2E6)
+	TS1		1/(18E6)
+	VS		1.08
+	temperature		-25
+
+Interactive.1
+Number of points completed: 15
+Number of simulation errors: 0
+Interactive.1 completed. 
+Current time: Tue Mar 24 00:22:37 2026 

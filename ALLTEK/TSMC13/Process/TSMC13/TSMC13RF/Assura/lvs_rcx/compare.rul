@@ -1,0 +1,1830 @@
+; read in schematic
+
+avCompareRules(
+   paramsNotPassToQRC( BJT "area" )
+   verifyTopSchPins( all ) ;; reports errors for all unbound top-level schematic pins
+;  groupModels(RES)
+  filterReduceStatistics((preExpand t))
+	sectionLineLimit( 10000 )
+; abortOnUnboundDevices( nil )
+; ignoreParameterNormalization ( t )
+
+  if( avSwitch( "FILTER_DGS_TIED_MOS" ) then
+    filter( "X" )	;filter MOS with D, G and S tied together
+  else
+    filter( "XW" )	;filter MOS with all pins tied (default)
+  )
+
+  schematic( 
+    deleteCellPin(BJT "SUBSTRATE")  
+;    netlist( cdl "ts_allcelllvs.cdl" )
+      
+    if( avSwitch( "CDL_input" ) then  
+	netlist( cdl "./Assura/lvs_rcx/source.added" )
+    ) ; end if
+	
+;   netlist( dfII "./myRun.vlr" )
+
+; Define the genericDevice region
+    genericDevice( emptySubckt )
+  )
+  layout(
+    deleteCellPin(BJT "SUBSTRATE")
+;   setPower( all "VDDPST" "TAVDD" "AVDDG" "VD33" "TAVD33" "DVDD" "HVDDWELL" "AVDDBG" "AHVDDB" "TAVDDPST" "DHVDD" "AHVDDG" "AVDDR" "AHVDDWELL" "VDD" "VDWELL" "VDD5V" "TAVD33PST" "AHVDDR" "AVDD" "VDDG" "VDDSA" "AVDWELL" "AHVDD" "AVDDB" "VDDESD" "TVDD")
+;   setGround( all "AGND" "VSS" "AHVSSR" "AHVSSUB" "AVSS" "VSSPST" "VSSG" "AVSSB" "VSSUB" "AHVSS" "AVSSG" "TAVSS" "VS33" "AVSSBG" "AVSSUB" "TAVSSPST" "DVSS" "AHVSSB" "AVSSR" "AHVSSG" "DHVSS" "GND" "HVSSUB" "VSSESD" "TACVSS" "TVSS")
+    swapPins("rpodrpo_m(Generic)"     "(p  PLUS MINUS )")
+    swapPins("rnodrpo_m(Generic)"     "(p  PLUS MINUS )")
+    swapPins("rpodl_m(Generic)"       "(p  PLUS MINUS )")
+    swapPins("rpods_m(Generic)"       "(p  PLUS MINUS )")
+    swapPins("rnodl_m(Generic)"       "(p  PLUS MINUS )")
+    swapPins("rnods_m(Generic)"       "(p  PLUS MINUS )")
+    swapPins("rnwod_m(Generic)"       "(p  PLUS MINUS )")
+    swapPins("rnodwo_m(Generic)"      "(p  PLUS MINUS )")
+    swapPins("rpodwo_m(Generic)"      "(p  PLUS MINUS )")
+    swapPins("rpplus(Generic)"        "(p  PLUS MINUS )")
+    swapPins("rnwsti_m(Generic)"      "(p  PLUS MINUS )")
+    swapPins("rppolyhri(Generic)"     "(p  PLUS MINUS )")
+    swapPins("rppolyhri_2k(Generic)"  "(p  PLUS MINUS )")
+    swapPins("rppolyl_rf(Generic)"    "(p  PLUS MINUS )")
+    swapPins("rplpoly_rf(Generic)"    "(p  PLUS MINUS )")
+    swapPins("rppolys_rf(Generic)"    "(p  PLUS MINUS )")
+    swapPins("rppolywo_rf(Generic)"   "(p  PLUS MINUS )")
+    swapPins("rppolyhri_rf(Generic)"  "(p  PLUS MINUS )")
+    swapPins("rppolyhri_dis(Generic)" "(p  PLUS MINUS )")
+    swapPins("rppoly_dis(Generic)"    "(p  PLUS MINUS )")
+    swapPins("rppolyl_dis(Generic)"   "(p  PLUS MINUS )")
+    swapPins("rppolys_dis(Generic)"   "(p  PLUS MINUS )")
+    swapPins("rppolywo_dis(Generic)"  "(p  PLUS MINUS )")
+    swapPins("rppolywo_m(Generic)"    "(p  PLUS MINUS )")
+    swapPins("rnpolyl_dis(Generic)"   "(p  PLUS MINUS )")
+    swapPins("rnpolys_dis(Generic)"   "(p  PLUS MINUS )")
+    swapPins("rnpolywo_dis(Generic)"  "(p  PLUS MINUS )")
+    swapPins("rnpolywo_m(Generic)"    "(p  PLUS MINUS )")
+    swapPins("rnplus(Generic)"        "(p  PLUS MINUS )")
+    swapPins("rnpoly_dis(Generic)"    "(p  PLUS MINUS )")
+    swapPins("rphpoly_rf(Generic)"    "(p  PLUS MINUS )")
+    swapPins("rphripoly(Generic)"     "(p  PLUS MINUS )")
+    swapPins("rphripoly_2k(Generic)"  "(p  PLUS MINUS )")
+    swapPins("rphripoly_rf(Generic)"  "(p  PLUS MINUS )")
+    
+    swapPins("crtmom(Generic)"        "(p  PLUS MINUS )")   ;cmyang 
+    swapPins("crtmom_rf(Generic)"        "(p  PLUS MINUS )")
+    filterDevice("pnwdio" lay)     
+  )
+  
+; *****************************************************************
+
+procedure( parallelRFCAP( dev1 dev2 )
+ prog( ( parRC)
+   parRC = ncons(nil)
+   L1 = L2 = W1 = W2 = G1 = G2 = B1 = B2 = float(0)
+   M1 = M2 = float(1)
+   if( dev1->m then M1 = float(dev1->m) )
+   if( dev2->m then M2 = float(dev2->m) )
+   if( dev1->LR then L1 = float(dev1->LR) )
+   if( dev2->LR then L2 = float(dev2->LR) )
+   if( dev1->lr then L1 = float(dev1->lr) )
+   if( dev2->lr then L2 = float(dev2->lr) )
+   if( dev1->WR then W1 = float(dev1->WR) )
+   if( dev2->WR then W2 = float(dev2->WR) )
+   if( dev1->wr then W1 = float(dev1->wr) )
+   if( dev2->wr then W2 = float(dev2->wr) )
+   if( dev1->GR then G1 = float(dev1->GR) )
+   if( dev2->GR then G2 = float(dev2->GR) )
+   if( dev1->gr then G1 = float(dev1->gr) )
+   if( dev2->gr then G2 = float(dev2->gr) )
+   if( dev1->BR then B1 = float(dev1->BR) )
+   if( dev2->BR then B2 = float(dev2->BR) )
+   if( dev1->br then B1 = float(dev1->br) )
+   if( dev2->br then B2 = float(dev2->br) )
+
+   unless( ((L1 == L2) && (W1 == W2) && (G1 == G2) && (B1 == B2))
+    printf( "\n** Unequal Parallel MOSCAP_RF NOT combined: \n" )
+    printf( "   1st device: lr=%g wr=%g gr=%g br=%g m=%g \n" L1 W1 G1 B1 M1 )
+    printf( "   2nd device: lr=%g wr=%g gr=%g br=%g m=%g \n" L2 W2 G2 B2 M2 )
+    return("doNotCombine")
+   )
+   newM = float( M1 + M2 )
+   parRC->m = newM
+   parRC->lr = float(L1)
+   parRC->wr = float(W1)
+   parRC->gr = float(G1)
+   parRC->br = float(B1)
+   printf( "\n** Parallel MOSCAP_RF combined: \n" )
+   printf( "   1st device: lr=%g wr=%g Gr=%g Br=%g m=%g \n" L1 W1 G1 B1 M1 )
+   printf( "   2nd device: lr=%g wr=%g Gr=%g Br=%g m=%g \n" L2 W2 G2 B2 M2 )
+   printf( "result device: lr=%g wr=%g Gr=%g Br=%g m=%g \n" L1 W1 G1 B1 newM )
+   return(parRC)
+ ) ; end prog
+) ; end parallelRFCAP
+; *****************************************************************
+procedure( compareRFCAP( dev1 dev2 )
+ prog( ( )
+   L1 = L2 = W1 = W2 = G1 = G2 = B1 = B2 = BT1 = B2T = float(0)
+   M1 = M2 = float(1)
+   if( dev1->m then M1 = float(dev1->m) )
+   if( dev2->m then M2 = float(dev2->m) )
+   if( dev1->LR then L1 = float(dev1->LR) )
+   if( dev2->LR then L2 = float(dev2->LR) )
+   if( dev1->lr then L1 = float(dev1->lr) )
+   if( dev2->lr then L2 = float(dev2->lr) )
+   if( dev1->WR then W1 = float(dev1->WR) )
+   if( dev2->WR then W2 = float(dev2->WR) )
+   if( dev1->wr then W1 = float(dev1->wr) )
+   if( dev2->wr then W2 = float(dev2->wr) )
+   if( dev1->GR then G1 = float(dev1->GR) )
+   if( dev2->GR then G2 = float(dev2->GR) )
+   if( dev1->gr then G1 = float(dev1->gr) )
+   if( dev2->gr then G2 = float(dev2->gr) )
+   if( dev1->BR then B1 = float(dev1->BR) )
+   if( dev2->BR then B2 = float(dev2->BR) )
+   if( dev1->br then B1 = float(dev1->br) )
+   if( dev2->br then B2 = float(dev2->br) )
+   B1T = float( B1 * M1 )
+   B2T = float( B2 * M2 )
+   Lerr = Werr = Gerr = Berr = t
+   diffL = diffW = diffG = diffB = float(0)
+   if( ( L2 > 0 && L1 > 0 ) then 
+     diffL = 100 * (abs( L2 - L1 ) / L2 )
+     when( diffL <= rfcapL_lvsTol Lerr = nil )
+     )
+   if( ( W2 > 0 && W1 > 0 ) then 
+     diffW = 100 * (abs( W2 - W1 ) / W2 )
+     when( diffW <= rfcapW_lvsTol Werr = nil )
+     )
+   if( ( G2 > 0 && G1 > 0 ) then 
+     diffG = 100 * (abs( G2 - G1 ) / G2 )
+     when( diffG <= rfcapG_lvsTol Gerr = nil )
+     )
+   if( ( B2T > 0 && B1T > 0 ) then 
+     diffB = 100 * (abs( B2T - B1T ) / B2T )
+     when( diffB <= rfcapB_lvsTol Berr = nil )
+     )
+    
+   if( Lerr || Werr || Gerr || Berr then
+   sprintf( msg1 "Err: MOSCAP_RF Sch m=%g wr=%g lr=%g gr=%g br=%g\n" M2 W2 L2 G2 B2 )
+   sprintf( msg2 "Err: MOSCAP_RF Lay m=%g wr=%g lr=%g gr=%g br=%g\n" M1 W1 L1 G1 B1 )
+   sprintf( msg "%s%s" msg1 msg2 )
+   return( msg )
+   )
+ ) ; end prog
+) ; end compareRFCAP
+; *****************************************************************
+procedure( parallelRFMOS( dev1 dev2 )
+ prog( ( parRF)
+   parRF = ncons(nil)
+   L1 = L2 = W1 = W2 = N1 = N2 = float(0)
+   M1 = M2 = float(1)
+   if( dev1->m then M1 = float(dev1->m) )
+   if( dev2->m then M2 = float(dev2->m) )
+   if( dev1->LR then L1 = float(dev1->LR) )
+   if( dev2->LR then L2 = float(dev2->LR) )
+   if( dev1->lr then L1 = float(dev1->lr) )
+   if( dev2->lr then L2 = float(dev2->lr) )
+   if( dev1->WR then W1 = float(dev1->WR) )
+   if( dev2->WR then W2 = float(dev2->WR) )
+   if( dev1->wr then W1 = float(dev1->wr) )
+   if( dev2->wr then W2 = float(dev2->wr) )
+   if( dev1->NR then N1 = float(dev1->NR) )
+   if( dev2->NR then N2 = float(dev2->NR) )
+   if( dev1->nr then N1 = float(dev1->nr) )
+   if( dev2->nr then N2 = float(dev2->nr) )
+
+   unless( ((L1 == L2) && (W1 == W2) && (N1 == N2))
+    printf( "\n** Unequal Parallel RFMOS NOT combined: \n" )
+    printf( "   1st device: lr=%g wr=%g nr=%g m=%g \n" L1 W1 N1 M1 )
+    printf( "   2nd device: lr=%g wr=%g nr=%g m=%g \n" L2 W2 N2 M2 )
+    return("doNotCombine")
+   )
+   newM = float( M1 + M2 )
+   parRF->m = newM
+   parRF->lr = float(L1)
+   parRF->wr = float(W1)
+   parRF->nr = float(N1)
+   printf( "\n** Parallel RFMOS combined: \n" )
+   printf( "   1st device: lr=%g wr=%g nr=%g m=%g \n" L1 W1 N1 M1 )
+   printf( "   2nd device: lr=%g wr=%g nr=%g m=%g \n" L2 W2 N2 M2 )
+   printf( "result device: lr=%g wr=%g nr=%g m=%g \n" L1 W1 N1 newM )
+   return(parRF)
+ ) ; end prog
+) ; end parallelRFMOS
+; *****************************************************************
+procedure( compareRFMOS( dev1 dev2 )
+ prog( ( )
+   L1 = L2 = W1 = W2 = N1 = N2 = float(0)
+   M1 = M2 = float(1)
+   if( dev1->m then M1 = float(dev1->m) )
+   if( dev2->m then M2 = float(dev2->m) )
+   if( dev1->LR then L1 = float(dev1->LR) )
+   if( dev2->LR then L2 = float(dev2->LR) )
+   if( dev1->lr then L1 = float(dev1->lr) )
+   if( dev2->lr then L2 = float(dev2->lr) )
+   if( dev1->WR then W1 = float(dev1->WR) )
+   if( dev2->WR then W2 = float(dev2->WR) )
+   if( dev1->wr then W1 = float(dev1->wr) )
+   if( dev2->wr then W2 = float(dev2->wr) )
+   if( dev1->NR then N1 = float(dev1->NR) )
+   if( dev2->NR then N2 = float(dev2->NR) )
+   if( dev1->nr then N1 = float(dev1->nr) )
+   if( dev2->nr then N2 = float(dev2->nr) )
+
+   Werr = Lerr = Nerr = Merr = t
+   diffM = abs( M1 - M2 )
+   diffW = diffL = diffN = float(1)
+   N1T = float( N1 * M1 )
+   N2T = float( N2 * M2 )
+
+   when( diffM <= RFMOS_lvsTol Merr = nil )
+   if( ( W1 > 0 && W2 > 0 ) then
+           diffW = 100 * (abs( W2 - W1 ) / W2 )
+           when( diffW <= RFMOS_lvsTol Werr = nil )
+   )
+   if( ( L1 > 0 && L2 > 0 ) then
+           diffL = 100 * (abs( L2 - L1 ) / L2 )
+           when( diffL <= RFMOS_lvsTol Lerr = nil )
+   )
+   if( ( N1 > 0 && N2 > 0 ) then
+           diffN = 100 * (abs( N2T - N1T ) / N2T )
+           when( diffN <= RFMOS_lvsTol Nerr = nil )
+   )
+   if( Merr || Werr || Lerr || Nerr then
+   sprintf( msg1 "Err: RFMOS Sch m=%g wr=%g lr=%g nr=%g\n" M2 W2 L2 N2 )
+   sprintf( msg2 "Err: RFMOS Lay m=%g wr=%g lr=%g nr=%g\n" M1 W1 L1 N1 )
+   sprintf( msg "%s%s" msg1 msg2 )
+   return( msg )
+  )
+ ); end prog
+) ; end compareRFMOS
+; *****************************************************************
+procedure( parallelMOSCAP( dev1 dev2 )
+ prog( ( parMC)
+   parMC = ncons(nil)
+   L1 = L2 = W1 = W2 = B1 = B2 = float(0)
+   M1 = M2 = float(1)
+   if( dev1->m then M1 = float(dev1->m) )
+   if( dev2->m then M2 = float(dev2->m) )
+   if( dev1->mr then B1 = float(dev1->mr) )
+   if( dev2->mr then B2 = float(dev2->mr) )
+   if( dev1->branch then B1 = float(dev1->branch) )
+   if( dev2->branch then B2 = float(dev2->branch) )
+   if( dev1->LR then L1 = float(dev1->LR) )
+   if( dev2->LR then L2 = float(dev2->LR) )
+   if( dev1->lr then L1 = float(dev1->lr) )
+   if( dev2->lr then L2 = float(dev2->lr) )
+   if( dev1->WR then W1 = float(dev1->WR) )
+   if( dev2->WR then W2 = float(dev2->WR) )
+   if( dev1->wr then W1 = float(dev1->wr) )
+   if( dev2->wr then W2 = float(dev2->wr) )
+
+   unless( ((L1 == L2) && (W1 == W2) && (B1 == B2))
+    printf( "\n** Unequal Parallel MOSCAP NOT combined: \n" )
+    printf( "   1st device: lr=%g wr=%g mr=%g m=%g \n" L1 W1 B1 M1 )
+    printf( "   2nd device: lr=%g wr=%g mr=%g m=%g \n" L2 W2 B2 M2 )
+    return("doNotCombine")
+   )
+   newM = float( M1 + M2 )
+   parMC->m = newM
+   parMC->lr = float(L1)
+   parMC->wr = float(W1)
+   parMC->mr = float(B1)
+   printf( "\n** Parallel MOSCAP combined: \n" )
+   printf( "   1st device: lr=%g wr=%g mr=%g m=%g \n" L1 W1 B1 M1 )
+   printf( "   2nd device: lr=%g wr=%g mr=%g m=%g \n" L2 W2 B2 M2 )
+   printf( "result device: lr=%g wr=%g mr=%g m=%g \n" L1 W1 B1 newM )
+   return(parMC)
+ ) ; end prog
+) ; end parallelMOSCAP
+; *****************************************************************
+procedure( compareMOSCAP( dev1 dev2 )
+ prog( ( )
+   L1 = L2 = W1 = W2 = float(0)
+   M1 = M2 = float(1)
+   if( dev1->m then M1 = float(dev1->m) )
+   if( dev2->m then M2 = float(dev2->m) )
+   if( dev1->wr then W1 = float(dev1->wr) )
+   if( dev2->wr then W2 = float(dev2->wr) )
+   if( dev1->lr then L1 = float(dev1->lr) )
+   if( dev2->lr then L2 = float(dev2->lr) )
+
+   Werr = Lerr = Merr = t
+   diffM = abs( M1 - M2 )
+   diffW = diffL = float(1)
+   when( diffM <= MOSCAP_lvsTol Merr = nil )
+   if( ( W1 > 0 && W2 > 0 ) then
+           diffW = 100 * (abs( W2 - W1 ) / W2 )
+           when( diffW <= MOSCAP_lvsTol Werr = nil )
+   )
+   if( ( L1 > 0 && L2 > 0 ) then
+           diffL = 100 * (abs( L2 - L1 ) / L2 )
+           when( diffL <= MOSCAP_lvsTol Lerr = nil )
+   )
+   if( Merr || Werr || Lerr then
+   sprintf( msg1 "Err: MOSCAP Sch m=%g wr=%g lr=%g\n" M2 W2 L2 )
+   sprintf( msg2 "Err: MOSCAP Lay m=%g wr=%g lr=%g\n" M1 W1 L1 )
+   sprintf( msg "%s%s" msg1 msg2 )
+   return( msg )
+   )
+ ) ; end prog
+) ; end compareMOSCAP
+; *****************************************************************
+procedure( parallelVAR( dev1 dev2 )
+ prog( ( parVar)
+   parVar = ncons(nil)
+   N1 = N2 = W1 = W2 = float(0)
+   M1 = M2 = float(1)
+   if( dev1->m then M1 = float(dev1->m) )
+   if( dev2->m then M2 = float(dev2->m) )
+   if( dev1->NR then N1 = float(dev1->NR) )
+   if( dev2->NR then N2 = float(dev2->NR) )
+   if( dev1->nr then N1 = float(dev1->nr) )
+   if( dev2->nr then N2 = float(dev2->nr) )
+   if( dev1->W then W1 = float(dev1->W) )
+   if( dev2->W then W2 = float(dev2->W) )
+   if( dev1->w then W1 = float(dev1->w) )
+   if( dev2->w then W2 = float(dev2->w) )
+   if( dev1->L then L1 = float(dev1->L) )
+   if( dev2->L then L2 = float(dev2->L) )
+   if( dev1->l then L1 = float(dev1->l) )
+   if( dev2->l then L2 = float(dev2->l) )
+
+   unless( (N1 == N2) && (W1 == W2) && (L1 == L2)
+    printf( "\n** Unequal Parallel Varactor NOT combined: \n" )
+    printf( "   1st device: m= %g nr= %g w=%g l=%g \n" M1 N1 W1 L1 )
+    printf( "   2nd device: m= %g nr= %g w=%g l=%g \n" M2 N2 W2 L2 )
+    return("doNotCombine")
+   )
+   newM = float( M1 + M2 )
+   parVar->m = newM
+   parVar->nr = float(N1)
+   parVar->w = float(W1)
+   parVar->l = float(L1)
+   printf( "\n** Parallel Varactor combined: \n" )
+   printf( "   1st device: m= %g nr= %g w=%g l=%g \n" M1 N1 W1 L1 )
+   printf( "   2nd device: m= %g nr= %g w=%g l=%g \n" M2 N2 W2 L2 )
+   printf( "result device: m= %g nr= %g w=%g l=%g \n" newM N1 W1 L1 )
+   return(parVar)
+ ) ; end prog
+) ; end parallelVAR
+; *****************************************************************
+procedure( compareVAR( dev1 dev2 )
+ prog( ( )
+   N1 = N2 = W1 = W2 = L1 = L2 = diffL = diffW = diffN = float(0)
+   M1 = M2 = float(1)
+   if( dev1->m then M1 = float(dev1->m) )
+   if( dev2->m then M2 = float(dev2->m) )
+   if( dev1->NR then N1 = float(dev1->NR) )
+   if( dev2->NR then N2 = float(dev2->NR) )
+   if( dev1->nr then N1 = float(dev1->nr) )
+   if( dev2->nr then N2 = float(dev2->nr) )
+   if( dev1->W then W1 = float(dev1->W) )
+   if( dev2->W then W2 = float(dev2->W) )
+   if( dev1->w then W1 = float(dev1->w) )
+   if( dev2->w then W2 = float(dev2->w) )
+   if( dev1->L then L1 = float(dev1->L) )
+   if( dev2->L then L2 = float(dev2->L) )
+   if( dev1->l then L1 = float(dev1->l) )
+   if( dev2->l then L2 = float(dev2->l) )
+
+   Nerr = Werr = Lerr = Merr = t
+   diffM = abs( M1 - M2 )
+   diffN = diffW = diffL = float(1)
+   N1T = float(N1 * M1)
+   N2T = float(N2 * M2)
+   when( diffM <= VAR_lvsTol Merr = nil )
+   if( ( N1T > 0 && N2T > 0 ) then
+           diffN = 100 * (abs( N2T - N1T ) / N2T )
+           when( diffN <= VAR_lvsTol Nerr = nil )
+   )
+   if( ( W1 > 0 && W2 > 0 ) then
+           diffW = 100 * (abs( W2 - W1 ) / W2 )
+           when( diffW <= VAR_lvsTol Werr = nil )
+   )
+   if( ( L1 > 0 && L2 > 0 ) then
+           diffL = 100 * (abs( L2 - L1 ) / L2 )
+           when( diffL <= VAR_lvsTol Lerr = nil )
+   )
+   if( Merr || Lerr || Werr || Nerr then
+   sprintf( msg1 "Err: VAR Sch m=%g nr=%g w=%g l=%g\n" M2 N2 W2 L2 )
+   sprintf( msg2 "Err:     Lay m=%g nr=%g w=%g l=%g\n" M1 N1 W1 L1 )
+   sprintf( msg "%s%s" msg1 msg2 )
+   return( msg )
+  )
+ ) ; end prog
+
+) ; end compareVAR
+; *****************************************************************
+procedure( parallelIND( dev1 dev2 )
+ prog( ( parInd)
+   parInd = ncons(nil)
+   W1 = W2 = N1 = N2 = L1 = L2 = R1 = R2 = float(0)
+   M1 = M2 = float(1)
+   if( dev1->m then M1 = float(dev1->m) )
+   if( dev2->m then M2 = float(dev2->m) )
+   if( dev1->w then W1 = float(dev1->w) )
+   if( dev2->w then W2 = float(dev2->w) )
+   if( dev1->nr then N1 = float(dev1->nr) )
+   if( dev2->nr then N2 = float(dev2->nr) )
+   if( dev1->lay then L1 = float(dev1->lay) )
+   if( dev2->lay then L2 = float(dev2->lay) )
+   if( dev1->rad then R1 = float(dev1->rad) )
+   if( dev2->rad then R2 = float(dev2->rad) )
+
+   unless( (W1 == W2) && (N1 == N2) && (L1 == L2) && (R1 == R2)
+    printf( "\n** Unequal Parallel IND NOT combined: \n" )
+    printf( " 1st device: m= %g w= %g nr= %g lay= %g rad= %g \n" M1 W1 N1 L1 R1 )
+    printf( " 2nd device: m= %g w= %g nr= %g lay= %g rad= %g \n" M2 W2 N2 L2 R2 )
+    return("doNotCombine")
+   )
+   newM = float( M1 + M2 )
+   parInd->m = newM
+   parInd->w = float(W1)
+   parInd->nr = float(N1)
+   parInd->lay = float(L1)
+   parInd->rad = float(R1)
+   printf( "\n** Parallel IND combined: \n" )
+   printf( " 1st device: m= %g w= %g nr= %g lay= %g rad= %g \n" M1 W1 N1 L1 R1 )
+   printf( " 2nd device: m= %g w= %g nr= %g lay= %g rad= %g \n" M2 W2 N2 L2 R2 )
+   printf( " resulting : m= %g w= %g nr= %g lay= %g rad= %g \n" newM W1 N1 L1 R1 )
+   return(parInd)
+ ) ; end prog
+) ; end parallelIND
+; *****************************************************************
+procedure( compareIND( dev1 dev2 )
+ prog( ()
+   W1 = W2 = N1 = N2 = L1 = L2 = R1 = R2 = float(0)
+   M1 = M2 = float(1)
+   if( dev1->m then M1 = float(dev1->m) )
+   if( dev2->m then M2 = float(dev2->m) )
+   if( dev1->w then W1 = float(dev1->w) )
+   if( dev2->w then W2 = float(dev2->w) )
+   if( dev1->nr then N1 = float(dev1->nr) )
+   if( dev2->nr then N2 = float(dev2->nr) )
+   if( dev1->lay then L1 = float(dev1->lay) )
+   if( dev2->lay then L2 = float(dev2->lay) )
+   if( dev1->rad then R1 = float(dev1->rad) )
+   if( dev2->rad then R2 = float(dev2->rad) )
+
+   Werr = Nerr = Lerr = Rerr = Merr = t
+   diffM = abs( M1 - M2 )
+   diffW = diffN = diffL = diffR = float(1)
+   when( diffM <= IND_lvsTol Merr = nil )
+   if( ( W1 > 0 && W2 > 0 ) then
+           diffW = abs( W1 - W2 )
+           when( diffW <= IND_lvsTol Werr = nil )
+   )
+   if( ( N1 > 0 && N2 > 0 ) then
+           diffN = abs( N1 - N2 )
+           when( diffN <= IND_lvsTol Nerr = nil )
+   )
+   if( ( L1 > 0 && L2 > 0 ) then
+           diffL = abs( L1 - L2 )
+           when( diffL <= IND_lvsTol Lerr = nil )
+   )
+   if( ( R1 > 0 && R2 > 0 ) then
+           diffR = abs( R1 - R2 )
+           when( diffR <= IND_lvsTol Rerr = nil )
+   )
+   if( Merr || Werr || Nerr || Lerr || Rerr then
+   sprintf( msg1 "Err: IND Sch m=%g w=%g nr=%g lay=%g rad=%g \n" M2 W2 N2 L2 R2 )
+   sprintf( msg2 "Err:     Lay m=%g w=%g nr=%g lay=%g rad=%g \n" M1 W1 N1 L1 R1 )
+   sprintf( msg "%s%s" msg1 msg2 )
+   return( msg )
+  )
+ ) ; end prog
+
+) ; end compareIND
+; *****************************************************************
+procedure( parallelBJT( dev1 dev2 )
+ prog( ( parBjt)
+   parBjt = ncons(nil)
+   A1 = A2 = float(0)
+   M1 = M2 = float(1)
+   if( dev1->m then M1 = float(dev1->m) )
+   if( dev2->m then M2 = float(dev2->m) )
+   if( dev1->EA then A1 = float(dev1->EA) )
+   if( dev2->EA then A2 = float(dev2->EA) )
+   if( dev1->AREA then A1 = float(dev1->AREA) )
+   if( dev2->AREA then A2 = float(dev2->AREA) )
+   if( dev1->area then A1 = float(dev1->area) )
+   if( dev2->area then A2 = float(dev2->area) )
+
+   unless( A1 == A2 
+    printf( "\n** Unequal Parallel BJT NOT combined: \n" )
+    printf( "   1st device: m= %g area= %g  \n" M1 A1  )
+    printf( "   2nd device: m= %g area= %g  \n" M2 A2  )
+    return("doNotCombine")
+   )
+   newM = float( M1 + M2 )
+   parBjt->m = newM
+   parBjt->area = float(A1)
+   printf( "\n** Parallel BJT combined: \n" )
+   printf( "   1st device: m= %g area= %g \n" M1 A1 )
+   printf( "   2nd device: m= %g area= %g \n" M2 A2 )
+   printf( "result device: m= %g area= %g \n" newM A1 )
+   return(parBjt)
+ ) ; end prog
+) ; end parallelBJT
+; *****************************************************************
+procedure( compareBJT( dev1 dev2 )
+ prog( ()
+   A1 = A2 = float(0)
+   M1 = M2 = float(1)
+   if( dev1->m then M1 = float(dev1->m)  )
+   if( dev2->m then M2 = float(dev2->m)  )
+   if( dev1->EA then A1 = float(dev1->EA) )
+   if( dev2->EA then A2 = float(dev2->EA) )
+   if( dev1->AREA then A1 = float(dev1->AREA) )
+   if( dev2->AREA then A2 = float(dev2->AREA) )
+   if( dev1->area then A1 = float(dev1->area) )
+   if( dev2->area then A2 = float(dev2->area) )
+
+   Aerr = Merr = t
+   diffM = abs( M1 - M2 )
+   diffA = float(1)
+   when( diffM <= BJT_lvsTol Merr = nil )
+   if( ( A1 > 0 && A2 > 0 ) then
+           diffA = abs( A1 - A2 )
+           when( diffA <= BJT_lvsTol Aerr = nil )
+   )
+   if( Merr || Aerr then
+   sprintf( msg1 "Err: BJT Sch area=%g, m=%g" A2 M2 )
+   sprintf( msg2 "Err:     Lay area=%g, m=%g" A1 M1 )
+   sprintf( msg "%s \n%s" msg1 msg2 )
+   return( msg )
+  )
+ ) ; end prog
+) ; end compareBJT
+; *****************************************************************
+procedure( parallelCAP( dev1 dev2 )
+ prog( ( parCap)
+   parCap = ncons(nil)
+   C1 = C2 = A1 = A2 = L1 = L2 = W1 = W2 = float(0)
+   M1 = M2 = float(1)
+   if( dev1->m then M1 = float(dev1->m) )
+   if( dev2->m then M2 = float(dev2->m) )
+   if( dev1->l then L1 = float(dev1->l) )
+   if( dev2->l then L2 = float(dev2->l) )
+   if( dev1->w then W1 = float(dev1->w) )
+   if( dev2->w then W2 = float(dev2->w) )
+   if( dev1->lt then L1 = float(dev1->lt) )
+   if( dev2->lt then L2 = float(dev2->lt) )
+   if( dev1->wt then W1 = float(dev1->wt) )
+   if( dev2->wt then W2 = float(dev2->wt) )
+   if( dev1->LT then L1 = float(dev1->LT) )
+   if( dev2->LT then L2 = float(dev2->LT) )
+   if( dev1->WT then W1 = float(dev1->WT) )
+   if( dev2->WT then W2 = float(dev2->WT) )   
+
+   unless( L1 == L2 && W1 == W2
+    printf( "\n** Unequal Parallel CAP NOT combined: \n" )
+    printf( "   1st device: m= %g lt= %g wt= %g \n" M1 L1 W1 )
+    printf( "   2nd device: m= %g lt= %g wt= %g \n" M2 L2 W2 )
+    return("doNotCombine")
+   )
+   newM = float( M1 + M2 )
+   parCap->m = newM
+   parCap->lt = float(L1)
+   parCap->wt = float(W1)
+   printf( "\n** Parallel CAP combined: \n" )
+   printf( "   1st device: m= %g lt= %g wt= %g \n" M1 L1 W1 )
+   printf( "   2nd device: m= %g lt= %g wt= %g \n" M2 L2 W2 )
+   printf( "result device: m= %g lt= %g wt= %g \n" newM L1 W1 )
+   return(parCap)
+ ) ; end prog
+) ; end parallelCAP
+; *****************************************************************
+procedure( parallelCAP_WOUM( dev1 dev2 )
+ prog( ( parCap)
+   parCap = ncons(nil)
+   C1 = C2 = A1 = A2 = L1 = L2 = W1 = W2 = LAY1 = LAY2 = float(0)
+   M1 = M2 = float(1)
+   if( dev1->m then M1 = float(dev1->m) )
+   if( dev2->m then M2 = float(dev2->m) )
+   if( dev1->l then L1 = float(dev1->l) )
+   if( dev2->l then L2 = float(dev2->l) )
+   if( dev1->w then W1 = float(dev1->w) )
+   if( dev2->w then W2 = float(dev2->w) )
+   if( dev1->lt then L1 = float(dev1->lt) )
+   if( dev2->lt then L2 = float(dev2->lt) )
+   if( dev1->wt then W1 = float(dev1->wt) )
+   if( dev2->wt then W2 = float(dev2->wt) )
+   if( dev1->LT then L1 = float(dev1->LT) )
+   if( dev2->LT then L2 = float(dev2->LT) )
+   if( dev1->WT then W1 = float(dev1->WT) )
+   if( dev2->WT then W2 = float(dev2->WT) )      
+   if( dev1->lay then LAY1 = float(dev1->lay) )
+   if( dev2->lay then LAY2 = float(dev2->lay) )
+   if( dev1->LAY then LAY1 = float(dev1->LAY) )
+   if( dev2->LAY then LAY2 = float(dev2->LAY) )   
+
+   unless( L1 == L2 && W1 == W2 && LAY1 == LAY2
+    printf( "\n** Unequal Parallel CAP NOT combined: \n" )
+    printf( "   1st device: m= %g lt= %g wt= %g lay= %g \n" M1 L1 W1 LAY1 )
+    printf( "   2nd device: m= %g lt= %g wt= %g lay= %g \n" M2 L2 W2 LAY2 )
+    return("doNotCombine")
+   )
+   newM = float( M1 + M2 )
+   parCap->m = newM
+   parCap->lt = float(L1)
+   parCap->wt = float(W1)
+   parCap->lay = float(LAY1)
+   printf( "\n** Parallel CAP combined: \n" )
+   printf( "   1st device: m= %g lt= %g wt= %g lay= %g \n" M1 L1 W1 LAY1 )
+   printf( "   2nd device: m= %g lt= %g wt= %g lay= %g \n" M2 L2 W2 LAY2 )
+   printf( "result device: m= %g lt= %g wt= %g lay= %g \n" newM L1 W1 LAY1 )
+   return(parCap)
+ ) ; end prog
+) ; end parallelCAP_WOUM
+; *****************************************************************
+; lay = dev1  sch = dev2
+procedure( compareCAP( dev1 dev2 )
+ prog( ()
+   L1 = L2 = W1 = W2 = float(0)
+   M1 = M2 = float(1)
+   if( dev1->m then M1 = float(dev1->m) )
+   if( dev2->m then M2 = float(dev2->m) )
+   if( dev1->l then L1 = float(dev1->l) )
+   if( dev2->l then L2 = float(dev2->l) )
+   if( dev1->w then W1 = float(dev1->w) )
+   if( dev2->w then W2 = float(dev2->w) )
+   if( dev1->lt then L1 = float(dev1->lt) )
+   if( dev2->lt then L2 = float(dev2->lt) )
+   if( dev1->wt then W1 = float(dev1->wt) )
+   if( dev2->wt then W2 = float(dev2->wt) )
+   if( dev1->LT then L1 = float(dev1->LT) )
+   if( dev2->LT then L2 = float(dev2->LT) )
+   if( dev1->WT then W1 = float(dev1->WT) )
+   if( dev2->WT then W2 = float(dev2->WT) )      
+
+   Lerr = Werr = Merr = t
+   diffM = abs( M1 - M2 )
+   diffL = diffW = diffLAY = float(1)
+   when( diffM <= CAP_lvsTol Merr = nil )
+   if( ( L1 > 0 && L2 > 0 ) then
+           diffL = abs( L1 - L2 )
+           when( diffL <= CAP_lvsTol Lerr = nil )
+   )
+   if( ( W1 > 0 && W2 > 0 ) then
+           diffW = abs( W1 - W2 )
+           when( diffW <= CAP_lvsTol Werr = nil )
+   )
+   if( Merr || Lerr || Werr then
+   sprintf( msg1 "Err: CAP Sch m=%g lt=%g wt=%g \n" M2 L2 W2 )
+   sprintf( msg2 "Err:     Lay m=%g lt=%g wt=%g \n" M1 L1 W1 )
+   sprintf( msg "%s \n%s" msg1 msg2 )
+   return( msg )
+  )
+ ) ; end prog
+) ; end compareCAP
+; *****************************************************************
+; lay = dev1  sch = dev2
+procedure( compareCAP_WOUM( dev1 dev2 )
+ prog( ()
+   L1 = L2 = W1 = W2 = LAY1 = LAY2 = float(0)
+   M1 = M2 = float(1)
+   if( dev1->m then M1 = float(dev1->m) )
+   if( dev2->m then M2 = float(dev2->m) )
+   if( dev1->l then L1 = float(dev1->l) )
+   if( dev2->l then L2 = float(dev2->l) )
+   if( dev1->w then W1 = float(dev1->w) )
+   if( dev2->w then W2 = float(dev2->w) )
+   if( dev1->lt then L1 = float(dev1->lt) )
+   if( dev2->lt then L2 = float(dev2->lt) )
+   if( dev1->wt then W1 = float(dev1->wt) )
+   if( dev2->wt then W2 = float(dev2->wt) )
+   if( dev1->LT then L1 = float(dev1->LT) )
+   if( dev2->LT then L2 = float(dev2->LT) )
+   if( dev1->WT then W1 = float(dev1->WT) )
+   if( dev2->WT then W2 = float(dev2->WT) )      
+   if( dev1->lay then LAY1 = float(dev1->lay) )
+   if( dev2->lay then LAY2 = float(dev2->lay) )
+   if( dev1->LAY then LAY1 = float(dev1->LAY) )
+   if( dev2->LAY then LAY2 = float(dev2->LAY) )     
+   
+   Lerr = Werr = Merr = t
+   diffM = abs( M1 - M2 )
+   diffL = diffW = float(1)
+   when( diffM <= CAP_lvsTol Merr = nil )
+   if( ( L1 > 0 && L2 > 0 ) then
+           diffL = abs( L1 - L2 )
+           when( diffL <= CAP_lvsTol Lerr = nil )
+   )
+   if( ( W1 > 0 && W2 > 0 ) then
+           diffW = abs( W1 - W2 )
+           when( diffW <= CAP_lvsTol Werr = nil )
+   )
+         
+   if( Merr || Lerr || Werr then
+   sprintf( msg1 "Err: CAP Sch m=%g lt=%g wt=%g \n" M2 L2 W2 )
+   sprintf( msg2 "Err:     Lay m=%g lt=%g wt=%g \n" M1 L1 W1 )
+   sprintf( msg "%s \n%s" msg1 msg2 )
+   
+   return( msg )
+  )
+ ) ; end prog
+) ; end compareCAP_WOUM
+; **********************************************************************
+procedure( parallelSBD( dev1 dev2 )
+ prog( (parSBD)
+   parSBD=ncons(nil) 
+   W1 = L1 = NF1 = W2 = L2 = NF2 = float(0)
+   M1 = M2 = float(1)
+ 
+   if( dev1->w then W1 = float( dev1->w ) ) 
+   if( dev1->W then W1 = float( dev1->W ) )
+   if( dev1->l then L1 = float( dev1->l ) ) 
+   if( dev1->L then L1 = float( dev1->L ) )
+   if( dev1->nr then NR1 = float( dev1->nr ) ) 
+   if( dev1->NR then NR1 = float( dev1->NR ) )
+   if( dev1->m then M1 = float( dev1->m ) )
+   if( dev1->M then M1 = float( dev1->M ) )
+   if( dev1->nf then NF1 = float( dev1->nf ) )
+   if( dev1->NF then NF1 = float( dev1->NF ) )
+
+   if( dev2->w then W2 = float( dev2->w ) ) 
+   if( dev2->W then W2 = float( dev2->W ) )
+   if( dev2->l then L2 = float( dev2->l ) ) 
+   if( dev2->L then L2 = float( dev2->L ) )
+   if( dev2->nr then NR2 = float( dev2->nr ) ) 
+   if( dev2->NR then NR2 = float( dev2->NR ) )
+   if( dev2->m then M2 = float( dev2->m ) )
+   if( dev2->M then M2 = float( dev2->M ) )
+   if( dev2->nf then NF2 = float( dev2->nf ) )
+   if( dev2->NF then NF2 = float( dev2->NF ) )
+
+   unless( L1 == L2 && W1 == W2 && NF1 == NF2 
+    printf( "\n** Unequal Parallel RF Schottky Barrier Diode not combined: \n" )
+    printf( "   1st device: m=%g w=%g l=%g nf=%g \n" M1 W1 L1 NF1 )
+    printf( "   2nd device: m=%g w=%g l=%g nf=%g \n" M2 W2 L2 NF2 )
+    return("doNotCombine")
+   )
+    newM = float( M1 + M2 )
+    parSBD-> m = newM
+    parSBD-> w = float(W1)
+    parSBD-> l = float(L1)
+    parSBD-> nf = float(NF1)
+    printf( "\n** Parallel RF Schottky Barrier Diode combined \n" )
+    printf( "   1st device: m=%g w=%g l=%g nf=%g \n" M1 W1 L1 NF1 )
+    printf( "   2nd device: m=%g w=%g l=%g nf=%g \n" M2 W2 L2 NF2 )
+    printf( "result device: m=%g w=%g l=%g nf=%g \n" newM W2 L2 NF2 )
+    return(parSBD)
+ ) ; end prog
+) ; end proc
+; **********************************************************************
+procedure( compareSBD( dev1 dev2 )
+ prog( ()
+   layW = schW = float(0)
+   layL = schL = float(0)
+   layM = schM = float(1)
+   layNF = schNF = float(0)
+ 
+   if( dev1->w then layW = float( dev1->w ) ) 
+   if( dev1->W then layW = float( dev1->W ) )
+   if( dev1->l then layL = float( dev1->l ) ) 
+   if( dev1->L then layL = float( dev1->L ) )
+   if( dev1->nr then layNR = float( dev1->nr ) ) 
+   if( dev1->NR then layNR = float( dev1->NR ) )
+   if( dev1->m then layM = float( dev1->m ) )
+   if( dev1->M then layM = float( dev1->M ) )
+   if( dev1->nf then layNF = float( dev1->nf ) )
+   if( dev1->NF then layNF = float( dev1->NF ) )
+
+   if( dev2->w then schW = float( dev2->w ) ) 
+   if( dev2->W then schW = float( dev2->W ) )
+   if( dev2->l then schL = float( dev2->l ) ) 
+   if( dev2->L then schL = float( dev2->L ) )
+   if( dev2->nr then schNR = float( dev2->nr ) ) 
+   if( dev2->NR then schNR = float( dev2->NR ) )
+   if( dev2->m then schM = float( dev2->m ) )
+   if( dev2->M then schM = float( dev2->M ) )
+   if( dev2->nf then schNF = float( dev2->nf ) )
+   if( dev2->NF then schNF = float( dev2->NF ) )
+
+
+   if( (layW==0 && schW==0) then
+     sprintf( msg1 "Err: RF Schottky Barrier Diode both schematic %g and layout %g missing w(0 stands for parameter missing)\n" schW layW )
+     return(msg1)
+   )
+   if( layW==0 then
+     sprintf( msg2 "Err: RF Schottky Barrier Diode layout missing w %g (0 stands for parameter missing)\n" layW )
+     return(msg2)
+   )
+   if( schW==0 then
+     sprintf( msg3 "Err: RF Schottky Barrier Diode schematic missing w %g (0 stands for parameter missing)\n" schW )
+     return(msg3)
+   )
+   if( (layL==0 && schL==0) then
+     sprintf( msg4 "Err: RF Schottky Barrier Diode both schematic %g and layout %g missing l (0 stands for parameter missing)\n" schL layL )
+     return(msg4)
+   )
+   if( layL==0 then
+     sprintf( msg5 "Err: RF Schottky Barrier Diode layout missing l %g (0 stands for parameter missing)\n" layL )
+     return(msg5)
+   )
+   if( schL==0 then
+     sprintf( msg6 "Err: RF Schottky Barrier Diode schematic missing l %g (0 stands for parameter missing)\n" schL )
+     return(msg6)
+   )
+   if( (layNF==0 && schNF==0) then
+     sprintf( msg7 "Err: RF Schottky Barrier Diode both schematic %g and layout %g missing NF (0 stands for parameter missing)\n" schNF layNF )
+     return(msg7)
+   )
+   if( layNF==0 then
+     sprintf( msg8 "Err: RF Schottky Barrier Diode layout missing NF %g (0 stands for parameter missing)\n" layNF )
+     return(msg8)
+   )
+   if( schNF==0 then
+     sprintf( msg9 "Err: RF Schottky Barrier Diode schematic missing NF %g (0 stands for parameter missing)\n" schNF )
+     return(msg9)
+   )
+
+      layL = layL*layM
+      layW = layW*layM
+      schL = schL*schM
+      schW = schW*schM
+   if((layL == schL) && (layW == schW) && (layNF == schNF) then 
+     return(nil)
+   )
+
+   diffW = 100 * abs((layW-schW)/schW)
+   diffL = 100 * abs((layL-schL)/schL)
+   diffNF = 100 * abs((layNF-schNF)/schNF)
+   if( ( diffNF > 0) then
+      sprintf( msg10 "Err: RF Schottky Barrier Diode nf %g(sch) vs nf %g(lay) differs by %g percent \n" layNF schNF diffNF )
+      else sprintf( msg10 "")
+   )
+   if( ( diffW > 0 ) then
+      sprintf( msg11 "Err: RF Schottky Barrier Diode w %g(sch) vs w %g(layout) differs by %g percent \n" layW schW diffW )
+      else sprintf( msg11 "" )
+   )
+   if( ( diffL > 0 ) then
+      sprintf( msg12 "Err: RF Schottky Barrier Diode l %g(sch) vs l %g(lay) differs by %g percent \n" layL schL diffL )
+      else sprintf( msg12 "")
+   )
+   sprintf( msg13 " %s \n %s \n %s \n" msg10 msg11 msg12 )
+   return(msg13)
+ ) ; end prog
+) ; end proc
+; **********************************************************************
+procedure( parallelMOM( dev1 dev2 )
+ prog( ( parMOM)
+   parMOM = ncons(nil)
+   NV1 = NV2 = NH1 = NH2 = S1 = S2 = LAY1 = LAY2 = float(0)
+   W1 = W2 = STM1 = STM2 = SPM1 = SPM2 = float(0)   
+   M1 = M2 = float(1)
+   if( dev1->m then M1 = float(dev1->m) )
+   if( dev2->m then M2 = float(dev2->m) )
+   if( dev1->nv then NV1 = float(dev1->nv) )
+   if( dev2->nv then NV2 = float(dev2->nv) )
+   if( dev1->nh  then NH1 = float(dev1->nh) )
+   if( dev2->nh  then NH2 = float(dev2->nh) )
+   if( dev1->s then S1 = float(dev1->s) )
+   if( dev2->s then S2 = float(dev2->s) )
+   if( dev1->lay then LAY1 = float(dev1->lay) )
+   if( dev2->lay then LAY2 = float(dev2->lay) )
+   if( dev1->w then W1 = float(dev1->w) )
+   if( dev2->w then W2 = float(dev2->w) )
+   if( dev1->stm then STM1 = float(dev1->stm) )
+   if( dev2->stm then STM2 = float(dev2->stm) )
+   if( dev1->spm then SPM1 = float(dev1->spm) )
+   if( dev2->spm then SPM2 = float(dev2->spm) )
+   
+   if( dev1->M then M1 = float(dev1->M) )
+   if( dev2->M then M2 = float(dev2->M) )
+   if( dev1->NV then NV1 = float(dev1->NV) )
+   if( dev2->NV then NV2 = float(dev2->NV) )
+   if( dev1->NH  then NH1 = float(dev1->NH) )
+   if( dev2->NH  then NH2 = float(dev2->NH) )
+   if( dev1->S then S1 = float(dev1->S) )
+   if( dev2->S then S2 = float(dev2->S) )
+   if( dev1->LAY then LAY1 = float(dev1->LAY) )
+   if( dev2->LAY then LAY2 = float(dev2->LAY) )
+   if( dev1->W then W1 = float(dev1->W) )
+   if( dev2->W then W2 = float(dev2->W) )
+   if( dev1->STM then STM1 = float(dev1->STM) )
+   if( dev2->STM then STM2 = float(dev2->STM) )
+   if( dev1->SPM then SPM1 = float(dev1->SPM) )
+   if( dev2->SPM then SPM2 = float(dev2->SPM) )    
+
+   unless( NV1==NV2 && NH1==NH2 && S1==S2 && LAY1==LAY2 && STM1==STM2 && SPM1==SPM2 && W1==W2
+    printf( "\n** Unequal Parallel MOM NOT combined: \n" )
+    printf( "   1st device: m= %g nv= %g nh= %g s= %g lay= %g stm= %g spm= %g w=%g \n" M1 NV1 NH1 S1 LAY1 STM1 SPM1 W1 )
+    printf( "   2st device: m= %g nv= %g nh= %g s= %g lay= %g stm= %g spm= %g w=%g \n" M2 NV2 NH2 S2 LAY2 STM2 SPM2 W2 )
+    return("doNotCombine")
+   )
+   newM = float( M1 + M2 )
+   parMOM->m = newM
+   parMOM->nv = float(NV1)
+   parMOM->nh = float(NH1)
+   parMOM->s = float(S1)
+   parMOM->lay = float(LAY1)
+   parMOM->stm = float(STM1)
+   parMOM->spm = float(SPM1)
+   parMOM->w = float(W1)
+   printf( "\n** Parallel CRTMOM combined: \n" )
+   printf( "   1st device: m= %g nv= %g nh= %g s= %g lay= %g stm= %g spm= %g w=%g \n" M1 NV1 NH1 S1 LAY1 STM1 SPM1 W1 )
+   printf( "   2st device: m= %g nv= %g nh= %g s= %g lay= %g stm= %g spm= %g w=%g \n" M2 NV2 NH2 S2 LAY2 STM2 SPM2 W2 )
+   printf( "result device: m= %g nv= %g nh= %g s= %g lay= %g stm= %g spm= %g w=%g \n" newM NV1 NH1 S1 LAY1 STM1 SPM1 W1 )
+   return(parMOM)
+ ) ; end prog
+) ; end parallelMOM
+; *****************************************************************
+; lay = dev1  sch = dev2
+procedure( compareMOM( dev1 dev2 )
+ prog( ()
+   NV1 = NV2 = NH1 = NH2 = S1 = S2 = LAY1 = LAY2 = float(0)
+   W1 = W2 = STM1 = STM2 = SPM1 = SPM2 = float(0)
+   M1 = M2 = float(1)
+   if( dev1->m then M1 = float(dev1->m) )
+   if( dev2->m then M2 = float(dev2->m) )
+   if( dev1->nv then NV1 = float(dev1->nv) )
+   if( dev2->nv then NV2 = float(dev2->nv) )
+   if( dev1->nh  then NH1 = float(dev1->nh) )
+   if( dev2->nh  then NH2 = float(dev2->nh) )
+   if( dev1->s then S1 = float(dev1->s) )
+   if( dev2->s then S2 = float(dev2->s) )
+   if( dev1->lay then LAY1 = float(dev1->lay) )
+   if( dev2->lay then LAY2 = float(dev2->lay) )
+   if( dev1->w then W1 = float(dev1->w) )
+   if( dev2->w then W2 = float(dev2->w) )
+   if( dev1->stm then STM1 = float(dev1->stm) )
+   if( dev2->stm then STM2 = float(dev2->stm) )
+   if( dev1->spm then SPM1 = float(dev1->spm) )
+   if( dev2->spm then SPM2 = float(dev2->spm) )
+   
+   if( dev1->M then M1 = float(dev1->M) )
+   if( dev2->M then M2 = float(dev2->M) )
+   if( dev1->NV then NV1 = float(dev1->NV) )
+   if( dev2->NV then NV2 = float(dev2->NV) )
+   if( dev1->NH  then NH1 = float(dev1->NH) )
+   if( dev2->NH  then NH2 = float(dev2->NH) )
+   if( dev1->S then S1 = float(dev1->S) )
+   if( dev2->S then S2 = float(dev2->S) )
+   if( dev1->LAY then LAY1 = float(dev1->LAY) )
+   if( dev2->LAY then LAY2 = float(dev2->LAY) )
+   if( dev1->W then W1 = float(dev1->W) )
+   if( dev2->W then W2 = float(dev2->W) )
+   if( dev1->STM then STM1 = float(dev1->STM) )
+   if( dev2->STM then STM2 = float(dev2->STM) )
+   if( dev1->SPM then SPM1 = float(dev1->SPM) )
+   if( dev2->SPM then SPM2 = float(dev2->SPM) )
+
+   Merr = NHerr = NVerr = Serr = LAYerr = Werr = STMerr = SPMerr = t
+   diffM = abs( M1 - M2 )
+   diffNH = diffNV = diffS = diffLAY = diffW = diffSTM = diffSPM = float(1)
+   when( diffM <= MOM_lvsTol Merr = nil )
+   if( ( NH1 > 0 && NH2 > 0 ) then
+           diffNH = abs( NH1 - NH2 )
+           when( diffNH <= MOM_lvsTol NHerr = nil )
+   )
+   if( ( NV1 > 0 && NV2 > 0 ) then
+           diffNV = abs( NV1 - NV2 )
+           when( diffNV <= MOM_lvsTol NVerr = nil )
+   )
+   if( ( S1 > 0 && S2 > 0 ) then
+           diffS = abs( S1 - S2 )
+           when( diffS <= MOM_lvsTol Serr = nil )
+   )
+   
+   if( LAY1 > 0 && LAY2 > 0 then
+           diffLAY = abs( LAY1 - LAY2 )
+           when( diffLAY <= MOM_lvsTol LAYerr = nil )
+   )
+       
+   if( Merr || NHerr || NVerr || Serr || LAYerr then
+   sprintf( msg1 "Err: MOM Sch m=%g nh=%g nv=%g s=%g lay=%g \n" M2 NH2 NV2 S2 LAY2 )
+   sprintf( msg2 "Err:     Lay m=%g nh=%g nv=%g s=%g lay=%g \n" M1 NH1 NV1 S1 LAY1 )
+   sprintf( msg "%s \n%s" msg1 msg2 )
+
+   return( msg )
+
+   ) ; end if err     
+ ) ; end prog
+) ; end compareMOM
+; *****************************************************************
+
+procedure( parallelRES( dev1 dev2 )
+ prog( ( parRES )
+   parRES = ncons(nil)
+   W1 = W2 = L1 = L2 = R1 = R2 = float(0)
+   M1 = M2 = float(1)
+   if( dev1->W then W1 = float( dev1->W ) )
+   if( dev2->W then W2 = float( dev2->W ) )
+   if( dev1->L then L1 = float( dev1->L ) )
+   if( dev2->L then L2 = float( dev2->L ) )
+   if( dev1->R then R1 = float( dev1->R ) )
+   if( dev2->R then R2 = float( dev2->R ) )
+   if( dev1->VALUE then R1 = float( dev1->VALUE ) )
+   if( dev2->VALUE then R2 = float( dev2->VALUE ) )
+   if( dev1->w then W1 = float( dev1->w ) )
+   if( dev2->w then W2 = float( dev2->w ) )
+   if( dev1->l then L1 = float( dev1->l ) )
+   if( dev2->l then L2 = float( dev2->l ) )
+   if( dev1->r then R1 = float( dev1->r ) )
+   if( dev2->r then R2 = float( dev2->r ) )
+   if( dev1->value then R1 = float(dev1->value) )
+   if( dev2->value then R2 = float(dev2->value) )
+   if( dev1->m then M1 = float(dev1->m) else M1 = float(1) )
+   if( dev2->m then M2 = float(dev2->m) else M2 = float(1) )
+   if( dev1->M then M1 = float(dev1->M) )
+   if( dev2->M then M2 = float(dev2->M) )
+   if( dev1->wr then W1 = float( dev1->wr ) )
+   if( dev2->wr then W2 = float( dev2->wr ) )
+   if( dev1->lr then L1 = float( dev1->lr ) )
+   if( dev2->lr then L2 = float( dev2->lr ) )    
+
+   unless( (L1 == L2) 
+    printf( "\n** Unequal Parallel RES NOT combined: \n" )
+    printf( "   1st device: l=%g w=%g r=%g m=%g \n" L1 W1 R1 M1 )
+    printf( "   2nd device: l=%g w=%g r=%g m=%g \n" L2 W2 R2 M2 )
+    return("doNotCombine")
+   )
+
+   newW  = float( W1*M1 + W2*M2 )
+   if( (R1 == 0) && (R2 == 0) then 
+     newR = float(0)
+   else 
+     newR = float( R1*R2 / ( M1*R2 + M2*R1 ) )
+   )
+   
+   parRES->w = newW
+;   parRES->l = newL
+   parRES->l = float(L1)
+   parRES->wr = newW
+   parRES->lr = float(L1)
+   parRES->r = newR
+   parRES->m = float(1)
+   
+   printf( "\n** Parallel RES combined: \n" )
+   printf( "   1st device: l=%g w=%g r=%g m=%g \n" L1 W1 R1 M1 )
+   printf( "   2nd device: l=%g w=%g r=%g m=%g \n" L2 W2 R2 M2 )
+   printf( "result device: l=%g w=%g r=%g m=1 \n" L1 newW newR )
+   return(parRES)
+ ) ; end prog
+) ;parallelRES
+; *****************************************************************
+procedure( parallelRFRES( dev1 dev2 )
+ prog( ( parRES )
+   parRES = ncons(nil)
+   W1 = W2 = L1 = L2 = float(0)
+   M1 = M2 = float(1)
+   if( dev1->W then W1 = float( dev1->W ) )
+   if( dev2->W then W2 = float( dev2->W ) )
+   if( dev1->L then L1 = float( dev1->L ) )
+   if( dev2->L then L2 = float( dev2->L ) )
+   if( dev1->w then W1 = float( dev1->w ) )
+   if( dev2->w then W2 = float( dev2->w ) )
+   if( dev1->l then L1 = float( dev1->l ) )
+   if( dev2->l then L2 = float( dev2->l ) )
+   if( dev1->m then M1 = float(dev1->m) else M1 = float(1) )
+   if( dev2->m then M2 = float(dev2->m) else M2 = float(1) )
+   if( dev1->M then M1 = float(dev1->M) )
+   if( dev2->M then M2 = float(dev2->M) )
+   if( dev1->wr then W1 = float( dev1->wr ) )
+   if( dev2->wr then W2 = float( dev2->wr ) )
+   if( dev1->lr then L1 = float( dev1->lr ) )
+   if( dev2->lr then L2 = float( dev2->lr ) )    
+
+   unless( (L1 == L2) 
+    printf( "\n** Unequal Parallel RES NOT combined: \n" )
+    printf( "   1st device: l=%g w=%g r=%g m=%g \n" L1 W1 R1 M1 )
+    printf( "   2nd device: l=%g w=%g r=%g m=%g \n" L2 W2 R2 M2 )
+    return("doNotCombine")
+   )
+
+   newM = float( M1 + M2 )
+   
+   parRES->w = float(W1)
+;   parRES->l = newL
+   parRES->l = float(L1)
+   parRES->wr = float(W1)
+   parRES->lr = float(L1)
+;   parRES->r = newR
+   parRES->m = float(newM)
+   
+   printf( "\n** Parallel RES combined: \n" )
+   printf( "   1st device: l=%g w=%g m=%g \n" L1 W1 M1 )
+   printf( "   2nd device: l=%g w=%g m=%g \n" L2 W2 M2 )
+   printf( "result device: l=%g w=%g m=%g \n" L1 W1 newM )
+   return(parRES)
+ ) ; end prog
+) ;parallelRFRES
+; *****************************************************************
+procedure( seriesRES( dev1 dev2 )
+ prog( ( parRESS ) 
+   parRESS = ncons(nil) 
+   W1 = newW1 = float(0)
+   W2 = newWR2= float(-1)
+   L1 = L2 = R1 = R2 = newR = newL = float(0)
+   M1 = M2 = float(1)
+
+   if( dev1->W then W1 = float( dev1->W ) )
+   if( dev2->W then W2 = float( dev2->W ) )
+   if( dev1->L then L1 = float( dev1->L ) )
+   if( dev2->L then L2 = float( dev2->L ) )
+   if( dev1->R then R1 = float( dev1->R ) )
+   if( dev2->R then R2 = float( dev2->R ) )
+   if( dev1->VALUE then R1 = float( dev1->VALUE ) )
+   if( dev2->VALUE then R2 = float( dev2->VALUE ) )
+   if( dev1->w then W1 = float( dev1->w ) )
+   if( dev2->w then W2 = float( dev2->w ) )
+   if( dev1->l then L1 = float( dev1->l ) )
+   if( dev2->l then L2 = float( dev2->l ) )
+   if( dev1->r then R1 = float( dev1->r ) )
+   if( dev2->r then R2 = float( dev2->r ) )
+   if( dev1->value then R1 = float( dev1->value ) )
+   if( dev2->value then R2 = float( dev2->value ) )
+   if( dev1->m then M1 = float( dev1->m ) )
+   if( dev2->m then M2 = float( dev2->m ) )
+   if( dev1->M then M1 = float( dev1->M ) )
+   if( dev2->M then M2 = float( dev2->M ) )
+   if( dev1->wr then W1 = float( dev1->wr ) )
+   if( dev2->wr then W2 = float( dev2->wr ) )
+   if( dev1->lr then L1 = float( dev1->lr ) )
+   if( dev2->lr then L2 = float( dev2->lr ) )           
+  
+   newW1 = float( W1*M1 )
+   newW2 = float( W2*M2 )
+   
+   unless( (newW1 == newW2) 
+     printf( "\n** Unequal Series RES NOT combined for device: \n")
+     printf( "   1st device: l=%g w=%g r=%g m=%g \n" L1 W1 R1 M1 )
+     printf( "   2nd device: l=%g w=%g r=%g m=%g \n" L2 W2 R2 M2 )
+     return("doNotCombine")
+   )
+
+   newL = float( L1 + L2 )
+   newW = newW1
+   newR = float( R1/M1 + R2/M2 )
+
+   parRESS->w = newW
+   parRESS->l = newL   
+   parRESS->wr = newW
+   parRESS->lr = newL
+   parRESS->r = newR
+   parRESS->m = float(1)
+   printf( "\n** Series RES combined: \n" )
+   printf( "   1st device: l=%g w=%g r=%g m=%g \n" L1 W1 R1 M1 )
+   printf( "   2nd device: l=%g w=%g r=%g m=%g \n" L2 W2 R2 M2 )
+   printf( "result device: l=%g w=%g r=%g m=1 \n" newL newW newR )
+   return(parRESS)
+ ) ; end prog
+) ;seriesRES
+; *****************************************************************
+procedure( compareRES( dev1 dev2 )
+ prog( ()
+
+; Make parameters case insensitive
+   L1 = L2 = W1 = W2 = R1 = R2 = float(0)
+   if( dev1->l then L1 = float( dev1->l ) )
+   if( dev2->l then L2 = float( dev2->l ) )
+   if( dev1->w then W1 = float( dev1->w ) )
+   if( dev2->w then W2 = float( dev2->w ) )
+   if( dev1->r then R1 = float( dev1->r ) )
+   if( dev2->r then R2 = float( dev2->r ) )
+   if( dev1->value then R1 = float( dev1->value ) )
+   if( dev2->value then R2 = float( dev2->value ) )
+   if( dev1->m then M1 = float( dev1->m ) else M1 = float(1) )
+   if( dev2->m then M2 = float( dev2->m ) else M2 = float(1) )
+   if( dev1->W then W1 = float( dev1->W ) )
+   if( dev2->W then W2 = float( dev2->W ) )
+   if( dev1->L then L1 = float( dev1->L ) )
+   if( dev2->L then L2 = float( dev2->L ) )
+   if( dev1->wr then W1 = float( dev1->wr ) )
+   if( dev2->wr then W2 = float( dev2->wr ) )
+   if( dev1->lr then L1 = float( dev1->lr ) )
+   if( dev2->lr then L2 = float( dev2->lr ) )
+   
+   if( dev1->VALUE then R1 = float( dev1->VALUE ) )
+   if( dev2->VALUE then R2 = float( dev2->VALUE ) )
+   if( dev1->R then R1 = float( dev1->R ) )
+   if( dev2->R then R2 = float( dev2->R ) )
+
+; The PDK uses w,l  other sources use w,r or Value
+; We've got to have something to work with.
+   sprintf( msg1 "" ) sprintf( msg2 "" )
+   parm_err = nil
+   if( ( W1==0 && L1==0 && R1==0 ) then
+    sprintf( msg2 "Lay RES missing params: l/w/r" )
+    parm_err = t
+   )
+   if( ( W2==0 && L2==0 && R2==0 ) then 
+    sprintf( msg1 "Sch RES missing params: l/w/r" )
+    parm_err = t
+   )
+   when( parm_err
+    sprintf( msg "Err: %s ; %s" msg1 msg2 )
+    return( msg )
+   )
+    
+   Lerr = Werr = t
+   Rerr = nil
+   diffL = diffR = diffW = float(0)
+    
+   if( ( L1 > 0 && L2 > 0 ) then
+    diffL = 100 * (abs( L1 - L2 ) / L1 )
+    when( diffL <= resL_lvsTol Lerr = nil )
+   )
+   layTW = float(W1 * M1)
+   schTW = float(W2 * M2)
+   if( ( layTW > 0 && schTW > 0 ) then
+    diffW = 100 * (abs( layTW - schTW ) / schTW )
+    when( diffW <= resW_lvsTol Werr = nil )
+    )
+   else if( ( layTW > 0 && schTW < 0 ) then
+    diffW = 100 * (abs( layTW - schTW ) / abs(schTW) )
+    when( diffW <= resW_lvsTol Werr = nil )
+    )
+
+   layTR = float(R1 * M1)
+   schTR = float(R2 * M2)
+   if( ( layTR > 0 && schTR > 0 ) then
+    Rerr = t
+    diffR = 100 * (abs( layTR - schTR ) / schTR )
+    when( diffR <= resR_lvsTol Rerr = nil )
+    Lerr = Werr = nil
+   )
+
+
+
+;   layTR = float(R1 * M1)
+;   schTR = float(R2 * M2)
+;   if( ( layTR > 0 && schTR > 0 ) then
+;    diffR = 100 * (abs( layTR - schTR ) / schTR )
+;    when( diffR <= resR_lvsTol Rerr = nil )
+;   )
+
+; If netlist W/L are both available then don't fail R
+; If only R is available then don't fail W/L
+; If W/L/R not available then fail all
+
+;   if( W1>0 && L1>0 && W2>0 && L2>0 then
+;    Rerr = nil
+;   else if( ( R1 > 0 && R2 > 0 ) then
+;     Rerr = t
+;     diffR = 100 * ( abs( R1 - R2 ) / R2 )
+;     when( diffR <= resR_lvsTol Rerr = nil )
+;     Lerr = Werr = nil
+;    else 
+;     Rerr = Lerr = Werr = t
+;    )
+;   )
+    
+; if no errors return nil
+    
+   when( !Werr && !Lerr && !Rerr return(nil) )
+    
+; now we know there is a parameter error      
+   if( Rerr then
+    sprintf( msg1 "Err: RES r %g vs %g differs by %g percent" 
+    R1 R2 diffR ) else sprintf( msg2 "" )
+   )
+   if( Lerr then
+    sprintf( msg2 "Err: RES l %g vs %g differs by %g percent" 
+    L2 L1 diffL ) else sprintf( msg1 "" )
+   )
+   if( Werr then
+    sprintf( msg3 "Err: RES w %g vs %g differs by %g percent" 
+    schTW layTW diffW ) else sprintf( msg3 "" )
+   )
+   sprintf( msg " %s \n %s \n %s" msg1 msg2 msg3 )
+   return( msg )
+ ) ; end prog
+) ; end compareRES
+; *****************************************************************
+procedure( compareRFRES( dev1 dev2 )
+ prog( ()
+
+; Make parameters case insensitive
+   L1 = L2 = W1 = W2 = R1 = R2 = float(0)
+   if( dev1->l then L1 = float( dev1->l ) )
+   if( dev2->l then L2 = float( dev2->l ) )
+   if( dev1->w then W1 = float( dev1->w ) )
+   if( dev2->w then W2 = float( dev2->w ) )
+   if( dev1->r then R1 = float( dev1->r ) )
+   if( dev2->r then R2 = float( dev2->r ) )
+   if( dev1->value then R1 = float( dev1->value ) )
+   if( dev2->value then R2 = float( dev2->value ) )
+   if( dev1->m then M1 = float( dev1->m ) else M1 = float(1) )
+   if( dev2->m then M2 = float( dev2->m ) else M2 = float(1) )
+   if( dev1->W then W1 = float( dev1->W ) )
+   if( dev2->W then W2 = float( dev2->W ) )
+   if( dev1->L then L1 = float( dev1->L ) )
+   if( dev2->L then L2 = float( dev2->L ) )
+   if( dev1->wr then W1 = float( dev1->wr ) )
+   if( dev2->wr then W2 = float( dev2->wr ) )
+   if( dev1->lr then L1 = float( dev1->lr ) )
+   if( dev2->lr then L2 = float( dev2->lr ) )
+   
+   if( dev1->VALUE then R1 = float( dev1->VALUE ) )
+   if( dev2->VALUE then R2 = float( dev2->VALUE ) )
+   if( dev1->R then R1 = float( dev1->R ) )
+   if( dev2->R then R2 = float( dev2->R ) )
+
+; The PDK uses w,l  other sources use w,r or Value
+; We've got to have something to work with.
+   sprintf( msg1 "" ) sprintf( msg2 "" )
+   parm_err = nil
+   if( ( W1==0 && L1==0 && R1==0 ) then
+    sprintf( msg2 "Lay RES missing params: l/w/r" )
+    parm_err = t
+   )
+   if( ( W2==0 && L2==0 && R2==0 ) then 
+    sprintf( msg1 "Sch RES missing params: l/w/r" )
+    parm_err = t
+   )
+   when( parm_err
+    sprintf( msg "Err: %s ; %s" msg1 msg2 )
+    return( msg )
+   )
+    
+   Lerr = Werr = t
+   Merr = nil
+   diffL = diffM = diffW = float(0)
+    
+   if( ( L1 > 0 && L2 > 0 ) then
+    diffL = 100 * (abs( L1 - L2 ) / L1 )
+    when( diffL <= resL_lvsTol Lerr = nil )
+   )
+   
+   layTW = float(W1)
+   schTW = float(W2)
+   if( ( layTW > 0 && schTW > 0 ) then
+    diffW = 100 * (abs( layTW - schTW ) / schTW )
+    when( diffW <= resW_lvsTol Werr = nil )
+    )
+   else if( ( layTW > 0 && schTW < 0 ) then
+    diffW = 100 * (abs( layTW - schTW ) / abs(schTW) )
+    when( diffW <= resW_lvsTol Werr = nil )
+    )
+
+   layM = float(M1)
+   schM = float(M2)
+   Merr = t
+   diffM = abs( M1 - M2 )
+   when( diffM <= resM_lvsTol Merr = nil )    
+    
+;   if( ( layM > 0 && schM > 0 ) then
+;    Merr = t
+;    diffM = 100 * (abs( layM - schM ) / schM )
+;    when( diffM <= resM_lvsTol Merr = nil )
+;    Lerr = Werr = nil
+;   )
+
+    
+; if no errors return nil
+    
+   when( !Werr && !Lerr && !Merr return(nil) )
+    
+; now we know there is a parameter error      
+   if( Merr then
+    sprintf( msg1 "Err: RES m %g vs %g differs by %g percent" 
+    M1 M2 diffM ) else sprintf( msg2 "" )
+   )
+   if( Lerr then
+    sprintf( msg2 "Err: RES l %g vs %g differs by %g percent" 
+    L2 L1 diffL ) else sprintf( msg1 "" )
+   )
+   if( Werr then
+    sprintf( msg3 "Err: RES w %g vs %g differs by %g percent" 
+    schTW layTW diffW ) else sprintf( msg3 "" )
+   )
+   sprintf( msg " %s \n %s \n %s" msg1 msg2 msg3 )
+   return( msg )
+ ) ; end prog
+) ; end compareRFRES
+; *****************************************************************
+procedure( parallelMOSVAR( dev1 dev2 )
+ prog( ( parMV)
+   parMV = ncons(nil)
+   W1 = W2 = B1 = B2 = G1 = G2 = float(0)
+   M1 = M2 = float(1)
+   if( dev1->m then M1 = float(dev1->m) )
+   if( dev2->m then M2 = float(dev2->m) )
+   if( dev1->wr then W1 = float(dev1->wr) )
+   if( dev2->wr then W2 = float(dev2->wr) )
+   if( dev1->br then B1 = float(dev1->br) )
+   if( dev2->br then B2 = float(dev2->br) )
+   if( dev1->gr then G1 = float(dev1->gr) )
+   if( dev2->gr then G2 = float(dev2->gr) )
+
+   unless( (W1 == W2) && (B1 == B2) && (G1 == G2) 
+    printf( "\n** Unequal Parallel mos_var NOT combined: \n" )
+    printf( " 1st device: m= %g wr= %g br= %g gr= %g \n" M1 W1 B1 G1 )
+    printf( " 2nd device: m= %g wr= %g br= %g gr= %g \n" M2 W2 B2 G2 )
+    return("doNotCombine")
+   )
+   newM = float( M1 + M2 )
+   parMV->m = newM
+   parMV->wr = float(W1)
+   parMV->br = float(B1)
+   parMV->gr = float(G1)
+   printf( "\n** Parallel mos_var combined: \n" )
+   printf( " 1st device: m= %g wr= %g br= %g gr= %g \n" M1 W1 B1 G1 )
+   printf( " 2nd device: m= %g wr= %g br= %g gr= %g \n" M2 W2 B2 G2 )
+   printf( " resulting : m= %g wr= %g br= %g gr= %g \n" newM W1 B1 G1 )
+   return(parMV)
+ ) ; end prog
+) ; end parallelMOSVAR
+; *****************************************************************
+procedure( compareMOSVAR( dev1 dev2 )
+ prog( ()
+   W1 = W2 = B1 = B2 = G1 = G2 = float(0)
+   M1 = M2 = float(1)
+   if( dev1->m then M1 = float(dev1->m) )
+   if( dev2->m then M2 = float(dev2->m) )
+   if( dev1->wr then W1 = float(dev1->wr) )
+   if( dev2->wr then W2 = float(dev2->wr) )
+   if( dev1->br then B1 = float(dev1->br) )
+   if( dev2->br then B2 = float(dev2->br) )
+   if( dev1->gr then G1 = float(dev1->gr) )
+   if( dev2->gr then G2 = float(dev2->gr) )
+
+   Werr = Berr = Gerr = Merr = t
+   diffM = abs( M1 - M2 )
+   diffW = diffB = diffG = float(1)
+   when( diffM <= MOSVAR_lvsTol Merr = nil )
+   if( ( W1 > 0 && W2 > 0 ) then
+           diffW = abs( W1 - W2 )
+           when( diffW <= MOSVAR_lvsTol Werr = nil )
+   )
+   if( ( B1 > 0 && B2 > 0 ) then
+           diffB = abs( B1 - B2 )
+           when( diffB <= MOSVAR_lvsTol Berr = nil )
+   )
+   if( ( G1 > 0 && G2 > 0 ) then
+           diffG = abs( G1 - G2 )
+           when( diffG <= MOSVAR_lvsTol Gerr = nil )
+   )
+
+   if( Merr || Werr || Berr || Gerr then
+   sprintf( msg1 "Err: mos_var Sch m=%g wr=%g br=%g gr=%g \n" M2 W2 B2 G2 )
+   sprintf( msg2 "Err:         Lay m=%g wr=%g br=%g gr=%g \n" M1 W1 B1 G1 )
+   sprintf( msg "%s%s" msg1 msg2 )
+   return( msg )
+  )
+ ) ; end prog
+) ; end compareMOSVAR
+; *****************************************************************
+procedure( compareDIODE_woAREA( dev1 dev2 )
+ prog( ( )
+   N1 = N2 = W1 = W2 = L1 = L2 = diffL = diffW = diffN = diffDTI = float(0)
+   M1 = M2 = float(1)
+   if( dev1->m then M1 = float(dev1->m) )
+   if( dev2->m then M2 = float(dev2->m) )
+   if( dev1->M then M1 = float(dev1->M) )
+   if( dev2->M then M2 = float(dev2->M) )
+
+   Aerr = t
+
+   if( ( M2 > 0 && M1 > 0 ) then Aerr = nil )
+
+   if( Aerr then
+      sprintf( msg1 "Err: DIODE Sch m= %g \n" M2 )
+      sprintf( msg2 "Err:       Lay m= %g \n" M1 )
+      sprintf( msg "%s%s" msg1 msg2 )
+      return( msg )
+   )
+
+ ) ; end prog
+) ; end compareDIODE_woAREA
+
+; *****************************************************************
+; *****************************************************************
+; *****************************************************************
+
+  mergeSeries( BJT noMerge )
+  compareParameter( BJT percent( "AREA" 0 ) )
+
+  compareParameter( MOS percent(  "w" 0 "l" 0 ) )
+  compareParameter( LDD percent(  "w" 0 "l" 0 ) )
+
+  RFMOS_lvsTol = 0
+ 
+  mergeParallel( "rfnmos1v(Generic)" merge parallelRFMOS )
+  compareParameter( "rfnmos1v(Generic)" compareRFMOS )
+  mergeParallel( "nmos_rf(Generic)" merge parallelRFMOS )
+  compareParameter( "nmos_rf(Generic)" compareRFMOS )
+
+  mergeParallel( "rfnmos2v(Generic)" merge parallelRFMOS )
+  compareParameter( "rfnmos2v(Generic)" compareRFMOS )
+  mergeParallel( "nmos_rf25(Generic)" merge parallelRFMOS )
+  compareParameter( "nmos_rf25(Generic)" compareRFMOS )
+
+  mergeParallel( "rfnmos3v(Generic)" merge parallelRFMOS )
+  compareParameter( "rfnmos3v(Generic)" compareRFMOS )
+  mergeParallel( "nmos_rf33(Generic)" merge parallelRFMOS )
+  compareParameter( "nmos_rf33(Generic)" compareRFMOS )
+
+  mergeParallel( "rfpmos1v(Generic)" merge parallelRFMOS )
+  compareParameter( "rfpmos1v(Generic)" compareRFMOS )
+  mergeParallel( "pmos_rf(Generic)" merge parallelRFMOS )
+  compareParameter( "pmos_rf(Generic)" compareRFMOS )
+
+  mergeParallel( "rfpmos2v(Generic)" merge parallelRFMOS )
+  compareParameter( "rfpmos2v(Generic)" compareRFMOS )
+  mergeParallel( "pmos_rf25(Generic)" merge parallelRFMOS )
+  compareParameter( "pmos_rf25(Generic)" compareRFMOS )
+
+  mergeParallel( "rfpmos3v(Generic)" merge parallelRFMOS )
+  compareParameter( "rfpmos3v(Generic)" compareRFMOS )
+  mergeParallel( "pmos_rf33(Generic)" merge parallelRFMOS )
+  compareParameter( "pmos_rf33(Generic)" compareRFMOS )
+
+  mergeParallel( "rfpmos1v_nw(Generic)" merge parallelRFMOS )
+  compareParameter( "rfpmos1v_nw(Generic)" compareRFMOS )
+  mergeParallel( "pmos_rf_nw(Generic)" merge parallelRFMOS )
+  compareParameter( "pmos_rf_nw(Generic)" compareRFMOS )
+
+  mergeParallel( "rfpmos2v_nw(Generic)" merge parallelRFMOS )
+  compareParameter( "rfpmos2v_nw(Generic)" compareRFMOS )
+  mergeParallel( "pmos_rf25_nw(Generic)" merge parallelRFMOS )
+  compareParameter( "pmos_rf25_nw(Generic)" compareRFMOS )
+
+  mergeParallel( "rfpmos3v_nw(Generic)" merge parallelRFMOS )
+  compareParameter( "rfpmos3v_nw(Generic)" compareRFMOS )
+  mergeParallel( "pmos_rf33_nw(Generic)" merge parallelRFMOS )
+  compareParameter( "pmos_rf33_nw(Generic)" compareRFMOS )
+
+  mergeSeries( CAP noMerge )
+  compareParameter( CAP percent( "VALUE" 0.05 ) )
+
+  CAP_lvsTol = 0
+  mergeParallel( "mimcap_um(Generic)" merge parallelCAP )
+  compareParameter( "mimcap_um(Generic)" compareCAP)
+  mergeParallel( "mimcap_um_1p0_sin_rf(Generic)" merge parallelCAP )
+  compareParameter( "mimcap_um_1p0_sin_rf(Generic)" compareCAP)
+  mergeParallel( "mimcap_um_1p5_sin_rf(Generic)" merge parallelCAP )
+  compareParameter( "mimcap_um_1p5_sin_rf(Generic)" compareCAP)
+  mergeParallel( "mimcap_um_2p0_sin_rf(Generic)" merge parallelCAP )
+  compareParameter( "mimcap_um_2p0_sin_rf(Generic)" compareCAP)  
+  mergeParallel( "mimcap_woum(Generic)" merge parallelCAP_WOUM )
+  compareParameter( "mimcap_woum(Generic)" compareCAP_WOUM )
+  mergeParallel( "mimcap_woum_1p0_sin_rf(Generic)" merge parallelCAP_WOUM )
+  compareParameter( "mimcap_woum_1p0_sin_rf(Generic)" compareCAP_WOUM )
+  mergeParallel( "mimcap_woum_1p5_sin_rf(Generic)" merge parallelCAP_WOUM )
+  compareParameter( "mimcap_woum_1p5_sin_rf(Generic)" compareCAP_WOUM )
+  mergeParallel( "mimcap_woum_2p0_sin_rf(Generic)" merge parallelCAP_WOUM )
+  compareParameter( "mimcap_woum_2p0_sin_rf(Generic)" compareCAP_WOUM )  
+
+  compareParameter( DIODE percent( "VALUE" 0.001 ) )
+
+  MOSCAP_lvsTol = 0
+
+  mergeParallel( "nmoscap(Generic)" merge parallelMOSCAP )
+  compareParameter( "nmoscap(Generic)" compareMOSCAP)
+  mergeParallel( "nc1(Generic)" merge parallelMOSCAP )
+  compareParameter( "nc1(Generic)" compareMOSCAP)
+
+  mergeParallel( "nmoscap_25(Generic)" merge parallelMOSCAP )
+  compareParameter( "nmoscap_25(Generic)" compareMOSCAP)
+  mergeParallel( "nmoscap_33(Generic)" merge parallelMOSCAP )
+  compareParameter( "nmoscap_33(Generic)" compareMOSCAP)
+  mergeParallel( "nmoscap_5(Generic)" merge parallelMOSCAP )
+  compareParameter( "nmoscap_5(Generic)" compareMOSCAP)  
+  mergeParallel( "nc2(Generic)" merge parallelMOSCAP )
+  compareParameter( "nc2(Generic)" compareMOSCAP)
+
+  mergeParallel( "pmoscap(Generic)" merge parallelMOSCAP )
+  compareParameter( "pmoscap(Generic)" compareMOSCAP)
+  mergeParallel( "pc1(Generic)" merge parallelMOSCAP )
+  compareParameter( "pc1(Generic)" compareMOSCAP)
+
+  mergeParallel( "pmoscap_25(Generic)" merge parallelMOSCAP )
+  compareParameter( "pmoscap_25(Generic)" compareMOSCAP)
+  mergeParallel( "pmoscap_33(Generic)" merge parallelMOSCAP )
+  compareParameter( "pmoscap_33(Generic)" compareMOSCAP)
+  mergeParallel( "pmoscap_5(Generic)" merge parallelMOSCAP )
+  compareParameter( "pmoscap_5(Generic)" compareMOSCAP)  
+  mergeParallel( "pc2(Generic)" merge parallelMOSCAP )
+  compareParameter( "pc2(Generic)" compareMOSCAP)
+
+  mergeParallel( "npolycap_33(Generic)" merge parallelMOSCAP )
+  compareParameter( "npolycap_33(Generic)" compareMOSCAP)
+  mergeParallel( "npolycap_33_psub(Generic)" merge parallelMOSCAP )
+  compareParameter( "npolycap_33_psub(Generic)" compareMOSCAP)
+
+  rfcapL_lvsTol = 2e-3
+  rfcapW_lvsTol = 2e-3
+  rfcapG_lvsTol = 2e-3
+  rfcapB_lvsTol = 2e-3
+
+  mergeParallel( "mos_var(Generic)" merge parallelRFCAP )
+  compareParameter( "mos_var(Generic)" compareRFCAP )
+  mergeParallel( "moscap_rf(Generic)" merge parallelRFCAP )
+  compareParameter( "moscap_rf(Generic)" compareRFCAP )
+ 
+  mergeParallel( "mos_var25(Generic)" merge parallelRFCAP )
+  compareParameter( "mos_var25(Generic)" compareRFCAP )
+  mergeParallel( "moscap_rf25(Generic)" merge parallelRFCAP )
+  compareParameter( "moscap_rf25(Generic)" compareRFCAP )
+
+  mergeParallel( "mos_var33(Generic)" merge parallelRFCAP )
+  compareParameter( "mos_var33(Generic)" compareRFCAP )
+  mergeParallel( "moscap_rf33(Generic)" merge parallelRFCAP )
+  compareParameter( "moscap_rf33(Generic)" compareRFCAP )
+
+  mergeParallel( "mos_var_nw(Generic)" merge parallelRFCAP )
+  compareParameter( "mos_var_nw(Generic)" compareRFCAP )
+  mergeParallel( "moscap_rf_nw(Generic)" merge parallelRFCAP )
+  compareParameter( "moscap_rf_nw(Generic)" compareRFCAP )
+
+  mergeParallel( "mos_var25_nw(Generic)" merge parallelRFCAP )
+  compareParameter( "mos_var25_nw(Generic)" compareRFCAP )
+  mergeParallel( "moscap_rf25_nw(Generic)" merge parallelRFCAP )
+  compareParameter( "moscap_rf25_nw(Generic)" compareRFCAP )
+
+  mergeParallel( "mos_var33_nw(Generic)" merge parallelRFCAP )
+  compareParameter( "mos_var33_nw(Generic)" compareRFCAP )
+  mergeParallel( "moscap_rf33_nw(Generic)" merge parallelRFCAP )
+  compareParameter( "moscap_rf33_nw(Generic)" compareRFCAP )
+
+  VAR_lvsTol = 0
+  MOSVAR_lvsTol = 0
+
+  mergeParallel( "xjvar(Generic)" merge parallelVAR )
+  compareParameter( "xjvar(Generic)" compareVAR)
+  mergeParallel( "jvar(Generic)" merge parallelVAR )
+  compareParameter( "jvar(Generic)" compareVAR)
+
+  mergeParallel( "xjvar_nw(Generic)" merge parallelVAR )
+  compareParameter( "xjvar_nw(Generic)" compareVAR)
+  mergeParallel( "jvar_nw(Generic)" merge parallelVAR )
+  compareParameter( "jvar_nw(Generic)" compareVAR)
+
+  IND_lvsTol = 0 
+  
+  mergeParallel( "spiral_std(Generic)" merge parallelIND )
+  compareParameter( "spiral_std(Generic)" compareIND )
+  mergeParallel( "spiral_sym(Generic)" merge parallelIND )
+  compareParameter( "spiral_sym(Generic)" compareIND )
+  mergeParallel( "spiral_sym_ct(Generic)" merge parallelIND )
+  compareParameter( "spiral_sym_ct(Generic)" compareIND )
+
+  resL_lvsTol = 0
+  resW_mergeTol = 0
+  resW_lvsTol = 0
+  resR_lvsTol = 0
+  resM_lvsTol = 0
+
+  compareParameter( RES percent(  "VALUE" 0.02 ) )
+
+  mergeParallel( "rnlplus(Generic)" merge parallelRES)
+  mergeSeries( "rnlplus(Generic)" merge seriesRES)
+  compareParameter( "rnlplus(Generic)" compareRES)
+  mergeParallel( "rnodl_m(Generic)" merge parallelRES)
+  mergeSeries( "rnodl_m(Generic)" merge seriesRES)
+  compareParameter( "rnodl_m(Generic)" compareRES)
+  mergeParallel( "rnods_m(Generic)" merge parallelRES)
+  mergeSeries( "rnods_m(Generic)" merge seriesRES)
+  compareParameter( "rnods_m(Generic)" compareRES)
+
+  mergeParallel( "rnplus(Generic)" merge parallelRES)
+  mergeSeries( "rnplus(Generic)" merge seriesRES)
+  compareParameter( "rnplus(Generic)" compareRES)
+  mergeParallel( "rnodwo_m(Generic)" merge parallelRES)
+  mergeSeries( "rnodwo_m(Generic)" merge seriesRES)
+  compareParameter( "rnodwo_m(Generic)" compareRES)
+
+  mergeParallel( "rnpoly_dis(Generic)" merge parallelRES)
+  mergeSeries( "rnpoly_dis(Generic)" merge seriesRES)
+  compareParameter( "rnpoly_dis(Generic)" compareRES)
+  mergeParallel( "rnpolyl_dis(Generic)" merge parallelRES)
+  mergeSeries( "rnpolyl_dis(Generic)" merge seriesRES)
+  compareParameter( "rnpolyl_dis(Generic)" compareRES)
+  mergeParallel( "rnpolys_dis(Generic)" merge parallelRES)
+  mergeSeries( "rnpolys_dis(Generic)" merge seriesRES)
+  compareParameter( "rnpolys_dis(Generic)" compareRES)
+
+  mergeParallel( "rnpolywo_dis(Generic)" merge parallelRES)
+  mergeSeries( "rnpolywo_dis(Generic)" merge seriesRES)
+  compareParameter( "rnpolywo_dis(Generic)" compareRES)
+
+  mergeParallel( "rnpolywo_m(Generic)" merge parallelRES)
+  mergeSeries( "rnpolywo_m(Generic)" merge seriesRES)
+  compareParameter( "rnpolywo_m(Generic)" compareRES)
+  
+  mergeParallel( "rnwellod(Generic)" merge parallelRES)
+  mergeSeries( "rnwellod(Generic)" merge seriesRES)
+  compareParameter( "rnwellod(Generic)" compareRES)
+
+  mergeParallel( "rnwod_m(Generic)" merge parallelRES)
+  mergeSeries( "rnwod_m(Generic)" merge seriesRES)
+  compareParameter( "rnwod_m(Generic)" compareRES)
+
+  mergeParallel( "rnwsti_m(Generic)" merge parallelRES)
+  mergeSeries( "rnwsti_m(Generic)" merge seriesRES)
+  compareParameter( "rnwsti_m(Generic)" compareRES)
+
+  mergeParallel( "rnwell_3t(Generic)" merge parallelRES)
+  mergeSeries( "rnwell_3t(Generic)" merge seriesRES)
+  compareParameter( "rnwell_3t(Generic)" compareRES)
+  
+  mergeParallel( "rphpoly_rf(Generic)" merge parallelRFRES)
+;  mergeSeries( "rphpoly_rf(Generic)" merge seriesRES)
+  compareParameter( "rphpoly_rf(Generic)" compareRFRES)
+  mergeParallel( "rppolywo_rf(Generic)" merge parallelRFRES)
+;  mergeSeries( "rppolywo_rf(Generic)" merge seriesRES)
+  compareParameter( "rppolywo_rf(Generic)" compareRFRES)
+
+  mergeParallel( "rphripoly(Generic)" merge parallelRES)
+  mergeSeries( "rphripoly(Generic)" merge seriesRES)
+  compareParameter( "rphripoly(Generic)" compareRES)
+  
+  mergeParallel( "rphripoly_2k(Generic)" merge parallelRES)
+  mergeSeries( "rphripoly_2k(Generic)" merge seriesRES)
+  compareParameter( "rphripoly_2k(Generic)" compareRES)
+  
+  mergeParallel( "rphripoly_rf(Generic)" merge parallelRFRES)
+;  mergeSeries( "rphripoly_rf(Generic)" merge seriesRES)
+  compareParameter( "rphripoly_rf(Generic)" compareRFRES)
+
+  mergeParallel( "rplplus(Generic)" merge parallelRES)
+  mergeSeries( "rplplus(Generic)" merge seriesRES)
+  compareParameter( "rplplus(Generic)" compareRES)
+  mergeParallel( "rpodl_m(Generic)" merge parallelRES)
+  mergeSeries( "rpodl_m(Generic)" merge seriesRES)
+  compareParameter( "rpodl_m(Generic)" compareRES)
+  mergeParallel( "rpods_m(Generic)" merge parallelRES)
+  mergeSeries( "rpods_m(Generic)" merge seriesRES)
+  compareParameter( "rpods_m(Generic)" compareRES)
+
+  mergeParallel( "rplpoly_rf(Generic)" merge parallelRFRES)
+;  mergeSeries( "rplpoly_rf(Generic)" merge seriesRES)
+  compareParameter( "rplpoly_rf(Generic)" compareRFRES)
+  mergeParallel( "rppolyl_rf(Generic)" merge parallelRFRES)
+;  mergeSeries( "rppolyl_rf(Generic)" merge seriesRES)
+  compareParameter( "rppolyl_rf(Generic)" compareRFRES)
+  mergeParallel( "rppolys_rf(Generic)" merge parallelRFRES)
+;  mergeSeries( "rppolys_rf(Generic)" merge seriesRES)
+  compareParameter( "rppolys_rf(Generic)" compareRFRES)
+
+  mergeParallel( "rpplus(Generic)" merge parallelRES)
+  mergeSeries( "rpplus(Generic)" merge seriesRES)
+  compareParameter( "rpplus(Generic)" compareRES)
+  mergeParallel( "rpodwo_m(Generic)" merge parallelRES)
+  mergeSeries( "rpodwo_m(Generic)" merge seriesRES)
+  compareParameter( "rpodwo_m(Generic)" compareRES)
+
+  mergeParallel( "rppoly_dis(Generic)" merge parallelRES)
+  mergeSeries( "rppoly_dis(Generic)" merge seriesRES)
+  compareParameter( "rppoly_dis(Generic)" compareRES)
+  mergeParallel( "rppolyl_dis(Generic)" merge parallelRES)
+  mergeSeries( "rppolyl_dis(Generic)" merge seriesRES)
+  compareParameter( "rppolyl_dis(Generic)" compareRES)
+  mergeParallel( "rppolys_dis(Generic)" merge parallelRES)
+  mergeSeries( "rppolys_dis(Generic)" merge seriesRES)
+  compareParameter( "rppolys_dis(Generic)" compareRES)
+
+  mergeParallel( "rppolyhri(Generic)" merge parallelRES)
+  mergeSeries( "rppolyhri(Generic)" merge seriesRES)
+  compareParameter( "rppolyhri(Generic)" compareRES)
+
+  mergeParallel( "rppolyhri_2k(Generic)" merge parallelRES)
+  mergeSeries( "rppolyhri_2k(Generic)" merge seriesRES)
+  compareParameter( "rppolyhri_2k(Generic)" compareRES)
+  
+  mergeParallel( "rppolyhri_dis(Generic)" merge parallelRES)
+  mergeSeries( "rppolyhri_dis(Generic)" merge seriesRES)
+  compareParameter( "rppolyhri_dis(Generic)" compareRES)
+
+  mergeParallel( "rppolyhri_rf(Generic)" merge parallelRFRES)
+;  mergeSeries( "rppolyhri_rf(Generic)" merge seriesRES)
+  compareParameter( "rppolyhri_rf(Generic)" compareRFRES)
+
+  mergeParallel( "rppolywo_dis(Generic)" merge parallelRES)
+  mergeSeries( "rppolywo_dis(Generic)" merge seriesRES)
+  compareParameter( "rppolywo_dis(Generic)" compareRES)
+
+  mergeParallel( "rppolywo_m(Generic)" merge parallelRES)
+  mergeSeries( "rppolywo_m(Generic)" merge seriesRES)
+  compareParameter( "rppolywo_m(Generic)" compareRES)
+  
+  MOM_lvsTol = 1e-09
+  
+  mergeParallel( "crtmom(Generic)" merge parallelMOM )
+  compareParameter( "crtmom(Generic)" compareMOM)
+
+  mergeParallel( "crtmom_rf(Generic)" merge parallelMOM )
+  compareParameter( "crtmom_rf(Generic)" compareMOM)
+ 
+  mergeParallel( "sbd_rf(Generic)" merge   parallelSBD )
+  compareParameter( "sbd_rf(Generic)" compareSBD )
+  
+  mergeParallel( "sbd_rf_nw(Generic)" merge   parallelSBD )
+  compareParameter( "sbd_rf_nw(Generic)" compareSBD )
+  if( !avSwitch( "compare_parasitic_diodes" ) then
+		compareParameter( "nblpepi_iso_dio(DIO)"	compareDIODE_woAREA )
+		compareParameter( "nblpepi_iso_dio_60(DIO)"	compareDIODE_woAREA )
+		compareParameter( "pwpepinbl_dio(DIO)"		compareDIODE_woAREA )
+		compareParameter( "pwpepinbl_dio_5(DIO)"	compareDIODE_woAREA )
+		compareParameter( "pwpepinbl_dio_60(DIO)"	compareDIODE_woAREA )
+		compareParameter( "pwpepinbl_dio_5_60(DIO)"	compareDIODE_woAREA )
+		compareParameter( "dnwpsub(DIO)"			compareDIODE_woAREA )
+		compareParameter( "pwdnw(DIO)"				compareDIODE_woAREA )
+		compareParameter( "pwdnw_5(DIO)"			compareDIODE_woAREA )
+  )
+  mergeSplitGate( sameOrder )
+  expandOnError((reduce t)(swap t)(swapThres t)(parameter t)(pins t))
+
+) ; avCompareRules complete

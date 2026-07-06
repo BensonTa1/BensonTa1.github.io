@@ -1,0 +1,31 @@
+Starting Single Run, Sweeps and Corners...
+
+Current time: Tue Nov 19 13:51:53 2024 
+Best design point: 1
+Design specs: 
+	TEST:VCO_5G:1	corner	C1_0_0 - 
+	harm=1 freq; pss (Hz)		4.527G
+	v /VOUTN VC=0; 1; pss dB20(Vrms)		-5.105
+	TEST:VCO_5G:1	corner	C1_0_1 - 
+	harm=1 freq; pss (Hz)		4.555G
+	v /VOUTN VC=0; 1; pss dB20(Vrms)		-5.1
+	TEST:VCO_5G:1	corner	C1_0_2 - 
+	harm=1 freq; pss (Hz)		4.495G
+	v /VOUTN VC=0; 1; pss dB20(Vrms)		-5.113
+	TEST:VCO_5G:1	corner	C1_0_3 - 
+	harm=1 freq; pss (Hz)		4.592G
+	v /VOUTN VC=0; 1; pss dB20(Vrms)		-5.109
+	TEST:VCO_5G:1	corner	C1_0_4 - 
+	harm=1 freq; pss (Hz)		4.546G
+	v /VOUTN VC=0; 1; pss dB20(Vrms)		-5.102
+	TEST:VCO_5G:1	corner	Nominal - 
+	harm=1 freq; pss (Hz)		4.527G
+	v /VOUTN VC=0; 1; pss dB20(Vrms)		-5.105
+Design parameters: 
+	VDD		1.8
+	VC		0
+	temperature		-100
+
+Received stop signal from user. 
+Interactive.6 completed. 
+Current time: Tue Nov 19 13:52:35 2024 

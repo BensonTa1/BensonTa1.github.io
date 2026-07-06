@@ -1,0 +1,92 @@
+\o Program:		@(#)$CDS: libManager version 6.1.8 - CAT37 09/24/2018 21:00 (ip-172-18-22-224) $
+\o Sub version:		sub-version  p015 
+\o Arguments:		-unmapped -mpssession virtuoso15336 -mpshost IC 
+\o Working Directory:	IC:/home/IC/Desktop/virtuoso/Process/TSMC13/TSMC13
+\o 64-bit offsets
+\o Qt version: 		5.9.1
+\o DB was auto refreshed.
+\o changeWorkingDir("/home/IC/Desktop/virtuoso/Process/TSMC13/TSMC13") unnecessary.
+\o ddSetForcedLib("") unnecessary.
+\o Log file is "/home/IC/Desktop/virtuoso/Process/TSMC13/TSMC13/libManager.log".
+\o Opening libManager window.
+\a nrSetWindowVisibility(cdsLibManager "show")
+\o MPS service: map window
+\o Library Manager customization server connected.
+\a nrSetCurrentWindow(cdsLibManager)
+\a nrResizeWindow(cdsLibManager list(906 93 959 776))
+\a cdsLibManager->libListBox->value = "TSMC13"
+\a cdsLibManager->libLineEdit->value = "TSMC13"
+\a cdsLibManager->cellListBox->value = "ruleVia"
+\a cdsLibManager->cellLineEdit->value = "ruleVia"
+\a cdsLibManager->viewListBox->value = "symbolic"
+\a cdsLibManager->viewLineEdit->value = "symbolic"
+\a cdsLibManager->libListBox->value = "tsmc13rf"
+\a cdsLibManager->libLineEdit->value = "tsmc13rf"
+\a cdsLibManager->cellLineEdit->value = ""
+\a cdsLibManager->cellListBox->value = nil
+\a cdsLibManager->viewLineEdit->value = ""
+\a cdsLibManager->viewListBox->value = nil
+\a cdsLibManager->cellListBox->value = "ruleVia"
+\a cdsLibManager->cellLineEdit->value = "ruleVia"
+\a cdsLibManager->viewListBox->value = "symbolic"
+\a cdsLibManager->viewLineEdit->value = "symbolic"
+\a cdsLibManager->viewLineEdit->value = ""
+\a cdsLibManager->viewListBox->value = nil
+\a cdsLibManager->viewListBox->value = "symbolic"
+\a cdsLibManager->viewLineEdit->value = "symbolic"
+\a cdsLibManager->libListBox->value = "TSMC13"
+\a cdsLibManager->libLineEdit->value = "TSMC13"
+\a cdsLibManager->cellLineEdit->value = ""
+\a cdsLibManager->cellListBox->value = nil
+\a cdsLibManager->viewLineEdit->value = ""
+\a cdsLibManager->viewListBox->value = nil
+\a cdsLibManager->cellListBox->value = "ruleVia"
+\a cdsLibManager->cellLineEdit->value = "ruleVia"
+\a cdsLibManager->viewListBox->value = "symbolic"
+\a cdsLibManager->viewLineEdit->value = "symbolic"
+\a cdsLibManager->viewLineEdit->value = ""
+\a cdsLibManager->viewListBox->value = nil
+\a cdsLibManager->viewListBox->value = "symbolic"
+\a cdsLibManager->viewLineEdit->value = "symbolic"
+\a nrSetCurrentWindow(cdsLibManager)
+\a cdsLibManager->libListBox->value = nil
+\a cdsLibManager->libLineEdit->value = ""
+\a cdsLibManager->cellListBox->value = nil
+\a cdsLibManager->viewLineEdit->value = ""
+\a cdsLibManager->viewListBox->value = nil
+\a cdsLibManager->cellLineEdit->value = ""
+\a cdsLibManager->libListBox->value = "TSMC13"
+\a cdsLibManager->libLineEdit->value = "TSMC13"
+\a cdsLibManager->cellListBox->value = "ruleVia"
+\a cdsLibManager->cellLineEdit->value = "ruleVia"
+\a cdsLibManager->viewListBox->value = "symbolic"
+\a cdsLibManager->viewLineEdit->value = "symbolic"
+\a cdsLibManager->cellLineEdit->value = ""
+\a cdsLibManager->cellListBox->value = nil
+\a cdsLibManager->viewLineEdit->value = ""
+\a cdsLibManager->viewListBox->value = nil
+\a cdsLibManager->cellListBox->value = "ruleVia"
+\a cdsLibManager->cellLineEdit->value = "ruleVia"
+\a cdsLibManager->viewListBox->value = "symbolic"
+\a cdsLibManager->viewLineEdit->value = "symbolic"
+\a cdsLibManager->viewLineEdit->value = ""
+\a cdsLibManager->viewListBox->value = nil
+\a cdsLibManager->viewListBox->value = "symbolic"
+\a cdsLibManager->viewLineEdit->value = "symbolic"
+\a cdsLibManager->viewLineEdit->value = ""
+\a cdsLibManager->viewListBox->value = nil
+\a cdsLibManager->viewListBox->value = "symbolic"
+\a cdsLibManager->viewLineEdit->value = "symbolic"
+\a nrSetCurrentWindow(cdsLibManager)
+\a nrSetCurrentWindow(cdsLibManager)
+\a cdsLibManager->libListBox->value = "analogLib"
+\a cdsLibManager->libLineEdit->value = "analogLib"
+\a cdsLibManager->cellLineEdit->value = ""
+\a cdsLibManager->cellListBox->value = nil
+\a cdsLibManager->viewLineEdit->value = ""
+\a cdsLibManager->viewListBox->value = nil
+\a cdsLibManager->libListBox->value = "tsmc13rf"
+\a cdsLibManager->libLineEdit->value = "tsmc13rf"
+\o MPS service: shutdown
+\o libManager is exiting.
+\a exit(0)

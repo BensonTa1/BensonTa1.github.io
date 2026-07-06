@@ -1,0 +1,33 @@
+//  ************************************************************************* 
+simulator lang=spectre insensitive=yes
+//        L110AE RF Bonding Pad V.02p1 
+//        May 2010 by Ji Wei Hsu 
+//  
+//       This model support 
+//          1. Metal layer option ( 1P8M)  
+//          2. Metal thickness option ( 40.0K ) 
+//          3. Pad type  50 um BOAC pad   (pad width=53um, pad length=80.2um)
+//  
+//  ************************************************************************* 
+ //   Corner Case: 
+//     1. ff: minimum capacitance  
+//     2. tt: typical 
+//     3. ss: maximum capacitance 
+//  
+library mylib
+section tt
+parameters d_cpad=0
+include "l110ae_pad_rf_v021.mdl.scs"
+endsection tt
+//  
+section ff
+parameters d_cpad=-0.15
+include "l110ae_pad_rf_v021.mdl.scs"
+endsection ff
+//  
+section ss
+parameters d_cpad=0.15
+include "l110ae_pad_rf_v021.mdl.scs"
+endsection ss
+ // 
+endlibrary mylib

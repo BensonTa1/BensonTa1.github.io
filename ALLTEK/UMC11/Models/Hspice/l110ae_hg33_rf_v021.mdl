@@ -1,0 +1,856 @@
+********************************************************************************
+* Property of UMC.
+* Unauthorized reproduction, modification and/or distribution are strictly
+* prohibited.
+* This product is protected under copyright law and trade secret law.
+* This model card may not be sent in any form outside of UMC without
+* the written consent of the UMC ATD Modeling Division.
+********************************************************************************
+* Process:      0.11um UMC RFCMOS Al Advanced Enhancement 3.3V Process
+* Device Type:  N- and P-FET  
+* Description:  3.3V High Gain 
+* Model:        Subcircuit BSIM3.2.4 RF model(HSPICE Level=49)
+* Simulator:    HSPICE 
+* Model Version:0.2_p1
+* Model Features:
+*     Global model:  Yes
+*     Igate model:  No
+*     GIDL model: No
+*     Substrate current model: Yes
+*     Flicker noise: Yes
+*     LOD model: Yes
+*     RF model: RF
+*     Well proximity effect: No
+********************************************************************************
+* Revision History:
+*
+* <Revision 1>
+* Version : 0.2 phase 1
+* Date    : 2012/05/29
+* Author  : Daniel Wan
+* Remark  : Silicon-based model
+*
+** *****************************************************
+** *  Subcircuit of the BSIM3 RF macro model           *
+** *  for  0.11um RFCMOS process                       *
+** *  3.3V High Gain Twin Well RF n-type MOS transistors         
+** *                                                   *
+****  Scaling Range(before 90% shrink):                *
+****    1. Finger width (wf): 3um ~ 12um               *
+****    2. Finger length (lf): 0.34um ~ 1um            *
+****    3. Finger No. (nf): 2 ~ 32                     *
+****  Voltage range: upto 3.3V                         *
+****  Temperature range:  -50C ~ 125C                  *
+****  Frequency range: upto 20.1GHz                    *
+****                                                   *
+****  Node Definitions:                                *
+****         1 -- Drain                                *
+****         2 -- gate                                 *
+****         3 -- source                               *
+****         4 -- body                                 *
+****                                                   *
+** *****************************************************
+** ! Do not change anything between the SUBCKT and ENDS statement !
+*
+.subckt n_33_hgrf 1 2 3 4 
+.param lf=0.34u wf=12u nf=16 mf=1 
++ lf_u='lf/1e-6' wf_u='wf/1e-6' nf_odd='nf-2*int(nf/2)' nf_even='1-nf_odd'
++ lf_shrink='lf*0.9+0.012e-6' wf_shrink='wf*0.9'
++ lf_shrink_u='lf_shrink/1e-6' wf_shrink_u='wf_shrink/1e-6'
++ p_cjdb=0.001025 p_cjdbg=3.52e-010
++ p_cjdb_pb=0.7 p_cjdb_mj=0.25
++ rshg='12*(1+drshg_n_33_hgl110aerf)'
++ rcnt='7*(1+drcnt_n_33_hgl110aerf)'
++ rvia='1.2*(1+drvia_n_33_hgl110aerf)'
++ sp_poly=0.44e-6 sp_edge=0.36e-6 xgw=0.22e-6 no_cnt=1 no_via=3 sp_sub_w=1.7e-6 
++ sp_sub_l=0.94e-6 sp_twell_w=2.24e-6 sp_twell_l=1.48e-6 sp_nwell_w=3.74e-6 sp_nwell_l=2.98e-6
++ a_rch=3.5 b_rch=7.441e-01 c_rch=9.373e+004
++ a_cgd_ext='3e-017*(1+dcgd_ext_n_33_hgl110aerf)' 
++ a_rdrain=4.317
++ a_cds=1.38e-2 b_cds=0.0002624
++ a_rsubd=10 b_rsubd=173.8 c_rsubd=1.315e-7
++ a_rsubb=39.91 b_rsubb=3210 c_rsubb=5300
++ a_cgb_ext='3.469e-016*(1+dcgb_ext_n_33_hgl110aerf)'
++ p_area_s='nf_odd*(sp_edge*wf+sp_poly*wf*(nf-1)/2)+nf_even*(2*sp_edge*wf+sp_poly*wf*(nf/2-1))'
++ p_area_d='nf_odd*(sp_edge*wf+sp_poly*wf*(nf-1)/2)+nf_even*(sp_poly*wf*nf/2)'
++ p_pj_s='nf_odd*(sp_edge*2+wf+(nf-1)/2*sp_poly*2)+nf_even*(sp_edge*2*2+wf*2+(nf/2-1)*sp_poly*2)'
++ p_pj_d='nf_odd*(sp_edge*2+wf+(nf-1)/2*sp_poly*2)+nf_even*(nf/2*sp_poly*2)'
++ p_pj_sg='nf*wf'
++ p_pj_dg='nf*wf'
++ p_rgc='(xgw/lf_shrink*rshg+no_cnt*rcnt+no_via*rvia)/nf/2'
++ p_rgi='rshg*wf_shrink/lf_shrink/12/nf'
++ p_rch='a_rch+b_rch*(lf_shrink/wf_shrink/nf)+c_rch*(lf_shrink/wf_shrink/nf)*(lf_shrink/wf_shrink/nf)'
++ p_cgd_ext='a_cgd_ext*wf_shrink_u*nf'
++ p_cgs_ext='p_cgd_ext'
++ p_cgb_ext='a_cgb_ext*wf_shrink_u' 
++ p_rdrain='a_rdrain/wf_shrink_u/nf'
++ p_rsource='p_rdrain'
++ cds_um='(a_cds+b_cds*(1/lf_shrink_u))*1e-15'
++ p_cds='(cds_um+abs(cds_um))/2*wf_shrink_u*nf+1e-15'
++ p_rsubd='a_rsubd+b_rsubd*(1/(nf*wf_shrink_u))+c_rsubd*(1/(nf*wf_shrink_u))*(1/(nf*wf_shrink_u))'
++ p_rsubs='p_rsubd'
++ rsub_w='(wf_shrink+2*sp_sub_w)/1e-6' rsub_l='(sp_edge*2+nf*lf_shrink+(nf-1)*sp_poly+2*sp_sub_l)/1e-6'
++ p_rsubb='a_rsubb+b_rsubb*(1/(rsub_w*rsub_l))+c_rsubb*(1/(rsub_w*rsub_l))*(1/(rsub_w*rsub_l))'
+rgc 2 21 'p_rgc'  
+rgi 21 22 'p_rgi' 
+rch 22 20 'p_rch*(1+drch_n_33_hgl110aerf)'  noise=0
+cgd_ext 21 10 'p_cgd_ext' 
+cgs_ext 21 30 'p_cgs_ext'
+cgb_ext 20 40 'p_cgb_ext'
+rdrain 1 10 'p_rdrain' 
+rsource 3 30 'p_rsource' 
+djdb 12 10 pwnmos_33_d area = 'p_area_d' pj='p_pj_d' 
+djdb_g 12 10 pwnmos_33_dg area='1e-18' pj='p_pj_dg' 
+djsb 32 30  pwnmos_33_d area = 'p_area_s' pj='p_pj_s' 
+djsb_g 32 30 pwnmos_33_dg area=1e-18 pj='p_pj_sg' 
+cds 30 10 'p_cds*(1+dcds_ext_n_33_hgl110aerf)'
+rsubb 4 40 'p_rsubb' 
+rsubd 40 12 'p_rsubd' 
+rsubs 40 32 'p_rsubs'
+mosm 10 20 30 40 n_33_hgrf_main m='nf' l='lf' w='wf' ad = 0  as = 0 pd = 0 ps = 0 sa = 0.36u sb = 0.36u 
+.model n_33_hgrf_main nmos 
++level = 49
+**************************************************************
+*               MODEL FLAG PARAMETERS 
+**************************************************************
++version = 3.24            lmin    = 3.4e-007     
++lmax    = 1e-006          wmin    = 3e-006      
++wmax    = 1.2e-005        binunit = 2             
++mobmod  = 1               capmod  = 3             
++nqsmod  = 0               stimod  = 1             
++binflag = 0             
+**************************************************************
+*               GENERAL MODEL PARAMETERS 
+**************************************************************
++tnom    = 25              tox     = '7.49e-009+dtox_n_33_hgl110aerf'     
++toxm    = 7.49e-009       wint    = 3.988e-008    
++lint    = 5.833e-008      dlc     = '4.406e-008+ddlc_n_33_hgl110aerf'    
++dwc     = '2.051e-012+ddwc_n_33_hgl110aerf'      hdif    = 1.34e-007     
++ldif    = 7.9e-008        wmlt    = 1             
++lmlt    = 1               xl      = '-9e-009+dxl_n_33_hgl110aerf+1.2e-008'        
++xw      = '-4.073e-010+dxw_n_33_hgl110aerf'     xj      = 1.2e-007      
++ngate   = 1.824e+020      ll      = -8.853e-015   
++wl      = -4.849e-014     lln     = 1             
++wln     = 0.9106          lw      = -2.401e-021   
++ww      = -3.323e-015     lwn     = 0.8049        
++wwn     = 0.99            lwl     = -5.714e-021   
++wwl     = '1.966e-021+dwwl_n_33_hgl110aerf'      llc     = 0.82e-015     
++wwc     = -3.901e-013     xpart   = 0             
+**************************************************************
+*               EXPERT PARAMETERS 
+**************************************************************
++vth0    = '0.4975+dvth0_n_33_hgl110aerf'          
++lvth0   = '2.722e-008+dlvth0_n_33_hgl110aerf'    
++pvth0   = '-3.38e-015+dpvth0_n_33_hgl110aerf'      vfb     = -0.7707       
++k1      = 0.6637          pk1     = -2.599e-015   
++k2      = 0.00214         k3      = '-0.598+dk3_n_33_hgl110aerf'        
++k3b     = 0.1776          wk3b    = 6.769e-009    
++nlx     = 2.929e-009      w0      = 5.649e-009    
++dvt0    = 2.66            dvt1    = 0.5598        
++dvt2    = -0.1357         dvt0w   = 4.729         
++dvt1w   = 59670000        dvt2w   = -0.3281       
++nch     = 6.628e+017      voff    = -0.1199       
++lvoff   = 4.389e-009      pvoff   = 1e-015        
++nfactor = 0.496           lnfactor= 2.832e-008    
++cdsc    = 0               cdscb   = 0             
++cdscd   = 0               cit     = 0             
++alpha0  = 1.2e-005        alpha1  = 100           
++beta0   = 30              eta0    = 0.02368       
++peta0   = 2e-016          etab    = -0.01379      
++petab   = 1.068e-015      dsub    = 0.4571        
++u0      = '0.03913+du0_n_33_hgl110aerf'         lu0     = -2.871e-012   
++ua      = -8.138e-010     pua     = 2.664e-023    
++ub      = 2.496e-018      wub     = -1.905e-024   
++pub     = -8e-032         uc      = 9.827e-011    
++luc     = -3.226e-017     puc     = -3.3e-024     
++prwg    = 2.477e-005      prwb    = -0.1281       
++wr      = 1               rdsw    = '894.1+drdsw_n_33_hgl110aerf'         
++wrdsw   = -1.423e-005     a0      = 1.167         
++la0     = -4.63e-007      wa0     = -3e-008       
++pa0     = 6.503e-014      ags     = '0.1+dags_n_33_hgl110aerf'           
++lags    = 1e-007          wags    = 3.32e-009     
++pags    = 1.23e-014       a1      = 0     
++a2      = 0.7285          b0      = '1.686e-006+db0_n_33_hgl110aerf'    
++wb0     = -6.365e-014     b1      = 5.494e-006    
++vsat    = '92000+dvsat_n_33_hgl110aerf'          lvsat   = 0.00176       
++pvsat   = '1.93e-009+dpvsat_n_33_hgl110aerf'       keta    = -0.0195       
++lketa   = -6.84e-009      wketa   = 9.761e-010    
++delta   = 0.0518          dwg     = -1.405e-009   
++dwb     = 3.532e-009      pclm    = 0.0202        
++ppclm   = 1.203e-013      pdiblc1 = 0.006687      
++pdiblc2 = 0.00104         pdiblcb = 0.2247        
++drout   = 0.8517          pvag    = 0.502         
++pscbe1  = 9.496e+008      pscbe2  = 1.94e-008     
++elm     = 5             
+**************************************************************
+*               CAPACITANCE PARAMETERS 
+**************************************************************
++cf      = 6.83e-011       ckappa  = 0.5           
++acde    = 0.4665          moin    = 9.018         
++noff    = 2.468           voffcv  = -0.09001      
++cgbo    = 0               cgso    = '1.9e-010*(1+dcgso_n_33_hgl110aerf)'      
++cgdo    = '1.9e-010*(1+dcgdo_n_33_hgl110aerf)'        
++cgdl    = '8e-011*(1+dcgdl_n_33_hgl110aerf)'        
++cgsl    = '8e-011*(1+dcgsl_n_33_hgl110aerf)'        
+**************************************************************
+*               TEMPERATURE PARAMETERS 
+**************************************************************
++kt1     = -0.3029         wkt1    = 4e-009        
++pkt1    = -2e-015         kt1l    = 2.779e-009    
++kt2     = -0.03177        lkt2    = 1.1e-008      
++ute     = -1.11           lute    = -1.264e-007   
++wute    = 6.582e-008      ua1     = 3.25e-009     
++lua1    = 3.082e-017      wua1    = 4.918e-017    
++pua1    = -2e-024         ub1     = -3.8e-018     
++lub1    = 1.26e-025       pub1    = 6e-032        
++uc1     = -5.6e-011       luc1    = 5.911e-017    
++prt     = -300            at      = 36600         
++pat     = 1.3e-009      
+**************************************************************
+*               NOISE PARAMETERS 
+**************************************************************
++noia    = 1.122e+020      noib    = 125900        
++noic    = -1.3e-012       em      = 25000000      
++ef      = 0.9077          noimod  = 2             
+**************************************************************
+*               DIODE PARAMETERS 
+**************************************************************
++rsh     = 8.3             js      = 5.932e-008    
++jsw     = 6.134e-014      cj      = 0             
++mj      = 0.3403          cjsw    = 0             
++mjsw    = 0.2026          cjswg   = 0             
++mjswg   = 0.3646          pb      = 0.7189        
++pbsw    = 0.6556          pbswg   = 0.6556        
++rd      = 0               rdc     = 0             
++rs      = 0               rsc     = 0             
++xti     = 3               tpb     = 0.001829      
++tpbsw   = 0.0008112       tcj     = 0.0007992     
++tcjsw   = 9.14e-005       tcjswg  = 0.01          
++acm     = 12              calcacm = 1             
++nj      = 1.016         
+**************************************************************
+*               STRESS PARAMETERS 
+**************************************************************
++sa0     = 2.2e-006        sb0     = 2.2e-006      
++wlod    = 0               kvth0   = 5.25e-009     
++lkvth0  = -2.71e-008      wkvth0  = 0             
++pkvth0  = 0               llodvth = 1             
++wlodvth = 1               stk2    = 5.6e-010      
++lodk2   = 1               lodeta0 = 1             
++ku0     = -1.51e-007      lku0    = 5.557e-007    
++wku0    = 0               pku0    = 0             
++llodku0 = 1.12            wlodku0 = 1             
++kvsat   = 1               steta0  = 0             
++tku0    = 0             
+.model pwnmos_33_d d 
++ level = 3 
++ tref = 25 
++ js = 5.932e-08 
++ ik = 5.28e+04 
++ vb = 13.36 
++ n = 1.008 
++ cjp = '1.408e-10*(1+dcjsw_n_33_hgl110aerf)' 
++ mjsw = 0.2026 
++ php = 0.6556 
++ cta = 0.0007992 
++ ctp = 9.14e-05 
++ tlev = 1 
++ tlevc = 1 
++ xti = 3 
++ eg = 1.11 
++ cj = 'p_cjdb*(1+dcj_n_33_hgl110aerf)'
++ pb = 'p_cjdb_pb' 
++ mj = 'p_cjdb_mj'  
+.model pwnmos_33_dg d 
++ level = 3 
++ tref = 25 
++ cj = 0 
++ mjsw = 0.3646 
++ php = 0.6556 
++ tlev = 0 
++ tlevc = 1 
++ xti = 3 
++ eg = 1.11 
++ ctp = 0.01 
++ cjp = 'p_cjdbg*(1+dcjswg_n_33_hgl110aerf)'
+.ends
+
+** *****************************************************
+** *  Subcircuit of the BSIM3 RF macro model           *
+** *  for  0.11um RFCMOS process                       *
+** *  3.3V High Gain  RF p-type MOS transistors        *
+** *                                                   *
+****  Scaling Range:                                   *
+****    1. Finger width (wf): 2.5um ~ 15um             *
+****    2. Finger length (lf): 0.34um ~ 1um            *
+****    3. Finger No. (nf): 2 ~ 32                     *
+****  Voltage range: upto 3.3V                         *
+****  Temperature range:  -50C ~ 125C                  *
+****  Frequency range: upto 20.1GHz                    *
+****                                                   *
+****  Node Definitions:                                *
+****         1 -- Drain                                *
+****         2 -- gate                                 *
+****         3 -- source                               *
+****         4 -- body                                 *
+****         5 -- p substrate (should be ground)       *
+****                                                   *
+** *****************************************************
+********************************************************
+
+.subckt p_33_hgrf 1 2 3 4 5
+.param lf=0.34u wf=10u nf=16 mf=1  
++ lf_u='lf/1e-6' wf_u='wf/1e-6' nf_odd='nf-2*int(nf/2)' nf_even='1-nf_odd'
++ lf_shrink='lf*0.9+0.012e-6' wf_shrink='wf*0.9'
++ lf_shrink_u='lf_shrink/1e-6' wf_shrink_u='wf_shrink/1e-6'
++ rshg='10.33*(1+drshg_p_33_hgl110aerf)'
++ rcnt='7*(1+drcnt_p_33_hgl110aerf)' 
++ rvia='1.2*(1+drvia_p_33_hgl110aerf)'
++ sp_poly=0.44e-6 sp_edge=0.36e-6 
++ xgw=1.04e-6 no_cnt=2 no_via=2 sp_sub_w=1.7e-6 
++ sp_sub_l=0.94e-6 sp_twell_w=2.24e-6 sp_twell_l=1.48e-6 sp_nwell_w=1.9e-6 sp_nwell_l=2.34e-6
++ a_rch=2.731 b_rch=0.02587 c_rch=1.211e+005
++ a_cgd_ext='1.0e-18*(1+dcgd_ext_p_33_hgl110aerf)'
++ a_cds=0.00067 b_cds=0.022
++ a_rsubd=3.936 b_rsubd=52.25 c_rsubd=5.294e+004
++ a_rsubb=30.37 b_rsubb=5000 c_rsubb=0.009439
++ a_cgb_ext= '3.17e-016*(1+dcgb_ext_p_33_hgl110aerf)' 
++ p_cj=0.00148 p_mj=0.208 p_pb=0.698
++ p_area_s='nf_odd*(sp_edge*wf+sp_poly*wf*(nf-1)/2)+nf_even*(2*sp_edge*wf+sp_poly*wf*(nf/2-1))'
++ p_area_d='nf_odd*(sp_edge*wf+sp_poly*wf*(nf-1)/2)+nf_even*(sp_poly*wf*nf/2)'
++ p_pj_s='nf_odd*(sp_edge*2+wf+(nf-1)/2*sp_poly*2)+nf_even*(sp_edge*2*2+wf*2+(nf/2-1)*sp_poly*2)'
++ p_pj_d='nf_odd*(sp_edge*2+wf+(nf-1)/2*sp_poly*2)+nf_even*(nf/2*sp_poly*2)'
++ p_pj_sg='nf*wf'
++ p_pj_dg='nf*wf'
++ p_area_tw='(wf+2*sp_twell_w)*(2*sp_edge+nf*(lf+0.012e-6)+(nf-1)*sp_poly+2*sp_twell_l)'
++ p_pj_tw='2*(wf+2*sp_twell_w + 2*sp_edge+nf*(lf+0.012e-6)+(nf-1)*sp_poly+2*sp_twell_l)'
++ p_area_dnw='(wf+2*sp_nwell_w)*(2*sp_edge+nf*(lf+0.012e-6)+(nf-1)*sp_poly+2*sp_nwell_l)'
++ p_pj_dnw='2*(wf+2*sp_nwell_w + 2*sp_edge+nf*(lf+0.012e-6)+(nf-1)*sp_poly+2*sp_nwell_l)'
++ p_rgc='(xgw/lf_shrink*rshg+no_cnt*rcnt+no_via*rvia)/nf/2'
++ p_rgi='rshg*wf_shrink/lf_shrink/12/nf'
++ p_rch='a_rch+b_rch*(lf_shrink/wf_shrink/nf)+c_rch*(lf_shrink/wf_shrink/nf)*(lf_shrink/wf_shrink/nf)'
++ p_cgd_ext='a_cgd_ext*wf_shrink_u*nf' 
++ p_cgs_ext='p_cgd_ext'
++ p_cgb_ext='a_cgb_ext*wf_shrink_u' 
++ a_rdain0 = 0
++ a_rdrain=1
++ p_rdrain='a_rdain0+a_rdrain/wf_shrink_u/nf'
++ p_rsource='p_rdrain'  rdswnf='-1200/nf'
++ cds_um='(a_cds+b_cds*(1/lf_shrink_u))*1e-15'
++ p_cds='(cds_um+abs(cds_um))/2*wf_shrink_u*nf+0.01e-15'
++ p_rsubd='(a_rsubd+b_rsubd*(1/(nf*wf_shrink_u))+c_rsubd*(1/(nf*wf_shrink_u))*(1/(nf*wf_shrink_u)))*2'
++ p_rsubs='p_rsubd'
++ rsub_w='(wf_shrink+2*sp_sub_w)/1e-6' rsub_l='(sp_edge*2+nf*lf_shrink+(nf-1)*sp_poly+2*sp_sub_l)/1e-6'
++ p_rsubb='(a_rsubb+b_rsubb*(1/(rsub_w*rsub_l))+c_rsubb*(1/(rsub_w*rsub_l))*(1/(rsub_w*rsub_l)))*0.6'
+rgc 2 21 'p_rgc'  
+rgi 21 22 'p_rgi' 
+rch 22 20 'p_rch*(1+drch_p_33_hgl110aerf)'  noise=0
+cgd_ext 21 10 'p_cgd_ext' 
+cgs_ext 21 30 'p_cgs_ext'
+cgb_ext 20 40 'p_cgb_ext'
+rdrain 1 10 'p_rdrain'
+rsource 3 30 'p_rsource'
+djdb 10 12  pmos_33_d area = 'p_area_d' pj='p_pj_d' 
+djdb_g 10 12  pmos_33_dg area='1e-18' pj='p_pj_dg' 
+djsb 30 32  pmos_33_d area = 'p_area_s' pj='p_pj_s' 
+djsb_g 30 32 pmos_33_dg area=1e-18 pj='p_pj_sg' 
+cds 30 10 'p_cds*(1+dcds_ext_p_33_hgl110aerf)' 
+rsubb 4 40 'p_rsubb' 
+rsubd 40 12 'p_rsubd' 
+rsubs 40 32 'p_rsubs' 
+mosm 10 20 30 40 p_33_hgrf_main l = 'lf' w = 'wf' ad = 0  as = 0 pd = 0 ps = 0 sa = 0.36u sb = 0.36u m = 'nf' 
+dnw 5 4 dio_nw_psub area='p_area_dnw' pj='p_pj_dnw'
+.model p_33_hgrf_main pmos
++level = 49
+**************************************************************
+*               MODEL FLAG PARAMETERS 
+**************************************************************
++version = 3.24            lmin    = 3.4e-007     
++lmax    = 1e-006          wmin    = 2.5e-006      
++wmax    = 1.5e-005        binunit = 2             
++mobmod  = 1               capmod  = 3             
++nqsmod  = 0               binflag = 0    
++stimod  = 1         
+**************************************************************
+*               GENERAL MODEL PARAMETERS 
+**************************************************************
++tnom    = 25              tox     = '7.68e-009+dtox_p_33_hgl110aerf'     
++toxm    = 7.68e-009       wint    = 4.483e-008    
++lint    = 4.381e-009      dlc     = '7.534e-008+ddlc_p_33_hgl110aerf'     
++dwc     = '-1.386e-007+ddwc_p_33_hgl110aerf'     hdif    = 1.34e-007     
++ldif    = 7.9e-008        wmlt    = 1             
++lmlt    = 1               xl      = '-9e-009+dxl_p_33_hgl110aerf+1.2e-008'        
++xw      = '4.206e-009+dxw_p_33_hgl110aerf'      xj      = 1.9e-007      
++ngate   = 1.519e+020      ll      = 5e-015        
++wl      = 0               lln     = 1             
++wln     = 1               lw      = -1.812e-014   
++ww      = -2.524e-015     lwn     = 1             
++wwn     = 1.028           lwl     = 1.234e-021    
++wwl     = '-7.639e-022+dwwl_p_33_hgl110aerf'     llc     = -1.03e-015    
++wlc     = 9.17e-017       lwc     = -2.901e-015   
++wwc     = -2.166e-017     lwlc    = 2.215e-023    
++wwlc    = -7.33e-022      xpart   = 0             
+**************************************************************
+*               EXPERT PARAMETERS 
+**************************************************************
++vth0    = '-0.6682+dvth0_p_33_hgl110aerf'         
++lvth0   = '1.726e-008+dlvth0_p_33_hgl110aerf'    
++wvth0   = 1.45e-009       pvth0   = '1.35e-015+dpvth0_p_33_hgl110aerf'     
++vfb     = -1.102          k1      = 0.981         
++wk1     = -1e-008         pk1     = -5.375e-015   
++k2      = -0.01962        k3      = '-1.678+dk3_p_33_hgl110aerf'        
++wk3     = 4.378e-007      k3b     = 1.852         
++nlx     = 6.421e-009      w0      = 2.229e-006    
++dvt0    = 2.629           dvt1    = 0.7075        
++dvt2    = -0.1076         dvt0w   = 16.75         
++dvt1w   = 4240000         dvt2w   = -0.03436      
++nch     = 3.6e+017        voff    = -0.1066       
++wvoff   = -4.79e-009      nfactor = 1.201         
++wnfactor= -2.344e-008     cdsc    = 0.00359       
++cdscb   = 0.00135         cdscd   = 1e-020        
++cit     = 0               alpha0  = 1.985e-006    
++alpha1  = 8.288           beta0   = 30.19         
++eta0    = 0.005181        peta0   = 2.5e-015      
++etab    = -0.06667        dsub    = 0.51          
++u0      = '0.0114+du0_p_33_hgl110aerf'          wu0     = -7.452e-011   
++pu0     = 6.72e-017       ua      = 6.591e-010    
++lua     = 7.244e-017      wua     = -9.882e-017   
++ub      = 1.397e-018      lub     = -2.781e-025   
++wub     = 1.176e-025      pub     = -5e-032       
++uc      = -2.347e-011     prwg    = 0.0041        
++prwb    = -0.01891        pprwb   = 1.043e-014    
++wr      = 1               rdsw    = '1.502e+003+rdswnf+drdsw_p_33_hgl110aerf'
++a0      = 0.8317          la0     = -2e-008       
++wa0     = -3e-008         ags     = '0.301+dags_p_33_hgl110aerf'         
++lags    = -1.467e-007     wags    = 4.5e-009      
++pags    = '-4.85e-014+dpags_p_33_hgl110aerf'      a1      = 0.0305        
++a2      = 1               b0      = '3.8e-008+db0_p_33_hgl110aerf'      
++b1      = -2.28e-008      vsat    = '86130+dvsat_p_33_hgl110aerf'         
++pvsat   = 2e-009          keta    = -0.009148     
++lketa   = -8.646e-009     pketa   = -1.256e-016   
++delta   = 0.01563         dwg     = -9.887e-009   
++dwb     = -3.369e-009     pclm    = 0.941         
++ppclm   = 1.99e-013       pdiblc1 = 0.0913        
++pdiblc2 = 0.001798        pdiblcb = 0             
++drout   = 0.7088          pvag    = 5.42e-007     
++pscbe1  = 6.481e+008      pscbe2  = 8.302e-006    
++elm     = 5             
+**************************************************************
+*               CAPACITANCE PARAMETERS 
+**************************************************************
++cf      = 6.775e-011      ckappa  = 1.055         
++acde    = 1.049           moin    = 5.671         
++vfbcv   = -1              noff    = 2.21          
++voffcv  = -0.06094        cgbo    = 0             
++cgso    = '2.65e-010*(1+dcgso_p_33_hgl110aerf)'      
++cgdo    = '2.65e-010*(1+dcgdo_p_33_hgl110aerf)'     
++cgdl    = '9.8e-011*(1+dcgdl_p_33_hgl110aerf)'        
++cgsl    = '9.8e-011*(1+dcgsl_p_33_hgl110aerf)'      
+**************************************************************
+*               TEMPERATURE PARAMETERS 
+**************************************************************
++kt1     = -0.358          wkt1    = 1.3e-008      
++kt1l    = 3.74e-009       kt2     = -0.0423       
++ute     = -0.7235         wute    = 1.2e-008      
++ua1     = 2.42e-009       ub1     = -3.309e-018   
++wub1    = 1.62e-025       uc1     = -1.589e-013   
++prt     = 4               at      = 10000         
+**************************************************************
+*               NOISE PARAMETERS 
+**************************************************************
++noia    = 2.36e+020       noib    = 5530          
++noic    = 3.41e-011       em      = 22010000      
++ef      = 1.249           noimod  = 2             
+**************************************************************
+*               DIODE PARAMETERS 
+**************************************************************
++rsh     = 7.2             js      = 7.763e-008    
++jsw     = 2.73e-014       cj      = 0.000      
++mj      = 0               cjsw    = 0    
++mjsw    = 0.0321          cjswg   = 0    
++mjswg   = 0.3712          pb      = 0.68          
++pbsw    = 0.4042          pbswg   = 0.6063        
++rd      = 0               rdc     = 0             
++rs      = 0               rsc     = 0             
++xti     = 3               tpb     = 0.00159       
++tpbsw   = 0.003649        tpbswg  = 0.00258       
++tcj     = 0.0008807       tcjsw   = 9.14e-005     
++tcjswg  = 0.001416        acm     = 12            
++calcacm = 1               nj      = 1.03          
+**************************************************************
+*               STRESS PARAMETERS 
+**************************************************************
++sa0     = 2.2e-006        sb0     = 2.2e-006      
++wlod    = 0               kvth0   = -1.44e-009    
++lkvth0  = 0               wkvth0  = -1e-011       
++pkvth0  = 0               llodvth = 1             
++wlodvth = 1               stk2    = 1.129e-009    
++lodk2   = 1               lodeta0 = 1             
++ku0     = 1.02e-007       lku0    = 3.1e-008      
++wku0    = 0               pku0    = 0             
++llodku0 = 1.22            wlodku0 = 1             
++kvsat   = 0               steta0  = 0             
++tku0    = 0             
+.model pmos_33_d d 
++ level = 3 
++ tref = 25 
++ js = 0
++ jsw = 0 
++ cjp = '8.811e-011*(1+dcjsw_p_33_hgl110aerf)' 
++ mjsw = 0.032102 
++ xti = 3 
++ tlev = 0 
++ tlevc = 1 
++ n = 1.017 
++ php = 0.6063 
++ cta = 0.00088072 
++ ctp = 9.14e-005 
++ cj = 'p_cj*(1+dcj_p_33_hgl110aerf)' 
++ mj = 'p_mj' 
++ pb = 'p_pb'
+.model pmos_33_dg d 
++ level = 3 
++ tref = 25 
++ cj = 0 
++ cjp = '2.287e-010*(1+dcjswg_p_33_hgl110aerf)' 
++ mjsw = 0.37123 
++ php = 0.6063 
++ tlev = 0 
++ tlevc = 1 
++ xti = 3 
++ eg = 1.16 
+.model  dio_nw_psub  d  level=3
++area    = 1.68e-007       pj      = 0.00469         tref    = 25            
++is      = 2.05e-006       jsw     = 5.34e-011       ik      = 17856           vb      = 9.662         
++ibv     = 5.952           ikr     = 595.2           n       = 1.0525          rs      = 0
++cj      = '8.28e-005*(1+dcj_nw_p_33_hgl110aerf)'  
++cjp     = '9.92e-010*(1+dcjsw_nw_p_33_hgl110aerf)'  pb      = 0.588           php     = 0.62          
++mj      = 0.474           mjsw    = 0.27          
++tlev    = 1               tlevc   = 1               trs     = 0.00322         tcv     = -0.000539     
++xti     = 5.4936          cta     = 0.00332         ctp     = 0.001           eg      = 1.16          
++tpb     = 0.0028          tphp    = 0.001  
+.ends 
+
+
+** *****************************************************
+** *  Subcircuit of the BSIM3 RF macro model           *
+** *  for  0.11um RFCMOS process                       *
+** *  3.3V High Gain Triple Well RF n-type MOS         *
+** *  transistors                                      *
+** *                                                   *
+****  Scaling Range(before 90% shrink):                *
+****    1. Finger width (wf): 3um ~ 12um               *
+****    2. Finger length (lf): 0.34um ~ 1um            *
+****    3. Finger No. (nf): 2 ~ 32                     *
+****  Voltage range: upto 3.3V                         *
+****  Temperature range:  -50C ~ 125C                  *
+****  Frequency range: upto 20.1GHz                    *
+****                                                   *
+****  Node Definitions:                                *
+****         1 -- Drain                                *
+****         2 -- gate                                 *
+****         3 -- source                               *
+****         4 -- body                                 *
+****         5 -- nwell                                *
+****         6 -- psub                                 *
+****                                                   *
+** *****************************************************
+** ! Do not change anything between the SUBCKT and ENDS statement !
+*
+.subckt n_33bpw_hgrf 1 2 3 4 5 6
+.param lf=0.34u wf=12u nf=16 mf=1 
++ wg='(wf*0.9)' lg='(lf*0.9+1.2e-8)'
++ lf_u='lf/1e-6' wf_u='wf/1e-6' nf_odd='nf-2*int(nf/2)' nf_even='1-nf_odd'
++ lf_shrink='lf*0.9+0.012e-6' wf_shrink='wf*0.9'
++ lf_shrink_u='lf_shrink/1e-6' wf_shrink_u='wf_shrink/1e-6'
++ p_cjdb=0.001025 p_cjdbg=3.52e-010
++ p_cjdb_pb=0.7 p_cjdb_mj=0.25
++ rshg='12*(1+drshg_n_33_hgl110aerf)'
++ rcnt='7*(1+drcnt_n_33_hgl110aerf)'
++ rvia='1.2*(1+drvia_n_33_hgl110aerf)'
++ sp_poly=0.44e-6 sp_edge=0.36e-6 xgw=0.22e-6 no_cnt=1 no_via=3 sp_sub_w=1.7e-6 
++ sp_sub_l=0.94e-6 sp_twell_w=2.24e-6 sp_twell_l=1.48e-6 sp_nwell_w=3.74e-6 sp_nwell_l=2.98e-6
+*...................dnw_psub...............................................*
++ p_area_tw='((wf)+2*sp_twell_w)*(2*sp_edge+nf*(lf)+(nf-1)*sp_poly+2*sp_twell_l)'
++ p_pj_tw='2*((wf)+2*sp_twell_w+ 2*sp_edge+nf*(lf)+(nf-1)*sp_poly+2*sp_twell_l)'
++ p_area_dnw='((wf)+2*sp_nwell_w)*(2*sp_edge+nf*(lf)+(nf-1)*sp_poly+2*sp_nwell_l)'
++ p_pj_dnw='2*((wf)+2*sp_nwell_w+ 2*sp_edge+nf*(lf)+(nf-1)*sp_poly+2*sp_nwell_l)'
++ dev_l = '(2*sp_edge+nf*lg+(nf-1)*sp_poly+2*sp_twell_l)'
++ dev_w = 'wg+2*sp_twell_w'
++ dev_access = 'dev_l * dev_w/(16*(dev_l*dev_l+dev_w*dev_w))'
++ a_rch=3.5 b_rch=7.441e-01 c_rch=9.373e+004
++ a_cgd_ext='3e-017*(1+dcgd_ext_n_33_hgl110aerf)' 
++ a_rdrain=4.317
++ a_cds=1.38e-2 b_cds=0.0002624
++ a_rsubd=10 b_rsubd=173.8 c_rsubd=1.315e-7
++ a_rsubb=39.91 b_rsubb=3210 c_rsubb=5300
++ a_cgb_ext='3.469e-016*(1+dcgb_ext_n_33_hgl110aerf)'
++ p_area_s='nf_odd*(sp_edge*wf+sp_poly*wf*(nf-1)/2)+nf_even*(2*sp_edge*wf+sp_poly*wf*(nf/2-1))'
++ p_area_d='nf_odd*(sp_edge*wf+sp_poly*wf*(nf-1)/2)+nf_even*(sp_poly*wf*nf/2)'
++ p_pj_s='nf_odd*(sp_edge*2+wf+(nf-1)/2*sp_poly*2)+nf_even*(sp_edge*2*2+wf*2+(nf/2-1)*sp_poly*2)'
++ p_pj_d='nf_odd*(sp_edge*2+wf+(nf-1)/2*sp_poly*2)+nf_even*(nf/2*sp_poly*2)'
++ p_pj_sg='nf*wf'
++ p_pj_dg='nf*wf'
++ p_rgc='(xgw/lf_shrink*rshg+no_cnt*rcnt+no_via*rvia)/nf/2'
++ p_rgi='rshg*wf_shrink/lf_shrink/12/nf'
++ p_rch='a_rch+b_rch*(lf_shrink/wf_shrink/nf)+c_rch*(lf_shrink/wf_shrink/nf)*(lf_shrink/wf_shrink/nf)'
++ p_cgd_ext='a_cgd_ext*wf_shrink_u*nf'
++ p_cgs_ext='p_cgd_ext'
++ p_cgb_ext='a_cgb_ext*wf_shrink_u' 
++ p_rdrain='a_rdrain/wf_shrink_u/nf'
++ p_rsource='p_rdrain'
++ cds_um='(a_cds+b_cds*(1/lf_shrink_u))*1e-15'
++ p_cds='(cds_um+abs(cds_um))/2*wf_shrink_u*nf+1e-15'
++ p_rsubd='a_rsubd+b_rsubd*(1/(nf*wf_shrink_u))+c_rsubd*(1/(nf*wf_shrink_u))*(1/(nf*wf_shrink_u))'
++ p_rsubs='p_rsubd'
++ rsub_w='(wf_shrink+2*sp_sub_w)/1e-6' rsub_l='(sp_edge*2+nf*lf_shrink+(nf-1)*sp_poly+2*sp_sub_l)/1e-6'
++ p_rsubb='a_rsubb+b_rsubb*(1/(rsub_w*rsub_l))+c_rsubb*(1/(rsub_w*rsub_l))*(1/(rsub_w*rsub_l))'
+rgc 2 21 'p_rgc'  
+rgi 21 22 'p_rgi' 
+rch 22 20 'p_rch*(1+drch_n_33_hgl110aerf)'  noise=0
+cgd_ext 21 10 'p_cgd_ext' 
+cgs_ext 21 30 'p_cgs_ext'
+cgb_ext 20 40 'p_cgb_ext'
+rdrain 1 10 'p_rdrain' 
+rsource 3 30 'p_rsource' 
+djdb 12 10 pwnmos_33_d area = 'p_area_d' pj='p_pj_d' 
+djdb_g 12 10 pwnmos_33_dg area='1e-18' pj='p_pj_dg' 
+djsb 32 30  pwnmos_33_d area = 'p_area_s' pj='p_pj_s' 
+djsb_g 32 30 pwnmos_33_dg area=1e-18 pj='p_pj_sg' 
+cds 30 10 'p_cds*(1+dcds_ext_n_33_hgl110aerf)'
+rsubb 4 40 'p_rsubb' 
+rsubd 40 12 'p_rsubd' 
+rsubs 40 32 'p_rsubs'
+*...................dnw_psub.................................*
+dnw 4 50 dionw_l110e  area='p_area_tw' pj='p_pj_tw'
+rdnw 50 5 '100*dev_access'
+dnwp 60 50 dnw_psub  area='p_area_dnw' pj='p_pj_dnw'
+rpsub 60 6 '390*dev_access'
+*------------------------------------------------------------*
+mosm 10 20 30 40 n_33bpw_hgrf_main m='nf' l='lf' w='wf' ad = 0  as = 0 pd = 0 ps = 0 sa = 0.36u sb = 0.36u 
+.model n_33bpw_hgrf_main nmos 
++level = 49
+**************************************************************
+*               MODEL FLAG PARAMETERS 
+**************************************************************
++version = 3.24            lmin    = 3.4e-007     
++lmax    = 1e-006          wmin    = 3e-006      
++wmax    = 1.2e-005        binunit = 2             
++mobmod  = 1               capmod  = 3             
++nqsmod  = 0               stimod  = 1             
++binflag = 0             
+**************************************************************
+*               GENERAL MODEL PARAMETERS 
+**************************************************************
++tnom    = 25              tox     = '7.49e-009+dtox_n_33_hgl110aerf'     
++toxm    = 7.49e-009       wint    = 3.988e-008    
++lint    = 5.833e-008       dlc     = '4.406e-008+ddlc_n_33_hgl110aerf'    
++dwc     = '2.051e-012+ddwc_n_33_hgl110aerf'      hdif    = 1.34e-007     
++ldif    = 7.9e-008        wmlt    = 1             
++lmlt    = 1               xl      = '-9e-009+dxl_n_33_hgl110aerf+1.2e-008'        
++xw      = '-4.073e-010+dxw_n_33_hgl110aerf'     xj      = 1.2e-007      
++ngate   = 1.824e+020      ll      = -8.853e-015   
++wl      = -4.849e-014     lln     = 1             
++wln     = 0.9106          lw      = -2.401e-021   
++ww      = -3.323e-015     lwn     = 0.8049        
++wwn     = 0.99            lwl     = -5.714e-021   
++wwl     = '1.966e-021+dwwl_n_33_hgl110aerf'      llc     = 0.82e-015     
++wwc     = -3.901e-013     xpart   = 0             
+**************************************************************
+*               EXPERT PARAMETERS 
+**************************************************************
++vth0    = '0.4975+dvth0_n_33_hgl110aerf'          
++lvth0   = '2.722e-008+dlvth0_n_33_hgl110aerf'    
++pvth0   = '-3.38e-015+dpvth0_n_33_hgl110aerf'      vfb     = -0.7707       
++k1      = 0.6637          pk1     = -2.599e-015   
++k2      = 0.00214         k3      = '-0.598+dk3_n_33_hgl110aerf'        
++k3b     = 0.1776          wk3b    = 6.769e-009    
++nlx     = 2.929e-009      w0      = 5.649e-009    
++dvt0    = 2.66            dvt1    = 0.5598        
++dvt2    = -0.1357         dvt0w   = 4.729         
++dvt1w   = 59670000        dvt2w   = -0.3281       
++nch     = 6.628e+017      voff    = -0.1199       
++lvoff   = 4.389e-009      pvoff   = 1e-015        
++nfactor = 0.496           lnfactor= 2.832e-008    
++cdsc    = 0               cdscb   = 0             
++cdscd   = 0               cit     = 0             
++alpha0  = 1.2e-005        alpha1  = 100           
++beta0   = 30              eta0    = 0.02368       
++peta0   = 2e-016          etab    = -0.01379      
++petab   = 1.068e-015      dsub    = 0.4571        
++u0      = '0.03913+du0_n_33_hgl110aerf'         lu0     = -2.871e-012   
++ua      = -8.138e-010     pua     = 2.664e-023    
++ub      = 2.496e-018      wub     = -1.905e-024   
++pub     = -8e-032         uc      = 9.827e-011    
++luc     = -3.226e-017     puc     = -3.3e-024     
++prwg    = 2.477e-005      prwb    = -0.1281       
++wr      = 1               rdsw    = '894.1+drdsw_n_33_hgl110aerf'         
++wrdsw   = -1.423e-005     a0      = 1.167         
++la0     = -4.63e-007      wa0     = -3e-008       
++pa0     = 6.503e-014      ags     = '0.1+dags_n_33_hgl110aerf'           
++lags    = 1e-007          wags    = 3.32e-009     
++pags    = 1.23e-014       a1      = 0     
++a2      = 0.7285          b0      = '1.686e-006+db0_n_33_hgl110aerf'    
++wb0     = -6.365e-014     b1      = 5.494e-006    
++vsat    = '92000+dvsat_n_33_hgl110aerf'          lvsat   = 0.00176       
++pvsat   = '1.93e-009+dpvsat_n_33_hgl110aerf'       keta    = -0.0195       
++lketa   = -6.84e-009      wketa   = 9.761e-010    
++delta   = 0.0518          dwg     = -1.405e-009   
++dwb     = 3.532e-009      pclm    = 0.0202        
++ppclm   = 1.203e-013      pdiblc1 = 0.006687      
++pdiblc2 = 0.00104         pdiblcb = 0.2247        
++drout   = 0.8517          pvag    = 0.502         
++pscbe1  = 9.496e+008      pscbe2  = 1.94e-008     
++elm     = 5             
+**************************************************************
+*               CAPACITANCE PARAMETERS 
+**************************************************************
++cf      = 6.83e-011       ckappa  = 0.5           
++acde    = 0.4665          moin    = 9.018         
++noff    = 2.468           voffcv  = -0.09001      
++cgbo    = 0               cgso    = '1.9e-010*(1+dcgso_n_33_hgl110aerf)'      
++cgdo    = '1.9e-010*(1+dcgdo_n_33_hgl110aerf)'        
++cgdl    = '8e-011*(1+dcgdl_n_33_hgl110aerf)'        
++cgsl    = '8e-011*(1+dcgsl_n_33_hgl110aerf)'        
+**************************************************************
+*               TEMPERATURE PARAMETERS 
+**************************************************************
++kt1     = -0.3029         wkt1    = 4e-009        
++pkt1    = -2e-015         kt1l    = 2.779e-009    
++kt2     = -0.03177        lkt2    = 1.1e-008      
++ute     = -1.11           lute    = -1.264e-007   
++wute    = 6.582e-008      ua1     = 3.25e-009     
++lua1    = 3.082e-017      wua1    = 4.918e-017    
++pua1    = -2e-024         ub1     = -3.8e-018     
++lub1    = 1.26e-025       pub1    = 6e-032        
++uc1     = -5.6e-011       luc1    = 5.911e-017    
++prt     = -300            at      = 36600         
++pat     = 1.3e-009      
+**************************************************************
+*               NOISE PARAMETERS 
+**************************************************************
++noia    = 1.122e+020      noib    = 125900        
++noic    = -1.3e-012       em      = 25000000      
++ef      = 0.9077          noimod  = 2             
+**************************************************************
+*               DIODE PARAMETERS 
+**************************************************************
++rsh     = 8.3             js      = 5.932e-008    
++jsw     = 6.134e-014      cj      = 0             
++mj      = 0.3403          cjsw    = 0             
++mjsw    = 0.2026          cjswg   = 0             
++mjswg   = 0.3646          pb      = 0.7189        
++pbsw    = 0.6556          pbswg   = 0.6556        
++rd      = 0               rdc     = 0             
++rs      = 0               rsc     = 0             
++xti     = 3               tpb     = 0.001829      
++tpbsw   = 0.0008112       tcj     = 0.0007992     
++tcjsw   = 9.14e-005       tcjswg  = 0.01          
++acm     = 12              calcacm = 1             
++nj      = 1.016         
+**************************************************************
+*               STRESS PARAMETERS 
+**************************************************************
++sa0     = 2.2e-006        sb0     = 2.2e-006      
++wlod    = 0               kvth0   = 5.25e-009     
++lkvth0  = -2.71e-008      wkvth0  = 0             
++pkvth0  = 0               llodvth = 1             
++wlodvth = 1               stk2    = 5.6e-010      
++lodk2   = 1               lodeta0 = 1             
++ku0     = -1.51e-007      lku0    = 5.557e-007    
++wku0    = 0               pku0    = 0             
++llodku0 = 1.12            wlodku0 = 1             
++kvsat   = 1               steta0  = 0             
++tku0    = 0             
+.model pwnmos_33_d d 
++ level = 3 
++ tref = 25 
++ js = 5.932e-08 
++ ik = 5.28e+04 
++ vb = 13.36 
++ n = 1.008 
++ cjp = '1.408e-10*(1+dcjsw_n_33_hgl110aerf)' 
++ mjsw = 0.2026 
++ php = 0.6556 
++ cta = 0.0007992 
++ ctp = 9.14e-05 
++ tlev = 1 
++ tlevc = 1 
++ xti = 3 
++ eg = 1.11 
++ cj = 'p_cjdb*(1+dcj_n_33_hgl110aerf)'
++ pb = 'p_cjdb_pb' 
++ mj = 'p_cjdb_mj'  
+.model pwnmos_33_dg d 
++ level = 3 
++ tref = 25 
++ cj = 0 
++ mjsw = 0.3646 
++ php = 0.6556 
++ tlev = 0 
++ tlevc = 1 
++ xti = 3 
++ eg = 1.11 
++ ctp = 0.01 
++ cjp = 'p_cjdbg*(1+dcjswg_n_33_hgl110aerf)'
+*
+* Device tw/dnw diode
+* 
+.model  dionw_l110e  d  level = 3
+**************************************************************
+*               GENERAL PARAMETERS 
+**************************************************************
++area    = 3.2e-008        pj      = 0.00032         tref    = 25            
+**************************************************************
+*               DC PARAMETERS 
+**************************************************************
++is      = 1.2857e-006            jsw     = 6.5407e-013     ik      = 31946         
++vb      = 9.3721          ibv     = 5.952           ikr     = 595.2         
++n       = 1.08410         rs      = 0   
+**************************************************************
+*               CAPACITANCE PARAMETERS 
+**************************************************************
++cj      = '0.0011667*(1+dcj_nwtw_n_33bpw_hgl110aerf)'          cjp     = '5.3568e-010*(1+dcjsw_nwtw_n_33bpw_hgl110aerf)'            pb      = 0.59388       
++php     = 0.62            mj      = 0.3081          mjsw    = 0.27          
+**************************************************************
+*               NOISE PARAMETERS 
+**************************************************************
+**************************************************************
+*               TEMPERATURE PARAMETERS 
+**************************************************************
++tlev    = 1               tlevc   = 1               trs     = 0.006897      
++tcv     = -0.000539       xti     = 5.4936          cta     = 0.00085358    
++ctp     = 0.001           eg      = 1.16            tpb     = 0.001512      
++tphp    = 0.001  
+*       
+* Device dnw/psub diode
+*
+.model  dnw_psub  d  level = 3
+**************************************************************
+*               GENERAL PARAMETERS 
+**************************************************************
++area    = 3.2e-008        pj      = 0.00032         tref    = 25            
+**************************************************************
+*               DC PARAMETERS 
+**************************************************************
++is      = 1.3886e-006     jsw     = 7.8545e-011     ik      = 6738.8        
++vb      = 9.8407          ibv     = 5.952           ikr     = 595.2         
++n       = 1.0073          rs      = 0   
+**************************************************************
+*               CAPACITANCE PARAMETERS 
+**************************************************************
++cj      = '0.00017814*(1+dcj_nw_n_33bpw_hgl110aerf)'        cjp     = '1.9409e-009*(1+dcjsw_nw_n_33bpw_hgl110aerf)'       pb      = 0.34911       
++php     = 0.56633         mj      = 0.2415          mjsw    = 0.30262       
+**************************************************************
+*               NOISE PARAMETERS 
+**************************************************************
+**************************************************************
+*               TEMPERATURE PARAMETERS 
+**************************************************************
++tlev    = 1               tlevc   = 1               trs     = 0.0045789     
++tcv     = -0.000539       xti     = 2.4515          cta     = 0.0027908     
++ctp     = 0.0013          eg      = 1.16            tpb     = 0.0022245     
++tphp    = 0.001   
+.ends
+
+

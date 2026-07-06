@@ -1,0 +1,268 @@
+#Converted from P12-LOGIC-110N-1P5M-SMIM-STARRCXT-0.5-CMAX.itf by using itf_to_ict.pl, version 4.98
+# 
+process P12-LOGIC-110N-1P5M-SMIM-STARRCXT-0.5-CMAX { 
+   background_dielectric_constant 1.0
+   temp_reference 25 
+} 
+# Well declarations 
+well NWELL {} 
+well PWELL {} 
+ 
+# Diffusion Layers 
+diffusion P_SOURCE_DRAIN {
+   thickness    	 0.12 
+   resistivity  	 15 
+} 
+ 
+diffusion N_SOURCE_DRAIN {
+   thickness    	 0.12 
+   resistivity  	 15 
+} 
+ 
+# Conducting Layers 
+conductor PO {
+   min_spacing  	 0.162 
+   min_width    	 0.143 
+   height       	 0.324 
+   thickness    	 0.220 
+   resistivity  	 6.00 
+   gate_forming_layer  	 true 
+} 
+ 
+conductor M1 {
+   min_spacing  	 0.135 
+   min_width    	 0.176 
+   height       	 0.6993 
+   thickness    	 0.253 
+   resistivity  	 0.13 
+   gate_forming_layer  	 false 
+} 
+ 
+conductor M2 {
+   min_spacing  	 0.162 
+   min_width    	 0.220 
+   height       	 1.3743 
+   thickness    	 0.308 
+   resistivity  	 0.095 
+   gate_forming_layer  	 false 
+} 
+ 
+conductor M3 {
+   min_spacing  	 0.162 
+   min_width    	 0.220 
+   height       	 2.0943 
+   thickness    	 0.308 
+   resistivity  	 0.095 
+   gate_forming_layer  	 false 
+} 
+ 
+conductor M4 {
+   min_spacing  	 0.162 
+   min_width    	 0.220 
+   height       	 2.8143 
+   thickness    	 0.308 
+   resistivity  	 0.095 
+   gate_forming_layer  	 false 
+} 
+ 
+conductor MIM4K {
+   min_spacing  	 0.720 
+   min_width    	 4.40 
+   height       	 3.1529 
+   thickness    	 0.055 
+   resistivity  	 31.50 
+   gate_forming_layer  	 false 
+} 
+ 
+conductor M5 {
+   min_spacing  	 0.351 
+   min_width    	 0.396 
+   height       	 3.5343 
+   thickness    	 0.9515 
+   resistivity  	 0.010 
+   gate_forming_layer  	 false 
+} 
+ 
+# dielectric Layers 
+dielectric   TOX {
+   conformal 		   FALSE 
+   height    		   0.0000 
+   thickness 		   0.3240 
+   dielectric_constant 	   4.1 
+} 
+ 
+dielectric   V0L {
+   conformal 		   TRUE 
+   expandedFrom 	   PO
+   height    		   0.3240 
+   thickness 		   0.0370 
+   topThickness 	   0.0370 
+   sideExpand 		   0.0370 
+   dielectric_constant 	   7.0 
+} 
+ 
+dielectric   V0H {
+   conformal 		   FALSE 
+   height    		   0.3610 
+   thickness 		   0.3383 
+   dielectric_constant 	   4.1 
+} 
+ 
+dielectric   V1L {
+   conformal 		   TRUE 
+   expandedFrom 	   M1
+   height    		   0.6993 
+   thickness 		   0.0000 
+   topThickness 	   0.0270 
+   sideExpand 		   0.0000 
+   dielectric_constant 	   6.5 
+} 
+ 
+dielectric   V1H {
+   conformal 		   FALSE 
+   height    		   0.6993 
+   thickness 		   0.6750 
+   dielectric_constant 	   4.1 
+} 
+ 
+dielectric   V2L {
+   conformal 		   TRUE 
+   expandedFrom 	   M2
+   height    		   1.3743 
+   thickness 		   0.0000 
+   topThickness 	   0.0270 
+   sideExpand 		   0.0000 
+   dielectric_constant 	   6.5 
+} 
+ 
+dielectric   V2H {
+   conformal 		   FALSE 
+   height    		   1.3743 
+   thickness 		   0.7200 
+   dielectric_constant 	   4.1 
+} 
+ 
+dielectric   V3L {
+   conformal 		   TRUE 
+   expandedFrom 	   M3
+   height    		   2.0943 
+   thickness 		   0.0000 
+   topThickness 	   0.0270 
+   sideExpand 		   0.0000 
+   dielectric_constant 	   6.5 
+} 
+ 
+dielectric   V3H {
+   conformal 		   FALSE 
+   height    		   2.0943 
+   thickness 		   0.7200 
+   dielectric_constant 	   4.1 
+} 
+ 
+dielectric   V4LL {
+   conformal 		   TRUE 
+   expandedFrom 	   M4
+   height    		   2.8143 
+   thickness 		   0.0000 
+   topThickness 	   0.0306 
+   sideExpand 		   0.0000 
+   dielectric_constant 	   7.0 
+} 
+ 
+dielectric   V4L {
+   conformal 		   FALSE 
+   height    		   2.8143 
+   thickness 		   0.3386 
+   dielectric_constant 	   4.1 
+} 
+ 
+dielectric   V4HL {
+   conformal 		   TRUE 
+   expandedFrom 	   MIM4K
+   height    		   3.1529 
+   thickness 		   0.0000 
+   topThickness 	   0.0270 
+   sideExpand 		   0.0000 
+   dielectric_constant 	   6.5 
+} 
+ 
+dielectric   V4H {
+   conformal 		   FALSE 
+   height    		   3.1529 
+   thickness 		   0.3814 
+   dielectric_constant 	   4.1 
+} 
+ 
+dielectric   V5L {
+   conformal 		   TRUE 
+   expandedFrom 	   M5
+   height    		   3.5343 
+   thickness 		   0.0000 
+   topThickness 	   0.0270 
+   sideExpand 		   0.0000 
+   dielectric_constant 	   6.5 
+} 
+ 
+dielectric   V5H {
+   conformal 		   FALSE 
+   height    		   3.5343 
+   thickness 		   1.4355 
+   dielectric_constant 	   4.1 
+} 
+ 
+dielectric   V5LH {
+   conformal 		   FALSE 
+   height    		   4.9698 
+   thickness 		   0.5400 
+   dielectric_constant 	   7.0 
+} 
+ 
+# Connect Layers 
+via   CONT {
+   bottom_layer  	 P_SOURCE_DRAIN 
+   top_layer     	 M1 
+   contact_resistance  	 15 
+} 
+ 
+via   CONT {
+   bottom_layer  	 N_SOURCE_DRAIN 
+   top_layer     	 M1 
+   contact_resistance  	 15 
+} 
+ 
+via   CT {
+   bottom_layer   	 PO 
+   top_layer      	 M1 
+   contact_resistance 37.000 
+} 
+ 
+via   V1 {
+   bottom_layer   	 M1 
+   top_layer      	 M2 
+   contact_resistance 10.450 
+} 
+ 
+via   V2 {
+   bottom_layer   	 M2 
+   top_layer      	 M3 
+   contact_resistance 10.450 
+} 
+ 
+via   V3 {
+   bottom_layer   	 M3 
+   top_layer      	 M4 
+   contact_resistance 10.450 
+} 
+ 
+via   V4 {
+   bottom_layer   	 M4 
+   top_layer      	 M5 
+   contact_resistance 8.250 
+} 
+ 
+via   VMIM {
+   bottom_layer   	 MIM4K 
+   top_layer      	 M5 
+   contact_resistance 8.250 
+} 
+ 

@@ -1,0 +1,17 @@
+//*.prot
+simulator lang=spectre insensitive=yes
+parameters b1_np_50_lvtl110ae_xx = 0
+parameters b2_np_50_lvtl110ae_xx = 0
+parameters b3_np_50_lvtl110ae_xx = 0
+parameters b4_np_50_lvtl110ae_xx = 0
+parameters b5_np_50_lvtl110ae_xx = 0
+//*.unprot
+statistics {
+    mismatch {
+        vary b1_np_50_lvtl110ae_xx dist=gauss std=1/1
+        vary b2_np_50_lvtl110ae_xx dist=gauss std=1/1
+        vary b3_np_50_lvtl110ae_xx dist=gauss std=1/1
+        vary b4_np_50_lvtl110ae_xx dist=gauss std=1/1
+        vary b5_np_50_lvtl110ae_xx dist=gauss std=1/1
+    }
+}

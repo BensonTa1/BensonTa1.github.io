@@ -1,0 +1,33 @@
+simulator lang=spectre insensitive=yes
+library l110ae_l_sy8knwct_vil_rf_v031_lib
+//
+section tt
+include "l110ae_l_sy8knwct_vil_rf_v031.mdl.scs"
+parameters syctnw_drs_1p6m0t1f=1
+parameters syctnw_drs_sub_1p6m0t1f=1
+parameters syctnw_dls_1p6m0t1f=1
+endsection tt
+//
+section ff
+include "l110ae_l_sy8knwct_vil_rf_v031.mdl.scs"
+parameters syctnw_drs_1p6m0t1f=1.15
+parameters syctnw_drs_sub_1p6m0t1f=0.85
+parameters syctnw_dls_1p6m0t1f=1.05
+endsection ff
+//
+section ss
+include "l110ae_l_sy8knwct_vil_rf_v031.mdl.scs"
+parameters syctnw_drs_1p6m0t1f=0.85
+parameters syctnw_drs_sub_1p6m0t1f=1.15
+parameters syctnw_dls_1p6m0t1f=0.95
+endsection ss
+//
+endlibrary l110ae_l_sy8knwct_vil_rf_v031_lib
+
+
+
+
+
+
+
+

@@ -1,0 +1,36 @@
+//  
+simulator lang=spectre insensitive=yes 
+parameters dtoxe_pcap_33=1.52e-10*(0.0300/3*mc_toxe_pcap_33)
+parameters dxl_pcap_33=(1.906e-8/3)*mc_xl_pcap_33
+parameters dxw_pcap_33=(4.37472e-7/3)*mc_xw_pcap_33
+parameters dcmin_pcap_33=(24.6/3)*mc_cmin_pcap_33
+parameters mc_toxe_pcap_33=0 
+ 
+statistics { 
+    process { 
+        vary mc_toxe_pcap_33 dist=gauss std=sigma/3 
+        } 
+    } 
+parameters mc_xl_pcap_33=0 
+ 
+statistics { 
+    process { 
+        vary mc_xl_pcap_33 dist=gauss std=sigma/3 
+        } 
+    } 
+parameters mc_xw_pcap_33=0 
+ 
+statistics { 
+    process { 
+        vary mc_xw_pcap_33 dist=gauss std=sigma/3 
+        } 
+    } 
+parameters mc_cmin_pcap_33=0 
+ 
+statistics { 
+    process { 
+        vary mc_cmin_pcap_33 dist=gauss std=sigma/3 
+        } 
+    } 
+  
+  

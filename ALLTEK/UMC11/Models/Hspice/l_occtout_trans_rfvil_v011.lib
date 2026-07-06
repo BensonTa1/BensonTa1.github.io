@@ -1,0 +1,20 @@
+* Model: l_occtout_trans_rfvil_v011
+* UMC 0.11um 1P8M top metal 41K octagonal transformer, secondary tapped
+* Date: 2009-12-27
+* Model coverage:
+* od: (128.58 - 320) * 1e-06 (Before shrinkage)
+* w: (6 - 12) * 1e-06 (Before shrinkage)
+* nt_in: 1 - 4 (Integer)
+* Frequency range: 1 MHz - 0.8 * resonance (maximum 30.0 GHz)
+*
+.lib typ
+.include './l_occtout_trans_rfvil_v011.typ.mdl'
+.endl typ
+*
+.lib min
+.include './l_occtout_trans_rfvil_v011.min.mdl'
+.endl min
+*
+.lib max
+.include './l_occtout_trans_rfvil_v011.max.mdl'
+.endl max

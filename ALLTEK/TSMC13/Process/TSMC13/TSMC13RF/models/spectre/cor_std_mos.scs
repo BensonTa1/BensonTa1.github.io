@@ -1,0 +1,24 @@
+library std_mos_cor 
+
+section ff 
+include "cr013g_2d5_v1d4.scs" section = ff 
+endsection ff 
+
+section fs 
+include "cr013g_2d5_v1d4.scs" section = fs 
+endsection fs 
+
+section sf 
+include "cr013g_2d5_v1d4.scs" section = sf 
+endsection sf 
+
+section ss 
+include "cr013g_2d5_v1d4.scs" section = ss 
+endsection ss 
+
+section tt 
+include "cr013g_2d5_v1d4.scs" section = tt 
+endsection tt 
+
+
+endlibrary std_mos_cor 

@@ -1,0 +1,53 @@
+.lib res_typ
+.param
+
++  drend_rnnpo_mm    =   0.0000e+00                 
++  drs_rnnpo_mm      =   0.0000e+00                 
++  ddw_rnnpo_mm      =   0.0000e+00                       
++  drend_rnppo_mm    =   0.0000e+00                 
++  drs_rnppo_mm      =   0.0000e+00                 
++  ddw_rnppo_mm      =   0.0000e+00                 
++  drend_rnhr1000_mm =   0.0000e+00                 
++  drs_rnhr1000_mm   =   0.0000e+00                 
++  ddw_rnhr1000_mm   =   0.0000e+00                 
+
+.include './mm180_res_v141.mdl'
+
+.endl  res_typ
+
+.lib res_max
+.param
+
++  drend_rnnpo_mm    =   7.6500e-06                 
++  drs_rnnpo_mm      =   2.8250e+01                 
++  ddw_rnnpo_mm      =  -5.1000e-08                               
++  drend_rnppo_mm    =   2.3520e-05                 
++  drs_rnppo_mm      =   7.5000e+01                 
++  ddw_rnppo_mm      =  -1.9000e-08                 
++  drend_rnhr1000_mm =   1.0e-04                 
++  drs_rnhr1000_mm   =   2.5975e+02                 
++  ddw_rnhr1000_mm   =  -1.8000e-08        
+
+.include './mm180_res_v141.mdl'
+
+
+.endl  res_max
+
+.lib res_min
+.param
+
++  drend_rnnpo_mm    =  -7.6500e-06               
++  drs_rnnpo_mm      =  -2.8250e+01               
++  ddw_rnnpo_mm      =   5.1000e-08                             
++  drend_rnppo_mm    =  -2.3520e-05               
++  drs_rnppo_mm      =  -8.8000e+01               
++  ddw_rnppo_mm      =   1.9000e-08               
++  drend_rnhr1000_mm =  -1.0e-04               
++  drs_rnhr1000_mm   =  -2.5975e+02               
++  ddw_rnhr1000_mm   =   1.8000e-08           
+
+.include './mm180_res_v141.mdl'
+
+
+.endl  res_min
+

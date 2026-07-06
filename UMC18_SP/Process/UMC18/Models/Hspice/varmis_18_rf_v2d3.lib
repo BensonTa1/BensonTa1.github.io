@@ -1,0 +1,53 @@
+.lib typ
+.param
+*
++ drgate_mis_rf=0
++ dcbox_mis_rf=0
++ dxl_mis_rf=0.0000e+00
++ dxw_mis_rf=0.0000e+00
++ dcj_mis_rf=0.0000e+00
++ dcjsw_mis_rf=0.0000e+00
++ dtox_mis_rf=0
++ dcgdo_mis_rf=0
++ dcgso_mis_rf=0
++ dcf_mis_rf=0.0000e+00
+*
+.include './varmis_18_rf_v2d3.mdl'
+* 
+.endl typ
+*
+.lib min
+.param
+*
++ drgate_mis_rf=0.35
++ dcbox_mis_rf=0.1
++ dxl_mis_rf=-2e-8
++ dxw_mis_rf=-2e-8
++ dcj_mis_rf=0.1
++ dcjsw_mis_rf=0.1
++ dtox_mis_rf=1.0000e-10
++ dcgdo_mis_rf=-0.1
++ dcgso_mis_rf=-0.1
++ dcf_mis_rf=-0.15
+*
+.include './varmis_18_rf_v2d3.mdl'
+* 
+.endl min
+*
+.lib max
+.param
+*
++ drgate_mis_rf=-0.35
++ dcbox_mis_rf=-0.1
++ dxl_mis_rf=2e-8
++ dxw_mis_rf=2e-8
++ dcj_mis_rf=-0.1
++ dcjsw_mis_rf=-0.1
++ dtox_mis_rf=-1.0000e-10
++ dcgdo_mis_rf=0.1
++ dcgso_mis_rf=0.1
++ dcf_mis_rf=0.15
+*
+.include './varmis_18_rf_v2d3.mdl'
+* 
+.endl max

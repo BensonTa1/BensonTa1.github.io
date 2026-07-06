@@ -1,0 +1,27 @@
+simulator lang=spectre insensitive=yes
+library mylib
+
+section typ
+parameters dtoxe_ncap_33=0.0000e+00
+parameters dxw_ncap_33=0.0000e+00
+parameters dxl_ncap_33=0.0000e+00
+parameters dcmina_ncap_33=0.0000e+00
+include "l110ae_ncap33_v031.mdl.scs"
+endsection typ
+ 
+section min
+parameters dtoxe_ncap_33=1.5000e-10
+parameters dxw_ncap_33=-2.9050e-07
+parameters dxl_ncap_33=-3.0700e-08
+parameters dcmina_ncap_33=8.0000e-02
+include "l110ae_ncap33_v031.mdl.scs"
+endsection min
+ 
+section max
+parameters dtoxe_ncap_33=-1.5000e-10
+parameters dxw_ncap_33=2.8650e-07
+parameters dxl_ncap_33=2.7050e-08
+parameters dcmina_ncap_33=-6.7200e-02
+include "l110ae_ncap33_v031.mdl.scs"
+endsection max
+endlibrary mylib

@@ -1,0 +1,58 @@
+`include "discipline.h"
+`include "constants.h"
+
+module res_va(p,n);
+inout p,n;
+electrical p,n;
+
+parameter real rend=1;
+parameter real rs=1;
+parameter real dw=1;
+parameter real vcr1=1;
+parameter real vcr2=1;
+parameter real tc1=1;
+parameter real tc2=1;
+parameter real res_type=1;
+parameter real lr=1;
+parameter real wr=1;
+parameter real temper=25;
+
+
+
+
+real res,tcoef,vl,i,v,power;
+
+analog begin
+
+res=0;
+tcoef=1.0+(tc1*(temper-25))+(tc2 *(temper-25)*(temper-25)); 
+
+
+
+
+ 
+if (res_type==1) begin//*****FOR DIFFUSION TYPE RESISTOR 
+res=((2*rend/(wr+dw))+(rs*lr/(wr+dw)))*(1.0+vcr1*abs(V(p, n))+vcr2*pow(abs(V(p, n)),2))*tcoef;
+end 
+
+if (res_type==2) begin//*****FOR POLY TYPE RESISTOR 
+res=((2*rend/(wr+dw))+(rs*lr/(wr+dw)))*(1.0+vcr1*abs(V(p, n))/lr+vcr2*pow(abs(V(p, n))/lr,2))*tcoef;
+end 
+
+if (res_type==3) begin//*****FOR HR TYPE RESISTOR 
+res=((2*rend/(wr+dw))+(rs*(lr-0.4e-6)/(wr+dw)))*(1.0+vcr1*abs(V(p, n))/(lr-0.4e-6)+vcr2*pow(abs(V(p, n))/(lr-0.4e-6),2))*tcoef;
+end 
+
+
+//$strobe(r);
+
+I(p, n) <+ V(p, n)/res;
+I(p, n) <+ white_noise(4*1.38e-23*(temper+273)/res,"thermal");
+
+v=V(p,n);
+i=v/res;
+power=i*v;
+
+end
+
+endmodule

@@ -1,0 +1,129 @@
+//********************************************************************
+simulator lang=spectre insensitive=yes
+//Property of UMC.
+//Unauthorized reproduction, modification and/or distribution are strictly
+//prohibited.
+//This product is protected under copyright law and trade secret law.
+//This model card may not be sent in any form outside of UMC without
+//the written consent of the UMC ATD Modeling Division.
+//******************************************************************************
+//Revision history:
+//<Revision 1>
+//Version : 0.1 p1
+//Date  : 2010/01/08
+//Author  : Jian Zhi Huang
+//Remark  : 1. Copy model from l110e_nvt_33_v011.lib in the G-05-LOGIC/MIXED_MODE11-MMC/L110E-SPICE
+//2. DSM version definition from 2009/11/30.
+//
+//<Revision 2>
+//Version : 0.2 p1
+//Date  : 2010/07/26
+//Author  : Ruei Chih Yen
+//Remark  : Base on new silicon data.
+//
+//<Revision 3>
+//Version : 0.3 p1
+//Date  : 2013/03/04
+//Author  : Yealing Lin
+//Remark  : Revise corner range.
+//******************************************************************************
+model n_nvt_33_l110e bsim3v3 type=n
+//*
+//* GENERAL PARAMETERS
+//*
++ lmin=1.632e-6             lmax=5.0e-5               wmin=9.0e-7
++ wmax=1.0e-4               tnom=25.0                 version=3.24
++ tox=7.15e-09+dtox_n_nvt_33_l110e                  toxm=7.15e-09
++ xj=1.0700000e-07          nch=1.0000000e+17         lln=1.0800000
++ lwn=0.9942539             wln=1.0109237             wwn=1.0134194
++ lint=9.2200000e-08        ll=1.8367501e-16          lw=3.1082689e-15
++ lwl=-4.3266660e-21        wint=4.7000000e-08        wl=-1.7500001e-14
++ ww=-3.7500000e-14         wwl=-3.4180850e-22+dwwl_n_nvt_33_l110e
++ mobmod=1                  binunit=2               
++ xl=-2.50e-08+1.2e-8+dxl_n_nvt_33_l110e      
++ xw=-1.80e-08+dxw_n_nvt_33_l110e                 dwg=6.5000010e-09
++ dwb=0.00                
+//* DIODE PARAMETERS
++ ldif=7.40e-08
++ hdif=1.80e-07             rsh=8.49                  rd=0
++ rs=0                      rsc=0                     rdc=0
+//*
+//* THRESHOLD VOLTAGE PARAMETERS
+//*
++ vth0=-0.1438274+dvth0_n_nvt_33_l110e          
++ lvth0=0.0+dlvth0_n_nvt_33_l110e                   wvth0=-6.2711770e-08
++ pvth0=3.6611080e-14+dpvth0_n_nvt_33_l110e         k1=5.7317180e-02
++ k2=2.0192898e-05          wk2=-1.1251663e-08        pk2=1.5000000e-14
++ k3=18.0000000+dk3_n_nvt_33_l110e                  dvt0=0.2002633
++ dvt1=6.5873220e-02        dvt2=-8.3669630e-02       dvt0w=0.9353778
++ dvt1w=3.5784460e+05       dvt2w=-0.2807697          nlx=0.00
++ w0=2.5000000e-07          k3b=-11.6590530           ngate=1.0000000e+23
+//*
+//* MOBILITY PARAMETERS
+//*
++ vsat=9.9000000e+04+dvsat_n_nvt_33_l110e           lvsat=-2.0000001e-03
++ pvsat=1.9000000e-08       ua=8.0753000e-10          ub=1.0000000e-18
++ lub=5.0886000e-27         wub=-2.9115577e-25        pub=-6.0000000e-32
++ uc=-6.3257400e-12         puc=-1.0000000e-23      
++ rdsw=5.2523800e+02+drdsw_n_nvt_33_l110e           prwb=2.8066123e-02
++ prwg=0.00                 wr=1.0000000            
++ u0=4.6903250e-02+du0_n_nvt_33_l110e             
++ lu0=9.6575000e-11+dlu0_n_nvt_33_l110e           
++ wu0=-2.9999998e-09+dwu0_n_nvt_33_l110e          a0=1.7000000
++ la0=-1.1000000e-06        keta=-3.2000000e-02       lketa=2.5000000e-09
++ wketa=1.9999999e-09       a1=0.00                   a2=0.4000000
++ la2=1.8243468e-07         ags=1.2709563+dags_n_nvt_33_l110e
++ lags=2.0086006e-06        b0=1.7999999e-06          b1=0.00
++ wags=0+dwags_n_nvt_33_l110e                     
++ pu0=0+dpu0_n_nvt_33_l110e                       
++ pags=0+dpags_n_nvt_33_l110e                     
+//*
+//* SUBTHRESHOLD CURRENT PARAMETERS
+//*
++ voff=-0.1000000
++ nfactor=0.3000000         cit=0.00                  cdsc=0.00
++ cdscb=0.00                cdscd=0.00                eta0=8.0000000e-02
++ leta0=-2.0000000e-08      peta0=-6.0000000e-14      etab=0.00
++ dsub=9.5230830e-02        ldsub=2.9999999e-08       pdsub=1.5000000e-14
+//*
+//* ROUT PARAMETERS
+//*
++ pclm=5.2043990            lpclm=6.3684890e-08       pdiblc1=0.7700000
++ lpdiblc1=-4.2000000e-07   pdiblc2=8.0000000e-03     wpdiblc2=-5.0000000e-09
++ pdiblcb=0.2000000         drout=0.2000000           pdrout=1.2000000e-14
++ pscbe1=6.0000000e+08      pscbe2=1.0000000e-06      pvag=4.2137730
++ lpvag=-5.5395680e-08      delta=5.0000000e-03       alpha0=1.2699000e-08
++ alpha1=2.2351999e-08      beta0=12.3100000          lbeta0=-6.3541800e-07
++ pbeta0=-3.1000001e-12   
+//*
+//* TEMPERATURE EFFECTS PARAMETERS
+//*
++ kt1=-0.1810000            wkt1=-2.0000000e-08
++ pkt1=7.4855000e-14        kt2=-5.1940000e-03        lkt2=-3.5093500e-09
++ wkt2=-3.6310670e-11       pkt2=2.1480339e-14        at=1.0000000e+05
++ lat=-6.5000000e-02        wat=6.0000000e-02         pat=-1.0000000e-07
++ ute=-1.4902200            lute=-3.4671520e-07       wute=1.5689791e-07
++ pute=1.0231400e-13        ua1=2.1550000e-09         ub1=-4.6000000e-18
++ lub1=1.6594500e-24        wub1=7.2000000e-26        pub1=1.2633891e-30
++ uc1=-1.0000000e-11        wuc1=-1.0000000e-17       kt1l=-3.5714090e-08
++ prt=-9.1924120e+02      
+//*
+//* CAPACITANCE PARAMETERS
+//*
++ cj=1.2064e-04+dcj_n_nvt_33_l110e
++ mj=0.31506                pb=0.46566              
++ cjsw=3.4543e-10+dcjsw_n_nvt_33_l110e              mjsw=0.1
++ pbsw=0.84                 cjswg=1.126e-10+dcjswg_n_nvt_33_l110e
++ mjswg=0.37476             pbswg=0.46305             tpb=2.60e-03
++ tpbsw=4.30e-03            tpbswg=2.60e-03           tcj=2.26e-03
++ tcjsw=5.37e-04            tcjswg=2.35e-03           js=1.3681e-06
++ jsw=1.3586e-12            nj=1.00884                xti=3.0
++ cgdo=2.162e-10+dcgdo_n_nvt_33_l110e             
++ cgso=2.162e-10+dcgso_n_nvt_33_l110e               cgbo=0
++ capmod=3                  nqsmod=0                  elm=5
++ xpart=1                   cf=8.88e-13               dlc=3.0e-08
++ dwc=0                     llc=0                     lwc=0
++ wlc=0                     wwc=0                     lwlc=0
++ wwlc=0                    acde=0.4001000            moin=21.0599990
++ noff=3.8250000            voffcv=5.8000000e-02    
++ minr=0.01                 imax=0.1

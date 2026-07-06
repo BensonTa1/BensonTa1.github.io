@@ -1,0 +1,123 @@
+
+********************************************************************************
+* Property of UMC
+* Unauthorized reproduction, modification and/or distribution are strictly
+* prohibited.
+* This product is protected under copyright law and trade secret law.
+* This model card may not be sent in any form outside of UMC without
+* the written consent of the UMC ATD Modeling Division.
+********************************************************************************
+* Process:      0.11um Logic and Mixed-Mode 1P8M Metal Metal Capacitor Al Advanced Enhancement Process
+* Device Type:  n-ch MOSFET
+* Description:  2.5V OD 3.3V Native Device
+* Model:        BSIM3 3.24
+* Simulator:    HSPICE
+* Model features:
+*     Global model          : Yes
+*     Igate model           : NA
+*     Flicker Noise         : Yes
+*     LOD model             : NA
+*     RF model              : NA
+*     Well proximity effect : NA
+********************************************************************************        
+* Revision history:                 
+* <Revision 1>                 
+* Version : 0.2 p1                 
+* Date    : 2012/06/27                 
+* Author  : Eason Cheng                
+* Remark  : 1.Original release.
+********************************************************************************
+* Application ranges:
+* Geometry range(After 90% shrink):
+*
+* For Vcc=2.5V n-ch MOSFET:
+*
+*     1.62um <= LDES <= 10um
+*        1um <= WDES <= 10um
+*
+* Voltage range:
+* 
+* For n-ch MOSFET:
+*    0V <= VGS <= Vcc(*1.1)
+*    0V <= VDS <= Vcc(*1.1)
+*  -Vcc <= VBS <= 0V
+*
+* Temperature range:-40c ~ 125c ; nominal temperature  =  25c
+************************************************************************************
+**
+.model n_nvt_25_l110ae nmos
+***** Flag Parameter ***
++level      = 49                                        version    = 3.24                                      binunit    = 2                                         
++mobmod     = 1                                         capmod     = 3                                         nqsmod     = 0         
++noimod     = 2                                 
+***** Geometry Range Parameter ***
++lmin       = 1.62e-6                                   lmax       = 1e-5                                      wmin       = 1e-6                                      
++wmax       = 1e-5                                      
+***** Process Parameter ***
++tox        = '5.4e-9+dtox_n_nvt_25_l110ae'             xj         = 1.2e-7                                    nch        = 3.6822e16                                 
+***** dW and dL Parameter ***
++wint       = 6.682753e-8                               wl         = 0                                         wln        = 1                                         
++ww         = -1.981546e-14                             wwn        = 1                                         wwl        = '7.6143030e-021+dwwl_n_nvt_25_l110ae'     
++lint       = 1.40529e-7                                ll         = -5.375e-14                                lln        = 1                                         
++lw         = 0                                         lwn        = 1                                         lwl        = 2.64422e-20                               
++llc        = -3.811294e-15                             lwc        = 8.815656e-14                              lwlc       = 2.90774e-21                               
++wlc        = -7.42099e-15                              wwc        = 9.101659e-17                              wwlc       = -7.994494e-21                             
++dwg        = -1.1214741e-008                           wdwg       = -3.234764e-15                             dwb        = -5.066382e-9                              
++xl         = '0+1.2e-8+dxl_n_nvt_25_l110ae'                   xw         = '0+dxw_n_nvt_25_l110ae'                   
+***** Vth Related  Parameter ***
++vth0       = '-1.9264900e-001+dvth0_n_nvt_25_l110ae'   lvth0      = '-3.9009237e-008+dlvth0_n_nvt_25_l110ae'  pvth0      = '1.6028575e-014+dpvth0_n_nvt_25_l110ae'   
++k1         = 0.10255                                   lk1        = -1.22e-8                                  k2         = -0.01732                                  
++k3         = '1.7457685e+001+dk3_n_nvt_25_l110ae'      k3b        = -12.4275                                  wk3b       = 2.532297e-6                               
++w0         = 1.89425e-7                                nlx        = 0                                         dvt0       = 0.5                                       
++dvt1       = 2                                         dvt2       = -1.4                                      dvt0w      = 0.900275                                  
++dvt1w      = 1.483304e6                                dvt2w      = -0.750531                                 ngate      = 1.116e21                                  
+***** Mobility Related Parameter ***
++u0         = '4.2311798e-002+du0_n_nvt_25_l110ae'      ua         = 3e-10                                     wua        = 1.5109e-16                                
++ub         = 1.89e-18                                  uc         = 1.064615e-11                              puc        = -1.250048e-23                             
++vsat       = '1.4557809e+005+dvsat_n_nvt_25_l110ae'    lvsat      = -0.0943                                   pvsat      = '1.045e-7+dpvsat_n_nvt_25_l110ae'         
++a0         = 4.002669                                  pa0        = 4.47454e-14                               ags        = 7.3971118e-001                            
++lags       = 2.18e-8                                   pags       = 2.5023237e-015                            b0         = '2.1995720e-006+db0_n_nvt_25_l110ae'      
++wb0        = -9.27432e-13                              pb0        = 4.720683e-19                              b1         = 0                                         
++keta       = -3.17996e-2                               lketa      = 2.19219e-8                                a1         = 0                                         
++a2         = 1                                         rdsw       = '5.7575484e+002+drdsw_n_nvt_25_l110ae'    prwb       = 1.16224e-2                                
++prwg       = 0.01                                      wr         = 1                                         lwr        = 1.193356e-8                               
+***** Subthreshold Related Parameter ***
++voff       = -0.105                                    nfactor    = 0.7                                       lnfactor   = 2.538875e-6                               
++eta0       = 1.0124794e+000                            leta0      = -2.8211e-7                                peta0      = -1.2469893e-013                           
++etab       = 0.1296                                    dsub       = 0.252                                     pdsub      = 2.1e-13                                   
++cit        = -9.8175e-4                                cdsc       = 3.0875e-3                                 cdscb      = 1.6e-3                                    
++cdscd      = 3.25e-3                                   
+***** Output Resistance Related Parameter ***
++pclm       = 2.212056                                  lpclm      = -2e-6                                     pdiblc1    = 1e-4                                      
++pdiblc2    = 0.011                                     wpdiblc2   = -6.612448e-9                              pdiblcb    = 0                                         
++drout      = 0.2464                                    pscbe1     = 1e9                                       pscbe2     = 1e-9                                      
++pvag       = 0                                         delta      = 0.01                                      alpha0     = 1.549865e-9                               
++alpha1     = 0                                         beta0      = 6.7975                                    
+***** Capacitance Parameter ***
++xpart      = 1                                         cgso       = '2.25e-12+dcgso_n_nvt_25_l110ae'          cgdo       = '2.25e-12+dcgdo_n_nvt_25_l110ae'          
++cgbo       = 0                                         ckappa     = 0.6                                       clc        = 1e-7                                      
++cle        = 0.6                                       dlc        = 3.842288e-8                               dwc        = -4.202453e-9                              
++vfbcv      = -1                                        noff       = 2.456285                                  lnoff      = 1.398516e-6                               
++ijth       = 0.1                                       voffcv     = 0                                         lvoffcv    = -3.29259e-8                               
++acde       = 0.5                                       moin       = 16.5                                      cgsl       = '2.504883e-10+dcgsl_n_nvt_25_l110ae'      
++cgdl       = '2.504883e-10+dcgdl_n_nvt_25_l110ae'      
+***** Souce/Drain Junction Diode Model Parameter ***
++tlev       = 1                                         tlevc      = 1                                         calcacm    = 1                                         
++acm        = 12                                        hdif       = 2.2e-7                                    rsh        = 8.3                                       
++cj         = '1.137e-4+dcj_n_nvt_25_l110ae'            mj         = 0.3039                                    mjsw       = 0.12333                                   
++cjsw       = '3.0903e-10+dcjsw_n_nvt_25_l110ae'        cjswg      = '9.9314e-11+dcjswg_n_nvt_25_l110ae'       mjswg      = 0.35565                                   
++js         = 3.3253e-6                                 jsw        = 2.2414e-12                                pbsw       = 0.836                                     
++pb         = 0.44059                                   pbswg      = 0.34846                                   
+***** Temperature Coeffient ***
++tnom       = 25                                        ute        = -1.778458                                 lute       = -1.800689e-7                              
++wute       = 7.695e-8                                  pute       = -4.001531e-14                             kt1        = -0.254283                                 
++kt1l       = -4.255e-8                                 kt2        = -0.017104                                 ua1        = 8.502193e-10                              
++ub1        = -3.05005e-18                              uc1        = 1.13458e-11                               wuc1       = -4.160129e-17                             
++at         = 3.556756e4                                prt        = 0.951562                                  nj         = 1.05                                      
++xti        = 3.5693                                    tpb        = 1.8856e-3                                 tpbsw      = 3.8059e-3                                 
++tpbswg     = 3.032e-4                                  tcj        = 2.6903e-3                                 tcjsw      = 1e-3                                      
++tcjswg     = 6e-3                                      
+***** Noise Parameters ***
++noia       = 2.0000000e+20                             noib       = 6.0000000e+03                             noic       = 1.1000000e-13
++ef         = 0.93                                      em         = 4.1000000e+07
+

@@ -1,0 +1,26 @@
+//
+simulator lang=spectre insensitive=yes 
+library mylib 
+
+section mc
+include "rnppo_rf_v2d4_mc_statistical_p.mdl.scs"
+include "rnppo_rf_v2d4_mc_statistical_m.mdl.scs"
+include "rnppo_rf_v2d4_mc.mdl.scs"
+endsection mc
+
+section tt
+include "rnppo_rf_v2d4_mc_statistical_m.mdl.scs"
+include "rnppo_rf_v2d4_mc.lib.scs" section=tt
+endsection tt
+
+section ss
+include "rnppo_rf_v2d4_mc_statistical_m.mdl.scs"
+include "rnppo_rf_v2d4_mc.lib.scs" section=ss
+endsection ss
+
+section ff
+include "rnppo_rf_v2d4_mc_statistical_m.mdl.scs"
+include "rnppo_rf_v2d4_mc.lib.scs" section=ff
+endsection ff     
+
+endlibrary mylib 

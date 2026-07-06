@@ -1,0 +1,26 @@
+Starting Single Run, Sweeps and Corners...
+
+Current time: Thu Mar 19 21:04:35 2026 
+Best design point: 1
+Design specs: 
+	TEST_TSMC13_ALLTEK_PLL:CONSTANT_GM:1	corner	C0_0 - 
+	IDC("/IPRB0/PLUS")		86.83u
+	IDC("/I0/M4/D")		253.9p
+	TEST_TSMC13_ALLTEK_PLL:CONSTANT_GM:1	corner	C0_1 - 
+	IDC("/IPRB0/PLUS")		72.03u
+	IDC("/I0/M4/D")		365.7p
+	TEST_TSMC13_ALLTEK_PLL:CONSTANT_GM:1	corner	C0_2 - 
+	IDC("/IPRB0/PLUS")		109.3u
+	IDC("/I0/M4/D")		155.8p
+	TEST_TSMC13_ALLTEK_PLL:CONSTANT_GM:1	corner	Nominal - 
+	IDC("/IPRB0/PLUS")		86.83u
+	IDC("/I0/M4/D")		253.9p
+Design parameters: 
+	VS		1.08
+	temperature		-25
+
+Interactive.4
+Number of points completed: 15
+Number of simulation errors: 0
+Interactive.4 completed. 
+Current time: Thu Mar 19 21:05:21 2026 

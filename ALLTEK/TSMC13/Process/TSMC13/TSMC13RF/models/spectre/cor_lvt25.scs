@@ -1,0 +1,24 @@
+library lvt25_cor 
+
+section ff_lvt25 
+include "cr013g_2d5_v1d4.scs" section = ff_lvt25 
+endsection ff_lvt25 
+
+section fs_lvt25 
+include "cr013g_2d5_v1d4.scs" section = fs_lvt25 
+endsection fs_lvt25 
+
+section sf_lvt25 
+include "cr013g_2d5_v1d4.scs" section = sf_lvt25 
+endsection sf_lvt25 
+
+section ss_lvt25 
+include "cr013g_2d5_v1d4.scs" section = ss_lvt25 
+endsection ss_lvt25 
+
+section tt_lvt25 
+include "cr013g_2d5_v1d4.scs" section = tt_lvt25 
+endsection tt_lvt25 
+
+
+endlibrary lvt25_cor 

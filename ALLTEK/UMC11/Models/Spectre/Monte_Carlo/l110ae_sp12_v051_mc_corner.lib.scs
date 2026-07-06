@@ -1,0 +1,144 @@
+simulator lang=spectre insensitive=yes
+library mylib
+section mc
+include "l110ae_sp12_v051_mc_statistical_p.mdl.scs"
+include "l110ae_sp12_v051_mc_statistical_m.mdl.scs"
+include "l110ae_sp12_v051_mc.mdl.scs"
+include "l110ae_sp12_v051_mc.lib.scs" section=tt
+parameters total_flag_n_12_spl110e  = 0
+parameters global_flag_n_12_spl110e = 1
+parameters local_flag_n_12_spl110e  = 1
+parameters total_flag_p_12_spl110e  = 0
+parameters global_flag_p_12_spl110e = 1
+parameters local_flag_p_12_spl110e  = 1
+endsection mc
+
+section tt
+include "l110ae_sp12_v051_mc_statistical_m.mdl.scs"
+include "l110ae_sp12_v051_mc.mdl.scs"
+include "l110ae_sp12_v051_mc.lib.scs" section=tt
+include "l110ae_sp12_v051_mc.lib.scs" section=tt_g
+parameters total_flag_n_12_spl110e  = 1
+parameters global_flag_n_12_spl110e = 0
+parameters local_flag_n_12_spl110e  = 0
+parameters total_flag_p_12_spl110e  = 1
+parameters global_flag_p_12_spl110e = 0
+parameters local_flag_p_12_spl110e  = 0
+endsection tt
+
+section ss
+include "l110ae_sp12_v051_mc_statistical_m.mdl.scs"
+include "l110ae_sp12_v051_mc.mdl.scs"
+include "l110ae_sp12_v051_mc.lib.scs" section=ss
+include "l110ae_sp12_v051_mc.lib.scs" section=ss_g
+parameters total_flag_n_12_spl110e  = 1
+parameters global_flag_n_12_spl110e = 0
+parameters local_flag_n_12_spl110e  = 0
+parameters total_flag_p_12_spl110e  = 1
+parameters global_flag_p_12_spl110e = 0
+parameters local_flag_p_12_spl110e  = 0
+endsection ss
+
+section ff
+include "l110ae_sp12_v051_mc_statistical_m.mdl.scs"
+include "l110ae_sp12_v051_mc.mdl.scs"
+include "l110ae_sp12_v051_mc.lib.scs" section=ff
+include "l110ae_sp12_v051_mc.lib.scs" section=ff_g
+parameters total_flag_n_12_spl110e  = 1
+parameters global_flag_n_12_spl110e = 0
+parameters local_flag_n_12_spl110e  = 0
+parameters total_flag_p_12_spl110e  = 1
+parameters global_flag_p_12_spl110e = 0
+parameters local_flag_p_12_spl110e  = 0
+endsection ff
+
+section snfp
+include "l110ae_sp12_v051_mc_statistical_m.mdl.scs"
+include "l110ae_sp12_v051_mc.mdl.scs"
+include "l110ae_sp12_v051_mc.lib.scs" section=snfp
+include "l110ae_sp12_v051_mc.lib.scs" section=snfp_g
+parameters total_flag_n_12_spl110e  = 1
+parameters global_flag_n_12_spl110e = 0
+parameters local_flag_n_12_spl110e  = 0
+parameters total_flag_p_12_spl110e  = 1
+parameters global_flag_p_12_spl110e = 0
+parameters local_flag_p_12_spl110e  = 0
+endsection snfp
+
+section fnsp
+include "l110ae_sp12_v051_mc_statistical_m.mdl.scs"
+include "l110ae_sp12_v051_mc.mdl.scs"
+include "l110ae_sp12_v051_mc.lib.scs" section=fnsp
+include "l110ae_sp12_v051_mc.lib.scs" section=fnsp_g
+parameters total_flag_n_12_spl110e  = 1
+parameters global_flag_n_12_spl110e = 0
+parameters local_flag_n_12_spl110e  = 0
+parameters total_flag_p_12_spl110e  = 1
+parameters global_flag_p_12_spl110e = 0
+parameters local_flag_p_12_spl110e  = 0
+endsection fnsp
+section tt_g
+include "l110ae_sp12_v051_mc_statistical_m.mdl.scs"
+include "l110ae_sp12_v051_mc.mdl.scs"
+include "l110ae_sp12_v051_mc.lib.scs" section=tt
+include "l110ae_sp12_v051_mc.lib.scs" section=tt_g
+parameters total_flag_n_12_spl110e  = 0
+parameters global_flag_n_12_spl110e = 1
+parameters local_flag_n_12_spl110e  = 1
+parameters total_flag_p_12_spl110e  = 0
+parameters global_flag_p_12_spl110e = 1
+parameters local_flag_p_12_spl110e  = 1
+endsection tt_g
+
+section ss_g
+include "l110ae_sp12_v051_mc_statistical_m.mdl.scs"
+include "l110ae_sp12_v051_mc.mdl.scs"
+include "l110ae_sp12_v051_mc.lib.scs" section=ss
+include "l110ae_sp12_v051_mc.lib.scs" section=ss_g
+parameters total_flag_n_12_spl110e  = 0
+parameters global_flag_n_12_spl110e = 1
+parameters local_flag_n_12_spl110e  = 1
+parameters total_flag_p_12_spl110e  = 0
+parameters global_flag_p_12_spl110e = 1
+parameters local_flag_p_12_spl110e  = 1
+endsection ss_g
+
+section ff_g
+include "l110ae_sp12_v051_mc_statistical_m.mdl.scs"
+include "l110ae_sp12_v051_mc.mdl.scs"
+include "l110ae_sp12_v051_mc.lib.scs" section=ff
+include "l110ae_sp12_v051_mc.lib.scs" section=ff_g
+parameters total_flag_n_12_spl110e  = 0
+parameters global_flag_n_12_spl110e = 1
+parameters local_flag_n_12_spl110e  = 1
+parameters total_flag_p_12_spl110e  = 0
+parameters global_flag_p_12_spl110e = 1
+parameters local_flag_p_12_spl110e  = 1
+endsection ff_g
+
+section snfp_g
+include "l110ae_sp12_v051_mc_statistical_m.mdl.scs"
+include "l110ae_sp12_v051_mc.mdl.scs"
+include "l110ae_sp12_v051_mc.lib.scs" section=snfp
+include "l110ae_sp12_v051_mc.lib.scs" section=snfp_g
+parameters total_flag_n_12_spl110e  = 0
+parameters global_flag_n_12_spl110e = 1
+parameters local_flag_n_12_spl110e  = 1
+parameters total_flag_p_12_spl110e  = 0
+parameters global_flag_p_12_spl110e = 1
+parameters local_flag_p_12_spl110e  = 1
+endsection snfp_g
+
+section fnsp_g
+include "l110ae_sp12_v051_mc_statistical_m.mdl.scs"
+include "l110ae_sp12_v051_mc.mdl.scs"
+include "l110ae_sp12_v051_mc.lib.scs" section=fnsp
+include "l110ae_sp12_v051_mc.lib.scs" section=fnsp_g
+parameters total_flag_n_12_spl110e  = 0
+parameters global_flag_n_12_spl110e = 1
+parameters local_flag_n_12_spl110e  = 1
+parameters total_flag_p_12_spl110e  = 0
+parameters global_flag_p_12_spl110e = 1
+parameters local_flag_p_12_spl110e  = 1
+endsection fnsp_g
+endlibrary mylib

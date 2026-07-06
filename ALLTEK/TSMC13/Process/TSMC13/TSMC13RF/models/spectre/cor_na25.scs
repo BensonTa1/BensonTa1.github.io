@@ -1,0 +1,16 @@
+library na25_cor 
+
+section ff_na25 
+include "cr013g_2d5_v1d4.scs" section = ff_na25 
+endsection ff_na25 
+
+section ss_na25 
+include "cr013g_2d5_v1d4.scs" section = ss_na25 
+endsection ss_na25 
+
+section tt_na25 
+include "cr013g_2d5_v1d4.scs" section = tt_na25 
+endsection tt_na25 
+
+
+endlibrary na25_cor 

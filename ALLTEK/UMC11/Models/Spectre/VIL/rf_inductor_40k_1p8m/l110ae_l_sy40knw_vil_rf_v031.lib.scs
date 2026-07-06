@@ -1,0 +1,29 @@
+simulator lang=spectre insensitive=yes
+library l110ae_l_sy40knw_vil_rf_v031_lib
+//
+section tt
+parameters synw_drs=1
+parameters synw_drs_sub=1
+parameters synw_dls=1
+include "l110ae_l_sy40knw_vil_rf_v031.mdl.scs"
+endsection tt
+//
+section ff
+parameters synw_drs=1.15
+parameters synw_drs_sub=0.85
+parameters synw_dls=1.05
+include "l110ae_l_sy40knw_vil_rf_v031.mdl.scs"
+endsection ff
+//
+section ss
+parameters synw_drs=0.85
+parameters synw_drs_sub=1.15
+parameters synw_dls=0.95
+include "l110ae_l_sy40knw_vil_rf_v031.mdl.scs"
+endsection ss
+//
+endlibrary l110ae_l_sy40knw_vil_rf_v031_lib
+
+
+
+

@@ -1,0 +1,24 @@
+library g_cor 
+
+section ff_g 
+include "cr013g_2d5_v1d4.scs" section = ff_g 
+endsection ff_g 
+
+section fs_g 
+include "cr013g_2d5_v1d4.scs" section = fs_g 
+endsection fs_g 
+
+section sf_g 
+include "cr013g_2d5_v1d4.scs" section = sf_g 
+endsection sf_g 
+
+section ss_g 
+include "cr013g_2d5_v1d4.scs" section = ss_g 
+endsection ss_g 
+
+section tt_g 
+include "cr013g_2d5_v1d4.scs" section = tt_g 
+endsection tt_g 
+
+
+endlibrary g_cor 

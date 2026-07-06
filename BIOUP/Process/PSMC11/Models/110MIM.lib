@@ -1,0 +1,199 @@
+***************************************************************
+*******    Powerchip Semiconductor Corp. SPICE Model     ******
+*****************************************************************************************************************
+*   Process        : Logic 110nm  MIM SPICE Model                  							*
+*   Registered date: Nov 27, 2015                                  						*
+*   Version        : 0.50                                       						*
+*   Creator        : tchsu                                							*
+*****************************************************************************************************************
+*********************************************************************************
+* 1. In this version(v0.50), copy 4 SiN MIM models from 11N MM v1.05.*
+*********************************************************************************
+*                                                                               *
+* Model Description                                                             *
+*  										*
+*  1)MIM model name --- cmim1fn, cmim1p25fn, cmim1p5fn, cmim2fn                  					*
+*     Lib MIM_TT :   MIM typical model                                 		*
+*     Lib MIM_FF :   MIM fast model                                     *
+*     Lib MIM_SS :   MIM slow model                                     * 
+*
+*      Model_name  	Description    	             Bias range  			                fitting size geometry	    *	
+*
+*
+*      cmim1fn              1fF MIM CAP               -19V<= V <=0V, or 0V<= V <=19V          Area= (4*4)*216   , (10*10)*36  ,           *
+*                                                                                             (24x24)*6   , (35*35)*4    um2    * 
+*      cmim1p25fn     1.25fF MIM CAP               -14.5V<= V <=0V, or 0V<= V <=14.5V          Area= (4*4)*216   , (10*10)*36  ,           *
+*                                                                                             (24x24)*6   , (35*35)*4    um2    *                                                    
+*      cmim1p5fn     1.5fF MIM CAP               -14.5V<= V <=0V, or 0V<= V <=14.5V          Area= (4*4)*216   , (10*10)*36  ,           *
+*                                                                                             (24x24)*6   , (35*35)*4    um2    * 
+*      cmim2fn     2fF MIM CAP               -7.7V<= V <=0V, or 0V<= V <=7.7V          Area= (4*4)*216   , (10*10)*36  ,           *
+*                                                                                             (24x24)*6   , (35*35)*4    um2    * 
+*
+*  *)To use these models by using this command:                                 *
+*     .lib 'lib_path/lib_name' model_name                                       *
+*                                                                               *
+*     EX: .lib '/home/user/psc/110MIM.lib' MIM_TT                         	*
+*         for typical MIM							*    
+*										*				
+*********************************************************************************
+
+
+
+
+*****************************************************************
+*                                                             	*
+*  MIM SPICE Model Library              			*
+*                                                             	*
+*****************************************************************
+
+**************** CORNER_LIB OF TYPICAL MODEL ******************
+.lib MIM_TT
+
+.param
+
++ca_cmim1f =9.657E-04
++cp_cmim1f =2.603E-11
++dw_cmim1f =-0.059u
++dl_cmim1f =-0.059u
+
++ca_cmim1p25f =1.214E-03
++cp_cmim1p25f =1.364E-11
++dw_cmim1p25f =-0.059u
++dl_cmim1p25f =-0.059u
+
++ca_cmim1p5f =1.45847E-3
++cp_cmim1p5f =1.29819E-11
++dw_cmim1p5f =-0.059u
++dl_cmim1p5f =-0.059u
+
++ca_cmim2f =1.949E-3
++cp_cmim2f =1.948E-13
++dw_cmim2f =-0.059u
++dl_cmim2f =-0.059u
+
+
+
+.lib '110MIM.lib' MIM
+.endl MIM_TT 
+
+***************************************************************
+**************** CORNER_LIB OF FAST MODEL ******************
+.lib MIM_FF
+
+.param
+
++ca_cmim1f =7.726E-04
++cp_cmim1f =2.082E-11
++dw_cmim1f =-0.059u
++dl_cmim1f =-0.059u
+
++ca_cmim1p25f =9.710E-04
++cp_cmim1p25f =1.091E-11
++dw_cmim1p25f =-0.059u
++dl_cmim1p25f =-0.059u
+
++ca_cmim1p5f =1.166776E-3
++cp_cmim1p5f =1.03855E-11
++dw_cmim1p5f =-0.059u
++dl_cmim1p5f =-0.059u
+
++ca_cmim2f =1.559E-3
++cp_cmim2f =1.559E-13
++dw_cmim2f =-0.059u
++dl_cmim2f =-0.059u
+
+
+.lib '110MIM.lib' MIM
+.endl MIM_FF 
+
+***************************************************************
+**************** CORNER_LIB OF SLOW MODEL ******************
+.lib MIM_SS
+
+.param
+
++ca_cmim1f = 1.159E-03
++cp_cmim1f =3.123E-11
++dw_cmim1f =-0.059u
++dl_cmim1f =-0.059u
+
++ca_cmim1p25f = 1.456E-03
++cp_cmim1p25f =1.636E-11
++dw_cmim1p25f =-0.059u
++dl_cmim1p25f =-0.059u
+
++ca_cmim1p5f = 1.75016E-3
++cp_cmim1p5f =1.55783E-11
++dw_cmim1p5f =-0.059u
++dl_cmim1p5f =-0.059u
+
++ca_cmim2f =2.339E-3
++cp_cmim2f =2.338E-13
++dw_cmim2f =-0.059u
++dl_cmim2f =-0.059u
+
+
+.lib '110MIM.lib' MIM
+.endl MIM_SS 
+
+***************************************************************
+*****************************************************************
+*                                                             	*
+*   MIM SPICE Model Sub-Circuit                        		*
+*                                                             	*
+*****************************************************************
+
+.lib MIM
+
+
+**cmim1fn **
+***-19V<= V <=0V, or 0V<= V <=19V***
+***ca  unit : F/m2  ,cp  unit : F/m***
+.subckt cmim1fn n1 n2  l=length w=width mf=1
+.param ca= ' ca_cmim1f ' cp= ' cp_cmim1f '  dw= ' dw_cmim1f ' dl= ' dl_cmim1f '
+.param area_eff= ' (w-2*dw)*(l-2*dl) '  peri_eff= ' ((w-2*dw)+(l-2*dl))*2 '
+.param ptc1=2.516E-05 ptc2=-2.974E-08 pvc1=-2.15E-05 pvc2=3.141E-6 pt='temper'
+.param tfac='1.0+ptc1*(pt-27.0)+ptc2*(pt-27.0)*(pt-27.0)'
+cmim n1 n2 '(ca*area_eff*mf+cp*peri_eff*mf)*(1+pvc1*(v(n1,n2))+pvc2*(v(n1,n2))*(v(n1,n2)))*tfac'
+.ends cmim1fn
+
+
+**cmim1p25fn **
+***-14.5V<= V <=0V, or 0V<= V <=14.5V***
+***ca  unit : F/m2  ,cp  unit : F/m***
+.subckt cmim1p25fn n1 n2  l=length w=width mf=1
+.param ca= ' ca_cmim1p25f ' cp= ' cp_cmim1p25f '  dw= ' dw_cmim1p25f ' dl= ' dl_cmim1p25f '
+.param area_eff= ' (w-2*dw)*(l-2*dl) '  peri_eff= ' ((w-2*dw)+(l-2*dl))*2 '
+.param ptc1=2.529E-05 ptc2=-6.86e-12 pvc1=-1.481E-05 pvc2=4.607E-6 pt='temper'
+.param tfac='1.0+ptc1*(pt-27.0)+ptc2*(pt-27.0)*(pt-27.0)'
+cmim n1 n2 '(ca*area_eff*mf+cp*peri_eff*mf)*(1+pvc1*(v(n1,n2))+pvc2*(v(n1,n2))*(v(n1,n2)))*tfac'
+.ends cmim1p25fn
+
+
+**cmim1p5fn **
+***-14.5V<= V <=0V, or 0V<= V <=14.5V***
+***ca  unit : F/m2  ,cp  unit : F/m***
+.subckt cmim1p5fn n1 n2  l=length w=width mf=1
+.param ca= ' ca_cmim1p5f ' cp= ' cp_cmim1p5f '  dw= ' dw_cmim1p5f ' dl= ' dl_cmim1p5f '
+.param area_eff= ' (w-2*dw)*(l-2*dl) '  peri_eff= ' ((w-2*dw)+(l-2*dl))*2 '
+.param ptc1= 3.78E-5 ptc2=-5.505E-8 pvc1=-4.679E-5 pvc2=6.952E-6 pt='temper'
+.param tfac='1.0+ptc1*(pt-27.0)+ptc2*(pt-27.0)*(pt-27.0)'
+cmim n1 n2 '(ca*area_eff*mf+cp*peri_eff*mf)*(1+pvc1*(v(n1,n2))+pvc2*(v(n1,n2))*(v(n1,n2)))*tfac'
+.ends cmim1p5fn
+
+
+**cmim2fn **
+***-7.7V<= V <=0V, or 0V<= V <=7.7V***
+***ca  unit : F/m2  ,cp  unit : F/m***
+.subckt cmim2fn n1 n2  l=length w=width mf=1
+.param ca= ' ca_cmim2f ' cp= ' cp_cmim2f '  dw= ' dw_cmim2f ' dl= ' dl_cmim2f '
+.param area_eff= ' (w-2*dw)*(l-2*dl) '  peri_eff= ' ((w-2*dw)+(l-2*dl))*2 '
+.param ptc1=3.057E-05 ptc2=3.101E-08 pvc1=-1.106E-4 pvc2=2.194E-5 pt='temper'
+.param tfac='1.0+ptc1*(pt-27.0)+ptc2*(pt-27.0)*(pt-27.0)'
+cmim n1 n2 '(ca*area_eff*mf+cp*peri_eff*mf)*(1+pvc1*(v(n1,n2))+pvc2*(v(n1,n2))*(v(n1,n2)))*tfac'
+.ends cmim2fn
+
+
+
+
+.endl MIM

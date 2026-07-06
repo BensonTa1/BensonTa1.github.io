@@ -1,0 +1,48 @@
+**************************************************************************************************************** 
+*             Non Salicide N+ poly resistor subcircuit netlist for typical case                                * 
+**************************************************************************************************************** 
+.subckt rnnpo_mm n2 n1 pw wr=1  lr=1
+.param rend='17e-6+drend_rnnpo_mm'  rs='113+drs_rnnpo_mm'  dw='-0.097e-6+ddw_rnnpo_mm'  
+.param vcr1=-0.00376e-6  vcr2=-0.08474e-12  tc1=-1.6e-4  tc2=4.18e-7  temp= 'temper'  
+.param tcoef = '1.0+tc1*(temp-25.0)+tc2*pow((temp-25.0),2)'  
++ca   = 9.0755e-5
+
+c1 pw n1 'ca*(wr+dw)*lr/2'
+r1 n2 n1 '((2*rend/(wr+dw))+(rs*lr/(wr+dw)))*(1.0+vcr1*abs(v(n1,n2)/lr)+vcr2*pow(abs(v(n1,n2))/lr,2))*tcoef'
+c2 pw n2 'ca*(wr+dw)*lr/2'  
+
+.ends rnnpo_mm
+
+
+****************************************************************************************************************  
+*             Non salicide P+ poly resistor subcircuit netlist for typical case                                * 
+**************************************************************************************************************** 
+.subckt rnppo_mm n2 n1 nw wr=1  lr=1
+.param rend='105e-6+drend_rnppo_mm' rs='352+drs_rnppo_mm' dw='-0.046e-6+ddw_rnppo_mm' 
+.param vcr1=-0.0106e-6   vcr2=-0.105e-12  tc1=-2.84e-4  tc2=3e-7  temp= 'temper'  
+.param tcoef = '1.0+tc1*(temp-25.0)+tc2*pow((temp-25.0),2)'    
++ca   = 9.0755e-5
+
+c1 n1 nw 'ca*(wr+dw)*lr/2'
+r1 n2 n1 '((2*rend/(wr+dw))+(rs*lr/(wr+dw)))*(1.0+vcr1*abs(v(n1,n2)/lr)+vcr2*pow(abs(v(n1,n2))/lr,2))*tcoef'
+c2 n2 nw 'ca*(wr+dw)*lr/2'  
+
+.ends rnppo_mm
+
+
+****************************************************************************************************************  
+*             Non salicide HR poly resistor subcircuit netlist for typical case                                * 
+**************************************************************************************************************** 
+.subckt rnhr1000_mm n2 n1 nw wr=1  lr=1 
+.param rend='120e-6+drend_rnhr1000_mm' rs='1039+drs_rnhr1000_mm' dw='-0.043e-6+ddw_rnhr1000_mm'
+.param vcr1=-0.035e-6   vcr2=-0.15e-12  tc1=-8.34e-4  tc2=1.3e-6  temp= 'temper'  
+.param tcoef = '1.0+tc1*(temp-25.0)+tc2*pow((temp-25.0),2)'    
++ca   = 9.0755e-5
+
+c1 n1 nw 'ca*(wr+dw)*lr/2'
+r1 n2 n1 '((2*rend/(wr+dw))+(rs*(lr-0.4e-6)/(wr+dw)))*(1.0+vcr1*abs(v(n1,n2)/(lr-0.4e-6))+vcr2*pow(abs(v(n1,n2))/(lr-0.4e-6),2))*tcoef'
+c2 n2 nw 'ca*(wr+dw)*lr/2'
+
+.ends rnhr1000_mm
+
+

@@ -1,0 +1,40 @@
+Virtuoso Framework License (111) was checked out successfully. Total checkout time was 0.00s.
+
+Running netlist
+Begin Incremental Netlisting Sep 17 17:12:31 2025
+WARNING (OSSHNL-268): Value of variable 'hnlNamePrefix' has changed to 'CDL_' from 'hnl_' since last netlisting
+session. Netlist from the last session cannot be used for incremental
+netlisting. Therefore re-netlisting the design.
+
+Loading LG1533/libInit.il ...
+	Loading LG1533/loadCxt.ile ... done!
+	Loading context 'LG1533' from PDK library 'LG1533' ... done!
+	Loading context 'pcellUtils' from PDK library 'LG1533' ... done!
+Loaded LG1533/libInit.il successfully!
+WARNING (OSSHNL-117): Ignoring switch view 'symbol' of cell 'hvn' in library 'LG1533', as it does not contain
+any instance. To netlist this cell, add this switch view to the stop list or to
+ignore any specific instance set the property 'nlAction' to value "ignore" on
+this cell view.
+
+WARNING (OSSHNL-117): Ignoring switch view 'symbol' of cell 'hvp' in library 'LG1533', as it does not contain
+any instance. To netlist this cell, add this switch view to the stop list or to
+ignore any specific instance set the property 'nlAction' to value "ignore" on
+this cell view.
+
+WARNING (OSSHNL-117): Ignoring switch view 'symbol' of cell 'rppolync' in library 'LG1533', as it does not contain
+any instance. To netlist this cell, add this switch view to the stop list or to
+ignore any specific instance set the property 'nlAction' to value "ignore" on
+this cell view.
+
+WARNING (OSSHNL-117): Ignoring switch view 'symbol' of cell 'pnp' in library 'LG1533', as it does not contain
+any instance. To netlist this cell, add this switch view to the stop list or to
+ignore any specific instance set the property 'nlAction' to value "ignore" on
+this cell view.
+
+WARNING (OSSHNL-117): Ignoring switch view 'symbol' of cell 'rnpolync' in library 'LG1533', as it does not contain
+any instance. To netlist this cell, add this switch view to the stop list or to
+ignore any specific instance set the property 'nlAction' to value "ignore" on
+this cell view.
+
+
+End netlisting Sep 17 17:12:31 2025

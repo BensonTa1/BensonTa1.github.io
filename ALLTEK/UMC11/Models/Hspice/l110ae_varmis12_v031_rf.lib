@@ -1,0 +1,41 @@
+********************************************************************************
+* TYP: Typical capacitor
+* MIN: Minimum capacitor
+* MAX: Maximum capacitor
+********************************************************************************
+
+.lib typ 
+.param
++  dtoxe_varmis_12_rf       =   0.0000e+00 
++  dxl_varmis_12_rf         =   0.0000e+00
++  dxw_varmis_12_rf         =   0.0000e+00   
++  dcmina_varmis_12_rf      =   0.0000e+00   
++  dcj_varmis_12_rf         =   0.0000e+00
++  dcjsw_varmis_12_rf       =   0.0000e+00 
++  dr_gate_varmis_12_rf     =   0.0000e+00
+.include 'l110ae_varmis12_v031_rf.mdl'
+.endl typ 
+
+.lib min 
+.param
++  dtoxe_varmis_12_rf       =  +8.40000E-11
++  dxl_varmis_12_rf         =  -4.86300e-08     
++  dxw_varmis_12_rf         =  -9.2800e-08  
++  dcmina_varmis_12_rf      =  0.082820672
++  dcj_varmis_12_rf         =  0.1
++  dcjsw_varmis_12_rf       =  0.1
++  dr_gate_varmis_12_rf     =  0.15
+.include 'l110ae_varmis12_v031_rf.mdl'
+.endl min 
+
+.lib max 
+.param
++  dtoxe_varmis_12_rf       =  -8.49000E-11
++  dxl_varmis_12_rf         =  +4.005070e-08    
++  dxw_varmis_12_rf         =  +9.2800e-08
++  dcmina_varmis_12_rf      =  -0.068470000
++  dcj_varmis_12_rf         =  -0.1
++  dcjsw_varmis_12_rf       =  -0.1
++  dr_gate_varmis_12_rf     =  -0.15
+.include 'l110ae_varmis12_v031_rf.mdl'
+.endl max 

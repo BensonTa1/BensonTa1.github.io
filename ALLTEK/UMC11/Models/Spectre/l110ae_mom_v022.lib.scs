@@ -1,0 +1,164 @@
+//************************************************************************************* 
+//* property of umc. 
+//* unauthorized reproduction, modification and/or distribution are strictly prohibited. 
+//* this product is protected under copyright law and trade secret law. 
+//* this model card may not be sent in any form outside of umc without 
+//* the written consent of the umc atd modeling division. 
+//************************************************************************************* 
+//* process: umc 40 nm embedded high voltage 1.1 v/8 v/+- 10 v low power process 
+//* description:  mom capacitor 
+//* simulator:    Spectre
+//******************************************************************************** 
+//* revision history: 
+//* <revision 1> 
+//* Version : T.ApB 
+//* Date    : 2007/2/2 
+//* Author  : Hey Jong Su 
+//* Remark  : Original release of Paper model(without Si data) 
+//* <revision 2> 
+//* version : 0.1p1 
+//* date    : 2010/03/04 
+//* author  : Chih hung Chuang 
+//* remark  : 1. Copy from MM130E_MOM_V041 model and shrink to 90% geometry size. 
+//*           2. Follow New DSM version definition from 2009/11/30. 
+//* <revision 3> 
+//* version : 0.2p1 
+//* date    : 2010/7/27 
+//* author  : Eddie Chang 
+//* remark  : Add stripe MOM structure 
+//* <revision 4> 
+//* version : 0.2p2 
+//* date    : 2020/5/26 
+//* author  : Min Chi Huang 
+//* remark  : Modify document typo 
+//*         1. Symmetric and Stripe: 
+//*					minimum lf from 4.4u to 2.4u and minimum nf of from 14 to 8. 
+//*					2. Asymmetric: 
+//*					minimum lf from 4.4u to 2.4u and minimum nf of from 15 to 9. 
+//*					3. Stripe: 
+//*					minimum lf from 4.4u to 2.52u and minimum nf of from 14 to 8. 
+//******************************************************************************** 
+//* model list 
+//* this is a merged model card which includes: 
+//* 1.l110ae_mom_v022 
+//****************************** start of model card ********************************** 
+//*    input parameter and recommended range: 
+//* 
+//* 
+//*	1. for momc capacitor momcaps_sy_mml110ae,momcaps_symesh_mml110ae	  
+//*  input parameter and recommended range: 
+//*  1. capacitance (c):   10.71ff ~ 9.30pf (nm=6) 
+//*                        8.72ff ~ 7.64pf (nm=5) 
+//*                        6.87ff ~ 6.1pf  (nm=4) 
+//*                        4.97ff ~ 4.52pf  (nm=3) 
+//*  2. finger number (nf): 198>= nf >=8  (even number only) 
+//*  3. finger width (w): fixed at 0.2um (before shrinkage) 
+//*  4. finger space (s): fixed at 0.2um (before shrinkage) 
+//*  5. number of metal layer (nm): 3 to 6 
+//* 
+//*  finger length range: 
+//*  1. finger length (l): 78.4um>= l >=2.4um (before shrinkage) 
+//* 
+//*	2. for momc capacitor momcaps_as_mml110ae,momcaps_asmesh_mml110ae 
+//*            input parameter and recommended range: 
+//*            1. capacitance (c):  12.18ff ~ 8.21pf   (nm=6) 
+//*                                 9.66ff  ~ 6.56pf  (nm=5) 
+//*                                 7.11ff  ~ 4.91pf   (nm=4) 
+//*            2. finger number (nf): 199>= nf >=9  (odd number only) 
+//*            3. finger width (w): fixed at 0.2um (before shrinkage) 
+//*            4. finger space (s): fixed at 0.2um (before shrinkage) 
+//*            5. number of metal layer (nm): 4 to 6 
+//* 
+//*            finger length range: 
+//*            1. finger length (l): 78.4um>= l >=2.4um (before shrinkage) 
+//* 
+//*	3. for momc capacitor momcaps_stripe_mml110ae,momcaps_stripemesh_mml110ae 
+//*            input parameter and recommended range: 
+//*            1. capacitance (c):   
+//*                                 11.94ff  ~ 9.26pf   (nm=6) 
+//*                                 9.86ff ~ 7.65pf   (nm=5) 
+//*                                 7.76ff  ~6.03pf   (nm=4) 
+//*                                 5.73ff  ~4.46pf   (nm=3) 
+//*                                 3.68ff  ~2.87pf   (nm=2) 
+//*            2. finger number (nf): 198>= nf >=8    (even number only) 
+//*            3. finger width (w): fixed at 0.2um (before shrinkage) 
+//*            4. finger space (s): fixed at 0.2um (before shrinkage) 
+//*            5. number of metal layer (nm): 2 to 6 
+//* 
+//*            finger length range: 
+//*            1. finger length (l): 78.4 um>= l >=2.52 um (before shrinkage) 
+//* 
+//*            node definition for non-mesh momcaps: 
+//*            1. port1 
+//*            2. port2 
+//*            3. well 
+//* 
+//*            node definition for mesh momcaps: 
+//*            1. port1 
+//*            2. port2 
+//*            3. port3 
+//*            4. port4 
+//*            5. well 
+//* 
+//*            temperature range: -55c ~ +125c 
+//* 
+//****************************** start of model card ********************************** 
+simulator lang=spectre insensitive=yes
+library mylib
+
+section tt
+parameters 
++ d_c1_momcaps_sy_mml110ae=0 
++ d_cox_momcaps_sy_mml110ae=0 
++ d_c1_momcaps_as_mml110ae=0 
++ d_cox_momcaps_as_mml110ae=0 
++ d_c1_momcaps_stripe_mml110ae=0 
++ d_cox_momcaps_stripe_mml110ae=0 
+
++ d_c1_momcaps_symesh_mml110ae=0 
++ d_cox_momcaps_symesh_mml110ae=0 
++ d_c1_momcaps_asmesh_mml110ae=0 
++ d_cox_momcaps_asmesh_mml110ae=0 
++ d_c1_momcaps_stripemesh_mml110ae=0 
++ d_cox_momcaps_stripemesh_mml110ae=0 
+
+include "l110ae_mom_v022.mdl.scs"
+endsection tt 
+//* 
+section ss
+parameters 
++ d_c1_momcaps_sy_mml110ae=0.15 
++ d_cox_momcaps_sy_mml110ae=0.15 
++ d_c1_momcaps_as_mml110ae=0.15 
++ d_cox_momcaps_as_mml110ae=0.15 
++ d_c1_momcaps_stripe_mml110ae=0.15 
++ d_cox_momcaps_stripe_mml110ae=0.15 
++ d_c1_momcaps_symesh_mml110ae=0.15 
++ d_cox_momcaps_symesh_mml110ae=0.15 
++ d_c1_momcaps_asmesh_mml110ae=0.15 
++ d_cox_momcaps_asmesh_mml110ae=0.15 
++ d_c1_momcaps_stripemesh_mml110ae=0.15 
++ d_cox_momcaps_stripemesh_mml110ae=0.15 
+include "l110ae_mom_v022.mdl.scs"
+endsection ss 
+//* 
+section ff
+parameters 
++ d_c1_momcaps_sy_mml110ae=-0.15 
++ d_cox_momcaps_sy_mml110ae=-0.15 
++ d_c1_momcaps_as_mml110ae=-0.15 
++ d_cox_momcaps_as_mml110ae=-0.15 
++ d_c1_momcaps_stripe_mml110ae=-0.15 
++ d_cox_momcaps_stripe_mml110ae=-0.15 
++ d_c1_momcaps_symesh_mml110ae=-0.15 
++ d_cox_momcaps_symesh_mml110ae=-0.15 
++ d_c1_momcaps_asmesh_mml110ae=-0.15 
++ d_cox_momcaps_asmesh_mml110ae=-0.15 
++ d_c1_momcaps_stripemesh_mml110ae=-0.15 
++ d_cox_momcaps_stripemesh_mml110ae=-0.15 
+include "l110ae_mom_v022.mdl.scs"
+endsection ff 
+//* 
+//* 
+endlibrary mylib
+

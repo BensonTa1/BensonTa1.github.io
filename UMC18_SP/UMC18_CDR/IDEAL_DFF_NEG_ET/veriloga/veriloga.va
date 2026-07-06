@@ -1,0 +1,37 @@
+// VerilogA for CDR, IDEAL_DFF_POS_ET, veriloga
+
+`include "constants.vams"
+`include "disciplines.vams"
+
+module IDEAL_DFF_NEG_ET(D,Q,CLK);
+
+	input D,CLK;
+	output Q;
+	electrical D,Q,CLK;
+
+	real DATA=1.4;
+
+	parameter real VOH=1.8;
+	parameter real VOL=1.0;
+
+	parameter real VTH=1.4;
+
+
+	analog begin
+		
+		@(cross(V(CLK)-VTH,-1))begin
+			
+			if(V(D)>1.4) begin
+				DATA=VOH;
+			end
+
+			if(V(D)<=1.4) begin
+				DATA=VOL;
+			end
+		end
+
+		V(Q)<+transition(DATA,0,10p,10p);
+		
+	end
+
+endmodule

@@ -1,0 +1,8 @@
+DEFINE basic $CDSHOME/tools/dfII/etc/cdslib/basic
+ASSIGN  basic libMode shared
+DEFINE analogLib $CDSHOME/tools/dfII/etc/cdslib/artist/analogLib
+ASSIGN  analogLib libMode shared
+DEFINE US_8ths $CDSHOME/tools/dfII/etc/cdslib/sheets/US_8ths
+ASSIGN  US_8ths libMode shared
+DEFINE tsmc13rf ./tsmc13rf
+ASSIGN  tsmc13rf libMode shared

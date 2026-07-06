@@ -1,0 +1,147 @@
+// VerilogA for Fractional_PLL, DSM_MASH_3rd_INT, veriloga
+
+`include "constants.vams"
+`include "disciplines.vams"
+
+module DSM_MASH_3rd_INT(DFRA0,DFRA1,DFRA2,DFRA3,DFRA4,DFRA5,DFRA6,DFRA7,
+					DINT0,DINT1,DINT2,DINT3,DINT4,DINT5,
+					CLKIN,DOUT0,DOUT1,DOUT2,DOUT3,DOUT4,DOUT5,AOUT);
+
+	electrical DFRA0,DFRA1,DFRA2,DFRA3,DFRA4,DFRA5,DFRA6,DFRA7,DINT0,DINT1,DINT2,DINT3,DINT4,DINT5,CLKIN,DOUT0,DOUT1,DOUT2,DOUT3,DOUT4,DOUT5,AOUT;
+
+	input DFRA0,DFRA1,DFRA2,DFRA3,DFRA4,DFRA5,DFRA6,DFRA7;	//fractional input
+	input DINT0,DINT1,DINT2,DINT3,DINT4,DINT5,CLKIN;		//integer input
+
+	output DOUT0,DOUT1,DOUT2,DOUT3,DOUT4,DOUT5,AOUT;
+
+	parameter real VOH=1;
+	parameter real VOL=0;
+	parameter real VTH=0.5;
+	
+	parameter FS=255;	//fractional Full scale
+	parameter INT_FS=64;	//
+
+	//================internal
+	real DDFRA0,DDFRA1,DDFRA2,DDFRA3,DDFRA4,DDFRA5,DDFRA6,DDFRA7;	//internal fraction
+	real DDINT0,DDINT1,DDINT2,DDINT3,DDINT4,DDINT5;				//internal integer
+	
+	real Y1,INTG1_1=0,INTG1_2=0,V1=0,V1D=0;			//integrator 1 
+	real Y2=0,INTG2_1=0,INTG2_2=0,V2=0,V2D=0;		//integrator 2 
+	real Y3=0,INTG3_1=0,INTG3_2=0,V3=0,V3D=0;		//integrator 3 
+	
+	real V1D_D=0,V1D_DD=0,V2D_D=0,V3D_D=0,U1D=0,U1D_D,U2D;		//noise cancellation
+
+	real DINT,DINT_SUM;
+	real DDAC;
+
+	real DDOUT0=0,DDOUT1=0,DDOUT2=0,DDOUT3=0,DDOUT4=0,DDOUT5=0;	
+
+	integer LR0=0,LR1=0,LR2=0,LR3=0,LR4=0,LR5=0,LR6=1;			//LFSR
+
+
+
+	analog begin
+		//================================fractional
+		DDFRA0=(V(DFRA0)>VTH)?1:0;
+		DDFRA1=(V(DFRA1)>VTH)?1:0;
+		DDFRA2=(V(DFRA2)>VTH)?1:0;
+		DDFRA3=(V(DFRA3)>VTH)?1:0;
+		DDFRA4=(V(DFRA4)>VTH)?1:0;
+		DDFRA5=(V(DFRA5)>VTH)?1:0;
+		DDFRA6=(V(DFRA6)>VTH)?1:0;
+		DDFRA7=(V(DFRA7)>VTH)?1:0;
+		Y1= DDFRA0*1+DDFRA1*2+DDFRA2*4+DDFRA3*8+DDFRA4*16+DDFRA5*32+DDFRA6*64+DDFRA7*128;
+		
+		//================================integer
+		DDINT0=(V(DINT0)>VTH)?1:0;
+		DDINT1=(V(DINT1)>VTH)?1:0;
+		DDINT2=(V(DINT2)>VTH)?1:0;
+		DDINT3=(V(DINT3)>VTH)?1:0;
+		DDINT4=(V(DINT4)>VTH)?1:0;
+		DDINT5=(V(DINT5)>VTH)?1:0;
+		DINT=DDINT0*1+DDINT1*2+DDINT2*4+DDINT3*8+DDINT4*16+DDINT5*32;
+
+		@(cross(V(CLKIN)-VTH,1))begin
+			//================================LSFR
+			LR0=LR5^LR6;
+			LR6=LR5; LR5=LR4; LR4=LR3; LR3=LR2; LR2=LR1; LR1=LR0;
+			
+
+			//================================INTG3
+			INTG3_1=Y3-V3+LR0;
+			INTG3_2=INTG3_1+INTG3_2;
+
+			if(INTG3_2>(FS/2)) begin 
+				V3=FS;
+				V3D=1;
+			end else begin
+				V3=0;
+				V3D=0;
+			end
+
+			//================================INTG2
+			INTG2_1=Y2-V2;
+			INTG2_2=INTG2_1+INTG2_2;
+
+			if(INTG2_2>(FS/2)) begin 
+				V2=FS;
+				V2D=1;
+			end else begin
+				V2=0;
+				V2D=0;
+			end
+
+			Y3=V2-INTG2_2+(FS/2);
+
+			//================================INTG1
+			
+			INTG1_1=Y1-V1;
+			INTG1_2=INTG1_1+INTG1_2;
+
+			if(INTG1_2>(FS/2)) begin 
+				V1=FS;
+				V1D=1;
+			end else begin
+				V1=0;
+				V1D=0;
+			end
+			
+			Y2=V1-INTG1_2+(FS/2);
+
+			//================================noise cancellation 3rd
+			U1D=V2D_D-(V3D-V3D_D);
+			U2D=V1D_DD-(U1D-U1D_D);
+
+			//=============z-1 delay
+			V1D_DD=V1D_D;
+			V1D_D=V1D;
+			V2D_D=V2D;
+			V3D_D=V3D;
+			U1D_D=U1D;
+
+			//================================ADC
+			DINT_SUM=DINT+U2D;
+			DDAC=0;
+			
+			if((DINT_SUM-DDAC)>=INT_FS)begin DDOUT5=1; DDAC=DDAC+INT_FS/2**1; end
+			if((DINT_SUM-DDAC)>=INT_FS)begin DDOUT4=1; DDAC=DDAC+INT_FS/2**2; end
+			if((DINT_SUM-DDAC)>=INT_FS)begin DDOUT3=1; DDAC=DDAC+INT_FS/2**3; end
+			if((DINT_SUM-DDAC)>=INT_FS)begin DDOUT2=1; DDAC=DDAC+INT_FS/2**4; end
+			if((DINT_SUM-DDAC)>=INT_FS)begin DDOUT1=1; DDAC=DDAC+INT_FS/2**5; end
+			if((DINT_SUM-DDAC)>=INT_FS)begin DDOUT0=1; DDAC=DDAC+INT_FS/2**6; end
+
+		
+		end
+
+		V(DOUT0)<+(DDOUT0>0.5) ? VOH : VOL;
+		V(DOUT1)<+(DDOUT1>0.5) ? VOH : VOL;
+		V(DOUT2)<+(DDOUT2>0.5) ? VOH : VOL;
+		V(DOUT3)<+(DDOUT3>0.5) ? VOH : VOL;
+		V(DOUT4)<+(DDOUT4>0.5) ? VOH : VOL;
+		V(DOUT5)<+(DDOUT5>0.5) ? VOH : VOL;
+
+		V(AOUT)<+DINT_SUM;
+
+	end
+
+endmodule

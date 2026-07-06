@@ -1,0 +1,23 @@
+.lib mimcaps_tt
+.param
++ d_ca_mimcaps_10f_mml110e    =   0.0000e+00
++ d_ca_mimcaps_15f_mml110e		=   0.0000e+00
++ d_ca_mimcaps_20f_mml110e		=   0.0000e+00
+.include './l110ae_mimcap_v101.mdl'
+.endl mimcaps_tt
+
+.lib mimcaps_ss
+.param
++ d_ca_mimcaps_10f_mml110e    =   0.15
++ d_ca_mimcaps_15f_mml110e		=   0.15
++ d_ca_mimcaps_20f_mml110e		=   0.15
+.include './l110ae_mimcap_v101.mdl' 
+.endl mimcaps_ss 
+
+.lib mimcaps_ff
+.param
++ d_ca_mimcaps_10f_mml110e    =   -0.15
++ d_ca_mimcaps_15f_mml110e		=   -0.15
++ d_ca_mimcaps_20f_mml110e		=   -0.15
+.include './l110ae_mimcap_v101.mdl' 
+.endl mimcaps_ff 

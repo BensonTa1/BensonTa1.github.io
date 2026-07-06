@@ -1,0 +1,20 @@
+`include "constants.vams"
+`include "disciplines.vams"
+
+module IDEAL_DIODE(p, n);
+inout p, n;
+electrical p, n;
+
+// ===== Parameters =====
+parameter real Ron  = 1.0;      // 
+parameter real Roff = 1e9;      // 
+parameter real Vth  = 0.7;      // 
+
+analog begin
+    if (V(p,n) >= Vth)
+        I(p,n) <+ V(p,n) / Ron;
+    else
+        I(p,n) <+ V(p,n) / Roff;
+end
+
+endmodule

@@ -1,0 +1,1254 @@
+
+///////////////////////////////////////////////////////////////////////////////
+//                                                                           //
+//     Title     :  DRC (Calibre) for Antenna rule in 0.13um                 //
+//                  Logic and Mixed-Mode 1P5M1T MMC AL Enhancement Shrinkable  //
+//                  Process Topological Layout Rule                          //
+//                                                                           //
+//     Parent Doc.: G-03-LOGIC/MIXED_MODE13-1P8M-MMC/AL/L130E/SHRINKABLE-TLR //
+//                                                                           //
+//     Revision  :  0.1_P2                                                   //
+//                                                                           //
+//     Copyright (c) United Microelectronics Corporation, 1980-2020          //
+//     All Rights Reserved                                                   //
+//                                                                           //
+//     This source file is proprietary information of United                 //
+//     Microelectronics Corporation.  It may not be distributed,             //
+//     in whole or in any part without prior written permission.             //
+//                                                                           //
+//     DISCLAIMER OF WARRANTY                                                //
+//                                                                           //
+//     United Microelectronics Corporation software and associated           //
+//     files are provided "as is" and without warranty. United               //
+//     Microelectronics Corporation has no obligation to support or          //
+//     otherwise maintain software. United Microelectronics                  //
+//     Corporation makes no warranties, express or implied with              //
+//     respect to software including any warranty of merchantability         //
+//     or fitness for a particular purpose.                                  //
+//                                                                           //
+//     LIMITATION OF LIABILITY                                               //
+//                                                                           //
+//     United Microelectronics Corporation is not liable for any             //
+//     property damage, personal injury, loss of profits,                    //
+//     interruption of business, or for any other special,                   //
+//     consequential or incidental damages, however caused, whether          //
+//     for breach of warranty, contract tort (including negligence),         //
+//     strict liability or otherwise. United Microelectronics                //
+//     Corporationfurther further assumes no responsibility for any          //
+//     errors that may appear within this set of files for any               //
+//     damages, direct or indirect, that may result from using this          //
+//     document.                                                             //
+//                                                                           //
+//     This runset is validated with Calibre 2011.4.2220                     //
+//                                                                           //
+///////////////////////////////////////////////////////////////////////////////
+//NOTES ( Important, Read Me First )
+//===================================  
+// 1. This rule deck is coded accoring to Section-Antenna Rule of 
+//    following SPEC.
+//    G-03-LOGIC/MIXED_MODE13-1P8M-MMC/AL/L130E/SHRINKABLE-TLR
+// 2. Please set correct value for RESOLUTION, LAYOUT SYSTEM, 
+//    LAYOUT PATH, LAYOUT PRIMARY, MET_TOP_THICK and make sure layer numbers in LAYER 
+//    DECLARATIONS section are correct before run drc.
+// 3. Increment Connection is used in this antenna check, it can be run flat or 
+//    hierarchical(Calibre July,99 release or late version for hierarchical run), 
+//    but do NOT inlude or integrate it into basic drc command file that has normal 
+//    CONNECT commands.
+// 4. DIODE definition : the area should be lager than 0.1936um2
+// 5. It should be avoided if the different nets connected to the same diode
+//==================================================================================
+// revision  date       who         changes                             
+//========= ========== =========== =================================================
+//  0.1_P1  2020/03/18 D.C Wu       1.New creation
+//
+//  0.1_P2  2020/06/16 D.C Wu       1.Update the thickness of metal, DIO_AREA, ANT.7.1.2B?, ANT.7.1.1H?
+//                                  2.Delete: ANT.7.1.2.Note2?
+//                                  3.Change rule ID: ANT.7.1.1G? to ANT.7.1.1H?, ANT.7.1.1H? to ANT.7.1.1I?
+//
+// ===============================================================================
+// Antenna Ratio Look Up Table
+// -----------------------------------------------------------------------------
+// Variable/Technology
+//------------------------------------------------------------------------------
+// POLY_THICK    0.16 um
+// ME1_THICK     0.20 um
+// MET_IN_THIN   0.25 um
+// MET_IN_THICK  0.80 um
+// MET_TOP_THICK 0.80 um for 8KA/ 1.2 um for 12KA/ 2.0 um for 20KA/ 4.0 um for 40KA
+// DIO_AREA      0.1024 um^2
+//
+// ----------------------------------------------------------------
+// Please set following VARIABLEs according to your design technology
+// ----------------------------------------------------------------
+
+VARIABLE POLY_THICK     0.16    //Poly thickness
+VARIABLE ME1_THICK      0.20    //ME1 thickness
+VARIABLE MET_IN_THIN    0.25    //Inner thin METAL thickness
+VARIABLE MET_IN_THICK   0.80    //Inner thick METAL thickness
+VARIABLE DIO_AREA       0.1024  // Diode Area
+
+//==============================================
+// Please select the thickness of TOP METAL.
+// Default is MET_TOP_THICK_40KA.
+//==============================================
+#DEFINE MET_TOP_THICK_40KA    //Default
+//#DEFINE MET_TOP_THICK_20KA
+//#DEFINE MET_TOP_THICK_12KA
+//#DEFINE MET_TOP_THICK_8KA
+
+#IFDEF MET_TOP_THICK_40KA
+   #UNDEFINE MET_TOP_THICK_20KA
+   #UNDEFINE MET_TOP_THICK_12KA
+   #UNDEFINE MET_TOP_THICK_8KA
+   VARIABLE MET_TOP_THICK  4.0    //TOP metal thickness
+#ELSE
+   #IFDEF MET_TOP_THICK_20KA
+      #UNDEFINE MET_TOP_THICK_40KA
+      #UNDEFINE MET_TOP_THICK_12KA
+      #UNDEFINE MET_TOP_THICK_8KA
+      VARIABLE MET_TOP_THICK  2.0    //TOP metal thickness
+   #ELSE
+      #IFDEF MET_TOP_THICK_12KA
+         #UNDEFINE MET_TOP_THICK_40KA
+         #UNDEFINE MET_TOP_THICK_20KA
+         #UNDEFINE MET_TOP_THICK_8KA
+         VARIABLE MET_TOP_THICK  1.2    //TOP metal thickness
+      #ELSE
+         #IFDEF MET_TOP_THICK_8KA
+            #UNDEFINE MET_TOP_THICK_40KA
+            #UNDEFINE MET_TOP_THICK_20KA
+            #UNDEFINE MET_TOP_THICK_12KA
+            VARIABLE MET_TOP_THICK  0.8    //TOP metal thickness
+         #ELSE
+            #DEFINE MET_TOP_THICK_40KA
+            VARIABLE MET_TOP_THICK  4.0    //TOP metal thickness
+         #ENDIF
+      #ENDIF
+   #ENDIF
+#ENDIF
+
+// ** OUTPUT TYPE OPTION: Show whole net / show gate only
+ #DEFINE SHOW_WHOLE_NET   // This option for showing whole net metal if any violations are found.
+
+#IFDEF SHOW_WHOLE_NET
+OUTPUT_MARKER = COPY BULK
+
+#ELSE 
+OUTPUT_MARKER = COPY NULL
+#ENDIF
+
+//===========================
+//===  Setup Environment  ===
+//===========================
+
+LAYOUT DEPTH  ALL
+LAYOUT SYSTEM GDSII
+
+RESOLUTION 1
+PRECISION  1000
+
+UNIT CAPACITANCE FF
+UNIT LENGTH      U
+UNIT RESISTANCE  OHM
+UNIT TIME        US
+
+FLAG ACUTE   YES
+FLAG OFFGRID YES
+FLAG SKEW    YES
+
+//================================
+//===  Setup Defaults for DRC  ===
+//================================
+
+LAYOUT PATH "/ds/yclee/Layout/fail.gds"
+LAYOUT PRIMARY "fail"
+DRC SUMMARY REPORT "L130_ant_1P5M1T_fail_1226.sum"
+DRC RESULTS DATABASE "L130_ant_1P5M1T_fail_1226.db" ASCII
+
+DRC CHECK TEXT       COMMENTS RFI
+DRC KEEP EMPTY       NO
+DRC MAXIMUM RESULTS  1000
+DRC MAXIMUM VERTEX   4096
+DRC TOLERANCE FACTOR .0005
+
+//===========================
+// MMC customer's definition
+//===========================
+
+//----- MMC related METAL switchs (please select only one option) -----
+
+NULL = NWEL NOT BULK
+//#DEFINE M34_MMC
+#DEFINE M45_MMC
+
+GROUP M34_MMC_rule  M34_MMC_?
+#IFDEF M34_MMC
+M34_MMC = COPY MMC
+M45_MMC = COPY NULL
+DRC UNSELECT CHECK M45_MMC_rule
+#ENDIF
+
+GROUP M45_MMC_rule  M45_MMC_?
+#IFDEF M45_MMC
+M45_MMC = COPY MMC
+M34_MMC = COPY NULL
+DRC UNSELECT CHECK M34_MMC_rule
+#ENDIF
+
+//////////////////////////////////////////////
+// INPUT LAYER STATEMENTS
+//////////////////////////////////////////////
+
+LAYER MAP 1 DATATYPE 0 1001
+LAYER DIFF  1001  // Diffusion
+
+LAYER MAP 3 DATATYPE 0 1003
+LAYER NWEL  1003  // N-well
+
+LAYER MAP 6 DATATYPE 0 1006
+LAYER TWEL  1006  // T-well for Triple Well Process
+
+LAYER MAP 11 DATATYPE 0 1009
+LAYER PPLUS  1009  // P+ Imp
+
+LAYER MAP 12 DATATYPE 0 1010
+LAYER NPLUS  1010  // N+ Imp
+
+LAYER MAP 39 DATATYPE 0 1037
+LAYER CONT  1037  // Contact
+
+LAYER MAP 41 DATATYPE 0 1040
+LAYER PO1  1040  // Poly1
+
+LAYER MAP 46 DATATYPE 0 1045
+LAYER ME1  1045  // Metal1
+
+LAYER MAP 47 DATATYPE 0 1046
+LAYER VI1  1046  // Mvia1
+
+LAYER MAP 48 DATATYPE 0 1048
+LAYER ME2  1048  // Metal2
+
+LAYER MAP 49 DATATYPE 0 1049
+LAYER VI2  1049  // Mvia2
+
+LAYER MAP 50 DATATYPE 0 1051
+LAYER ME3  1051  // Metal3
+
+LAYER MAP 51 DATATYPE 0 1052
+LAYER VI3  1052  // Mvia3
+
+LAYER MAP 52 DATATYPE 0 1054
+LAYER ME4  1054  // Metal4
+
+LAYER MAP 53 DATATYPE 0 1055
+LAYER VI4  1055  // Mvia4
+
+LAYER MAP 54 DATATYPE 0 1057
+LAYER ME5  1057  // Metal5
+
+LAYER MAP 55 DATATYPE 0 1058
+LAYER VI5  1058  // Mvia5
+
+LAYER MAP 56 DATATYPE 0 1060
+LAYER ME6  1060  // Metal6
+
+LAYER MAP 57 DATATYPE 0 1061
+LAYER VI6  1061  // Mvia6
+
+LAYER MAP 58 DATATYPE 0 1063
+LAYER ME7  1063  // Metal7
+
+LAYER MAP 59 DATATYPE 0 1064
+LAYER VI7  1064  // Mvia7
+
+LAYER MAP 60 DATATYPE 0 1065
+LAYER ME8  1065  // Metal8
+
+LAYER MAP 65 DATATYPE 0 1071
+LAYER MMCTP  1071  // Metal Cap (top Plate)
+
+LAYER MAP 4  DATATYPE  2 1072
+LAYER DNW_LV 1072      // For Creating DNW by booleanLAYER ME6
+
+LAYER MAP 37 DATATYPE  9 1073
+LAYER HVG    1073      // HVG
+
+MMC = COPY MMCTP
+
+// define well regions
+
+DRC:1     =  EXTENT
+BULK      =  SIZE DRC:1 BY 1.0
+
+NWEL_A    =  NWEL      NOT       TWEL
+
+// define diffusion regions
+
+ACTIVE_NW =  DIFF      NOT OUTSIDE     NWEL_A               // Active region inside N_WELL
+ACTIVE_PS =  DIFF        OUTSIDE       NWEL_A               // Active region inside P_WELL or T_WELL
+
+
+PTDIF     =  DIFF          AND         PPLUS                // All P type Diffusion
+NTDIF     =  DIFF          AND         NPLUS                // All N type Diffusion
+
+PSB       =  PTDIF         AND         ACTIVE_PS            // P substrate tie
+NSB       =  NTDIF         AND         ACTIVE_NW            // N-well substrate tie
+
+PDIF      =  PPLUS         AND         ACTIVE_NW            // Define P+ device inside N_WELL
+NDIF      =  ACTIVE_PS     NOT         PPLUS                // Define N+ device inside P_WELL
+
+PSD       =  PDIF          NOT         GATE                 // P+ devices source / drain / diode (PN junction)
+NSD       =  NDIF          NOT         GATE                 // N+ devices source / drain / diode (PN junction)
+
+
+GATE1     =  PO1           AND         DIFF
+// comment by Ya Huang , thickness of GOX inside HVG is 850 
+//                       it is larger than LV region (thickness is 26)
+GATE2     =  GATE1         NOT         HVG                  // exlude HVG region
+GATE      =  SIZE (SIZE GATE2 BY -0.03 ) BY 0.03 TRUNCATE 0.03  
+                                                            // 0.03 means to fit the Library of after OPC
+                                                            // Why don't use GATE = GATE1 TOUCH SD == 2 ?
+                                                            // because HV device channel does not touch S/D
+
+PDIF_NOT_GATE = (DIFF AND PPLUS) NOT GATE
+NDIF_NOT_GATE = (DIFF AND NPLUS) NOT GATE
+
+// Define Diode and GROUND region
+
+// The definations is commented by LOGIC/MIXED_MODE13 TLR owner: FAB8C/PEI/INT8 William Chen. (20200311)
+DIODE = ((DIFF AND PPLUS) OR (DIFF AND NPLUS)) NOT GATE
+
+// The definations is commented by ESD team: Yen Wen Huang. (20181204)
+SUB = (BULK AND DIFF) NOT PO1
+
+
+/////////////////////////
+//  Poly Antenna check //
+////////////////////////
+
+// Antenna check //
+
+DRC INCREMENTAL CONNECT YES
+
+CONNECT PO1 GATE
+
+//ANT.7.1.3.poly { @ If the poly gate over diffusion area > 6400, the protection diode is must be.
+//    NET AREA GATE > 6400   // the protection diode is connected by METAL
+//}
+
+ANT.7.1.1A.poly { @ Maximum Ratio of POLY1 sidewall area to gate atea is 300, without protection diode
+    PO1_RATIO = NET AREA RATIO PO1 GATE > 300
+                [PERIMETER(PO1)*POLY_THICK/AREA(GATE)]
+    E = NET AREA RATIO PO1 GATE > 300 ACCUMULATE
+        [PERIMETER(PO1)*POLY_THICK/AREA(GATE)]
+    COPY E   
+    NET AREA RATIO PRINT E ANT.7.1.1A.poly.sum
+      
+    NET AREA RATIO PO1 GATE > 300
+    [PERIMETER(PO1)*POLY_THICK/AREA(GATE)]  
+    RDB ANT.7.1.1A.poly.rdb BY LAYER PO1 GATE     
+
+    PO1_RATIO AND OUTPUT_MARKER
+}
+
+f_CONT = BULK AND CONT
+CONNECT PO1 f_CONT
+
+ANT.7.1.1B.poly { @ Maximum ratio of Contact area to gate area is 10.
+                  @ Without protection diode
+     CT_RATIO = NET AREA RATIO f_CONT GATE > 10
+     E = NET AREA RATIO f_CONT GATE > 10 ACCUMULATE 
+     COPY E            
+     NET AREA RATIO PRINT E ANT.7.1.1B.poly.sum    
+      
+     NET AREA RATIO f_CONT GATE > 10    
+     RDB ANT.7.1.1B.poly.rdb BY LAYER f_CONT GATE  
+
+     CT_RATIO AND OUTPUT_MARKER   
+}
+
+
+/////////////////////////
+// ME1 Antenna check   //
+/////////////////////////
+
+CONNECT ME1 PO1 BY CONT
+CONNECT ME1 DIODE BY CONT
+CONNECT ME1 SUB BY CONT
+CONNECT ME1 PDIF_NOT_GATE BY CONT
+CONNECT ME1 NDIF_NOT_GATE BY CONT
+DIODE_ME1 = NET AREA DIODE >= DIO_AREA
+CONNECT ME1 DIODE_ME1 BY CONT
+
+ME1_WITHOUT_DIODE      = NET AREA RATIO ME1 DIODE_ME1 == 0   // ME1 NOT CONNECT WITH DIODE 
+ME1_WITH_DIODE         = NET AREA RATIO ME1 DIODE_ME1 > 0    // ME1 CONNECT WITH DIODE 
+
+//ANT.7.1.3.ME1 { @ If the poly gate over diffusion area > 6400, the protection diode is must be.X = NET AREA GATE > 6400
+//     X = NET AREA GATE > 6400
+//     NET AREA RATIO X DIODE_ME1 == 0  // check the GATE is NOT connected with the protection diode by METAL
+//}
+
+ANT.7.1.1D.ME1 { @ Maximum ratio of Metal1 sidewall area (each layer) to gate area is 1800.
+                 @ Without protection diode
+     E = NET AREA RATIO ME1_WITHOUT_DIODE GATE > 1800 ACCUMULATE
+         [PERIMETER(ME1_WITHOUT_DIODE)*ME1_THICK/AREA(GATE)]
+     COPY E
+     NET AREA RATIO PRINT E ANT.7.1.1D.ME1.sum   
+   
+     NET AREA RATIO ME1_WITHOUT_DIODE GATE > 1800
+     [PERIMETER(ME1_WITHOUT_DIODE)*ME1_THICK/AREA(GATE)]
+     RDB ANT.7.1.1D.ME1.rdb BY LAYER ME1_WITHOUT_DIODE GATE
+}
+
+ANT.7.1.1H.ME1 { @ Maximum ratio of Metal sidewall area (cumulative) to gate area is 15000.
+                 @ Without protection diode
+     E = NET AREA RATIO ME1_WITHOUT_DIODE OVER GATE > 15000
+               [PERIMETER(ME1_WITHOUT_DIODE)*ME1_THICK/AREA(GATE)] ACCUMULATE
+     COPY E 
+     NET AREA RATIO PRINT E  ANT.7.1.1H.ME1.sum
+   
+     NET AREA RATIO ME1_WITHOUT_DIODE OVER GATE > 15000
+           [PERIMETER(ME1_WITHOUT_DIODE)*ME1_THICK/AREA(GATE)]
+     RDB ANT.7.1.1H.ME1.rdb BY LAYER ME1_WITHOUT_DIODE GATE
+ 
+     E_STAMP = STAMP (E AND OUTPUT_MARKER) BY PO1
+     NET AREA RATIO ME1 E_STAMP >0
+}
+
+ME1_CA_G = NET AREA RATIO ME1_WITHOUT_DIODE OVER GATE > 0
+         [PERIMETER(ME1_WITHOUT_DIODE)*ME1_THICK/AREA(GATE)] ACCUMULATE // GATE ME1 ACCUMULATE
+
+
+ANT.7.1.2B.ME1 { @ Maximum ratio of Metal sidewall area (cumulative) to gate area is 45000+400*diode area.
+                 @ With protection diode
+     E = NET AREA RATIO ME1_WITH_DIODE OVER GATE DIODE_ME1 > 100
+               [PERIMETER(ME1_WITH_DIODE)*ME1_THICK*100 / (AREA(GATE)*(45000+400*AREA(DIODE_ME1)))]  ACCUMULATE   
+     COPY E 
+     NET AREA RATIO PRINT E ANT.7.1.2B.ME1.sum
+ 
+     NET AREA RATIO ME1_WITH_DIODE OVER GATE DIODE_ME1 > 100
+           [PERIMETER(ME1_WITH_DIODE)*ME1_THICK*100 / (AREA(GATE)*(45000+400*AREA(DIODE_ME1)))]   
+     RDB ANT.7.1.2B.ME1.rdb BY LAYER ME1_WITH_DIODE GATE DIODE_ME1    
+
+     E_STAMP = STAMP (E AND OUTPUT_MARKER) BY PO1 
+     NET AREA RATIO ME1 E_STAMP > 0
+}
+
+ME1_CA = NET AREA RATIO ME1_WITH_DIODE OVER GATE DIODE_ME1 > 0
+         [PERIMETER(ME1_WITH_DIODE)*ME1_THICK*100 / (AREA(GATE)*(45000+400*AREA(DIODE_ME1)))] ACCUMULATE // GATE ME1 ACCUMULATE
+
+
+/////////////////////////
+// VI1 Antenna check   //
+/////////////////////////
+
+f_VI1 = BULK AND VI1
+CONNECT ME1 f_VI1
+
+VI1_WITHOUT_DIODE = NET AREA RATIO f_VI1 DIODE_ME1 ==0	// VIA1 DO NOT CONNECT WITH DIODE_ME1
+VI1_WITH_DIODE    = f_VI1 INTERACT ( NET AREA RATIO f_VI1 DIODE_ME1 > 0 )   // f_VI1 CONNECT WITH DIODE
+CONNECT f_VI1 VI1_WITHOUT_DIODE
+CONNECT f_VI1 VI1_WITH_DIODE 
+
+ANT.7.1.1C.VI1 { @ Maximum ratio of VIA1 area (each layer) to gate area is 20.
+                 @ Without protection diode
+     E = NET AREA RATIO VI1_WITHOUT_DIODE OVER GATE > 20 ACCUMULATE    
+     COPY E 
+     NET AREA RATIO PRINT E ANT.7.1.1C.VI1.sum
+   
+     NET AREA RATIO VI1_WITHOUT_DIODE OVER GATE > 20 
+     RDB ANT.7.1.1C.VI1.rdb BY LAYER VI1_WITHOUT_DIODE GATE   
+}
+
+ANT.7.1.1I.VI1 { @ Maximum ratio of cumulative VIA1 area to gate area is 30.
+                 @ Without protection diode
+     E = NET AREA RATIO VI1_WITHOUT_DIODE OVER GATE > 30 ACCUMULATE    
+     COPY E 
+     NET AREA RATIO PRINT E ANT.7.1.1I.VI1.sum
+   
+     NET AREA RATIO VI1_WITHOUT_DIODE OVER GATE > 30 
+     RDB ONLY ANT.7.1.1I.VI1.rdb BY LAYER VI1_WITHOUT_DIODE GATE   
+
+     E_STAMP = STAMP (E AND OUTPUT_MARKER) BY PO1
+     NET AREA RATIO f_VI1 E_STAMP > 0
+}
+
+
+ANT.7.1.2A.VI1 { @ Maximum ratio of VIA1 area (cumulative) to gate area is 160+36*diode area.
+                 @ With protection diode
+     E = NET AREA RATIO VI1_WITH_DIODE OVER GATE DIODE_ME1 > 1 ACCUMULATE
+             [AREA(VI1_WITH_DIODE) / (AREA(GATE)*(160+36*AREA(DIODE_ME1)))] 
+     COPY E 
+     NET AREA RATIO PRINT E ANT.7.1.2A.VI1.sum
+   
+     NET AREA RATIO VI1_WITH_DIODE OVER GATE DIODE_ME1 > 1 
+         [AREA(VI1_WITH_DIODE) / (AREA(GATE)*(160+36*AREA(DIODE_ME1)))] 
+     RDB ANT.7.1.2A.VI1.rdb BY LAYER VI1_WITH_DIODE GATE DIODE_ME1   
+
+     E_STAMP = STAMP (E AND OUTPUT_MARKER) BY PO1 
+     NET AREA RATIO f_VI1 E_STAMP >0  
+}
+
+//ANT.7.1.2.Note2.VI1 { @ Maximum ratio of VIA1 area (cumulative) to gate area is 1200 area.
+//     E = NET AREA RATIO f_VI1 OVER GATE  > 1200 ACCUMULATE
+//     COPY E 
+//     NET AREA RATIO PRINT E ANT.7.1.2.Note2.VI1.sum
+//   
+//     NET AREA RATIO f_VI1 OVER GATE > 1200 
+//     RDB ONLY ANT.7.1.2.Note2.VI1.rdb BY LAYER f_VI1 GATE    
+//
+//     E_STAMP = STAMP (E AND OUTPUT_MARKER) BY PO1 
+//     NET AREA RATIO f_VI1 E_STAMP >0  
+//}
+
+VI1_all_CA =  NET AREA RATIO f_VI1 OVER GATE > 0 ACCUMULATE
+VI1_CA = NET AREA RATIO VI1_WITHOUT_DIODE OVER GATE > 0 ACCUMULATE // GATE VI1 ACCUMULATE without diode
+VI1_CA_WD = NET AREA RATIO VI1_WITH_DIODE OVER GATE DIODE_ME1 > 0
+            [AREA(VI1_WITH_DIODE) / (AREA(GATE)*(160+36*AREA(DIODE_ME1)))] ACCUMULATE // GATE VI1 ACCUMULATE with diode
+    
+/////////////////////////
+// ME2 Antenna check   //
+/////////////////////////
+
+  
+CONNECT ME2 ME1 BY VI1
+DIODE_ME2   = NET AREA DIODE >= DIO_AREA
+CONNECT ME1 DIODE_ME2 BY CONT
+
+
+ME2_WITHOUT_DIODE    =  NET AREA RATIO ME2 DIODE_ME2 == 0 // ME2 DO NOT CONNECT WITH DIODE
+ME2_WITH_DIODE       =  NET AREA RATIO ME2 DIODE_ME2 > 0   // ME2 CONNECT WITH DIODE
+
+//ANT.7.1.3.ME2 { @ If the poly gate over diffusion area > 6400, the protection diode is must be.
+//     X = NET AREA GATE > 6400
+//     NET AREA RATIO X DIODE_ME2 == 0  // check the GATE is NOT connected with the protection diode by METAL
+//}
+
+ANT.7.1.1E.ME2 { @ Maximum ratio of Thin Metal2 sidewall area (each layer) to gate area is 2100.
+                 @ Without protection diode
+     E = NET AREA RATIO ME2_WITHOUT_DIODE GATE > 2100 ACCUMULATE
+         [PERIMETER(ME2_WITHOUT_DIODE)*MET_IN_THIN/AREA(GATE)]
+     COPY E
+     NET AREA RATIO PRINT E ANT.7.1.1E.ME2.sum   
+   
+     NET AREA RATIO ME2_WITHOUT_DIODE GATE > 2100
+     [PERIMETER(ME2_WITHOUT_DIODE)*MET_IN_THIN/AREA(GATE)]
+     RDB ANT.7.1.1E.ME2.rdb BY LAYER ME2_WITHOUT_DIODE GATE
+}
+
+ANT.7.1.1H.ME2 { @ Maximum ratio of Metal sidewall area (cumulative) to gate area is 15000.
+                 @ Without protection diode
+     E = NET AREA RATIO ME2_WITHOUT_DIODE OVER GATE > 15000
+               [PERIMETER(ME2_WITHOUT_DIODE)*MET_IN_THIN/AREA(GATE)] ACCUMULATE ME1_CA_G
+     COPY E 
+     NET AREA RATIO PRINT E  ANT.7.1.1H.ME2.sum
+   
+     NET AREA RATIO ME2_WITHOUT_DIODE OVER GATE > 15000
+           [PERIMETER(ME2_WITHOUT_DIODE)*MET_IN_THIN/AREA(GATE)] ACCUMULATE ME1_CA_G
+     RDB ANT.7.1.1H.ME2.rdb BY LAYER ME2_WITHOUT_DIODE GATE
+ 
+     E_STAMP = STAMP (E AND OUTPUT_MARKER) BY PO1
+     NET AREA RATIO ME1 E_STAMP >0
+     NET AREA RATIO ME2 E_STAMP >0
+}
+
+ME2_CA_G = NET AREA RATIO ME2_WITHOUT_DIODE OVER GATE > 0
+         [PERIMETER(ME2_WITHOUT_DIODE)*MET_IN_THIN/AREA(GATE)] ACCUMULATE ME1_CA_G // GATE ME1 to ME2 ACCUMULATE
+
+   
+ANT.7.1.2B.ME2 { @ Maximum ratio of Metal sidewall area (cumulative) to gate area is 45000+400*diode area.
+                 @ With protection diode
+     E = NET AREA RATIO ME2_WITH_DIODE OVER GATE DIODE_ME2 > 100
+               [PERIMETER(ME2_WITH_DIODE)*MET_IN_THIN*100 / (AREA(GATE)*(45000+400*AREA(DIODE_ME2)))] ACCUMULATE ME1_CA
+     COPY E 
+     NET AREA RATIO PRINT E  ANT.7.1.2B.ME2.sum
+   
+     NET AREA RATIO ME2_WITH_DIODE OVER GATE DIODE_ME2 > 100
+           [PERIMETER(ME2_WITH_DIODE)*MET_IN_THIN*100 / (AREA(GATE)*(45000+400*AREA(DIODE_ME2)))] ACCUMULATE ME1_CA  
+     RDB ANT.7.1.2B.ME2.rdb BY LAYER ME2_WITH_DIODE GATE DIODE_ME2
+ 
+     E_STAMP = STAMP (E AND OUTPUT_MARKER) BY PO1
+     NET AREA RATIO ME1 E_STAMP >0
+     NET AREA RATIO ME2 E_STAMP >0
+}
+
+ME2_CA = NET AREA RATIO ME2_WITH_DIODE OVER GATE DIODE_ME2 > 0
+         [PERIMETER(ME2_WITH_DIODE)*MET_IN_THIN*100 / (AREA(GATE)*(45000+ 400*AREA(DIODE_ME2)))] ACCUMULATE ME1_CA // GATE ME1 to ME2 ACCUMULATE
+
+   
+/////////////////////////
+// VI2 Antenna check   //
+/////////////////////////
+
+f_VI2 = BULK AND VI2
+CONNECT ME2 f_VI2
+
+VI2_WITHOUT_DIODE = NET AREA RATIO f_VI2 DIODE_ME2 ==0	// VIA2 DO NOT CONNECT WITH DIODE
+VI2_WITH_DIODE    = NET AREA RATIO f_VI2 DIODE_ME2 > 0  // VIA2 CONNECT WITH DIODE
+
+ANT.7.1.1C.VI2 { @ Maximum ratio of VIA2 area (each layer) to gate area is 20.
+                 @ Without protection diode
+     E = NET AREA RATIO VI2_WITHOUT_DIODE OVER GATE > 20 ACCUMULATE    
+     COPY E 
+     NET AREA RATIO PRINT E ANT.7.1.1C.VI2.sum
+   
+     NET AREA RATIO VI2_WITHOUT_DIODE OVER GATE > 20 
+     RDB ANT.7.1.1C.VI2.rdb BY LAYER VI2_WITHOUT_DIODE GATE   
+}
+
+ANT.7.1.1I.VI2 { @ Maximum ratio of cumulative VIA2 area to gate area is 30.
+                 @ Without protection diode
+     E = NET AREA RATIO VI2_WITHOUT_DIODE OVER GATE > 30 ACCUMULATE VI1_CA  
+     COPY E 
+     NET AREA RATIO PRINT E  ANT.7.1.1I.VI2.sum
+   
+     NET AREA RATIO VI2_WITHOUT_DIODE OVER GATE > 30 ACCUMULATE VI1_CA 
+     RDB ANT.7.1.1I.VI2.rdb BY LAYER VI2_WITHOUT_DIODE GATE
+
+     E_STAMP = STAMP (E AND OUTPUT_MARKER) BY PO1
+       NET AREA RATIO f_VI1 E_STAMP >0
+       NET AREA RATIO f_VI2 E_STAMP >0
+}
+
+ANT.7.1.2A.VI2 { @ Maximum ratio of VIA2 area (cumulative) to gate area is 160+36*diode area.
+                 @ With protection diode
+   E = NET AREA RATIO VI2_WITH_DIODE OVER GATE DIODE_ME2 >1
+             [AREA(VI2_WITH_DIODE) / (AREA(GATE)*(160+36*AREA(DIODE_ME2)))]  ACCUMULATE VI1_CA_WD
+   COPY E  
+   NET AREA RATIO PRINT E  ANT.7.1.2A.VI2.sum
+   
+   NET AREA RATIO VI2_WITH_DIODE OVER GATE DIODE_ME2 >1
+         [AREA(VI2_WITH_DIODE) / (AREA(GATE)*(160+36*AREA(DIODE_ME2)))]  ACCUMULATE VI1_CA_WD   
+   RDB  ANT.7.1.2A.VI2.rdb  BY LAYER  VI2_WITH_DIODE  GATE DIODE_ME2 
+
+   E_STAMP = STAMP (E AND OUTPUT_MARKER) BY PO1
+     NET AREA RATIO f_VI1 E_STAMP >0
+     NET AREA RATIO f_VI2 E_STAMP >0
+}
+
+//ANT.7.1.2.Note2.VI2 { @ Maximum ratio of VIA2 area (cumulative) to gate area is 1200 area.
+//   E = NET AREA RATIO f_VI2 OVER GATE  > 1200 ACCUMULATE VI1_all_CA
+//   COPY E  
+//   NET AREA RATIO PRINT E  ANT.7.1.2.Note2.VI2.sum
+//   
+//   NET AREA RATIO f_VI2 OVER GATE > 1200 ACCUMULATE VI1_all_CA   
+//   RDB ONLY ANT.7.1.2.Note2.VI2.rdb  BY LAYER  f_VI2  GATE  
+//
+//   E_STAMP = STAMP (E AND OUTPUT_MARKER) BY PO1
+//     NET AREA RATIO f_VI1 E_STAMP >0
+//     NET AREA RATIO f_VI2 E_STAMP >0
+//}
+
+VI2_all_CA = NET AREA RATIO f_VI2 OVER GATE > 0 ACCUMULATE VI1_all_CA
+VI2_CA = NET AREA RATIO VI2_WITHOUT_DIODE OVER GATE > 0 ACCUMULATE VI1_CA // GATE VI1 to VI2 ACCUMULATE without diode
+VI2_CA_WD = NET AREA RATIO VI2_WITH_DIODE OVER GATE DIODE_ME2 > 0
+            [AREA(VI2_WITH_DIODE) / (AREA(GATE)*(160+36*AREA(DIODE_ME2)))] ACCUMULATE VI1_CA_WD // GATE VI1 to VI2 ACCUMULATE with diode
+    
+/////////////////////////
+// ME3 Antenna check   //
+/////////////////////////
+
+  
+CONNECT ME3 ME2 BY VI2
+DIODE_ME3   = NET AREA DIODE >= DIO_AREA
+CONNECT ME1 DIODE_ME3 BY CONT
+
+
+ME3_WITHOUT_DIODE    =  NET AREA RATIO ME3 DIODE_ME3 == 0 // ME3 DO NOT CONNECT WITH DIODE
+ME3_WITH_DIODE       =  NET AREA RATIO ME3 DIODE_ME3 > 0   // ME3 CONNECT WITH DIODE
+
+//ANT.7.1.3.ME3 { @ If the poly gate over diffusion area > 6400, the protection diode is must be.
+//     X = NET AREA GATE > 6400
+//     NET AREA RATIO X DIODE_ME3 == 0  // check the GATE is NOT connected with the protection diode by METAL
+//}
+
+ANT.7.1.1E.ME3 { @ Maximum ratio of Thin Metal3 sidewall area (each layer) to gate area is 2100.
+                 @ Without protection diode
+     E = NET AREA RATIO ME3_WITHOUT_DIODE GATE > 2100 ACCUMULATE
+         [PERIMETER(ME3_WITHOUT_DIODE)*MET_IN_THIN/AREA(GATE)]
+     COPY E
+     NET AREA RATIO PRINT E ANT.7.1.1E.ME3.sum   
+   
+     NET AREA RATIO ME3_WITHOUT_DIODE GATE > 2100
+     [PERIMETER(ME3_WITHOUT_DIODE)*MET_IN_THIN/AREA(GATE)]
+     RDB ANT.7.1.1E.ME3.rdb BY LAYER ME3_WITHOUT_DIODE GATE
+}
+
+ANT.7.1.1H.ME3 { @ Maximum ratio of Metal sidewall area (cumulative) to gate area is 15000.
+                 @ Without protection diode
+     E = NET AREA RATIO ME3_WITHOUT_DIODE OVER GATE > 15000
+               [PERIMETER(ME3_WITHOUT_DIODE)*MET_IN_THIN/AREA(GATE)] ACCUMULATE ME2_CA_G
+     COPY E 
+     NET AREA RATIO PRINT E  ANT.7.1.1H.ME3.sum
+   
+     NET AREA RATIO ME3_WITHOUT_DIODE OVER GATE > 15000
+           [PERIMETER(ME3_WITHOUT_DIODE)*MET_IN_THIN/AREA(GATE)] ACCUMULATE ME2_CA_G
+     RDB ANT.7.1.1H.ME3.rdb BY LAYER ME3_WITHOUT_DIODE GATE
+ 
+     E_STAMP = STAMP (E AND OUTPUT_MARKER) BY PO1
+     NET AREA RATIO ME1 E_STAMP >0
+     NET AREA RATIO ME2 E_STAMP >0
+     NET AREA RATIO ME3 E_STAMP >0
+}
+
+ME3_CA_G = NET AREA RATIO ME3_WITHOUT_DIODE OVER GATE > 0
+         [PERIMETER(ME3_WITHOUT_DIODE)*MET_IN_THIN/AREA(GATE)] ACCUMULATE ME2_CA_G // GATE ME1 to ME3 ACCUMULATE
+
+   
+ANT.7.1.2B.ME3 { @ Maximum ratio of Metal sidewall area (cumulative) to gate area is 45000+400*diode area.
+                 @ With protection diode
+     E = NET AREA RATIO ME3_WITH_DIODE OVER GATE DIODE_ME3 > 100
+               [PERIMETER(ME3_WITH_DIODE)*MET_IN_THIN*100 / (AREA(GATE)*(45000+400*AREA(DIODE_ME3)))] ACCUMULATE ME2_CA
+     COPY E 
+     NET AREA RATIO PRINT E  ANT.7.1.2B.ME3.sum
+   
+     NET AREA RATIO ME3_WITH_DIODE OVER GATE DIODE_ME3 > 100
+           [PERIMETER(ME3_WITH_DIODE)*MET_IN_THIN*100 / (AREA(GATE)*(45000+400*AREA(DIODE_ME3)))] ACCUMULATE ME2_CA  
+     RDB ANT.7.1.2B.ME3.rdb BY LAYER ME3_WITH_DIODE GATE DIODE_ME3
+ 
+     E_STAMP = STAMP (E AND OUTPUT_MARKER) BY PO1
+     NET AREA RATIO ME1 E_STAMP >0
+     NET AREA RATIO ME2 E_STAMP >0
+     NET AREA RATIO ME3 E_STAMP >0
+}
+
+ME3_CA = NET AREA RATIO ME3_WITH_DIODE OVER GATE DIODE_ME3 > 0
+         [PERIMETER(ME3_WITH_DIODE)*MET_IN_THIN*100 / (AREA(GATE)*(45000+ 400*AREA(DIODE_ME3)))] ACCUMULATE ME2_CA // GATE ME1 to ME3 ACCUMULATE
+
+   
+/////////////////////////
+// VI3 Antenna check   //
+/////////////////////////
+
+f_VI3 = BULK AND VI3
+CONNECT ME3 f_VI3
+
+VI3_WITHOUT_DIODE = NET AREA RATIO f_VI3 DIODE_ME3 ==0	// VIA3 DO NOT CONNECT WITH DIODE
+VI3_WITH_DIODE    = NET AREA RATIO f_VI3 DIODE_ME3 > 0  // VIA3 CONNECT WITH DIODE
+
+ANT.7.1.1C.VI3 { @ Maximum ratio of VIA3 area (each layer) to gate area is 20.
+                 @ Without protection diode
+     E = NET AREA RATIO VI3_WITHOUT_DIODE OVER GATE > 20 ACCUMULATE    
+     COPY E 
+     NET AREA RATIO PRINT E ANT.7.1.1C.VI3.sum
+   
+     NET AREA RATIO VI3_WITHOUT_DIODE OVER GATE > 20 
+     RDB ANT.7.1.1C.VI3.rdb BY LAYER VI3_WITHOUT_DIODE GATE   
+}
+
+ANT.7.1.1I.VI3 { @ Maximum ratio of cumulative VIA3 area to gate area is 30.
+                 @ Without protection diode
+     E = NET AREA RATIO VI3_WITHOUT_DIODE OVER GATE > 30 ACCUMULATE VI2_CA  
+     COPY E 
+     NET AREA RATIO PRINT E  ANT.7.1.1I.VI3.sum
+   
+     NET AREA RATIO VI3_WITHOUT_DIODE OVER GATE > 30 ACCUMULATE VI2_CA 
+     RDB ANT.7.1.1I.VI3.rdb BY LAYER VI3_WITHOUT_DIODE GATE
+
+     E_STAMP = STAMP (E AND OUTPUT_MARKER) BY PO1
+       NET AREA RATIO f_VI1 E_STAMP >0
+       NET AREA RATIO f_VI2 E_STAMP >0
+       NET AREA RATIO f_VI3 E_STAMP >0
+}
+
+ANT.7.1.2A.VI3 { @ Maximum ratio of VIA3 area (cumulative) to gate area is 160+36*diode area.
+                 @ With protection diode
+   E = NET AREA RATIO VI3_WITH_DIODE OVER GATE DIODE_ME3 >1
+             [AREA(VI3_WITH_DIODE) / (AREA(GATE)*(160+36*AREA(DIODE_ME3)))]  ACCUMULATE VI2_CA_WD
+   COPY E  
+   NET AREA RATIO PRINT E  ANT.7.1.2A.VI3.sum
+   
+   NET AREA RATIO VI3_WITH_DIODE OVER GATE DIODE_ME3 >1
+         [AREA(VI3_WITH_DIODE) / (AREA(GATE)*(160+36*AREA(DIODE_ME3)))]  ACCUMULATE VI2_CA_WD   
+   RDB  ANT.7.1.2A.VI3.rdb  BY LAYER  VI3_WITH_DIODE  GATE DIODE_ME3 
+
+   E_STAMP = STAMP (E AND OUTPUT_MARKER) BY PO1
+     NET AREA RATIO f_VI1 E_STAMP >0
+     NET AREA RATIO f_VI2 E_STAMP >0
+     NET AREA RATIO f_VI3 E_STAMP >0
+}
+
+//ANT.7.1.2.Note2.VI3 { @ Maximum ratio of VIA3 area (cumulative) to gate area is 1200 area.
+//   E = NET AREA RATIO f_VI3 OVER GATE  > 1200 ACCUMULATE VI2_all_CA
+//   COPY E  
+//   NET AREA RATIO PRINT E  ANT.7.1.2.Note2.VI3.sum
+//   
+//   NET AREA RATIO f_VI3 OVER GATE > 1200 ACCUMULATE VI2_all_CA   
+//   RDB ONLY ANT.7.1.2.Note2.VI3.rdb  BY LAYER  f_VI3  GATE  
+//
+//   E_STAMP = STAMP (E AND OUTPUT_MARKER) BY PO1
+//     NET AREA RATIO f_VI1 E_STAMP >0
+//     NET AREA RATIO f_VI2 E_STAMP >0
+//     NET AREA RATIO f_VI3 E_STAMP >0
+//}
+
+VI3_all_CA = NET AREA RATIO f_VI3 OVER GATE > 0 ACCUMULATE VI2_all_CA
+VI3_CA = NET AREA RATIO VI3_WITHOUT_DIODE OVER GATE > 0 ACCUMULATE VI2_CA // GATE VI1 to VI3 ACCUMULATE without diode
+VI3_CA_WD = NET AREA RATIO VI3_WITH_DIODE OVER GATE DIODE_ME3 > 0
+            [AREA(VI3_WITH_DIODE) / (AREA(GATE)*(160+36*AREA(DIODE_ME3)))] ACCUMULATE VI2_CA_WD // GATE VI1 to VI3 ACCUMULATE with diode
+    
+// Start the VI3 Ratio rule of MMC between ME3 and ME4
+
+M34_MMC_ANT.7.2.1D_CBM_VI3{ @ Maximum Ratio of MVIA_3 (or UTMV) area to the METAL_CAP area is 20
+                            @ for balance structure when both CTM and CBM are floating or grounded
+                            @ Antenna CBM node; MMC between ME3 and ME4
+MMC34_FLOAT_ME3 = NET AREA RATIO ME3 SUB == 0
+MMC34_ON_FLOAT_ME3 = DFM PROPERTY MMC34_FLOAT_ME3 M34_MMC OVERLAP MULTI
+                     [MMC_AREA = AREA(M34_MMC)] > 0
+MMC34_VI3 = (NET AREA RATIO f_VI3 MMC34_FLOAT_ME3 > 0) NOT M34_MMC
+MMC34_FLOAT_VI3 = DFM PROPERTY MMC34_FLOAT_ME3 MMC34_VI3 MMC34_ON_FLOAT_ME3 NODAL MULTI
+                               [VI3_AREA = AREA(MMC34_VI3)] > 0
+                               [MMC_AREA = PROPERTY(MMC34_ON_FLOAT_ME3,MMC_AREA)] > 0
+
+  P = DFM PROPERTY MMC34_FLOAT_ME3 M34_MMC MMC34_FLOAT_VI3 OVERLAP MULTI
+      [check = AREA(M34_MMC)] > 0
+      [CBM_VI3_AREA = PROPERTY(MMC34_FLOAT_VI3,VI3_AREA)] > 0
+      [MMC_AREA = PROPERTY(MMC34_FLOAT_VI3,MMC_AREA)] > 0
+      [VI3_RATIO = PROPERTY(MMC34_FLOAT_VI3,VI3_AREA)/PROPERTY(MMC34_FLOAT_VI3,MMC_AREA)] > 20
+  DFM COPY P
+  DFM RDB P MMC34_CBM_VI3_balance.rdb
+}
+    
+/////////////////////////
+// ME4 Antenna check   //
+/////////////////////////
+
+  
+CONNECT ME4 M34_MMC ME3 BY VI3
+DIODE_ME4   = NET AREA DIODE >= DIO_AREA
+CONNECT ME1 DIODE_ME4 BY CONT
+
+
+ME4_WITHOUT_DIODE    =  NET AREA RATIO ME4 DIODE_ME4 == 0 // ME4 DO NOT CONNECT WITH DIODE
+ME4_WITH_DIODE       =  NET AREA RATIO ME4 DIODE_ME4 > 0   // ME4 CONNECT WITH DIODE
+
+//ANT.7.1.3.ME4 { @ If the poly gate over diffusion area > 6400, the protection diode is must be.
+//     X = NET AREA GATE > 6400
+//     NET AREA RATIO X DIODE_ME4 == 0  // check the GATE is NOT connected with the protection diode by METAL
+//}
+
+ANT.7.1.1E.ME4 { @ Maximum ratio of Thin Metal4 sidewall area (each layer) to gate area is 2100.
+                 @ Without protection diode
+     E = NET AREA RATIO ME4_WITHOUT_DIODE GATE > 2100 ACCUMULATE
+         [PERIMETER(ME4_WITHOUT_DIODE)*MET_IN_THIN/AREA(GATE)]
+     COPY E
+     NET AREA RATIO PRINT E ANT.7.1.1E.ME4.sum   
+   
+     NET AREA RATIO ME4_WITHOUT_DIODE GATE > 2100
+     [PERIMETER(ME4_WITHOUT_DIODE)*MET_IN_THIN/AREA(GATE)]
+     RDB ANT.7.1.1E.ME4.rdb BY LAYER ME4_WITHOUT_DIODE GATE
+}
+
+ANT.7.1.1H.ME4 { @ Maximum ratio of Metal sidewall area (cumulative) to gate area is 15000.
+                 @ Without protection diode
+     E = NET AREA RATIO ME4_WITHOUT_DIODE OVER GATE > 15000
+               [PERIMETER(ME4_WITHOUT_DIODE)*MET_IN_THIN/AREA(GATE)] ACCUMULATE ME3_CA_G
+     COPY E 
+     NET AREA RATIO PRINT E  ANT.7.1.1H.ME4.sum
+   
+     NET AREA RATIO ME4_WITHOUT_DIODE OVER GATE > 15000
+           [PERIMETER(ME4_WITHOUT_DIODE)*MET_IN_THIN/AREA(GATE)] ACCUMULATE ME3_CA_G
+     RDB ANT.7.1.1H.ME4.rdb BY LAYER ME4_WITHOUT_DIODE GATE
+ 
+     E_STAMP = STAMP (E AND OUTPUT_MARKER) BY PO1
+     NET AREA RATIO ME1 E_STAMP >0
+     NET AREA RATIO ME2 E_STAMP >0
+     NET AREA RATIO ME3 E_STAMP >0
+     NET AREA RATIO ME4 E_STAMP >0
+}
+
+ME4_CA_G = NET AREA RATIO ME4_WITHOUT_DIODE OVER GATE > 0
+         [PERIMETER(ME4_WITHOUT_DIODE)*MET_IN_THIN/AREA(GATE)] ACCUMULATE ME3_CA_G // GATE ME1 to ME4 ACCUMULATE
+
+   
+ANT.7.1.2B.ME4 { @ Maximum ratio of Metal sidewall area (cumulative) to gate area is 45000+400*diode area.
+                 @ With protection diode
+     E = NET AREA RATIO ME4_WITH_DIODE OVER GATE DIODE_ME4 > 100
+               [PERIMETER(ME4_WITH_DIODE)*MET_IN_THIN*100 / (AREA(GATE)*(45000+400*AREA(DIODE_ME4)))] ACCUMULATE ME3_CA
+     COPY E 
+     NET AREA RATIO PRINT E  ANT.7.1.2B.ME4.sum
+   
+     NET AREA RATIO ME4_WITH_DIODE OVER GATE DIODE_ME4 > 100
+           [PERIMETER(ME4_WITH_DIODE)*MET_IN_THIN*100 / (AREA(GATE)*(45000+400*AREA(DIODE_ME4)))] ACCUMULATE ME3_CA  
+     RDB ANT.7.1.2B.ME4.rdb BY LAYER ME4_WITH_DIODE GATE DIODE_ME4
+ 
+     E_STAMP = STAMP (E AND OUTPUT_MARKER) BY PO1
+     NET AREA RATIO ME1 E_STAMP >0
+     NET AREA RATIO ME2 E_STAMP >0
+     NET AREA RATIO ME3 E_STAMP >0
+     NET AREA RATIO ME4 E_STAMP >0
+}
+
+ME4_CA = NET AREA RATIO ME4_WITH_DIODE OVER GATE DIODE_ME4 > 0
+         [PERIMETER(ME4_WITH_DIODE)*MET_IN_THIN*100 / (AREA(GATE)*(45000+ 400*AREA(DIODE_ME4)))] ACCUMULATE ME3_CA // GATE ME1 to ME4 ACCUMULATE
+
+   
+/////////////////////////
+// VI4 Antenna check   //
+/////////////////////////
+
+f_VI4 = BULK AND VI4
+CONNECT ME4 f_VI4
+
+VI4_WITHOUT_DIODE = NET AREA RATIO f_VI4 DIODE_ME4 ==0	// VIA4 DO NOT CONNECT WITH DIODE
+VI4_WITH_DIODE    = NET AREA RATIO f_VI4 DIODE_ME4 > 0  // VIA4 CONNECT WITH DIODE
+
+ANT.7.1.1C.VI4 { @ Maximum ratio of VIA4 area (each layer) to gate area is 20.
+                 @ Without protection diode
+     E = NET AREA RATIO VI4_WITHOUT_DIODE OVER GATE > 20 ACCUMULATE    
+     COPY E 
+     NET AREA RATIO PRINT E ANT.7.1.1C.VI4.sum
+   
+     NET AREA RATIO VI4_WITHOUT_DIODE OVER GATE > 20 
+     RDB ANT.7.1.1C.VI4.rdb BY LAYER VI4_WITHOUT_DIODE GATE   
+}
+
+ANT.7.1.1I.VI4 { @ Maximum ratio of cumulative VIA4 area to gate area is 30.
+                 @ Without protection diode
+     E = NET AREA RATIO VI4_WITHOUT_DIODE OVER GATE > 30 ACCUMULATE VI3_CA  
+     COPY E 
+     NET AREA RATIO PRINT E  ANT.7.1.1I.VI4.sum
+   
+     NET AREA RATIO VI4_WITHOUT_DIODE OVER GATE > 30 ACCUMULATE VI3_CA 
+     RDB ANT.7.1.1I.VI4.rdb BY LAYER VI4_WITHOUT_DIODE GATE
+
+     E_STAMP = STAMP (E AND OUTPUT_MARKER) BY PO1
+       NET AREA RATIO f_VI1 E_STAMP >0
+       NET AREA RATIO f_VI2 E_STAMP >0
+       NET AREA RATIO f_VI3 E_STAMP >0
+       NET AREA RATIO f_VI4 E_STAMP >0
+}
+
+ANT.7.1.2A.VI4 { @ Maximum ratio of VIA4 area (cumulative) to gate area is 160+36*diode area.
+                 @ With protection diode
+   E = NET AREA RATIO VI4_WITH_DIODE OVER GATE DIODE_ME4 >1
+             [AREA(VI4_WITH_DIODE) / (AREA(GATE)*(160+36*AREA(DIODE_ME4)))]  ACCUMULATE VI3_CA_WD
+   COPY E  
+   NET AREA RATIO PRINT E  ANT.7.1.2A.VI4.sum
+   
+   NET AREA RATIO VI4_WITH_DIODE OVER GATE DIODE_ME4 >1
+         [AREA(VI4_WITH_DIODE) / (AREA(GATE)*(160+36*AREA(DIODE_ME4)))]  ACCUMULATE VI3_CA_WD   
+   RDB  ANT.7.1.2A.VI4.rdb  BY LAYER  VI4_WITH_DIODE  GATE DIODE_ME4 
+
+   E_STAMP = STAMP (E AND OUTPUT_MARKER) BY PO1
+     NET AREA RATIO f_VI1 E_STAMP >0
+     NET AREA RATIO f_VI2 E_STAMP >0
+     NET AREA RATIO f_VI3 E_STAMP >0
+     NET AREA RATIO f_VI4 E_STAMP >0
+}
+
+//ANT.7.1.2.Note2.VI4 { @ Maximum ratio of VIA4 area (cumulative) to gate area is 1200 area.
+//   E = NET AREA RATIO f_VI4 OVER GATE  > 1200 ACCUMULATE VI3_all_CA
+//   COPY E  
+//   NET AREA RATIO PRINT E  ANT.7.1.2.Note2.VI4.sum
+//   
+//   NET AREA RATIO f_VI4 OVER GATE > 1200 ACCUMULATE VI3_all_CA   
+//   RDB ONLY ANT.7.1.2.Note2.VI4.rdb  BY LAYER  f_VI4  GATE  
+//
+//   E_STAMP = STAMP (E AND OUTPUT_MARKER) BY PO1
+//     NET AREA RATIO f_VI1 E_STAMP >0
+//     NET AREA RATIO f_VI2 E_STAMP >0
+//     NET AREA RATIO f_VI3 E_STAMP >0
+//     NET AREA RATIO f_VI4 E_STAMP >0
+//}
+
+VI4_all_CA = NET AREA RATIO f_VI4 OVER GATE > 0 ACCUMULATE VI3_all_CA
+VI4_CA = NET AREA RATIO VI4_WITHOUT_DIODE OVER GATE > 0 ACCUMULATE VI3_CA // GATE VI1 to VI4 ACCUMULATE without diode
+VI4_CA_WD = NET AREA RATIO VI4_WITH_DIODE OVER GATE DIODE_ME4 > 0
+            [AREA(VI4_WITH_DIODE) / (AREA(GATE)*(160+36*AREA(DIODE_ME4)))] ACCUMULATE VI3_CA_WD // GATE VI1 to VI4 ACCUMULATE with diode
+    
+// Start the VI4 Ratio rule of MMC between ME4 and ME5
+
+M45_MMC_ANT.7.2.1D_CBM_VI4{ @ Maximum Ratio of MVIA_4 (or UTMV) area to the METAL_CAP area is 20
+                            @ for balance structure when both CTM and CBM are floating or grounded
+                            @ Antenna CBM node; MMC between ME4 and ME5
+MMC45_FLOAT_ME4 = NET AREA RATIO ME4 SUB == 0
+MMC45_ON_FLOAT_ME4 = DFM PROPERTY MMC45_FLOAT_ME4 M45_MMC OVERLAP MULTI
+                     [MMC_AREA = AREA(M45_MMC)] > 0
+MMC45_VI4 = (NET AREA RATIO f_VI4 MMC45_FLOAT_ME4 > 0) NOT M45_MMC
+MMC45_FLOAT_VI4 = DFM PROPERTY MMC45_FLOAT_ME4 MMC45_VI4 MMC45_ON_FLOAT_ME4 NODAL MULTI
+                               [VI4_AREA = AREA(MMC45_VI4)] > 0
+                               [MMC_AREA = PROPERTY(MMC45_ON_FLOAT_ME4,MMC_AREA)] > 0
+
+  P = DFM PROPERTY MMC45_FLOAT_ME4 M45_MMC MMC45_FLOAT_VI4 OVERLAP MULTI
+      [check = AREA(M45_MMC)] > 0
+      [CBM_VI4_AREA = PROPERTY(MMC45_FLOAT_VI4,VI4_AREA)] > 0
+      [MMC_AREA = PROPERTY(MMC45_FLOAT_VI4,MMC_AREA)] > 0
+      [VI4_RATIO = PROPERTY(MMC45_FLOAT_VI4,VI4_AREA)/PROPERTY(MMC45_FLOAT_VI4,MMC_AREA)] > 20
+  DFM COPY P
+  DFM RDB P MMC45_CBM_VI4_balance.rdb
+}
+    
+// Start the ME4 & VIA4 Ratio rule of MMC between ME3 and ME4 //
+
+MMC34_FLOAT_CBM_4 = NET AREA RATIO ME3 SUB == 0
+MMC34_FLOAT_CTM_4 = NET AREA RATIO M34_MMC SUB == 0
+MMC34_GROUND_CBM_4 = NET AREA RATIO ME3 SUB > 0
+MMC34_GROUND_CTM_4 = NET AREA RATIO M34_MMC SUB > 0
+
+MMC34_BALANCE_CTM_4 = (MMC34_FLOAT_CTM_4 AND MMC34_FLOAT_CBM_4) OR (MMC34_GROUND_CTM_4 AND MMC34_GROUND_CBM_4)
+MMC34_UNBALANCE_CTM_4 = MMC34_FLOAT_CTM_4 AND MMC34_GROUND_CBM_4
+CONNECT MMC34_BALANCE_CTM_4 M34_MMC
+CONNECT MMC34_UNBALANCE_CTM_4 M34_MMC
+
+M34_MMC_ANT.7.2.1A_CTM_ME4{ @ Maximum Ratio of Metal_4 (M4 or UTM) sidewall area to the METAL_CAP area is 6000
+                            @ for balance structure when both CTM and CBM are floating or grounded
+                            @ Antenna CTM node, MMC between ME3 and ME4
+     NET AREA RATIO ME4 MMC34_BALANCE_CTM_4 > 6000
+     [PERIMETER(ME4)*MET_IN_THIN/AREA(MMC34_BALANCE_CTM_4)]
+     RDB MMC34_CTM_ME4_balance.rdb BY LAYER ME4 MMC34_BALANCE_CTM_4
+}
+
+M34_MMC_ANT.7.2.1C_CTM_ME4{ @ Maximum Ratio of Metal_4 (M4 or UTM) sidewall area to the METAL_CAP area is 100
+                            @ for unbalanced structure where CBM is connected to DIFFUSION and CTM is floating
+                            @ Antenna CTM node, MMC between ME3 and ME4
+     NET AREA RATIO ME4 MMC34_UNBALANCE_CTM_4 > 100
+     [PERIMETER(ME4)*MET_IN_THIN/AREA(MMC34_UNBALANCE_CTM_4)]
+     RDB MMC34_CTM_ME4_unbalance.rdb BY LAYER ME4 MMC34_UNBALANCE_CTM_4
+}
+
+M34_MMC_ANT.7.2.1D_CTM_VI4{ @ Maximum Ratio of MVIA_4 (or UTMV) area to the METAL_CAP area is 20
+                            @ for balance structure when both CTM and CBM are floating or grounded
+                            @ Antenna CTM node, MMC between ME3 and ME4
+     NET AREA RATIO f_VI4 MMC34_BALANCE_CTM_4 > 20
+     RDB MMC34_CTM_VI4_balance.rdb BY LAYER f_VI4 MMC34_BALANCE_CTM_4
+}
+
+M34_MMC_ANT.7.2.1F_CTM_VI4{ @ Maximum Ratio of MVIA_4 (or UTMV) area to the METAL_CAP area is 10
+                            @ for unbalanced structure when both CTM and CBM are floating or grounded
+                            @ Antenna CTM node, MMC between ME3 and ME4
+     NET AREA RATIO f_VI4 MMC34_UNBALANCE_CTM_4 > 10
+     RDB MMC34_CTM_VI4_unbalance.rdb BY LAYER f_VI4 MMC34_UNBALANCE_CTM_4
+}
+
+MMC34_BALANCE_CBM_4 = (MMC34_FLOAT_CBM_4 INTERACT MMC34_FLOAT_CTM_4) OR (MMC34_GROUND_CBM_4 INTERACT MMC34_GROUND_CTM_4)
+MMC34_UNBALANCE_CBM_4 = MMC34_FLOAT_CBM_4 INTERACT MMC34_GROUND_CTM_4
+CONNECT MMC34_BALANCE_CBM_4 ME3
+CONNECT MMC34_UNBALANCE_CBM_4 ME3
+
+MMC34_BALANCE_ME4_4 = NET AREA RATIO ME4 MMC34_BALANCE_CBM_4 > 0
+MMC34_UNBALANCE_ME4_4 = NET AREA RATIO ME4 MMC34_UNBALANCE_CBM_4 > 0
+MMC34_BALANCE_VI4_4 = NET AREA RATIO f_VI4 MMC34_BALANCE_CBM_4 > 0
+MMC34_UNBALANCE_VI4_4 = NET AREA RATIO f_VI4 MMC34_UNBALANCE_CBM_4 > 0
+
+M34_MMC_ANT.7.2.1A_CBM_ME4{ @ Maximum Ratio of Metal_4 (M4 or UTM) sidewall area to the METAL_CAP area is 6000
+                            @ for balance structure when both CTM and CBM are floating or grounded
+                            @ Antenna CBM node, MMC between ME3 and ME4
+     f_M34_MMC = STAMP M34_MMC BY ME3   
+     NET AREA RATIO MMC34_BALANCE_ME4_4 f_M34_MMC > 6000
+     [PERIMETER(MMC34_BALANCE_ME4_4)*MET_IN_THIN/AREA(f_M34_MMC)]
+     RDB MMC34_CBM_ME4_balance.rdb BY LAYER MMC34_BALANCE_ME4_4 f_M34_MMC
+}
+
+M34_MMC_ANT.7.2.1B_CBM_ME4{ @ Maximum Ratio of Metal_4 (M4 or UTM) sidewall area to the METAL_CAP area is 100
+                            @ for unbalanced structure where CTM is connected to DIFFUSION and CBM is floating
+                            @ Antenna CBM node, MMC between ME3 and ME4
+     f_M34_MMC = STAMP M34_MMC BY ME3   
+     NET AREA RATIO MMC34_UNBALANCE_ME4_4 f_M34_MMC > 100
+     [PERIMETER(MMC34_UNBALANCE_ME4_4)*MET_IN_THIN/AREA(f_M34_MMC)]
+     RDB MMC34_CBM_ME4_unbalance.rdb BY LAYER MMC34_UNBALANCE_ME4_4 f_M34_MMC
+}
+
+M34_MMC_ANT.7.2.1D_CBM_VI4{ @ Maximum Ratio of MVIA_4 (or UTMV) area to the METAL_CAP area is 20
+                            @ for balance structure when both CTM and CBM are floating or grounded
+                            @ Antenna CBM node, MMC between ME3 and ME4
+     f_M34_MMC = STAMP M34_MMC BY ME3   
+     NET AREA RATIO MMC34_BALANCE_VI4_4 f_M34_MMC > 20
+     RDB MMC34_CBM_VI4_balance.rdb BY LAYER MMC34_BALANCE_VI4_4 f_M34_MMC
+}
+
+M34_MMC_ANT.7.2.1E_CBM_VI4{ @ Maximum Ratio of MVIA_4 (or UTMV) area to the METAL_CAP area is 10
+                            @ for unbalanced structure where CTM is connected to DIFFUSION and CBM is floating
+                            @ Antenna CBM node, MMC between ME3 and ME4
+     f_M34_MMC = STAMP M34_MMC BY ME3   
+     NET AREA RATIO MMC34_UNBALANCE_VI4_4 f_M34_MMC > 10
+     RDB MMC34_CBM_VI4_unbalance.rdb BY LAYER MMC34_UNBALANCE_VI4_4 f_M34_MMC
+}
+    
+/////////////////////////
+// ME5 Antenna check   //
+/////////////////////////
+
+  
+CONNECT ME5 M45_MMC ME4 BY VI4
+DIODE_ME5   = NET AREA DIODE >= DIO_AREA
+CONNECT ME1 DIODE_ME5 BY CONT
+
+
+ME5_WITHOUT_DIODE    =  NET AREA RATIO ME5 DIODE_ME5 == 0 // ME5 DO NOT CONNECT WITH DIODE
+ME5_WITH_DIODE       =  NET AREA RATIO ME5 DIODE_ME5 > 0   // ME5 CONNECT WITH DIODE
+
+//ANT.7.1.3.ME5 { @ If the poly gate over diffusion area > 6400, the protection diode is must be.
+//     X = NET AREA GATE > 6400
+//     NET AREA RATIO X DIODE_ME5 == 0  // check the GATE is NOT connected with the protection diode by METAL
+//}
+
+ANT.7.1.1G.ME5 { @ Maximum ratio of Second Thick (2T) Metal sidewall area (each layer) to gate area is 3600.
+                 @ Without protection diode
+     E = NET AREA RATIO ME5_WITHOUT_DIODE GATE > 3600 ACCUMULATE
+         [PERIMETER(ME5_WITHOUT_DIODE)*MET_TOP_THICK/AREA(GATE)]
+     COPY E
+     NET AREA RATIO PRINT E ANT.7.1.1G.ME5.sum   
+   
+     NET AREA RATIO ME5_WITHOUT_DIODE GATE > 3600
+     [PERIMETER(ME5_WITHOUT_DIODE)*MET_TOP_THICK/AREA(GATE)]
+     RDB ANT.7.1.1G.ME5.rdb BY LAYER ME5_WITHOUT_DIODE GATE
+}
+
+ANT.7.1.1H.ME5 { @ Maximum ratio of Metal sidewall area (cumulative) to gate area is 15000.
+                 @ Without protection diode
+     E = NET AREA RATIO ME5_WITHOUT_DIODE OVER GATE > 15000
+               [PERIMETER(ME5_WITHOUT_DIODE)*MET_TOP_THICK/AREA(GATE)] ACCUMULATE ME4_CA_G
+     COPY E 
+     NET AREA RATIO PRINT E  ANT.7.1.1H.ME5.sum
+   
+     NET AREA RATIO ME5_WITHOUT_DIODE OVER GATE > 15000
+           [PERIMETER(ME5_WITHOUT_DIODE)*MET_TOP_THICK/AREA(GATE)] ACCUMULATE ME4_CA_G
+     RDB ANT.7.1.1H.ME5.rdb BY LAYER ME5_WITHOUT_DIODE GATE
+ 
+     E_STAMP = STAMP (E AND OUTPUT_MARKER) BY PO1
+     NET AREA RATIO ME1 E_STAMP >0
+     NET AREA RATIO ME2 E_STAMP >0
+     NET AREA RATIO ME3 E_STAMP >0
+     NET AREA RATIO ME4 E_STAMP >0
+     NET AREA RATIO ME5 E_STAMP >0
+}
+
+ME5_CA_G = NET AREA RATIO ME5_WITHOUT_DIODE OVER GATE > 0
+         [PERIMETER(ME5_WITHOUT_DIODE)*MET_TOP_THICK/AREA(GATE)] ACCUMULATE ME4_CA_G // GATE ME1 to ME5 ACCUMULATE
+
+   
+ANT.7.1.2B.ME5 { @ Maximum ratio of Metal sidewall area (cumulative) to gate area is 45000+400*diode area.
+                 @ With protection diode
+     E = NET AREA RATIO ME5_WITH_DIODE OVER GATE DIODE_ME5 > 100
+               [PERIMETER(ME5_WITH_DIODE)*MET_TOP_THICK*100 / (AREA(GATE)*(45000+400*AREA(DIODE_ME5)))] ACCUMULATE ME4_CA
+     COPY E 
+     NET AREA RATIO PRINT E  ANT.7.1.2B.ME5.sum
+   
+     NET AREA RATIO ME5_WITH_DIODE OVER GATE DIODE_ME5 > 100
+           [PERIMETER(ME5_WITH_DIODE)*MET_TOP_THICK*100 / (AREA(GATE)*(45000+400*AREA(DIODE_ME5)))] ACCUMULATE ME4_CA  
+     RDB ANT.7.1.2B.ME5.rdb BY LAYER ME5_WITH_DIODE GATE DIODE_ME5  
+
+     E_STAMP = STAMP (E AND OUTPUT_MARKER) BY PO1
+     NET AREA RATIO ME1 E_STAMP >0
+     NET AREA RATIO ME2 E_STAMP >0
+     NET AREA RATIO ME3 E_STAMP >0
+     NET AREA RATIO ME4 E_STAMP >0
+     NET AREA RATIO ME5 E_STAMP >0
+}
+
+ME5_CA = NET AREA RATIO ME5_WITH_DIODE OVER GATE DIODE_ME5 > 0
+         [PERIMETER(ME5_WITH_DIODE)*MET_TOP_THICK*100 / (AREA(GATE)*(45000+ 400*AREA(DIODE_ME5)))] ACCUMULATE ME4_CA // GATE ME1 to ME5 ACCUMULATE
+   
+
+// Start the ME5 Ratio rule of MMC between ME4 and ME5 //
+
+MMC45_FLOAT_CBM_5 = NET AREA RATIO ME4 SUB == 0
+MMC45_FLOAT_CTM_5 = NET AREA RATIO M45_MMC SUB == 0
+MMC45_GROUND_CBM_5 = NET AREA RATIO ME4 SUB > 0
+MMC45_GROUND_CTM_5 = NET AREA RATIO M45_MMC SUB > 0
+
+MMC45_BALANCE_CTM_5 = (MMC45_FLOAT_CTM_5 AND MMC45_FLOAT_CBM_5) OR (MMC45_GROUND_CTM_5 AND MMC45_GROUND_CBM_5)
+MMC45_UNBALANCE_CTM_5 = MMC45_FLOAT_CTM_5 AND MMC45_GROUND_CBM_5
+CONNECT MMC45_BALANCE_CTM_5 M45_MMC
+CONNECT MMC45_UNBALANCE_CTM_5 M45_MMC
+
+M45_MMC_ANT.7.2.1A_CTM_ME5{ @ Maximum Ratio of Metal_5 (M5 or UTM) sidewall area to the METAL_CAP area is 6000
+                            @ for balance structure when both CTM and CBM are floating or grounded
+                            @ Antenna CTM node, MMC between ME4 and ME5
+     NET AREA RATIO ME5 MMC45_BALANCE_CTM_5 > 6000
+     [PERIMETER(ME5)*MET_TOP_THICK/AREA(MMC45_BALANCE_CTM_5)]
+     RDB MMC45_CTM_ME5_balance.rdb BY LAYER ME5 MMC45_BALANCE_CTM_5
+}
+
+M45_MMC_ANT.7.2.1C_CTM_ME5{ @ Maximum Ratio of Metal_5 (M5 or UTM) sidewall area to the METAL_CAP area is 100
+                            @ for unbalanced structure where CBM is connected to DIFFUSION and CTM is floating
+                            @ Antenna CTM node, MMC between ME4 and ME5
+     NET AREA RATIO ME5 MMC45_UNBALANCE_CTM_5 > 100
+     [PERIMETER(ME5)*MET_TOP_THICK/AREA(MMC45_UNBALANCE_CTM_5)]
+     RDB MMC45_CTM_ME5_unbalance.rdb BY LAYER ME5 MMC45_UNBALANCE_CTM_5
+}
+
+MMC45_BALANCE_CBM_5 = (MMC45_FLOAT_CBM_5 INTERACT MMC45_FLOAT_CTM_5) OR (MMC45_GROUND_CBM_5 INTERACT MMC45_GROUND_CTM_5)
+MMC45_UNBALANCE_CBM_5 = MMC45_FLOAT_CBM_5 INTERACT MMC45_GROUND_CTM_5
+CONNECT MMC45_BALANCE_CBM_5 ME4
+CONNECT MMC45_UNBALANCE_CBM_5 ME4
+
+MMC45_BALANCE_ME5_5 = NET AREA RATIO ME5 MMC45_BALANCE_CBM_5 > 0
+MMC45_UNBALANCE_ME5_5 = NET AREA RATIO ME5 MMC45_UNBALANCE_CBM_5 > 0
+
+M45_MMC_ANT.7.2.1A_CBM_ME5{ @ Maximum Ratio of Metal_5 (M5 or UTM) sidewall area to the METAL_CAP area is 6000
+                            @ for balance structure when both CTM and CBM are floating or grounded
+                            @ Antenna CBM node, MMC between ME4 and ME5
+     f_M45_MMC = STAMP M45_MMC BY ME4   
+     NET AREA RATIO MMC45_BALANCE_ME5_5 f_M45_MMC > 6000
+     [PERIMETER(MMC45_BALANCE_ME5_5)*MET_TOP_THICK/AREA(f_M45_MMC)]
+     RDB MMC45_CBM_ME5_balance.rdb BY LAYER MMC45_BALANCE_ME5_5 f_M45_MMC
+}
+
+M45_MMC_ANT.7.2.1B_CBM_ME5{ @ Maximum Ratio of Metal_5 (M5 or UTM) sidewall area to the METAL_CAP area is 100
+                            @ for unbalanced structure where CTM is connected to DIFFUSION and CBM is floating
+                            @ Antenna CBM node, MMC between ME4 and ME5
+     f_M45_MMC = STAMP M45_MMC BY ME4   
+     NET AREA RATIO MMC45_UNBALANCE_ME5_5 f_M45_MMC > 100
+     [PERIMETER(MMC45_UNBALANCE_ME5_5)*MET_TOP_THICK/AREA(f_M45_MMC)]
+     RDB MMC45_CBM_ME5_unbalance.rdb BY LAYER MMC45_UNBALANCE_ME5_5 f_M45_MMC
+}
+    
+
+// Start the ME5 Ratio rule of MMC between ME3 and ME4 //
+
+MMC34_FLOAT_CBM_5 = NET AREA RATIO ME3 SUB == 0
+MMC34_FLOAT_CTM_5 = NET AREA RATIO M34_MMC SUB == 0
+MMC34_GROUND_CBM_5 = NET AREA RATIO ME3 SUB > 0
+MMC34_GROUND_CTM_5 = NET AREA RATIO M34_MMC SUB > 0
+
+MMC34_BALANCE_CTM_5 = (MMC34_FLOAT_CTM_5 AND MMC34_FLOAT_CBM_5) OR (MMC34_GROUND_CTM_5 AND MMC34_GROUND_CBM_5)
+MMC34_UNBALANCE_CTM_5 = MMC34_FLOAT_CTM_5 AND MMC34_GROUND_CBM_5
+CONNECT MMC34_BALANCE_CTM_5 M34_MMC
+CONNECT MMC34_UNBALANCE_CTM_5 M34_MMC
+
+M34_MMC_ANT.7.2.1A_CTM_ME5{ @ Maximum Ratio of Metal_5 (M5 or UTM) sidewall area to the METAL_CAP area is 6000
+                            @ for balance structure when both CTM and CBM are floating or grounded
+                            @ Antenna CTM node, MMC between ME3 and ME4
+     NET AREA RATIO ME5 MMC34_BALANCE_CTM_5 > 6000
+     [PERIMETER(ME5)*MET_TOP_THICK/AREA(MMC34_BALANCE_CTM_5)]
+     RDB MMC34_CTM_ME5_balance.rdb BY LAYER ME5 MMC34_BALANCE_CTM_5
+}
+
+M34_MMC_ANT.7.2.1C_CTM_ME5{ @ Maximum Ratio of Metal_5 (M5 or UTM) sidewall area to the METAL_CAP area is 100
+                            @ for unbalanced structure where CBM is connected to DIFFUSION and CTM is floating
+                            @ Antenna CTM node, MMC between ME3 and ME4
+     NET AREA RATIO ME5 MMC34_UNBALANCE_CTM_5 > 100
+     [PERIMETER(ME5)*MET_TOP_THICK/AREA(MMC34_UNBALANCE_CTM_5)]
+     RDB MMC34_CTM_ME5_unbalance.rdb BY LAYER ME5 MMC34_UNBALANCE_CTM_5
+}
+
+MMC34_BALANCE_CBM_5 = (MMC34_FLOAT_CBM_5 INTERACT MMC34_FLOAT_CTM_5) OR (MMC34_GROUND_CBM_5 INTERACT MMC34_GROUND_CTM_5)
+MMC34_UNBALANCE_CBM_5 = MMC34_FLOAT_CBM_5 INTERACT MMC34_GROUND_CTM_5
+CONNECT MMC34_BALANCE_CBM_5 ME3
+CONNECT MMC34_UNBALANCE_CBM_5 ME3
+
+MMC34_BALANCE_ME5_5 = NET AREA RATIO ME5 MMC34_BALANCE_CBM_5 > 0
+MMC34_UNBALANCE_ME5_5 = NET AREA RATIO ME5 MMC34_UNBALANCE_CBM_5 > 0
+
+M34_MMC_ANT.7.2.1A_CBM_ME5{ @ Maximum Ratio of Metal_5 (M5 or UTM) sidewall area to the METAL_CAP area is 6000
+                            @ for balance structure when both CTM and CBM are floating or grounded
+                            @ Antenna CBM node, MMC between ME3 and ME4
+     f_M34_MMC = STAMP M34_MMC BY ME3   
+     NET AREA RATIO MMC34_BALANCE_ME5_5 f_M34_MMC > 6000
+     [PERIMETER(MMC34_BALANCE_ME5_5)*MET_TOP_THICK/AREA(f_M34_MMC)]
+     RDB MMC34_CBM_ME5_balance.rdb BY LAYER MMC34_BALANCE_ME5_5 f_M34_MMC
+}
+
+M34_MMC_ANT.7.2.1B_CBM_ME5{ @ Maximum Ratio of Metal_5 (M5 or UTM) sidewall area to the METAL_CAP area is 100
+                            @ for unbalanced structure where CTM is connected to DIFFUSION and CBM is floating
+                            @ Antenna CBM node, MMC between ME3 and ME4
+     f_M34_MMC = STAMP M34_MMC BY ME3   
+     NET AREA RATIO MMC34_UNBALANCE_ME5_5 f_M34_MMC > 100
+     [PERIMETER(MMC34_UNBALANCE_ME5_5)*MET_TOP_THICK/AREA(f_M34_MMC)]
+     RDB MMC34_CBM_ME5_unbalance.rdb BY LAYER MMC34_UNBALANCE_ME5_5 f_M34_MMC
+}
+    
+//the end of deck

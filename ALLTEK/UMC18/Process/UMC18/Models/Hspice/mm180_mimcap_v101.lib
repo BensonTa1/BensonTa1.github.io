@@ -1,0 +1,33 @@
+
+
+.lib mimcaps_typ 
+.param 
+
++dcm_mimcaps_mm = 0   dcmf_mimcaps_mm = 0  
+ 
+.include './mm180_mimcap_v101.mdl' 
+ 
+.endl  mimcaps_typ 
+ 
+ 
+ 
+.lib mimcaps_min 
+.param 
+
++dcm_mimcaps_mm = -0.15e-15   dcmf_mimcaps_mm = -0.0021e-15  
+ 
+.include './mm180_mimcap_v101.mdl' 
+ 
+.endl  mimcaps_min 
+ 
+ 
+ 
+.lib mimcaps_max 
+.param 
+
++dcm_mimcaps_mm = 0.15e-15   dcmf_mimcaps_mm = 0.0022e-15  
+ 
+.include './mm180_mimcap_v101.mdl' 
+ 
+.endl  mimcaps_max 
+ 

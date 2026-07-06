@@ -1,0 +1,28 @@
+simulator lang=spectre insensitive=yes
+//********************************************************************************
+//* Process:   0.18 um Mixed-Mode and RFCMOS 1.8V/3.3V Twin-Well Metal Metal Capacitor Process
+//* Simulator: SPECTRE
+//* <Revision 1> 
+//* Date:      2014/03/31      
+//* Owner:     Rex CW Chang
+//* Version:   0.1 P1           
+//* Remark:    Add Res RF MC model.
+//* Usage:     Inculde the following comment in the beginning of your simulation netlist,
+//*            .include './rfcoms180-mc-spectre-control-v011.lib.scs'
+//* 
+//********************************************************************************
+//* Library:
+//*                                                                                                                                      
+//*       1. rnnpo_rf_v2d4_mc_corner.lib.scs                                                                                             
+//*       (Resistor Model)                                                                                                                  
+//*       Model Name:                                                                                                                    
+//*       rnnpo_rf ............... Non salicide N+ poly resistor model                                                                                                                                                                                        
+//*                                                                                                                                    
+//*       2. rnppo_rf_v2d4_mc_corner.lib.scs                                                                                            
+//*       (Resistor Model)                                                                                                                  
+//*       Model Name:                                                                                                                                                                                                                                  
+//*       rnppo_rf ................ Non salicide P+ poly resistor model                                                                                                                
+//*                                                         
+//********************************************************************************************************************* 
+include "./spectre/rnnpo_rf_v2d4_mc_corner.lib.scs" section= mc                     // mc, tt, ff, ss
+include "./spectre/rnppo_rf_v2d4_mc_corner.lib.scs" section= mc                     // mc, tt, ff, ss

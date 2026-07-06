@@ -1,0 +1,28 @@
+// VerilogA for ADC, Ideal_Switch, veriloga
+
+`include "constants.vams"
+`include "disciplines.vams"
+
+
+module Ideal_Switch(A,B,CLK);
+	electrical A,B,C,CLK;
+	inout A,B;
+	input CLK;
+	
+	
+real R=0.1;
+	parameter real VTH=0.1;
+
+	analog begin
+		if(V(CLK)>VTH)begin
+			R=0.1;
+		end
+		else begin
+			R=1000000000;
+		end
+
+		V(A,B)<+R*I(A,B);
+
+	end
+
+endmodule

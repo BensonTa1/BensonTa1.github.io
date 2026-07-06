@@ -1,0 +1,16 @@
+library rfind_cor 
+
+section ff_rfind 
+include "cr013g_2d5_v1d4.scs" section = ff_rfind 
+endsection ff_rfind 
+
+section ss_rfind 
+include "cr013g_2d5_v1d4.scs" section = ss_rfind 
+endsection ss_rfind 
+
+section tt_rfind 
+include "cr013g_2d5_v1d4.scs" section = tt_rfind 
+endsection tt_rfind 
+
+
+endlibrary rfind_cor 
